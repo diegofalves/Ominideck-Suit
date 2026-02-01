@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>OmniDeck — Projeto de Migração</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    fieldset { margin-bottom: 24px; padding: 16px; border: 1px solid #ccc; }
+    legend { font-weight: bold; }
+    label { display: block; margin-top: 8px; }
+    input, select, textarea { width: 100%; max-width: 400px; }
+  </style>
+</head>
+<body>
+
+<h1>OmniDeck</h1>
+
+<form method="POST">
+
+  <!-- ========================= -->
+  <!-- Identificação do Projeto -->
+  <!-- ========================= -->
+  <fieldset>
+    <legend>{{ ui.project.section }}</legend>
+
+    {% for field, cfg in ui.project.fields.items() %}
+      <label>{{ cfg.label }}</label>
+
+      {% if cfg.type == "text" %}
+        <input type="text" name="{{ field }}">
+      {% elif cfg.type == "number" %}
+        <input type="number" name="{{ field }}">
+      {% endif %}
+    {% endfor %}
+  </fieldset>
+
+  <!-- ================= -->
+  <!-- Grupo (definição) -->
+  <!-- ================= -->
+  <fieldset>
+    <legend>{{ ui.groups.section }}</legend>
+
+    {% for field, cfg in ui.groups.fields.items() %}
+      <label>{{ cfg.label }}</label>
+      <input type="{{ cfg.type }}" name="group_{{ field }}">
+    {% endfor %}
+
+    <h3>Objeto</h3>
+
+    {% for field, cfg in ui.groups.objects.fields.items() %}
+      <label>{{ cfg.label }}</label>
+
+      {% if cfg.type == "select" %}
+        <select name="object_{{ field }}">
+          {% for opt in enums[cfg.enum] %}
+            <option value="{{ opt }}">{{ opt }}</option>
+          {% endfor %}
+        </select>
+
+      {% elif cfg.type == "textarea" %}
+        <textarea name="object_{{ field }}" rows="3"></textarea>
+
+      {% else %}
+        <input type="{{ cfg.type }}" name="object_{{ field }}">
+      {% endif %}
+    {% endfor %}
+  </fieldset>
+
+  <button type="submit">Salvar Projeto</button>
+</form>
+
+</body>
+</html>
