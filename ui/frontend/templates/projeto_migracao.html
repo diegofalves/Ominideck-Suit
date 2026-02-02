@@ -142,7 +142,7 @@
             <option value="{{ loop.index0 }}"
               {% if edit_object_index == loop.index0 %}selected{% endif %}
             >
-              {{ loop.index }} — {{ obj.type }} ({{ obj.deployment_type }})
+              {{ obj.name or ("Objeto " ~ loop.index) }} — {{ obj.type }} · {{ obj.deployment_type }}
             </option>
           {% endfor %}
         </select>
@@ -160,6 +160,23 @@
 
       <!-- Formulário de Objeto -->
       <h4>Dados do Objeto</h4>
+
+      <label><strong>Nome do Objeto *</strong></label>
+      <input 
+        type="text" 
+        name="object_name" 
+        required 
+        placeholder="Ex: Query de Elegibilidade de Frete"
+        value="{{ current_object.name if current_object else '' }}"
+      >
+
+      <label>Descrição Funcional</label>
+      <textarea 
+        name="object_description" 
+        rows="3" 
+        placeholder="Explique o propósito funcional deste objeto no projeto"
+        style="width: 100%; padding: 6px; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
+      >{{ current_object.description if current_object else '' }}</textarea>
 
       <label>Tipo de Deploy</label>
       <select name="object_deployment_type">
@@ -246,12 +263,12 @@
       {% if current_group.data and current_group.data.objects %}
         <h4 style="margin-top: 24px;">Objetos do Grupo</h4>
 
-        <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 800px;">
+        <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 900px;">
           <thead>
             <tr style="background-color: #f5f5f5;">
               <th>#</th>
-              <th>Tipo</th>
-              <th>Deploy</th>
+              <th>Nome Funcional</th>
+              <th>Tipo · Deploy</th>
               <th>Responsável</th>
               <th>Status</th>
             </tr>
@@ -260,8 +277,8 @@
             {% for obj in current_group.data.objects %}
               <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ obj.type }}</td>
-                <td>{{ obj.deployment_type }}</td>
+                <td><strong>{{ obj.name or "Sem nome" }}</strong></td>
+                <td>{{ obj.type }} · {{ obj.deployment_type }}</td>
                 <td>{{ obj.responsible }}</td>
                 <td>{{ obj.status.documentation }}</td>
               </tr>

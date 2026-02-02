@@ -56,6 +56,10 @@ def validate_project(domain):
             errors.append(f"Grupo {g_idx}: deve conter ao menos um objeto.")
 
         for o_idx, obj in enumerate(objects, start=1):
+            # Validação: nome obrigatório
+            if not obj.get("name"):
+                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: Nome do objeto é obrigatório.")
+            
             obj_type = obj.get("object_type")
             if not obj_type:
                 errors.append(f"Grupo {g_idx} / Objeto {o_idx}: object_type é obrigatório.")

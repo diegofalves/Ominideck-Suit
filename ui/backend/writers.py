@@ -13,7 +13,21 @@ def load_project():
         return None
 
     with open(PROJECT_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+        data = json.load(f)
+
+    # Compatibilidade retroativa: adicionar 'name' e 'description' se não existirem
+    if data.get("groups"):
+        for group_idx, group in enumerate(data["groups"]):
+            if group.get("objects"):
+                for obj_idx, obj in enumerate(group["objects"]):
+                    if "name" not in obj:
+                        # Gerar fallback: TYPE #index
+                        obj_type = obj.get("object_type") or obj.get("type", "OBJETO")
+                        obj["name"] = f"{obj_type} #{obj_idx + 1}"
+                    if "description" not in obj:
+                        obj["description"] = ""
+
+    return data
 
 
 def save_project(domain):

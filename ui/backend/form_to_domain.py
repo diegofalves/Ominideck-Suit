@@ -61,6 +61,8 @@ def form_to_domain(form):
 
             while len(groups[group_idx]["objects"]) <= obj_idx:
                 groups[group_idx]["objects"].append({
+                    "name": "",  # Nome funcional obrigatório
+                    "description": "",  # Descrição funcional opcional
                     "identifiers": {},
                     "data": {}
                 })

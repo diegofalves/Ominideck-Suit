@@ -98,6 +98,27 @@ function addObject(groupIndex) {
       </button>
     </div>
 
+    <div style="margin-bottom: 12px;">
+      <label style="display: block; font-weight: bold; margin-bottom: 4px;"><strong>Nome do Objeto *</strong></label>
+      <input 
+        type="text"
+        name="groups[${groupIndex}][objects][${objectIndex}][name]"
+        placeholder="Ex: Query de Elegibilidade de Frete"
+        style="width: 100%; padding: 6px; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
+        required
+      >
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <label style="display: block; font-weight: bold; margin-bottom: 4px;">Descrição Funcional</label>
+      <textarea 
+        name="groups[${groupIndex}][objects][${objectIndex}][description]"
+        rows="2"
+        placeholder="Explique o propósito funcional deste objeto no projeto"
+        style="width: 100%; padding: 6px; font-size: 12px; border: 1px solid #ccc; border-radius: 3px; font-family: Arial, sans-serif;"
+      ></textarea>
+    </div>
+
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
       <div>
         <label style="display: block; font-weight: bold; margin-bottom: 4px;">Tipo de Objeto</label>
@@ -256,6 +277,17 @@ function hydrateProject(projectJson) {
           }
           if (deploySelect) deploySelect.value = obj.deployment_type || '';
           if (seqObjInput) seqObjInput.value = obj.sequence || '';
+
+          // Preencher nome e descrição
+          const nameInput = groupDiv.querySelector(
+            `input[name="groups[${groupIdx}][objects][${objIdx}][name]"]`
+          );
+          const descInput = groupDiv.querySelector(
+            `textarea[name="groups[${groupIdx}][objects][${objIdx}][description]"]`
+          );
+
+          if (nameInput) nameInput.value = obj.name || '';
+          if (descInput) descInput.value = obj.description || '';
 
           // Preencher identifiers
           if (obj.identifiers) {
