@@ -1,0 +1,911 @@
+{
+  "project": {
+    "code": "MIG0001",
+    "name": "Projeto de Migração - Configuração OTM Unificada (BR100 + Projeto)",
+    "version": "1.1",
+    "consultant": "Diego Ferreira Alves",
+    "environment": {
+      "source": "https://otmgtm-dev1-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.com/",
+      "target": "https://otmgtm-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.com/"
+    }
+  },
+  "groups": [
+    {
+      "group_id": "AUTOMATION",
+      "label": "Automação",
+      "sequence": 1,
+      "objects": [
+        {
+          "name": "Saved Queries",
+          "description": "Queries utilizadas por automações, conditions e agents",
+          "object_type": "SAVED_QUERY",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 1,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          },
+          "saved_query": {
+            "sql": "SELECT DOMAIN_NAME, SAVED_QUERY_XID, USER_QUERY_NAME, QUERY_NAME FROM SAVED_QUERY WHERE DOMAIN_NAME = 'BAU'"
+          }
+        },
+        {
+          "name": "Saved Conditions",
+          "description": "Conditions utilizadas por agents e eventos",
+          "object_type": "SAVED_CONDITION",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 2,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Data Type Association",
+          "description": "Associações de tipos de dados do sistema",
+          "object_type": "DATA_TYPE_ASSOCIATION",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 3,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Agent Event",
+          "description": "Eventos de agentes do sistema",
+          "object_type": "AGENT_EVENT",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 4,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Agents",
+          "description": "Agentes ativos no domínio",
+          "object_type": "AGENT",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 5,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "App Actions",
+          "description": "Ações de aplicação do OTM",
+          "object_type": "APP_ACTION",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 6,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Actions",
+          "description": "Ações gerais do sistema",
+          "object_type": "ACTION",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 7,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Batch Processes",
+          "description": "Processos batch de execução automática",
+          "object_type": "BATCH_PROCESS",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 8,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        }
+      ]
+    },
+    {
+      "group_id": "CONFIGURATION",
+      "label": "Configuração",
+      "sequence": 2,
+      "objects": [
+        {
+          "name": "Domains – Add Domain",
+          "description": "Configuração de domínios OTM",
+          "object_type": "DOMAIN",
+          "deployment_type": "MANUAL",
+          "sequence": 1,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Domain Grants",
+          "description": "Permissões de domínio",
+          "object_type": "DOMAIN_GRANTS_MADE",
+          "deployment_type": "MANUAL",
+          "sequence": 2,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Domain Settings",
+          "description": "Configurações de domínio",
+          "object_type": "DOMAIN_SETTING",
+          "deployment_type": "MANUAL",
+          "sequence": 3,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Properties",
+          "description": "Propriedades do sistema",
+          "object_type": "PROP_INSTRUCTION",
+          "deployment_type": "MANUAL",
+          "sequence": 4,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Units of Measure (UOM)",
+          "description": "Unidades de medida utilizadas no domínio",
+          "object_type": "UOM",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 5,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Postal Code Components",
+          "description": "Componentes de código postal",
+          "object_type": "HNAME_COMPONENT",
+          "deployment_type": "DB_XML",
+          "sequence": 6,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Branding",
+          "description": "Configuração de marca e identidade visual",
+          "object_type": "BRANDING",
+          "deployment_type": "MANUAL",
+          "sequence": 7,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Business Number",
+          "description": "Regras de números de negócio",
+          "object_type": "BN_RULE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 8,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Reports",
+          "description": "Relatórios do sistema",
+          "object_type": "REPORT",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 9,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Transport Mode",
+          "description": "Modos de transporte",
+          "object_type": "TRANSPORT_MODE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 10,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "BN Named Range",
+          "description": "Intervalo nomeado de números de negócio",
+          "object_type": "BN_NAMED_RANGE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 11,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        }
+      ]
+    },
+    {
+      "group_id": "MASTER_DATA",
+      "label": "Dados Mestres",
+      "sequence": 3,
+      "objects": [
+        {
+          "name": "Commodities",
+          "description": "Cadastro de commodities vinculadas a itens",
+          "object_type": "COMMODITY",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 1,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Corporations",
+          "description": "Entidades corporativas e empresas",
+          "object_type": "CORPORATION",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 2,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Ship Unit Specs (THU)",
+          "description": "Especificações de unidades de transporte",
+          "object_type": "SHIP_UNIT_SPEC",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 3,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Service Providers",
+          "description": "Transportadoras e prestadores de serviço",
+          "object_type": "SERVPROV",
+          "deployment_type": "CSV",
+          "sequence": 4,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Locations",
+          "description": "Localizações e endereços",
+          "object_type": "LOCATION",
+          "deployment_type": "INTEGRATION",
+          "sequence": 5,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Contacts",
+          "description": "Contatos e informações de pessoas",
+          "object_type": "CONTACT",
+          "deployment_type": "CSV",
+          "sequence": 6,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Equipment Groups",
+          "description": "Grupos de equipamentos",
+          "object_type": "EQUIPMENT_GROUP",
+          "deployment_type": "CSV",
+          "sequence": 7,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Items",
+          "description": "Itens e produtos",
+          "object_type": "ITEM",
+          "deployment_type": "INTEGRATION",
+          "sequence": 8,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Packaged Items",
+          "description": "Itens embalados",
+          "object_type": "PACKAGED_ITEM",
+          "deployment_type": "INTEGRATION",
+          "sequence": 9,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Contact Groups",
+          "description": "Grupos de contatos",
+          "object_type": "CONTACT_GROUP",
+          "deployment_type": "CSV",
+          "sequence": 10,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        }
+      ]
+    },
+    {
+      "group_id": "EXTENSION_QUALIFIERS",
+      "label": "Extensão e Qualificadores",
+      "sequence": 4,
+      "objects": [
+        {
+          "name": "Location Refnum Qualifier",
+          "description": "Qualificador de número de referência de localização",
+          "object_type": "LOCATION_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 1,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Order Release Refnum Qualifier",
+          "description": "Qualificador de número de referência de liberação de pedido",
+          "object_type": "ORDER_RELEASE_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 2,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Order Release Line Refnum Qualifier",
+          "description": "Qualificador de número de referência de linha de liberação",
+          "object_type": "ORDER_RELEASE_LINE_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 3,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Packaged Item Refnum Qualifier",
+          "description": "Qualificador de número de referência de item embalado",
+          "object_type": "PACKAGED_ITEM_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 4,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Item Refnum Qualifier",
+          "description": "Qualificador de número de referência de item",
+          "object_type": "ITEM_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 5,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Shipment Refnum Qualifier",
+          "description": "Qualificador de número de referência de remessa",
+          "object_type": "SHIPMENT_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 6,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Shipment Stop Refnum Qualifier",
+          "description": "Qualificador de número de referência de parada de remessa",
+          "object_type": "SHIPMENT_STOP_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 7,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Rate Geo Refnum Qualifier",
+          "description": "Qualificador de número de referência de taxa geográfica",
+          "object_type": "RATE_GEO_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 8,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Order Movement Refnum Qualifier",
+          "description": "Qualificador de número de referência de movimento de pedido",
+          "object_type": "OM_REFNUM_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 9,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Status Types and Values",
+          "description": "Tipos e valores de status do sistema",
+          "object_type": "STATUS_TYPE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 10,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Remarks Qualifiers",
+          "description": "Qualificadores de observações",
+          "object_type": "REMARK_QUAL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 11,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        }
+      ]
+    },
+    {
+      "group_id": "PLANNING",
+      "label": "Planejamento",
+      "sequence": 5,
+      "objects": [
+        {
+          "name": "Audit Trail",
+          "description": "Trilha de auditoria do sistema",
+          "object_type": "AUDIT_TRAIL",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 1,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Logic Configs",
+          "description": "Configurações de lógica de planejamento",
+          "object_type": "LOGIC_PARAMETER",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 2,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Parameter Sets",
+          "description": "Conjuntos de parâmetros de planejamento",
+          "object_type": "PLANNING_PARAMETER",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 3,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Accessorial Codes",
+          "description": "Códigos de serviços acessórios",
+          "object_type": "ACCESSORIAL_CODE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 4,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Itinerary Leg",
+          "description": "Trechos de itinerário",
+          "object_type": "LEG",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 5,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Itineraries",
+          "description": "Itinerários de transporte",
+          "object_type": "ITINERARY",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 6,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Itinerary Profiles",
+          "description": "Perfis de itinerários",
+          "object_type": "ITINERARY_PROFILE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 7,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Load Configuration Rules",
+          "description": "Regras de configuração de carregamento",
+          "object_type": "LOAD_CONFIG_RULE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 8,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Load Configuration Setup",
+          "description": "Configuração de carregamento",
+          "object_type": "LOAD_CONFIG_SETUP",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 9,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Order Release Types",
+          "description": "Tipos de liberação de pedido",
+          "object_type": "ORDER_RELEASE_TYPE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 10,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        }
+      ]
+    },
+    {
+      "group_id": "INTEGRATION",
+      "label": "Integração",
+      "sequence": 6,
+      "objects": [
+        {
+          "name": "Stylesheet Contents",
+          "description": "Conteúdos de folhas de estilo",
+          "object_type": "STYLESHEET_CONTENT",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 1,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Stylesheet Profiles",
+          "description": "Perfis de folhas de estilo",
+          "object_type": "STYLESHEET_PROFILE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 2,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "XML Templates",
+          "description": "Templates XML para integração",
+          "object_type": "XML_TEMPLATE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 3,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Outbound XML Profiles",
+          "description": "Perfis de XML de saída",
+          "object_type": "OUT_XML_PROFILE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 4,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Document",
+          "description": "Documentos do sistema",
+          "object_type": "DOCUMENT",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 5,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Webservice",
+          "description": "Serviços web para integração",
+          "object_type": "WEB_SERVICE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 6,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "External Systems",
+          "description": "Configuração de sistemas externos",
+          "object_type": "EXTERNAL_SYSTEM",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 7,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "External System Contact",
+          "description": "Contatos de sistemas externos",
+          "object_type": "EXTERNAL_CONTACT",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 8,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        }
+      ]
+    },
+    {
+      "group_id": "GOVERNANCE_UI",
+      "label": "Governança e UI",
+      "sequence": 7,
+      "objects": [
+        {
+          "name": "Manager Layouts",
+          "description": "Layouts de gerenciamento do OTM",
+          "object_type": "MANAGER_LAYOUT",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 1,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Finder Sets",
+          "description": "Conjuntos de busca e filtros",
+          "object_type": "FINDER_SET",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 2,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Workbenches",
+          "description": "Bancadas de trabalho do OTM",
+          "object_type": "TRANSPORTATION_WORKBENCH",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 3,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Business Monitors",
+          "description": "Monitores de negócio",
+          "object_type": "BUSINESS_MONITOR_D",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 4,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Access Control Lists (ACL)",
+          "description": "Listas de controle de acesso",
+          "object_type": "ACR_ROLE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 5,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "User Roles",
+          "description": "Papéis de usuário",
+          "object_type": "USER_ROLE",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 6,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "User Menus",
+          "description": "Menus de usuário",
+          "object_type": "USER_MENU",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 7,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "User Preferences",
+          "description": "Preferências de usuário",
+          "object_type": "USER_PREFERENCE_D",
+          "deployment_type": "MIGRATION_PROJECT",
+          "sequence": 8,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        },
+        {
+          "name": "Translation (Labels)",
+          "description": "Traduções e rótulos do sistema",
+          "object_type": "TRANSLATION",
+          "deployment_type": "DB_XML",
+          "sequence": 9,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Manage User Access",
+          "description": "Gerenciamento de acesso de usuário",
+          "object_type": "USER_ACCESS",
+          "deployment_type": "DB_XML",
+          "sequence": 10,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "VPD Profile",
+          "description": "Perfil de segurança em nível de dados",
+          "object_type": "VPD_PROFILE",
+          "deployment_type": "DB_XML",
+          "sequence": 11,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "DONE",
+            "deployment": "DONE"
+          }
+        },
+        {
+          "name": "Relatórios (BI ZIP)",
+          "description": "Relatórios e arquivos BI",
+          "object_type": "BI_PUBLISHER_FILES",
+          "deployment_type": "MANUAL",
+          "sequence": 12,
+          "responsible": "ITC",
+          "status": {
+            "documentation": "PENDING",
+            "deployment": "PENDING"
+          }
+        }
+      ]
+    }
+  ],
+  "state": {
+    "overall_status": "IN_PROGRESS",
+    "last_edit_object_index": 0
+  },
+  "active_group_id": "AUTOMATION"
+}

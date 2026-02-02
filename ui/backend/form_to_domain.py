@@ -29,14 +29,16 @@ def form_to_domain(form):
             "version": form.get("version", ""),
             "consultant": form.get("consultant", ""),
             "environment": {
-                "source": form.get("environment.source", ""),
-                "target": form.get("environment.target", ""),
+                "source": form.get("environment.source") or form.get("environment_source", ""),
+                "target": form.get("environment.target") or form.get("environment_target", ""),
             },
         },
         "groups": [],
         "state": {
-            "overall_status": "PENDING"
-        }
+            "overall_status": form.get("overall_status") or "PENDING",
+            "last_edit_object_index": form.get("edit_object_index") or None
+        },
+        "active_group_id": form.get("active_group_id") or None
     }
 
     groups = defaultdict(lambda: {"objects": []})
@@ -50,7 +52,10 @@ def form_to_domain(form):
 
         group_idx = int(parts[1])
 
-        if parts[2] == "label":
+        if parts[2] == "group_id":
+            groups[group_idx]["group_id"] = value
+
+        elif parts[2] == "label":
             groups[group_idx]["label"] = value
 
         elif parts[2] == "sequence":
@@ -67,7 +72,10 @@ def form_to_domain(form):
                     "data": {},
                     "status": {
                         "documentation": "PENDING",
-                        "deployment": "PENDING"
+                        "migration_project": "PENDING",
+                        "export": "PENDING",
+                        "deploy": "PENDING",
+                        "validation": "PENDING"
                     },
                     "saved_query": {"sql": ""}  # Inicializar vazio
                 })
@@ -88,16 +96,29 @@ def form_to_domain(form):
                 obj["data"][data_key] = value
             
             elif parts[4] == "status_documentation":
-                # Campo de status documentação
                 if "status" not in obj:
                     obj["status"] = {}
                 obj["status"]["documentation"] = value
             
-            elif parts[4] == "status_deployment":
-                # Campo de status deployment
+            elif parts[4] == "status_migration_project":
                 if "status" not in obj:
                     obj["status"] = {}
-                obj["status"]["deployment"] = value
+                obj["status"]["migration_project"] = value
+            
+            elif parts[4] == "status_export":
+                if "status" not in obj:
+                    obj["status"] = {}
+                obj["status"]["export"] = value
+            
+            elif parts[4] == "status_deploy":
+                if "status" not in obj:
+                    obj["status"] = {}
+                obj["status"]["deploy"] = value
+            
+            elif parts[4] == "status_validation":
+                if "status" not in obj:
+                    obj["status"] = {}
+                obj["status"]["validation"] = value
             
             else:
                 # Campos genéricos do objeto
@@ -113,6 +134,7 @@ def form_to_domain(form):
     # Normaliza para lista ordenada
     domain["groups"] = [
         {
+            "group_id": g.get("group_id"),
             "label": g.get("label"),
             "sequence": g.get("sequence"),
             "objects": g.get("objects", [])
@@ -123,37 +145,114 @@ def form_to_domain(form):
     # Processar saved_query_sql do formulário de edição (não aninhado)
     saved_query_sql = form.get("saved_query_sql", "").strip()
     object_name = form.get("object_name", "").strip()
-    
-    # Se estamos editando um objeto (campos não-aninhados presentes)
-    if object_name:
-        # Buscar o último grupo com objetos
-        for group in domain["groups"]:
-            if group.get("objects"):
-                last_obj = group["objects"][-1]
-                
-                # Atualizar campos do objeto em edição
-                if object_name:
-                    last_obj["name"] = object_name
-                
-                object_description = form.get("object_description", "")
-                if object_description:
-                    last_obj["description"] = object_description
-                
-                # Status
-                status_doc = form.get("status_documentation")
-                status_dep = form.get("status_deployment")
-                if status_doc or status_dep:
-                    if "status" not in last_obj:
-                        last_obj["status"] = {}
-                    if status_doc:
-                        last_obj["status"]["documentation"] = status_doc
-                    if status_dep:
-                        last_obj["status"]["deployment"] = status_dep
-                
-                # Saved Query SQL
-                if saved_query_sql:
-                    if "saved_query" not in last_obj:
-                        last_obj["saved_query"] = {}
-                    last_obj["saved_query"]["sql"] = saved_query_sql
+
+    def _coerce_index(value):
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return None
+
+    active_group_index = _coerce_index(form.get("active_group_index"))
+    edit_object_index = _coerce_index(form.get("edit_object_index"))
+
+    # Se estamos editando/criando um objeto (campos não-aninhados presentes)
+    if object_name or saved_query_sql or form.get("object_description") or form.get("object_responsible") or form.get("object_deployment_type"):
+        if active_group_index is not None:
+            # Garantir grupo ativo existe
+            while len(domain["groups"]) <= active_group_index:
+                domain["groups"].append({"label": "", "sequence": None, "objects": []})
+            target_group = domain["groups"][active_group_index]
+
+            # Definir índice do objeto (editar ou criar novo no fim)
+            target_obj_index = edit_object_index if edit_object_index is not None else len(target_group["objects"])
+
+            while len(target_group["objects"]) <= target_obj_index:
+                target_group["objects"].append({
+                    "name": "",
+                    "description": "",
+                    "identifiers": {},
+                    "data": {},
+                    "status": {
+                        "documentation": "PENDING",
+                        "migration_project": "PENDING",
+                        "export": "PENDING",
+                        "deploy": "PENDING",
+                        "validation": "PENDING"
+                    },
+                    "saved_query": {"sql": ""}
+                })
+
+            target_obj = target_group["objects"][target_obj_index]
+
+            # Campos básicos
+            if object_name:
+                target_obj["name"] = object_name
+            object_description = form.get("object_description", "")
+            if object_description:
+                target_obj["description"] = object_description
+            object_type = form.get("object_type")
+            if object_type:
+                target_obj["object_type"] = object_type
+            object_deployment_type = form.get("object_deployment_type")
+            if object_deployment_type:
+                target_obj["deployment_type"] = object_deployment_type
+            object_responsible = form.get("object_responsible")
+            if object_responsible:
+                target_obj["responsible"] = object_responsible
+            object_notes = form.get("object_notes")
+            if object_notes:
+                target_obj["notes"] = object_notes
+
+            # Status (5 campos)
+            if "status" not in target_obj:
+                target_obj["status"] = {}
+            
+            status_doc = form.get("status_documentation")
+            if status_doc:
+                target_obj["status"]["documentation"] = status_doc
+            
+            status_mig = form.get("status_migration_project")
+            if status_mig:
+                target_obj["status"]["migration_project"] = status_mig
+            
+            status_exp = form.get("status_export")
+            if status_exp:
+                target_obj["status"]["export"] = status_exp
+            
+            status_dep = form.get("status_deploy")
+            if status_dep:
+                target_obj["status"]["deploy"] = status_dep
+            
+            status_val = form.get("status_validation")
+            if status_val:
+                target_obj["status"]["validation"] = status_val
+
+            # Saved Query SQL (legado - será migrado para technical_content)
+            if saved_query_sql:
+                if "saved_query" not in target_obj:
+                    target_obj["saved_query"] = {}
+                target_obj["saved_query"]["sql"] = saved_query_sql
+
+            # Technical Content (novo modelo canônico v1.1)
+            technical_content_type = form.get("technical_content_type", "NONE")
+            technical_content_content = form.get("technical_content_content", "").strip()
+            
+            if "technical_content" not in target_obj:
+                target_obj["technical_content"] = {"type": "NONE", "content": ""}
+            
+            target_obj["technical_content"]["type"] = technical_content_type
+            target_obj["technical_content"]["content"] = technical_content_content
+
+            # Identifiers (não aninhados)
+            for key, value in form.items():
+                if key.startswith("identifiers[") and key.endswith("]"):
+                    identifier_key = key[len("identifiers["):-1]
+                    target_obj.setdefault("identifiers", {})[identifier_key] = value
+
+            # Data (schema-driven não aninhado)
+            for key, value in form.items():
+                if key.startswith("data[") and key.endswith("]"):
+                    data_key = key[len("data["):-1]
+                    target_obj.setdefault("data", {})[data_key] = value
 
     return domain

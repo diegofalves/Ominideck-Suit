@@ -1,73 +1,53 @@
-# {{ project.name }}
+# {{ data.project.name }}
 
 ## Identificação do Projeto
 
-- **Código**: {{ project.code }}
-- **Versão**: {{ project.version }}
-- **Consultor**: {{ project.consultant }}
-- **Ambiente Origem**: {{ project.environment.source }}
-- **Ambiente Destino**: {{ project.environment.target }}
+- **Código**: {{ data.project.code }}
+- **Versão**: {{ data.project.version }}
+- **Consultor**: {{ data.project.consultant }}
+- **Ambiente Origem**: {{ data.project.environment.source }}
+- **Ambiente Destino**: {{ data.project.environment.target }}
 
 ---
 
-{% for group in groups %}
-{% if group.objects %}
-
-## Grupo: {{ group.label }} ({{ loop.index }}º)
-
-Sequência do Grupo: **{{ group.sequence }}**
+{% for group in data.groups %}
+## {{ group.name }}
 
 {% for object in group.objects %}
+### {{ object.name }}
 
-### Objeto {{ loop.index }} — {{ object.type }}
+{{ object.description }}
 
-- **Sequência**: {{ object.sequence }}
-- **Tipo de Deploy**: {{ object.deployment_type }}
-- **Responsável**: {{ object.responsible }}
-
-#### Identificadores
-
-{% if object.type == "SAVED_QUERY" %}
-- Query Name: `{{ object.identifiers.query_name if object.identifiers and object.identifiers.query_name else "—" }}`
-
-{% elif object.type == "AGENT" %}
-- Agent GID: `{{ object.identifiers.agent_gid if object.identifiers and object.identifiers.agent_gid else "—" }}`
-
-{% elif object.type == "TABLE" %}
-- Table Name: `{{ object.identifiers.table_name if object.identifiers and object.identifiers.table_name else "—" }}`
-
-{% elif object.type == "FINDER_SET" %}
-- Finder Set GID: `{{ object.identifiers.finder_set_gid if object.identifiers and object.identifiers.finder_set_gid else "—" }}`
-
-{% elif object.type == "RATE" %}
-- Rate Offering GID: `{{ object.identifiers.rate_offering_gid if object.identifiers and object.identifiers.rate_offering_gid else "—" }}`
-
-{% elif object.type == "EVENT_GROUP" %}
-- Event Group GID: `{{ object.identifiers.event_group_gid if object.identifiers and object.identifiers.event_group_gid else "—" }}`
-
+<div class="meta-text" markdown="1">
+**Sequência:** {{ object.sequence }}
+**Object Type:** {{ object.object_type }}
+**OTM Table:** {{ object.otm_table }}
+**Deployment Type:** {{ object.deployment_type }}
+{% if object.identifiers.migration_project_id %}
+**Migration Project ID:** {{ object.identifiers.migration_project_id }}
+{% endif %}
+{% for key, value in object.identifiers.items() if key != 'migration_project_id' %}
+**{{ key.replace('_', ' ') | title }}:** {{ value }}
+{% endfor %}
+**Responsável:** {{ object.responsible }}
+**Tipo de Migração:** {{ object.migration_type }}
+{% if object.notes %}
+**Notas:** {{ object.notes }}
 {% endif %}
 
-#### Status de Progressão
+**Documentação:** {{ object.status.documentation }}
+**Migration Project:** {{ object.status.migration_project }}
+**Exportação:** {{ object.status.export }}
+**Deploy:** {{ object.status.deploy }}
+**Validação:** {{ object.status.validation }}
+</div>
 
-| Fase | Status |
-|------|--------|
-| 📋 Documentação | {{ object.status.documentation }} |
-| 🔧 Migration Project | {{ object.status.migration_project }} |
-| 📤 Exportação | {{ object.status.export }} |
-| 🚀 Deploy | {{ object.status.deploy }} |
-| ✅ Validação | {{ object.status.validation }} |
-
-{% if object.notes %}
-
-#### Observações
-
-{{ object.notes }}
-
+{% if object.technical_content and object.technical_content.content %}
+**Conteúdo Técnico:**
+```{{ object.technical_content.type | lower }}
+{{ object.technical_content.content }}
+```
 {% endif %}
 
 {% endfor %}
-
----
-
-{% endif %}
 {% endfor %}

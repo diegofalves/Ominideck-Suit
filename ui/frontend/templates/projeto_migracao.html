@@ -9,6 +9,17 @@
     legend { font-weight: bold; }
     label { display: block; margin-top: 8px; }
     input, select, textarea { width: 100%; max-width: 400px; }
+    
+    /* Validação Leve Schema-Driven (Ajuste 9.3) */
+    .field-error {
+      border: 2px solid #e53935 !important;
+      background-color: #ffebee;
+    }
+    
+    .field-warning {
+      border: 2px solid #fb8c00 !important;
+      background-color: #fff3e0;
+    }
   </style>
 </head>
 <body>
@@ -32,6 +43,35 @@
 
 <form method="POST">
 
+  <!-- ========================================================================= -->
+  <!-- Contexto: Determinar current_object para preencher seletor object_type -->
+  <!-- ========================================================================= -->
+  {% if project and project.active_group_id %}
+    {% set active_id = project.active_group_id %}
+    
+    <!-- Encontrar o grupo completo do projeto -->
+    {% set current_group_ctx = namespace(data=none) %}
+    {% if project.groups %}
+      {% for g in project.groups %}
+        {% if g.group_id == active_id %}
+          {% set current_group_ctx.data = g %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <!-- Pegar o índice do objeto a editar -->
+    {% set last_edit_index = project.state.get('last_edit_object_index') if project and project.state else none %}
+    {% set edit_object_index = last_edit_index | int if last_edit_index is not none else -1 %}
+    
+    <!-- Pegar o objeto a editar (se índice válido) -->
+    {% set current_object = none %}
+    {% if edit_object_index >= 0 and current_group_ctx.data and edit_object_index < current_group_ctx.data.objects | length %}
+      {% set current_object = current_group_ctx.data.objects[edit_object_index] %}
+    {% endif %}
+  {% else %}
+    {% set current_object = none %}
+  {% endif %}
+
   <!-- ========================= -->
   <!-- Identificação do Projeto -->
   <!-- ========================= -->
@@ -41,17 +81,17 @@
     {% for field, cfg in ui.project.fields.items() %}
       <label>{{ cfg.label }}</label>
 
-      {% if field == "environment_source" %}
+      {% if field == "environment.source" %}
         <input
           type="text"
-          name="environment_source"
+          name="environment.source"
           value="{{ project.project.environment.source if project and project.project and project.project.environment else '' }}"
         >
 
-      {% elif field == "environment_target" %}
+      {% elif field == "environment.target" %}
         <input
           type="text"
-          name="environment_target"
+          name="environment.target"
           value="{{ project.project.environment.target if project and project.project and project.project.environment else '' }}"
         >
 
@@ -70,6 +110,14 @@
         >
       {% endif %}
     {% endfor %}
+
+    <label style="display: block; margin-top: 12px;"><strong>Status Geral do Projeto</strong></label>
+    <select name="overall_status" required>
+      <option value="">— Selecione —</option>
+      <option value="PENDING" {% if project and project.state and project.state.overall_status == 'PENDING' %}selected{% endif %}>Pendente</option>
+      <option value="IN_PROGRESS" {% if project and project.state and project.state.overall_status == 'IN_PROGRESS' %}selected{% endif %}>Em andamento</option>
+      <option value="DONE" {% if project and project.state and project.state.overall_status == 'DONE' %}selected{% endif %}>Concluído</option>
+    </select>
   </fieldset>
 
   <!-- ================= -->
@@ -88,8 +136,16 @@
   <!-- ================================== -->
   <fieldset id="object-type-container" style="display: none;">
     <legend>Tipo do Objeto</legend>
+    
     <label>Selecione o tipo (Tabela OTM ou Tipo Lógico):</label>
-    <select name="object_type" id="object-type-selector" class="object-type-selector">
+    <select
+      name="object_type"
+      id="object_type"
+      class="form-control object-type-selector"
+      {% if current_object and current_object.object_type %}
+        data-current-type="{{ current_object.object_type }}"
+      {% endif %}
+    >
       <!-- Opções serão injetadas por schema-engine.js -->
     </select>
   </fieldset>
@@ -97,29 +153,26 @@
   <!-- ================================== -->
   <!-- Painel Condicional - Grupo Ativo -->
   <!-- ================================== -->
-  {% if project_data and project_data.active_group_id %}
-    {% set active_id = project_data.active_group_id %}
+  {% if project and project.active_group_id %}
+    {% set active_id = project.active_group_id %}
     {% set active_group = groups_catalog.get(active_id) %}
 
-    <!-- Encontrar o grupo completo do projeto -->
+    <!-- Encontrar o grupo completo do projeto e índice -->
     {% set current_group = namespace(data=none) %}
-    {% if project_data.groups %}
-      {% for g in project_data.groups %}
+    {% set active_group_index = namespace(value=none) %}
+    {% if project.groups %}
+      {% for g in project.groups %}
         {% if g.group_id == active_id %}
           {% set current_group.data = g %}
+          {% set active_group_index.value = loop.index0 %}
         {% endif %}
       {% endfor %}
     {% endif %}
 
-    <!-- Pegar o índice do objeto a editar -->
-    {% set last_edit_index = project_data.state.get('last_edit_object_index') if project_data and project_data.state else none %}
+    <!-- Calcular índice do formulário (para novo objeto ou edição) -->
+    {% set last_edit_index = project.state.get('last_edit_object_index') if project and project.state else none %}
     {% set edit_object_index = last_edit_index | int if last_edit_index is not none else -1 %}
-    
-    <!-- Pegar o objeto a editar (se índice válido) -->
-    {% set current_object = none %}
-    {% if edit_object_index >= 0 and current_group.data and edit_object_index < current_group.data.objects | length %}
-      {% set current_object = current_group.data.objects[edit_object_index] %}
-    {% endif %}
+    {% set object_form_index = edit_object_index if edit_object_index >= 0 else (current_group.data.objects | length if current_group.data and current_group.data.objects else 0) %}
 
     <fieldset style="border: 2px solid #4CAF50;">
       <legend>
@@ -135,14 +188,15 @@
       <!-- Seção de Seleção/Criação de Objeto -->
       {% if current_group.data and current_group.data.objects %}
         <label for="edit_object_index" style="font-weight: bold; margin-top: 16px;">Editar Objeto Existente</label>
-        <select id="edit_object_index" name="edit_object_index" style="margin-bottom: 16px;">
+        <input type="hidden" name="action" value="" id="form_action">
+        <select id="edit_object_index" name="edit_object_index" style="margin-bottom: 16px;" onchange="document.getElementById('form_action').value='load_object'; this.form.submit();">
           <option value="">— Criar novo objeto —</option>
 
           {% for obj in current_group.data.objects %}
             <option value="{{ loop.index0 }}"
               {% if edit_object_index == loop.index0 %}selected{% endif %}
             >
-              {{ obj.name or ("Objeto " ~ loop.index) }} — {{ obj.type }} · {{ obj.deployment_type }}
+              {{ obj.name or ("Objeto " ~ loop.index) }} — {{ obj.object_type or obj.type }} · {{ obj.deployment_type }}
             </option>
           {% endfor %}
         </select>
@@ -197,7 +251,7 @@
       <!-- ========================================== -->
       <h4 style="margin-top: 16px;">Status</h4>
       
-      <label>Status de Documentação</label>
+      <label>📝 Documentação</label>
       <select name="status_documentation">
         {% for opt_key, opt_label in enums.status.items() %}
           <option value="{{ opt_key }}" 
@@ -207,11 +261,41 @@
         {% endfor %}
       </select>
 
-      <label>Status de Deploy</label>
-      <select name="status_deployment">
+      <label>📦 Migration Project</label>
+      <select name="status_migration_project">
         {% for opt_key, opt_label in enums.status.items() %}
           <option value="{{ opt_key }}" 
-            {% if current_object and current_object.status and current_object.deployment == opt_key %}selected{% endif %}>
+            {% if current_object and current_object.status and current_object.status.migration_project == opt_key %}selected{% endif %}>
+            {{ opt_label }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label>💾 Exportação</label>
+      <select name="status_export">
+        {% for opt_key, opt_label in enums.status.items() %}
+          <option value="{{ opt_key }}" 
+            {% if current_object and current_object.status and current_object.status.export == opt_key %}selected{% endif %}>
+            {{ opt_label }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label>🚀 Deploy</label>
+      <select name="status_deploy">
+        {% for opt_key, opt_label in enums.status.items() %}
+          <option value="{{ opt_key }}" 
+            {% if current_object and current_object.status and current_object.status.deploy == opt_key %}selected{% endif %}>
+            {{ opt_label }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label>✅ Validação</label>
+      <select name="status_validation">
+        {% for opt_key, opt_label in enums.status.items() %}
+          <option value="{{ opt_key }}" 
+            {% if current_object and current_object.status and current_object.status.validation == opt_key %}selected{% endif %}>
             {{ opt_label }}
           </option>
         {% endfor %}
@@ -271,8 +355,40 @@
         <!-- Será preenchido dinamicamente por schema-engine.js -->
       </div>
 
+      <!-- ========================================== -->
+      <!-- Query de Extração (technical_content)     -->
+      <!-- ========================================== -->
+      <fieldset style="background-color: #f5f5f5; border: 1px solid #2196F3;">
+        <legend style="color: #1976D2;">🔍 Query de Extração</legend>
+        
+        <label><strong>Tipo de Conteúdo:</strong></label>
+        <select name="technical_content_type" style="max-width: 200px; background-color: #e3f2fd; border: 1px solid #64b5f6;">
+          <option value="NONE" {% if not current_object or not current_object.technical_content or current_object.technical_content.type == 'NONE' %}selected{% endif %}>Nenhum</option>
+          <option value="SQL" {% if current_object and current_object.technical_content and current_object.technical_content.type == 'SQL' %}selected{% endif %}>SQL Query</option>
+          <option value="TEXT" {% if current_object and current_object.technical_content and current_object.technical_content.type == 'TEXT' %}selected{% endif %}>Texto Técnico</option>
+          <option value="SCRIPT" {% if current_object and current_object.technical_content and current_object.technical_content.type == 'SCRIPT' %}selected{% endif %}>Script</option>
+          <option value="RULE" {% if current_object and current_object.technical_content and current_object.technical_content.type == 'RULE' %}selected{% endif %}>Regra</option>
+        </select>
+        
+        <label style="margin-top: 12px;"><strong>Conteúdo (SQL / Script / Texto):</strong></label>
+        <textarea
+          name="technical_content_content"
+          rows="12"
+          placeholder="Cole aqui a query SQL, script ou texto técnico..."
+          style="font-family: 'Courier New', monospace; font-size: 12px; background-color: #263238; color: #aed581; padding: 12px; border: 1px solid #37474f; width: 100%; max-width: 100%;"
+        >{{ current_object.technical_content.content if current_object and current_object.technical_content else '' }}</textarea>
+        
+        <p style="font-size: 11px; color: #666; margin-top: 8px;">
+          💡 Esta query/script é usada para extrair dados do ambiente de origem ou descrever lógica técnica.
+        </p>
+      </fieldset>
+
       <label>Observações Técnicas</label>
       <textarea name="object_notes" rows="3">{{ current_object.notes if current_object else '' }}</textarea>
+
+      <!-- Hidden field para manter active_group_id no POST -->
+      <input type="hidden" name="active_group_id" value="{{ project.active_group_id if project else '' }}">
+      <input type="hidden" name="active_group_index" value="{{ active_group_index.value if active_group_index.value is not none else '' }}">
 
       <!-- Hidden field para manter edit_object_index no POST -->
       <input type="hidden" name="edit_object_index" value="{{ edit_object_index if edit_object_index >= 0 else '' }}">
@@ -317,7 +433,7 @@
               <tr>
                 <td>{{ loop.index }}</td>
                 <td><strong>{{ obj.name or "Sem nome" }}</strong></td>
-                <td>{{ obj.type }} · {{ obj.deployment_type }}</td>
+                <td>{{ obj.object_type or obj.type }} · {{ obj.deployment_type }}</td>
                 <td>{{ obj.responsible }}</td>
                 <td>{{ obj.status.documentation }}</td>
               </tr>
@@ -342,6 +458,19 @@
 
 <script src="{{ url_for('static', filename='js/schema-engine.js') }}"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+<!-- Injeta dados do objeto existente para SchemaEngine -->
+<script>
+  // Disponibilizar dados de edição para SchemaEngine
+  {% if current_object and current_object.data %}
+    window.ExistingObjectData = {{ current_object.data | tojson | safe }};
+  {% else %}
+    window.ExistingObjectData = {};
+  {% endif %}
+  
+  // Log para debug
+  console.log("[Template] Dados do objeto existente:", window.ExistingObjectData);
+</script>
 
 </body>
 </html>

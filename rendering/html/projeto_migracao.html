@@ -1,83 +1,3150 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <title>Projeto de Migração OTM</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 40px;
-      max-width: 900px;
-    }
-
-    h1 {
-      border-bottom: 2px solid #333;
-      padding-bottom: 8px;
-    }
-
-    h2 {
-      margin-top: 32px;
-      color: #2c3e50;
-    }
-
-    h3 {
-      margin-top: 24px;
-      color: #34495e;
-    }
-
-    h4 {
-      margin-top: 16px;
-      color: #555;
-    }
-
-    ul {
-      margin-left: 20px;
-    }
-
-    li {
-      margin-bottom: 6px;
-    }
-
-    p {
-      margin: 8px 0 12px 0;
-    }
-  </style>
+    <meta charset="utf-8" />
+    <title>PROJETO_MIGRACAO</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
+        h2 { border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+        .object-block { margin: 18px 0 28px; padding-bottom: 12px; border-bottom: 1px dashed #ddd; }
+        .meta-table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+        .meta-table th, .meta-table td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
+        .meta-table th { width: 220px; background: #f7f7f7; }
+        pre { background: #f3f3f3; padding: 10px; overflow-x: auto; }
+    </style>
 </head>
 <body>
-  <h1>Projeto de Migração OTM</h1>
-<h2>Identificação do Projeto</h2>
-<ul>
-<li>Código: MIG0001</li>
-<li>Versão: 1.0</li>
-<li>Consultor: Diego</li>
-<li>Ambiente Origem: DEV</li>
-<li>Ambiente Destino: PROD</li>
-</ul>
-<h2>Descrição</h2>
-<p>Projeto piloto de migração.</p>
-<h2>Objetivo</h2>
-<p>Validar o OmniDeck.</p>
-<h2>Observações Gerais</h2>
-<p>Sem observações adicionais.</p>
-<h2>Grupo: Automação</h2>
-<p>Objetos de automação.</p>
-<h3>SAVED_QUERY — QUERY</h3>
-<ul>
-<li>Sequência: 1</li>
-<li>Tipo de Deploy: MIGRATION_PROJECT</li>
-<li>Responsável: ITC</li>
-</ul>
-<h4>Status</h4>
-<ul>
-<li>Documentação: DONE</li>
-<li>Migration Project: IN_PROGRESS</li>
-<li>Exportação: PENDING</li>
-<li>Deploy: PENDING</li>
-<li>Validação: PENDING</li>
-</ul>
-<h4>Observações Técnicas</h4>
-<p>Objeto crítico.</p>
+    <section class="project-header">
+        <h1>Projeto de Migração - Configuração OTM Unificada (BR100 + Projeto)</h1>
+        <table class="meta-table">
+            <tr><th>Código</th><td>MIG0001</td></tr>
+            <tr><th>Versão</th><td>1.1</td></tr>
+            <tr><th>Consultor</th><td>Diego Ferreira Alves</td></tr>
+            <tr><th>Ambiente Origem</th><td>https://otmgtm-dev1-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.com/</td></tr>
+            <tr><th>Ambiente Destino</th><td>https://otmgtm-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.com/</td></tr>
+        </table>
+    </section>
+    
+    <section class="group-block">
+        <h2>Automação</h2>
+
+        
+        <section class="object-block">
+            <h3>Saved Queries</h3>
+            <p>Queries utilizadas por automações, conditions e agents</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>1</td></tr>
+                <tr><th>Object Type</th><td>SAVED_QUERY</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>DONE</td></tr>
+                <tr><th>Exportação</th><td>DONE</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>DONE</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT DOMAIN_NAME,
+  SAVED_QUERY_XID,
+  USER_QUERY_NAME,
+  QUERY_NAME,
+  USE_IN_FINDER,
+  IS_CONDITION
+FROM
+  SAVED_QUERY
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+  AND SAVED_QUERY_GID NOT LIKE &#39;%TEST%&#39;
+  AND SAVED_QUERY_GID NOT LIKE &#39;%TESTE%&#39;
+  AND SAVED_QUERY_GID NOT LIKE &#39;%MIG%&#39;
+  AND SAVED_QUERY_GID NOT LIKE &#39;%TEMP%&#39;
+ORDER BY
+  DOMAIN_NAME,
+  USER_QUERY_NAME,
+  SAVED_QUERY_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Saved Conditions</h3>
+            <p>Conditions utilizadas por agents e eventos</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>2</td></tr>
+                <tr><th>Object Type</th><td>SAVED_CONDITION</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>DONE</td></tr>
+                <tr><th>Exportação</th><td>DONE</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>DONE</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT SC.DOMAIN_NAME,
+  SC.SAVED_CONDITION_XID,
+  SC.QUERY_NAME,
+  SC.USER_CONDITION_NAME,
+  SCQ.SAVED_QUERY_GID,
+  SC.OTM_RELEASE
+FROM
+  SAVED_CONDITION SC,
+  SAVED_CONDITION_QUERY SCQ
+WHERE
+  SC.SAVED_CONDITION_GID = SCQ.SAVED_CONDITION_GID
+  AND SC.DOMAIN_NAME = &#39;BAU&#39;
+  AND SC.SAVED_CONDITION_GID NOT LIKE &#39;%TEST%&#39;
+  AND SC.SAVED_CONDITION_GID NOT LIKE &#39;%TESTE%&#39;
+  AND SC.SAVED_CONDITION_GID NOT LIKE &#39;%MIG%&#39;
+  AND SC.SAVED_CONDITION_GID NOT LIKE &#39;%TEMP%&#39;
+ORDER BY
+  SC.DOMAIN_NAME,
+  SC.SAVED_CONDITION_XID,
+  SCQ.SAVED_QUERY_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Data Type Association</h3>
+            <p>Associações de tipos de dados do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>3</td></tr>
+                <tr><th>Object Type</th><td>DATA_TYPE_ASSOCIATION</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>DONE</td></tr>
+                <tr><th>Exportação</th><td>DONE</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>DONE</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  DATA_TYPE_ASSOCIATION_GID,
+  DATA_TYPE_ASSOCIATION_XID,
+  IS_PRIMARY,
+  FROM_DATA_QUERY_TYPE_GID,
+  TO_DATA_QUERY_TYPE_GID,
+  ASSOCIATION_QUERY,
+  JAVA_PLUGIN_GID,
+  OTM_RELEASE
+FROM
+  DATA_TYPE_ASSOCIATION
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DATA_TYPE_ASSOCIATION_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Agent Event</h3>
+            <p>Eventos de agentes do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>4</td></tr>
+                <tr><th>Object Type</th><td>AGENT_EVENT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>DONE</td></tr>
+                <tr><th>Exportação</th><td>DONE</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>DONE</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT ae.DOMAIN_NAME,
+  ae.AGENT_EVENT_GID,
+  ae.AGENT_EVENT_XID,
+  ae.DATA_QUERY_TYPE_GID,
+  ae.NOTIFY_SUBJECT_GID,
+  ae.AGENT_EVENT_PARENT,
+  ae.EVENT_TOPIC_CLASS,
+  ae.IS_CUSTOM,
+  ae.IS_LIFETIME_MOD,
+  ae.DESCRIPTION,
+  ae.OTM_RELEASE,
+  aed.AGENT_GID,
+  a.AGENT_XID,
+  a.IS_ACTIVE
+FROM
+  AGENT_EVENT ae,
+  AGENT_EVENT_DETAILS aed,
+  AGENT a
+WHERE
+  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
+  AND aed.AGENT_GID = a.AGENT_GID
+  AND ae.DOMAIN_NAME = &#39;BAU&#39;
+  AND a.IS_ACTIVE = &#39;Y&#39;
+ORDER BY
+  ae.DATA_QUERY_TYPE_GID,
+  ae.AGENT_EVENT_XID,
+  a.AGENT_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Agents</h3>
+            <p>Agentes ativos no domínio</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>5</td></tr>
+                <tr><th>Object Type</th><td>AGENT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>DONE</td></tr>
+                <tr><th>Exportação</th><td>DONE</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>DONE</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  ACTION_GID,
+  ACTION_XID,
+  LABEL_KEY,
+  DISPLAY_IGNORE_CRITERIA,
+  ACTION_DEF_GID,
+  APP_ACTION_GID,
+  MANAGER_LAYOUT_GID,
+  IS_LONG_RUNNING_TASK,
+  LRT_INTERRUPTABILITY,
+  LRT_INTERRUPT_ON_SQL,
+  LRT_OBJECT_COUNT_THRESHOLD,
+  OPT_FEATURE_GID,
+  OTM_RELEASE,
+  RESULT_MESSAGE_TEXT,
+  RESULT_AUTOCLOSE_TIMEOUT,
+  DEFAULT_LOG_PROFILE_GID,
+  INSERT_USER,
+  INSERT_DATE,
+  UPDATE_USER,
+  UPDATE_DATE
+FROM
+  ACTION
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  ACTION_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>App Actions</h3>
+            <p>Ações de aplicação do OTM</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>6</td></tr>
+                <tr><th>Object Type</th><td>APP_ACTION</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>DONE</td></tr>
+                <tr><th>Exportação</th><td>DONE</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>DONE</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  ACTION_GID,
+  ACTION_XID,
+  LABEL_KEY,
+  DISPLAY_IGNORE_CRITERIA,
+  ACTION_DEF_GID,
+  APP_ACTION_GID,
+  MANAGER_LAYOUT_GID,
+  IS_LONG_RUNNING_TASK,
+  LRT_INTERRUPTABILITY,
+  LRT_INTERRUPT_ON_SQL,
+  LRT_OBJECT_COUNT_THRESHOLD,
+  OPT_FEATURE_GID,
+  OTM_RELEASE,
+  RESULT_MESSAGE_TEXT,
+  RESULT_AUTOCLOSE_TIMEOUT,
+  DEFAULT_LOG_PROFILE_GID,
+  INSERT_USER,
+  INSERT_DATE,
+  UPDATE_USER,
+  UPDATE_DATE
+FROM
+  APP_ACTION
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  ACTION_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Actions</h3>
+            <p>Ações gerais do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>7</td></tr>
+                <tr><th>Object Type</th><td>ACTION</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>DONE</td></tr>
+                <tr><th>Exportação</th><td>DONE</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>DONE</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  STYLESHEET_CONTENT_GID,
+  STYLESHEET_CONTENT_XID,
+  USED_FOR_VIEW,
+  USED_FOR_EDIT,
+  MEDIA_TYPE
+FROM
+  STYLESHEET_CONTENT
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Batch Processes</h3>
+            <p>Processos batch de execução automática</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>8</td></tr>
+                <tr><th>Object Type</th><td>BATCH_PROCESS</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>DONE</td></tr>
+                <tr><th>Exportação</th><td>DONE</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>DONE</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  BP.DOMAIN_NAME,
+  BP.BATCH_PROCESS_XID,
+  BP.DESCRIPTION,
+  BP.IS_ENABLED,
+  BPD.SEQUENCE_NO,
+  BPD.TOPIC_ALIAS_GID
+FROM
+  BATCH_PROCESS BP,
+  BATCH_PROCESS_D BPD
+WHERE
+  BP.BATCH_PROCESS_GID = BPD.BATCH_PROCESS_GID
+  AND BP.IS_ENABLED = &#39;Y&#39;
+ORDER BY
+  BP.DOMAIN_NAME,
+  BP.BATCH_PROCESS_XID,
+  BPD.SEQUENCE_NO
+            </code></pre>
+            
+        </section>
+        
+    </section>
+    
+    <section class="group-block">
+        <h2>Configuração</h2>
+
+        
+        <section class="object-block">
+            <h3>Domains – Add Domain</h3>
+            <p>Configuração de domínios OTM</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>1</td></tr>
+                <tr><th>Object Type</th><td>DOMAIN</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MANUAL</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT * FROM DOMAIN
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Domain Grants</h3>
+            <p>Permissões de domínio</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>2</td></tr>
+                <tr><th>Object Type</th><td>DOMAIN_GRANTS_MADE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MANUAL</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  GRANTOR_DOMAIN,
+  GRANTEE_DOMAIN,
+  TABLE_SET,
+  IS_WRITE_ACCESS
+FROM
+  DOMAIN_GRANTS_MADE
+ORDER BY
+  GRANTOR_DOMAIN
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Domain Settings</h3>
+            <p>Configurações de domínio</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>3</td></tr>
+                <tr><th>Object Type</th><td>DOMAIN_SETTING</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MANUAL</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  &#39;Y&#39; AS IS_DEFAULT,
+  PLANNING_PARAMETER_SET_GID,
+  POSTAL_CODE_VALIDATE_TYPE,
+  FUNCTIONAL_CURRENCY_GID
+FROM
+  DOMAIN_SETTING
+ORDER BY
+  DOMAIN_NAME
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Properties</h3>
+            <p>Propriedades do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>4</td></tr>
+                <tr><th>Object Type</th><td>PROP_INSTRUCTION</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MANUAL</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  PROP_SEQUENCE_NUM,
+  INSTRUCTION,
+  KEY,
+  VALUE,
+  DESCRIPTION
+FROM
+  PROP_INSTRUCTION
+WHERE
+  PROP_INSTRUCTION_SET_GID = &#39;CUSTOM&#39;
+ORDER BY
+  PROP_SEQUENCE_NUM
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Units of Measure (UOM)</h3>
+            <p>Unidades de medida utilizadas no domínio</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>5</td></tr>
+                <tr><th>Object Type</th><td>UOM</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  TYPE,
+  UOM_CODE,
+  UOM_SHORT_DESCRIPTION,
+  UOM_LONG_DESCRIPTION,
+  UOM_RANK,
+  IS_STORAGE_DEFAULT,
+  IS_DISPLAY_DEFAULT
+FROM
+  UOM
+ORDER BY
+  TYPE
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Postal Code Components</h3>
+            <p>Componentes de código postal</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>6</td></tr>
+                <tr><th>Object Type</th><td>HNAME_COMPONENT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>DB_XML</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT * FROM HNAME_COMPONENT ORDER BY HNAME_COMPONENT_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Branding</h3>
+            <p>Configuração de marca e identidade visual</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>7</td></tr>
+                <tr><th>Object Type</th><td>BRANDING</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MANUAL</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Business Number</h3>
+            <p>Regras de números de negócio</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>8</td></tr>
+                <tr><th>Object Type</th><td>BN_RULE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  BN_RULE_XID,
+  BN_TYPE_GID,
+  BN_GENERATOR_GID,
+  RULE_DEFINITION,
+  IS_DEFAULT,
+  OTM_RELEASE
+FROM
+  BN_RULE
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+  AND BN_RULE_XID LIKE &#39;%BAU%&#39;
+ORDER BY
+  BN_RULE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Reports</h3>
+            <p>Relatórios do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>9</td></tr>
+                <tr><th>Object Type</th><td>REPORT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  REPORT_GID,
+  REPORT_XID,
+  REPORT_DISPLAY_NAME,
+  REPORT_DESC,
+  REPORT_GROUP_GID,
+  REPORT_PHYSICAL_NAME,
+  SELECT_VIA_UI,
+  ADDITIONAL_URL_ARGUMENTS,
+  CAN_AUTO_GENERATE,
+  SECURITY_LEVEL,
+  REPORT_TYPE,
+  IS_RPT_MGR_DISPLAY,
+  USE_HTML_PARAMFORM,
+  DEFAULT_DESFORMAT,
+  REPORT_FROM_DB,
+  ICON_GID,
+  APP_ACTION_GID,
+  TRANSACTIONAL_EVENT_GID,
+  SEED_DATA,
+  USE_PARAMS_AS_BIND,
+  THIRD_PARTY_CONTENT_TYPE,
+  USE_THIRD_PARTY_DISTRIBUTION,
+  IS_CONSOLIDATED,
+  REPORT_SYSTEM_GID,
+  REPORT_PATH,
+  USE_PARAM_OPERATORS,
+  DATA_QUERY_TYPE_GID,
+  OTM_RELEASE
+FROM
+  REPORT
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  REPORT_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Transport Mode</h3>
+            <p>Modos de transporte</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>10</td></tr>
+                <tr><th>Object Type</th><td>TRANSPORT_MODE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  TRANSPORT_MODE_GID,
+  TRANSPORT_MODE_XID,
+  TRANSPORT_MODE_NAME,
+  TRANSPORT_MODE_QUALIFIER,
+  PERFORM_SHIPPING_SPACE_CALC,
+  COLOR,
+  IS_MASTER_CARR_REF_REM_VISIBLE,
+  CONDITIONAL_BOOKING_PROF_GID,
+  IS_CONSIDER_COST,
+  THU_PROFILE_GID,
+  MODE_TYPE,
+  X12_FORMAT_CODE,
+  ALLOW_REPACK
+FROM
+  TRANSPORT_MODE
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  TRANSPORT_MODE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>BN Named Range</h3>
+            <p>Intervalo nomeado de números de negócio</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>11</td></tr>
+                <tr><th>Object Type</th><td>BN_NAMED_RANGE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  BN_NAMED_RANGE_GID,
+  BN_NAMED_RANGE_XID,
+  RECYCLING_POLICY,
+  USE_BN_CONTEXT
+FROM
+  BN_NAMED_RANGE
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  BN_NAMED_RANGE_XID
+            </code></pre>
+            
+        </section>
+        
+    </section>
+    
+    <section class="group-block">
+        <h2>Dados Mestres</h2>
+
+        
+        <section class="object-block">
+            <h3>Commodities</h3>
+            <p>Cadastro de commodities vinculadas a itens</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>1</td></tr>
+                <tr><th>Object Type</th><td>COMMODITY</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  COMMODITY_GID,
+  COMMODITY_XID,
+  COMMODITY_NAME,
+  COMMODITY_DESCRIPTION,
+  REQ_EQPMT_GROUP_PROFILE_GID
+FROM
+  COMMODITY
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+  AND COMMODITY_GID IN (
+    SELECT COMMODITY_GID FROM ITEM WHERE DOMAIN_NAME = &#39;BAU&#39; AND COMMODITY_GID IS NOT NULL
+  )
+ORDER BY COMMODITY_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Corporations</h3>
+            <p>Entidades corporativas e empresas</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>2</td></tr>
+                <tr><th>Object Type</th><td>CORPORATION</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  CORPORATION_GID,
+  CORPORATION_XID,
+  CORPORATION_NAME,
+  IS_DOMAIN_MASTER,
+  IS_SHIPPING_AGENTS_ACTIVE,
+  IS_ALLOW_HOUSE_COLLECT
+FROM
+  CORPORATION
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  CORPORATION_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Ship Unit Specs (THU)</h3>
+            <p>Especificações de unidades de transporte</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>3</td></tr>
+                <tr><th>Object Type</th><td>SHIP_UNIT_SPEC</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  SHIP_UNIT_SPEC_GID,
+  SHIP_UNIT_SPEC_XID,
+  SHIP_UNIT_SPEC_NAME,
+  LENGTH,
+  LENGTH_UOM_CODE,
+  WIDTH,
+  WIDTH_UOM_CODE,
+  HEIGHT,
+  HEIGHT_UOM_CODE,
+  UNIT_TYPE,
+  IS_IN_ON_MAX
+FROM
+  SHIP_UNIT_SPEC
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+  AND UNIT_TYPE = &#39;T&#39;
+ORDER BY
+  SHIP_UNIT_SPEC_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Service Providers</h3>
+            <p>Transportadoras e prestadores de serviço</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>4</td></tr>
+                <tr><th>Object Type</th><td>SERVPROV</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>CSV</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  S.SERVPROV_XID,
+  S.ALLOW_TENDER,
+  S.IS_FLEET,
+  L.LOCATION_NAME,
+  L.CITY,
+  L.PROVINCE_CODE,
+  L.POSTAL_CODE,
+  L.COUNTRY_CODE3_GID,
+  L.ZONE4,
+  L.LAT,
+  L.LON,
+  L.DESCRIPTION,
+  LR.LOCATION_REFNUM_QUAL_GID,
+  LR.LOCATION_REFNUM_VALUE
+FROM
+  SERVPROV S,
+  LOCATION L,
+  LOCATION_REFNUM LR
+WHERE
+  S.SERVPROV_GID = L.LOCATION_GID
+  AND L.LOCATION_GID = LR.LOCATION_GID
+ORDER BY
+  L.LOCATION_NAME
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Locations</h3>
+            <p>Localizações e endereços</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>5</td></tr>
+                <tr><th>Object Type</th><td>LOCATION</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>INTEGRATION</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  L.DOMAIN_NAME,
+  L.LOCATION_XID,
+  L.LOCATION_NAME,
+  L.CITY,
+  L.PROVINCE_CODE,
+  L.POSTAL_CODE,
+  L.COUNTRY_CODE3_GID,
+  L.ZONE4,
+  L.LAT,
+  L.LON,
+  L.DESCRIPTION,
+  LR.LOCATION_REFNUM_QUAL_GID,
+  LR.LOCATION_REFNUM_VALUE
+FROM
+  LOCATION L,
+  LOCATION_REFNUM LR
+WHERE
+  L.LOCATION_GID = LR.LOCATION_GID
+ORDER BY
+  L.LOCATION_NAME
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Contacts</h3>
+            <p>Contatos e informações de pessoas</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>6</td></tr>
+                <tr><th>Object Type</th><td>CONTACT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>CSV</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  C.DOMAIN_NAME,
+  C.CONTACT_XID,
+  C.FIRST_NAME,
+  C.LAST_NAME,
+  C.EMAIL_ADDRESS,
+  C.PHONE1,
+  C.LANGUAGE_SPOKEN,
+  C.IS_PRIMARY_CONTACT,
+  C.CONTACT_TYPE,
+  C.LOCATION_GID,
+  CCM.COM_METHOD_GID
+FROM
+  CONTACT C,
+  CONTACT_COM_METHOD CCM
+WHERE
+  C.CONTACT_GID = CCM.CONTACT_GID
+ORDER BY
+  FIRST_NAME
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Equipment Groups</h3>
+            <p>Grupos de equipamentos</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>7</td></tr>
+                <tr><th>Object Type</th><td>EQUIPMENT_GROUP</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>CSV</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  EG.DOMAIN_NAME,
+  EG.EQUIPMENT_GROUP_XID,
+  EG.EQUIPMENT_GROUP_NAME,
+  ROUND(EG.EFFECTIVE_WEIGHT,5) AS EFFECTIVE_WEIGHT,
+  EG.EFFECTIVE_WEIGHT_UOM_CODE,
+  ROUND(EG.EFFECTIVE_VOLUME,5) AS EFFECTIVE_VOLUME,
+  EG.EFFECTIVE_VOLUME_UOM_CODE,
+  ROUND(EG.WIDTH,5) AS WIDTH,
+  EG.WIDTH_UOM_CODE,
+  ROUND(EG.LENGTH,5) AS LENGTH,
+  EG.LENGTH_UOM_CODE,
+  ROUND(EG.HEIGHT,5) AS HEIGHT,
+  EG.HEIGHT_UOM_CODE,
+  EG.IS_CONTAINER,
+  EG.ALLOW_LIFO_ONLY
+FROM
+  EQUIPMENT_GROUP EG
+WHERE
+  EG.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  EG.EQUIPMENT_GROUP_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Items</h3>
+            <p>Itens e produtos</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>8</td></tr>
+                <tr><th>Object Type</th><td>ITEM</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>INTEGRATION</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  ssp.DOMAIN_NAME,
+  ssp.STYLESHEET_PROFILE_GID,
+  ssp.STYLESHEET_PROFILE_XID,
+  ssp.RAW_XML,
+  ssp.FORMAT,
+  ssp.SUBJECT_PROPKEY,
+  ssp.OUT_XML_PROFILE_GID,
+  ssp.DOCUMENT_ATTACH_TYPE,
+  ssp.DIRECTION,
+  ssp.TYPE,
+  ssp.IS_FOR_NOTIFICATION_XML,
+  ssp.IS_FOR_TRANSMISSION_XML,
+  ssp.IS_FOR_MESSAGE_XML,
+  ssp.CONTENT_GID,
+  ssp.OTM_RELEASE
+FROM
+  STYLESHEET_PROFILE ssp
+WHERE
+  ssp.CONTENT_GID IN (
+    SELECT
+      sc.STYLESHEET_CONTENT_GID
+    FROM
+      STYLESHEET_CONTENT sc
+    WHERE
+      sc.DOMAIN_NAME = &#39;BAU&#39;
+  )
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Packaged Items</h3>
+            <p>Itens embalados</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>9</td></tr>
+                <tr><th>Object Type</th><td>PACKAGED_ITEM</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>INTEGRATION</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT xt.DOMAIN_NAME,
+  xt.XML_TEMPLATE_GID,
+  xt.XML_TEMPLATE_XID,
+  xt.USE_DATA,
+  xt.DESCRIPTION,
+  xt.GLOG_XML_ELEMENT_GID
+FROM
+  XML_TEMPLATE xt
+WHERE
+  xt.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  xt.XML_TEMPLATE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Contact Groups</h3>
+            <p>Grupos de contatos</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>10</td></tr>
+                <tr><th>Object Type</th><td>CONTACT_GROUP</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>CSV</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  STYLESHEET_CONTENT_GID,
+  STYLESHEET_CONTENT_XID,
+  USED_FOR_VIEW,
+  USED_FOR_EDIT,
+  MEDIA_TYPE
+FROM
+  STYLESHEET_CONTENT
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  STYLESHEET_CONTENT_XID
+            </code></pre>
+            
+        </section>
+        
+    </section>
+    
+    <section class="group-block">
+        <h2>Extensão e Qualificadores</h2>
+
+        
+        <section class="object-block">
+            <h3>Location Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de localização</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>1</td></tr>
+                <tr><th>Object Type</th><td>LOCATION_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  LOCATION_REFNUM_QUAL_XID,
+  LOCATION_REFNUM_QUAL_DESC,
+  IS_VISIBLE_IF_MASTER_CARR,
+  DEFAULT_REFNUM_BN_TYPE_GID,
+  UPDATE_FLAG
+FROM
+  LOCATION_REFNUM_QUAL
+WHERE LOCATION_REFNUM_QUAL_GID IN (SELECT LOCATION_REFNUM_QUAL_GID FROM LOCATION_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  LOCATION_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Order Release Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de liberação de pedido</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>2</td></tr>
+                <tr><th>Object Type</th><td>ORDER_RELEASE_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  ORDER_RELEASE_REFNUM_QUAL_XID,
+  ORDER_RELEASE_REFNUM_QUAL_DESC,
+  IS_VISIBLE_IF_MASTER_CARR,
+  DEFAULT_REFNUM_BN_TYPE_GID,
+  UPDATE_FLAG
+FROM
+  ORDER_RELEASE_REFNUM_QUAL
+WHERE ORDER_RELEASE_REFNUM_QUAL_GID IN (SELECT ORDER_RELEASE_REFNUM_QUAL_GID FROM ORDER_RELEASE_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  ORDER_RELEASE_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Order Release Line Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de linha de liberação</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>3</td></tr>
+                <tr><th>Object Type</th><td>ORDER_RELEASE_LINE_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  OR_LINE_REFNUM_QUAL_XID,
+  DESCRIPTION,
+  IS_VISIBLE_IF_MASTER_CARR,
+  DEFAULT_REFNUM_BN_TYPE_GID,
+  OR_LINE_REFNUM_SEQUENCE_NO,
+  UPDATE_FLAG
+FROM
+  ORDER_RELEASE_LINE_REFNUM_QUAL
+WHERE OR_LINE_REFNUM_QUAL_GID IN (SELECT OR_LINE_REFNUM_QUAL_GID FROM ORDER_RELEASE_LINE_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  OR_LINE_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Packaged Item Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de item embalado</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>4</td></tr>
+                <tr><th>Object Type</th><td>PACKAGED_ITEM_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  PACKAGED_ITEM_REFNUM_QUAL_XID,
+  PACKAGED_ITEM_REFNUM_QUAL_DESC,
+  IS_VISIBLE_IF_MASTER_CARR,
+  UPDATE_FLAG
+FROM
+  PACKAGED_ITEM_REFNUM_QUAL
+WHERE PACKAGED_ITEM_REFNUM_QUAL_GID IN (SELECT PACKAGED_ITEM_REFNUM_QUAL_GID FROM PACKAGED_ITEM_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  PACKAGED_ITEM_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Item Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de item</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>5</td></tr>
+                <tr><th>Object Type</th><td>ITEM_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  ITEM_REFNUM_QUAL_XID,
+  ITEM_REFNUM_QUAL_DESC,
+  IS_VISIBLE_IF_MASTER_CARR,
+  UPDATE_FLAG
+FROM
+  ITEM_REFNUM_QUAL
+WHERE ITEM_REFNUM_QUAL_GID IN (SELECT ITEM_REFNUM_QUAL_GID FROM ITEM_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  ITEM_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Shipment Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de remessa</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>6</td></tr>
+                <tr><th>Object Type</th><td>SHIPMENT_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  SHIPMENT_REFNUM_QUAL_XID,
+  SHIPMENT_REFNUM_QUAL_DESC,
+  IS_VISIBLE_IF_MASTER_CARR,
+  UPDATE_FLAG
+FROM
+  SHIPMENT_REFNUM_QUAL
+WHERE SHIPMENT_REFNUM_QUAL_GID IN (SELECT SHIPMENT_REFNUM_QUAL_GID FROM SHIPMENT_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  SHIPMENT_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Shipment Stop Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de parada de remessa</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>7</td></tr>
+                <tr><th>Object Type</th><td>SHIPMENT_STOP_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  SHIPMENT_STOP_REFNUM_QUAL_XID,
+  SHIPMENT_STOP_REFNUM_QUAL_DESC,
+  IS_VISIBLE_IF_MASTER_CARR,
+  UPDATE_FLAG
+FROM
+  SHIPMENT_STOP_REFNUM_QUAL
+WHERE SHIPMENT_STOP_REFNUM_QUAL_GID IN (SELECT SHIPMENT_STOP_REFNUM_QUAL_GID FROM SHIPMENT_STOP_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  SHIPMENT_STOP_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Rate Geo Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de taxa geográfica</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>8</td></tr>
+                <tr><th>Object Type</th><td>RATE_GEO_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  RATE_GEO_REFNUM_QUAL_XID,
+  RATE_GEO_REFNUM_QUAL_DESC,
+  IS_VISIBLE_IF_MASTER_CARR,
+  DEFAULT_REFNUM_BN_TYPE_GID,
+  UPDATE_FLAG
+FROM
+  RATE_GEO_REFNUM_QUAL
+WHERE RATE_GEO_REFNUM_QUAL_GID IN (SELECT RATE_GEO_REFNUM_QUAL_GID FROM RATE_GEO_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  RATE_GEO_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Order Movement Refnum Qualifier</h3>
+            <p>Qualificador de número de referência de movimento de pedido</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>9</td></tr>
+                <tr><th>Object Type</th><td>OM_REFNUM_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT DOMAIN_NAME,
+  OM_REFNUM_QUAL_GID,
+  OM_REFNUM_QUAL_DESC,
+  UPDATE_FLAG
+FROM
+  OM_REFNUM_QUAL
+WHERE OM_REFNUM_QUAL_GID IN (SELECT OM_REFNUM_QUAL_GID FROM ORDER_MOVEMENT_REFNUM)
+  AND DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  OM_REFNUM_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Status Types and Values</h3>
+            <p>Tipos e valores de status do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>10</td></tr>
+                <tr><th>Object Type</th><td>STATUS_TYPE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  st.DOMAIN_NAME,
+  st.STATUS_TYPE_GID,
+  st.STATUS_TYPE_XID,
+  st.OBJECT_TYPE,
+  st.DESCRIPTION AS STATUS_TYPE_DESCRIPTION,
+  st.SEQUENCE AS STATUS_TYPE_SEQUENCE,
+  st.IS_EXTERNAL,
+  sv.STATUS_VALUE_XID,
+  sv.DESCRIPTION AS STATUS_VALUE_DESCRIPTION,
+  sv.SEQUENCE AS STATUS_VALUE_SEQUENCE,
+  sv.INITIAL_VALUE
+FROM
+  STATUS_VALUE sv,
+  STATUS_TYPE st
+WHERE
+  sv.STATUS_TYPE_GID = st.STATUS_TYPE_GID
+  AND st.IS_EXTERNAL = &#39;Y&#39;
+  AND (
+    EXISTS (
+      SELECT 1
+      FROM SHIPMENT_STATUS ss
+      WHERE ss.STATUS_TYPE_GID = st.STATUS_TYPE_GID
+        AND ss.UPDATE_DATE &gt;= TO_DATE(&#39;02/01/2026&#39;,&#39;DD/MM/YYYY&#39;)
+    )
+    OR EXISTS (
+      SELECT 1
+      FROM ORDER_RELEASE_STATUS ors
+      WHERE ors.STATUS_TYPE_GID = st.STATUS_TYPE_GID
+        AND ors.UPDATE_DATE &gt;= TO_DATE(&#39;02/01/2026&#39;,&#39;DD/MM/YYYY&#39;)
+    )
+  )
+ORDER BY
+  st.DOMAIN_NAME,
+  st.OBJECT_TYPE,
+  st.STATUS_TYPE_GID,
+  sv.SEQUENCE
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Remarks Qualifiers</h3>
+            <p>Qualificadores de observações</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>11</td></tr>
+                <tr><th>Object Type</th><td>REMARK_QUAL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT rq.DOMAIN_NAME,
+  rq.REMARK_QUAL_GID,
+  rq.REMARK_QUAL_XID,
+  rq.REMARK_QUAL_DESC,
+  rq.REMARK_LEVEL,
+  rq.IS_VISIBLE_IF_MASTER_CARR,
+  rq.UPDATE_FLAG,
+  rq.TEXT_TEMPLATE_GID,
+  rq.QUAL_TYPE,
+  rq.DATA_QUERY_TYPE_GID
+FROM
+  REMARK_QUAL rq
+WHERE
+  rq.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  rq.DATA_QUERY_TYPE_GID,
+  rq.REMARK_QUAL_XID
+            </code></pre>
+            
+        </section>
+        
+    </section>
+    
+    <section class="group-block">
+        <h2>Planejamento</h2>
+
+        
+        <section class="object-block">
+            <h3>Audit Trail</h3>
+            <p>Trilha de auditoria do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>1</td></tr>
+                <tr><th>Object Type</th><td>AUDIT_TRAIL</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  c.DOMAIN_NAME AS CONTACT_DOMAIN_NAME,
+  c.CONTACT_GID,
+  c.CONTACT_XID,
+  c.CONTACT_TYPE,
+  c.IS_PRIMARY_CONTACT,
+  ccm.COM_METHOD_GID,
+  ccm.COM_METHOD_RANK,
+  nsc.NOTIFY_SUBJECT_GID,
+  nsc.CONSOLIDATED_NOTIFY_ONLY,
+  nsc.PARAMETERS
+FROM
+  CONTACT c
+  LEFT JOIN CONTACT_COM_METHOD ccm ON ccm.CONTACT_GID = c.CONTACT_GID
+  LEFT JOIN NOTIFY_SUBJECT_CONTACT nsc ON nsc.CONTACT_GID = c.CONTACT_GID AND nsc.COM_METHOD_GID = ccm.COM_METHOD_GID
+WHERE
+  c.DOMAIN_NAME = &#39;BAU&#39;
+  AND
+  c.CONTACT_GID = &#39;BAU.AUD&#39;
+ORDER BY
+  c.CONTACT_GID,
+  ccm.COM_METHOD_RANK,
+  nsc.NOTIFY_SUBJECT_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Logic Configs</h3>
+            <p>Configurações de lógica de planejamento</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>2</td></tr>
+                <tr><th>Object Type</th><td>LOGIC_PARAMETER</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  LOGIC_CONFIG_GID,
+  LOGIC_PARAM_QUAL_GID,
+  LOGIC_SCENARIO_GID,
+  PARAM_VALUE,
+  PARAM_UOM_CODE
+FROM
+  LOGIC_PARAMETER
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  LOGIC_CONFIG_GID,
+  LOGIC_PARAM_QUAL_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Parameter Sets</h3>
+            <p>Conjuntos de parâmetros de planejamento</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>3</td></tr>
+                <tr><th>Object Type</th><td>PLANNING_PARAMETER</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  PLANNING_PARAMETER_SET_GID,
+  PLANNING_PARAM_QUALIFIER_GID,
+  PLANNING_PARAM_VALUE
+FROM
+  PLANNING_PARAMETER
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+  AND PLANNING_PARAMETER_SET_GID IN (&#39;BAU.BAU_PARAMETER_OV&#39;, &#39;BAU.BAU_PARAMETER&#39;)
+ORDER BY
+  DOMAIN_NAME,
+  PLANNING_PARAMETER_SET_GID,
+  PLANNING_PARAM_QUALIFIER_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Accessorial Codes</h3>
+            <p>Códigos de serviços acessórios</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>4</td></tr>
+                <tr><th>Object Type</th><td>ACCESSORIAL_CODE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  ACCESSORIAL_CODE_XID,
+  ACCESSORIAL_DESC,
+  APPLY_GLOBALLY,
+  IS_FLOW_THRU
+FROM
+  ACCESSORIAL_CODE
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  ACCESSORIAL_CODE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Itinerary Leg</h3>
+            <p>Trechos de itinerário</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>5</td></tr>
+                <tr><th>Object Type</th><td>LEG</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  L.LEG_GID,
+  L.LEG_NAME,
+  ID.ITINERARY_GID
+FROM
+    ITINERARY ID,
+    ITINERARY_DETAIL ITD,
+    LEG L
+WHERE
+    ID.ITINERARY_GID = ITD.ITINERARY_GID
+    AND ITD.LEG_GID = L.LEG_GID
+    AND ID.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+    ID.ITINERARY_XID,
+    ITD.SEQUENCE_NO
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Itineraries</h3>
+            <p>Itinerários de transporte</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>6</td></tr>
+                <tr><th>Object Type</th><td>ITINERARY</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+    ID.DOMAIN_NAME,
+    ID.ITINERARY_GID,
+    ID.ITINERARY_XID,
+    ITD.LEG_GID,
+    ITD.SEQUENCE_NO,
+    L.LEG_NAME,
+    L.LEG_TYPE,
+    L.EQUIPMENT_GROUP_PROFILE_GID,
+    L.MODE_PROFILE_GID,
+    L.DEST_LOCATION_GID,
+    L.RATE_OFFERING_GID,
+    L.AUTO_CONSOLIDATION_TYPE
+FROM
+    ITINERARY ID,
+    ITINERARY_DETAIL ITD,
+    LEG L
+WHERE
+    ID.ITINERARY_GID = ITD.ITINERARY_GID
+    AND ITD.LEG_GID = L.LEG_GID
+    AND ID.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+    ID.ITINERARY_XID,
+    ITD.SEQUENCE_NO
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Itinerary Profiles</h3>
+            <p>Perfis de itinerários</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>7</td></tr>
+                <tr><th>Object Type</th><td>ITINERARY_PROFILE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  IP.ITINERARY_PROFILE_GID,
+  IP.ITINERARY_PROFILE_XID,
+  IP.ITINERARY_PROFILE_NAME,
+  IP.IS_COMPATIBLE,
+  IP.DOMAIN_NAME,
+  IPD.ITINERARY_GID,
+  IPD.DOMAIN_NAME AS DETAIL_DOMAIN_NAME
+FROM ITINERARY_PROFILE IP
+JOIN ITINERARY_PROFILE_D IPD
+  ON IP.ITINERARY_PROFILE_GID = IPD.ITINERARY_PROFILE_GID
+WHERE
+  IP.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  IP.ITINERARY_PROFILE_XID,
+  IPD.ITINERARY_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Load Configuration Rules</h3>
+            <p>Regras de configuração de carregamento</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>8</td></tr>
+                <tr><th>Object Type</th><td>LOAD_CONFIG_RULE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  LOAD_CONFIG_SETUP_GID,
+  SEQUENCE_NO,
+  TRANSPORT_HANDLING_UNIT_GID
+FROM
+  LOAD_CONFIG_RULE
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  LOAD_CONFIG_SETUP_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Load Configuration Setup</h3>
+            <p>Configuração de carregamento</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>9</td></tr>
+                <tr><th>Object Type</th><td>LOAD_CONFIG_SETUP</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  LCS.DOMAIN_NAME,
+  LCS.LOAD_CONFIG_SETUP_GID,
+  LCS.LOAD_CONFIG_SETUP_XID,
+  LCSO.ORIENTATION_GID,
+  LCSO.IS_PREFERRED,
+  LCSO.IS_FLOOR_COMPATIBLE,
+  LCSO.MAX_TOP_WEIGHT
+FROM
+  LOAD_CONFIG_SETUP LCS
+  JOIN LOAD_CONFIG_SETUP_ORIENTATION LCSO
+    ON LCSO.LOAD_CONFIG_SETUP_GID = LCS.LOAD_CONFIG_SETUP_GID
+    AND LCSO.DOMAIN_NAME = LCS.DOMAIN_NAME
+WHERE
+  LCS.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  LCS.LOAD_CONFIG_SETUP_GID,
+  LCSO.ORIENTATION_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Order Release Types</h3>
+            <p>Tipos de liberação de pedido</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>10</td></tr>
+                <tr><th>Object Type</th><td>ORDER_RELEASE_TYPE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  ORDER_RELEASE_TYPE_GID,
+  ORDER_RELEASE_TYPE_XID,
+  ORDER_RELEASE_TYPE_NAME
+FROM
+  ORDER_RELEASE_TYPE
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  ORDER_RELEASE_TYPE_XID
+            </code></pre>
+            
+        </section>
+        
+    </section>
+    
+    <section class="group-block">
+        <h2>Integração</h2>
+
+        
+        <section class="object-block">
+            <h3>Stylesheet Contents</h3>
+            <p>Conteúdos de folhas de estilo</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>1</td></tr>
+                <tr><th>Object Type</th><td>STYLESHEET_CONTENT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  STYLESHEET_CONTENT_GID,
+  STYLESHEET_CONTENT_XID,
+  USED_FOR_VIEW,
+  USED_FOR_EDIT,
+  MEDIA_TYPE
+FROM
+  STYLESHEET_CONTENT
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  DOMAIN_NAME,
+  STYLESHEET_CONTENT_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Stylesheet Profiles</h3>
+            <p>Perfis de folhas de estilo</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>2</td></tr>
+                <tr><th>Object Type</th><td>STYLESHEET_PROFILE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT ssp.STYLESHEET_PROFILE_GID,
+  ssp.STYLESHEET_PROFILE_XID,
+  ssp.TEMPLATE_NAME,
+  ssp.RAW_XML,
+  ssp.FORMAT,
+  ssp.SUBJECT_PROPKEY,
+  ssp.OUT_XML_PROFILE_GID,
+  ssp.DATA_GENERATOR_PLUGIN_GID,
+  ssp.NOTIFY_FUNCTION_GID,
+  ssp.DOCUMENT_ATTACH_TYPE,
+  ssp.DIRECTION,
+  ssp.TYPE,
+  ssp.IS_FOR_NOTIFICATION_XML,
+  ssp.IS_FOR_TRANSMISSION_XML,
+  ssp.IS_FOR_MESSAGE_XML,
+  ssp.CONTENT_GID,
+  ssp.VIEW_CONTENT_GID,
+  ssp.EDIT_CONTENT_GID,
+  ssp.OTM_RELEASE,
+  ssp.DOMAIN_NAME
+FROM
+  STYLESHEET_PROFILE ssp
+WHERE
+  ssp.CONTENT_GID IN (
+    SELECT
+      sc.STYLESHEET_CONTENT_GID
+    FROM
+      STYLESHEET_CONTENT sc
+    WHERE
+      sc.DOMAIN_NAME = &#39;BAU&#39;
+  )
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>XML Templates</h3>
+            <p>Templates XML para integração</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>3</td></tr>
+                <tr><th>Object Type</th><td>XML_TEMPLATE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT xt.DOMAIN_NAME,
+  xt.XML_TEMPLATE_GID,
+  xt.XML_TEMPLATE_XID,
+  xt.USE_DATA,
+  xt.DESCRIPTION,
+  xt.GLOG_XML_ELEMENT_GID
+FROM
+  XML_TEMPLATE xt
+WHERE
+  xt.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  xt.XML_TEMPLATE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Outbound XML Profiles</h3>
+            <p>Perfis de XML de saída</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>4</td></tr>
+                <tr><th>Object Type</th><td>OUT_XML_PROFILE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT oxp.DOMAIN_NAME,
+  oxp.OUT_XML_PROFILE_GID,
+  oxp.OUT_XML_PROFILE_XID,
+  oxp.DEFAULT_MODE,
+  oxp.SHOULD_VALIDATE,
+  oxp.XML_TEMPLATE_GID,
+  oxp.USE_TEMPLATE,
+  oxp.INT_PREFERENCE_GID
+FROM
+  OUT_XML_PROFILE oxp
+WHERE
+  oxp.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  oxp.OUT_XML_PROFILE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Document</h3>
+            <p>Documentos do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>5</td></tr>
+                <tr><th>Object Type</th><td>DOCUMENT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT d.DOMAIN_NAME,
+  d.DOCUMENT_GID,
+  d.DOCUMENT_XID,
+  d.DOCUMENT_TYPE,
+  d.DOCUMENT_MIME_TYPE,
+  d.DOCUMENT_FILENAME,
+  d.MARKED_FOR_PURGE,
+  d.UPLOADED_AT,
+  d.DOCUMENT_CMS_ID,
+  d.CONTENT_MANAGEMENT_SYSTEM_GID,
+  d.USED_AS
+FROM
+  DOCUMENT d
+WHERE
+  d.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  d.DOCUMENT_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Webservice</h3>
+            <p>Serviços web para integração</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>6</td></tr>
+                <tr><th>Object Type</th><td>WEB_SERVICE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT ws.DOMAIN_NAME,
+  ws.WEB_SERVICE_GID,
+  ws.WEB_SERVICE_XID,
+  ws.WSDL_DOCUMENT_GID,
+  ws.SERVICE_NAME,
+  ws.PORT_NAME,
+  ws.NAMESPACE,
+  ws.SOAP_ENCODING,
+  ws.USE_WSS,
+  ws.WEB_SERVICE_TYPE
+FROM
+  WEB_SERVICE ws
+WHERE
+  ws.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  ws.WEB_SERVICE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>External Systems</h3>
+            <p>Configuração de sistemas externos</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>7</td></tr>
+                <tr><th>Object Type</th><td>EXTERNAL_SYSTEM</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT es.DOMAIN_NAME,
+  es.EXTERNAL_SYSTEM_GID,
+  es.EXTERNAL_SYSTEM_XID,
+  es.DESCRIPTION,
+  es.USE_GLCREDENTIAL,
+  es.ACTIVE_MODE,
+  es.IS_ENABLE_DEBUG,
+  es.IS_LOG_RESPONSE_MSG,
+  es.REATTEMPT_MODE,
+  es.FTP_APPEND_FILE,
+  es.HTTP_ACK_EXPECTED,
+  es.HTTP_USE_ACK_STATUS,
+  es.HTTP_READ_RESPONSE,
+  es.SERVICE_ACK_EXPECTED,
+  es.SERVICE_USE_ACK_STATUS,
+  es.HTTP_CLOSE_CONNECTION,
+  es.DELAYED_STREAM_TRANSPORT,
+  es.USE_FTPS,
+  es.INCLUDE_NAMESPACE,
+  es.TARGET_NAMESPACE,
+  es.CONTENT_TYPE,
+  es.USE_HTTP_POST_OVERRIDE,
+  es.HTTP_METHOD,
+  es.OTM_RELEASE,
+  es.ALLOW_FOLLOW_REDIRECT
+FROM
+  EXTERNAL_SYSTEM es
+WHERE
+  es.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  es.EXTERNAL_SYSTEM_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>External System Contact</h3>
+            <p>Contatos de sistemas externos</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>8</td></tr>
+                <tr><th>Object Type</th><td>EXTERNAL_CONTACT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT c.CONTACT_GID,
+  c.CONTACT_XID,
+  c.IS_PRIMARY_CONTACT,
+  c.EXTERNAL_SYSTEM_GID,
+  c.CONTACT_TYPE,
+  c.IS_BROADCAST,
+  c.DOMAIN_NAME
+FROM
+  CONTACT c
+WHERE
+  c.DOMAIN_NAME = &#39;BAU&#39;
+  AND c.EXTERNAL_SYSTEM_GID IS NOT NULL
+ORDER BY
+  c.CONTACT_XID
+            </code></pre>
+            
+        </section>
+        
+    </section>
+    
+    <section class="group-block">
+        <h2>Governança e UI</h2>
+
+        
+        <section class="object-block">
+            <h3>Manager Layouts</h3>
+            <p>Layouts de gerenciamento do OTM</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>1</td></tr>
+                <tr><th>Object Type</th><td>MANAGER_LAYOUT</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  ml.DOMAIN_NAME,
+  ml.MANAGER_LAYOUT_GID,
+  ml.MANAGER_LAYOUT_XID,
+  ml.MANAGER_LAYOUT_NAME,
+  ml.ENTITY_NAME
+FROM
+  MANAGER_LAYOUT ml
+WHERE
+  ml.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  ml.MANAGER_LAYOUT_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Finder Sets</h3>
+            <p>Conjuntos de busca e filtros</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>2</td></tr>
+                <tr><th>Object Type</th><td>FINDER_SET</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  fs.DOMAIN_NAME,
+  fs.FINDER_SET_XID,
+  fs.FINDER_SET_NAME,
+  fs.QUERY_TABLE_GID,
+  fs.USE_IN_MIGRATION
+FROM
+  FINDER_SET fs
+WHERE
+  fs.DOMAIN_NAME = &#39;BAU&#39;
+  AND (
+    EXISTS (
+      SELECT 1
+      FROM USER_MENU_LAYOUT uml
+      WHERE uml.DOMAIN_NAME = &#39;BAU&#39;
+        AND uml.USER_MENU_LAYOUT_XML IS NOT NULL
+        AND DBMS_LOB.INSTR(uml.USER_MENU_LAYOUT_XML, &#39;finder_set_gid=&#39; || fs.FINDER_SET_GID, 1, 1) &gt; 0
+    )
+    OR EXISTS (
+      SELECT 1
+      FROM USER_MENU_LAYOUT uml
+      WHERE uml.DOMAIN_NAME = &#39;BAU&#39;
+        AND uml.USER_MENU_LAYOUT_JSON IS NOT NULL
+        AND DBMS_LOB.INSTR(uml.USER_MENU_LAYOUT_JSON, &#39;finder_set_gid=&#39; || fs.FINDER_SET_GID, 1, 1) &gt; 0
+    )
+    OR EXISTS (
+      SELECT 1
+      FROM DEFAULT_FINDER_SET_ACCESS dfa
+      WHERE dfa.DOMAIN_NAME = &#39;BAU&#39;
+        AND dfa.FINDER_SET_GID = fs.FINDER_SET_GID
+    )
+  )
+ORDER BY
+  fs.FINDER_SET_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Workbenches</h3>
+            <p>Bancadas de trabalho do OTM</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>3</td></tr>
+                <tr><th>Object Type</th><td>TRANSPORTATION_WORKBENCH</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  tw.DOMAIN_NAME,
+  tw.LAYOUT_GID,
+  tw.LAYOUT_XID,
+  tw.DESCRIPTION
+FROM
+  TRANSPORTATION_WORKBENCH tw
+WHERE
+  tw.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  tw.LAYOUT_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Business Monitors</h3>
+            <p>Monitores de negócio</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>4</td></tr>
+                <tr><th>Object Type</th><td>BUSINESS_MONITOR_D</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  BUSINESS_MONITOR_GID,
+  SEQUENCE,
+  QUERY_TABLE_GID,
+  SAVED_QUERY_GID,
+  FINDER_SET_GID
+FROM
+  BUSINESS_MONITOR_D
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Access Control Lists (ACL)</h3>
+            <p>Listas de controle de acesso</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>5</td></tr>
+                <tr><th>Object Type</th><td>ACR_ROLE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  URAR.DOMAIN_NAME,
+  URAR.USER_ROLE_GID,
+  AR.ACR_ROLE_XID,
+  URAR.IS_GRANTED
+FROM
+  ACR_ROLE AR,
+  USER_ROLE_ACR_ROLE URAR
+WHERE
+  AR.ACR_ROLE_GID = URAR.ACR_ROLE_GID
+ORDER BY
+  URAR.USER_ROLE_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>User Roles</h3>
+            <p>Papéis de usuário</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>6</td></tr>
+                <tr><th>Object Type</th><td>USER_ROLE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  USER_ROLE_GID,
+  USER_ROLE_XID,
+  USER_ROLE_NAME,
+  DESCRIPTION,
+  ACTIVE_STATUS
+FROM
+  USER_ROLE
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  USER_ROLE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>User Menus</h3>
+            <p>Menus de usuário</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>7</td></tr>
+                <tr><th>Object Type</th><td>USER_MENU</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  USER_MENU_GID,
+  USER_MENU_XID,
+  LABEL,
+  MENU_TYPE,
+  DESCRIPTION
+FROM
+  USER_MENU
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  USER_MENU_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>User Preferences</h3>
+            <p>Preferências de usuário</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>8</td></tr>
+                <tr><th>Object Type</th><td>USER_PREFERENCE_D</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MIGRATION_PROJECT</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  DOMAIN_NAME,
+  USER_PREFERENCE_GID,
+  PREFERENCE_GID,
+  USER_PREFERENCE_VALUE
+FROM
+  USER_PREFERENCE_D
+ORDER BY
+  USER_PREFERENCE_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Translation (Labels)</h3>
+            <p>Traduções e rótulos do sistema</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>9</td></tr>
+                <tr><th>Object Type</th><td>TRANSLATION</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>DB_XML</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT t.DOMAIN_NAME,
+  t.TRANSLATION_GID,
+  t.TRANSLATION_XID,
+  t.TRANSLATION_TYPE,
+  td.LANG,
+  td.COUNTRY,
+  td.VARIANT,
+  td.TEXT
+FROM
+  TRANSLATION t,
+  TRANSLATION_D td
+WHERE
+  t.TRANSLATION_GID = td.TRANSLATION_GID
+  AND t.TRANSLATION_GID LIKE &#39;%BAU%&#39;
+ORDER BY
+  t.TRANSLATION_XID,
+  td.LANG,
+  td.COUNTRY,
+  td.VARIANT
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Manage User Access</h3>
+            <p>Gerenciamento de acesso de usuário</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>10</td></tr>
+                <tr><th>Object Type</th><td>USER_ACCESS</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>DB_XML</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  ua.DOMAIN_NAME,
+  ua.USER_ACCESS_XID,
+  ua.GL_USER_GID,
+  ua.GL_LEVEL,
+  ua.USER_ROLE_GID,
+  uma.USER_MENU_LAYOUT_GID,
+  upa.USER_PREFERENCE_GID,
+  maa.MOBILE_ACTION_GID
+FROM
+  USER_ACCESS ua
+  LEFT JOIN USER_MENU_ACCESS uma ON ua.USER_ACCESS_GID = uma.USER_ACCESS_GID
+  LEFT JOIN USER_PREFERENCE_ACCESS upa ON ua.USER_ACCESS_GID = upa.USER_ACCESS_GID
+  LEFT JOIN MOBILE_ACTION_ACCESS maa ON ua.USER_ACCESS_GID = maa.USER_ACCESS_GID
+WHERE
+  ua.DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  ua.USER_ACCESS_GID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>VPD Profile</h3>
+            <p>Perfil de segurança em nível de dados</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>11</td></tr>
+                <tr><th>Object Type</th><td>VPD_PROFILE</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>DB_XML</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>DONE</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>DONE</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+            <pre><code class="language-sql">
+SELECT
+  *
+FROM
+  VPD_PROFILE
+WHERE
+  DOMAIN_NAME = &#39;BAU&#39;
+ORDER BY
+  VPD_PROFILE_XID
+            </code></pre>
+            
+        </section>
+        
+        <section class="object-block">
+            <h3>Relatórios (BI ZIP)</h3>
+            <p>Relatórios e arquivos BI</p>
+
+            <table class="meta-table">
+                <tr><th>Sequência</th><td>12</td></tr>
+                <tr><th>Object Type</th><td>BI_PUBLISHER_FILES</td></tr>
+                <tr><th>OTM Table</th><td></td></tr>
+                <tr><th>Deployment Type</th><td>MANUAL</td></tr>
+                <tr><th>Responsável</th><td>ITC</td></tr>
+                <tr><th>Tipo de Migração</th><td></td></tr>
+
+                
+
+                <tr><th>Documentação</th><td>PENDING</td></tr>
+                <tr><th>Migration Project</th><td>PENDING</td></tr>
+                <tr><th>Exportação</th><td>PENDING</td></tr>
+                <tr><th>Deploy</th><td>PENDING</td></tr>
+                <tr><th>Validação</th><td>PENDING</td></tr>
+                
+            </table>
+
+            
+        </section>
+        
+    </section>
+    
 </body>
 </html>

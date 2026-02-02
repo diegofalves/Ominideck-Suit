@@ -30,22 +30,21 @@ function addGroup() {
     <fieldset style="margin-bottom: 16px;">
       <legend>Informações do Grupo</legend>
       
+      <label style="display: block; margin-bottom: 8px;">ID do Grupo (identificador único)</label>
+      <input 
+        type="text" 
+        name="groups[${groupIndex}][group_id]" 
+        placeholder="Ex: AUTOMATION, CONFIGURATION, MASTER_DATA"
+        style="width: 100%; max-width: 400px; padding: 6px; margin-bottom: 12px;"
+        required
+      >
+
       <label style="display: block; margin-bottom: 8px;">Nome do Grupo</label>
       <input 
         type="text" 
         name="groups[${groupIndex}][label]" 
         placeholder="Ex: Automação, Tabelas, etc."
         style="width: 100%; max-width: 400px; padding: 6px; margin-bottom: 12px;"
-        required
-      >
-
-      <label style="display: block; margin-bottom: 8px;">Sequência</label>
-      <input 
-        type="number" 
-        name="groups[${groupIndex}][sequence]" 
-        placeholder="1, 2, 3..."
-        style="width: 100%; max-width: 400px; padding: 6px;"
-        min="1"
         required
       >
     </fieldset>
@@ -188,6 +187,13 @@ function addObject(groupIndex) {
   `;
 
   container.appendChild(objectDiv);
+  
+  // Repopular selects de tipos de objeto depois de adicionar um novo
+  if (window.SchemaEngine && window.SchemaEngine.populateObjectTypeSelector) {
+    setTimeout(() => {
+      window.SchemaEngine.populateObjectTypeSelector();
+    }, 100);
+  }
 }
 
 function removeObject(groupIndex, objectIndex) {
@@ -201,7 +207,14 @@ function removeObject(groupIndex, objectIndex) {
 
 async function toggleIdentifiers(selectElement, groupIndex, objectIndex) {
   const tableName = selectElement.value;
-  const identifiersContainer = document.getElementById(`identifiers-${groupIndex}-${objectIndex}`);
+  let identifiersContainer = document.getElementById(`identifiers-${groupIndex}-${objectIndex}`);
+  if (!identifiersContainer) {
+    identifiersContainer = document.getElementById("identifiers-container");
+  }
+  if (!identifiersContainer) {
+    console.warn('[toggleIdentifiers] Container de identifiers não encontrado no DOM');
+    return;
+  }
 
   if (!tableName) {
     identifiersContainer.innerHTML = `<p style="color: #999; font-size: 12px; margin: 0;">Selecione uma tabela OTM</p>`;
@@ -273,10 +286,10 @@ function hydrateProject(projectJson) {
     const groupDiv = document.querySelector(`.group-block[data-group-index="${groupIdx}"]`);
     if (groupDiv) {
       const labelInput = groupDiv.querySelector(`input[name="groups[${groupIdx}][label]"]`);
-      const seqInput = groupDiv.querySelector(`input[name="groups[${groupIdx}][sequence]"]`);
+      const groupIdInput = groupDiv.querySelector(`input[name="groups[${groupIdx}][group_id]"]`);
 
       if (labelInput) labelInput.value = group.label || '';
-      if (seqInput) seqInput.value = group.sequence || '';
+      if (groupIdInput) groupIdInput.value = group.group_id || '';
 
       // Adicionar objetos
       if (group.objects && group.objects.length > 0) {
@@ -284,62 +297,68 @@ function hydrateProject(projectJson) {
           addObject(groupIdx);
 
           // Preencher objeto
-          const typeSelect = groupDiv.querySelector(
-            `select[name="groups[${groupIdx}][objects][${objIdx}][object_type]"]`
+          const objectBlock = groupDiv.querySelector(
+            `.object-block[data-group-index="${groupIdx}"][data-object-index="${objIdx}"]`
           );
-          const deploySelect = groupDiv.querySelector(
-            `select[name="groups[${groupIdx}][objects][${objIdx}][deployment_type]"]`
-          );
-          const seqObjInput = groupDiv.querySelector(
-            `input[name="groups[${groupIdx}][objects][${objIdx}][sequence]"]`
-          );
+          
+          if (objectBlock) {
+            const typeSelect = objectBlock.querySelector(
+              `select[name="groups[${groupIdx}][objects][${objIdx}][object_type]"]`
+            );
+            const deploySelect = objectBlock.querySelector(
+              `select[name="groups[${groupIdx}][objects][${objIdx}][deployment_type]"]`
+            );
+            const seqObjInput = objectBlock.querySelector(
+              `input[name="groups[${groupIdx}][objects][${objIdx}][sequence]"]`
+            );
 
-          if (typeSelect) {
-            // Compatibilidade: suporta tanto 'object_type' quanto 'type'
-            const objectTypeValue = obj.object_type || obj.type || '';
-            typeSelect.value = objectTypeValue;
-            // Trigger change para renderizar identifiers
-            if (objectTypeValue) {
-              toggleIdentifiers(typeSelect, groupIdx, objIdx);
+            if (typeSelect) {
+              // Compatibilidade: suporta tanto 'object_type' quanto 'type'
+              const objectTypeValue = obj.object_type || obj.type || '';
+              // Adicionar atributo data-current-type para que SchemaEngine possa restaurar o valor
+              if (objectTypeValue) {
+                typeSelect.setAttribute('data-current-type', objectTypeValue);
+              }
+              typeSelect.value = objectTypeValue;
             }
-          }
-          if (deploySelect) deploySelect.value = obj.deployment_type || '';
-          if (seqObjInput) seqObjInput.value = obj.sequence || '';
+            if (deploySelect) deploySelect.value = obj.deployment_type || '';
+            if (seqObjInput) seqObjInput.value = obj.sequence || '';
 
-          // Preencher nome e descrição
-          const nameInput = groupDiv.querySelector(
-            `input[name="groups[${groupIdx}][objects][${objIdx}][name]"]`
-          );
-          const descInput = groupDiv.querySelector(
-            `textarea[name="groups[${groupIdx}][objects][${objIdx}][description]"]`
-          );
+            // Preencher nome e descrição
+            const nameInput = objectBlock.querySelector(
+              `input[name="groups[${groupIdx}][objects][${objIdx}][name]"]`
+            );
+            const descInput = objectBlock.querySelector(
+              `textarea[name="groups[${groupIdx}][objects][${objIdx}][description]"]`
+            );
 
-          if (nameInput) nameInput.value = obj.name || '';
-          if (descInput) descInput.value = obj.description || '';
+            if (nameInput) nameInput.value = obj.name || '';
+            if (descInput) descInput.value = obj.description || '';
 
-          // Preencher status
-          const statusDocSelect = groupDiv.querySelector(
-            `select[name="groups[${groupIdx}][objects][${objIdx}][status_documentation]"]`
-          );
-          const statusDepSelect = groupDiv.querySelector(
-            `select[name="groups[${groupIdx}][objects][${objIdx}][status_deployment]"]`
-          );
+            // Preencher status
+            const statusDocSelect = objectBlock.querySelector(
+              `select[name="groups[${groupIdx}][objects][${objIdx}][status_documentation]"]`
+            );
+            const statusDepSelect = objectBlock.querySelector(
+              `select[name="groups[${groupIdx}][objects][${objIdx}][status_deployment]"]`
+            );
 
-          if (statusDocSelect && obj.status) {
-            statusDocSelect.value = obj.status.documentation || 'PENDING';
-          }
-          if (statusDepSelect && obj.status) {
-            statusDepSelect.value = obj.status.deployment || 'PENDING';
-          }
+            if (statusDocSelect && obj.status) {
+              statusDocSelect.value = obj.status.documentation || 'PENDING';
+            }
+            if (statusDepSelect && obj.status) {
+              statusDepSelect.value = obj.status.deployment || 'PENDING';
+            }
 
-          // Preencher identifiers
-          if (obj.identifiers) {
-            Object.keys(obj.identifiers).forEach(key => {
-              const identInput = groupDiv.querySelector(
-                `input[name="groups[${groupIdx}][objects][${objIdx}][identifiers][${key}]"]`
-              );
-              if (identInput) identInput.value = obj.identifiers[key] || '';
-            });
+            // Preencher identifiers
+            if (obj.identifiers) {
+              Object.keys(obj.identifiers).forEach(key => {
+                const identInput = objectBlock.querySelector(
+                  `input[name="groups[${groupIdx}][objects][${objIdx}][identifiers][${key}]"]`
+                );
+                if (identInput) identInput.value = obj.identifiers[key] || '';
+              });
+            }
           }
         });
       }
@@ -352,13 +371,16 @@ function hydrateProject(projectJson) {
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-  const existingProjectElement = document.getElementById('existing-project-data');
-  if (existingProjectElement) {
-    try {
-      const projectData = JSON.parse(existingProjectElement.textContent);
-      hydrateProject(projectData);
-    } catch (e) {
-      console.error('Erro ao carregar projeto:', e);
+  document.addEventListener('change', function(e) {
+    if (!e.target) return;
+    if (e.target.classList && e.target.classList.contains('dynamic-object-type-selector')) {
+      const objectBlock = e.target.closest('.object-block');
+      if (!objectBlock) return;
+      const groupIndex = objectBlock.dataset.groupIndex;
+      const objectIndex = objectBlock.dataset.objectIndex;
+      if (groupIndex !== undefined && objectIndex !== undefined) {
+        toggleIdentifiers(e.target, groupIndex, objectIndex);
+      }
     }
-  }
+  });
 });

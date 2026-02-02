@@ -106,6 +106,17 @@ def projeto_migracao():
     project = load_project()
 
     if request.method == "POST":
+        action = request.form.get("action", "")
+        
+        # Se ação é apenas carregar objeto, salvar apenas o state sem validar
+        if action == "load_object":
+            edit_index = request.form.get("edit_object_index")
+            if edit_index:
+                project["state"]["last_edit_object_index"] = int(edit_index) if edit_index else None
+                save_project(project)
+            return redirect("/projeto-migracao")
+        
+        # Caso contrário, validar e salvar normalmente
         domain_data = form_to_domain(request.form)
 
         try:
@@ -116,6 +127,7 @@ def projeto_migracao():
                 schema=data["schema"],
                 enums=data["enums"],
                 ui=data["ui"],
+                groups_catalog=data.get("groups_catalog", {}),
                 project=domain_data,
                 errors=e.args[0]
             )
@@ -128,6 +140,7 @@ def projeto_migracao():
         schema=data["schema"],
         enums=data["enums"],
         ui=data["ui"],
+        groups_catalog=data.get("groups_catalog", {}),
         project=project,
         errors=[]
     )

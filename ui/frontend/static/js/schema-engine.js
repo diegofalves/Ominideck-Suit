@@ -24,6 +24,7 @@ const SchemaEngine = {
     currentTable: null,
     currentSchema: null,
     tables: [],
+    logicalTypes: Array.from(LOGICAL_OBJECT_TYPES),
     
     // ========================================================
     // Initialization
@@ -55,39 +56,65 @@ const SchemaEngine = {
     },
     
     populateObjectTypeSelector() {
-        const selectors = document.querySelectorAll('select[name="object_type"], .dynamic-object-type-selector');
+        // Encontrar selects estáticos (renderizados pelo backend)
+        const staticSelectors = document.querySelectorAll('select[name="object_type"]');
         
-        if (selectors.length === 0) {
-            console.warn("[SchemaEngine] Nenhum seletor de object_type encontrado");
+        console.log("[SchemaEngine] Selectors encontrados:", staticSelectors.length);
+
+        if (!staticSelectors.length) {
+            console.warn("[SchemaEngine] Nenhum select object_type encontrado no DOM");
             return;
         }
-        
-        selectors.forEach(selector => {
-            // Limpar opções existentes
-            selector.innerHTML = "";
+
+        // Processar cada select encontrado
+        staticSelectors.forEach(selector => {
+            // Passo 1: Ler valor do atributo data-current-type (renderizado pelo backend)
+            const currentType = selector.getAttribute("data-current-type") || "";
             
-            // Adicionar placeholder
+            console.log("[SchemaEngine] Processando selector:", {
+                name: selector.name,
+                currentType: currentType || "(nenhum)"
+            });
+
+            // Passo 2: Limpar opções existentes
+            selector.innerHTML = "";
+
+            // Passo 3: Inserir placeholder
             const placeholder = document.createElement("option");
             placeholder.value = "";
             placeholder.textContent = "— Selecione uma tabela OTM —";
             selector.appendChild(placeholder);
-            
-            // Adicionar tabelas OTM
+
+            // Passo 4: Inserir tabelas OTM
             this.tables.forEach(table => {
                 const option = document.createElement("option");
                 option.value = table;
                 option.textContent = table;
                 selector.appendChild(option);
             });
+
+            // Passo 5: Restaurar valor usando data-current-type (BACKEND-DRIVEN)
+            if (currentType) {
+                selector.value = currentType;
+                console.log("[SchemaEngine] Valor restaurado:", {
+                    selector: selector.name,
+                    value: currentType
+                });
+            }
         });
-        
-        // Mostrar o fieldset que contém o select principal
+
+        // Passo 6: Mostrar container do select
         const container = document.getElementById("object-type-container");
         if (container) {
             container.style.display = "block";
+            console.log("[SchemaEngine] Container object-type visível");
         }
         
-        console.log(`[SchemaEngine] ${selectors.length} seletores preenchidos com ${this.tables.length} tabelas OTM`);
+        console.log(`[SchemaEngine] ✅ ${staticSelectors.length} select(s) populado(s) com ${this.tables.length} tabelas OTM`);
+    },
+
+    onObjectTypeChange(objectType) {
+        this.loadTableSchema(objectType);
     },
     
     // ========================================================
@@ -155,9 +182,54 @@ const SchemaEngine = {
             
             this.showSchemaPreview(tableName, data);
             this.hideIdentifierFields();
+            
+            // Se for edição de objeto existente, renderizar schema com dados existentes
+            const objTypeSelect = document.querySelector('select[name="object_type"]');
+            if (objTypeSelect && objTypeSelect.dataset.currentType) {
+                // Obter dados existentes do objeto atual
+                const currentData = this.getExistingObjectData();
+                if (currentData) {
+                    console.log(`[SchemaEngine] Renderizando schema com dados existentes`, currentData);
+                    this.renderSchemaFields(currentData);
+                } else {
+                    console.log(`[SchemaEngine] Renderizando schema sem dados (novo objeto)`);
+                    this.renderSchemaFields(null);
+                }
+            }
         } catch (error) {
             console.error("[SchemaEngine] Erro ao carregar schema:", error);
         }
+    },
+    
+    getExistingObjectData() {
+        // Primeira prioridade: Dados injetados pelo template (current_object.data)
+        if (window.ExistingObjectData && Object.keys(window.ExistingObjectData).length > 0) {
+            console.log(`[SchemaEngine] Usando dados do template: ${Object.keys(window.ExistingObjectData).length} campos`);
+            return window.ExistingObjectData;
+        }
+        
+        // Segunda prioridade: Extrair do formulário renderizado
+        const container = document.querySelector('div[id*="schema-sections"]');
+        if (!container) return null;
+        
+        const formFields = container.querySelectorAll('input, select, textarea');
+        if (formFields.length === 0) return null;
+        
+        const data = {};
+        formFields.forEach(field => {
+            // Parse "data[FIELD_NAME]" format
+            const match = field.name.match(/data\[([^\]]+)\]/);
+            if (match) {
+                const fieldName = match[1];
+                if (field.type === 'checkbox') {
+                    data[fieldName] = field.checked;
+                } else {
+                    data[fieldName] = field.value;
+                }
+            }
+        });
+        
+        return Object.keys(data).length > 0 ? data : null;
     },
     
     showSchemaPreview(tableName, schema) {
@@ -197,7 +269,7 @@ const SchemaEngine = {
     // Render schema fields into form sections
     // ========================================================
     
-    renderSchemaFields() {
+    renderSchemaFields(existingData = null) {
         if (!this.currentSchema) {
             alert("Nenhuma tabela OTM selecionada");
             return;
@@ -209,18 +281,18 @@ const SchemaEngine = {
         container.innerHTML = "";
         const sections = this.currentSchema.sections;
         
-        // Renderiza cada seção
+        // Renderiza cada seção com dados existentes se houver
         for (const [sectionName, fields] of Object.entries(sections)) {
-            const fieldset = this.createSectionFieldset(sectionName, fields);
+            const fieldset = this.createSectionFieldset(sectionName, fields, existingData);
             container.appendChild(fieldset);
         }
         
         container.style.display = "block";
         
-        console.log(`[SchemaEngine] ${Object.keys(sections).length} seções renderizadas`);
+        console.log(`[SchemaEngine] ${Object.keys(sections).length} seções renderizadas com dados existentes`);
     },
     
-    createSectionFieldset(sectionName, fields) {
+    createSectionFieldset(sectionName, fields, existingData = null) {
         const fieldset = document.createElement("fieldset");
         fieldset.style.marginBottom = "24px";
         fieldset.style.padding = "16px";
@@ -233,16 +305,16 @@ const SchemaEngine = {
         legend.textContent = `📋 ${sectionName}`;
         fieldset.appendChild(legend);
         
-        // Renderiza cada campo
+        // Renderiza cada campo com dados existentes se houver
         fields.forEach(field => {
-            const div = this.createFieldDiv(field, "data");
+            const div = this.createFieldDiv(field, "data", existingData);
             fieldset.appendChild(div);
         });
         
         return fieldset;
     },
     
-    createFieldDiv(field, prefix = "data") {
+    createFieldDiv(field, prefix = "data", existingData = null) {
         const div = document.createElement("div");
         div.style.marginBottom = "12px";
         
@@ -259,8 +331,8 @@ const SchemaEngine = {
         `;
         div.appendChild(label);
         
-        // Input element based on type
-        const input = this.createInputElement(field, prefix);
+        // Input element based on type com dados existentes
+        const input = this.createInputElement(field, prefix, existingData);
         div.appendChild(input);
         
         // Help text if has constraint or lookup
@@ -284,7 +356,7 @@ const SchemaEngine = {
         return div;
     },
     
-    createInputElement(field, prefix = "data") {
+    createInputElement(field, prefix = "data", existingData = null) {
         const input = document.createElement("input");
         input.name = `${prefix}[${field.name}]`;
         input.style.width = "100%";
@@ -332,6 +404,11 @@ const SchemaEngine = {
                 });
             }
             
+            // Restaurar valor existente se disponível
+            if (existingData && existingData[field.name] !== undefined) {
+                select.value = existingData[field.name];
+            }
+            
             return select;
         } else {
             input.type = "text";
@@ -340,9 +417,21 @@ const SchemaEngine = {
             }
         }
         
-        // Set default value
-        if (field.defaultValue) {
-            input.value = field.defaultValue;
+        // Restaurar valor existente ou usar default
+        if (existingData && existingData[field.name] !== undefined) {
+            // Valor existente tem prioridade
+            if (field.type === "boolean") {
+                input.checked = existingData[field.name];
+            } else {
+                input.value = existingData[field.name];
+            }
+        } else if (field.defaultValue) {
+            // Usar default se não houver valor existente
+            if (field.type === "boolean") {
+                input.checked = field.defaultValue;
+            } else {
+                input.value = field.defaultValue;
+            }
         }
         
         // Set required attribute
@@ -350,7 +439,38 @@ const SchemaEngine = {
             input.required = true;
         }
         
+        // Aplicar validação leve do schema (Ajuste 9.3)
+        this.attachFieldValidation(input, field);
+        
         return input;
+    },
+    
+    // ========================================================
+    // Validação Leve Schema-Driven (Ajuste 9.3)
+    // ========================================================
+    
+    attachFieldValidation(input, field) {
+        // Required: destacar se vazio ao perder foco
+        if (field.required) {
+            input.addEventListener("blur", () => {
+                if (!input.value) {
+                    input.classList.add("field-error");
+                } else {
+                    input.classList.remove("field-error");
+                }
+            });
+        }
+        
+        // Max Length: destacar se exceder ao digitar
+        if (field.maxLength && input.type === "text") {
+            input.addEventListener("input", () => {
+                if (input.value.length > field.maxLength) {
+                    input.classList.add("field-warning");
+                } else {
+                    input.classList.remove("field-warning");
+                }
+            });
+        }
     },
     
     // ========================================================
