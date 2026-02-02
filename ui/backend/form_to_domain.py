@@ -1,10 +1,25 @@
 from collections import defaultdict
 
 
+# Tipos lógicos (não são tabelas OTM)
+LOGICAL_OBJECT_TYPES = {
+    "SAVED_QUERY",
+    "AGENT",
+    "FINDER_SET",
+    "RATE",
+    "EVENT_GROUP",
+}
+
+
 def form_to_domain(form):
     """
-    Converte request.form (flat) em estrutura de domínio canônica
-    compatível com schema.json
+    Converte request.form (flat) em estrutura de domínio canônica.
+    
+    SE object_type é tipo lógico (AGENT, SAVED_QUERY, etc):
+        → salvar em identifiers (modelo antigo)
+    
+    SE object_type é tabela OTM (ORDER_RELEASE, SHIPMENT, etc):
+        → salvar em data (schema-driven)
     """
 
     domain = {
@@ -46,15 +61,27 @@ def form_to_domain(form):
 
             while len(groups[group_idx]["objects"]) <= obj_idx:
                 groups[group_idx]["objects"].append({
-                    "identifiers": {}
+                    "identifiers": {},
+                    "data": {}
                 })
 
             obj = groups[group_idx]["objects"][obj_idx]
+            
+            # Determinar se é tipo lógico ou tabela OTM
+            obj_type = obj.get("object_type") or form.get(f"groups[{group_idx}][objects][{obj_idx}][object_type]", "")
 
             if parts[4] == "identifiers":
+                # Tipo lógico: usar identifiers
                 identifier_key = parts[5]
                 obj["identifiers"][identifier_key] = value
+            
+            elif parts[4] == "data":
+                # Tabela OTM: usar data
+                data_key = parts[5]
+                obj["data"][data_key] = value
+            
             else:
+                # Campos genéricos do objeto
                 obj[parts[4]] = value
 
     # Normaliza para lista ordenada

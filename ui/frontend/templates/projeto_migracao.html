@@ -73,38 +73,9 @@
   </fieldset>
 
   <!-- ================================== -->
-  <!-- Seletor de Tabela (Schema-Driven) -->
+  <!-- Seletor de Tabela Removido       -->
+  <!-- Integrado ao object_type         -->
   <!-- ================================== -->
-  <fieldset>
-    <legend>📊 Seletor de Tabela (OTM 9.0 Schema-Driven)</legend>
-    
-    <p style="font-size: 12px; color: #666; margin-bottom: 12px;">
-      Selecione uma tabela OTM para carregar automaticamente seus campos com validações em tempo real.
-    </p>
-    
-    <label for="schema-table-selector" style="font-weight: bold;">Tabela OTM</label>
-    <select id="schema-table-selector" style="margin-bottom: 16px;">
-      <option value="">— Selecione uma tabela —</option>
-    </select>
-    
-    <div id="schema-preview" style="display: none; background-color: #f9f9f9; padding: 12px; border-radius: 4px; margin-top: 12px;">
-      <p style="font-size: 11px; color: #666; margin: 0;">
-        <strong>Tabela selecionada:</strong> <span id="schema-table-name"></span> 
-        (<span id="schema-field-count"></span> campos)
-      </p>
-    </div>
-    
-    <button type="button" id="load-schema-btn" style="margin-top: 12px; background-color: #4CAF50; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; display: none;">
-      🔄 Carregar Campos da Tabela
-    </button>
-  </fieldset>
-
-  <!-- ================================== -->
-  <!-- Seções de Campo Schema-Driven     -->
-  <!-- ================================== -->
-  <div id="schema-sections-container" style="display: none;">
-    <!-- Será preenchido dinamicamente por app.js -->
-  </div>
 
   <!-- ================= -->
   <!-- Grupos Dinâmicos -->
@@ -184,13 +155,9 @@
       <!-- Formulário de Objeto -->
       <h4>Dados do Objeto</h4>
 
-      <label>Tipo do Objeto</label>
+      <label>Tipo do Objeto (Tabela OTM ou Tipo Lógico)</label>
       <select name="object_type">
-        {% for opt in enums.object_type %}
-          <option value="{{ opt }}" {% if current_object and current_object.type == opt %}selected{% endif %}>
-            {{ opt }}
-          </option>
-        {% endfor %}
+        <option value="">— Selecione —</option>
       </select>
 
       <label>Tipo de Deploy</label>
@@ -205,76 +172,47 @@
       <label>Responsável</label>
       <input type="text" name="object_responsible" value="{{ current_object.responsible if current_object else '' }}">
 
-      <!-- Identificadores por Tipo de Objeto (Domain Rules) -->
-      <h4 style="margin-top: 24px;">Identificadores (por tipo)</h4>
+      <!-- ========================================== -->
+      <!-- Identificadores para Tipos Lógicos       -->
+      <!-- ========================================== -->
+      <h4 style="margin-top: 24px;">Identificadores (Tipos Lógicos)</h4>
 
       <!-- SAVED_QUERY -->
       <div id="identifier_query_name" style="display:none;">
         <label>Query Name</label>
-        <input type="text" name="identifiers_query_name" placeholder="Nome da query" value="{{ current_object.identifiers.query_name if current_object and current_object.get('identifiers') else '' }}">
+        <input type="text" name="identifiers[query_name]" placeholder="Nome da query" value="">
       </div>
 
       <!-- AGENT -->
       <div id="identifier_agent_gid" style="display:none;">
         <label>Agent GID</label>
-        <input type="text" name="identifiers_agent_gid" placeholder="Identificador do agente" value="{{ current_object.identifiers.agent_gid if current_object and current_object.get('identifiers') else '' }}">
-      </div>
-
-      <!-- TABLE -->
-      <div id="identifier_table_name" style="display:none;">
-        <label>Table Name</label>
-        <input type="text" name="identifiers_table_name" placeholder="Nome da tabela" value="{{ current_object.identifiers.table_name if current_object and current_object.get('identifiers') else '' }}">
+        <input type="text" name="identifiers[agent_gid]" placeholder="Identificador do agente" value="">
       </div>
 
       <!-- FINDER_SET -->
       <div id="identifier_finder_set_gid" style="display:none;">
         <label>Finder Set GID</label>
-        <input type="text" name="identifiers_finder_set_gid" placeholder="Identificador do Finder Set" value="{{ current_object.identifiers.finder_set_gid if current_object and current_object.get('identifiers') else '' }}">
+        <input type="text" name="identifiers[finder_set_gid]" placeholder="Identificador do Finder Set" value="">
       </div>
 
       <!-- RATE -->
       <div id="identifier_rate_offering_gid" style="display:none;">
         <label>Rate Offering GID</label>
-        <input type="text" name="identifiers_rate_offering_gid" placeholder="Identificador da taxa de oferta" value="{{ current_object.identifiers.rate_offering_gid if current_object and current_object.get('identifiers') else '' }}">
+        <input type="text" name="identifiers[rate_offering_gid]" placeholder="Identificador da taxa de oferta" value="">
       </div>
 
       <!-- EVENT_GROUP -->
       <div id="identifier_event_group_gid" style="display:none;">
         <label>Event Group GID</label>
-        <input type="text" name="identifiers_event_group_gid" placeholder="Identificador do grupo de eventos" value="{{ current_object.identifiers.event_group_gid if current_object and current_object.get('identifiers') else '' }}">
+        <input type="text" name="identifiers[event_group_gid]" placeholder="Identificador do grupo de eventos" value="">
       </div>
 
-      <!-- Script para mostrar/esconder campos de identifiers baseado no type -->
-      <script>
-        function updateIdentifierFields() {
-          const objectType = document.querySelector('select[name="object_type"]').value;
-          
-          // Esconder todos os campos de identifiers
-          document.querySelectorAll('[id^="identifier_"]').forEach(el => {
-            el.style.display = 'none';
-          });
-          
-          // Mostrar campo apropriado baseado no tipo
-          const mapTypeToField = {
-            'SAVED_QUERY': 'identifier_query_name',
-            'AGENT': 'identifier_agent_gid',
-            'TABLE': 'identifier_table_name',
-            'FINDER_SET': 'identifier_finder_set_gid',
-            'RATE': 'identifier_rate_offering_gid',
-            'EVENT_GROUP': 'identifier_event_group_gid'
-          };
-          
-          if (mapTypeToField[objectType]) {
-            document.getElementById(mapTypeToField[objectType]).style.display = 'block';
-          }
-        }
-        
-        // Executar ao carregar
-        document.addEventListener('DOMContentLoaded', updateIdentifierFields);
-        
-        // Executar ao mudar tipo
-        document.querySelector('select[name="object_type"]').addEventListener('change', updateIdentifierFields);
-      </script>>
+      <!-- ========================================== -->
+      <!-- Campos Schema-Driven (Tabelas OTM)       -->
+      <!-- ========================================== -->
+      <div id="schema-sections-container" style="display: none;">
+        <!-- Será preenchido dinamicamente por schema-engine.js -->
+      </div>
 
       <label>Observações Técnicas</label>
       <textarea name="object_notes" rows="3">{{ current_object.notes if current_object else '' }}</textarea>

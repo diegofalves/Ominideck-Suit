@@ -1,13 +1,20 @@
 /**
- * Schema-Driven Form Engine (OmniDeck 9.0)
+ * Schema-Driven Form Engine (OmniDeck 9.1)
  * 
- * Responsabilidades:
- * - Carregar lista de tabelas OTM do API
- * - Renderizar seletor de tabelas
- * - Carregar campos dinâmicos por seção
- * - Validar dados em tempo real
- * - Hidrar formulário ao carregar
+ * Modelo Correto:
+ * - Tabela OTM = object_type (ex: ORDER_RELEASE, SHIPMENT)
+ * - Tipos lógicos também em object_type (ex: AGENT, SAVED_QUERY)
+ * - SE tipo lógico → usar identifiers (modelo antigo)
+ * - SE tabela OTM → usar data (schema-driven)
  */
+
+const LOGICAL_OBJECT_TYPES = new Set([
+    "SAVED_QUERY",
+    "AGENT",
+    "FINDER_SET",
+    "RATE",
+    "EVENT_GROUP"
+]);
 
 // ============================================================
 // Global State
@@ -23,10 +30,10 @@ const SchemaEngine = {
     // ========================================================
     
     async init() {
-        console.log("[SchemaEngine] Inicializando...");
+        console.log("[SchemaEngine 9.1] Inicializando com modelo novo...");
         await this.loadTableList();
         this.setupEventListeners();
-        console.log("[SchemaEngine] Pronto");
+        console.log("[SchemaEngine 9.1] Pronto");
     },
     
     // ========================================================
@@ -40,14 +47,14 @@ const SchemaEngine = {
             this.tables = data.tables || [];
             
             console.log(`[SchemaEngine] ${this.tables.length} tabelas carregadas`);
-            this.populateTableSelector();
+            this.populateObjectTypeSelector();
         } catch (error) {
             console.error("[SchemaEngine] Erro ao carregar tabelas:", error);
         }
     },
     
-    populateTableSelector() {
-        const selector = document.getElementById("schema-table-selector");
+    populateObjectTypeSelector() {
+        const selector = document.querySelector('select[name="object_type"]');
         if (!selector) return;
         
         // Limpar opções existentes (mantém placeholder)
@@ -55,25 +62,52 @@ const SchemaEngine = {
             selector.remove(1);
         }
         
-        // Adicionar tabelas
+        // Adicionar tipos lógicos PRIMEIRO
+        const logicalGroup = document.createElement("optgroup");
+        logicalGroup.label = "Tipos Lógicos";
+        LOGICAL_OBJECT_TYPES.forEach(type => {
+            const option = document.createElement("option");
+            option.value = type;
+            option.textContent = type;
+            logicalGroup.appendChild(option);
+        });
+        selector.appendChild(logicalGroup);
+        
+        // Adicionar tabelas OTM
+        const tablesGroup = document.createElement("optgroup");
+        tablesGroup.label = "Tabelas OTM";
         this.tables.forEach(table => {
             const option = document.createElement("option");
             option.value = table;
             option.textContent = table;
-            selector.appendChild(option);
+            tablesGroup.appendChild(option);
         });
+        selector.appendChild(tablesGroup);
     },
     
     // ========================================================
-    // Load schema for selected table
+    // Load schema for OTM table
     // ========================================================
     
     async loadTableSchema(tableName) {
+        // Se for tipo lógico: não carregar schema
+        if (LOGICAL_OBJECT_TYPES.has(tableName)) {
+            console.log(`[SchemaEngine] ${tableName} é tipo lógico, não carregando schema`);
+            this.currentTable = null;
+            this.currentSchema = null;
+            this.hideSchemaPreview();
+            this.hideIdentifierFields();
+            this.showIdentifierFieldsForLogicalType(tableName);
+            return;
+        }
+        
+        // Se for tabela OTM: carregar schema
         if (!tableName) {
             console.log("[SchemaEngine] Tabela limpa");
             this.currentTable = null;
             this.currentSchema = null;
             this.hideSchemaPreview();
+            this.hideIdentifierFields();
             return;
         }
         
@@ -91,9 +125,9 @@ const SchemaEngine = {
             this.currentSchema = data;
             
             console.log(`[SchemaEngine] Schema carregado: ${tableName}`);
-            console.log(`[SchemaEngine] Seções: ${Object.keys(data.sections).join(", ")}`);
             
             this.showSchemaPreview(tableName, data);
+            this.hideIdentifierFields();
         } catch (error) {
             console.error("[SchemaEngine] Erro ao carregar schema:", error);
         }
@@ -138,7 +172,7 @@ const SchemaEngine = {
     
     renderSchemaFields() {
         if (!this.currentSchema) {
-            alert("Nenhuma tabela selecionada");
+            alert("Nenhuma tabela OTM selecionada");
             return;
         }
         
@@ -174,14 +208,14 @@ const SchemaEngine = {
         
         // Renderiza cada campo
         fields.forEach(field => {
-            const div = this.createFieldDiv(field);
+            const div = this.createFieldDiv(field, "data");
             fieldset.appendChild(div);
         });
         
         return fieldset;
     },
     
-    createFieldDiv(field) {
+    createFieldDiv(field, prefix = "data") {
         const div = document.createElement("div");
         div.style.marginBottom = "12px";
         
@@ -199,7 +233,7 @@ const SchemaEngine = {
         div.appendChild(label);
         
         // Input element based on type
-        const input = this.createInputElement(field);
+        const input = this.createInputElement(field, prefix);
         div.appendChild(input);
         
         // Help text if has constraint or lookup
@@ -223,9 +257,9 @@ const SchemaEngine = {
         return div;
     },
     
-    createInputElement(field) {
+    createInputElement(field, prefix = "data") {
         const input = document.createElement("input");
-        input.name = field.name;
+        input.name = `${prefix}[${field.name}]`;
         input.style.width = "100%";
         input.style.maxWidth = "400px";
         input.style.padding = "6px";
@@ -248,7 +282,7 @@ const SchemaEngine = {
             input.style.width = "auto";
         } else if (field.type === "select") {
             const select = document.createElement("select");
-            select.name = field.name;
+            select.name = `${prefix}[${field.name}]`;
             select.style.width = "100%";
             select.style.maxWidth = "400px";
             select.style.padding = "6px";
@@ -293,11 +327,35 @@ const SchemaEngine = {
     },
     
     // ========================================================
+    // Identifier fields for logical types
+    // ========================================================
+    
+    hideIdentifierFields() {
+        document.querySelectorAll('[id^="identifier_"]').forEach(el => {
+            el.style.display = 'none';
+        });
+    },
+    
+    showIdentifierFieldsForLogicalType(objectType) {
+        const mapTypeToField = {
+            'SAVED_QUERY': 'identifier_query_name',
+            'AGENT': 'identifier_agent_gid',
+            'FINDER_SET': 'identifier_finder_set_gid',
+            'RATE': 'identifier_rate_offering_gid',
+            'EVENT_GROUP': 'identifier_event_group_gid'
+        };
+        
+        if (mapTypeToField[objectType]) {
+            document.getElementById(mapTypeToField[objectType]).style.display = 'block';
+        }
+    },
+    
+    // ========================================================
     // Event Listeners
     // ========================================================
     
     setupEventListeners() {
-        const selector = document.getElementById("schema-table-selector");
+        const selector = document.querySelector('select[name="object_type"]');
         const loadBtn = document.getElementById("load-schema-btn");
         
         if (selector) {

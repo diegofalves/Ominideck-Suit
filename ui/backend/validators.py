@@ -10,10 +10,10 @@ class DomainValidationError(Exception):
     pass
 
 
-OBJECT_TYPE_RULES = {
+# Tipos lógicos (não são tabelas OTM)
+LOGICAL_OBJECT_TYPES = {
     "SAVED_QUERY": ["query_name"],
     "AGENT": ["agent_gid"],
-    "TABLE": ["table_name"],
     "FINDER_SET": ["finder_set_gid"],
     "RATE": ["rate_offering_gid"],
     "EVENT_GROUP": ["event_group_gid"],
@@ -61,13 +61,26 @@ def validate_project(domain):
                 errors.append(f"Grupo {g_idx} / Objeto {o_idx}: object_type é obrigatório.")
                 continue
 
-            required_ids = OBJECT_TYPE_RULES.get(obj_type, [])
-            identifiers = obj.get("identifiers", {})
+            # SE é tipo lógico (não tabela OTM)
+            if obj_type in LOGICAL_OBJECT_TYPES:
+                required_ids = LOGICAL_OBJECT_TYPES[obj_type]
+                identifiers = obj.get("identifiers", {})
 
-            for rid in required_ids:
-                if not identifiers.get(rid):
+                for rid in required_ids:
+                    if not identifiers.get(rid):
+                        errors.append(
+                            f"Grupo {g_idx} / Objeto {o_idx}: {rid} é obrigatório para {obj_type}."
+                        )
+            
+            # SE é tabela OTM (schema-driven)
+            else:
+                # Validar usando schema
+                data = obj.get("data", {})
+                schema_errors = validate_form_data_against_schema(obj_type, data)
+                
+                for schema_error in schema_errors:
                     errors.append(
-                        f"Grupo {g_idx} / Objeto {o_idx}: {rid} é obrigatório para {obj_type}."
+                        f"Grupo {g_idx} / Objeto {o_idx}: {schema_error}"
                     )
 
     if errors:
