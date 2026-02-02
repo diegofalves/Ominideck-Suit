@@ -15,6 +15,21 @@
 
 <h1>OmniDeck</h1>
 
+<!-- Exibição de Erros de Validação -->
+{% if errors %}
+  <div style="background-color: #ffebee; border: 2px solid #c62828; color: #b71c1c; padding: 16px; border-radius: 4px; margin-bottom: 24px;">
+    <h3 style="margin-top: 0; color: #b71c1c;">⚠️ Erros de Validação</h3>
+    <ul style="margin: 0; padding-left: 20px;">
+      {% for error in errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    <p style="font-size: 12px; margin-bottom: 0; color: #666;">
+      Corrija os erros abaixo e tente novamente.
+    </p>
+  </div>
+{% endif %}
+
 <form method="POST">
 
   <!-- ========================= -->
@@ -26,48 +41,277 @@
     {% for field, cfg in ui.project.fields.items() %}
       <label>{{ cfg.label }}</label>
 
-      {% if cfg.type == "text" %}
-        <input type="text" name="{{ field }}">
+      {% if field == "environment_source" %}
+        <input
+          type="text"
+          name="environment_source"
+          value="{{ project.project.environment.source if project and project.project and project.project.environment else '' }}"
+        >
+
+      {% elif field == "environment_target" %}
+        <input
+          type="text"
+          name="environment_target"
+          value="{{ project.project.environment.target if project and project.project and project.project.environment else '' }}"
+        >
+
       {% elif cfg.type == "number" %}
-        <input type="number" name="{{ field }}">
-      {% endif %}
-    {% endfor %}
-  </fieldset>
-
-  <!-- ================= -->
-  <!-- Grupo (definição) -->
-  <!-- ================= -->
-  <fieldset>
-    <legend>{{ ui.groups.section }}</legend>
-
-    {% for field, cfg in ui.groups.fields.items() %}
-      <label>{{ cfg.label }}</label>
-      <input type="{{ cfg.type }}" name="group_{{ field }}">
-    {% endfor %}
-
-    <h3>Objeto</h3>
-
-    {% for field, cfg in ui.groups.objects.fields.items() %}
-      <label>{{ cfg.label }}</label>
-
-      {% if cfg.type == "select" %}
-        <select name="object_{{ field }}">
-          {% for opt in enums[cfg.enum] %}
-            <option value="{{ opt }}">{{ opt }}</option>
-          {% endfor %}
-        </select>
-
-      {% elif cfg.type == "textarea" %}
-        <textarea name="object_{{ field }}" rows="3"></textarea>
+        <input
+          type="number"
+          name="{{ field }}"
+          value="{{ project.project[field] if project and project.project else '' }}"
+        >
 
       {% else %}
-        <input type="{{ cfg.type }}" name="object_{{ field }}">
+        <input
+          type="text"
+          name="{{ field }}"
+          value="{{ project.project[field] if project and project.project else '' }}"
+        >
       {% endif %}
     {% endfor %}
   </fieldset>
+
+  <!-- ================= -->
+  <!-- Grupos Dinâmicos -->
+  <!-- ================= -->
+  <fieldset>
+    <legend>Grupos do Projeto</legend>
+
+    <div id="groups-container"></div>
+
+    <button type="button" onclick="addGroup()">➕ Adicionar Grupo</button>
+  </fieldset>
+
+  <!-- ================================== -->
+  <!-- Painel Condicional - Grupo Ativo -->
+  <!-- ================================== -->
+  {% if project_data and project_data.active_group_id %}
+    {% set active_id = project_data.active_group_id %}
+    {% set active_group = groups_catalog.get(active_id) %}
+
+    <!-- Encontrar o grupo completo do projeto -->
+    {% set current_group = namespace(data=none) %}
+    {% if project_data.groups %}
+      {% for g in project_data.groups %}
+        {% if g.group_id == active_id %}
+          {% set current_group.data = g %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <!-- Pegar o índice do objeto a editar -->
+    {% set last_edit_index = project_data.state.get('last_edit_object_index') if project_data and project_data.state else none %}
+    {% set edit_object_index = last_edit_index | int if last_edit_index is not none else -1 %}
+    
+    <!-- Pegar o objeto a editar (se índice válido) -->
+    {% set current_object = none %}
+    {% if edit_object_index >= 0 and current_group.data and edit_object_index < current_group.data.objects | length %}
+      {% set current_object = current_group.data.objects[edit_object_index] %}
+    {% endif %}
+
+    <fieldset style="border: 2px solid #4CAF50;">
+      <legend>
+        Grupo Ativo — {{ active_group.label }}
+      </legend>
+
+      <p style="font-size: 13px; color: #555;">
+        Você está editando o grupo
+        <strong>{{ active_group.label }}</strong>
+        ({{ active_group.sequence }}º no fluxo).
+      </p>
+
+      <!-- Seção de Seleção/Criação de Objeto -->
+      {% if current_group.data and current_group.data.objects %}
+        <label for="edit_object_index" style="font-weight: bold; margin-top: 16px;">Editar Objeto Existente</label>
+        <select id="edit_object_index" name="edit_object_index" style="margin-bottom: 16px;">
+          <option value="">— Criar novo objeto —</option>
+
+          {% for obj in current_group.data.objects %}
+            <option value="{{ loop.index0 }}"
+              {% if edit_object_index == loop.index0 %}selected{% endif %}
+            >
+              {{ loop.index }} — {{ obj.type }} ({{ obj.deployment_type }})
+            </option>
+          {% endfor %}
+        </select>
+      {% endif %}
+
+      <h4>{% if edit_object_index >= 0 %}Editar Objeto{% else %}Novo Objeto{% endif %}</h4>
+
+      <p style="font-size: 12px; color: #666; margin-bottom: 12px;">
+        {% if edit_object_index >= 0 %}
+          <strong>Modo: Edição</strong> - Alterando objeto #{{ edit_object_index + 1 }}
+        {% else %}
+          <strong>Modo: Criação</strong> - Um novo objeto será adicionado ao grupo
+        {% endif %}
+      </p>
+
+      <!-- Formulário de Objeto -->
+      <h4>Dados do Objeto</h4>
+
+      <label>Tipo do Objeto</label>
+      <select name="object_type">
+        {% for opt in enums.object_type %}
+          <option value="{{ opt }}" {% if current_object and current_object.type == opt %}selected{% endif %}>
+            {{ opt }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label>Tipo de Deploy</label>
+      <select name="object_deployment_type">
+        {% for opt in enums.deployment_type %}
+          <option value="{{ opt }}" {% if current_object and current_object.deployment_type == opt %}selected{% endif %}>
+            {{ opt }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label>Responsável</label>
+      <input type="text" name="object_responsible" value="{{ current_object.responsible if current_object else '' }}">
+
+      <!-- Identificadores por Tipo de Objeto (Domain Rules) -->
+      <h4 style="margin-top: 24px;">Identificadores (por tipo)</h4>
+
+      <!-- SAVED_QUERY -->
+      <div id="identifier_query_name" style="display:none;">
+        <label>Query Name</label>
+        <input type="text" name="identifiers_query_name" placeholder="Nome da query" value="{{ current_object.identifiers.query_name if current_object and current_object.get('identifiers') else '' }}">
+      </div>
+
+      <!-- AGENT -->
+      <div id="identifier_agent_gid" style="display:none;">
+        <label>Agent GID</label>
+        <input type="text" name="identifiers_agent_gid" placeholder="Identificador do agente" value="{{ current_object.identifiers.agent_gid if current_object and current_object.get('identifiers') else '' }}">
+      </div>
+
+      <!-- TABLE -->
+      <div id="identifier_table_name" style="display:none;">
+        <label>Table Name</label>
+        <input type="text" name="identifiers_table_name" placeholder="Nome da tabela" value="{{ current_object.identifiers.table_name if current_object and current_object.get('identifiers') else '' }}">
+      </div>
+
+      <!-- FINDER_SET -->
+      <div id="identifier_finder_set_gid" style="display:none;">
+        <label>Finder Set GID</label>
+        <input type="text" name="identifiers_finder_set_gid" placeholder="Identificador do Finder Set" value="{{ current_object.identifiers.finder_set_gid if current_object and current_object.get('identifiers') else '' }}">
+      </div>
+
+      <!-- RATE -->
+      <div id="identifier_rate_offering_gid" style="display:none;">
+        <label>Rate Offering GID</label>
+        <input type="text" name="identifiers_rate_offering_gid" placeholder="Identificador da taxa de oferta" value="{{ current_object.identifiers.rate_offering_gid if current_object and current_object.get('identifiers') else '' }}">
+      </div>
+
+      <!-- EVENT_GROUP -->
+      <div id="identifier_event_group_gid" style="display:none;">
+        <label>Event Group GID</label>
+        <input type="text" name="identifiers_event_group_gid" placeholder="Identificador do grupo de eventos" value="{{ current_object.identifiers.event_group_gid if current_object and current_object.get('identifiers') else '' }}">
+      </div>
+
+      <!-- Script para mostrar/esconder campos de identifiers baseado no type -->
+      <script>
+        function updateIdentifierFields() {
+          const objectType = document.querySelector('select[name="object_type"]').value;
+          
+          // Esconder todos os campos de identifiers
+          document.querySelectorAll('[id^="identifier_"]').forEach(el => {
+            el.style.display = 'none';
+          });
+          
+          // Mostrar campo apropriado baseado no tipo
+          const mapTypeToField = {
+            'SAVED_QUERY': 'identifier_query_name',
+            'AGENT': 'identifier_agent_gid',
+            'TABLE': 'identifier_table_name',
+            'FINDER_SET': 'identifier_finder_set_gid',
+            'RATE': 'identifier_rate_offering_gid',
+            'EVENT_GROUP': 'identifier_event_group_gid'
+          };
+          
+          if (mapTypeToField[objectType]) {
+            document.getElementById(mapTypeToField[objectType]).style.display = 'block';
+          }
+        }
+        
+        // Executar ao carregar
+        document.addEventListener('DOMContentLoaded', updateIdentifierFields);
+        
+        // Executar ao mudar tipo
+        document.querySelector('select[name="object_type"]').addEventListener('change', updateIdentifierFields);
+      </script>>
+
+      <label>Observações Técnicas</label>
+      <textarea name="object_notes" rows="3">{{ current_object.notes if current_object else '' }}</textarea>
+
+      <!-- Hidden field para manter edit_object_index no POST -->
+      <input type="hidden" name="edit_object_index" value="{{ edit_object_index if edit_object_index >= 0 else '' }}">
+
+      <!-- Seção de Ações do Objeto -->
+      {% if edit_object_index >= 0 %}
+        <div style="margin-top: 24px; padding: 16px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px;">
+          <p style="font-size: 12px; color: #856404; margin: 0 0 12px 0;">
+            <strong>Ações Disponíveis:</strong>
+          </p>
+
+          <!-- Botão Remover (formulário separado) -->
+          <form method="POST" style="display: inline;">
+            <input type="hidden" name="remove_object_index" value="{{ edit_object_index }}">
+            <button type="submit" style="background-color: #e53935; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+              🗑️ Remover Objeto
+            </button>
+          </form>
+
+          <p style="font-size: 11px; color: #856404; margin-top: 8px;">
+            ⚠️ Esta ação remove permanentemente o objeto do grupo.
+          </p>
+        </div>
+      {% endif %}>
+
+      <!-- Lista de Objetos do Grupo Ativo -->
+      {% if current_group.data and current_group.data.objects %}
+        <h4 style="margin-top: 24px;">Objetos do Grupo</h4>
+
+        <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 800px;">
+          <thead>
+            <tr style="background-color: #f5f5f5;">
+              <th>#</th>
+              <th>Tipo</th>
+              <th>Deploy</th>
+              <th>Responsável</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in current_group.data.objects %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ obj.type }}</td>
+                <td>{{ obj.deployment_type }}</td>
+                <td>{{ obj.responsible }}</td>
+                <td>{{ obj.status.documentation }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </fieldset>
+  {% else %}
+    <p style="color: #999;">
+      Selecione um grupo ativo para começar a edição.
+    </p>
+  {% endif %}
 
   <button type="submit">Salvar Projeto</button>
 </form>
+
+<!-- Injetar dados do projeto para reidratação -->
+<div id="existing-project-data" style="display: none;">
+  {{ project | tojson | safe }}
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 </body>
 </html>

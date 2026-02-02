@@ -28,6 +28,14 @@ def load_ui_contract():
         return json.load(f)
 
 
+def load_groups():
+    path = BASE_DIR / "metadata" / "ui" / "groups.json"
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_all():
     """
     Ponto único de carga para a UI.
@@ -35,5 +43,6 @@ def load_all():
     return {
         "schema": load_schema(),
         "enums": load_enums(),
-        "ui": load_ui_contract()
+        "ui": load_ui_contract(),
+        "groups_catalog": load_groups()
     }

@@ -1,40 +1,189 @@
-# Projeto de Migração OTM
+# Projeto Válido
 
 ## Identificação do Projeto
-- Código: MIG0001
-- Versão: 1.0
-- Consultor: Diego
-- Ambiente Origem: DEV
-- Ambiente Destino: PROD
 
-## Descrição
-Projeto piloto de migração.
+- **Código**: PROJ001
+- **Versão**: 1.0.0
+- **Consultor**: Diego Alves
+- **Ambiente Origem**: DEV
+- **Ambiente Destino**: PROD
 
-## Objetivo
-Validar o OmniDeck.
-
-## Observações Gerais
-Sem observações adicionais.
+---
 
 
-## Grupo: Automação
-Objetos de automação.
 
 
-### SAVED_QUERY — QUERY
+## Grupo: Automação (1º)
 
-- Sequência: 1
-- Tipo de Deploy: MIGRATION_PROJECT
-- Responsável: ITC
+Sequência do Grupo: **1**
 
-#### Status
-- Documentação: DONE
-- Migration Project: IN_PROGRESS
-- Exportação: PENDING
-- Deploy: PENDING
-- Validação: PENDING
 
-#### Observações Técnicas
-Objeto crítico.
+
+### Objeto 1 — TABLE
+
+- **Sequência**: 2
+- **Tipo de Deploy**: CSV
+- **Responsável**: Equipe DBA
+
+#### Identificadores
+
+
+- Table Name: `—`
+
+
+
+#### Status de Progressão
+
+| Fase | Status |
+|------|--------|
+| 📋 Documentação | PENDING |
+| 🔧 Migration Project | PENDING |
+| 📤 Exportação | PENDING |
+| 🚀 Deploy | PENDING |
+| ✅ Validação | PENDING |
+
+
+
+#### Observações
+
+Objeto 1
+
+
+
+
+
+### Objeto 2 — TABLE
+
+- **Sequência**: 4
+- **Tipo de Deploy**: CSV
+- **Responsável**: Equipe DBA
+
+#### Identificadores
+
+
+- Table Name: `—`
+
+
+
+#### Status de Progressão
+
+| Fase | Status |
+|------|--------|
+| 📋 Documentação | PENDING |
+| 🔧 Migration Project | PENDING |
+| 📤 Exportação | PENDING |
+| 🚀 Deploy | PENDING |
+| ✅ Validação | PENDING |
+
+
+
+#### Observações
+
+Objeto 3
+
+
+
+
+
+### Objeto 3 — TABLE
+
+- **Sequência**: 5
+- **Tipo de Deploy**: CSV
+- **Responsável**: Equipe DBA
+
+#### Identificadores
+
+
+- Table Name: `—`
+
+
+
+#### Status de Progressão
+
+| Fase | Status |
+|------|--------|
+| 📋 Documentação | PENDING |
+| 🔧 Migration Project | PENDING |
+| 📤 Exportação | PENDING |
+| 🚀 Deploy | PENDING |
+| ✅ Validação | PENDING |
+
+
+
+#### Observações
+
+Objeto 4
+
+
+
+
+
+### Objeto 4 — TABLE
+
+- **Sequência**: 4
+- **Tipo de Deploy**: CSV
+- **Responsável**: Equipe DBA
+
+#### Identificadores
+
+
+- Table Name: `—`
+
+
+
+#### Status de Progressão
+
+| Fase | Status |
+|------|--------|
+| 📋 Documentação | PENDING |
+| 🔧 Migration Project | PENDING |
+| 📤 Exportação | PENDING |
+| 🚀 Deploy | PENDING |
+| ✅ Validação | PENDING |
+
+
+
+#### Observações
+
+Tabela de testes
+
+
+
+
+
+### Objeto 5 — SAVED_QUERY
+
+- **Sequência**: 6
+- **Tipo de Deploy**: MIGRATION_PROJECT
+- **Responsável**: Equipe BI
+
+#### Identificadores
+
+
+- Query Name: `query_sales_report_v2`
+
+
+
+#### Status de Progressão
+
+| Fase | Status |
+|------|--------|
+| 📋 Documentação | PENDING |
+| 🔧 Migration Project | IN_PROGRESS |
+| 📤 Exportação | PENDING |
+| 🚀 Deploy | PENDING |
+| ✅ Validação | PENDING |
+
+
+
+#### Observações
+
+Query de relatório de vendas integrada
+
+
+
+
+
+---
 
 
