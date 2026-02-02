@@ -1,5 +1,14 @@
 # Arquitetura do OmniDeck
 
+## Visão Geral
+
+O OmniDeck é construído seguindo princípios de **Domain-Driven Design (DDD)**.
+O **Projeto de Migração** é o *Aggregate Root* do sistema e representa a fonte única
+da verdade para qualquer migração OTM.
+
+Interfaces (UI Web, CLI futura), parsers e renderizadores (Markdown, HTML, PDF)
+são considerados **adapters** e nunca contêm regras de negócio.
+
 ## Entidades de Domínio
 
 ### Projeto de Migração
@@ -74,12 +83,10 @@ Regras:
 ### 2. Validações de Grupo
 
 Campos obrigatórios:
-- group_id (UPPER_SNAKE_CASE)
 - label
 - sequence (inteiro >= 1)
 
 Regras:
-- group_id deve ser único dentro do projeto
 - sequence deve ser única dentro do projeto
 - Grupos são ordenáveis pela propriedade sequence
 
@@ -90,36 +97,36 @@ Regras:
 Campos obrigatórios:
 - sequence (inteiro >= 1)
 - object_type (enum válido)
-- otm_table
 - deployment_type (enum válido)
-- responsible
+- identifiers deve ser um objeto válido
 
 Regras:
 - sequence deve ser única dentro do grupo
 - otm_table deve existir na Metadata OTM
-- identifiers deve ser um objeto válido
 
 ---
 
-### 4. Validações condicionais por Deployment Type
+### 4. Validações condicionais por Tipo de Objeto
 
-- MANUAL  
-  - Não permite identificadores técnicos
+Cada tipo de objeto exige identificadores específicos:
 
-- MIGRATION_PROJECT  
-  - Exige identifiers.migration_project_id
+- SAVED_QUERY  
+  - identifiers.query_name
 
-- CSV  
-  - Exige identifiers.csv_file_name
+- AGENT  
+  - identifiers.agent_gid
 
-- DB_XML  
-  - Exige identifiers.db_xml_object_name
+- TABLE  
+  - identifiers.table_name
 
-- ZIP_BI  
-  - Exige identifiers.zip_bi_name
+- FINDER_SET  
+  - identifiers.finder_set_gid
 
-- BUILDER_CONTROL  
-  - Exige identifiers.builder_control_id
+- RATE  
+  - identifiers.rate_offering_gid
+
+- EVENT_GROUP  
+  - identifiers.event_group_gid
 
 ---
 
@@ -160,3 +167,15 @@ Regras:
 - Enums governam valores fechados
 - UI apenas consome e respeita o domínio
 - Nenhuma regra de domínio depende de renderização
+
+---
+
+## Estado Atual da Arquitetura
+
+- UI Web implementada (Flask + HTML + JS)
+- Parser form → domain canônico
+- Validação de domínio centralizada
+- Persistência via Repository Pattern (JSON)
+- Renderização Markdown funcional
+- HTML/PDF como próximos adapters
+- CLI planejada como adapter futuro

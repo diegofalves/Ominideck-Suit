@@ -72,6 +72,40 @@
     {% endfor %}
   </fieldset>
 
+  <!-- ================================== -->
+  <!-- Seletor de Tabela (Schema-Driven) -->
+  <!-- ================================== -->
+  <fieldset>
+    <legend>📊 Seletor de Tabela (OTM 9.0 Schema-Driven)</legend>
+    
+    <p style="font-size: 12px; color: #666; margin-bottom: 12px;">
+      Selecione uma tabela OTM para carregar automaticamente seus campos com validações em tempo real.
+    </p>
+    
+    <label for="schema-table-selector" style="font-weight: bold;">Tabela OTM</label>
+    <select id="schema-table-selector" style="margin-bottom: 16px;">
+      <option value="">— Selecione uma tabela —</option>
+    </select>
+    
+    <div id="schema-preview" style="display: none; background-color: #f9f9f9; padding: 12px; border-radius: 4px; margin-top: 12px;">
+      <p style="font-size: 11px; color: #666; margin: 0;">
+        <strong>Tabela selecionada:</strong> <span id="schema-table-name"></span> 
+        (<span id="schema-field-count"></span> campos)
+      </p>
+    </div>
+    
+    <button type="button" id="load-schema-btn" style="margin-top: 12px; background-color: #4CAF50; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; display: none;">
+      🔄 Carregar Campos da Tabela
+    </button>
+  </fieldset>
+
+  <!-- ================================== -->
+  <!-- Seções de Campo Schema-Driven     -->
+  <!-- ================================== -->
+  <div id="schema-sections-container" style="display: none;">
+    <!-- Será preenchido dinamicamente por app.js -->
+  </div>
+
   <!-- ================= -->
   <!-- Grupos Dinâmicos -->
   <!-- ================= -->
@@ -311,6 +345,7 @@
   {{ project | tojson | safe }}
 </div>
 
+<script src="{{ url_for('static', filename='js/schema-engine.js') }}"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 </body>

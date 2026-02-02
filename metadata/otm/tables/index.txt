@@ -1,0 +1,54 @@
+The database schema is designed so that table will have its own JSON file.
+The JSON attributes that are available in the table-specific files are described below.
+
+Table Detail
+===================================================================
+Attribute Name                          Description
+schema                                  Describes the name of the database schema of the table.
+name                                    Name of the database table.
+description                             Description of the database table.
+
+Column Detail
+===================================================================
+Attribute Name                          Description
+name                                    Name of the column.
+description                             Description of column.
+dataType                                Data type of the column.
+size                                    Size of the column. (N/A for Data/BLOB/CLOB datatype. default value is 22 for Number data type only.)
+precision                               If the data type is a number then we will populate the precision value.
+scale                                   If the data type is a number then we will populate the scale value.
+isNull                                  Its boolean value indicates whether or not this column is an index.
+isConstraint                            Its boolean value indicates whether or not this column has having constraint.
+constraintValues                        Possible values of the column.
+conditionalConstraint                   Conditional constraint of the column.
+defaultValue                            Default value of the column if not provided.
+
+Primary Key Detail
+===================================================================
+Attribute Name                          Description
+sequence                                Primary Key sequence.
+columnName                              Primary Key column name.
+
+Foreign Keys Detail
+===================================================================
+Attribute Name                          Description
+foreignKeyName                          Name of the foreign key.
+cascadeDelete                           Its boolean value indicates whether or not to delete records in the current table.
+parentTableName                         Name of the table that provides data into the current table.
+columnRelation                          Column relationship for current table and parent table.
+columnRelation[].sequence               Sequence of the column.
+columnRelation[].parentColumnName       Name of the column, where we are getting data from the parent table.
+columnRelation[].columnName             Name of the column of the current table.
+
+Child Tables Detail
+===================================================================
+Attribute Name                          Description
+tableName                               Name of the database table.
+
+Indices Detail
+===================================================================
+Attribute Name                          Description
+indexName                               Name of the index of the table.
+columnNames                             List of the column name and index sequence.
+columnNames[].sequence                  Sequence of the index column.
+columnNames[].name                      Name of the index column.
