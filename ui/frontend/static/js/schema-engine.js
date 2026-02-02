@@ -103,7 +103,29 @@ const SchemaEngine = {
             this.hideSchemaPreview();
             this.hideIdentifierFields();
             this.showIdentifierFieldsForLogicalType(tableName);
+            
+            // Mostrar bloco Saved Query se for SAVED_QUERY
+            const savedQueryBlock = document.getElementById('saved_query_block');
+            if (savedQueryBlock) {
+                if (tableName === 'SAVED_QUERY') {
+                    savedQueryBlock.style.display = 'block';
+                    const sqlTextarea = document.getElementById('saved_query_sql');
+                    if (sqlTextarea) sqlTextarea.required = true;
+                } else {
+                    savedQueryBlock.style.display = 'none';
+                    const sqlTextarea = document.getElementById('saved_query_sql');
+                    if (sqlTextarea) sqlTextarea.required = false;
+                }
+            }
             return;
+        }
+        
+        // Esconder bloco Saved Query para tabelas OTM
+        const savedQueryBlock = document.getElementById('saved_query_block');
+        if (savedQueryBlock) {
+            savedQueryBlock.style.display = 'none';
+            const sqlTextarea = document.getElementById('saved_query_sql');
+            if (sqlTextarea) sqlTextarea.required = false;
         }
         
         // Se for tabela OTM: carregar schema

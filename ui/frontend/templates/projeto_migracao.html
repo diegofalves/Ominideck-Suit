@@ -178,6 +178,45 @@
         style="width: 100%; padding: 6px; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
       >{{ current_object.description if current_object else '' }}</textarea>
 
+      <!-- ========================================== -->
+      <!-- SAVED QUERY (somente para tipo SAVED_QUERY) -->
+      <!-- ========================================== -->
+      <div id="saved_query_block" style="display: none; margin-bottom: 16px;">
+        <label><strong>Saved Query (SQL) *</strong></label>
+        <textarea 
+          name="saved_query_sql" 
+          id="saved_query_sql"
+          rows="8" 
+          placeholder="Digite o SQL da saved query aqui..."
+          style="width: 100%; padding: 8px; font-family: 'Courier New', monospace; font-size: 12px; border: 1px solid #ccc; border-radius: 3px; background: #f9f9f9;"
+        >{{ current_object.saved_query.sql if current_object and current_object.saved_query else '' }}</textarea>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- STATUS (sempre visível)                  -->
+      <!-- ========================================== -->
+      <h4 style="margin-top: 16px;">Status</h4>
+      
+      <label>Status de Documentação</label>
+      <select name="status_documentation">
+        {% for opt_key, opt_label in enums.status.items() %}
+          <option value="{{ opt_key }}" 
+            {% if current_object and current_object.status and current_object.status.documentation == opt_key %}selected{% endif %}>
+            {{ opt_label }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label>Status de Deploy</label>
+      <select name="status_deployment">
+        {% for opt_key, opt_label in enums.status.items() %}
+          <option value="{{ opt_key }}" 
+            {% if current_object and current_object.status and current_object.deployment == opt_key %}selected{% endif %}>
+            {{ opt_label }}
+          </option>
+        {% endfor %}
+      </select>
+
       <label>Tipo de Deploy</label>
       <select name="object_deployment_type">
         {% for opt in enums.deployment_type %}

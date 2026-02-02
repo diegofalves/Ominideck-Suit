@@ -64,6 +64,29 @@ def validate_project(domain):
             if not obj_type:
                 errors.append(f"Grupo {g_idx} / Objeto {o_idx}: object_type é obrigatório.")
                 continue
+            
+            # Validação: Saved Query SQL obrigatório para SAVED_QUERY
+            if obj_type == "SAVED_QUERY":
+                saved_query = obj.get("saved_query", {})
+                sql = saved_query.get("sql", "").strip()
+                if not sql:
+                    errors.append(f"Grupo {g_idx} / Objeto {o_idx}: SQL da Saved Query é obrigatório.")
+            
+            # Validação: Status documentation
+            status = obj.get("status", {})
+            status_doc = status.get("documentation", "").strip()
+            if status_doc and status_doc not in ["PENDING", "IN_PROGRESS", "DONE"]:
+                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: Status de documentação inválido (use PENDING, IN_PROGRESS ou DONE).")
+            
+            # Validação: Status deployment
+            status_dep = status.get("deployment", "").strip()
+            if status_dep and status_dep not in ["PENDING", "IN_PROGRESS", "DONE"]:
+                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: Status de deployment inválido (use PENDING, IN_PROGRESS ou DONE).")
+            
+            obj_type = obj.get("object_type")
+            if not obj_type:
+                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: object_type é obrigatório.")
+                continue
 
             # SE é tipo lógico (não tabela OTM)
             if obj_type in LOGICAL_OBJECT_TYPES:

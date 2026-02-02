@@ -26,6 +26,24 @@ def load_project():
                         obj["name"] = f"{obj_type} #{obj_idx + 1}"
                     if "description" not in obj:
                         obj["description"] = ""
+                    
+                    # Garantir status existe
+                    if "status" not in obj:
+                        obj["status"] = {
+                            "documentation": "PENDING",
+                            "deployment": "PENDING"
+                        }
+                    else:
+                        # Garantir campos de status existem
+                        if "documentation" not in obj["status"]:
+                            obj["status"]["documentation"] = "PENDING"
+                        if "deployment" not in obj["status"]:
+                            obj["status"]["deployment"] = "PENDING"
+                    
+                    # Garantir saved_query existe para SAVED_QUERY
+                    obj_type = obj.get("object_type") or obj.get("type")
+                    if obj_type == "SAVED_QUERY" and "saved_query" not in obj:
+                        obj["saved_query"] = {"sql": ""}
 
     return data
 

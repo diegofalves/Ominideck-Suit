@@ -121,6 +121,34 @@ function addObject(groupIndex) {
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
       <div>
+        <label style="display: block; font-weight: bold; margin-bottom: 4px;">Status Documentação</label>
+        <select 
+          name="groups[${groupIndex}][objects][${objectIndex}][status_documentation]"
+          style="width: 100%; padding: 6px;"
+          required
+        >
+          <option value="PENDING">Pendente</option>
+          <option value="IN_PROGRESS">Em andamento</option>
+          <option value="DONE">Concluído</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="display: block; font-weight: bold; margin-bottom: 4px;">Status Deploy</label>
+        <select 
+          name="groups[${groupIndex}][objects][${objectIndex}][status_deployment]"
+          style="width: 100%; padding: 6px;"
+          required
+        >
+          <option value="PENDING">Pendente</option>
+          <option value="IN_PROGRESS">Em andamento</option>
+          <option value="DONE">Concluído</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+      <div>
         <label style="display: block; font-weight: bold; margin-bottom: 4px;">Tipo de Objeto</label>
         <select 
           name="groups[${groupIndex}][objects][${objectIndex}][object_type]"
@@ -288,6 +316,21 @@ function hydrateProject(projectJson) {
 
           if (nameInput) nameInput.value = obj.name || '';
           if (descInput) descInput.value = obj.description || '';
+
+          // Preencher status
+          const statusDocSelect = groupDiv.querySelector(
+            `select[name="groups[${groupIdx}][objects][${objIdx}][status_documentation]"]`
+          );
+          const statusDepSelect = groupDiv.querySelector(
+            `select[name="groups[${groupIdx}][objects][${objIdx}][status_deployment]"]`
+          );
+
+          if (statusDocSelect && obj.status) {
+            statusDocSelect.value = obj.status.documentation || 'PENDING';
+          }
+          if (statusDepSelect && obj.status) {
+            statusDepSelect.value = obj.status.deployment || 'PENDING';
+          }
 
           // Preencher identifiers
           if (obj.identifiers) {
