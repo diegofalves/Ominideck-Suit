@@ -72,11 +72,6 @@
     {% endfor %}
   </fieldset>
 
-  <!-- ================================== -->
-  <!-- Seletor de Tabela Removido       -->
-  <!-- Integrado ao object_type         -->
-  <!-- ================================== -->
-
   <!-- ================= -->
   <!-- Grupos Dinâmicos -->
   <!-- ================= -->
@@ -86,6 +81,17 @@
     <div id="groups-container"></div>
 
     <button type="button" onclick="addGroup()">➕ Adicionar Grupo</button>
+  </fieldset>
+
+  <!-- ================================== -->
+  <!-- Seletor de Tipo de Objeto (Global) -->
+  <!-- ================================== -->
+  <fieldset id="object-type-container" style="display: none;">
+    <legend>Tipo do Objeto</legend>
+    <label>Selecione o tipo (Tabela OTM ou Tipo Lógico):</label>
+    <select name="object_type" id="object-type-selector" class="object-type-selector">
+      <!-- Opções serão injetadas por schema-engine.js -->
+    </select>
   </fieldset>
 
   <!-- ================================== -->
@@ -154,11 +160,6 @@
 
       <!-- Formulário de Objeto -->
       <h4>Dados do Objeto</h4>
-
-      <label>Tipo do Objeto (Tabela OTM ou Tipo Lógico)</label>
-      <select name="object_type">
-        <option value="">— Selecione —</option>
-      </select>
 
       <label>Tipo de Deploy</label>
       <select name="object_deployment_type">

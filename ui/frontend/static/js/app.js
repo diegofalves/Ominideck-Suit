@@ -2,26 +2,6 @@
 let groupIndexCounter = 0;
 let objectIndexCounters = {}; // {groupIndex: counter}
 
-const OBJECT_TYPES = ["SAVED_QUERY", "AGENT", "TABLE", "FINDER_SET", "RATE", "EVENT_GROUP"];
-
-const IDENTIFIER_FIELDS = {
-  "SAVED_QUERY": ["query_name"],
-  "AGENT": ["agent_gid"],
-  "TABLE": ["table_name"],
-  "FINDER_SET": ["finder_set_gid"],
-  "RATE": ["rate_offering_gid"],
-  "EVENT_GROUP": ["event_group_gid"]
-};
-
-const IDENTIFIER_LABELS = {
-  "query_name": "Query Name",
-  "agent_gid": "Agent GID",
-  "table_name": "Table Name",
-  "finder_set_gid": "Finder Set GID",
-  "rate_offering_gid": "Rate Offering GID",
-  "event_group_gid": "Event Group GID"
-};
-
 // ============================================================
 // GERENCIAMENTO DE GRUPOS
 // ============================================================
@@ -123,12 +103,11 @@ function addObject(groupIndex) {
         <label style="display: block; font-weight: bold; margin-bottom: 4px;">Tipo de Objeto</label>
         <select 
           name="groups[${groupIndex}][objects][${objectIndex}][object_type]"
-          onchange="toggleIdentifiers(this, ${groupIndex}, ${objectIndex})"
+          class="dynamic-object-type-selector"
           style="width: 100%; padding: 6px;"
           required
         >
-          <option value="">Selecione...</option>
-          ${OBJECT_TYPES.map(type => `<option value="${type}">${type}</option>`).join('')}
+          <!-- Será populado por SchemaEngine -->
         </select>
       </div>
 
@@ -157,13 +136,6 @@ function addObject(groupIndex) {
         min="1"
       >
     </div>
-
-    <div style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-bottom: 12px;">
-      <label style="display: block; font-weight: bold; margin-bottom: 8px;">🔑 Identificadores</label>
-      <div id="identifiers-${groupIndex}-${objectIndex}">
-        <p style="color: #999; font-size: 12px; margin: 0;">Selecione um tipo de objeto primeiro</p>
-      </div>
-    </div>
   `;
 
   container.appendChild(objectDiv);
@@ -178,35 +150,56 @@ function removeObject(groupIndex, objectIndex) {
   }
 }
 
-function toggleIdentifiers(selectElement, groupIndex, objectIndex) {
-  const objectType = selectElement.value;
+async function toggleIdentifiers(selectElement, groupIndex, objectIndex) {
+  const tableName = selectElement.value;
   const identifiersContainer = document.getElementById(`identifiers-${groupIndex}-${objectIndex}`);
 
-  if (!objectType || !IDENTIFIER_FIELDS[objectType]) {
-    identifiersContainer.innerHTML = `<p style="color: #999; font-size: 12px; margin: 0;">Selecione um tipo válido</p>`;
+  if (!tableName) {
+    identifiersContainer.innerHTML = `<p style="color: #999; font-size: 12px; margin: 0;">Selecione uma tabela OTM</p>`;
     return;
   }
 
-  const requiredFields = IDENTIFIER_FIELDS[objectType];
-  let html = '';
+  // Mostrar loading
+  identifiersContainer.innerHTML = `<p style="color: #666; font-size: 12px; margin: 0;">⏳ Carregando chave primária...</p>`;
 
-  requiredFields.forEach(fieldKey => {
-    const label = IDENTIFIER_LABELS[fieldKey] || fieldKey;
-    html += `
-      <div style="margin-bottom: 8px;">
-        <label style="display: block; font-size: 12px; color: #666; margin-bottom: 4px;">${label}</label>
-        <input 
-          type="text" 
-          name="groups[${groupIndex}][objects][${objectIndex}][identifiers][${fieldKey}]"
-          placeholder="${label}"
-          style="width: 100%; padding: 6px; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
-          required
-        >
-      </div>
-    `;
-  });
-
-  identifiersContainer.innerHTML = html;
+  try {
+    // Buscar schema da tabela
+    const response = await fetch(`/api/schema/${tableName}/raw`);
+    if (!response.ok) {
+      throw new Error('Schema não encontrado');
+    }
+    
+    const schema = await response.json();
+    const primaryKey = schema.primaryKey || [];
+    
+    if (primaryKey.length === 0) {
+      identifiersContainer.innerHTML = `<p style="color: #f44336; font-size: 12px; margin: 0;">⚠️ Tabela sem chave primária definida</p>`;
+      return;
+    }
+    
+    // Renderizar campos da PK
+    let html = '';
+    primaryKey.forEach(pk => {
+      const columnName = pk.columnName || pk;
+      html += `
+        <div style="margin-bottom: 8px;">
+          <label style="display: block; font-size: 12px; color: #666; margin-bottom: 4px;">${columnName}</label>
+          <input 
+            type="text" 
+            name="groups[${groupIndex}][objects][${objectIndex}][identifiers][${columnName}]"
+            placeholder="Valor da chave primária"
+            style="width: 100%; padding: 6px; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
+            required
+          >
+        </div>
+      `;
+    });
+    
+    identifiersContainer.innerHTML = html;
+  } catch (error) {
+    console.error('[toggleIdentifiers] Erro ao carregar PK:', error);
+    identifiersContainer.innerHTML = `<p style="color: #f44336; font-size: 12px; margin: 0;">❌ Erro ao carregar chave primária</p>`;
+  }
 }
 
 // ============================================================
@@ -253,9 +246,13 @@ function hydrateProject(projectJson) {
           );
 
           if (typeSelect) {
-            typeSelect.value = obj.object_type || '';
+            // Compatibilidade: suporta tanto 'object_type' quanto 'type'
+            const objectTypeValue = obj.object_type || obj.type || '';
+            typeSelect.value = objectTypeValue;
             // Trigger change para renderizar identifiers
-            toggleIdentifiers(typeSelect, groupIdx, objIdx);
+            if (objectTypeValue) {
+              toggleIdentifiers(typeSelect, groupIdx, objIdx);
+            }
           }
           if (deploySelect) deploySelect.value = obj.deployment_type || '';
           if (seqObjInput) seqObjInput.value = obj.sequence || '';

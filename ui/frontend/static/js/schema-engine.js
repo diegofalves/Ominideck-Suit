@@ -33,6 +33,7 @@ const SchemaEngine = {
         console.log("[SchemaEngine 9.1] Inicializando com modelo novo...");
         await this.loadTableList();
         this.setupEventListeners();
+        this.setupDynamicObjectObserver();
         console.log("[SchemaEngine 9.1] Pronto");
     },
     
@@ -54,35 +55,39 @@ const SchemaEngine = {
     },
     
     populateObjectTypeSelector() {
-        const selector = document.querySelector('select[name="object_type"]');
-        if (!selector) return;
+        const selectors = document.querySelectorAll('select[name="object_type"], .dynamic-object-type-selector');
         
-        // Limpar opções existentes (mantém placeholder)
-        while (selector.options.length > 1) {
-            selector.remove(1);
+        if (selectors.length === 0) {
+            console.warn("[SchemaEngine] Nenhum seletor de object_type encontrado");
+            return;
         }
         
-        // Adicionar tipos lógicos PRIMEIRO
-        const logicalGroup = document.createElement("optgroup");
-        logicalGroup.label = "Tipos Lógicos";
-        LOGICAL_OBJECT_TYPES.forEach(type => {
-            const option = document.createElement("option");
-            option.value = type;
-            option.textContent = type;
-            logicalGroup.appendChild(option);
+        selectors.forEach(selector => {
+            // Limpar opções existentes
+            selector.innerHTML = "";
+            
+            // Adicionar placeholder
+            const placeholder = document.createElement("option");
+            placeholder.value = "";
+            placeholder.textContent = "— Selecione uma tabela OTM —";
+            selector.appendChild(placeholder);
+            
+            // Adicionar tabelas OTM
+            this.tables.forEach(table => {
+                const option = document.createElement("option");
+                option.value = table;
+                option.textContent = table;
+                selector.appendChild(option);
+            });
         });
-        selector.appendChild(logicalGroup);
         
-        // Adicionar tabelas OTM
-        const tablesGroup = document.createElement("optgroup");
-        tablesGroup.label = "Tabelas OTM";
-        this.tables.forEach(table => {
-            const option = document.createElement("option");
-            option.value = table;
-            option.textContent = table;
-            tablesGroup.appendChild(option);
-        });
-        selector.appendChild(tablesGroup);
+        // Mostrar o fieldset que contém o select principal
+        const container = document.getElementById("object-type-container");
+        if (container) {
+            container.style.display = "block";
+        }
+        
+        console.log(`[SchemaEngine] ${selectors.length} seletores preenchidos com ${this.tables.length} tabelas OTM`);
     },
     
     // ========================================================
@@ -356,19 +361,64 @@ const SchemaEngine = {
     
     setupEventListeners() {
         const selector = document.querySelector('select[name="object_type"]');
-        const loadBtn = document.getElementById("load-schema-btn");
         
         if (selector) {
-            selector.addEventListener("change", (e) => {
-                this.loadTableSchema(e.target.value);
+            selector.addEventListener("change", async (e) => {
+                const selectedType = e.target.value;
+                if (!selectedType) {
+                    this.hideIdentifierFields();
+                    return;
+                }
+                
+                if (LOGICAL_OBJECT_TYPES.has(selectedType)) {
+                    // Tipo lógico: mostrar campos de identifiers
+                    this.showIdentifierFieldsForLogicalType(selectedType);
+                } else {
+                    // Tabela OTM: carregar schema e renderizar forma
+                    await this.loadTableSchema(selectedType);
+                }
             });
+        } else {
+            console.warn("[SchemaEngine] Seletor de object_type não encontrado");
         }
         
+        const loadBtn = document.getElementById("load-schema-btn");
         if (loadBtn) {
             loadBtn.addEventListener("click", () => {
                 this.renderSchemaFields();
             });
         }
+    },
+    
+    // ========================================================
+    // Observer for dynamic selects
+    // ========================================================
+    
+    setupDynamicObjectObserver() {
+        // Observar mudanças no DOM para popular novos selects criados dinamicamente
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === 1) { // Element node
+                        // Verificar se é um select ou contém selects
+                        const selects = node.classList && node.classList.contains('dynamic-object-type-selector') 
+                            ? [node] 
+                            : node.querySelectorAll ? node.querySelectorAll('.dynamic-object-type-selector') : [];
+                        
+                        if (selects.length > 0) {
+                            console.log(`[SchemaEngine] Detectado ${selects.length} novo(s) select(s), populando...`);
+                            this.populateObjectTypeSelector();
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Observar o documento inteiro
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
     }
 };
 
