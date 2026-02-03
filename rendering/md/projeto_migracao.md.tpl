@@ -49,5 +49,12 @@
 ```
 {% endif %}
 
+{% if object.saved_query %}
+### Query de Extração
+```sql
+{{ object.saved_query.sql }}
+```
+{% endif %}
+
 {% endfor %}
 {% endfor %}

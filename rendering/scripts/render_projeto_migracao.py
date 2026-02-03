@@ -37,6 +37,17 @@ def _normalize(data: dict) -> dict:
             obj.setdefault("notes", "")
             obj.setdefault("sequence", "")
             obj.setdefault("name", "")
+            
+            # Gerar saved_query canônico a partir de technical_content
+            technical_content = obj.get("technical_content", {})
+            if technical_content.get("content") and technical_content.get("type") == "SQL":
+                obj["saved_query"] = {
+                    "sql": technical_content["content"],
+                    "type": "extraction"
+                }
+            else:
+                obj.setdefault("saved_query", None)
+            
             objects.append(obj)
 
         group = dict(group)

@@ -15,13 +15,20 @@ TEMPLATE_HTML = r"""
     <meta charset="utf-8" />
     <title>PROJETO_MIGRACAO</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
-        h2 { border-bottom: 1px solid #ccc; padding-bottom: 4px; }
-        .object-block { margin: 18px 0 28px; padding-bottom: 12px; border-bottom: 1px dashed #ddd; }
-        .meta-table { border-collapse: collapse; width: 100%; margin: 10px 0; }
-        .meta-table th, .meta-table td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
-        .meta-table th { width: 220px; background: #f7f7f7; }
-        pre { background: #f3f3f3; padding: 10px; overflow-x: auto; }
+        * { margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; margin: 24px; color: #222; font-size: 12px; }
+        h1 { font-size: 22px; margin-bottom: 16px; }
+        h2 { font-size: 16px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 20px; margin-bottom: 12px; }
+        h3, h4 { font-size: 13px; margin-top: 10px; margin-bottom: 8px; }
+        .project-header { page-break-after: avoid; margin-bottom: 24px; }
+        .group-block { page-break-after: auto; }
+        .object-block { margin: 12px 0 16px; padding: 10px 0 12px; border-bottom: 1px dashed #ddd; page-break-inside: avoid; }
+        .meta-table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 11px; }
+        .meta-table th, .meta-table td { border: 1px solid #ddd; padding: 5px 6px; text-align: left; }
+        .meta-table th { width: 200px; background: #f7f7f7; font-weight: bold; }
+        pre { background: #f3f3f3; padding: 8px; overflow-x: auto; font-family: "Courier New", monospace; font-size: 10px; white-space: pre-wrap; word-wrap: break-word; page-break-inside: avoid; margin: 6px 0; }
+        code { background: #f3f3f3; padding: 2px 4px; font-family: "Courier New", monospace; font-size: 10px; }
+        h4 { margin-top: 12px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -71,6 +78,13 @@ TEMPLATE_HTML = r"""
 {{ object.technical_content.content }}
             </code></pre>
             {% endif %}
+
+            {% if object.saved_query %}
+            <h4>Query de Extração</h4>
+            <pre><code class="language-sql">
+{{ object.saved_query.sql }}
+            </code></pre>
+            {% endif %}
         </section>
         {% endfor %}
     </section>
@@ -107,6 +121,17 @@ def _normalize(data: dict) -> dict:
             obj.setdefault("notes", "")
             obj.setdefault("sequence", "")
             obj.setdefault("name", "")
+            
+            # Gerar saved_query canônico a partir de technical_content
+            technical_content = obj.get("technical_content", {})
+            if technical_content.get("content") and technical_content.get("type") == "SQL":
+                obj["saved_query"] = {
+                    "sql": technical_content["content"],
+                    "type": "extraction"
+                }
+            else:
+                obj.setdefault("saved_query", None)
+            
             objects.append(obj)
 
         group = dict(group)
