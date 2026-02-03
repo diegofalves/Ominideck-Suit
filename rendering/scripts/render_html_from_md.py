@@ -13,23 +13,9 @@ TEMPLATE_HTML = r"""
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PROJETO_MIGRACAO</title>
-    <style>
-        * { margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; margin: 24px; color: #222; font-size: 12px; }
-        h1 { font-size: 22px; margin-bottom: 16px; }
-        h2 { font-size: 16px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 20px; margin-bottom: 12px; }
-        h3, h4 { font-size: 13px; margin-top: 10px; margin-bottom: 8px; }
-        .project-header { page-break-after: avoid; margin-bottom: 24px; }
-        .group-block { page-break-after: auto; }
-        .object-block { margin: 12px 0 16px; padding: 10px 0 12px; border-bottom: 1px dashed #ddd; page-break-inside: avoid; }
-        .meta-table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 11px; }
-        .meta-table th, .meta-table td { border: 1px solid #ddd; padding: 5px 6px; text-align: left; }
-        .meta-table th { width: 200px; background: #f7f7f7; font-weight: bold; }
-        pre { background: #f3f3f3; padding: 8px; overflow-x: auto; font-family: "Courier New", monospace; font-size: 10px; white-space: pre-wrap; word-wrap: break-word; page-break-inside: avoid; margin: 6px 0; }
-        code { background: #f3f3f3; padding: 2px 4px; font-family: "Courier New", monospace; font-size: 10px; }
-        h4 { margin-top: 12px; font-weight: bold; }
-    </style>
+    <link rel="stylesheet" href="../assets/style.css" />
 </head>
 <body>
     <section class="project-header">
