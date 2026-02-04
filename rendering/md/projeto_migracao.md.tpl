@@ -10,8 +10,74 @@
 
 ---
 
+## Sumário
+
+- Grupos e Objetos de Migração OTM
 {% for group in data.groups %}
-## {{ group.name }}
+  - Grupo: {{ group.label }}
+  {% for object in group.objects %}
+    - {{ object.name }}
+  {% endfor %}
+{% endfor %}
+
+---
+
+{% if data.project_metadata.migration_objective.blocks %}
+## {{ data.project_metadata.migration_objective.title }}
+
+{% for block in data.project_metadata.migration_objective.blocks %}
+{% if block.type == "paragraph" %}
+{{ block.text }}
+
+{% elif block.type == "list" %}
+{% for item in block["items"] %}
+- {{ item }}
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+
+---
+
+{% endif %}
+
+{% set vc = data.project_metadata.version_control %}
+{% if vc.current_version or vc.last_update or vc.author %}
+## Controle de Versão
+
+{% if vc.current_version %}**Versão Atual:** {{ vc.current_version }}{% endif %}{% if vc.last_update %}  
+**Última Atualização:** {{ vc.last_update }}{% endif %}{% if vc.author %}  
+**Autor:** {{ vc.author }}{% endif %}
+
+---
+{% endif %}
+
+{% set history = data.project_metadata.change_history %}
+{% if history and history|length > 0 %}
+## Histórico de Alterações
+
+| Data | Versão | Descrição | Autor |
+|------|--------|-----------|--------|
+{% for item in history %}
+| {{ item.date }} | {{ item.version }} | {{ item.description }} | {{ item.author }} |
+{% endfor %}
+
+---
+{% endif %}
+
+## Grupos e Objetos de Migração OTM
+
+Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.
+
+---
+
+{% for group in data.groups %}
+### Grupo: {{ group.label }}
+
+{% if group.description %}
+{{ group.description }}
+
+{% endif %}
 
 {% for object in group.objects %}
 ### {{ object.name }}

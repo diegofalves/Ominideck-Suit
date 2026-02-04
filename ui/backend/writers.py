@@ -15,6 +15,13 @@ def load_project():
     with open(PROJECT_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
 
+    project_metadata = data.setdefault("project_metadata", {})
+    migration_objective = project_metadata.setdefault("migration_objective", {})
+    migration_objective.setdefault("title", "Objetivo do Projeto de Migração")
+    migration_objective.setdefault("content", [])
+    project_metadata.setdefault("version_control", {})
+    project_metadata.setdefault("change_history", [])
+
     # Compatibilidade retroativa: adicionar 'name' e 'description' se não existirem
     if data.get("groups"):
         for group_idx, group in enumerate(data["groups"]):

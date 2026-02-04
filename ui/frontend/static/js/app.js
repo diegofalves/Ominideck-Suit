@@ -1,6 +1,7 @@
 // State global para rastreamento de índices
 let groupIndexCounter = 0;
 let objectIndexCounters = {}; // {groupIndex: counter}
+let changeHistoryIndexCounter = 0;
 
 // ============================================================
 // GERENCIAMENTO DE GRUPOS
@@ -47,6 +48,14 @@ function addGroup() {
         style="width: 100%; max-width: 400px; padding: 6px; margin-bottom: 12px;"
         required
       >
+
+      <label style="display: block; margin-bottom: 8px;">Descrição do Grupo</label>
+      <textarea
+        name="groups[${groupIndex}][description]"
+        rows="3"
+        placeholder="Descreva o propósito e escopo deste grupo"
+        style="width: 100%; max-width: 600px; padding: 6px; margin-bottom: 12px; font-family: Arial, sans-serif;"
+      ></textarea>
     </fieldset>
 
     <fieldset>
@@ -204,6 +213,70 @@ function removeObject(groupIndex, objectIndex) {
     objectDiv.remove();
   }
 }
+
+// ============================================================
+// HISTÓRICO DE ALTERAÇÕES
+// ============================================================
+
+function buildChangeHistoryRow(index, data = {}) {
+  const container = document.createElement("div");
+  container.className = "change-history-row";
+  container.dataset.index = index;
+  container.style.border = "1px solid #ddd";
+  container.style.padding = "10px";
+  container.style.marginBottom = "10px";
+  container.style.borderRadius = "4px";
+
+  container.innerHTML = `
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: end;">
+      <div>
+        <label style="font-weight: bold;">Data</label>
+        <input type="text" name="change_history[${index}][date]" value="${data.date || ""}" style="width: 100%; padding: 6px;">
+      </div>
+      <div>
+        <label style="font-weight: bold;">Versão</label>
+        <input type="text" name="change_history[${index}][version]" value="${data.version || ""}" style="width: 100%; padding: 6px;">
+      </div>
+      <div>
+        <label style="font-weight: bold;">Descrição</label>
+        <input type="text" name="change_history[${index}][description]" value="${data.description || ""}" style="width: 100%; padding: 6px;">
+      </div>
+      <div>
+        <label style="font-weight: bold;">Autor</label>
+        <input type="text" name="change_history[${index}][author]" value="${data.author || ""}" style="width: 100%; padding: 6px;">
+      </div>
+    </div>
+    <div style="margin-top: 8px; text-align: right;">
+      <button type="button" onclick="removeChangeHistoryRow(${index})" style="background: #f44336; color: white; border: none; padding: 6px 10px; border-radius: 3px; cursor: pointer;">Remover</button>
+    </div>
+  `;
+
+  return container;
+}
+
+function addChangeHistoryRow(data = {}) {
+  const container = document.getElementById("change-history-rows");
+  const index = changeHistoryIndexCounter++;
+  const row = buildChangeHistoryRow(index, data);
+  container.appendChild(row);
+}
+
+function removeChangeHistoryRow(index) {
+  const row = document.querySelector(`.change-history-row[data-index="${index}"]`);
+  if (row) row.remove();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.initialChangeHistory && Array.isArray(window.initialChangeHistory)) {
+    if (window.initialChangeHistory.length > 0) {
+      window.initialChangeHistory.forEach((item) => addChangeHistoryRow(item));
+    } else {
+      addChangeHistoryRow({});
+    }
+  } else {
+    addChangeHistoryRow({});
+  }
+});
 
 async function toggleIdentifiers(selectElement, groupIndex, objectIndex) {
   const tableName = selectElement.value;

@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
+from objective_utils import extract_project_metadata
+
 BASE_DIR = Path(__file__).resolve().parents[2]
 TEMPLATE_DIR = BASE_DIR / "rendering" / "md"
 DEFAULT_JSON = BASE_DIR / "domain" / "projeto_migracao" / "projeto_migracao.json"
@@ -51,12 +53,30 @@ def _normalize(data: dict) -> dict:
             objects.append(obj)
 
         group = dict(group)
-        group["name"] = group.get("label", "")
-        group.setdefault("label", "")
+        label = group.get("label") or group.get("group_name") or group.get("name", "")
+        group["label"] = label
+        group["name"] = label
+        group.setdefault("description", "")
         group["objects"] = objects
         groups.append(group)
 
-    return {"project": project, "groups": groups}
+    project_metadata = extract_project_metadata(data)
+    groups_overview = project_metadata.get("groups_overview", {}) or {}
+    project_metadata["groups_overview"] = {
+        "title": groups_overview.get("title", "") or "Grupos e Objetos de Migração OTM",
+        "description": groups_overview.get("description", "") or "Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração."
+    }
+
+    # Quebra de parágrafos para descrições de grupos e overview
+    def split_paragraphs(text: str):
+        return [p.strip() for p in (text or "").split("\n\n") if p.strip()]
+
+    project_metadata["groups_overview"]["paragraphs"] = split_paragraphs(project_metadata["groups_overview"]["description"])
+
+    for g in groups:
+        g["description_paragraphs"] = split_paragraphs(g.get("description", ""))
+
+    return {"project": project, "groups": groups, "project_metadata": project_metadata}
 
 
 def _validate_status(data: dict) -> None:

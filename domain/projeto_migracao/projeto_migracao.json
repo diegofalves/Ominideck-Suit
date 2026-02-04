@@ -9,6 +9,60 @@
       "target": "https://otmgtm-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.com/"
     }
   },
+  "project_metadata": {
+    "migration_objective": {
+      "title": "Objetivo do Projeto de Migração",
+      "content": [
+        "Este projeto tem como objetivo executar a migração controlada e governada das configurações do Oracle Transportation Management (OTM), atualmente consolidadas e validadas no ambiente de homologação (HOM), para o ambiente de produção (PRD).",
+        "A migração visa unificar e padronizar o conjunto de objetos de configuração definidos no baseline BR100, incorporando também ajustes e extensões específicas do projeto Bauducco, garantindo consistência funcional, estabilidade operacional e aderência às melhores práticas de governança do OTM.",
+        "Com a execução desta migração em PROD, espera-se:",
+        "- disponibilizar integralmente as configurações necessárias para o planejamento, execução e monitoramento logístico;",
+        "- eliminar divergências entre ambientes que possam impactar comportamento de planejamento, rating, integração ou visibilidade operacional;",
+        "- assegurar rastreabilidade, capacidade de rollback e validação pós-migração, reduzindo riscos de impacto nas operações produtivas."
+      ]
+    },
+    "version_control": {
+      "current_version": "1.1",
+      "last_update": "2026-02-02",
+      "author": "Diego Ferreira Alves"
+    },
+    "change_history": [
+      {
+        "date": "2026-02-02",
+        "version": "1.1",
+        "description": "Atualização do objetivo e alinhamento das seções de automação.",
+        "author": "Diego Ferreira Alves"
+      },
+      {
+        "date": "2026-01-28",
+        "version": "1.3",
+        "description": "Remoção do ícone de diamante das seções da tabela de roadmap e publicação do novo agrupamento de tipos de deploy (MANUAL, MIGRATION, CSV, DB.XML, ARQUIVO ZIP BI).",
+        "author": "Diego Ferreira Alves"
+      },
+      {
+        "date": "2026-01-27",
+        "version": "1.2",
+        "description": "Adoção do novo deploy type BUILDER-CONTROL e reforço na ordenação e no preenchimento automático das colunas da tabela Migration Project.",
+        "author": "Diego Ferreira Alves"
+      },
+      {
+        "date": "2026-01-21",
+        "version": "1.1",
+        "description": "Ajustes consolidados do painel de migração e da tabela Migration Project (tipos de deploy, colunas, links), reordenação dos objetos e atualização dos caches.",
+        "author": "Diego Ferreira Alves"
+      },
+      {
+        "date": "2026-01-18",
+        "version": "1.0",
+        "description": "Criação inicial do documento.",
+        "author": "Diego Ferreira Alves"
+      }
+    ],
+    "groups_overview": {
+      "title": "Grupos e Objetos de Migração OTM",
+      "description": "Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração."
+    }
+  },
   "groups": [
     {
       "group_id": "AUTOMATION",
@@ -167,7 +221,8 @@
             "content": "SELECT\n  BP.DOMAIN_NAME,\n  BP.BATCH_PROCESS_XID,\n  BP.DESCRIPTION,\n  BP.IS_ENABLED,\n  BPD.SEQUENCE_NO,\n  BPD.TOPIC_ALIAS_GID\nFROM\n  BATCH_PROCESS BP,\n  BATCH_PROCESS_D BPD\nWHERE\n  BP.BATCH_PROCESS_GID = BPD.BATCH_PROCESS_GID\n  AND BP.IS_ENABLED = 'Y'\nORDER BY\n  BP.DOMAIN_NAME,\n  BP.BATCH_PROCESS_XID,\n  BPD.SEQUENCE_NO"
           }
         }
-      ]
+      ],
+      "description": "Esta seção concentra os objetos responsáveis pela execução automática de regras e fluxos operacionais no OTM, como Saved Queries, Conditions e lógicas de acionamento utilizadas por Agents e processos batch. O conteúdo evidencia como cada automação está associada a um deploy type específico (MANUAL, MIGRATION, CSV, DB.XML, ZIP BI), permitindo rastrear impactos da migração sobre fluxos automáticos, dependências técnicas e a ordem correta de implantação no roadmap do projeto."
     },
     {
       "group_id": "CONFIGURATION",
@@ -383,7 +438,8 @@
             "content": "SELECT\n  DOMAIN_NAME,\n  BN_NAMED_RANGE_GID,\n  BN_NAMED_RANGE_XID,\n  RECYCLING_POLICY,\n  USE_BN_CONTEXT\nFROM\n  BN_NAMED_RANGE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  BN_NAMED_RANGE_XID"
           }
         }
-      ]
+      ],
+      "description": "Reúne configurações centrais do domínio OTM, incluindo domínios, grants, parâmetros e propriedades que sustentam a operação e o baseline de migração."
     },
     {
       "group_id": "MASTER_DATA",
@@ -580,7 +636,8 @@
             "content": "SELECT\n  DOMAIN_NAME,\n  STYLESHEET_CONTENT_GID,\n  STYLESHEET_CONTENT_XID,\n  USED_FOR_VIEW,\n  USED_FOR_EDIT,\n  MEDIA_TYPE\nFROM\n  STYLESHEET_CONTENT\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  STYLESHEET_CONTENT_XID"
           }
         }
-      ]
+      ],
+      "description": "Contém cadastros mestres essenciais para planejamento e execução logística (commodities, corporações, unidades de embarque, transportadoras etc.), garantindo consistência entre ambientes."
     },
     {
       "group_id": "EXTENSION_QUALIFIERS",
@@ -796,7 +853,8 @@
             "content": "SELECT rq.DOMAIN_NAME,\n  rq.REMARK_QUAL_GID,\n  rq.REMARK_QUAL_XID,\n  rq.REMARK_QUAL_DESC,\n  rq.REMARK_LEVEL,\n  rq.IS_VISIBLE_IF_MASTER_CARR,\n  rq.UPDATE_FLAG,\n  rq.TEXT_TEMPLATE_GID,\n  rq.QUAL_TYPE,\n  rq.DATA_QUERY_TYPE_GID\nFROM\n  REMARK_QUAL rq\nWHERE\n  rq.DOMAIN_NAME = 'BAU'\nORDER BY\n  rq.DATA_QUERY_TYPE_GID,\n  rq.REMARK_QUAL_XID"
           }
         }
-      ]
+      ],
+      "description": "Agrupa qualificadores, códigos e extensões necessárias para classificação, tributação ou regras específicas de negócio do projeto."
     },
     {
       "group_id": "PLANNING",
@@ -993,7 +1051,8 @@
             "content": "SELECT\n  DOMAIN_NAME,\n  ORDER_RELEASE_TYPE_GID,\n  ORDER_RELEASE_TYPE_XID,\n  ORDER_RELEASE_TYPE_NAME\nFROM\n  ORDER_RELEASE_TYPE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  ORDER_RELEASE_TYPE_XID"
           }
         }
-      ]
+      ],
+      "description": "Foca em tabelas e estruturas que suportam o planejamento e execução de cargas, perfis de roteirização e configuração de transporte."
     },
     {
       "group_id": "INTEGRATION",
@@ -1152,7 +1211,8 @@
             "content": "SELECT c.CONTACT_GID,\n  c.CONTACT_XID,\n  c.IS_PRIMARY_CONTACT,\n  c.EXTERNAL_SYSTEM_GID,\n  c.CONTACT_TYPE,\n  c.IS_BROADCAST,\n  c.DOMAIN_NAME\nFROM\n  CONTACT c\nWHERE\n  c.DOMAIN_NAME = 'BAU'\n  AND c.EXTERNAL_SYSTEM_GID IS NOT NULL\nORDER BY\n  c.CONTACT_XID"
           }
         }
-      ]
+      ],
+      "description": "Inclui objetos relacionados a integração e mensageria (templates, perfis XML, web services e sistemas externos) assegurando comunicação entre OTM e sistemas parceiros."
     },
     {
       "group_id": "GOVERNANCE_UI",
@@ -1387,7 +1447,8 @@
             "content": ""
           }
         }
-      ]
+      ],
+      "description": "Abriga objetos de governança, segurança e experiência do usuário (layouts, ACLs, roles, menus, traduções), garantindo aderência às políticas de acesso e usabilidade."
     }
   ],
   "state": {

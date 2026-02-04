@@ -120,41 +120,35 @@ def validate_md(objects_with_sql: Dict[str, dict]) -> ValidationResult:
 
 
 def validate_html(objects_with_sql: Dict[str, dict]) -> ValidationResult:
-    """Valida HTML: cada objeto deve ter <pre><code> com SQL (decodificado)."""
+    """Valida HTML buscando qualquer bloco <pre> que contenha o SQL normalizado."""
     result = ValidationResult("HTML")
-    
+
     html_content = HTML_FILE.read_text(encoding="utf-8")
-    
+
+    # Coletar todos os blocos <pre> (independente de tags filhas)
+    pre_pattern = re.compile(r"<pre[^>]*>(.*?)</pre>", re.DOTALL | re.IGNORECASE)
+    raw_pre_blocks = pre_pattern.findall(html_content)
+
+    normalized_pre_blocks = []
+    for block in raw_pre_blocks:
+        # Remover tags internas (ex.: <code>), decodificar entidades e normalizar whitespace
+        no_tags = re.sub(r"<[^>]+>", "", block)
+        decoded = html_module.unescape(no_tags)
+        normalized_pre_blocks.append(_normalize_sql(decoded))
+
     for obj_name, obj_data in objects_with_sql.items():
         json_sql = _normalize_sql(obj_data["sql"])
-        
-        # Procurar <h3> com nome do objeto + <pre><code> subsequente
-        # O padrão procura por qualquer bloco <pre><code> após o h3
-        pattern = re.compile(
-            rf"<h3>.*?{re.escape(obj_name)}.*?</h3>.*?<pre><code[^>]*>(.*?)</code></pre>",
-            re.DOTALL
+
+        found = any(
+            json_sql in pre_sql
+            for pre_sql in normalized_pre_blocks
         )
-        matches = pattern.findall(html_content)
-        
-        if not matches:
-            result.add_fail(obj_name, "Nenhum bloco <pre><code> encontrado no HTML")
-            continue
-        
-        # Decodificar HTML entities e normalizar
-        found = False
-        for html_sql_encoded in matches:
-            html_sql = _normalize_sql(html_module.unescape(html_sql_encoded))
-            
-            # Comparação normalizada
-            if html_sql[:100] == json_sql[:100]:
-                found = True
-                break
-        
+
         if found:
             result.add_pass()
         else:
-            result.add_fail(obj_name, "SQL no HTML não corresponde ao JSON")
-    
+            result.add_fail(obj_name, "SQL não encontrado em nenhum <pre>")
+
     return result
 
 

@@ -61,6 +61,9 @@ def form_to_domain(form):
         elif parts[2] == "sequence":
             groups[group_idx]["sequence"] = int(value)
 
+        elif parts[2] == "description":
+            groups[group_idx]["description"] = value
+
         elif parts[2] == "objects":
             obj_idx = int(parts[3])
 
@@ -254,5 +257,43 @@ def form_to_domain(form):
                 if key.startswith("data[") and key.endswith("]"):
                     data_key = key[len("data["):-1]
                     target_obj.setdefault("data", {})[data_key] = value
+
+    migration_objective_title = form.get("migration_objective_title") or "Objetivo do Projeto de Migração"
+    migration_objective_content = form.get("migration_objective_content", "")
+    content_lines = [
+        line.strip()
+        for line in migration_objective_content.splitlines()
+        if line.strip()
+    ]
+
+    # Controle de versão
+    version_control = {
+        "current_version": form.get("version_control.current_version", ""),
+        "last_update": form.get("version_control.last_update", ""),
+        "author": form.get("version_control.author", "")
+    }
+
+    # Histórico de alterações
+    change_history_map = {}
+    for key, value in form.items():
+        if key.startswith("change_history[") and key.endswith("]"):
+            parts = key.replace("]", "").split("[")
+            idx = int(parts[1])
+            field = parts[2]
+            change_history_map.setdefault(idx, {})[field] = value
+
+    change_history = [
+        change_history_map[idx] for idx in sorted(change_history_map.keys())
+        if any(change_history_map[idx].values())
+    ]
+
+    domain["project_metadata"] = {
+        "migration_objective": {
+            "title": migration_objective_title,
+            "content": content_lines
+        },
+        "version_control": version_control,
+        "change_history": change_history
+    }
 
     return domain

@@ -10,8 +10,257 @@
 
 ---
 
+## Sumário
 
-## Automação
+- Grupos e Objetos de Migração OTM
+
+  - Grupo: Automação
+  
+    - Saved Queries
+  
+    - Saved Conditions
+  
+    - Data Type Association
+  
+    - Agent Event
+  
+    - Agents
+  
+    - App Actions
+  
+    - Actions
+  
+    - Batch Processes
+  
+
+  - Grupo: Configuração
+  
+    - Domains – Add Domain
+  
+    - Domain Grants
+  
+    - Domain Settings
+  
+    - Properties
+  
+    - Units of Measure (UOM)
+  
+    - Postal Code Components
+  
+    - Branding
+  
+    - Business Number
+  
+    - Reports
+  
+    - Transport Mode
+  
+    - BN Named Range
+  
+
+  - Grupo: Dados Mestres
+  
+    - Commodities
+  
+    - Corporations
+  
+    - Ship Unit Specs (THU)
+  
+    - Service Providers
+  
+    - Locations
+  
+    - Contacts
+  
+    - Equipment Groups
+  
+    - Items
+  
+    - Packaged Items
+  
+    - Contact Groups
+  
+
+  - Grupo: Extensão e Qualificadores
+  
+    - Location Refnum Qualifier
+  
+    - Order Release Refnum Qualifier
+  
+    - Order Release Line Refnum Qualifier
+  
+    - Packaged Item Refnum Qualifier
+  
+    - Item Refnum Qualifier
+  
+    - Shipment Refnum Qualifier
+  
+    - Shipment Stop Refnum Qualifier
+  
+    - Rate Geo Refnum Qualifier
+  
+    - Order Movement Refnum Qualifier
+  
+    - Status Types and Values
+  
+    - Remarks Qualifiers
+  
+
+  - Grupo: Planejamento
+  
+    - Audit Trail
+  
+    - Logic Configs
+  
+    - Parameter Sets
+  
+    - Accessorial Codes
+  
+    - Itinerary Leg
+  
+    - Itineraries
+  
+    - Itinerary Profiles
+  
+    - Load Configuration Rules
+  
+    - Load Configuration Setup
+  
+    - Order Release Types
+  
+
+  - Grupo: Integração
+  
+    - Stylesheet Contents
+  
+    - Stylesheet Profiles
+  
+    - XML Templates
+  
+    - Outbound XML Profiles
+  
+    - Document
+  
+    - Webservice
+  
+    - External Systems
+  
+    - External System Contact
+  
+
+  - Grupo: Governança e UI
+  
+    - Manager Layouts
+  
+    - Finder Sets
+  
+    - Workbenches
+  
+    - Business Monitors
+  
+    - Access Control Lists (ACL)
+  
+    - User Roles
+  
+    - User Menus
+  
+    - User Preferences
+  
+    - Translation (Labels)
+  
+    - Manage User Access
+  
+    - VPD Profile
+  
+    - Relatórios (BI ZIP)
+  
+
+
+---
+
+
+## Objetivo do Projeto de Migração
+
+
+
+Este projeto tem como objetivo executar a migração controlada e governada das configurações do Oracle Transportation Management (OTM), atualmente consolidadas e validadas no ambiente de homologação (HOM), para o ambiente de produção (PRD).
+
+
+
+
+A migração visa unificar e padronizar o conjunto de objetos de configuração definidos no baseline BR100, incorporando também ajustes e extensões específicas do projeto Bauducco, garantindo consistência funcional, estabilidade operacional e aderência às melhores práticas de governança do OTM.
+
+
+
+
+Com a execução desta migração em PROD, espera-se:
+
+
+
+
+
+- disponibilizar integralmente as configurações necessárias para o planejamento, execução e monitoramento logístico;
+
+- eliminar divergências entre ambientes que possam impactar comportamento de planejamento, rating, integração ou visibilidade operacional;
+
+- assegurar rastreabilidade, capacidade de rollback e validação pós-migração, reduzindo riscos de impacto nas operações produtivas.
+
+
+
+
+
+---
+
+
+
+
+
+## Controle de Versão
+
+**Versão Atual:** 1.1  
+**Última Atualização:** 2026-02-02  
+**Autor:** Diego Ferreira Alves
+
+---
+
+
+
+
+## Histórico de Alterações
+
+| Data | Versão | Descrição | Autor |
+|------|--------|-----------|--------|
+
+| 2026-02-02 | 1.1 | Atualização do objetivo e alinhamento das seções de automação. | Diego Ferreira Alves |
+
+| 2026-01-28 | 1.3 | Remoção do ícone de diamante das seções da tabela de roadmap e publicação do novo agrupamento de tipos de deploy (MANUAL, MIGRATION, CSV, DB.XML, ARQUIVO ZIP BI). | Diego Ferreira Alves |
+
+| 2026-01-27 | 1.2 | Adoção do novo deploy type BUILDER-CONTROL e reforço na ordenação e no preenchimento automático das colunas da tabela Migration Project. | Diego Ferreira Alves |
+
+| 2026-01-21 | 1.1 | Ajustes consolidados do painel de migração e da tabela Migration Project (tipos de deploy, colunas, links), reordenação dos objetos e atualização dos caches. | Diego Ferreira Alves |
+
+| 2026-01-18 | 1.0 | Criação inicial do documento. | Diego Ferreira Alves |
+
+
+---
+
+
+
+
+## Grupos e Objetos de Migração OTM
+
+Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.
+
+---
+
+
+
+### Grupo: Automação
+
+
+Esta seção concentra os objetos responsáveis pela execução automática de regras e fluxos operacionais no OTM, como Saved Queries, Conditions e lógicas de acionamento utilizadas por Agents e processos batch. O conteúdo evidencia como cada automação está associada a um deploy type específico (MANUAL, MIGRATION, CSV, DB.XML, ZIP BI), permitindo rastrear impactos da migração sobre fluxos automáticos, dependências técnicas e a ordem correta de implantação no roadmap do projeto.
+
+
 
 
 ### Saved Queries
@@ -625,7 +874,12 @@ ORDER BY
 
 
 
-## Configuração
+### Grupo: Configuração
+
+
+Reúne configurações centrais do domínio OTM, incluindo domínios, grants, parâmetros e propriedades que sustentam a operação e o baseline de migração.
+
+
 
 
 ### Domains – Add Domain
@@ -1266,7 +1520,12 @@ ORDER BY
 
 
 
-## Dados Mestres
+### Grupo: Dados Mestres
+
+
+Contém cadastros mestres essenciais para planejamento e execução logística (commodities, corporações, unidades de embarque, transportadoras etc.), garantindo consistência entre ambientes.
+
+
 
 
 ### Commodities
@@ -1996,7 +2255,12 @@ ORDER BY
 
 
 
-## Extensão e Qualificadores
+### Grupo: Extensão e Qualificadores
+
+
+Agrupa qualificadores, códigos e extensões necessárias para classificação, tributação ou regras específicas de negócio do projeto.
+
+
 
 
 ### Location Refnum Qualifier
@@ -2733,7 +2997,12 @@ ORDER BY
 
 
 
-## Planejamento
+### Grupo: Planejamento
+
+
+Foca em tabelas e estruturas que suportam o planejamento e execução de cargas, perfis de roteirização e configuração de transporte.
+
+
 
 
 ### Audit Trail
@@ -3405,7 +3674,12 @@ ORDER BY
 
 
 
-## Integração
+### Grupo: Integração
+
+
+Inclui objetos relacionados a integração e mensageria (templates, perfis XML, web services e sistemas externos) assegurando comunicação entre OTM e sistemas parceiros.
+
+
 
 
 ### Stylesheet Contents
@@ -3987,7 +4261,12 @@ ORDER BY
 
 
 
-## Governança e UI
+### Grupo: Governança e UI
+
+
+Abriga objetos de governança, segurança e experiência do usuário (layouts, ACLs, roles, menus, traduções), garantindo aderência às políticas de acesso e usabilidade.
+
+
 
 
 ### Manager Layouts

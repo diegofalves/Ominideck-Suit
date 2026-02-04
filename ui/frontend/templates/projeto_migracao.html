@@ -25,6 +25,10 @@
 <body>
 
 <h1>OmniDeck</h1>
+{% set change_history = project.project_metadata.change_history if project and project.project_metadata else [] %}
+<script>
+  window.initialChangeHistory = {{ change_history | tojson | safe }};
+</script>
 
 <!-- Exibição de Erros de Validação -->
 {% if errors %}
@@ -120,6 +124,43 @@
     </select>
   </fieldset>
 
+  {% set objective_meta = project.project_metadata.migration_objective if project and project.project_metadata else {} %}
+  {% set objective_content = objective_meta.content if objective_meta.content else [] %}
+  {% set objective_title = objective_meta.title if objective_meta.title else "Objetivo do Projeto de Migração" %}
+
+  <fieldset>
+    <legend>Capítulo 0 — Objetivo do Projeto de Migração</legend>
+    <p style="margin-bottom: 8px; font-size: 13px; color: #555;">
+      Edite o texto deste capítulo. Use linhas que comecem com <code>- </code> para itens de lista.
+    </p>
+    <textarea
+      name="migration_objective_content"
+      rows="6"
+      style="width: 100%; padding: 8px; font-size: 13px; min-height: 120px;"
+    >{{ objective_content | join('\n') }}</textarea>
+    <input type="hidden" name="migration_objective_title" value="{{ objective_title }}">
+  </fieldset>
+
+  {% set version_control = project.project_metadata.version_control if project and project.project_metadata else {} %}
+  <fieldset>
+    <legend>Controle de Versão</legend>
+    <label>Versão Atual</label>
+    <input type="text" name="version_control.current_version" value="{{ version_control.current_version or '' }}">
+
+    <label style="margin-top: 8px;">Última Atualização</label>
+    <input type="text" name="version_control.last_update" value="{{ version_control.last_update or '' }}">
+
+    <label style="margin-top: 8px;">Autor</label>
+    <input type="text" name="version_control.author" value="{{ version_control.author or '' }}">
+  </fieldset>
+
+  {% set change_history = project.project_metadata.change_history if project and project.project_metadata else [] %}
+  <fieldset>
+    <legend>Histórico de Alterações</legend>
+    <div id="change-history-rows"></div>
+    <button type="button" onclick="addChangeHistoryRow()" style="margin-top: 8px;">➕ Adicionar linha</button>
+  </fieldset>
+
   <!-- ================= -->
   <!-- Grupos Dinâmicos -->
   <!-- ================= -->
@@ -184,6 +225,19 @@
         <strong>{{ active_group.label }}</strong>
         ({{ active_group.sequence }}º no fluxo).
       </p>
+
+      <!-- Descrição do Grupo -->
+      {% if current_group.data %}
+        <input type="hidden" name="groups[{{ active_group_index.value }}][group_id]" value="{{ current_group.data.group_id }}">
+        <input type="hidden" name="groups[{{ active_group_index.value }}][label]" value="{{ current_group.data.label }}">
+        <input type="hidden" name="groups[{{ active_group_index.value }}][sequence]" value="{{ current_group.data.sequence }}">
+        <label style="display:block; font-weight: bold; margin-top: 12px;">Descrição do Grupo</label>
+        <textarea
+          name="groups[{{ active_group_index.value }}][description]"
+          rows="3"
+          style="width: 100%; max-width: 700px; padding: 8px; font-family: Arial, sans-serif;"
+        >{{ current_group.data.description }}</textarea>
+      {% endif %}
 
       <!-- Seção de Seleção/Criação de Objeto -->
       {% if current_group.data and current_group.data.objects %}
