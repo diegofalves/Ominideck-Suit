@@ -65,6 +65,48 @@
 ---
 {% endif %}
 
+## Roadmap de Migração
+
+Este capítulo apresenta a estratégia de execução da migração, agrupada por tipo de implantação (Deployment Type). Cada bloco representa um grupo coeso de objetos que devem ser migrados seguindo a mesma tática operacional.
+
+{% set deployment_types = {} %}
+{% for group in data.groups %}
+{% for object in group.objects %}
+{% set dt = object.deployment_type or "INDEFINIDO" %}
+{% if dt not in deployment_types %}
+{% set _ = deployment_types.update({dt: []}) %}
+{% endif %}
+{% set _ = deployment_types[dt].append(object.name) %}
+{% endfor %}
+{% endfor %}
+
+{% for dt_name in ["MANUAL", "MIGRATION_PROJECT", "CSV", "DB.XML", "ARQUIVO ZIP BI"] %}
+{% if dt_name in deployment_types %}
+### {{ dt_name }}
+
+{% if dt_name == "MANUAL" %}
+Implantação manual no ambiente de destino. Objetos que requerem ação humana direta e validação específica.
+{% elif dt_name == "MIGRATION_PROJECT" %}
+Migração via projeto de migração nativo do OTM. Objetos transportados com configurações relacionadas.
+{% elif dt_name == "CSV" %}
+Importação via arquivos CSV. Dados estruturados em formato de valores separados por vírgula.
+{% elif dt_name == "DB.XML" %}
+Migração via banco de dados e arquivos XML. Transportação com integridade de relacionamentos.
+{% elif dt_name == "ARQUIVO ZIP BI" %}
+Exportação para arquivo ZIP com conteúdo BI. Inclui dashboards, relatórios e visualizações.
+{% endif %}
+
+**Objetos nesta estratégia:** {{ deployment_types[dt_name] | length }}
+
+{% for obj_name in deployment_types[dt_name] %}
+- {{ obj_name }}
+{% endfor %}
+
+---
+
+{% endif %}
+{% endfor %}
+
 ## Grupos e Objetos de Migração OTM
 
 Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.

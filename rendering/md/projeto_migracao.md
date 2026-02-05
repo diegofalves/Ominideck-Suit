@@ -245,6 +245,492 @@ Com a execução desta migração em PROD, espera-se:
 ---
 
 
+## Roadmap de Migração
+
+Este capítulo apresenta a estratégia de execução da migração, agrupada por tipo de implantação (Deployment Type). Cada bloco representa um grupo coeso de objetos que devem ser migrados seguindo a mesma tática operacional.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### MANUAL
+
+
+Implantação manual no ambiente de destino. Objetos que requerem ação humana direta e validação específica.
+
+
+**Objetos nesta estratégia:** 6
+
+
+- Domains – Add Domain
+
+- Domain Grants
+
+- Domain Settings
+
+- Properties
+
+- Branding
+
+- Relatórios (BI ZIP)
+
+
+---
+
+
+
+
+### MIGRATION_PROJECT
+
+
+Migração via projeto de migração nativo do OTM. Objetos transportados com configurações relacionadas.
+
+
+**Objetos nesta estratégia:** 53
+
+
+- Saved Queries
+
+- Saved Conditions
+
+- Data Type Association
+
+- Agent Event
+
+- Agents
+
+- App Actions
+
+- Actions
+
+- Batch Processes
+
+- Units of Measure (UOM)
+
+- Business Number
+
+- Reports
+
+- Transport Mode
+
+- BN Named Range
+
+- Commodities
+
+- Corporations
+
+- Ship Unit Specs (THU)
+
+- Location Refnum Qualifier
+
+- Order Release Refnum Qualifier
+
+- Order Release Line Refnum Qualifier
+
+- Packaged Item Refnum Qualifier
+
+- Item Refnum Qualifier
+
+- Shipment Refnum Qualifier
+
+- Shipment Stop Refnum Qualifier
+
+- Rate Geo Refnum Qualifier
+
+- Order Movement Refnum Qualifier
+
+- Status Types and Values
+
+- Remarks Qualifiers
+
+- Audit Trail
+
+- Logic Configs
+
+- Parameter Sets
+
+- Accessorial Codes
+
+- Itinerary Leg
+
+- Itineraries
+
+- Itinerary Profiles
+
+- Load Configuration Rules
+
+- Load Configuration Setup
+
+- Order Release Types
+
+- Stylesheet Contents
+
+- Stylesheet Profiles
+
+- XML Templates
+
+- Outbound XML Profiles
+
+- Document
+
+- Webservice
+
+- External Systems
+
+- External System Contact
+
+- Manager Layouts
+
+- Finder Sets
+
+- Workbenches
+
+- Business Monitors
+
+- Access Control Lists (ACL)
+
+- User Roles
+
+- User Menus
+
+- User Preferences
+
+
+---
+
+
+
+
+### CSV
+
+
+Importação via arquivos CSV. Dados estruturados em formato de valores separados por vírgula.
+
+
+**Objetos nesta estratégia:** 4
+
+
+- Service Providers
+
+- Contacts
+
+- Equipment Groups
+
+- Contact Groups
+
+
+---
+
+
+
+
+
+
 
 
 ## Grupos e Objetos de Migração OTM
@@ -252,7 +738,6 @@ Com a execução desta migração em PROD, espera-se:
 Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.
 
 ---
-
 
 
 ### Grupo: Automação
