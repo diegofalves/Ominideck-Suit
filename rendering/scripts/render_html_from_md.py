@@ -246,6 +246,73 @@ TEMPLATE_HTML = r"""
         {% endif %}
 
         <!-- =============================================
+             SEÇÃO 6.5: ROADMAP DE MIGRAÇÃO
+             - Plano de execução agrupado por deployment type
+             ============================================= -->
+        <div class="page">
+            <div class="page-content">
+                <section class="roadmap-page" aria-label="Roadmap de Migração" id="roadmap">
+                    <header class="roadmap-page__header">
+                        <h2 class="roadmap-page__title">Roadmap de Migração</h2>
+                        <p class="roadmap-page__description">
+                            Este capítulo apresenta a estratégia de execução da migração, agrupada por tipo de implantação (Deployment Type). 
+                            Cada bloco representa um grupo coeso de objetos que devem ser migrados seguindo a mesma tática operacional.
+                        </p>
+                    </header>
+
+                    {% set deployment_map = {} %}
+                    {% for group in data.groups %}
+                        {% for obj in group.objects %}
+                            {% set dt = obj.deployment_type or "INDEFINIDO" %}
+                            {% if dt not in deployment_map %}
+                                {% set _ = deployment_map.update({dt: {"objects": [], "count": 0}}) %}
+                            {% endif %}
+                            {% set _ = deployment_map[dt]["objects"].append(obj.name) %}
+                            {% set _ = deployment_map[dt].update({"count": deployment_map[dt]["count"] + 1}) %}
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% set dt_order = ["MANUAL", "MIGRATION_PROJECT", "CSV", "DB.XML", "ARQUIVO ZIP BI"] %}
+                    {% for dt_key in dt_order %}
+                        {% if dt_key in deployment_map %}
+                            {% set dt_data = deployment_map[dt_key] %}
+                            {% set css_class = dt_key.lower().replace(".", "").replace(" ", "").replace("_", "") %}
+                            <div class="deployment-type-block deployment-type--{{ css_class }}" aria-label="Deployment Type: {{ dt_key }}">
+                                <div class="deployment-type-block__header">
+                                    <h3 class="deployment-type-block__title">{{ dt_key }}</h3>
+                                    <span class="deployment-type-block__count">{{ dt_data.count }} {{ "objeto" if dt_data.count == 1 else "objetos" }}</span>
+                                </div>
+                                
+                                <p class="deployment-type-block__description">
+                                    {% if dt_key == "MANUAL" %}
+                                        Implantação manual no ambiente de destino. Objetos que requerem ação humana direta e validação específica.
+                                    {% elif dt_key == "MIGRATION_PROJECT" %}
+                                        Migração via projeto de migração nativo do OTM. Objetos transportados com configurações relacionadas.
+                                    {% elif dt_key == "CSV" %}
+                                        Importação via arquivos CSV. Dados estruturados em formato de valores separados por vírgula.
+                                    {% elif dt_key == "DB.XML" %}
+                                        Migração via banco de dados e arquivos XML. Transportação com integridade de relacionamentos.
+                                    {% elif dt_key == "ARQUIVO ZIP BI" %}
+                                        Exportação para arquivo ZIP com conteúdo BI. Inclui dashboards, relatórios e visualizações.
+                                    {% endif %}
+                                </p>
+
+                                <ul class="deployment-type-block__items">
+                                    {% for obj_name in dt_data.objects %}
+                                        <li class="deployment-type-block__item">
+                                            <span class="deployment-type-block__item-name">{{ obj_name }}</span>
+                                            <span class="deployment-type-block__item-detail">({{ loop.index }}/{{ dt_data.count }})</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </section>
+            </div>
+        </div>
+
+        <!-- =============================================
              SEÇÃO 7: OVERVIEW DOS GRUPOS
              ============================================= -->
         <div class="page">
