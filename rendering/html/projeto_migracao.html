@@ -553,6 +553,7 @@
         <!-- =============================================
              SEÇÃO 6.5: ROADMAP DE MIGRAÇÃO
              - Plano de execução agrupado por deployment type
+             - Colunas específicas por tipo de deployment
              ============================================= -->
         <div class="page">
             <div class="page-content">
@@ -562,9 +563,11 @@
                         <p class="roadmap-page__description">
                             Este capítulo apresenta a estratégia de execução da migração, agrupada por tipo de implantação (Deployment Type). 
                             Cada bloco representa um grupo coeso de objetos que devem ser migrados seguindo a mesma tática operacional.
+                            As colunas de cada tabela variam conforme o tipo de deployment, refletindo as informações técnicas relevantes para cada estratégia.
                         </p>
                     </header>
 
+                    <!-- MAPA DE OBJETOS AGRUPADOS POR DEPLOYMENT TYPE E GRUPO -->
                     
                     
                         
@@ -942,9 +945,11 @@
                         
                     
 
+                    <!-- ITERAÇÃO SOBRE DEPLOYMENT TYPES NA ORDEM CORRETA -->
                     
                     
                         
+                            
                             
                             
                             <div class="deployment-type-block deployment-type--manual" aria-label="Deployment Type: MANUAL">
@@ -959,43 +964,71 @@
                                     
                                 </p>
 
-                                <ul class="deployment-type-block__items">
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Domains – Add Domain</span>
-                                            <span class="deployment-type-block__item-detail">(1/6)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Domain Grants</span>
-                                            <span class="deployment-type-block__item-detail">(2/6)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Domain Settings</span>
-                                            <span class="deployment-type-block__item-detail">(3/6)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Properties</span>
-                                            <span class="deployment-type-block__item-detail">(4/6)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Branding</span>
-                                            <span class="deployment-type-block__item-detail">(5/6)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Relatórios (BI ZIP)</span>
-                                            <span class="deployment-type-block__item-detail">(6/6)</span>
-                                        </li>
-                                    
-                                </ul>
+                                <!-- TABELAS COM COLUNAS ESPECÍFICAS POR DEPLOYMENT TYPE -->
+                                
+                                    <!-- MANUAL: Resp., Grupo, Descrição, Tabela OTM -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos MANUAL">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Configuração de domínios OTM</td>
+                                                    <td class="meta-table__value">DOMAIN</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Permissões de domínio</td>
+                                                    <td class="meta-table__value">DOMAIN_GRANTS_MADE</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Configurações de domínio</td>
+                                                    <td class="meta-table__value">DOMAIN_SETTING</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Propriedades do sistema</td>
+                                                    <td class="meta-table__value">PROP_INSTRUCTION</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Configuração de marca e identidade visual</td>
+                                                    <td class="meta-table__value">BRANDING</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Relatórios e arquivos BI</td>
+                                                    <td class="meta-table__value">BI_PUBLISHER_FILES</td>
+                                                </tr>
+                                            
+                                        </tbody>
+                                    </table>
+
+                                
                             </div>
                         
                     
                         
+                            
                             
                             
                             <div class="deployment-type-block deployment-type--migrationproject" aria-label="Deployment Type: MIGRATION_PROJECT">
@@ -1010,278 +1043,562 @@
                                     
                                 </p>
 
-                                <ul class="deployment-type-block__items">
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Saved Queries</span>
-                                            <span class="deployment-type-block__item-detail">(1/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Saved Conditions</span>
-                                            <span class="deployment-type-block__item-detail">(2/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Data Type Association</span>
-                                            <span class="deployment-type-block__item-detail">(3/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Agent Event</span>
-                                            <span class="deployment-type-block__item-detail">(4/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Agents</span>
-                                            <span class="deployment-type-block__item-detail">(5/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">App Actions</span>
-                                            <span class="deployment-type-block__item-detail">(6/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Actions</span>
-                                            <span class="deployment-type-block__item-detail">(7/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Batch Processes</span>
-                                            <span class="deployment-type-block__item-detail">(8/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Units of Measure (UOM)</span>
-                                            <span class="deployment-type-block__item-detail">(9/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Business Number</span>
-                                            <span class="deployment-type-block__item-detail">(10/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Reports</span>
-                                            <span class="deployment-type-block__item-detail">(11/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Transport Mode</span>
-                                            <span class="deployment-type-block__item-detail">(12/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">BN Named Range</span>
-                                            <span class="deployment-type-block__item-detail">(13/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Commodities</span>
-                                            <span class="deployment-type-block__item-detail">(14/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Corporations</span>
-                                            <span class="deployment-type-block__item-detail">(15/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Ship Unit Specs (THU)</span>
-                                            <span class="deployment-type-block__item-detail">(16/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Location Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(17/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Order Release Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(18/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Order Release Line Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(19/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Packaged Item Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(20/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Item Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(21/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Shipment Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(22/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Shipment Stop Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(23/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Rate Geo Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(24/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Order Movement Refnum Qualifier</span>
-                                            <span class="deployment-type-block__item-detail">(25/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Status Types and Values</span>
-                                            <span class="deployment-type-block__item-detail">(26/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Remarks Qualifiers</span>
-                                            <span class="deployment-type-block__item-detail">(27/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Audit Trail</span>
-                                            <span class="deployment-type-block__item-detail">(28/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Logic Configs</span>
-                                            <span class="deployment-type-block__item-detail">(29/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Parameter Sets</span>
-                                            <span class="deployment-type-block__item-detail">(30/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Accessorial Codes</span>
-                                            <span class="deployment-type-block__item-detail">(31/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Itinerary Leg</span>
-                                            <span class="deployment-type-block__item-detail">(32/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Itineraries</span>
-                                            <span class="deployment-type-block__item-detail">(33/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Itinerary Profiles</span>
-                                            <span class="deployment-type-block__item-detail">(34/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Load Configuration Rules</span>
-                                            <span class="deployment-type-block__item-detail">(35/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Load Configuration Setup</span>
-                                            <span class="deployment-type-block__item-detail">(36/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Order Release Types</span>
-                                            <span class="deployment-type-block__item-detail">(37/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Stylesheet Contents</span>
-                                            <span class="deployment-type-block__item-detail">(38/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Stylesheet Profiles</span>
-                                            <span class="deployment-type-block__item-detail">(39/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">XML Templates</span>
-                                            <span class="deployment-type-block__item-detail">(40/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Outbound XML Profiles</span>
-                                            <span class="deployment-type-block__item-detail">(41/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Document</span>
-                                            <span class="deployment-type-block__item-detail">(42/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Webservice</span>
-                                            <span class="deployment-type-block__item-detail">(43/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">External Systems</span>
-                                            <span class="deployment-type-block__item-detail">(44/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">External System Contact</span>
-                                            <span class="deployment-type-block__item-detail">(45/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Manager Layouts</span>
-                                            <span class="deployment-type-block__item-detail">(46/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Finder Sets</span>
-                                            <span class="deployment-type-block__item-detail">(47/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Workbenches</span>
-                                            <span class="deployment-type-block__item-detail">(48/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Business Monitors</span>
-                                            <span class="deployment-type-block__item-detail">(49/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Access Control Lists (ACL)</span>
-                                            <span class="deployment-type-block__item-detail">(50/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">User Roles</span>
-                                            <span class="deployment-type-block__item-detail">(51/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">User Menus</span>
-                                            <span class="deployment-type-block__item-detail">(52/53)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">User Preferences</span>
-                                            <span class="deployment-type-block__item-detail">(53/53)</span>
-                                        </li>
-                                    
-                                </ul>
+                                <!-- TABELAS COM COLUNAS ESPECÍFICAS POR DEPLOYMENT TYPE -->
+                                
+                                    <!-- MIGRATION_PROJECT: Resp., Seq., ID Migration Project, Grupo, Descrição, Tabela OTM, Saved Query ID -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos MIGRATION_PROJECT">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Seq.</th>
+                                                <th scope="col" class="meta-table__header">ID Migration Project</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                                <th scope="col" class="meta-table__header">Saved Query ID</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">1</td>
+                                                    <td class="meta-table__value">SAV-001</td>
+                                                    <td class="meta-table__value">Automação</td>
+                                                    <td class="meta-table__value">Queries utilizadas por automações, conditions e agents</td>
+                                                    <td class="meta-table__value">SAVED_QUERY</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">1</td>
+                                                    <td class="meta-table__value">COM-001</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Cadastro de commodities vinculadas a itens</td>
+                                                    <td class="meta-table__value">COMMODITY</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">1</td>
+                                                    <td class="meta-table__value">LOC-001</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de localização</td>
+                                                    <td class="meta-table__value">LOCATION_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">1</td>
+                                                    <td class="meta-table__value">AUD-001</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Trilha de auditoria do sistema</td>
+                                                    <td class="meta-table__value">AUDIT_TRAIL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">1</td>
+                                                    <td class="meta-table__value">STY-001</td>
+                                                    <td class="meta-table__value">Integração</td>
+                                                    <td class="meta-table__value">Conteúdos de folhas de estilo</td>
+                                                    <td class="meta-table__value">STYLESHEET_CONTENT</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">1</td>
+                                                    <td class="meta-table__value">MAN-001</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Layouts de gerenciamento do OTM</td>
+                                                    <td class="meta-table__value">MANAGER_LAYOUT</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">2</td>
+                                                    <td class="meta-table__value">SAV-002</td>
+                                                    <td class="meta-table__value">Automação</td>
+                                                    <td class="meta-table__value">Conditions utilizadas por agents e eventos</td>
+                                                    <td class="meta-table__value">SAVED_CONDITION</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">2</td>
+                                                    <td class="meta-table__value">COR-002</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Entidades corporativas e empresas</td>
+                                                    <td class="meta-table__value">CORPORATION</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">2</td>
+                                                    <td class="meta-table__value">ORD-002</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de liberação de pedido</td>
+                                                    <td class="meta-table__value">ORDER_RELEASE_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">2</td>
+                                                    <td class="meta-table__value">LOG-002</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Configurações de lógica de planejamento</td>
+                                                    <td class="meta-table__value">LOGIC_PARAMETER</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">2</td>
+                                                    <td class="meta-table__value">STY-002</td>
+                                                    <td class="meta-table__value">Integração</td>
+                                                    <td class="meta-table__value">Perfis de folhas de estilo</td>
+                                                    <td class="meta-table__value">STYLESHEET_PROFILE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">2</td>
+                                                    <td class="meta-table__value">FIN-002</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Conjuntos de busca e filtros</td>
+                                                    <td class="meta-table__value">FINDER_SET</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">3</td>
+                                                    <td class="meta-table__value">DAT-003</td>
+                                                    <td class="meta-table__value">Automação</td>
+                                                    <td class="meta-table__value">Associações de tipos de dados do sistema</td>
+                                                    <td class="meta-table__value">DATA_TYPE_ASSOCIATION</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">3</td>
+                                                    <td class="meta-table__value">SHI-003</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Especificações de unidades de transporte</td>
+                                                    <td class="meta-table__value">SHIP_UNIT_SPEC</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">3</td>
+                                                    <td class="meta-table__value">ORD-003</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de linha de liberação</td>
+                                                    <td class="meta-table__value">ORDER_RELEASE_LINE_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">3</td>
+                                                    <td class="meta-table__value">PLA-003</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Conjuntos de parâmetros de planejamento</td>
+                                                    <td class="meta-table__value">PLANNING_PARAMETER</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">3</td>
+                                                    <td class="meta-table__value">XML-003</td>
+                                                    <td class="meta-table__value">Integração</td>
+                                                    <td class="meta-table__value">Templates XML para integração</td>
+                                                    <td class="meta-table__value">XML_TEMPLATE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">3</td>
+                                                    <td class="meta-table__value">TRA-003</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Bancadas de trabalho do OTM</td>
+                                                    <td class="meta-table__value">TRANSPORTATION_WORKBENCH</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">4</td>
+                                                    <td class="meta-table__value">AGE-004</td>
+                                                    <td class="meta-table__value">Automação</td>
+                                                    <td class="meta-table__value">Eventos de agentes do sistema</td>
+                                                    <td class="meta-table__value">AGENT_EVENT</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">4</td>
+                                                    <td class="meta-table__value">PAC-004</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de item embalado</td>
+                                                    <td class="meta-table__value">PACKAGED_ITEM_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">4</td>
+                                                    <td class="meta-table__value">ACC-004</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Códigos de serviços acessórios</td>
+                                                    <td class="meta-table__value">ACCESSORIAL_CODE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">4</td>
+                                                    <td class="meta-table__value">OUT-004</td>
+                                                    <td class="meta-table__value">Integração</td>
+                                                    <td class="meta-table__value">Perfis de XML de saída</td>
+                                                    <td class="meta-table__value">OUT_XML_PROFILE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">4</td>
+                                                    <td class="meta-table__value">BUS-004</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Monitores de negócio</td>
+                                                    <td class="meta-table__value">BUSINESS_MONITOR_D</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">5</td>
+                                                    <td class="meta-table__value">AGE-005</td>
+                                                    <td class="meta-table__value">Automação</td>
+                                                    <td class="meta-table__value">Agentes ativos no domínio</td>
+                                                    <td class="meta-table__value">AGENT</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">5</td>
+                                                    <td class="meta-table__value">UOM-005</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Unidades de medida utilizadas no domínio</td>
+                                                    <td class="meta-table__value">UOM</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">5</td>
+                                                    <td class="meta-table__value">ITE-005</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de item</td>
+                                                    <td class="meta-table__value">ITEM_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">5</td>
+                                                    <td class="meta-table__value">LEG-005</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Trechos de itinerário</td>
+                                                    <td class="meta-table__value">LEG</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">5</td>
+                                                    <td class="meta-table__value">DOC-005</td>
+                                                    <td class="meta-table__value">Integração</td>
+                                                    <td class="meta-table__value">Documentos do sistema</td>
+                                                    <td class="meta-table__value">DOCUMENT</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">5</td>
+                                                    <td class="meta-table__value">ACR-005</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Listas de controle de acesso</td>
+                                                    <td class="meta-table__value">ACR_ROLE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">6</td>
+                                                    <td class="meta-table__value">APP-006</td>
+                                                    <td class="meta-table__value">Automação</td>
+                                                    <td class="meta-table__value">Ações de aplicação do OTM</td>
+                                                    <td class="meta-table__value">APP_ACTION</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">6</td>
+                                                    <td class="meta-table__value">SHI-006</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de remessa</td>
+                                                    <td class="meta-table__value">SHIPMENT_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">6</td>
+                                                    <td class="meta-table__value">ITI-006</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Itinerários de transporte</td>
+                                                    <td class="meta-table__value">ITINERARY</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">6</td>
+                                                    <td class="meta-table__value">WEB-006</td>
+                                                    <td class="meta-table__value">Integração</td>
+                                                    <td class="meta-table__value">Serviços web para integração</td>
+                                                    <td class="meta-table__value">WEB_SERVICE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">6</td>
+                                                    <td class="meta-table__value">USE-006</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Papéis de usuário</td>
+                                                    <td class="meta-table__value">USER_ROLE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">7</td>
+                                                    <td class="meta-table__value">ACT-007</td>
+                                                    <td class="meta-table__value">Automação</td>
+                                                    <td class="meta-table__value">Ações gerais do sistema</td>
+                                                    <td class="meta-table__value">ACTION</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">7</td>
+                                                    <td class="meta-table__value">SHI-007</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de parada de remessa</td>
+                                                    <td class="meta-table__value">SHIPMENT_STOP_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">7</td>
+                                                    <td class="meta-table__value">ITI-007</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Perfis de itinerários</td>
+                                                    <td class="meta-table__value">ITINERARY_PROFILE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">7</td>
+                                                    <td class="meta-table__value">EXT-007</td>
+                                                    <td class="meta-table__value">Integração</td>
+                                                    <td class="meta-table__value">Configuração de sistemas externos</td>
+                                                    <td class="meta-table__value">EXTERNAL_SYSTEM</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">7</td>
+                                                    <td class="meta-table__value">USE-007</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Menus de usuário</td>
+                                                    <td class="meta-table__value">USER_MENU</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">8</td>
+                                                    <td class="meta-table__value">BAT-008</td>
+                                                    <td class="meta-table__value">Automação</td>
+                                                    <td class="meta-table__value">Processos batch de execução automática</td>
+                                                    <td class="meta-table__value">BATCH_PROCESS</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">8</td>
+                                                    <td class="meta-table__value">BN_-008</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Regras de números de negócio</td>
+                                                    <td class="meta-table__value">BN_RULE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">8</td>
+                                                    <td class="meta-table__value">RAT-008</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de taxa geográfica</td>
+                                                    <td class="meta-table__value">RATE_GEO_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">8</td>
+                                                    <td class="meta-table__value">LOA-008</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Regras de configuração de carregamento</td>
+                                                    <td class="meta-table__value">LOAD_CONFIG_RULE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">8</td>
+                                                    <td class="meta-table__value">EXT-008</td>
+                                                    <td class="meta-table__value">Integração</td>
+                                                    <td class="meta-table__value">Contatos de sistemas externos</td>
+                                                    <td class="meta-table__value">EXTERNAL_CONTACT</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">8</td>
+                                                    <td class="meta-table__value">USE-008</td>
+                                                    <td class="meta-table__value">Governança e UI</td>
+                                                    <td class="meta-table__value">Preferências de usuário</td>
+                                                    <td class="meta-table__value">USER_PREFERENCE_D</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">9</td>
+                                                    <td class="meta-table__value">REP-009</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Relatórios do sistema</td>
+                                                    <td class="meta-table__value">REPORT</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">9</td>
+                                                    <td class="meta-table__value">OM_-009</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificador de número de referência de movimento de pedido</td>
+                                                    <td class="meta-table__value">OM_REFNUM_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">9</td>
+                                                    <td class="meta-table__value">LOA-009</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Configuração de carregamento</td>
+                                                    <td class="meta-table__value">LOAD_CONFIG_SETUP</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">10</td>
+                                                    <td class="meta-table__value">TRA-010</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Modos de transporte</td>
+                                                    <td class="meta-table__value">TRANSPORT_MODE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">10</td>
+                                                    <td class="meta-table__value">STA-010</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Tipos e valores de status do sistema</td>
+                                                    <td class="meta-table__value">STATUS_TYPE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">10</td>
+                                                    <td class="meta-table__value">ORD-010</td>
+                                                    <td class="meta-table__value">Planejamento</td>
+                                                    <td class="meta-table__value">Tipos de liberação de pedido</td>
+                                                    <td class="meta-table__value">ORDER_RELEASE_TYPE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">11</td>
+                                                    <td class="meta-table__value">BN_-011</td>
+                                                    <td class="meta-table__value">Configuração</td>
+                                                    <td class="meta-table__value">Intervalo nomeado de números de negócio</td>
+                                                    <td class="meta-table__value">BN_NAMED_RANGE</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">11</td>
+                                                    <td class="meta-table__value">REM-011</td>
+                                                    <td class="meta-table__value">Extensão e Qualificadores</td>
+                                                    <td class="meta-table__value">Qualificadores de observações</td>
+                                                    <td class="meta-table__value">REMARK_QUAL</td>
+                                                    <td class="meta-table__value">—</td>
+                                                </tr>
+                                            
+                                        </tbody>
+                                    </table>
+
+                                
                             </div>
                         
                     
                         
+                            
                             
                             
                             <div class="deployment-type-block deployment-type--csv" aria-label="Deployment Type: CSV">
@@ -1296,34 +1613,123 @@
                                     
                                 </p>
 
-                                <ul class="deployment-type-block__items">
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Service Providers</span>
-                                            <span class="deployment-type-block__item-detail">(1/4)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Contacts</span>
-                                            <span class="deployment-type-block__item-detail">(2/4)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Equipment Groups</span>
-                                            <span class="deployment-type-block__item-detail">(3/4)</span>
-                                        </li>
-                                    
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">Contact Groups</span>
-                                            <span class="deployment-type-block__item-detail">(4/4)</span>
-                                        </li>
-                                    
-                                </ul>
+                                <!-- TABELAS COM COLUNAS ESPECÍFICAS POR DEPLOYMENT TYPE -->
+                                
+                                    <!-- CSV / DB.XML: Resp., Seq., Grupo, Descrição, Tabela OTM -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos CSV">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Seq.</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">4</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Transportadoras e prestadores de serviço</td>
+                                                    <td class="meta-table__value">SERVPROV</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">6</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Contatos e informações de pessoas</td>
+                                                    <td class="meta-table__value">CONTACT</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">7</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Grupos de equipamentos</td>
+                                                    <td class="meta-table__value">EQUIPMENT_GROUP</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">10</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Grupos de contatos</td>
+                                                    <td class="meta-table__value">CONTACT_GROUP</td>
+                                                </tr>
+                                            
+                                        </tbody>
+                                    </table>
+
+                                
                             </div>
                         
                     
                         
                     
+                        
+                    
+                        
+                            
+                            
+                            
+                            <div class="deployment-type-block deployment-type--integration" aria-label="Deployment Type: INTEGRATION">
+                                <div class="deployment-type-block__header">
+                                    <h3 class="deployment-type-block__title">INTEGRATION</h3>
+                                    <span class="deployment-type-block__count">3 objetos</span>
+                                </div>
+                                
+                                <p class="deployment-type-block__description">
+                                    
+                                        Integração e configuração de interfaces externas. Objetos de conectividade e troca de dados com sistemas terceiros.
+                                    
+                                </p>
+
+                                <!-- TABELAS COM COLUNAS ESPECÍFICAS POR DEPLOYMENT TYPE -->
+                                
+                                    <!-- INTEGRATION: Resp., Seq., Grupo, Descrição, Tabela OTM -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos INTEGRATION">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Seq.</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">5</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Localizações e endereços</td>
+                                                    <td class="meta-table__value">LOCATION</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">8</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Itens e produtos</td>
+                                                    <td class="meta-table__value">ITEM</td>
+                                                </tr>
+                                            
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">ITC</td>
+                                                    <td class="meta-table__value">9</td>
+                                                    <td class="meta-table__value">Dados Mestres</td>
+                                                    <td class="meta-table__value">Itens embalados</td>
+                                                    <td class="meta-table__value">PACKAGED_ITEM</td>
+                                                </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                
+                            </div>
                         
                     
                 </section>
@@ -1333,18 +1739,6 @@
         <!-- =============================================
              SEÇÃO 7: OVERVIEW DOS GRUPOS
              ============================================= -->
-        <div class="page">
-            <div class="page-content">
-                <section class="groups-overview" aria-label="Grupos e Objetos de Migração OTM" id="grupos-overview">
-                    <header class="groups-overview__header">
-                        <h2 class="groups-overview__title">Grupos e Objetos de Migração OTM</h2>
-                    </header>
-                    <div class="groups-overview__content">
-                        <p>Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.</p>
-                    </div>
-                </section>
-            </div>
-        </div>
 
         <!-- =============================================
              SEÇÃO 3: GRUPOS E OBJETOS DE MIGRAÇÃO
@@ -1356,6 +1750,18 @@
         
         <div class="page">
             <div class="page-content">
+                
+                <!-- Overview do grupos - inserido na primeira página -->
+                <section class="groups-overview" aria-label="Grupos e Objetos de Migração OTM" id="grupos-overview">
+                    <header class="groups-overview__header">
+                        <h2 class="groups-overview__title">Grupos e Objetos de Migração OTM</h2>
+                    </header>
+                    <div class="groups-overview__content">
+                        <p>Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.</p>
+                    </div>
+                </section>
+                
+                
                 <section class="group-block" aria-label="Grupo: Automação" id="group-automacao">
                     <!-- Cabeçalho do Grupo -->
                     <header class="group-block__header">
@@ -2669,6 +3075,8 @@ ORDER BY
         
         <div class="page">
             <div class="page-content">
+                
+                
                 <section class="group-block" aria-label="Grupo: Configuração" id="group-configuracao">
                     <!-- Cabeçalho do Grupo -->
                     <header class="group-block__header">
@@ -4358,6 +4766,8 @@ ORDER BY
         
         <div class="page">
             <div class="page-content">
+                
+                
                 <section class="group-block" aria-label="Grupo: Dados Mestres" id="group-dados-mestres">
                     <!-- Cabeçalho do Grupo -->
                     <header class="group-block__header">
@@ -5974,6 +6384,8 @@ ORDER BY
         
         <div class="page">
             <div class="page-content">
+                
+                
                 <section class="group-block" aria-label="Grupo: Extensão e Qualificadores" id="group-extensao-e-qualificadores">
                     <!-- Cabeçalho do Grupo -->
                     <header class="group-block__header">
@@ -7716,6 +8128,8 @@ ORDER BY
         
         <div class="page">
             <div class="page-content">
+                
+                
                 <section class="group-block" aria-label="Grupo: Planejamento" id="group-planejamento">
                     <!-- Cabeçalho do Grupo -->
                     <header class="group-block__header">
@@ -9303,6 +9717,8 @@ ORDER BY
         
         <div class="page">
             <div class="page-content">
+                
+                
                 <section class="group-block" aria-label="Grupo: Integração" id="group-integracao">
                     <!-- Cabeçalho do Grupo -->
                     <header class="group-block__header">
@@ -10600,6 +11016,8 @@ ORDER BY
         
         <div class="page">
             <div class="page-content">
+                
+                
                 <section class="group-block" aria-label="Grupo: Governança e UI" id="group-governanca-e-ui">
                     <!-- Cabeçalho do Grupo -->
                     <header class="group-block__header">

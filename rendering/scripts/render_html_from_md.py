@@ -248,6 +248,7 @@ TEMPLATE_HTML = r"""
         <!-- =============================================
              SEÇÃO 6.5: ROADMAP DE MIGRAÇÃO
              - Plano de execução agrupado por deployment type
+             - Colunas específicas por tipo de deployment
              ============================================= -->
         <div class="page">
             <div class="page-content">
@@ -257,30 +258,44 @@ TEMPLATE_HTML = r"""
                         <p class="roadmap-page__description">
                             Este capítulo apresenta a estratégia de execução da migração, agrupada por tipo de implantação (Deployment Type). 
                             Cada bloco representa um grupo coeso de objetos que devem ser migrados seguindo a mesma tática operacional.
+                            As colunas de cada tabela variam conforme o tipo de deployment, refletindo as informações técnicas relevantes para cada estratégia.
                         </p>
                     </header>
 
+                    <!-- MAPA DE OBJETOS AGRUPADOS POR DEPLOYMENT TYPE E GRUPO -->
                     {% set deployment_map = {} %}
                     {% for group in data.groups %}
                         {% for obj in group.objects %}
                             {% set dt = obj.deployment_type or "INDEFINIDO" %}
                             {% if dt not in deployment_map %}
-                                {% set _ = deployment_map.update({dt: {"objects": [], "count": 0}}) %}
+                                {% set _ = deployment_map.update({dt: []}) %}
                             {% endif %}
-                            {% set _ = deployment_map[dt]["objects"].append(obj.name) %}
-                            {% set _ = deployment_map[dt].update({"count": deployment_map[dt]["count"] + 1}) %}
+                            {% set obj_data = {
+                                "name": obj.name,
+                                "description": obj.description,
+                                "object_type": obj.object_type,
+                                "responsible": obj.responsible,
+                                "sequence": obj.sequence,
+                                "group_label": group.label,
+                                "deployment_type": obj.deployment_type,
+                                "saved_query_id": obj.get("saved_query_id", None),
+                                "migration_project_id": "%s-%03d" % (obj.object_type[:3].upper(), obj.sequence)
+                            } %}
+                            {% set _ = deployment_map[dt].append(obj_data) %}
                         {% endfor %}
                     {% endfor %}
 
-                    {% set dt_order = ["MANUAL", "MIGRATION_PROJECT", "CSV", "DB.XML", "ARQUIVO ZIP BI"] %}
+                    <!-- ITERAÇÃO SOBRE DEPLOYMENT TYPES NA ORDEM CORRETA -->
+                    {% set dt_order = ["MANUAL", "MIGRATION_PROJECT", "CSV", "DB.XML", "ARQUIVO ZIP BI", "INTEGRATION"] %}
                     {% for dt_key in dt_order %}
                         {% if dt_key in deployment_map %}
-                            {% set dt_data = deployment_map[dt_key] %}
+                            {% set dt_objects = deployment_map[dt_key] %}
                             {% set css_class = dt_key.lower().replace(".", "").replace(" ", "").replace("_", "") %}
+                            
                             <div class="deployment-type-block deployment-type--{{ css_class }}" aria-label="Deployment Type: {{ dt_key }}">
                                 <div class="deployment-type-block__header">
                                     <h3 class="deployment-type-block__title">{{ dt_key }}</h3>
-                                    <span class="deployment-type-block__count">{{ dt_data.count }} {{ "objeto" if dt_data.count == 1 else "objetos" }}</span>
+                                    <span class="deployment-type-block__count">{{ dt_objects | length }} {{ "objeto" if dt_objects | length == 1 else "objetos" }}</span>
                                 </div>
                                 
                                 <p class="deployment-type-block__description">
@@ -294,17 +309,139 @@ TEMPLATE_HTML = r"""
                                         Migração via banco de dados e arquivos XML. Transportação com integridade de relacionamentos.
                                     {% elif dt_key == "ARQUIVO ZIP BI" %}
                                         Exportação para arquivo ZIP com conteúdo BI. Inclui dashboards, relatórios e visualizações.
+                                    {% elif dt_key == "INTEGRATION" %}
+                                        Integração e configuração de interfaces externas. Objetos de conectividade e troca de dados com sistemas terceiros.
                                     {% endif %}
                                 </p>
 
-                                <ul class="deployment-type-block__items">
-                                    {% for obj_name in dt_data.objects %}
-                                        <li class="deployment-type-block__item">
-                                            <span class="deployment-type-block__item-name">{{ obj_name }}</span>
-                                            <span class="deployment-type-block__item-detail">({{ loop.index }}/{{ dt_data.count }})</span>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                                <!-- TABELAS COM COLUNAS ESPECÍFICAS POR DEPLOYMENT TYPE -->
+                                {% if dt_key == "MANUAL" %}
+                                    <!-- MANUAL: Resp., Grupo, Descrição, Tabela OTM -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos MANUAL">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for obj in dt_objects | sort(attribute="sequence") %}
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">{{ obj.responsible }}</td>
+                                                    <td class="meta-table__value">{{ obj.group_label }}</td>
+                                                    <td class="meta-table__value">{{ obj.description }}</td>
+                                                    <td class="meta-table__value">{{ obj.object_type }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                {% elif dt_key == "MIGRATION_PROJECT" %}
+                                    <!-- MIGRATION_PROJECT: Resp., Seq., ID Migration Project, Grupo, Descrição, Tabela OTM, Saved Query ID -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos MIGRATION_PROJECT">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Seq.</th>
+                                                <th scope="col" class="meta-table__header">ID Migration Project</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                                <th scope="col" class="meta-table__header">Saved Query ID</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for obj in dt_objects | sort(attribute="sequence") %}
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">{{ obj.responsible }}</td>
+                                                    <td class="meta-table__value">{{ obj.sequence }}</td>
+                                                    <td class="meta-table__value">{{ obj.migration_project_id }}</td>
+                                                    <td class="meta-table__value">{{ obj.group_label }}</td>
+                                                    <td class="meta-table__value">{{ obj.description }}</td>
+                                                    <td class="meta-table__value">{{ obj.object_type }}</td>
+                                                    <td class="meta-table__value">{% if obj.saved_query_id %}{{ obj.saved_query_id }}{% else %}—{% endif %}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                {% elif dt_key in ["CSV", "DB.XML"] %}
+                                    <!-- CSV / DB.XML: Resp., Seq., Grupo, Descrição, Tabela OTM -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos {{ dt_key }}">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Seq.</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for obj in dt_objects | sort(attribute="sequence") %}
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">{{ obj.responsible }}</td>
+                                                    <td class="meta-table__value">{{ obj.sequence }}</td>
+                                                    <td class="meta-table__value">{{ obj.group_label }}</td>
+                                                    <td class="meta-table__value">{{ obj.description }}</td>
+                                                    <td class="meta-table__value">{{ obj.object_type }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                {% elif dt_key == "ARQUIVO ZIP BI" %}
+                                    <!-- ARQUIVO ZIP BI: Resp., Seq., Grupo, Descrição, Tabela OTM -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos ARQUIVO ZIP BI">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Seq.</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for obj in dt_objects | sort(attribute="sequence") %}
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">{{ obj.responsible }}</td>
+                                                    <td class="meta-table__value">{{ obj.sequence }}</td>
+                                                    <td class="meta-table__value">{{ obj.group_label }}</td>
+                                                    <td class="meta-table__value">{{ obj.description }}</td>
+                                                    <td class="meta-table__value">{{ obj.object_type }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                {% elif dt_key == "INTEGRATION" %}
+                                    <!-- INTEGRATION: Resp., Seq., Grupo, Descrição, Tabela OTM -->
+                                    <table class="meta-table meta-table--roadmap" role="table" aria-label="Objetos INTEGRATION">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="meta-table__header">Resp.</th>
+                                                <th scope="col" class="meta-table__header">Seq.</th>
+                                                <th scope="col" class="meta-table__header">Grupo</th>
+                                                <th scope="col" class="meta-table__header">Descrição</th>
+                                                <th scope="col" class="meta-table__header">Tabela OTM</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for obj in dt_objects | sort(attribute="sequence") %}
+                                                <tr class="meta-table__row">
+                                                    <td class="meta-table__value">{{ obj.responsible }}</td>
+                                                    <td class="meta-table__value">{{ obj.sequence }}</td>
+                                                    <td class="meta-table__value">{{ obj.group_label }}</td>
+                                                    <td class="meta-table__value">{{ obj.description }}</td>
+                                                    <td class="meta-table__value">{{ obj.object_type }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
                             </div>
                         {% endif %}
                     {% endfor %}
@@ -315,18 +452,6 @@ TEMPLATE_HTML = r"""
         <!-- =============================================
              SEÇÃO 7: OVERVIEW DOS GRUPOS
              ============================================= -->
-        <div class="page">
-            <div class="page-content">
-                <section class="groups-overview" aria-label="Grupos e Objetos de Migração OTM" id="grupos-overview">
-                    <header class="groups-overview__header">
-                        <h2 class="groups-overview__title">Grupos e Objetos de Migração OTM</h2>
-                    </header>
-                    <div class="groups-overview__content">
-                        <p>Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.</p>
-                    </div>
-                </section>
-            </div>
-        </div>
 
         <!-- =============================================
              SEÇÃO 3: GRUPOS E OBJETOS DE MIGRAÇÃO
@@ -338,6 +463,18 @@ TEMPLATE_HTML = r"""
         {% set group_id = "group-" + group.label.lower().replace(" ", "-").replace("ã", "a").replace("é", "e").replace("ç", "c") %}
         <div class="page">
             <div class="page-content">
+                {% if loop.first %}
+                <!-- Overview do grupos - inserido na primeira página -->
+                <section class="groups-overview" aria-label="Grupos e Objetos de Migração OTM" id="grupos-overview">
+                    <header class="groups-overview__header">
+                        <h2 class="groups-overview__title">Grupos e Objetos de Migração OTM</h2>
+                    </header>
+                    <div class="groups-overview__content">
+                        <p>Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.</p>
+                    </div>
+                </section>
+                {% endif %}
+                
                 <section class="group-block" aria-label="Grupo: {{ group.label }}" id="{{ group_id }}">
                     <!-- Cabeçalho do Grupo -->
                     <header class="group-block__header">
