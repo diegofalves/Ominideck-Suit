@@ -1164,6 +1164,218 @@ td code {
   font-size: 0.85rem;
 }
 
+/* ========================================
+   ROADMAP DE MIGRAÇÃO - Capítulo Visual
+   Plano de execução com blocos por deployment type
+   ======================================== */
+
+/* Container principal do Roadmap */
+.roadmap-page {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  page-break-before: always;
+  break-before: page;
+  page-break-inside: avoid;
+  background: var(--color-surface);
+  box-sizing: border-box;
+}
+
+.roadmap-page__header {
+  margin-bottom: 1.5rem;
+  page-break-after: avoid;
+}
+
+.roadmap-page__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-headline);
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 0.75rem;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.3px;
+}
+
+.roadmap-page__description {
+  font-size: 0.95rem;
+  color: var(--color-body);
+  line-height: 1.6;
+  margin: 0;
+  page-break-after: avoid;
+}
+
+/* Bloco de Deployment Type */
+.deployment-type-block {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: #f8fafb;
+  border: 1px solid var(--card-border-subtle);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 4px;
+  page-break-inside: avoid;
+  box-sizing: border-box;
+}
+
+.deployment-type-block:first-of-type {
+  margin-top: 0;
+  page-break-inside: avoid;
+}
+
+/* Header do bloco de deployment */
+.deployment-type-block__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--card-border-subtle);
+  page-break-after: avoid;
+}
+
+.deployment-type-block__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.deployment-type-block__count {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  background: rgba(31, 78, 121, 0.08);
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Descrição do deployment type */
+.deployment-type-block__description {
+  font-size: 0.85rem;
+  color: #556b82;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.5;
+  page-break-after: avoid;
+}
+
+/* Lista de objetos dentro do deployment type */
+.deployment-type-block__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.deployment-type-block__item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-body);
+  page-break-inside: avoid;
+}
+
+.deployment-type-block__item::before {
+  content: "▸";
+  display: inline-flex;
+  width: 1.25rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.deployment-type-block__item-name {
+  font-weight: 500;
+  color: var(--color-headline);
+}
+
+.deployment-type-block__item-detail {
+  margin-left: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+/* Cards de resumo (se existirem) */
+.deployment-type-block__summary {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--card-border-subtle);
+  page-break-inside: avoid;
+}
+
+.deployment-type-block__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  page-break-inside: avoid;
+}
+
+.deployment-type-block__stat-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+.deployment-type-block__stat-label {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 0.25rem;
+}
+
+/* Hierarquia visual: tipos de deploy com cores consistentes */
+.deployment-type--manual {
+  border-left-color: #3b82f6;
+}
+
+.deployment-type--manual .deployment-type-block__title {
+  color: #3b82f6;
+}
+
+.deployment-type--migration {
+  border-left-color: #8b5cf6;
+}
+
+.deployment-type--migration .deployment-type-block__title {
+  color: #8b5cf6;
+}
+
+.deployment-type--csv {
+  border-left-color: #06b6d4;
+}
+
+.deployment-type--csv .deployment-type-block__title {
+  color: #06b6d4;
+}
+
+.deployment-type--dbxml {
+  border-left-color: #f59e0b;
+}
+
+.deployment-type--dbxml .deployment-type-block__title {
+  color: #f59e0b;
+}
+
+.deployment-type--zipbi {
+  border-left-color: #ec4899;
+}
+
+.deployment-type--zipbi .deployment-type-block__title {
+  color: #ec4899;
+}
+
 /* Print overrides */
 @media print {
   body {
