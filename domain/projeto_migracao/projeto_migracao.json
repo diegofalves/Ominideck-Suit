@@ -70,25 +70,6 @@
       "sequence": 1,
       "objects": [
         {
-          "name": "Saved Queries",
-          "description": "Queries utilizadas por automações, conditions e agents",
-          "object_type": "SAVED_QUERY",
-          "deployment_type": "MIGRATION_PROJECT",
-          "sequence": 1,
-          "responsible": "ITC",
-          "status": {
-            "documentation": "DONE",
-            "migration_project": "DONE",
-            "export": "DONE",
-            "deploy": "DONE",
-            "validation": "DONE"
-          },
-          "technical_content": {
-            "type": "SQL",
-            "content": "SELECT DOMAIN_NAME,\n  SAVED_QUERY_XID,\n  USER_QUERY_NAME,\n  QUERY_NAME,\n  USE_IN_FINDER,\n  IS_CONDITION\nFROM\n  SAVED_QUERY\nWHERE\n  DOMAIN_NAME = 'BAU'\n  AND SAVED_QUERY_GID NOT LIKE '%TEST%'\n  AND SAVED_QUERY_GID NOT LIKE '%TESTE%'\n  AND SAVED_QUERY_GID NOT LIKE '%MIG%'\n  AND SAVED_QUERY_GID NOT LIKE '%TEMP%'\nORDER BY\n  DOMAIN_NAME,\n  USER_QUERY_NAME,\n  SAVED_QUERY_XID"
-          }
-        },
-        {
           "name": "Saved Conditions",
           "description": "Conditions utilizadas por agents e eventos",
           "object_type": "SAVED_CONDITION",
@@ -100,12 +81,16 @@
             "migration_project": "DONE",
             "export": "DONE",
             "deploy": "DONE",
-            "validation": "DONE"
+            "validation": "DONE",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT SC.DOMAIN_NAME,\n  SC.SAVED_CONDITION_XID,\n  SC.QUERY_NAME,\n  SC.USER_CONDITION_NAME,\n  SCQ.SAVED_QUERY_GID,\n  SC.OTM_RELEASE\nFROM\n  SAVED_CONDITION SC,\n  SAVED_CONDITION_QUERY SCQ\nWHERE\n  SC.SAVED_CONDITION_GID = SCQ.SAVED_CONDITION_GID\n  AND SC.DOMAIN_NAME = 'BAU'\n  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEST%'\n  AND SC.SAVED_CONDITION_GID NOT LIKE '%TESTE%'\n  AND SC.SAVED_CONDITION_GID NOT LIKE '%MIG%'\n  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEMP%'\nORDER BY\n  SC.DOMAIN_NAME,\n  SC.SAVED_CONDITION_XID,\n  SCQ.SAVED_QUERY_GID"
-          }
+          },
+          "otm_table": "SAVED_CONDITION",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Data Type Association",
@@ -119,12 +104,16 @@
             "migration_project": "DONE",
             "export": "DONE",
             "deploy": "DONE",
-            "validation": "DONE"
+            "validation": "DONE",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  DATA_TYPE_ASSOCIATION_GID,\n  DATA_TYPE_ASSOCIATION_XID,\n  IS_PRIMARY,\n  FROM_DATA_QUERY_TYPE_GID,\n  TO_DATA_QUERY_TYPE_GID,\n  ASSOCIATION_QUERY,\n  JAVA_PLUGIN_GID,\n  OTM_RELEASE\nFROM\n  DATA_TYPE_ASSOCIATION\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  DATA_TYPE_ASSOCIATION_XID"
-          }
+          },
+          "otm_table": "DATA_TYPE_ASSOCIATION",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Agent Event",
@@ -138,12 +127,16 @@
             "migration_project": "DONE",
             "export": "DONE",
             "deploy": "DONE",
-            "validation": "DONE"
+            "validation": "DONE",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT ae.DOMAIN_NAME,\n  ae.AGENT_EVENT_GID,\n  ae.AGENT_EVENT_XID,\n  ae.DATA_QUERY_TYPE_GID,\n  ae.NOTIFY_SUBJECT_GID,\n  ae.AGENT_EVENT_PARENT,\n  ae.EVENT_TOPIC_CLASS,\n  ae.IS_CUSTOM,\n  ae.IS_LIFETIME_MOD,\n  ae.DESCRIPTION,\n  ae.OTM_RELEASE,\n  aed.AGENT_GID,\n  a.AGENT_XID,\n  a.IS_ACTIVE\nFROM\n  AGENT_EVENT ae,\n  AGENT_EVENT_DETAILS aed,\n  AGENT a\nWHERE\n  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID\n  AND aed.AGENT_GID = a.AGENT_GID\n  AND ae.DOMAIN_NAME = 'BAU'\n  AND a.IS_ACTIVE = 'Y'\nORDER BY\n  ae.DATA_QUERY_TYPE_GID,\n  ae.AGENT_EVENT_XID,\n  a.AGENT_XID"
-          }
+          },
+          "otm_table": "AGENT_EVENT",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Agents",
@@ -157,12 +150,16 @@
             "migration_project": "DONE",
             "export": "DONE",
             "deploy": "DONE",
-            "validation": "DONE"
+            "validation": "DONE",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  ACTION_GID,\n  ACTION_XID,\n  LABEL_KEY,\n  DISPLAY_IGNORE_CRITERIA,\n  ACTION_DEF_GID,\n  APP_ACTION_GID,\n  MANAGER_LAYOUT_GID,\n  IS_LONG_RUNNING_TASK,\n  LRT_INTERRUPTABILITY,\n  LRT_INTERRUPT_ON_SQL,\n  LRT_OBJECT_COUNT_THRESHOLD,\n  OPT_FEATURE_GID,\n  OTM_RELEASE,\n  RESULT_MESSAGE_TEXT,\n  RESULT_AUTOCLOSE_TIMEOUT,\n  DEFAULT_LOG_PROFILE_GID,\n  INSERT_USER,\n  INSERT_DATE,\n  UPDATE_USER,\n  UPDATE_DATE\nFROM\n  ACTION\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  ACTION_XID"
-          }
+          },
+          "otm_table": "AGENT",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "App Actions",
@@ -176,12 +173,16 @@
             "migration_project": "DONE",
             "export": "DONE",
             "deploy": "DONE",
-            "validation": "DONE"
+            "validation": "DONE",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  ACTION_GID,\n  ACTION_XID,\n  LABEL_KEY,\n  DISPLAY_IGNORE_CRITERIA,\n  ACTION_DEF_GID,\n  APP_ACTION_GID,\n  MANAGER_LAYOUT_GID,\n  IS_LONG_RUNNING_TASK,\n  LRT_INTERRUPTABILITY,\n  LRT_INTERRUPT_ON_SQL,\n  LRT_OBJECT_COUNT_THRESHOLD,\n  OPT_FEATURE_GID,\n  OTM_RELEASE,\n  RESULT_MESSAGE_TEXT,\n  RESULT_AUTOCLOSE_TIMEOUT,\n  DEFAULT_LOG_PROFILE_GID,\n  INSERT_USER,\n  INSERT_DATE,\n  UPDATE_USER,\n  UPDATE_DATE\nFROM\n  APP_ACTION\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  ACTION_XID"
-          }
+          },
+          "otm_table": "APP_ACTION",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Actions",
@@ -195,12 +196,16 @@
             "migration_project": "DONE",
             "export": "DONE",
             "deploy": "DONE",
-            "validation": "DONE"
+            "validation": "DONE",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  STYLESHEET_CONTENT_GID,\n  STYLESHEET_CONTENT_XID,\n  USED_FOR_VIEW,\n  USED_FOR_EDIT,\n  MEDIA_TYPE\nFROM\n  STYLESHEET_CONTENT\nWHERE\n  DOMAIN_NAME = 'BAU'"
-          }
+          },
+          "otm_table": "ACTION",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Batch Processes",
@@ -214,12 +219,16 @@
             "migration_project": "DONE",
             "export": "DONE",
             "deploy": "DONE",
-            "validation": "DONE"
+            "validation": "DONE",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  BP.DOMAIN_NAME,\n  BP.BATCH_PROCESS_XID,\n  BP.DESCRIPTION,\n  BP.IS_ENABLED,\n  BPD.SEQUENCE_NO,\n  BPD.TOPIC_ALIAS_GID\nFROM\n  BATCH_PROCESS BP,\n  BATCH_PROCESS_D BPD\nWHERE\n  BP.BATCH_PROCESS_GID = BPD.BATCH_PROCESS_GID\n  AND BP.IS_ENABLED = 'Y'\nORDER BY\n  BP.DOMAIN_NAME,\n  BP.BATCH_PROCESS_XID,\n  BPD.SEQUENCE_NO"
-          }
+          },
+          "otm_table": "BATCH_PROCESS",
+          "identifiers": {},
+          "notes": ""
         }
       ],
       "description": "Esta seção concentra os objetos responsáveis pela execução automática de regras e fluxos operacionais no OTM, como Saved Queries, Conditions e lógicas de acionamento utilizadas por Agents e processos batch. O conteúdo evidencia como cada automação está associada a um deploy type específico (MANUAL, MIGRATION, CSV, DB.XML, ZIP BI), permitindo rastrear impactos da migração sobre fluxos automáticos, dependências técnicas e a ordem correta de implantação no roadmap do projeto."
@@ -241,12 +250,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT * FROM DOMAIN"
-          }
+          },
+          "otm_table": "DOMAIN",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Domain Grants",
@@ -260,12 +273,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  GRANTOR_DOMAIN,\n  GRANTEE_DOMAIN,\n  TABLE_SET,\n  IS_WRITE_ACCESS\nFROM\n  DOMAIN_GRANTS_MADE\nORDER BY\n  GRANTOR_DOMAIN"
-          }
+          },
+          "otm_table": "DOMAIN_GRANTS_MADE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Domain Settings",
@@ -279,12 +296,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  'Y' AS IS_DEFAULT,\n  PLANNING_PARAMETER_SET_GID,\n  POSTAL_CODE_VALIDATE_TYPE,\n  FUNCTIONAL_CURRENCY_GID\nFROM\n  DOMAIN_SETTING\nORDER BY\n  DOMAIN_NAME"
-          }
+          },
+          "otm_table": "DOMAIN_SETTING",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Properties",
@@ -298,12 +319,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  PROP_SEQUENCE_NUM,\n  INSTRUCTION,\n  KEY,\n  VALUE,\n  DESCRIPTION\nFROM\n  PROP_INSTRUCTION\nWHERE\n  PROP_INSTRUCTION_SET_GID = 'CUSTOM'\nORDER BY\n  PROP_SEQUENCE_NUM"
-          }
+          },
+          "otm_table": "PROP_INSTRUCTION",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Units of Measure (UOM)",
@@ -317,12 +342,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  TYPE,\n  UOM_CODE,\n  UOM_SHORT_DESCRIPTION,\n  UOM_LONG_DESCRIPTION,\n  UOM_RANK,\n  IS_STORAGE_DEFAULT,\n  IS_DISPLAY_DEFAULT\nFROM\n  UOM\nORDER BY\n  TYPE"
-          }
+          },
+          "otm_table": "UOM",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Postal Code Components",
@@ -336,12 +365,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT * FROM HNAME_COMPONENT ORDER BY HNAME_COMPONENT_XID"
-          }
+          },
+          "otm_table": "HNAME_COMPONENT",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Branding",
@@ -355,12 +388,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "NONE",
             "content": ""
-          }
+          },
+          "otm_table": "BRANDING",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Business Number",
@@ -374,12 +411,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  BN_RULE_XID,\n  BN_TYPE_GID,\n  BN_GENERATOR_GID,\n  RULE_DEFINITION,\n  IS_DEFAULT,\n  OTM_RELEASE\nFROM\n  BN_RULE\nWHERE\n  DOMAIN_NAME = 'BAU'\n  AND BN_RULE_XID LIKE '%BAU%'\nORDER BY\n  BN_RULE_XID"
-          }
+          },
+          "otm_table": "BN_RULE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Reports",
@@ -393,12 +434,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  REPORT_GID,\n  REPORT_XID,\n  REPORT_DISPLAY_NAME,\n  REPORT_DESC,\n  REPORT_GROUP_GID,\n  REPORT_PHYSICAL_NAME,\n  SELECT_VIA_UI,\n  ADDITIONAL_URL_ARGUMENTS,\n  CAN_AUTO_GENERATE,\n  SECURITY_LEVEL,\n  REPORT_TYPE,\n  IS_RPT_MGR_DISPLAY,\n  USE_HTML_PARAMFORM,\n  DEFAULT_DESFORMAT,\n  REPORT_FROM_DB,\n  ICON_GID,\n  APP_ACTION_GID,\n  TRANSACTIONAL_EVENT_GID,\n  SEED_DATA,\n  USE_PARAMS_AS_BIND,\n  THIRD_PARTY_CONTENT_TYPE,\n  USE_THIRD_PARTY_DISTRIBUTION,\n  IS_CONSOLIDATED,\n  REPORT_SYSTEM_GID,\n  REPORT_PATH,\n  USE_PARAM_OPERATORS,\n  DATA_QUERY_TYPE_GID,\n  OTM_RELEASE\nFROM\n  REPORT\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  REPORT_XID"
-          }
+          },
+          "otm_table": "REPORT",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Transport Mode",
@@ -412,12 +457,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  TRANSPORT_MODE_GID,\n  TRANSPORT_MODE_XID,\n  TRANSPORT_MODE_NAME,\n  TRANSPORT_MODE_QUALIFIER,\n  PERFORM_SHIPPING_SPACE_CALC,\n  COLOR,\n  IS_MASTER_CARR_REF_REM_VISIBLE,\n  CONDITIONAL_BOOKING_PROF_GID,\n  IS_CONSIDER_COST,\n  THU_PROFILE_GID,\n  MODE_TYPE,\n  X12_FORMAT_CODE,\n  ALLOW_REPACK\nFROM\n  TRANSPORT_MODE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  TRANSPORT_MODE_XID"
-          }
+          },
+          "otm_table": "TRANSPORT_MODE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "BN Named Range",
@@ -431,12 +480,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  BN_NAMED_RANGE_GID,\n  BN_NAMED_RANGE_XID,\n  RECYCLING_POLICY,\n  USE_BN_CONTEXT\nFROM\n  BN_NAMED_RANGE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  BN_NAMED_RANGE_XID"
-          }
+          },
+          "otm_table": "BN_NAMED_RANGE",
+          "identifiers": {},
+          "notes": ""
         }
       ],
       "description": "Reúne configurações centrais do domínio OTM, incluindo domínios, grants, parâmetros e propriedades que sustentam a operação e o baseline de migração."
@@ -458,12 +511,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  COMMODITY_GID,\n  COMMODITY_XID,\n  COMMODITY_NAME,\n  COMMODITY_DESCRIPTION,\n  REQ_EQPMT_GROUP_PROFILE_GID\nFROM\n  COMMODITY\nWHERE\n  DOMAIN_NAME = 'BAU'\n  AND COMMODITY_GID IN (\n    SELECT COMMODITY_GID FROM ITEM WHERE DOMAIN_NAME = 'BAU' AND COMMODITY_GID IS NOT NULL\n  )\nORDER BY COMMODITY_XID"
-          }
+          },
+          "otm_table": "COMMODITY",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Corporations",
@@ -477,12 +534,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  CORPORATION_GID,\n  CORPORATION_XID,\n  CORPORATION_NAME,\n  IS_DOMAIN_MASTER,\n  IS_SHIPPING_AGENTS_ACTIVE,\n  IS_ALLOW_HOUSE_COLLECT\nFROM\n  CORPORATION\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  CORPORATION_XID"
-          }
+          },
+          "otm_table": "CORPORATION",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Ship Unit Specs (THU)",
@@ -496,12 +557,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  SHIP_UNIT_SPEC_GID,\n  SHIP_UNIT_SPEC_XID,\n  SHIP_UNIT_SPEC_NAME,\n  LENGTH,\n  LENGTH_UOM_CODE,\n  WIDTH,\n  WIDTH_UOM_CODE,\n  HEIGHT,\n  HEIGHT_UOM_CODE,\n  UNIT_TYPE,\n  IS_IN_ON_MAX\nFROM\n  SHIP_UNIT_SPEC\nWHERE\n  DOMAIN_NAME = 'BAU'\n  AND UNIT_TYPE = 'T'\nORDER BY\n  SHIP_UNIT_SPEC_XID"
-          }
+          },
+          "otm_table": "SHIP_UNIT_SPEC",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Service Providers",
@@ -515,12 +580,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  S.SERVPROV_XID,\n  S.ALLOW_TENDER,\n  S.IS_FLEET,\n  L.LOCATION_NAME,\n  L.CITY,\n  L.PROVINCE_CODE,\n  L.POSTAL_CODE,\n  L.COUNTRY_CODE3_GID,\n  L.ZONE4,\n  L.LAT,\n  L.LON,\n  L.DESCRIPTION,\n  LR.LOCATION_REFNUM_QUAL_GID,\n  LR.LOCATION_REFNUM_VALUE\nFROM\n  SERVPROV S,\n  LOCATION L,\n  LOCATION_REFNUM LR\nWHERE\n  S.SERVPROV_GID = L.LOCATION_GID\n  AND L.LOCATION_GID = LR.LOCATION_GID\nORDER BY\n  L.LOCATION_NAME"
-          }
+          },
+          "otm_table": "SERVPROV",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Locations",
@@ -534,12 +603,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  L.DOMAIN_NAME,\n  L.LOCATION_XID,\n  L.LOCATION_NAME,\n  L.CITY,\n  L.PROVINCE_CODE,\n  L.POSTAL_CODE,\n  L.COUNTRY_CODE3_GID,\n  L.ZONE4,\n  L.LAT,\n  L.LON,\n  L.DESCRIPTION,\n  LR.LOCATION_REFNUM_QUAL_GID,\n  LR.LOCATION_REFNUM_VALUE\nFROM\n  LOCATION L,\n  LOCATION_REFNUM LR\nWHERE\n  L.LOCATION_GID = LR.LOCATION_GID\nORDER BY\n  L.LOCATION_NAME"
-          }
+          },
+          "otm_table": "LOCATION",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Contacts",
@@ -553,12 +626,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  C.DOMAIN_NAME,\n  C.CONTACT_XID,\n  C.FIRST_NAME,\n  C.LAST_NAME,\n  C.EMAIL_ADDRESS,\n  C.PHONE1,\n  C.LANGUAGE_SPOKEN,\n  C.IS_PRIMARY_CONTACT,\n  C.CONTACT_TYPE,\n  C.LOCATION_GID,\n  CCM.COM_METHOD_GID\nFROM\n  CONTACT C,\n  CONTACT_COM_METHOD CCM\nWHERE\n  C.CONTACT_GID = CCM.CONTACT_GID\nORDER BY\n  FIRST_NAME"
-          }
+          },
+          "otm_table": "CONTACT",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Equipment Groups",
@@ -572,12 +649,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  EG.DOMAIN_NAME,\n  EG.EQUIPMENT_GROUP_XID,\n  EG.EQUIPMENT_GROUP_NAME,\n  ROUND(EG.EFFECTIVE_WEIGHT,5) AS EFFECTIVE_WEIGHT,\n  EG.EFFECTIVE_WEIGHT_UOM_CODE,\n  ROUND(EG.EFFECTIVE_VOLUME,5) AS EFFECTIVE_VOLUME,\n  EG.EFFECTIVE_VOLUME_UOM_CODE,\n  ROUND(EG.WIDTH,5) AS WIDTH,\n  EG.WIDTH_UOM_CODE,\n  ROUND(EG.LENGTH,5) AS LENGTH,\n  EG.LENGTH_UOM_CODE,\n  ROUND(EG.HEIGHT,5) AS HEIGHT,\n  EG.HEIGHT_UOM_CODE,\n  EG.IS_CONTAINER,\n  EG.ALLOW_LIFO_ONLY\nFROM\n  EQUIPMENT_GROUP EG\nWHERE\n  EG.DOMAIN_NAME = 'BAU'\nORDER BY\n  EG.EQUIPMENT_GROUP_XID"
-          }
+          },
+          "otm_table": "EQUIPMENT_GROUP",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Items",
@@ -591,12 +672,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  ssp.DOMAIN_NAME,\n  ssp.STYLESHEET_PROFILE_GID,\n  ssp.STYLESHEET_PROFILE_XID,\n  ssp.RAW_XML,\n  ssp.FORMAT,\n  ssp.SUBJECT_PROPKEY,\n  ssp.OUT_XML_PROFILE_GID,\n  ssp.DOCUMENT_ATTACH_TYPE,\n  ssp.DIRECTION,\n  ssp.TYPE,\n  ssp.IS_FOR_NOTIFICATION_XML,\n  ssp.IS_FOR_TRANSMISSION_XML,\n  ssp.IS_FOR_MESSAGE_XML,\n  ssp.CONTENT_GID,\n  ssp.OTM_RELEASE\nFROM\n  STYLESHEET_PROFILE ssp\nWHERE\n  ssp.CONTENT_GID IN (\n    SELECT\n      sc.STYLESHEET_CONTENT_GID\n    FROM\n      STYLESHEET_CONTENT sc\n    WHERE\n      sc.DOMAIN_NAME = 'BAU'\n  )"
-          }
+          },
+          "otm_table": "ITEM",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Packaged Items",
@@ -610,12 +695,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT xt.DOMAIN_NAME,\n  xt.XML_TEMPLATE_GID,\n  xt.XML_TEMPLATE_XID,\n  xt.USE_DATA,\n  xt.DESCRIPTION,\n  xt.GLOG_XML_ELEMENT_GID\nFROM\n  XML_TEMPLATE xt\nWHERE\n  xt.DOMAIN_NAME = 'BAU'\nORDER BY\n  xt.XML_TEMPLATE_XID"
-          }
+          },
+          "otm_table": "PACKAGED_ITEM",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Contact Groups",
@@ -629,12 +718,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  STYLESHEET_CONTENT_GID,\n  STYLESHEET_CONTENT_XID,\n  USED_FOR_VIEW,\n  USED_FOR_EDIT,\n  MEDIA_TYPE\nFROM\n  STYLESHEET_CONTENT\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  STYLESHEET_CONTENT_XID"
-          }
+          },
+          "otm_table": "CONTACT_GROUP",
+          "identifiers": {},
+          "notes": ""
         }
       ],
       "description": "Contém cadastros mestres essenciais para planejamento e execução logística (commodities, corporações, unidades de embarque, transportadoras etc.), garantindo consistência entre ambientes."
@@ -656,12 +749,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  LOCATION_REFNUM_QUAL_XID,\n  LOCATION_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  DEFAULT_REFNUM_BN_TYPE_GID,\n  UPDATE_FLAG\nFROM\n  LOCATION_REFNUM_QUAL\nWHERE LOCATION_REFNUM_QUAL_GID IN (SELECT LOCATION_REFNUM_QUAL_GID FROM LOCATION_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  LOCATION_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "LOCATION_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Order Release Refnum Qualifier",
@@ -675,12 +772,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  ORDER_RELEASE_REFNUM_QUAL_XID,\n  ORDER_RELEASE_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  DEFAULT_REFNUM_BN_TYPE_GID,\n  UPDATE_FLAG\nFROM\n  ORDER_RELEASE_REFNUM_QUAL\nWHERE ORDER_RELEASE_REFNUM_QUAL_GID IN (SELECT ORDER_RELEASE_REFNUM_QUAL_GID FROM ORDER_RELEASE_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  ORDER_RELEASE_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "ORDER_RELEASE_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Order Release Line Refnum Qualifier",
@@ -694,12 +795,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  OR_LINE_REFNUM_QUAL_XID,\n  DESCRIPTION,\n  IS_VISIBLE_IF_MASTER_CARR,\n  DEFAULT_REFNUM_BN_TYPE_GID,\n  OR_LINE_REFNUM_SEQUENCE_NO,\n  UPDATE_FLAG\nFROM\n  ORDER_RELEASE_LINE_REFNUM_QUAL\nWHERE OR_LINE_REFNUM_QUAL_GID IN (SELECT OR_LINE_REFNUM_QUAL_GID FROM ORDER_RELEASE_LINE_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  OR_LINE_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "ORDER_RELEASE_LINE_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Packaged Item Refnum Qualifier",
@@ -713,12 +818,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  PACKAGED_ITEM_REFNUM_QUAL_XID,\n  PACKAGED_ITEM_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  UPDATE_FLAG\nFROM\n  PACKAGED_ITEM_REFNUM_QUAL\nWHERE PACKAGED_ITEM_REFNUM_QUAL_GID IN (SELECT PACKAGED_ITEM_REFNUM_QUAL_GID FROM PACKAGED_ITEM_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  PACKAGED_ITEM_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "PACKAGED_ITEM_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Item Refnum Qualifier",
@@ -732,12 +841,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  ITEM_REFNUM_QUAL_XID,\n  ITEM_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  UPDATE_FLAG\nFROM\n  ITEM_REFNUM_QUAL\nWHERE ITEM_REFNUM_QUAL_GID IN (SELECT ITEM_REFNUM_QUAL_GID FROM ITEM_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  ITEM_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "ITEM_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Shipment Refnum Qualifier",
@@ -751,12 +864,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  SHIPMENT_REFNUM_QUAL_XID,\n  SHIPMENT_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  UPDATE_FLAG\nFROM\n  SHIPMENT_REFNUM_QUAL\nWHERE SHIPMENT_REFNUM_QUAL_GID IN (SELECT SHIPMENT_REFNUM_QUAL_GID FROM SHIPMENT_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  SHIPMENT_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "SHIPMENT_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Shipment Stop Refnum Qualifier",
@@ -770,12 +887,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  SHIPMENT_STOP_REFNUM_QUAL_XID,\n  SHIPMENT_STOP_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  UPDATE_FLAG\nFROM\n  SHIPMENT_STOP_REFNUM_QUAL\nWHERE SHIPMENT_STOP_REFNUM_QUAL_GID IN (SELECT SHIPMENT_STOP_REFNUM_QUAL_GID FROM SHIPMENT_STOP_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  SHIPMENT_STOP_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "SHIPMENT_STOP_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Rate Geo Refnum Qualifier",
@@ -789,12 +910,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  RATE_GEO_REFNUM_QUAL_XID,\n  RATE_GEO_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  DEFAULT_REFNUM_BN_TYPE_GID,\n  UPDATE_FLAG\nFROM\n  RATE_GEO_REFNUM_QUAL\nWHERE RATE_GEO_REFNUM_QUAL_GID IN (SELECT RATE_GEO_REFNUM_QUAL_GID FROM RATE_GEO_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  RATE_GEO_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "RATE_GEO_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Order Movement Refnum Qualifier",
@@ -808,12 +933,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT DOMAIN_NAME,\n  OM_REFNUM_QUAL_GID,\n  OM_REFNUM_QUAL_DESC,\n  UPDATE_FLAG\nFROM\n  OM_REFNUM_QUAL\nWHERE OM_REFNUM_QUAL_GID IN (SELECT OM_REFNUM_QUAL_GID FROM ORDER_MOVEMENT_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  OM_REFNUM_QUAL_XID"
-          }
+          },
+          "otm_table": "OM_REFNUM_QUAL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Status Types and Values",
@@ -827,12 +956,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  st.DOMAIN_NAME,\n  st.STATUS_TYPE_GID,\n  st.STATUS_TYPE_XID,\n  st.OBJECT_TYPE,\n  st.DESCRIPTION AS STATUS_TYPE_DESCRIPTION,\n  st.SEQUENCE AS STATUS_TYPE_SEQUENCE,\n  st.IS_EXTERNAL,\n  sv.STATUS_VALUE_XID,\n  sv.DESCRIPTION AS STATUS_VALUE_DESCRIPTION,\n  sv.SEQUENCE AS STATUS_VALUE_SEQUENCE,\n  sv.INITIAL_VALUE\nFROM\n  STATUS_VALUE sv,\n  STATUS_TYPE st\nWHERE\n  sv.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n  AND st.IS_EXTERNAL = 'Y'\n  AND (\n    EXISTS (\n      SELECT 1\n      FROM SHIPMENT_STATUS ss\n      WHERE ss.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ss.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n    OR EXISTS (\n      SELECT 1\n      FROM ORDER_RELEASE_STATUS ors\n      WHERE ors.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ors.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n  )\nORDER BY\n  st.DOMAIN_NAME,\n  st.OBJECT_TYPE,\n  st.STATUS_TYPE_GID,\n  sv.SEQUENCE"
-          }
+          },
+          "otm_table": "STATUS_TYPE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Remarks Qualifiers",
@@ -846,12 +979,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT rq.DOMAIN_NAME,\n  rq.REMARK_QUAL_GID,\n  rq.REMARK_QUAL_XID,\n  rq.REMARK_QUAL_DESC,\n  rq.REMARK_LEVEL,\n  rq.IS_VISIBLE_IF_MASTER_CARR,\n  rq.UPDATE_FLAG,\n  rq.TEXT_TEMPLATE_GID,\n  rq.QUAL_TYPE,\n  rq.DATA_QUERY_TYPE_GID\nFROM\n  REMARK_QUAL rq\nWHERE\n  rq.DOMAIN_NAME = 'BAU'\nORDER BY\n  rq.DATA_QUERY_TYPE_GID,\n  rq.REMARK_QUAL_XID"
-          }
+          },
+          "otm_table": "REMARK_QUAL",
+          "identifiers": {},
+          "notes": ""
         }
       ],
       "description": "Agrupa qualificadores, códigos e extensões necessárias para classificação, tributação ou regras específicas de negócio do projeto."
@@ -873,12 +1010,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  c.DOMAIN_NAME AS CONTACT_DOMAIN_NAME,\n  c.CONTACT_GID,\n  c.CONTACT_XID,\n  c.CONTACT_TYPE,\n  c.IS_PRIMARY_CONTACT,\n  ccm.COM_METHOD_GID,\n  ccm.COM_METHOD_RANK,\n  nsc.NOTIFY_SUBJECT_GID,\n  nsc.CONSOLIDATED_NOTIFY_ONLY,\n  nsc.PARAMETERS\nFROM\n  CONTACT c\n  LEFT JOIN CONTACT_COM_METHOD ccm ON ccm.CONTACT_GID = c.CONTACT_GID\n  LEFT JOIN NOTIFY_SUBJECT_CONTACT nsc ON nsc.CONTACT_GID = c.CONTACT_GID AND nsc.COM_METHOD_GID = ccm.COM_METHOD_GID\nWHERE\n  c.DOMAIN_NAME = 'BAU'\n  AND\n  c.CONTACT_GID = 'BAU.AUD'\nORDER BY\n  c.CONTACT_GID,\n  ccm.COM_METHOD_RANK,\n  nsc.NOTIFY_SUBJECT_GID"
-          }
+          },
+          "otm_table": "AUDIT_TRAIL",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Logic Configs",
@@ -892,12 +1033,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  LOGIC_CONFIG_GID,\n  LOGIC_PARAM_QUAL_GID,\n  LOGIC_SCENARIO_GID,\n  PARAM_VALUE,\n  PARAM_UOM_CODE\nFROM\n  LOGIC_PARAMETER\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  LOGIC_CONFIG_GID,\n  LOGIC_PARAM_QUAL_GID"
-          }
+          },
+          "otm_table": "LOGIC_PARAMETER",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Parameter Sets",
@@ -911,12 +1056,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  PLANNING_PARAMETER_SET_GID,\n  PLANNING_PARAM_QUALIFIER_GID,\n  PLANNING_PARAM_VALUE\nFROM\n  PLANNING_PARAMETER\nWHERE\n  DOMAIN_NAME = 'BAU'\n  AND PLANNING_PARAMETER_SET_GID IN ('BAU.BAU_PARAMETER_OV', 'BAU.BAU_PARAMETER')\nORDER BY\n  DOMAIN_NAME,\n  PLANNING_PARAMETER_SET_GID,\n  PLANNING_PARAM_QUALIFIER_GID"
-          }
+          },
+          "otm_table": "PLANNING_PARAMETER",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Accessorial Codes",
@@ -930,12 +1079,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  ACCESSORIAL_CODE_XID,\n  ACCESSORIAL_DESC,\n  APPLY_GLOBALLY,\n  IS_FLOW_THRU\nFROM\n  ACCESSORIAL_CODE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  ACCESSORIAL_CODE_XID"
-          }
+          },
+          "otm_table": "ACCESSORIAL_CODE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Itinerary Leg",
@@ -949,12 +1102,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  L.LEG_GID,\n  L.LEG_NAME,\n  ID.ITINERARY_GID\nFROM\n    ITINERARY ID,\n    ITINERARY_DETAIL ITD,\n    LEG L\nWHERE\n    ID.ITINERARY_GID = ITD.ITINERARY_GID\n    AND ITD.LEG_GID = L.LEG_GID\n    AND ID.DOMAIN_NAME = 'BAU'\nORDER BY\n    ID.ITINERARY_XID,\n    ITD.SEQUENCE_NO"
-          }
+          },
+          "otm_table": "LEG",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Itineraries",
@@ -968,12 +1125,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n    ID.DOMAIN_NAME,\n    ID.ITINERARY_GID,\n    ID.ITINERARY_XID,\n    ITD.LEG_GID,\n    ITD.SEQUENCE_NO,\n    L.LEG_NAME,\n    L.LEG_TYPE,\n    L.EQUIPMENT_GROUP_PROFILE_GID,\n    L.MODE_PROFILE_GID,\n    L.DEST_LOCATION_GID,\n    L.RATE_OFFERING_GID,\n    L.AUTO_CONSOLIDATION_TYPE\nFROM\n    ITINERARY ID,\n    ITINERARY_DETAIL ITD,\n    LEG L\nWHERE\n    ID.ITINERARY_GID = ITD.ITINERARY_GID\n    AND ITD.LEG_GID = L.LEG_GID\n    AND ID.DOMAIN_NAME = 'BAU'\nORDER BY\n    ID.ITINERARY_XID,\n    ITD.SEQUENCE_NO"
-          }
+          },
+          "otm_table": "ITINERARY",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Itinerary Profiles",
@@ -987,12 +1148,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  IP.ITINERARY_PROFILE_GID,\n  IP.ITINERARY_PROFILE_XID,\n  IP.ITINERARY_PROFILE_NAME,\n  IP.IS_COMPATIBLE,\n  IP.DOMAIN_NAME,\n  IPD.ITINERARY_GID,\n  IPD.DOMAIN_NAME AS DETAIL_DOMAIN_NAME\nFROM ITINERARY_PROFILE IP\nJOIN ITINERARY_PROFILE_D IPD\n  ON IP.ITINERARY_PROFILE_GID = IPD.ITINERARY_PROFILE_GID\nWHERE\n  IP.DOMAIN_NAME = 'BAU'\nORDER BY\n  IP.ITINERARY_PROFILE_XID,\n  IPD.ITINERARY_GID"
-          }
+          },
+          "otm_table": "ITINERARY_PROFILE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Load Configuration Rules",
@@ -1006,12 +1171,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  LOAD_CONFIG_SETUP_GID,\n  SEQUENCE_NO,\n  TRANSPORT_HANDLING_UNIT_GID\nFROM\n  LOAD_CONFIG_RULE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  LOAD_CONFIG_SETUP_GID"
-          }
+          },
+          "otm_table": "LOAD_CONFIG_RULE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Load Configuration Setup",
@@ -1025,12 +1194,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  LCS.DOMAIN_NAME,\n  LCS.LOAD_CONFIG_SETUP_GID,\n  LCS.LOAD_CONFIG_SETUP_XID,\n  LCSO.ORIENTATION_GID,\n  LCSO.IS_PREFERRED,\n  LCSO.IS_FLOOR_COMPATIBLE,\n  LCSO.MAX_TOP_WEIGHT\nFROM\n  LOAD_CONFIG_SETUP LCS\n  JOIN LOAD_CONFIG_SETUP_ORIENTATION LCSO\n    ON LCSO.LOAD_CONFIG_SETUP_GID = LCS.LOAD_CONFIG_SETUP_GID\n    AND LCSO.DOMAIN_NAME = LCS.DOMAIN_NAME\nWHERE\n  LCS.DOMAIN_NAME = 'BAU'\nORDER BY\n  LCS.LOAD_CONFIG_SETUP_GID,\n  LCSO.ORIENTATION_GID"
-          }
+          },
+          "otm_table": "LOAD_CONFIG_SETUP",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Order Release Types",
@@ -1044,12 +1217,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  ORDER_RELEASE_TYPE_GID,\n  ORDER_RELEASE_TYPE_XID,\n  ORDER_RELEASE_TYPE_NAME\nFROM\n  ORDER_RELEASE_TYPE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  ORDER_RELEASE_TYPE_XID"
-          }
+          },
+          "otm_table": "ORDER_RELEASE_TYPE",
+          "identifiers": {},
+          "notes": ""
         }
       ],
       "description": "Foca em tabelas e estruturas que suportam o planejamento e execução de cargas, perfis de roteirização e configuração de transporte."
@@ -1071,12 +1248,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  STYLESHEET_CONTENT_GID,\n  STYLESHEET_CONTENT_XID,\n  USED_FOR_VIEW,\n  USED_FOR_EDIT,\n  MEDIA_TYPE\nFROM\n  STYLESHEET_CONTENT\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  STYLESHEET_CONTENT_XID"
-          }
+          },
+          "otm_table": "STYLESHEET_CONTENT",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Stylesheet Profiles",
@@ -1090,12 +1271,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT ssp.STYLESHEET_PROFILE_GID,\n  ssp.STYLESHEET_PROFILE_XID,\n  ssp.TEMPLATE_NAME,\n  ssp.RAW_XML,\n  ssp.FORMAT,\n  ssp.SUBJECT_PROPKEY,\n  ssp.OUT_XML_PROFILE_GID,\n  ssp.DATA_GENERATOR_PLUGIN_GID,\n  ssp.NOTIFY_FUNCTION_GID,\n  ssp.DOCUMENT_ATTACH_TYPE,\n  ssp.DIRECTION,\n  ssp.TYPE,\n  ssp.IS_FOR_NOTIFICATION_XML,\n  ssp.IS_FOR_TRANSMISSION_XML,\n  ssp.IS_FOR_MESSAGE_XML,\n  ssp.CONTENT_GID,\n  ssp.VIEW_CONTENT_GID,\n  ssp.EDIT_CONTENT_GID,\n  ssp.OTM_RELEASE,\n  ssp.DOMAIN_NAME\nFROM\n  STYLESHEET_PROFILE ssp\nWHERE\n  ssp.CONTENT_GID IN (\n    SELECT\n      sc.STYLESHEET_CONTENT_GID\n    FROM\n      STYLESHEET_CONTENT sc\n    WHERE\n      sc.DOMAIN_NAME = 'BAU'\n  )"
-          }
+          },
+          "otm_table": "STYLESHEET_PROFILE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "XML Templates",
@@ -1109,12 +1294,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT xt.DOMAIN_NAME,\n  xt.XML_TEMPLATE_GID,\n  xt.XML_TEMPLATE_XID,\n  xt.USE_DATA,\n  xt.DESCRIPTION,\n  xt.GLOG_XML_ELEMENT_GID\nFROM\n  XML_TEMPLATE xt\nWHERE\n  xt.DOMAIN_NAME = 'BAU'\nORDER BY\n  xt.XML_TEMPLATE_XID"
-          }
+          },
+          "otm_table": "XML_TEMPLATE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Outbound XML Profiles",
@@ -1128,12 +1317,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT oxp.DOMAIN_NAME,\n  oxp.OUT_XML_PROFILE_GID,\n  oxp.OUT_XML_PROFILE_XID,\n  oxp.DEFAULT_MODE,\n  oxp.SHOULD_VALIDATE,\n  oxp.XML_TEMPLATE_GID,\n  oxp.USE_TEMPLATE,\n  oxp.INT_PREFERENCE_GID\nFROM\n  OUT_XML_PROFILE oxp\nWHERE\n  oxp.DOMAIN_NAME = 'BAU'\nORDER BY\n  oxp.OUT_XML_PROFILE_XID"
-          }
+          },
+          "otm_table": "OUT_XML_PROFILE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Document",
@@ -1147,12 +1340,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT d.DOMAIN_NAME,\n  d.DOCUMENT_GID,\n  d.DOCUMENT_XID,\n  d.DOCUMENT_TYPE,\n  d.DOCUMENT_MIME_TYPE,\n  d.DOCUMENT_FILENAME,\n  d.MARKED_FOR_PURGE,\n  d.UPLOADED_AT,\n  d.DOCUMENT_CMS_ID,\n  d.CONTENT_MANAGEMENT_SYSTEM_GID,\n  d.USED_AS\nFROM\n  DOCUMENT d\nWHERE\n  d.DOMAIN_NAME = 'BAU'\nORDER BY\n  d.DOCUMENT_XID"
-          }
+          },
+          "otm_table": "DOCUMENT",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Webservice",
@@ -1166,12 +1363,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT ws.DOMAIN_NAME,\n  ws.WEB_SERVICE_GID,\n  ws.WEB_SERVICE_XID,\n  ws.WSDL_DOCUMENT_GID,\n  ws.SERVICE_NAME,\n  ws.PORT_NAME,\n  ws.NAMESPACE,\n  ws.SOAP_ENCODING,\n  ws.USE_WSS,\n  ws.WEB_SERVICE_TYPE\nFROM\n  WEB_SERVICE ws\nWHERE\n  ws.DOMAIN_NAME = 'BAU'\nORDER BY\n  ws.WEB_SERVICE_XID"
-          }
+          },
+          "otm_table": "WEB_SERVICE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "External Systems",
@@ -1185,12 +1386,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT es.DOMAIN_NAME,\n  es.EXTERNAL_SYSTEM_GID,\n  es.EXTERNAL_SYSTEM_XID,\n  es.DESCRIPTION,\n  es.USE_GLCREDENTIAL,\n  es.ACTIVE_MODE,\n  es.IS_ENABLE_DEBUG,\n  es.IS_LOG_RESPONSE_MSG,\n  es.REATTEMPT_MODE,\n  es.FTP_APPEND_FILE,\n  es.HTTP_ACK_EXPECTED,\n  es.HTTP_USE_ACK_STATUS,\n  es.HTTP_READ_RESPONSE,\n  es.SERVICE_ACK_EXPECTED,\n  es.SERVICE_USE_ACK_STATUS,\n  es.HTTP_CLOSE_CONNECTION,\n  es.DELAYED_STREAM_TRANSPORT,\n  es.USE_FTPS,\n  es.INCLUDE_NAMESPACE,\n  es.TARGET_NAMESPACE,\n  es.CONTENT_TYPE,\n  es.USE_HTTP_POST_OVERRIDE,\n  es.HTTP_METHOD,\n  es.OTM_RELEASE,\n  es.ALLOW_FOLLOW_REDIRECT\nFROM\n  EXTERNAL_SYSTEM es\nWHERE\n  es.DOMAIN_NAME = 'BAU'\nORDER BY\n  es.EXTERNAL_SYSTEM_XID"
-          }
+          },
+          "otm_table": "EXTERNAL_SYSTEM",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "External System Contact",
@@ -1204,12 +1409,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT c.CONTACT_GID,\n  c.CONTACT_XID,\n  c.IS_PRIMARY_CONTACT,\n  c.EXTERNAL_SYSTEM_GID,\n  c.CONTACT_TYPE,\n  c.IS_BROADCAST,\n  c.DOMAIN_NAME\nFROM\n  CONTACT c\nWHERE\n  c.DOMAIN_NAME = 'BAU'\n  AND c.EXTERNAL_SYSTEM_GID IS NOT NULL\nORDER BY\n  c.CONTACT_XID"
-          }
+          },
+          "otm_table": "EXTERNAL_CONTACT",
+          "identifiers": {},
+          "notes": ""
         }
       ],
       "description": "Inclui objetos relacionados a integração e mensageria (templates, perfis XML, web services e sistemas externos) assegurando comunicação entre OTM e sistemas parceiros."
@@ -1231,12 +1440,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  ml.DOMAIN_NAME,\n  ml.MANAGER_LAYOUT_GID,\n  ml.MANAGER_LAYOUT_XID,\n  ml.MANAGER_LAYOUT_NAME,\n  ml.ENTITY_NAME\nFROM\n  MANAGER_LAYOUT ml\nWHERE\n  ml.DOMAIN_NAME = 'BAU'\nORDER BY\n  ml.MANAGER_LAYOUT_XID"
-          }
+          },
+          "otm_table": "MANAGER_LAYOUT",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Finder Sets",
@@ -1250,12 +1463,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  fs.DOMAIN_NAME,\n  fs.FINDER_SET_XID,\n  fs.FINDER_SET_NAME,\n  fs.QUERY_TABLE_GID,\n  fs.USE_IN_MIGRATION\nFROM\n  FINDER_SET fs\nWHERE\n  fs.DOMAIN_NAME = 'BAU'\n  AND (\n    EXISTS (\n      SELECT 1\n      FROM USER_MENU_LAYOUT uml\n      WHERE uml.DOMAIN_NAME = 'BAU'\n        AND uml.USER_MENU_LAYOUT_XML IS NOT NULL\n        AND DBMS_LOB.INSTR(uml.USER_MENU_LAYOUT_XML, 'finder_set_gid=' || fs.FINDER_SET_GID, 1, 1) > 0\n    )\n    OR EXISTS (\n      SELECT 1\n      FROM USER_MENU_LAYOUT uml\n      WHERE uml.DOMAIN_NAME = 'BAU'\n        AND uml.USER_MENU_LAYOUT_JSON IS NOT NULL\n        AND DBMS_LOB.INSTR(uml.USER_MENU_LAYOUT_JSON, 'finder_set_gid=' || fs.FINDER_SET_GID, 1, 1) > 0\n    )\n    OR EXISTS (\n      SELECT 1\n      FROM DEFAULT_FINDER_SET_ACCESS dfa\n      WHERE dfa.DOMAIN_NAME = 'BAU'\n        AND dfa.FINDER_SET_GID = fs.FINDER_SET_GID\n    )\n  )\nORDER BY\n  fs.FINDER_SET_XID"
-          }
+          },
+          "otm_table": "FINDER_SET",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Workbenches",
@@ -1269,12 +1486,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  tw.DOMAIN_NAME,\n  tw.LAYOUT_GID,\n  tw.LAYOUT_XID,\n  tw.DESCRIPTION\nFROM\n  TRANSPORTATION_WORKBENCH tw\nWHERE\n  tw.DOMAIN_NAME = 'BAU'\nORDER BY\n  tw.LAYOUT_XID"
-          }
+          },
+          "otm_table": "TRANSPORTATION_WORKBENCH",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Business Monitors",
@@ -1288,12 +1509,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  BUSINESS_MONITOR_GID,\n  SEQUENCE,\n  QUERY_TABLE_GID,\n  SAVED_QUERY_GID,\n  FINDER_SET_GID\nFROM\n  BUSINESS_MONITOR_D\nWHERE\n  DOMAIN_NAME = 'BAU'"
-          }
+          },
+          "otm_table": "BUSINESS_MONITOR_D",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Access Control Lists (ACL)",
@@ -1307,12 +1532,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  URAR.DOMAIN_NAME,\n  URAR.USER_ROLE_GID,\n  AR.ACR_ROLE_XID,\n  URAR.IS_GRANTED\nFROM\n  ACR_ROLE AR,\n  USER_ROLE_ACR_ROLE URAR\nWHERE\n  AR.ACR_ROLE_GID = URAR.ACR_ROLE_GID\nORDER BY\n  URAR.USER_ROLE_GID"
-          }
+          },
+          "otm_table": "ACR_ROLE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "User Roles",
@@ -1326,12 +1555,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  USER_ROLE_GID,\n  USER_ROLE_XID,\n  USER_ROLE_NAME,\n  DESCRIPTION,\n  ACTIVE_STATUS\nFROM\n  USER_ROLE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  USER_ROLE_XID"
-          }
+          },
+          "otm_table": "USER_ROLE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "User Menus",
@@ -1345,12 +1578,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  USER_MENU_GID,\n  USER_MENU_XID,\n  LABEL,\n  MENU_TYPE,\n  DESCRIPTION\nFROM\n  USER_MENU\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  USER_MENU_XID"
-          }
+          },
+          "otm_table": "USER_MENU",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "User Preferences",
@@ -1364,12 +1601,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  DOMAIN_NAME,\n  USER_PREFERENCE_GID,\n  PREFERENCE_GID,\n  USER_PREFERENCE_VALUE\nFROM\n  USER_PREFERENCE_D\nORDER BY\n  USER_PREFERENCE_GID"
-          }
+          },
+          "otm_table": "USER_PREFERENCE_D",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Translation (Labels)",
@@ -1383,12 +1624,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT t.DOMAIN_NAME,\n  t.TRANSLATION_GID,\n  t.TRANSLATION_XID,\n  t.TRANSLATION_TYPE,\n  td.LANG,\n  td.COUNTRY,\n  td.VARIANT,\n  td.TEXT\nFROM\n  TRANSLATION t,\n  TRANSLATION_D td\nWHERE\n  t.TRANSLATION_GID = td.TRANSLATION_GID\n  AND t.TRANSLATION_GID LIKE '%BAU%'\nORDER BY\n  t.TRANSLATION_XID,\n  td.LANG,\n  td.COUNTRY,\n  td.VARIANT"
-          }
+          },
+          "otm_table": "TRANSLATION",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Manage User Access",
@@ -1402,12 +1647,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  ua.DOMAIN_NAME,\n  ua.USER_ACCESS_XID,\n  ua.GL_USER_GID,\n  ua.GL_LEVEL,\n  ua.USER_ROLE_GID,\n  uma.USER_MENU_LAYOUT_GID,\n  upa.USER_PREFERENCE_GID,\n  maa.MOBILE_ACTION_GID\nFROM\n  USER_ACCESS ua\n  LEFT JOIN USER_MENU_ACCESS uma ON ua.USER_ACCESS_GID = uma.USER_ACCESS_GID\n  LEFT JOIN USER_PREFERENCE_ACCESS upa ON ua.USER_ACCESS_GID = upa.USER_ACCESS_GID\n  LEFT JOIN MOBILE_ACTION_ACCESS maa ON ua.USER_ACCESS_GID = maa.USER_ACCESS_GID\nWHERE\n  ua.DOMAIN_NAME = 'BAU'\nORDER BY\n  ua.USER_ACCESS_GID"
-          }
+          },
+          "otm_table": "USER_ACCESS",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "VPD Profile",
@@ -1421,12 +1670,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "DONE",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "SQL",
             "content": "SELECT\n  *\nFROM\n  VPD_PROFILE\nWHERE\n  DOMAIN_NAME = 'BAU'\nORDER BY\n  VPD_PROFILE_XID"
-          }
+          },
+          "otm_table": "VPD_PROFILE",
+          "identifiers": {},
+          "notes": ""
         },
         {
           "name": "Relatórios (BI ZIP)",
@@ -1440,12 +1693,16 @@
             "migration_project": "PENDING",
             "export": "PENDING",
             "deploy": "PENDING",
-            "validation": "PENDING"
+            "validation": "PENDING",
+            "deployment": "PENDING"
           },
           "technical_content": {
             "type": "NONE",
             "content": ""
-          }
+          },
+          "otm_table": "BI_PUBLISHER_FILES",
+          "identifiers": {},
+          "notes": ""
         }
       ],
       "description": "Abriga objetos de governança, segurança e experiência do usuário (layouts, ACLs, roles, menus, traduções), garantindo aderência às políticas de acesso e usabilidade."
@@ -1453,7 +1710,7 @@
   ],
   "state": {
     "overall_status": "IN_PROGRESS",
-    "last_edit_object_index": 0
+    "last_edit_object_index": null
   },
-  "active_group_id": "AUTOMATION"
+  "active_group_id": "MASTER_DATA"
 }

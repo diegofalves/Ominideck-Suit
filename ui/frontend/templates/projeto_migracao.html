@@ -4,21 +4,465 @@
   <meta charset="UTF-8">
   <title>OmniDeck — Projeto de Migração</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 24px; }
-    fieldset { margin-bottom: 24px; padding: 16px; border: 1px solid #ccc; }
-    legend { font-weight: bold; }
-    label { display: block; margin-top: 8px; }
-    input, select, textarea { width: 100%; max-width: 400px; }
+    /* ============================================================
+       OmniDeck Design System — Professional Corporate Theme v3
+       Incorpora tokens Tailwind + estilos CSS primários
+    ============================================================ */
     
-    /* Validação Leve Schema-Driven (Ajuste 9.3) */
-    .field-error {
-      border: 2px solid #e53935 !important;
-      background-color: #ffebee;
+    :root {
+      /* Core Brand Colors - HSL Values (Tailwind Compatible) */
+      --background: 0 0% 97%;
+      --foreground: 210 24% 16%;
+      --card: 0 0% 100%;
+      --card-foreground: 210 24% 16%;
+      
+      /* Primary - Deep Blue */
+      --primary: 210 34% 22%;
+      --primary-foreground: 210 40% 98%;
+      --primary-600: 210 92% 48%;
+      --primary-700: 210 90% 45%;
+      
+      /* Secondary - Slate */
+      --secondary: 210 16% 93%;
+      --secondary-foreground: 210 24% 16%;
+      
+      /* Muted */
+      --muted: 210 16% 93%;
+      --muted-foreground: 210 12% 45%;
+      
+      /* Status Colors */
+      --success: 142 71% 45%;
+      --success-bg: 142 60% 97%;
+      --warning: 36 100% 50%;
+      --warning-bg: 36 100% 97%;
+      --danger: 0 72% 51%;
+      --danger-bg: 0 84% 97%;
+      --info: 199 89% 48%;
+      --info-bg: 199 89% 97%;
+      
+      /* Borders & Input */
+      --border: 210 16% 87%;
+      --input: 210 16% 87%;
+      --ring: 210 34% 22%;
+      
+      /* Spacing System */
+      --radius: 0.5rem;
+      --space-1: 0.375rem;
+      --space-2: 0.625rem;
+      --space-3: 0.875rem;
+      --space-4: 1.25rem;
+      --space-5: 1.75rem;
+      --space-6: 2.25rem;
+      
+      /* Shadow System */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --active-group: hsl(var(--success));
+      --active-group-bg: hsl(var(--success-bg));
     }
-    
+
+    /* Dark Mode Support */
+    body.dark {
+      --background: 210 24% 9%;
+      --foreground: 210 16% 93%;
+      --card: 210 24% 12%;
+      --card-foreground: 210 16% 93%;
+      --primary: 199 89% 48%;
+      --secondary: 210 20% 18%;
+      --muted: 210 20% 18%;
+      --muted-foreground: 210 12% 55%;
+      --border: 210 20% 22%;
+      --input: 210 20% 22%;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 36px);
+      color: hsl(var(--primary));
+      margin-bottom: var(--space-5);
+      font-weight: 700;
+    }
+
+    h4 {
+      font-size: 16px;
+      margin-top: var(--space-5);
+      margin-bottom: var(--space-3);
+      color: hsl(var(--foreground));
+    }
+
+    p {
+      color: hsl(var(--muted-foreground));
+      line-height: 1.65;
+    }
+
+    form {
+      max-width: 1280px;
+      margin: var(--space-5) auto var(--space-6);
+      padding: 0 var(--space-4);
+    }
+
+    /* ================================================
+       Card / Fieldset Styling - OmniDeck Base
+    ================================================ */
+    fieldset {
+      margin-bottom: var(--space-5);
+      padding: var(--space-5);
+      border: 1px solid hsl(var(--border));
+      border-radius: var(--radius);
+      background: hsl(var(--card));
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    fieldset:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Active Group Card - Special Styling */
+    fieldset[style*="border: 2px solid #4CAF50"] {
+      border: 2px solid hsl(var(--success)) !important;
+      background: hsl(var(--success-bg));
+      box-shadow: 0 4px 20px -4px hsl(var(--success) / 0.25);
+    }
+
+    legend {
+      font-weight: 700;
+      padding: 0 var(--space-2);
+      color: hsl(var(--primary));
+      font-size: 16px;
+      text-transform: none;
+    }
+
+    /* ================================================
+       Form Elements
+    ================================================ */
+    label {
+      display: block;
+      margin-top: var(--space-3);
+      font-weight: 500;
+      font-size: 13px;
+      color: hsl(var(--foreground));
+      transition: color 0.2s ease;
+    }
+
+    label:focus-within {
+      color: hsl(var(--primary-600));
+    }
+
+    input, select, textarea {
+      width: 100%;
+      max-width: 600px;
+      padding: 0.75rem 0.875rem;
+      border: 1px solid hsl(var(--input));
+      border-radius: 8px;
+      background: hsl(var(--card));
+      color: hsl(var(--foreground));
+      font-size: 14px;
+      font-family: inherit;
+      line-height: 1.4;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      outline: none;
+    }
+
+    input:hover:not(:disabled), 
+    select:hover:not(:disabled), 
+    textarea:hover:not(:disabled) {
+      border-color: hsl(var(--muted-foreground) / 0.5);
+    }
+
+    input:focus, 
+    select:focus, 
+    textarea:focus {
+      border-color: hsl(var(--primary-600));
+      box-shadow: 0 0 0 3px hsl(var(--primary-600) / 0.15);
+      background-color: hsl(var(--card));
+    }
+
+    input:disabled, 
+    select:disabled, 
+    textarea:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    textarea {
+      max-width: 100%;
+      resize: vertical;
+      line-height: 1.55;
+      min-height: 90px;
+      font-family: 'Fira Code', 'Courier New', monospace;
+    }
+
+    input[type="number"] {
+      max-width: 200px;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.5rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+    }
+
+    /* ================================================
+       Buttons & CTAs
+    ================================================ */
+    button, input[type="submit"] {
+      background: hsl(var(--primary-600));
+      color: hsl(var(--primary-foreground));
+      border: none;
+      padding: 0.75rem 1.125rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    button:hover, input[type="submit"]:hover {
+      background: hsl(var(--primary-700));
+      box-shadow: 0 10px 22px hsl(var(--primary-600) / 0.2);
+      transform: translateY(-1px);
+    }
+
+    button:active, input[type="submit"]:active {
+      transform: translateY(0);
+    }
+
+    button:disabled, input[type="submit"]:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* ================================================
+       Tables
+    ================================================ */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: var(--space-2);
+      background: hsl(var(--card));
+      border: 1px solid hsl(var(--border));
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    thead {
+      background: hsl(var(--muted) / 0.5);
+    }
+
+    th {
+      padding: 0.75rem 0.875rem;
+      border-bottom: 1px solid hsl(var(--border));
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: hsl(var(--muted-foreground));
+    }
+
+    td {
+      padding: 0.75rem 0.875rem;
+      border-bottom: 1px solid hsl(var(--border));
+      text-align: left;
+      vertical-align: top;
+    }
+
+    tbody tr {
+      transition: background-color 0.2s ease;
+    }
+
+    tbody tr:nth-child(even) {
+      background: hsl(var(--muted) / 0.2);
+    }
+
+    tbody tr:hover {
+      background: hsl(var(--muted) / 0.3);
+    }
+
+    /* ================================================
+       Field States & Validation
+    ================================================ */
+    .field-error {
+      border: 2px solid hsl(var(--danger)) !important;
+      background-color: hsl(var(--danger-bg)) !important;
+    }
+
     .field-warning {
-      border: 2px solid #fb8c00 !important;
-      background-color: #fff3e0;
+      border: 2px solid hsl(var(--warning)) !important;
+      background-color: hsl(var(--warning-bg)) !important;
+    }
+
+    .field-success {
+      border: 2px solid hsl(var(--success)) !important;
+      background-color: hsl(var(--success-bg)) !important;
+    }
+
+    /* ================================================
+       Alert / Error Messages
+    ================================================ */
+    .error-alert {
+      background: hsl(var(--danger-bg));
+      border: 2px solid hsl(var(--danger));
+      color: hsl(var(--danger));
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .error-alert h3 {
+      margin-top: 0;
+      color: hsl(var(--danger));
+      font-weight: 600;
+    }
+
+    .error-alert ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .error-alert li {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ================================================
+       Responsive Grid
+    ================================================ */
+    @media (max-width: 1024px) {
+      form { padding: 0 var(--space-3); }
+      input, select, textarea { max-width: 100%; }
+      fieldset { padding: var(--space-4); }
+      h1 { font-size: 28px; }
+    }
+
+    @media (max-width: 768px) {
+      form { padding: 0 var(--space-2); }
+      fieldset { padding: var(--space-3); }
+      label { font-size: 12px; }
+      input, select, textarea { font-size: 16px; }
+      button, input[type="submit"] { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 24px; }
+      legend { font-size: 14px; }
+      fieldset { margin-bottom: var(--space-4); }
+    }
+
+    /* Prefer Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ================================================
+       Badge Styles - Deployment Types & Status
+    ================================================ */
+    .badge-deployment {
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .badge-deployment-novo {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .badge-deployment-alteracao {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+
+    .badge-deployment-default {
+      background-color: #e2e3e5;
+      color: #383d41;
+    }
+
+    .badge-status {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .badge-status-done {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .badge-status-in-progress {
+      background-color: #ffc107;
+      color: #212529;
+    }
+
+    .badge-status-not-started {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .badge-status-default {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    /* ================================================
+       Table Row Styling
+    ================================================ */
+    .table-row-even {
+      background-color: #f8f9fa;
+    }
+
+    .table-row-odd {
+      background-color: white;
+    }
+
+    .table-row {
+      border-bottom: 1px solid #e9ecef;
+      transition: background-color 0.2s;
     }
   </style>
 </head>
@@ -82,46 +526,86 @@
   <fieldset>
     <legend>{{ ui.project.section }}</legend>
 
-    {% for field, cfg in ui.project.fields.items() %}
-      <label>{{ cfg.label }}</label>
+    {% set env_source = ui.project.fields.get('environment.source') %}
+    {% set env_target = ui.project.fields.get('environment.target') %}
 
-      {% if field == "environment.source" %}
-        <input
-          type="text"
-          name="environment.source"
-          value="{{ project.project.environment.source if project and project.project and project.project.environment else '' }}"
-        >
+    {% set project_code = ui.project.fields.get('code') %}
+    {% set project_name = ui.project.fields.get('name') %}
+    {% set project_version = ui.project.fields.get('version') %}
+    {% set project_consultant = ui.project.fields.get('consultant') %}
 
-      {% elif field == "environment.target" %}
-        <input
-          type="text"
-          name="environment.target"
-          value="{{ project.project.environment.target if project and project.project and project.project.environment else '' }}"
-        >
+    <div style="display: grid; gap: 16px;">
+      <div style="display: grid; grid-template-columns: 1.2fr 140px 2.8fr 70px 1.1fr; gap: 16px; align-items: end;">
+        <div>
+          <label><strong>Status Geral do Projeto</strong></label>
+          <select name="overall_status" required>
+            <option value="">— Selecione —</option>
+            <option value="PENDING" {% if project and project.state and project.state.overall_status == 'PENDING' %}selected{% endif %}>Pendente</option>
+            <option value="IN_PROGRESS" {% if project and project.state and project.state.overall_status == 'IN_PROGRESS' %}selected{% endif %}>Em andamento</option>
+            <option value="DONE" {% if project and project.state and project.state.overall_status == 'DONE' %}selected{% endif %}>Concluído</option>
+          </select>
+        </div>
 
-      {% elif cfg.type == "number" %}
-        <input
-          type="number"
-          name="{{ field }}"
-          value="{{ project.project[field] if project and project.project else '' }}"
-        >
+        <div>
+          <label>{{ project_code.label if project_code else 'Código do Projeto' }}</label>
+          <input
+            type="text"
+            name="code"
+            value="{{ project.project.code if project and project.project else '' }}"
+            style="max-width: 160px;"
+          >
+        </div>
 
-      {% else %}
-        <input
-          type="text"
-          name="{{ field }}"
-          value="{{ project.project[field] if project and project.project else '' }}"
-        >
-      {% endif %}
-    {% endfor %}
+        <div>
+          <label>{{ project_name.label if project_name else 'Nome do Projeto' }}</label>
+          <input
+            type="text"
+            name="name"
+            value="{{ project.project.name if project and project.project else '' }}"
+            style="width: 100%;"
+          >
+        </div>
 
-    <label style="display: block; margin-top: 12px;"><strong>Status Geral do Projeto</strong></label>
-    <select name="overall_status" required>
-      <option value="">— Selecione —</option>
-      <option value="PENDING" {% if project and project.state and project.state.overall_status == 'PENDING' %}selected{% endif %}>Pendente</option>
-      <option value="IN_PROGRESS" {% if project and project.state and project.state.overall_status == 'IN_PROGRESS' %}selected{% endif %}>Em andamento</option>
-      <option value="DONE" {% if project and project.state and project.state.overall_status == 'DONE' %}selected{% endif %}>Concluído</option>
-    </select>
+        <div>
+          <label>{{ project_version.label if project_version else 'Versão' }}</label>
+          <input
+            type="text"
+            name="version"
+            value="{{ project.project.version if project and project.project else '' }}"
+            style="max-width: 70px;"
+          >
+        </div>
+
+        <div>
+          <label>{{ project_consultant.label if project_consultant else 'Consultor' }}</label>
+          <input
+            type="text"
+            name="consultant"
+            value="{{ project.project.consultant if project and project.project else '' }}"
+          >
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: end;">
+        <div>
+          <label>{{ env_source.label if env_source else 'Ambiente Origem' }}</label>
+          <input
+            type="text"
+            name="environment.source"
+            value="{{ project.project.environment.source if project and project.project and project.project.environment else '' }}"
+          >
+        </div>
+
+        <div>
+          <label>{{ env_target.label if env_target else 'Ambiente Destino' }}</label>
+          <input
+            type="text"
+            name="environment.target"
+            value="{{ project.project.environment.target if project and project.project and project.project.environment else '' }}"
+          >
+        </div>
+      </div>
+    </div>
   </fieldset>
 
   {% set objective_meta = project.project_metadata.migration_objective if project and project.project_metadata else {} %}
@@ -129,7 +613,7 @@
   {% set objective_title = objective_meta.title if objective_meta.title else "Objetivo do Projeto de Migração" %}
 
   <fieldset>
-    <legend>Capítulo 0 — Objetivo do Projeto de Migração</legend>
+    <legend>Objetivo do Projeto de Migração</legend>
     <p style="margin-bottom: 8px; font-size: 13px; color: #555;">
       Edite o texto deste capítulo. Use linhas que comecem com <code>- </code> para itens de lista.
     </p>
@@ -143,22 +627,42 @@
 
   {% set version_control = project.project_metadata.version_control if project and project.project_metadata else {} %}
   <fieldset>
-    <legend>Controle de Versão</legend>
-    <label>Versão Atual</label>
-    <input type="text" name="version_control.current_version" value="{{ version_control.current_version or '' }}">
-
-    <label style="margin-top: 8px;">Última Atualização</label>
-    <input type="text" name="version_control.last_update" value="{{ version_control.last_update or '' }}">
-
-    <label style="margin-top: 8px;">Autor</label>
-    <input type="text" name="version_control.author" value="{{ version_control.author or '' }}">
+    <legend>Controle de Versão <span style="font-size: 11px; color: #999; font-weight: normal;">(atualizado automaticamente)</span></legend>
+    <div style="display: grid; grid-template-columns: 1fr 2fr 1.5fr; gap: 16px; align-items: end;">
+      <div>
+        <label>Versão Atual</label>
+        <input type="text" id="version_control_current_version" name="version_control.current_version" value="{{ version_control.current_version or '' }}" readonly style="background-color: #f5f5f5; cursor: not-allowed;">
+      </div>
+      
+      <div>
+        <label>Última Atualização</label>
+        <input type="text" id="version_control_last_update" name="version_control.last_update" value="{{ version_control.last_update or '' }}" readonly style="background-color: #f5f5f5; cursor: not-allowed;">
+      </div>
+      
+      <div>
+        <label>Autor</label>
+        <input type="text" id="version_control_author" name="version_control.author" value="{{ version_control.author or '' }}" readonly style="background-color: #f5f5f5; cursor: not-allowed;">
+      </div>
+    </div>
   </fieldset>
 
   {% set change_history = project.project_metadata.change_history if project and project.project_metadata else [] %}
   <fieldset>
     <legend>Histórico de Alterações</legend>
-    <div id="change-history-rows"></div>
-    <button type="button" onclick="addChangeHistoryRow()" style="margin-top: 8px;">➕ Adicionar linha</button>
+    <table id="change-history-table" style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
+      <thead>
+        <tr style="background-color: #f5f5f5; border-bottom: 2px solid #ddd;">
+          <th style="text-align: left; padding: 8px; font-size: 12px; width: 12%;">Data</th>
+          <th style="text-align: left; padding: 8px; font-size: 12px; width: 10%;">Versão</th>
+          <th style="text-align: left; padding: 8px; font-size: 12px; width: 50%;">Descrição</th>
+          <th style="text-align: left; padding: 8px; font-size: 12px; width: 18%;">Autor</th>
+          <th style="text-align: center; padding: 8px; font-size: 12px; width: 10%;">Ações</th>
+        </tr>
+      </thead>
+      <tbody id="change-history-rows">
+      </tbody>
+    </table>
+    <button type="button" onclick="addChangeHistoryRow()" style="padding: 6px 12px; font-size: 13px;">➕ Adicionar linha</button>
   </fieldset>
 
   <!-- ================= -->
@@ -166,6 +670,48 @@
   <!-- ================= -->
   <fieldset>
     <legend>Grupos do Projeto</legend>
+    
+    <p style="font-size: 13px; color: #555; margin-bottom: 12px;">
+      Lista de todos os grupos criados. Para editar objetos, selecione o grupo ativo abaixo.
+    </p>
+
+    {% if project and project.groups %}
+      <table style="width: 100%; margin-bottom: 16px; border-collapse: collapse; font-size: 13px;">
+        <thead>
+          <tr style="background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
+            <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 50px;">Nº</th>
+            <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 180px;">ID Grupo</th>
+            <th style="text-align: left; padding: 6px 8px; font-weight: 600;">Nome</th>
+            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 60px;">Seq.</th>
+            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 70px;">Objetos</th>
+            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 110px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for g in project.groups %}
+            <tr class="{% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}" style="border-bottom: 1px solid #eee;">
+              <td style="padding: 2px 8px; color: #666;">{{ loop.index }}</td>
+              <td style="padding: 2px 8px;"><code style="background: #f0f0f0; padding: 2px 4px; border-radius: 3px; font-size: 12px;">{{ g.group_id }}</code></td>
+              <td style="padding: 2px 8px;"><strong>{{ g.label }}</strong></td>
+              <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.sequence }}º</td>
+              <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.objects|length if g.objects else 0 }}</td>
+              <td style="text-align: center; padding: 2px 8px !important; white-space: nowrap; font-size: 0;">
+                <form method="POST" style="display: inline-block; margin: 0; padding: 0; vertical-align: middle;">
+                  <input type="hidden" name="active_group_id" value="{{ g.group_id }}">
+                  <input type="hidden" id="reset_edit_mode" name="reset_edit_mode" value="1">
+                  <button type="submit" style="background: #2196F3; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; margin: 0 4px 0 0;" title="Editar grupo">✏️</button>
+                </form><form method="POST" style="display: inline-block; margin: 0; padding: 0; vertical-align: middle;" onsubmit="return confirm('Tem certeza que deseja remover este grupo?');">
+                  <input type="hidden" name="remove_group_id" value="{{ g.group_id }}">
+                  <button type="submit" style="background: #f44336; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; margin: 0;" title="Remover grupo">🗑️</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p style="color: #999; font-style: italic;">Nenhum grupo criado ainda.</p>
+    {% endif %}
 
     <div id="groups-container"></div>
 
@@ -173,23 +719,19 @@
   </fieldset>
 
   <!-- ================================== -->
-  <!-- Seletor de Tipo de Objeto (Global) -->
+  <!-- Descrição do Grupo Ativo -->
   <!-- ================================== -->
-  <fieldset id="object-type-container" style="display: none;">
-    <legend>Tipo do Objeto</legend>
-    
-    <label>Selecione o tipo (Tabela OTM ou Tipo Lógico):</label>
-    <select
-      name="object_type"
-      id="object_type"
-      class="form-control object-type-selector"
-      {% if current_object and current_object.object_type %}
-        data-current-type="{{ current_object.object_type }}"
-      {% endif %}
-    >
-      <!-- Opções serão injetadas por schema-engine.js -->
-    </select>
-  </fieldset>
+  {% if project and project.active_group_id %}
+    {% set active_group = groups_catalog.get(project.active_group_id) %}
+    {% if active_group %}
+      <fieldset style="margin-bottom: 24px; background-color: #f0f8ff; border-left: 4px solid #0066cc;">
+        <legend style="color: #0066cc; font-weight: 600;">📝 Descrição do Grupo</legend>
+        <p style="color: #333; line-height: 1.6; margin: 0;">
+          {{ active_group.description or '<span style="color: #999; font-style: italic;">Nenhuma descrição fornecida para este grupo.</span>' | safe }}
+        </p>
+      </fieldset>
+    {% endif %}
+  {% endif %}
 
   <!-- ================================== -->
   <!-- Painel Condicional - Grupo Ativo -->
@@ -199,6 +741,97 @@
     {% set active_group = groups_catalog.get(active_id) %}
 
     <!-- Encontrar o grupo completo do projeto e índice -->
+    {% set current_group = namespace(data=none) %}
+    {% set active_group_index = namespace(value=none) %}
+    {% if project.groups %}
+      {% for g in project.groups %}
+        {% if g.group_id == active_id %}
+          {% set current_group.data = g %}
+          {% set active_group_index.value = loop.index0 %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <!-- ================================== -->
+    <!-- Lista de Objetos do Grupo (MOVIDA) -->
+    <!-- ================================== -->
+    {% if current_group.data and current_group.data.objects %}
+      <fieldset style="margin-bottom: 24px;">
+        <legend>📦 Objetos do Grupo ({{ current_group.data.objects|length }})</legend>
+
+        <table style="border-collapse: collapse; width: 100%; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <thead>
+            <tr style="background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%); border-bottom: 2px solid #dee2e6;">
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 40px;">#</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057;">Nome Funcional</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 180px;">Tipo de Objeto</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 120px;">Deploy</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 150px;">Responsável</th>
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 120px;">Status Doc.</th>
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 100px;">Status Impl.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in current_group.data.objects %}
+              <tr class="table-row {% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}">
+                <td style="padding: 10px 12px; text-align: center; color: #6c757d; font-weight: 500;">{{ loop.index }}</td>
+                <td style="padding: 10px 12px;">
+                  <strong style="color: #212529;">{{ obj.name or "Sem nome" }}</strong>
+                  {% if obj.description %}
+                    <br><span style="font-size: 11px; color: #6c757d;">{{ obj.description[:60] }}{% if obj.description|length > 60 %}...{% endif %}</span>
+                  {% endif %}
+                </td>
+                <td style="padding: 10px 12px; color: #495057;">
+                  <span style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: 500; color: #0066cc;">
+                    {{ obj.object_type or obj.type or "N/A" }}
+                  </span>
+                </td>
+                <td style="padding: 10px 12px; color: #495057;">
+                  {% if obj.deployment_type %}
+                    <span class="badge-deployment {% if obj.deployment_type == 'NOVO' %}badge-deployment-novo{% elif obj.deployment_type == 'ALTERACAO' %}badge-deployment-alteracao{% else %}badge-deployment-default{% endif %}">
+                      {{ obj.deployment_type }}
+                    </span>
+                  {% else %}
+                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                  {% endif %}
+                </td>
+                <td style="padding: 10px 12px; color: #495057;">{{ obj.responsible or "-" }}</td>
+                <td style="padding: 10px 12px; text-align: center;">
+                  {% if obj.status and obj.status.documentation %}
+                    <span class="badge-status {% if obj.status.documentation == 'DONE' %}badge-status-done{% elif obj.status.documentation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.documentation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                      {% if obj.status.documentation == 'DONE' %}✓ Concluído
+                      {% elif obj.status.documentation == 'IN_PROGRESS' %}⏳ Em Progresso
+                      {% elif obj.status.documentation == 'NOT_STARTED' %}○ Não Iniciado
+                      {% else %}{{ obj.status.documentation }}{% endif %}
+                    </span>
+                  {% else %}
+                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                  {% endif %}
+                </td>
+                <td style="padding: 10px 12px; text-align: center;">
+                  {% if obj.status and obj.status.implementation %}
+                    <span class="badge-status {% if obj.status.implementation == 'DONE' %}badge-status-done{% elif obj.status.implementation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.implementation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                      {% if obj.status.implementation == 'DONE' %}✓ Concluído
+                      {% elif obj.status.implementation == 'IN_PROGRESS' %}⏳ Em Progresso
+                      {% elif obj.status.implementation == 'NOT_STARTED' %}○ Não Iniciado
+                      {% else %}{{ obj.status.implementation }}{% endif %}
+                    </span>
+                  {% else %}
+                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        <p style="font-size: 11px; color: #6c757d; margin-top: 12px;">
+          💡 Selecione um objeto no dropdown abaixo para editá-lo.
+        </p>
+      </fieldset>
+    {% endif %}
+
+    <!-- Retirar a declaração repetida de active_group_index e current_group -->
     {% set current_group = namespace(data=none) %}
     {% set active_group_index = namespace(value=none) %}
     {% if project.groups %}
@@ -225,19 +858,6 @@
         <strong>{{ active_group.label }}</strong>
         ({{ active_group.sequence }}º no fluxo).
       </p>
-
-      <!-- Descrição do Grupo -->
-      {% if current_group.data %}
-        <input type="hidden" name="groups[{{ active_group_index.value }}][group_id]" value="{{ current_group.data.group_id }}">
-        <input type="hidden" name="groups[{{ active_group_index.value }}][label]" value="{{ current_group.data.label }}">
-        <input type="hidden" name="groups[{{ active_group_index.value }}][sequence]" value="{{ current_group.data.sequence }}">
-        <label style="display:block; font-weight: bold; margin-top: 12px;">Descrição do Grupo</label>
-        <textarea
-          name="groups[{{ active_group_index.value }}][description]"
-          rows="3"
-          style="width: 100%; max-width: 700px; padding: 8px; font-family: Arial, sans-serif;"
-        >{{ current_group.data.description }}</textarea>
-      {% endif %}
 
       <!-- Seção de Seleção/Criação de Objeto -->
       {% if current_group.data and current_group.data.objects %}
@@ -269,22 +889,46 @@
       <!-- Formulário de Objeto -->
       <h4>Dados do Objeto</h4>
 
-      <label><strong>Nome do Objeto *</strong></label>
-      <input 
-        type="text" 
-        name="object_name" 
-        required 
-        placeholder="Ex: Query de Elegibilidade de Frete"
-        value="{{ current_object.name if current_object else '' }}"
-      >
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div>
+          <label><strong>Nome do Objeto *</strong></label>
+          <input 
+            type="text" 
+            name="object_name" 
+            required 
+            placeholder="Ex: Query de Elegibilidade de Frete"
+            value="{{ current_object.name if current_object else '' }}"
+            style="width: 100%;"
+          >
+        </div>
 
-      <label>Descrição Funcional</label>
-      <textarea 
-        name="object_description" 
-        rows="3" 
-        placeholder="Explique o propósito funcional deste objeto no projeto"
-        style="width: 100%; padding: 6px; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
-      >{{ current_object.description if current_object else '' }}</textarea>
+        <div>
+          <label><strong>Tipo do Objeto *</strong></label>
+          <select
+            name="object_type"
+            id="object_type"
+            class="form-control object-type-selector"
+            required
+            style="width: 100%;"
+            {% if current_object and current_object.object_type %}
+              data-current-type="{{ current_object.object_type }}"
+            {% endif %}
+          >
+            <option value="">— Selecione —</option>
+            <!-- Opções serão injetadas por schema-engine.js -->
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label>Descrição Funcional</label>
+        <textarea 
+          name="object_description" 
+          rows="3" 
+          placeholder="Explique o propósito funcional deste objeto no projeto"
+          style="width: 100%; padding: 6px; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
+        >{{ current_object.description if current_object else '' }}</textarea>
+      </div>
 
       <!-- ========================================== -->
       <!-- SAVED QUERY (somente para tipo SAVED_QUERY) -->
@@ -301,105 +945,148 @@
       </div>
 
       <!-- ========================================== -->
-      <!-- STATUS (sempre visível)                  -->
+      <!-- STATUS (sempre visível) - GRID LAYOUT     -->
       <!-- ========================================== -->
-      <h4 style="margin-top: 16px;">Status</h4>
+      <h4 style="margin-top: 16px;">Status e Configuração</h4>
       
-      <label>📝 Documentação</label>
-      <select name="status_documentation">
-        {% for opt_key, opt_label in enums.status.items() %}
-          <option value="{{ opt_key }}" 
-            {% if current_object and current_object.status and current_object.status.documentation == opt_key %}selected{% endif %}>
-            {{ opt_label }}
-          </option>
-        {% endfor %}
-      </select>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div>
+          <label>📝 Documentação</label>
+          <select name="status_documentation">
+            {% for opt_key, opt_label in enums.status.items() %}
+              <option value="{{ opt_key }}" 
+                {% if current_object and current_object.status and current_object.status.documentation == opt_key %}selected{% endif %}>
+                {{ opt_label }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
 
-      <label>📦 Migration Project</label>
-      <select name="status_migration_project">
-        {% for opt_key, opt_label in enums.status.items() %}
-          <option value="{{ opt_key }}" 
-            {% if current_object and current_object.status and current_object.status.migration_project == opt_key %}selected{% endif %}>
-            {{ opt_label }}
-          </option>
-        {% endfor %}
-      </select>
+        <div>
+          <label>📦 Migration Project</label>
+          <select name="status_migration_project">
+            {% for opt_key, opt_label in enums.status.items() %}
+              <option value="{{ opt_key }}" 
+                {% if current_object and current_object.status and current_object.status.migration_project == opt_key %}selected{% endif %}>
+                {{ opt_label }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
 
-      <label>💾 Exportação</label>
-      <select name="status_export">
-        {% for opt_key, opt_label in enums.status.items() %}
-          <option value="{{ opt_key }}" 
-            {% if current_object and current_object.status and current_object.status.export == opt_key %}selected{% endif %}>
-            {{ opt_label }}
-          </option>
-        {% endfor %}
-      </select>
+        <div>
+          <label>💾 Exportação</label>
+          <select name="status_export">
+            {% for opt_key, opt_label in enums.status.items() %}
+              <option value="{{ opt_key }}" 
+                {% if current_object and current_object.status and current_object.status.export == opt_key %}selected{% endif %}>
+                {{ opt_label }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
 
-      <label>🚀 Deploy</label>
-      <select name="status_deploy">
-        {% for opt_key, opt_label in enums.status.items() %}
-          <option value="{{ opt_key }}" 
-            {% if current_object and current_object.status and current_object.status.deploy == opt_key %}selected{% endif %}>
-            {{ opt_label }}
-          </option>
-        {% endfor %}
-      </select>
+        <div>
+          <label>🚀 Deploy</label>
+          <select name="status_deploy">
+            {% for opt_key, opt_label in enums.status.items() %}
+              <option value="{{ opt_key }}" 
+                {% if current_object and current_object.status and current_object.status.deploy == opt_key %}selected{% endif %}>
+                {{ opt_label }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
 
-      <label>✅ Validação</label>
-      <select name="status_validation">
-        {% for opt_key, opt_label in enums.status.items() %}
-          <option value="{{ opt_key }}" 
-            {% if current_object and current_object.status and current_object.status.validation == opt_key %}selected{% endif %}>
-            {{ opt_label }}
-          </option>
-        {% endfor %}
-      </select>
+        <div>
+          <label>✅ Validação</label>
+          <select name="status_validation">
+            {% for opt_key, opt_label in enums.status.items() %}
+              <option value="{{ opt_key }}" 
+                {% if current_object and current_object.status and current_object.status.validation == opt_key %}selected{% endif %}>
+                {{ opt_label }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
 
-      <label>Tipo de Deploy</label>
-      <select name="object_deployment_type">
-        {% for opt in enums.deployment_type %}
-          <option value="{{ opt }}" {% if current_object and current_object.deployment_type == opt %}selected{% endif %}>
-            {{ opt }}
-          </option>
-        {% endfor %}
-      </select>
+      <!-- ========================================== -->
+      <!-- Informações Técnicas e Metadados         -->
+      <!-- ========================================== -->
+      <h4 style="margin-top: 16px;">Informações Técnicas</h4>
 
-      <label>Responsável</label>
-      <input type="text" name="object_responsible" value="{{ current_object.responsible if current_object else '' }}">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div>
+          <label>📋 OTM Table</label>
+          <input type="text" name="object_otm_table" value="{{ current_object.otm_table if current_object else '' }}" placeholder="Ex: SAVED_QUERY" style="width: 100%;">
+        </div>
+
+        <div>
+          <label>🚀 Tipo de Deploy</label>
+          <select name="object_deployment_type" style="width: 100%;">
+            {% for opt in enums.deployment_type %}
+              <option value="{{ opt }}" {% if current_object and current_object.deployment_type == opt %}selected{% endif %}>
+                {{ opt }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Responsável</label>
+          <input type="text" name="object_responsible" value="{{ current_object.responsible if current_object else '' }}" style="width: 100%;">
+        </div>
+
+        <div>
+          <label>Migration Project ID</label>
+          <input type="text" name="identifiers[migration_project_id]" placeholder="ID do projeto" value="{{ current_object.identifiers.migration_project_id if current_object and current_object.identifiers else '' }}" style="width: 100%;">
+        </div>
+      </div>
+        <label>📝 Notas</label>
+        <textarea 
+          name="object_notes" 
+          rows="2" 
+          placeholder="Observações adicionais sobre este objeto"
+          style="width: 100%; padding: 6px; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
+        >{{ current_object.notes if current_object else '' }}</textarea>
+      </div>
 
       <!-- ========================================== -->
       <!-- Identificadores para Tipos Lógicos       -->
       <!-- ========================================== -->
       <h4 style="margin-top: 24px;">Identificadores (Tipos Lógicos)</h4>
 
-      <!-- SAVED_QUERY -->
-      <div id="identifier_query_name" style="display:none;">
-        <label>Query Name</label>
-        <input type="text" name="identifiers[query_name]" placeholder="Nome da query" value="">
-      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <!-- SAVED_QUERY -->
+        <div id="identifier_query_name" style="display:none;">
+          <label>Query Name</label>
+          <input type="text" name="identifiers[query_name]" placeholder="Nome da query" value="" style="width: 100%;">
+        </div>
 
-      <!-- AGENT -->
-      <div id="identifier_agent_gid" style="display:none;">
-        <label>Agent GID</label>
-        <input type="text" name="identifiers[agent_gid]" placeholder="Identificador do agente" value="">
-      </div>
+        <!-- AGENT -->
+        <div id="identifier_agent_gid" style="display:none;">
+          <label>Agent GID</label>
+          <input type="text" name="identifiers[agent_gid]" placeholder="Identificador do agente" value="" style="width: 100%;">
+        </div>
 
-      <!-- FINDER_SET -->
-      <div id="identifier_finder_set_gid" style="display:none;">
-        <label>Finder Set GID</label>
-        <input type="text" name="identifiers[finder_set_gid]" placeholder="Identificador do Finder Set" value="">
-      </div>
+        <!-- FINDER_SET -->
+        <div id="identifier_finder_set_gid" style="display:none;">
+          <label>Finder Set GID</label>
+          <input type="text" name="identifiers[finder_set_gid]" placeholder="Identificador do Finder Set" value="" style="width: 100%;">
+        </div>
 
-      <!-- RATE -->
-      <div id="identifier_rate_offering_gid" style="display:none;">
-        <label>Rate Offering GID</label>
-        <input type="text" name="identifiers[rate_offering_gid]" placeholder="Identificador da taxa de oferta" value="">
-      </div>
+        <!-- RATE -->
+        <div id="identifier_rate_offering_gid" style="display:none;">
+          <label>Rate Offering GID</label>
+          <input type="text" name="identifiers[rate_offering_gid]" placeholder="Identificador da taxa de oferta" value="" style="width: 100%;">
+        </div>
 
-      <!-- EVENT_GROUP -->
-      <div id="identifier_event_group_gid" style="display:none;">
-        <label>Event Group GID</label>
-        <input type="text" name="identifiers[event_group_gid]" placeholder="Identificador do grupo de eventos" value="">
+        <!-- EVENT_GROUP -->
+        <div id="identifier_event_group_gid" style="display:none;">
+          <label>Event Group GID</label>
+          <input type="text" name="identifiers[event_group_gid]" placeholder="Identificador do grupo de eventos" value="" style="width: 100%;">
+        </div>
       </div>
 
       <!-- ========================================== -->
@@ -454,47 +1141,45 @@
             <strong>Ações Disponíveis:</strong>
           </p>
 
-          <!-- Botão Remover (formulário separado) -->
-          <form method="POST" style="display: inline;">
-            <input type="hidden" name="remove_object_index" value="{{ edit_object_index }}">
-            <button type="submit" style="background-color: #e53935; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
-              🗑️ Remover Objeto
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <!-- Botão Salvar Objeto -->
+            <button type="submit" style="background-color: #4CAF50; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+              💾 Salvar Objeto
             </button>
-          </form>
+
+            <!-- Botão Remover (formulário separado) -->
+            <form method="POST" style="display: inline; margin: 0;">
+              <input type="hidden" name="remove_object_index" value="{{ edit_object_index }}">
+              <button type="submit" style="background-color: #e53935; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                🗑️ Remover Objeto
+              </button>
+            </form>
+
+            <!-- Mover Objeto para outro grupo -->
+            <form method="POST" style="display: inline-flex; gap: 8px; align-items: center; margin: 0;">
+              <input type="hidden" name="move_object_index" value="{{ edit_object_index }}">
+              <label style="font-size: 12px; margin: 0; white-space: nowrap;">Mover para:</label>
+              <select name="move_to_group_id" style="padding: 6px 10px; font-size: 12px; border-radius: 3px; border: 1px solid #ccc;">
+                <option value="">-- Selecione o grupo --</option>
+                {% if project and project.groups %}
+                  {% for g in project.groups %}
+                    {% if g.group_id != project.active_group_id %}
+                      <option value="{{ g.group_id }}">{{ g.label }} ({{ g.group_id }})</option>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              </select>
+              <button type="submit" style="background-color: #FF9800; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px;">
+                ➡️ Mover
+              </button>
+            </form>
+          </div>
 
           <p style="font-size: 11px; color: #856404; margin-top: 8px;">
-            ⚠️ Esta ação remove permanentemente o objeto do grupo.
+            💡 Use "Salvar Objeto" para gravar alterações | "Mover" transfere o objeto para outro grupo | "Remover" exclui permanentemente.
           </p>
         </div>
       {% endif %}>
-
-      <!-- Lista de Objetos do Grupo Ativo -->
-      {% if current_group.data and current_group.data.objects %}
-        <h4 style="margin-top: 24px;">Objetos do Grupo</h4>
-
-        <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 900px;">
-          <thead>
-            <tr style="background-color: #f5f5f5;">
-              <th>#</th>
-              <th>Nome Funcional</th>
-              <th>Tipo · Deploy</th>
-              <th>Responsável</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for obj in current_group.data.objects %}
-              <tr>
-                <td>{{ loop.index }}</td>
-                <td><strong>{{ obj.name or "Sem nome" }}</strong></td>
-                <td>{{ obj.object_type or obj.type }} · {{ obj.deployment_type }}</td>
-                <td>{{ obj.responsible }}</td>
-                <td>{{ obj.status.documentation }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% endif %}
     </fieldset>
   {% else %}
     <p style="color: #999;">

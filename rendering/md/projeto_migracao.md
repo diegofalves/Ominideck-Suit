@@ -755,7 +755,7 @@ Queries utilizadas por automações, conditions e agents
 <div class="meta-text" markdown="1">
 **Sequência:** 1
 **Object Type:** SAVED_QUERY
-**OTM Table:** 
+**OTM Table:** SAVED_QUERY
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -826,7 +826,7 @@ Conditions utilizadas por agents e eventos
 <div class="meta-text" markdown="1">
 **Sequência:** 2
 **Object Type:** SAVED_CONDITION
-**OTM Table:** 
+**OTM Table:** SAVED_CONDITION
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -901,7 +901,7 @@ Associações de tipos de dados do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 3
 **Object Type:** DATA_TYPE_ASSOCIATION
-**OTM Table:** 
+**OTM Table:** DATA_TYPE_ASSOCIATION
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -968,7 +968,7 @@ Eventos de agentes do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 4
 **Object Type:** AGENT_EVENT
-**OTM Table:** 
+**OTM Table:** AGENT_EVENT
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1057,7 +1057,7 @@ Agentes ativos no domínio
 <div class="meta-text" markdown="1">
 **Sequência:** 5
 **Object Type:** AGENT
-**OTM Table:** 
+**OTM Table:** AGENT
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1148,7 +1148,7 @@ Ações de aplicação do OTM
 <div class="meta-text" markdown="1">
 **Sequência:** 6
 **Object Type:** APP_ACTION
-**OTM Table:** 
+**OTM Table:** APP_ACTION
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1239,7 +1239,7 @@ Ações gerais do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 7
 **Object Type:** ACTION
-**OTM Table:** 
+**OTM Table:** ACTION
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1296,7 +1296,7 @@ Processos batch de execução automática
 <div class="meta-text" markdown="1">
 **Sequência:** 8
 **Object Type:** BATCH_PROCESS
-**OTM Table:** 
+**OTM Table:** BATCH_PROCESS
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1374,7 +1374,7 @@ Configuração de domínios OTM
 <div class="meta-text" markdown="1">
 **Sequência:** 1
 **Object Type:** DOMAIN
-**OTM Table:** 
+**OTM Table:** DOMAIN
 **Deployment Type:** MANUAL
 
 
@@ -1411,7 +1411,7 @@ Permissões de domínio
 <div class="meta-text" markdown="1">
 **Sequência:** 2
 **Object Type:** DOMAIN_GRANTS_MADE
-**OTM Table:** 
+**OTM Table:** DOMAIN_GRANTS_MADE
 **Deployment Type:** MANUAL
 
 
@@ -1464,7 +1464,7 @@ Configurações de domínio
 <div class="meta-text" markdown="1">
 **Sequência:** 3
 **Object Type:** DOMAIN_SETTING
-**OTM Table:** 
+**OTM Table:** DOMAIN_SETTING
 **Deployment Type:** MANUAL
 
 
@@ -1519,7 +1519,7 @@ Propriedades do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 4
 **Object Type:** PROP_INSTRUCTION
-**OTM Table:** 
+**OTM Table:** PROP_INSTRUCTION
 **Deployment Type:** MANUAL
 
 
@@ -1578,7 +1578,7 @@ Unidades de medida utilizadas no domínio
 <div class="meta-text" markdown="1">
 **Sequência:** 5
 **Object Type:** UOM
-**OTM Table:** 
+**OTM Table:** UOM
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1639,7 +1639,7 @@ Componentes de código postal
 <div class="meta-text" markdown="1">
 **Sequência:** 6
 **Object Type:** HNAME_COMPONENT
-**OTM Table:** 
+**OTM Table:** HNAME_COMPONENT
 **Deployment Type:** DB_XML
 
 
@@ -1676,7 +1676,7 @@ Configuração de marca e identidade visual
 <div class="meta-text" markdown="1">
 **Sequência:** 7
 **Object Type:** BRANDING
-**OTM Table:** 
+**OTM Table:** BRANDING
 **Deployment Type:** MANUAL
 
 
@@ -1703,7 +1703,7 @@ Regras de números de negócio
 <div class="meta-text" markdown="1">
 **Sequência:** 8
 **Object Type:** BN_RULE
-**OTM Table:** 
+**OTM Table:** BN_RULE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1768,7 +1768,7 @@ Relatórios do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 9
 **Object Type:** REPORT
-**OTM Table:** 
+**OTM Table:** REPORT
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1875,7 +1875,7 @@ Modos de transporte
 <div class="meta-text" markdown="1">
 **Sequência:** 10
 **Object Type:** TRANSPORT_MODE
-**OTM Table:** 
+**OTM Table:** TRANSPORT_MODE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -1952,7 +1952,7 @@ Intervalo nomeado de números de negócio
 <div class="meta-text" markdown="1">
 **Sequência:** 11
 **Object Type:** BN_NAMED_RANGE
-**OTM Table:** 
+**OTM Table:** BN_NAMED_RANGE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -2020,7 +2020,7 @@ Cadastro de commodities vinculadas a itens
 <div class="meta-text" markdown="1">
 **Sequência:** 1
 **Object Type:** COMMODITY
-**OTM Table:** 
+**OTM Table:** COMMODITY
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -2085,7 +2085,7 @@ Entidades corporativas e empresas
 <div class="meta-text" markdown="1">
 **Sequência:** 2
 **Object Type:** CORPORATION
-**OTM Table:** 
+**OTM Table:** CORPORATION
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -2148,7 +2148,7 @@ Especificações de unidades de transporte
 <div class="meta-text" markdown="1">
 **Sequência:** 3
 **Object Type:** SHIP_UNIT_SPEC
-**OTM Table:** 
+**OTM Table:** SHIP_UNIT_SPEC
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -2223,7 +2223,7 @@ Transportadoras e prestadores de serviço
 <div class="meta-text" markdown="1">
 **Sequência:** 4
 **Object Type:** SERVPROV
-**OTM Table:** 
+**OTM Table:** SERVPROV
 **Deployment Type:** CSV
 
 
@@ -2306,7 +2306,7 @@ Localizações e endereços
 <div class="meta-text" markdown="1">
 **Sequência:** 5
 **Object Type:** LOCATION
-**OTM Table:** 
+**OTM Table:** LOCATION
 **Deployment Type:** INTEGRATION
 
 
@@ -2383,7 +2383,7 @@ Contatos e informações de pessoas
 <div class="meta-text" markdown="1">
 **Sequência:** 6
 **Object Type:** CONTACT
-**OTM Table:** 
+**OTM Table:** CONTACT
 **Deployment Type:** CSV
 
 
@@ -2456,7 +2456,7 @@ Grupos de equipamentos
 <div class="meta-text" markdown="1">
 **Sequência:** 7
 **Object Type:** EQUIPMENT_GROUP
-**OTM Table:** 
+**OTM Table:** EQUIPMENT_GROUP
 **Deployment Type:** CSV
 
 
@@ -2535,7 +2535,7 @@ Itens e produtos
 <div class="meta-text" markdown="1">
 **Sequência:** 8
 **Object Type:** ITEM
-**OTM Table:** 
+**OTM Table:** ITEM
 **Deployment Type:** INTEGRATION
 
 
@@ -2624,7 +2624,7 @@ Itens embalados
 <div class="meta-text" markdown="1">
 **Sequência:** 9
 **Object Type:** PACKAGED_ITEM
-**OTM Table:** 
+**OTM Table:** PACKAGED_ITEM
 **Deployment Type:** INTEGRATION
 
 
@@ -2683,7 +2683,7 @@ Grupos de contatos
 <div class="meta-text" markdown="1">
 **Sequência:** 10
 **Object Type:** CONTACT_GROUP
-**OTM Table:** 
+**OTM Table:** CONTACT_GROUP
 **Deployment Type:** CSV
 
 
@@ -2755,7 +2755,7 @@ Qualificador de número de referência de localização
 <div class="meta-text" markdown="1">
 **Sequência:** 1
 **Object Type:** LOCATION_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** LOCATION_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -2818,7 +2818,7 @@ Qualificador de número de referência de liberação de pedido
 <div class="meta-text" markdown="1">
 **Sequência:** 2
 **Object Type:** ORDER_RELEASE_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** ORDER_RELEASE_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -2881,7 +2881,7 @@ Qualificador de número de referência de linha de liberação
 <div class="meta-text" markdown="1">
 **Sequência:** 3
 **Object Type:** ORDER_RELEASE_LINE_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** ORDER_RELEASE_LINE_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -2946,7 +2946,7 @@ Qualificador de número de referência de item embalado
 <div class="meta-text" markdown="1">
 **Sequência:** 4
 **Object Type:** PACKAGED_ITEM_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** PACKAGED_ITEM_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3007,7 +3007,7 @@ Qualificador de número de referência de item
 <div class="meta-text" markdown="1">
 **Sequência:** 5
 **Object Type:** ITEM_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** ITEM_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3068,7 +3068,7 @@ Qualificador de número de referência de remessa
 <div class="meta-text" markdown="1">
 **Sequência:** 6
 **Object Type:** SHIPMENT_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** SHIPMENT_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3129,7 +3129,7 @@ Qualificador de número de referência de parada de remessa
 <div class="meta-text" markdown="1">
 **Sequência:** 7
 **Object Type:** SHIPMENT_STOP_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** SHIPMENT_STOP_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3190,7 +3190,7 @@ Qualificador de número de referência de taxa geográfica
 <div class="meta-text" markdown="1">
 **Sequência:** 8
 **Object Type:** RATE_GEO_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** RATE_GEO_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3253,7 +3253,7 @@ Qualificador de número de referência de movimento de pedido
 <div class="meta-text" markdown="1">
 **Sequência:** 9
 **Object Type:** OM_REFNUM_QUAL
-**OTM Table:** 
+**OTM Table:** OM_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3310,7 +3310,7 @@ Tipos e valores de status do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 10
 **Object Type:** STATUS_TYPE
-**OTM Table:** 
+**OTM Table:** STATUS_TYPE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3419,7 +3419,7 @@ Qualificadores de observações
 <div class="meta-text" markdown="1">
 **Sequência:** 11
 **Object Type:** REMARK_QUAL
-**OTM Table:** 
+**OTM Table:** REMARK_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3497,7 +3497,7 @@ Trilha de auditoria do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 1
 **Object Type:** AUDIT_TRAIL
-**OTM Table:** 
+**OTM Table:** AUDIT_TRAIL
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3578,7 +3578,7 @@ Configurações de lógica de planejamento
 <div class="meta-text" markdown="1">
 **Sequência:** 2
 **Object Type:** LOGIC_PARAMETER
-**OTM Table:** 
+**OTM Table:** LOGIC_PARAMETER
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3643,7 +3643,7 @@ Conjuntos de parâmetros de planejamento
 <div class="meta-text" markdown="1">
 **Sequência:** 3
 **Object Type:** PLANNING_PARAMETER
-**OTM Table:** 
+**OTM Table:** PLANNING_PARAMETER
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3706,7 +3706,7 @@ Códigos de serviços acessórios
 <div class="meta-text" markdown="1">
 **Sequência:** 4
 **Object Type:** ACCESSORIAL_CODE
-**OTM Table:** 
+**OTM Table:** ACCESSORIAL_CODE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3765,7 +3765,7 @@ Trechos de itinerário
 <div class="meta-text" markdown="1">
 **Sequência:** 5
 **Object Type:** LEG
-**OTM Table:** 
+**OTM Table:** LEG
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3830,7 +3830,7 @@ Itinerários de transporte
 <div class="meta-text" markdown="1">
 **Sequência:** 6
 **Object Type:** ITINERARY
-**OTM Table:** 
+**OTM Table:** ITINERARY
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3913,7 +3913,7 @@ Perfis de itinerários
 <div class="meta-text" markdown="1">
 **Sequência:** 7
 **Object Type:** ITINERARY_PROFILE
-**OTM Table:** 
+**OTM Table:** ITINERARY_PROFILE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -3980,7 +3980,7 @@ Regras de configuração de carregamento
 <div class="meta-text" markdown="1">
 **Sequência:** 8
 **Object Type:** LOAD_CONFIG_RULE
-**OTM Table:** 
+**OTM Table:** LOAD_CONFIG_RULE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4037,7 +4037,7 @@ Configuração de carregamento
 <div class="meta-text" markdown="1">
 **Sequência:** 9
 **Object Type:** LOAD_CONFIG_SETUP
-**OTM Table:** 
+**OTM Table:** LOAD_CONFIG_SETUP
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4108,7 +4108,7 @@ Tipos de liberação de pedido
 <div class="meta-text" markdown="1">
 **Sequência:** 10
 **Object Type:** ORDER_RELEASE_TYPE
-**OTM Table:** 
+**OTM Table:** ORDER_RELEASE_TYPE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4174,7 +4174,7 @@ Conteúdos de folhas de estilo
 <div class="meta-text" markdown="1">
 **Sequência:** 1
 **Object Type:** STYLESHEET_CONTENT
-**OTM Table:** 
+**OTM Table:** STYLESHEET_CONTENT
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4237,7 +4237,7 @@ Perfis de folhas de estilo
 <div class="meta-text" markdown="1">
 **Sequência:** 2
 **Object Type:** STYLESHEET_PROFILE
-**OTM Table:** 
+**OTM Table:** STYLESHEET_PROFILE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4334,7 +4334,7 @@ Templates XML para integração
 <div class="meta-text" markdown="1">
 **Sequência:** 3
 **Object Type:** XML_TEMPLATE
-**OTM Table:** 
+**OTM Table:** XML_TEMPLATE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4393,7 +4393,7 @@ Perfis de XML de saída
 <div class="meta-text" markdown="1">
 **Sequência:** 4
 **Object Type:** OUT_XML_PROFILE
-**OTM Table:** 
+**OTM Table:** OUT_XML_PROFILE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4456,7 +4456,7 @@ Documentos do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 5
 **Object Type:** DOCUMENT
-**OTM Table:** 
+**OTM Table:** DOCUMENT
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4525,7 +4525,7 @@ Serviços web para integração
 <div class="meta-text" markdown="1">
 **Sequência:** 6
 **Object Type:** WEB_SERVICE
-**OTM Table:** 
+**OTM Table:** WEB_SERVICE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4592,7 +4592,7 @@ Configuração de sistemas externos
 <div class="meta-text" markdown="1">
 **Sequência:** 7
 **Object Type:** EXTERNAL_SYSTEM
-**OTM Table:** 
+**OTM Table:** EXTERNAL_SYSTEM
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4689,7 +4689,7 @@ Contatos de sistemas externos
 <div class="meta-text" markdown="1">
 **Sequência:** 8
 **Object Type:** EXTERNAL_CONTACT
-**OTM Table:** 
+**OTM Table:** EXTERNAL_CONTACT
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4761,7 +4761,7 @@ Layouts de gerenciamento do OTM
 <div class="meta-text" markdown="1">
 **Sequência:** 1
 **Object Type:** MANAGER_LAYOUT
-**OTM Table:** 
+**OTM Table:** MANAGER_LAYOUT
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4820,7 +4820,7 @@ Conjuntos de busca e filtros
 <div class="meta-text" markdown="1">
 **Sequência:** 2
 **Object Type:** FINDER_SET
-**OTM Table:** 
+**OTM Table:** FINDER_SET
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4923,7 +4923,7 @@ Bancadas de trabalho do OTM
 <div class="meta-text" markdown="1">
 **Sequência:** 3
 **Object Type:** TRANSPORTATION_WORKBENCH
-**OTM Table:** 
+**OTM Table:** TRANSPORTATION_WORKBENCH
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -4980,7 +4980,7 @@ Monitores de negócio
 <div class="meta-text" markdown="1">
 **Sequência:** 4
 **Object Type:** BUSINESS_MONITOR_D
-**OTM Table:** 
+**OTM Table:** BUSINESS_MONITOR_D
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -5037,7 +5037,7 @@ Listas de controle de acesso
 <div class="meta-text" markdown="1">
 **Sequência:** 5
 **Object Type:** ACR_ROLE
-**OTM Table:** 
+**OTM Table:** ACR_ROLE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -5096,7 +5096,7 @@ Papéis de usuário
 <div class="meta-text" markdown="1">
 **Sequência:** 6
 **Object Type:** USER_ROLE
-**OTM Table:** 
+**OTM Table:** USER_ROLE
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -5157,7 +5157,7 @@ Menus de usuário
 <div class="meta-text" markdown="1">
 **Sequência:** 7
 **Object Type:** USER_MENU
-**OTM Table:** 
+**OTM Table:** USER_MENU
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -5218,7 +5218,7 @@ Preferências de usuário
 <div class="meta-text" markdown="1">
 **Sequência:** 8
 **Object Type:** USER_PREFERENCE_D
-**OTM Table:** 
+**OTM Table:** USER_PREFERENCE_D
 **Deployment Type:** MIGRATION_PROJECT
 
 
@@ -5271,7 +5271,7 @@ Traduções e rótulos do sistema
 <div class="meta-text" markdown="1">
 **Sequência:** 9
 **Object Type:** TRANSLATION
-**OTM Table:** 
+**OTM Table:** TRANSLATION
 **Deployment Type:** DB_XML
 
 
@@ -5344,7 +5344,7 @@ Gerenciamento de acesso de usuário
 <div class="meta-text" markdown="1">
 **Sequência:** 10
 **Object Type:** USER_ACCESS
-**OTM Table:** 
+**OTM Table:** USER_ACCESS
 **Deployment Type:** DB_XML
 
 
@@ -5415,7 +5415,7 @@ Perfil de segurança em nível de dados
 <div class="meta-text" markdown="1">
 **Sequência:** 11
 **Object Type:** VPD_PROFILE
-**OTM Table:** 
+**OTM Table:** VPD_PROFILE
 **Deployment Type:** DB_XML
 
 
@@ -5466,7 +5466,7 @@ Relatórios e arquivos BI
 <div class="meta-text" markdown="1">
 **Sequência:** 12
 **Object Type:** BI_PUBLISHER_FILES
-**OTM Table:** 
+**OTM Table:** BI_PUBLISHER_FILES
 **Deployment Type:** MANUAL
 
 

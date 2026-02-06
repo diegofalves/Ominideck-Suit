@@ -35,6 +35,7 @@ const SchemaEngine = {
         await this.loadTableList();
         this.setupEventListeners();
         this.setupDynamicObjectObserver();
+        this.setupObjectModeObserver();
         console.log("[SchemaEngine 9.1] Pronto");
     },
     
@@ -56,23 +57,31 @@ const SchemaEngine = {
     },
     
     populateObjectTypeSelector() {
-        // Encontrar selects estáticos (renderizados pelo backend)
-        const staticSelectors = document.querySelectorAll('select[name="object_type"]');
+        // Encontrar TODOS os selects (estáticos do backend + dinâmicos criados por JS)
+        const allSelectors = document.querySelectorAll('select[name="object_type"], select#object_type, select.dynamic-object-type-selector');
         
-        console.log("[SchemaEngine] Selectors encontrados:", staticSelectors.length);
+        console.log("[SchemaEngine] Selectors encontrados:", allSelectors.length);
 
-        if (!staticSelectors.length) {
+        if (!allSelectors.length) {
             console.warn("[SchemaEngine] Nenhum select object_type encontrado no DOM");
             return;
         }
 
         // Processar cada select encontrado
-        staticSelectors.forEach(selector => {
+        allSelectors.forEach(selector => {
+            // Verificar se já foi populado (evitar duplicação)
+            if (selector.dataset.populated === 'true' && selector.options.length > 1) {
+                console.log("[SchemaEngine] Selector já populado, ignorando");
+                return;
+            }
+
             // Passo 1: Ler valor do atributo data-current-type (renderizado pelo backend)
             const currentType = selector.getAttribute("data-current-type") || "";
             
             console.log("[SchemaEngine] Processando selector:", {
                 name: selector.name,
+                id: selector.id,
+                classes: selector.className,
                 currentType: currentType || "(nenhum)"
             });
 
@@ -82,18 +91,32 @@ const SchemaEngine = {
             // Passo 3: Inserir placeholder
             const placeholder = document.createElement("option");
             placeholder.value = "";
-            placeholder.textContent = "— Selecione uma tabela OTM —";
+            placeholder.textContent = "— Selecione uma tabela OTM ou tipo lógico —";
             selector.appendChild(placeholder);
 
-            // Passo 4: Inserir tabelas OTM
+            // Passo 4: Criar grupo para Tabelas OTM
+            const otmGroup = document.createElement("optgroup");
+            otmGroup.label = "📋 Tabelas OTM";
             this.tables.forEach(table => {
                 const option = document.createElement("option");
                 option.value = table;
                 option.textContent = table;
-                selector.appendChild(option);
+                otmGroup.appendChild(option);
             });
+            selector.appendChild(otmGroup);
 
-            // Passo 5: Restaurar valor usando data-current-type (BACKEND-DRIVEN)
+            // Passo 5: Criar grupo para Tipos Lógicos
+            const logicalGroup = document.createElement("optgroup");
+            logicalGroup.label = "🔧 Tipos Lógicos";
+            this.logicalTypes.forEach(type => {
+                const option = document.createElement("option");
+                option.value = type;
+                option.textContent = type;
+                logicalGroup.appendChild(option);
+            });
+            selector.appendChild(logicalGroup);
+
+            // Passo 6: Restaurar valor usando data-current-type (BACKEND-DRIVEN)
             if (currentType) {
                 selector.value = currentType;
                 console.log("[SchemaEngine] Valor restaurado:", {
@@ -101,16 +124,12 @@ const SchemaEngine = {
                     value: currentType
                 });
             }
-        });
 
-        // Passo 6: Mostrar container do select
-        const container = document.getElementById("object-type-container");
-        if (container) {
-            container.style.display = "block";
-            console.log("[SchemaEngine] Container object-type visível");
-        }
+            // Marcar como populado
+            selector.dataset.populated = 'true';
+        });
         
-        console.log(`[SchemaEngine] ✅ ${staticSelectors.length} select(s) populado(s) com ${this.tables.length} tabelas OTM`);
+        console.log(`[SchemaEngine] ✅ ${allSelectors.length} select(s) populado(s) com ${this.tables.length} tabelas OTM + ${this.logicalTypes.length} tipos lógicos`);
     },
 
     onObjectTypeChange(objectType) {
@@ -561,6 +580,52 @@ const SchemaEngine = {
             childList: true,
             subtree: true
         });
+    },
+
+    // ========================================================
+    // Observer for edit mode changes
+    // ========================================================
+    
+    setupObjectModeObserver() {
+        // Observar mudanças no select de edição de objetos
+        const editSelector = document.getElementById('edit_object_index');
+        if (editSelector) {
+            editSelector.addEventListener('change', () => {
+                console.log("[SchemaEngine] Modo de objeto alterado, resetando select...");
+                // Resetar o select de object_type para forçar repopulação
+                const objectTypeSelect = document.querySelector('select[name="object_type"]');
+                if (objectTypeSelect) {
+                    objectTypeSelect.dataset.populated = 'false';
+                    this.populateObjectTypeSelector();
+                }
+            });
+        }
+
+        // Observar mudanças na URL (navegação sem reload)
+        const originalPushState = window.history.pushState;
+        const originalReplaceState = window.history.replaceState;
+        
+        const repopulateOnHistoryChange = () => {
+            setTimeout(() => {
+                const objectTypeSelect = document.querySelector('select[name="object_type"]');
+                if (objectTypeSelect) {
+                    objectTypeSelect.dataset.populated = 'false';
+                    this.populateObjectTypeSelector();
+                }
+            }, 100);
+        };
+        
+        window.history.pushState = function() {
+            originalPushState.apply(this, arguments);
+            repopulateOnHistoryChange();
+        };
+        
+        window.history.replaceState = function() {
+            originalReplaceState.apply(this, arguments);
+            repopulateOnHistoryChange();
+        };
+        
+        window.addEventListener('popstate', repopulateOnHistoryChange);
     }
 };
 
@@ -571,3 +636,6 @@ const SchemaEngine = {
 document.addEventListener("DOMContentLoaded", () => {
     SchemaEngine.init();
 });
+
+// Expor SchemaEngine globalmente para acesso por app.js
+window.SchemaEngine = SchemaEngine;

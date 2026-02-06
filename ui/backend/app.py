@@ -107,6 +107,108 @@ def projeto_migracao():
 
     if request.method == "POST":
         action = request.form.get("action", "")
+        reset_edit_mode = request.form.get("reset_edit_mode", "0")
+        
+        # ===== REMOVER OBJETO =====
+        remove_object_index = request.form.get("remove_object_index")
+        if remove_object_index is not None and remove_object_index != "":
+            try:
+                remove_idx = int(remove_object_index)
+                active_group_id = project.get("active_group_id")
+                
+                if active_group_id and project.get("groups"):
+                    for group in project["groups"]:
+                        if group.get("group_id") == active_group_id:
+                            if 0 <= remove_idx < len(group.get("objects", [])):
+                                removed_obj = group["objects"].pop(remove_idx)
+                                print(f"✅ Objeto removido: {removed_obj.get('name', 'Sem nome')}")
+                                
+                                # Limpar estado de edição
+                                if project.get("state"):
+                                    project["state"]["last_edit_object_index"] = None
+                                
+                                save_project(project)
+                            break
+                
+                return redirect("/projeto-migracao")
+            except (ValueError, KeyError) as e:
+                print(f"⚠️ Erro ao remover objeto: {e}")
+                return redirect("/projeto-migracao")
+        
+        # ===== REMOVER GRUPO =====
+        remove_group_id = request.form.get("remove_group_id")
+        if remove_group_id is not None and remove_group_id != "":
+            try:
+                if project.get("groups"):
+                    # Encontrar e remover o grupo
+                    for i, group in enumerate(project["groups"]):
+                        if group.get("group_id") == remove_group_id:
+                            removed_group = project["groups"].pop(i)
+                            print(f"✅ Grupo removido: {removed_group.get('label', 'Sem nome')}")
+                            
+                            # Se era o grupo ativo, desativar
+                            if project.get("active_group_id") == remove_group_id:
+                                project["active_group_id"] = None
+                            
+                            save_project(project)
+                            break
+                
+                return redirect("/projeto-migracao")
+            except (ValueError, KeyError) as e:
+                print(f"⚠️ Erro ao remover grupo: {e}")
+                return redirect("/projeto-migracao")
+        
+        # ===== MOVER OBJETO PARA OUTRO GRUPO =====
+        move_object_index = request.form.get("move_object_index")
+        move_to_group_id = request.form.get("move_to_group_id")
+        
+        if move_object_index is not None and move_object_index != "" and move_to_group_id:
+            try:
+                move_idx = int(move_object_index)
+                active_group_id = project.get("active_group_id")
+                
+                if active_group_id and project.get("groups"):
+                    # Encontrar grupo de origem
+                    source_group = None
+                    target_group = None
+                    
+                    for group in project["groups"]:
+                        if group.get("group_id") == active_group_id:
+                            source_group = group
+                        if group.get("group_id") == move_to_group_id:
+                            target_group = group
+                    
+                    if source_group and target_group and 0 <= move_idx < len(source_group.get("objects", [])):
+                        # Remover do grupo de origem
+                        moved_obj = source_group["objects"].pop(move_idx)
+                        
+                        # Adicionar ao grupo de destino
+                        if "objects" not in target_group:
+                            target_group["objects"] = []
+                        target_group["objects"].append(moved_obj)
+                        
+                        print(f"✅ Objeto '{moved_obj.get('name', 'Sem nome')}' movido de '{source_group.get('label')}' para '{target_group.get('label')}'")
+                        
+                        # Limpar estado de edição
+                        if project.get("state"):
+                            project["state"]["last_edit_object_index"] = None
+                        
+                        save_project(project)
+                
+                return redirect("/projeto-migracao")
+            except (ValueError, KeyError) as e:
+                print(f"⚠️ Erro ao mover objeto: {e}")
+                return redirect("/projeto-migracao")
+        
+        # Se reset_edit_mode está ativo (mudança de grupo), limpar estado de edição
+        if reset_edit_mode == "1":
+            active_group_id = request.form.get("active_group_id", "")
+            if project.get("state") is None:
+                project["state"] = {}
+            project["state"]["last_edit_object_index"] = None
+            project["active_group_id"] = active_group_id
+            save_project(project)
+            return redirect("/projeto-migracao")
         
         # Se ação é apenas carregar objeto, salvar apenas o state sem validar
         if action == "load_object":

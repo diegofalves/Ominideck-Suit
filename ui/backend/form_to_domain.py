@@ -205,6 +205,9 @@ def form_to_domain(form):
             object_notes = form.get("object_notes")
             if object_notes:
                 target_obj["notes"] = object_notes
+            object_otm_table = form.get("object_otm_table")
+            if object_otm_table:
+                target_obj["otm_table"] = object_otm_table
 
             # Status (5 campos)
             if "status" not in target_obj:

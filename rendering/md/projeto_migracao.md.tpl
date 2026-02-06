@@ -138,7 +138,6 @@ Esta seção apresenta os conjuntos de objetos do Oracle Transportation Manageme
 **{{ key.replace('_', ' ') | title }}:** {{ value }}
 {% endfor %}
 **Responsável:** {{ object.responsible }}
-**Tipo de Migração:** {{ object.migration_type }}
 {% if object.notes %}
 **Notas:** {{ object.notes }}
 {% endif %}

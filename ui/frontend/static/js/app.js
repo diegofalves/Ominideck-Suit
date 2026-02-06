@@ -58,14 +58,6 @@ function addGroup() {
       ></textarea>
     </fieldset>
 
-    <fieldset>
-      <legend>Objetos</legend>
-      <div class="objects-container-${groupIndex}" style="border-left: 3px solid #2196F3; padding-left: 12px; margin-bottom: 12px;"></div>
-      <button type="button" onclick="addObject(${groupIndex})" style="background: #4CAF50; color: white; padding: 8px 16px; border: none; cursor: pointer; border-radius: 4px; font-weight: bold;">
-        ➕ Adicionar Objeto
-      </button>
-    </fieldset>
-
     <hr style="margin: 16px 0;">
   `;
 
@@ -219,39 +211,76 @@ function removeObject(groupIndex, objectIndex) {
 // ============================================================
 
 function buildChangeHistoryRow(index, data = {}) {
-  const container = document.createElement("div");
-  container.className = "change-history-row";
-  container.dataset.index = index;
-  container.style.border = "1px solid #ddd";
-  container.style.padding = "10px";
-  container.style.marginBottom = "10px";
-  container.style.borderRadius = "4px";
+  const row = document.createElement("tr");
+  row.className = "change-history-row";
+  row.dataset.index = index;
+  row.style.borderBottom = "1px solid #e0e0e0";
 
-  container.innerHTML = `
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: end;">
-      <div>
-        <label style="font-weight: bold;">Data</label>
-        <input type="text" name="change_history[${index}][date]" value="${data.date || ""}" style="width: 100%; padding: 6px;">
-      </div>
-      <div>
-        <label style="font-weight: bold;">Versão</label>
-        <input type="text" name="change_history[${index}][version]" value="${data.version || ""}" style="width: 100%; padding: 6px;">
-      </div>
-      <div>
-        <label style="font-weight: bold;">Descrição</label>
-        <input type="text" name="change_history[${index}][description]" value="${data.description || ""}" style="width: 100%; padding: 6px;">
-      </div>
-      <div>
-        <label style="font-weight: bold;">Autor</label>
-        <input type="text" name="change_history[${index}][author]" value="${data.author || ""}" style="width: 100%; padding: 6px;">
-      </div>
-    </div>
-    <div style="margin-top: 8px; text-align: right;">
-      <button type="button" onclick="removeChangeHistoryRow(${index})" style="background: #f44336; color: white; border: none; padding: 6px 10px; border-radius: 3px; cursor: pointer;">Remover</button>
-    </div>
+  // Modo visualização (padrão)
+  row.innerHTML = `
+    <td style="padding: 8px; font-size: 13px;">
+      <span class="view-mode" data-field="date">${data.date || '-'}</span>
+      <input type="text" class="edit-mode" name="change_history[${index}][date]" value="${data.date || ''}" style="display: none; width: 100%; padding: 4px; font-size: 12px;">
+    </td>
+    <td style="padding: 8px; font-size: 13px;">
+      <span class="view-mode" data-field="version">${data.version || '-'}</span>
+      <input type="text" class="edit-mode" name="change_history[${index}][version]" value="${data.version || ''}" style="display: none; width: 100%; padding: 4px; font-size: 12px;">
+    </td>
+    <td style="padding: 8px; font-size: 13px;">
+      <span class="view-mode" data-field="description">${data.description || '-'}</span>
+      <input type="text" class="edit-mode" name="change_history[${index}][description]" value="${data.description || ''}" style="display: none; width: 100%; padding: 4px; font-size: 12px;">
+    </td>
+    <td style="padding: 8px; font-size: 13px;">
+      <span class="view-mode" data-field="author">${data.author || '-'}</span>
+      <input type="text" class="edit-mode" name="change_history[${index}][author]" value="${data.author || ''}" style="display: none; width: 100%; padding: 4px; font-size: 12px;">
+    </td>
+    <td style="padding: 8px; text-align: center;">
+      <button type="button" class="edit-btn" onclick="toggleEditHistoryRow(${index})" style="background: #2196F3; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; margin-right: 4px;" title="Editar">
+        ✏️
+      </button>
+      <button type="button" class="save-btn" onclick="toggleEditHistoryRow(${index})" style="display: none; background: #4CAF50; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; margin-right: 4px;" title="Salvar">
+        ✔️
+      </button>
+      <button type="button" onclick="removeChangeHistoryRow(${index})" style="background: #f44336; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px;" title="Remover">
+        🗑️
+      </button>
+    </td>
   `;
 
-  return container;
+  return row;
+}
+
+function toggleEditHistoryRow(index) {
+  const row = document.querySelector(`.change-history-row[data-index="${index}"]`);
+  if (!row) return;
+  
+  const viewModes = row.querySelectorAll('.view-mode');
+  const editModes = row.querySelectorAll('.edit-mode');
+  const editBtn = row.querySelector('.edit-btn');
+  const saveBtn = row.querySelector('.save-btn');
+  
+  const isEditing = editModes[0].style.display !== 'none';
+  
+  if (isEditing) {
+    // Salvar: atualizar spans com valores dos inputs
+    editModes.forEach((input, idx) => {
+      viewModes[idx].textContent = input.value || '-';
+    });
+    // Trocar para modo visualização
+    viewModes.forEach(span => span.style.display = '');
+    editModes.forEach(input => input.style.display = 'none');
+    editBtn.style.display = '';
+    saveBtn.style.display = 'none';
+    
+    // Atualizar controle de versão
+    updateVersionControl();
+  } else {
+    // Editar: mostrar inputs
+    viewModes.forEach(span => span.style.display = 'none');
+    editModes.forEach(input => input.style.display = '');
+    editBtn.style.display = 'none';
+    saveBtn.style.display = '';
+  }
 }
 
 function addChangeHistoryRow(data = {}) {
@@ -259,11 +288,57 @@ function addChangeHistoryRow(data = {}) {
   const index = changeHistoryIndexCounter++;
   const row = buildChangeHistoryRow(index, data);
   container.appendChild(row);
+  
+  // Atualizar controle de versão automaticamente
+  updateVersionControl();
 }
 
 function removeChangeHistoryRow(index) {
   const row = document.querySelector(`.change-history-row[data-index="${index}"]`);
-  if (row) row.remove();
+  if (row) {
+    row.remove();
+    // Atualizar controle de versão após remover linha
+    updateVersionControl();
+  }
+}
+
+// Função para sincronizar Controle de Versão com última entrada do histórico
+function updateVersionControl() {
+  const historyContainer = document.getElementById("change-history-rows");
+  if (!historyContainer) return;
+  
+  const allRows = historyContainer.querySelectorAll('.change-history-row');
+  
+  // Pegar a última linha (mais recente)
+  if (allRows.length > 0) {
+    const lastRow = allRows[allRows.length - 1];
+    
+    const version = lastRow.querySelector('input[name*="[version]"]')?.value || '';
+    const date = lastRow.querySelector('input[name*="[date]"]')?.value || '';
+    const author = lastRow.querySelector('input[name*="[author]"]')?.value || '';
+    
+    // Atualizar campos de Controle de Versão
+    const versionField = document.getElementById('version_control_current_version');
+    const dateField = document.getElementById('version_control_last_update');
+    const authorField = document.getElementById('version_control_author');
+    
+    if (versionField) versionField.value = version;
+    if (dateField) dateField.value = date;
+    if (authorField) authorField.value = author;
+  }
+}
+
+// Observar mudanças nos campos do histórico
+function observeHistoryChanges() {
+  const historyContainer = document.getElementById("change-history-rows");
+  if (!historyContainer) return;
+  
+  // Adicionar listeners para todos os inputs existentes e futuros
+  historyContainer.addEventListener('input', (e) => {
+    if (e.target.tagName === 'INPUT') {
+      updateVersionControl();
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -276,6 +351,10 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     addChangeHistoryRow({});
   }
+  
+  // Inicializar observador de mudanças e atualização inicial
+  observeHistoryChanges();
+  updateVersionControl();
 });
 
 async function toggleIdentifiers(selectElement, groupIndex, objectIndex) {
@@ -444,6 +523,20 @@ function hydrateProject(projectJson) {
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Inicializar o contador de grupos com o número de grupos já existentes
+  const projectDataEl = document.getElementById('existing-project-data');
+  if (projectDataEl && projectDataEl.textContent.trim()) {
+    try {
+      const projectJson = JSON.parse(projectDataEl.textContent);
+      if (projectJson && projectJson.groups && projectJson.groups.length > 0) {
+        groupIndexCounter = projectJson.groups.length;
+        console.log(`[app.js] Inicializado contador de grupos: ${groupIndexCounter} (grupos existentes)`);
+      }
+    } catch (e) {
+      console.error('[app.js] Erro ao parsear dados do projeto:', e);
+    }
+  }
+
   document.addEventListener('change', function(e) {
     if (!e.target) return;
     if (e.target.classList && e.target.classList.contains('dynamic-object-type-selector')) {
