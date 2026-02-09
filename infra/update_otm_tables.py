@@ -33,21 +33,33 @@ CORE_QUERY_TIMEOUT_SECONDS = 300
 SOURCE_SCRIPT_NAME = "update_otm_tables.py"
 
 CORE_DOMAIN_COUNT_SQL = """
-WITH candidate_tables AS (
+WITH table_columns AS (
   SELECT
-    atc.table_name,
+    table_name,
+    MAX(CASE WHEN column_name = 'DOMAIN_NAME' THEN 1 ELSE 0 END) AS has_domain_name,
+    MAX(CASE WHEN column_name = 'UPDATE_DATE' THEN 1 ELSE 0 END) AS has_update_date,
+    MAX(CASE WHEN column_name = 'INSERT_DATE' THEN 1 ELSE 0 END) AS has_insert_date
+  FROM all_tab_columns
+  WHERE owner = 'GLOGOWNER'
+    AND table_name NOT LIKE 'BIN$%'
+    AND table_name NOT LIKE '%$%'
+    AND column_name IN ('DOMAIN_NAME', 'UPDATE_DATE', 'INSERT_DATE')
+  GROUP BY table_name
+),
+candidate_tables AS (
+  SELECT
+    tc.table_name,
     ats.num_rows,
     ats.stale_stats,
     ats.last_analyzed
-  FROM all_tab_columns atc
+  FROM table_columns tc
   LEFT JOIN all_tab_statistics ats
-    ON ats.owner = atc.owner
-   AND ats.table_name = atc.table_name
+    ON ats.owner = 'GLOGOWNER'
+   AND ats.table_name = tc.table_name
    AND ats.partition_name IS NULL
-  WHERE atc.owner = 'GLOGOWNER'
-    AND atc.column_name = 'DOMAIN_NAME'
-    AND atc.table_name NOT LIKE 'BIN$%'
-    AND atc.table_name NOT LIKE '%$%'
+  WHERE tc.has_domain_name = 1
+    AND tc.has_update_date = 1
+    AND tc.has_insert_date = 1
 )
 SELECT
   table_name,
@@ -58,8 +70,12 @@ SELECT
     THEN ''
     ELSE dbms_xmlgen.getxmltype(
       'SELECT (SELECT LISTAGG(domain_name || '': '' || cnt, '' | '') WITHIN GROUP (ORDER BY domain_name) ' ||
-      'FROM (SELECT domain_name, COUNT(*) cnt FROM GLOGOWNER."' || table_name || '" ' ||
-      'WHERE domain_name IS NOT NULL GROUP BY domain_name)) c FROM DUAL'
+      'FROM (SELECT t.domain_name, COUNT(*) cnt FROM GLOGOWNER."' || table_name || '" t ' ||
+      'LEFT JOIN GLOGOWNER.DOMAIN d ON d.domain_name = t.domain_name ' ||
+      'WHERE t.domain_name IS NOT NULL ' ||
+      'AND (t.update_date IS NOT NULL OR (t.update_date IS NULL AND t.insert_date IS NOT NULL ' ||
+      'AND d.insert_date IS NOT NULL AND t.insert_date > (d.insert_date + 1))) ' ||
+      'GROUP BY t.domain_name)) c FROM DUAL'
     ).extract('//C/text()').getstringval()
   END AS total_registros_geral
 FROM candidate_tables
@@ -188,6 +204,9 @@ def _normalize_core_rows(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         domain_counts_raw = ""
         if domain_counts_raw_value is not None:
             domain_counts_raw = str(domain_counts_raw_value).strip()
+        if not domain_counts_raw:
+            # Regra CORE: tabelas sem retorno de contagem nao entram no JSON final.
+            continue
 
         normalized.append(
             {
