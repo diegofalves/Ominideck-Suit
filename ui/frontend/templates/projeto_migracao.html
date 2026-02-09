@@ -1636,6 +1636,24 @@
       return;
     }
 
+    let progressIntervalId = null;
+
+    const formatElapsed = (seconds) => {
+      if (seconds < 60) {
+        return `${seconds}s`;
+      }
+      const minutes = Math.floor(seconds / 60);
+      const remaining = seconds % 60;
+      return `${minutes}m ${remaining}s`;
+    };
+
+    const stopProgressFallback = () => {
+      if (progressIntervalId !== null) {
+        window.clearInterval(progressIntervalId);
+        progressIntervalId = null;
+      }
+    };
+
     updateButton.addEventListener("click", async () => {
       const confirmed = window.confirm(
         "Deseja atualizar os metadados das tabelas OTM usadas no projeto?"
@@ -1645,10 +1663,28 @@
       }
 
       const originalText = updateButton.textContent;
+      const startedAt = Date.now();
       updateButton.disabled = true;
-      updateButton.textContent = "Atualizando...";
+      updateButton.textContent = "Atualizando (0s)";
       statusLabel.style.color = "#1f2937";
-      statusLabel.textContent = "Executando script de atualização...";
+      statusLabel.textContent = "Processamento iniciado. Aguarde...";
+
+      stopProgressFallback();
+      progressIntervalId = window.setInterval(() => {
+        const elapsedSeconds = Math.floor((Date.now() - startedAt) / 1000);
+        const elapsedText = formatElapsed(elapsedSeconds);
+        const dots = ".".repeat((elapsedSeconds % 3) + 1);
+        updateButton.textContent = `Atualizando (${elapsedText})`;
+
+        if (elapsedSeconds < 20) {
+          statusLabel.style.color = "#1f2937";
+          statusLabel.textContent = `Atualização em processamento${dots} Aguarde (${elapsedText}).`;
+          return;
+        }
+
+        statusLabel.style.color = "#8A6D1E";
+        statusLabel.textContent = `Atualização ainda em processamento${dots} Isso pode levar alguns minutos (${elapsedText}).`;
+      }, 1000);
 
       try {
         const response = await fetch("/api/otm/update-tables", { method: "POST" });
@@ -1657,22 +1693,18 @@
         if (!response.ok || payload.status !== "success") {
           const errorMessage = payload.message || "Falha ao atualizar tabelas.";
           statusLabel.style.color = "#C62828";
-          statusLabel.textContent = errorMessage;
+          statusLabel.textContent = `${errorMessage} Processamento finalizado com erro.`;
           console.error("[Atualizar Tabelas] Erro:", payload);
           return;
         }
 
         const result = payload.result || {};
-        const updatedCount = Array.isArray(result.tables_updated)
-          ? result.tables_updated.length
-          : 0;
-        const missingCount = Array.isArray(result.tables_missing_in_otm)
-          ? result.tables_missing_in_otm.length
+        const tableCount = Array.isArray(result.tables)
+          ? result.tables.length
           : 0;
 
         statusLabel.style.color = "#2E7D32";
-        statusLabel.textContent = `Atualização concluída: ${updatedCount} tabela(s) atualizada(s)` +
-          (missingCount ? `, ${missingCount} sem retorno no OTM.` : ".");
+        statusLabel.textContent = `Atualização concluída com sucesso. ${tableCount} tabela(s) com estatísticas disponíveis.`;
 
         if (window.SchemaEngine && typeof window.SchemaEngine.loadTables === "function") {
           await window.SchemaEngine.loadTables();
@@ -1682,9 +1714,10 @@
         }
       } catch (error) {
         statusLabel.style.color = "#C62828";
-        statusLabel.textContent = "Erro de comunicação ao atualizar tabelas.";
+        statusLabel.textContent = "Erro de comunicação ao atualizar tabelas. Processamento finalizado com erro.";
         console.error("[Atualizar Tabelas] Erro inesperado:", error);
       } finally {
+        stopProgressFallback();
         updateButton.disabled = false;
         updateButton.textContent = originalText;
       }
