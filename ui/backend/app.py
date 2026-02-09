@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, jsonify
 import json
 import os
+import subprocess
+import sys
 
 from pathlib import Path
 
@@ -96,6 +98,97 @@ def api_schema_fields(table_name: str):
         "table": table_name,
         "sections": by_section
     })
+
+
+@app.route("/api/otm/update-tables", methods=["POST"])
+def api_otm_update_tables():
+    """
+    Executa script de atualizacao de metadados de tabelas OTM.
+
+    Response:
+    {
+      status: "success" | "error",
+      message: str,
+      result: dict | null
+    }
+    """
+    project_root = Path(__file__).resolve().parents[2]
+    script_path = project_root / "infra" / "update_otm_tables.py"
+
+    if not script_path.exists():
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": f"Script nao encontrado: {script_path}",
+                    "result": None,
+                }
+            ),
+            404,
+        )
+
+    try:
+        completed = subprocess.run(
+            [sys.executable, str(script_path), "--skip-report"],
+            cwd=str(project_root),
+            capture_output=True,
+            text=True,
+            timeout=600,
+        )
+    except subprocess.TimeoutExpired:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Tempo limite atingido ao atualizar tabelas OTM.",
+                    "result": None,
+                }
+            ),
+            504,
+        )
+    except Exception as exc:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": f"Falha ao executar script de atualizacao: {exc}",
+                    "result": None,
+                }
+            ),
+            500,
+        )
+
+    stdout = (completed.stdout or "").strip()
+    stderr = (completed.stderr or "").strip()
+
+    parsed_result = None
+    if stdout:
+        try:
+            parsed_result = json.loads(stdout)
+        except json.JSONDecodeError:
+            parsed_result = {"raw_output": stdout}
+
+    if completed.returncode != 0:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Script de atualizacao retornou erro.",
+                    "result": parsed_result,
+                    "stderr": stderr[-2000:] if stderr else None,
+                }
+            ),
+            500,
+        )
+
+    return jsonify(
+        {
+            "status": "success",
+            "message": "Atualizacao de tabelas concluida.",
+            "result": parsed_result,
+            "stderr": stderr[-2000:] if stderr else None,
+        }
+    )
 
 
 # ===== MAIN ROUTES =====
