@@ -5,6 +5,10 @@ CORE SCRIPT - OTM DOMAIN RECORD COUNT
 Script canonico e fixo para consulta de contagem de registros
 por dominio em tabelas OTM.
 
+Contrato de saida:
+- Gera metadata canônica em metadata/otm/domain_table_statistics.json
+- Inclui apenas tabelas com domainCountsRaw nao vazio
+
 ATENCAO: QUERY FIXA
 ATENCAO: NAO GENERALIZAR
 ATENCAO: NAO PARAMETRIZAR

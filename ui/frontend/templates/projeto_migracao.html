@@ -1656,7 +1656,7 @@
 
     updateButton.addEventListener("click", async () => {
       const confirmed = window.confirm(
-        "Deseja atualizar os metadados das tabelas OTM usadas no projeto?"
+        "Deseja atualizar as estatisticas de dominio OTM?"
       );
       if (!confirmed) {
         return;
@@ -1691,7 +1691,7 @@
         const payload = await response.json();
 
         if (!response.ok || payload.status !== "success") {
-          const errorMessage = payload.message || "Falha ao atualizar tabelas.";
+          const errorMessage = payload.message || "Falha ao atualizar estatisticas de dominio.";
           statusLabel.style.color = "#C62828";
           statusLabel.textContent = `${errorMessage} Processamento finalizado com erro.`;
           console.error("[Atualizar Tabelas] Erro:", payload);
@@ -1699,12 +1699,24 @@
         }
 
         const result = payload.result || {};
+        const isValidContract = (
+          result &&
+          result.metadataType === "OTM_DOMAIN_TABLE_STATISTICS" &&
+          Array.isArray(result.tables)
+        );
+        if (!isValidContract) {
+          statusLabel.style.color = "#C62828";
+          statusLabel.textContent = "Resposta fora do contrato esperado para estatisticas de dominio. Processamento finalizado com erro.";
+          console.error("[Atualizar Tabelas] Contrato invalido:", payload);
+          return;
+        }
+
         const tableCount = Array.isArray(result.tables)
           ? result.tables.length
           : 0;
 
         statusLabel.style.color = "#2E7D32";
-        statusLabel.textContent = `Atualização concluída com sucesso. ${tableCount} tabela(s) com estatísticas disponíveis.`;
+        statusLabel.textContent = `Atualizacao de estatisticas concluida com sucesso. ${tableCount} tabela(s) com contagem disponivel.`;
 
         if (window.SchemaEngine && typeof window.SchemaEngine.loadTables === "function") {
           await window.SchemaEngine.loadTables();
@@ -1714,7 +1726,7 @@
         }
       } catch (error) {
         statusLabel.style.color = "#C62828";
-        statusLabel.textContent = "Erro de comunicação ao atualizar tabelas. Processamento finalizado com erro.";
+        statusLabel.textContent = "Erro de comunicacao ao atualizar estatisticas de dominio. Processamento finalizado com erro.";
         console.error("[Atualizar Tabelas] Erro inesperado:", error);
       } finally {
         stopProgressFallback();

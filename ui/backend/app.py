@@ -103,7 +103,7 @@ def api_schema_fields(table_name: str):
 @app.route("/api/otm/update-tables", methods=["POST"])
 def api_otm_update_tables():
     """
-    Executa script de atualizacao de metadados de tabelas OTM.
+    Executa script CORE de atualizacao das estatisticas de dominio OTM.
 
     Response:
     {
@@ -129,7 +129,7 @@ def api_otm_update_tables():
 
     try:
         completed = subprocess.run(
-            [sys.executable, str(script_path), "--skip-report"],
+            [sys.executable, str(script_path)],
             cwd=str(project_root),
             capture_output=True,
             text=True,
@@ -140,7 +140,7 @@ def api_otm_update_tables():
             jsonify(
                 {
                     "status": "error",
-                    "message": "Tempo limite atingido ao atualizar tabelas OTM.",
+                    "message": "Tempo limite atingido ao atualizar estatisticas de dominio OTM.",
                     "result": None,
                 }
             ),
@@ -151,7 +151,7 @@ def api_otm_update_tables():
             jsonify(
                 {
                     "status": "error",
-                    "message": f"Falha ao executar script de atualizacao: {exc}",
+                    "message": f"Falha ao executar script de estatisticas OTM: {exc}",
                     "result": None,
                 }
             ),
@@ -173,7 +173,7 @@ def api_otm_update_tables():
             jsonify(
                 {
                     "status": "error",
-                    "message": "Script de atualizacao retornou erro.",
+                    "message": "Script de estatisticas OTM retornou erro.",
                     "result": parsed_result,
                     "stderr": stderr[-2000:] if stderr else None,
                 }
@@ -181,10 +181,28 @@ def api_otm_update_tables():
             500,
         )
 
+    is_valid_contract = (
+        isinstance(parsed_result, dict)
+        and parsed_result.get("metadataType") == "OTM_DOMAIN_TABLE_STATISTICS"
+        and isinstance(parsed_result.get("tables"), list)
+    )
+    if not is_valid_contract:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Resposta do script em formato inesperado para estatisticas de dominio OTM.",
+                    "result": parsed_result,
+                    "stderr": stderr[-2000:] if stderr else None,
+                }
+            ),
+            502,
+        )
+
     return jsonify(
         {
             "status": "success",
-            "message": "Atualizacao de tabelas concluida.",
+            "message": "Atualizacao de estatisticas de dominio concluida.",
             "result": parsed_result,
             "stderr": stderr[-2000:] if stderr else None,
         }
