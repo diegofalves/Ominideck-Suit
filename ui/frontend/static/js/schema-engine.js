@@ -317,6 +317,9 @@ const SchemaEngine = {
         fieldset.style.padding = "16px";
         fieldset.style.border = "1px solid #ddd";
         fieldset.style.borderRadius = "4px";
+        fieldset.style.width = "100%";
+        fieldset.style.maxWidth = "100%";
+        fieldset.style.boxSizing = "border-box";
         
         const legend = document.createElement("legend");
         legend.style.fontWeight = "bold";
@@ -336,6 +339,10 @@ const SchemaEngine = {
     createFieldDiv(field, prefix = "data", existingData = null) {
         const div = document.createElement("div");
         div.style.marginBottom = "12px";
+        div.style.width = "100%";
+        div.style.maxWidth = "100%";
+        div.style.minWidth = "0";
+        div.style.boxSizing = "border-box";
         
         // Label
         const label = document.createElement("label");
@@ -360,6 +367,8 @@ const SchemaEngine = {
             help.style.fontSize = "11px";
             help.style.color = "#999";
             help.style.margin = "4px 0 0 0";
+            help.style.overflowWrap = "anywhere";
+            help.style.wordBreak = "break-word";
             
             if (field.constraint && field.constraint.options) {
                 help.textContent = `✓ Valores permitidos: ${field.constraint.options.join(", ")}`;
@@ -379,10 +388,12 @@ const SchemaEngine = {
         const input = document.createElement("input");
         input.name = `${prefix}[${field.name}]`;
         input.style.width = "100%";
-        input.style.maxWidth = "400px";
+        input.style.maxWidth = "100%";
+        input.style.minWidth = "0";
         input.style.padding = "6px";
         input.style.border = "1px solid #ccc";
         input.style.borderRadius = "4px";
+        input.style.boxSizing = "border-box";
         
         // Set input type based on field type
         if (field.type === "number") {
@@ -402,10 +413,12 @@ const SchemaEngine = {
             const select = document.createElement("select");
             select.name = `${prefix}[${field.name}]`;
             select.style.width = "100%";
-            select.style.maxWidth = "400px";
+            select.style.maxWidth = "100%";
+            select.style.minWidth = "0";
             select.style.padding = "6px";
             select.style.border = "1px solid #ccc";
             select.style.borderRadius = "4px";
+            select.style.boxSizing = "border-box";
             
             // Add placeholder
             const placeholder = document.createElement("option");
