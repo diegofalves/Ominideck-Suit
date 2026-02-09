@@ -1,4 +1,5 @@
 from collections import defaultdict
+from datetime import datetime
 
 
 # Tipos lógicos (não são tabelas OTM)
@@ -9,6 +10,56 @@ LOGICAL_OBJECT_TYPES = {
     "RATE",
     "EVENT_GROUP",
 }
+
+
+def _parse_history_date(raw_date):
+    if not raw_date:
+        return None
+
+    value = str(raw_date).strip()
+    if not value:
+        return None
+
+    for date_format in ("%d/%m/%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(value, date_format)
+        except ValueError:
+            continue
+
+    return None
+
+
+def _latest_history_entry(change_history):
+    latest_entry = None
+    latest_date = None
+
+    for entry in change_history:
+        if not any(entry.values()):
+            continue
+
+        entry_date = _parse_history_date(entry.get("date", ""))
+
+        if latest_entry is None:
+            latest_entry = entry
+            latest_date = entry_date
+            continue
+
+        if entry_date and latest_date:
+            if entry_date > latest_date:
+                latest_entry = entry
+                latest_date = entry_date
+            continue
+
+        if entry_date and not latest_date:
+            latest_entry = entry
+            latest_date = entry_date
+            continue
+
+        if not entry_date and not latest_date:
+            # Sem data válida: mantém a última entrada preenchida.
+            latest_entry = entry
+
+    return latest_entry
 
 
 def form_to_domain(form):
@@ -289,6 +340,14 @@ def form_to_domain(form):
         change_history_map[idx] for idx in sorted(change_history_map.keys())
         if any(change_history_map[idx].values())
     ]
+
+    latest_entry = _latest_history_entry(change_history)
+    if latest_entry:
+        version_control = {
+            "current_version": latest_entry.get("version", ""),
+            "last_update": latest_entry.get("date", ""),
+            "author": latest_entry.get("author", "")
+        }
 
     domain["project_metadata"] = {
         "migration_objective": {

@@ -61,6 +61,15 @@
       --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
       --active-group: hsl(var(--success));
       --active-group-bg: hsl(var(--success-bg));
+
+      /* OmniDeck Suite Identity */
+      --omni-app-bg: #0b1220;
+      --omni-doc-bg: #f1f5f9;
+      --omni-box-bg: #e9eef5;
+      --omni-blue: #0b5cff;
+      --omni-blue-deep: #0a1e3f;
+      --omni-text: #0f1f36;
+      --omni-border: #c5d2e4;
     }
 
     /* Dark Mode Support */
@@ -85,16 +94,19 @@
 
     html {
       scroll-behavior: smooth;
+      background: var(--omni-app-bg);
     }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       margin: 0;
-      background: hsl(var(--background));
-      color: hsl(var(--foreground));
+      background: var(--omni-app-bg);
+      color: var(--omni-text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      padding-bottom: var(--space-6);
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -123,9 +135,14 @@
     }
 
     form {
-      max-width: 1280px;
-      margin: var(--space-5) auto var(--space-6);
-      padding: 0 var(--space-4);
+      width: calc(100vw - 24px);
+      max-width: 1680px;
+      margin: var(--space-4) auto var(--space-6);
+      padding: clamp(14px, 1.6vw, 26px);
+      background: var(--omni-doc-bg);
+      border: 1px solid var(--omni-border);
+      border-radius: 14px;
+      box-shadow: 0 20px 48px rgba(10, 30, 63, 0.35);
     }
 
     /* ================================================
@@ -134,9 +151,10 @@
     fieldset {
       margin-bottom: var(--space-5);
       padding: var(--space-5);
-      border: 1px solid hsl(var(--border));
+      border: 1px solid var(--omni-border);
+      border-left: 4px solid var(--omni-blue);
       border-radius: var(--radius);
-      background: hsl(var(--card));
+      background: var(--omni-box-bg);
       box-shadow: var(--shadow-sm);
       transition: box-shadow 0.2s ease, border-color 0.2s ease;
     }
@@ -147,15 +165,15 @@
 
     /* Active Group Card - Special Styling */
     fieldset[style*="border: 2px solid #4CAF50"] {
-      border: 2px solid hsl(var(--success)) !important;
-      background: hsl(var(--success-bg));
-      box-shadow: 0 4px 20px -4px hsl(var(--success) / 0.25);
+      border: 2px solid var(--omni-blue) !important;
+      background: var(--omni-box-bg) !important;
+      box-shadow: 0 8px 24px -8px rgba(11, 92, 255, 0.35);
     }
 
     legend {
       font-weight: 700;
       padding: 0 var(--space-2);
-      color: hsl(var(--primary));
+      color: var(--omni-blue-deep);
       font-size: 16px;
       text-transform: none;
     }
@@ -180,10 +198,10 @@
       width: 100%;
       max-width: 600px;
       padding: 0.75rem 0.875rem;
-      border: 1px solid hsl(var(--input));
+      border: 1px solid #b7c6dc;
       border-radius: 8px;
-      background: hsl(var(--card));
-      color: hsl(var(--foreground));
+      background: #ffffff;
+      color: var(--omni-blue-deep);
       font-size: 14px;
       font-family: inherit;
       line-height: 1.4;
@@ -200,9 +218,9 @@
     input:focus, 
     select:focus, 
     textarea:focus {
-      border-color: hsl(var(--primary-600));
-      box-shadow: 0 0 0 3px hsl(var(--primary-600) / 0.15);
-      background-color: hsl(var(--card));
+      border-color: var(--omni-blue);
+      box-shadow: 0 0 0 3px rgba(11, 92, 255, 0.2);
+      background-color: #ffffff;
     }
 
     input:disabled, 
@@ -275,33 +293,34 @@
       border-collapse: collapse;
       font-size: 13px;
       margin-top: var(--space-2);
-      background: hsl(var(--card));
-      border: 1px solid hsl(var(--border));
+      background: #ffffff;
+      border: 1px solid var(--omni-border);
       border-radius: 8px;
       overflow: hidden;
       box-shadow: var(--shadow-sm);
     }
 
     thead {
-      background: hsl(var(--muted) / 0.5);
+      background: var(--omni-blue-deep);
     }
 
     th {
       padding: 0.75rem 0.875rem;
-      border-bottom: 1px solid hsl(var(--border));
+      border-bottom: 1px solid #26446c;
       text-align: left;
       font-weight: 600;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: hsl(var(--muted-foreground));
+      color: #ffffff;
     }
 
     td {
       padding: 0.75rem 0.875rem;
-      border-bottom: 1px solid hsl(var(--border));
+      border-bottom: 1px solid #d8e1ee;
       text-align: left;
       vertical-align: top;
+      background: #ffffff;
     }
 
     tbody tr {
@@ -309,11 +328,103 @@
     }
 
     tbody tr:nth-child(even) {
-      background: hsl(var(--muted) / 0.2);
+      background: #ffffff;
     }
 
     tbody tr:hover {
-      background: hsl(var(--muted) / 0.3);
+      background: #f7fbff;
+    }
+
+    /* ================================================
+       Tabelas do Painel - Ajuste de Largura
+    ================================================ */
+    .group-summary-table,
+    .group-objects-table {
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .group-summary-table th,
+    .group-summary-table td,
+    .group-objects-table th,
+    .group-objects-table td {
+      padding: 6px 6px !important;
+      vertical-align: middle;
+    }
+
+    .group-summary-table th:nth-child(1) { width: 5% !important; }
+    .group-summary-table th:nth-child(2) { width: 16% !important; }
+    .group-summary-table th:nth-child(3) { width: 14% !important; }
+    .group-summary-table th:nth-child(4) { width: 49% !important; }
+    .group-summary-table th:nth-child(5) { width: 4% !important; }
+    .group-summary-table th:nth-child(6) { width: 5% !important; }
+    .group-summary-table th:nth-child(7) { width: 7% !important; }
+    
+    .group-summary-table td:nth-child(1) { width: 5% !important; }
+    .group-summary-table td:nth-child(2) { width: 16% !important; }
+    .group-summary-table td:nth-child(3) { width: 14% !important; }
+    .group-summary-table td:nth-child(4) { width: 49% !important; }
+    .group-summary-table td:nth-child(5) { width: 4% !important; }
+    .group-summary-table td:nth-child(6) { width: 5% !important; }
+    .group-summary-table td:nth-child(7) { width: 7% !important; }
+
+    .group-summary-table td:nth-child(2),
+    .group-summary-table td:nth-child(3) {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .group-objects-table th:nth-child(1) { width: 4% !important; text-align: center !important; }
+    .group-objects-table th:nth-child(2) { width: 27% !important; }
+    .group-objects-table th:nth-child(3) { width: 13% !important; }
+    .group-objects-table th:nth-child(4) { width: 10% !important; }
+    .group-objects-table th:nth-child(5) { width: 7% !important; }
+    .group-objects-table th:nth-child(6),
+    .group-objects-table th:nth-child(7),
+    .group-objects-table th:nth-child(8),
+    .group-objects-table th:nth-child(9) {
+      width: auto !important;
+      text-align: center !important;
+    }
+    .group-objects-table th:nth-child(10) {
+      width: 32px !important;
+      min-width: 32px !important;
+      max-width: 32px !important;
+      padding-left: 2px !important;
+      padding-right: 2px !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+    }
+    .group-objects-table th:nth-child(11) {
+      width: auto !important;
+      text-align: center !important;
+    }
+
+    .group-objects-table td:nth-child(1) { width: 4% !important; text-align: center !important; }
+    .group-objects-table td:nth-child(2) { width: 27% !important; }
+    .group-objects-table td:nth-child(3) { width: 13% !important; }
+    .group-objects-table td:nth-child(4) { width: 10% !important; }
+    .group-objects-table td:nth-child(5) { width: 7% !important; }
+    .group-objects-table td:nth-child(6),
+    .group-objects-table td:nth-child(7),
+    .group-objects-table td:nth-child(8),
+    .group-objects-table td:nth-child(9),
+    .group-objects-table td:nth-child(11) {
+      text-align: center !important;
+      white-space: nowrap;
+    }
+    .group-objects-table td:nth-child(10) {
+      width: 32px !important;
+      min-width: 32px !important;
+      max-width: 32px !important;
+      padding-left: 2px !important;
+      padding-right: 2px !important;
+      text-align: center !important;
+      white-space: nowrap;
+    }
+    .group-objects-table td:nth-child(10) .badge-status {
+      padding: 2px 4px !important;
+      min-width: 0 !important;
     }
 
     /* ================================================
@@ -366,14 +477,20 @@
        Responsive Grid
     ================================================ */
     @media (max-width: 1024px) {
-      form { padding: 0 var(--space-3); }
+      form { width: calc(100vw - 16px); padding: var(--space-4); }
       input, select, textarea { max-width: 100%; }
       fieldset { padding: var(--space-4); }
       h1 { font-size: 28px; }
+      .group-objects-table,
+      .group-summary-table { font-size: 12px; }
+      .group-objects-table th,
+      .group-objects-table td,
+      .group-summary-table th,
+      .group-summary-table td { padding: 5px 4px !important; }
     }
 
     @media (max-width: 768px) {
-      form { padding: 0 var(--space-2); }
+      form { width: calc(100vw - 12px); padding: var(--space-3); }
       fieldset { padding: var(--space-3); }
       label { font-size: 12px; }
       input, select, textarea { font-size: 16px; }
@@ -453,22 +570,168 @@
        Table Row Styling
     ================================================ */
     .table-row-even {
-      background-color: #f8f9fa;
+      background-color: #ffffff;
     }
 
     .table-row-odd {
-      background-color: white;
+      background-color: #ffffff;
     }
 
     .table-row {
       border-bottom: 1px solid #e9ecef;
       transition: background-color 0.2s;
     }
+
+    .panel-brand {
+      width: calc(100vw - 24px);
+      max-width: 1680px;
+      margin: var(--space-4) auto 0;
+      padding: 0 clamp(2px, 0.8vw, 10px);
+      display: grid;
+      grid-template-columns: clamp(160px, 24vw, 280px) 1fr clamp(160px, 24vw, 280px);
+      align-items: center;
+      column-gap: 34px;
+    }
+
+    .panel-brand::after {
+      content: "";
+      width: clamp(160px, 24vw, 280px);
+      height: 1px;
+      visibility: hidden;
+    }
+
+    .panel-brand__logo {
+      grid-column: 1;
+      justify-self: start;
+      display: block;
+      width: clamp(160px, 24vw, 280px);
+      height: auto;
+      filter: drop-shadow(0 10px 24px rgba(10, 30, 63, 0.45));
+    }
+
+    .panel-brand__content {
+      grid-column: 2;
+      justify-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      max-width: 720px;
+    }
+
+    .panel-brand__title {
+      margin: 0;
+      font-size: clamp(24px, 2.8vw, 36px);
+      line-height: 1.1;
+      color: #e9eef5;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .panel-brand__subtitle {
+      margin: 0;
+      font-size: 13px;
+      color: #9db0cf;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .panel-brand {
+        display: flex;
+        width: calc(100vw - 12px);
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        padding: 0;
+      }
+
+      .panel-brand::after {
+        display: none;
+      }
+
+      .panel-brand__logo {
+        width: clamp(150px, 52vw, 240px);
+      }
+
+      .panel-brand__content {
+        text-align: center;
+        align-items: center;
+      }
+    }
+
+    /* ============================================================
+       OmniDeck Identity Overrides for Inline Styles
+       ============================================================ */
+    fieldset[style*="background-color"] {
+      background: var(--omni-box-bg) !important;
+      border-color: var(--omni-border) !important;
+    }
+
+    fieldset[style*="border-left"] {
+      border-left-color: var(--omni-blue) !important;
+    }
+
+    fieldset legend[style*="color"] {
+      color: var(--omni-blue-deep) !important;
+    }
+
+    input[style],
+    select[style],
+    textarea[style] {
+      background: #ffffff !important;
+      border-color: #b7c6dc !important;
+      color: var(--omni-blue-deep) !important;
+    }
+
+    input[readonly][style] {
+      background: #ffffff !important;
+      color: #3d4f68 !important;
+    }
+
+    table[style],
+    table[style] td {
+      background: #ffffff !important;
+    }
+
+    table[style] thead tr[style] {
+      background: var(--omni-blue-deep) !important;
+    }
+
+    table[style] thead tr[style] th {
+      background: var(--omni-blue-deep) !important;
+      color: #ffffff !important;
+      border-bottom: 1px solid #26446c !important;
+    }
+
+    #change-history-table thead th {
+      color: #fff !important;
+      font-weight: 700 !important;
+      font-size: 12px !important;
+      line-height: 1.4 !important;
+      /* O background será definido pelo CSS institucional */
+    }
+    }
+
+    tr[style*="background-color: #f5f5f5"],
+    tr[style*="background-color: #f8f9fa"] {
+      background-color: #ffffff !important;
+    }
   </style>
 </head>
 <body>
 
-<h1>OmniDeck</h1>
+<header class="panel-brand" aria-label="Identidade OmniDeck">
+  <img
+    class="panel-brand__logo"
+    src="{{ url_for('static', filename='img/omnideck_logo.png') }}"
+    alt="OmniDeck"
+  >
+  <div class="panel-brand__content">
+    <h1 class="panel-brand__title">Painel de Construção - Projeto de Migração</h1>
+    <p class="panel-brand__subtitle">Gestão e acompanhamento da migração OTM DEV para OTM PROD</p>
+  </div>
+</header>
 {% set change_history = project.project_metadata.change_history if project and project.project_metadata else [] %}
 <script>
   window.initialChangeHistory = {{ change_history | tojson | safe }};
@@ -651,12 +914,12 @@
     <legend>Histórico de Alterações</legend>
     <table id="change-history-table" style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
       <thead>
-        <tr style="background-color: #f5f5f5; border-bottom: 2px solid #ddd;">
-          <th style="text-align: left; padding: 8px; font-size: 12px; width: 12%;">Data</th>
-          <th style="text-align: left; padding: 8px; font-size: 12px; width: 10%;">Versão</th>
-          <th style="text-align: left; padding: 8px; font-size: 12px; width: 50%;">Descrição</th>
-          <th style="text-align: left; padding: 8px; font-size: 12px; width: 18%;">Autor</th>
-          <th style="text-align: center; padding: 8px; font-size: 12px; width: 10%;">Ações</th>
+        <tr>
+          <th class="omni-header-th" style="width: 8%;">Data</th>
+          <th class="omni-header-th" style="width: 6%;">Versão</th>
+          <th class="omni-header-th" style="width: 64%;">Descrição</th>
+          <th class="omni-header-th" style="width: 12%;">Autor</th>
+          <th class="omni-header-th" style="width: 10%; text-align: center;">Ações</th>
         </tr>
       </thead>
       <tbody id="change-history-rows">
@@ -676,15 +939,16 @@
     </p>
 
     {% if project and project.groups %}
-      <table style="width: 100%; margin-bottom: 16px; border-collapse: collapse; font-size: 13px;">
+      <table class="group-summary-table" style="width: 100%; margin-bottom: 16px; border-collapse: collapse; font-size: 13px;">
         <thead>
           <tr style="background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
             <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 50px;">Nº</th>
             <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 180px;">ID Grupo</th>
-            <th style="text-align: left; padding: 6px 8px; font-weight: 600;">Nome</th>
-            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 60px;">Seq.</th>
-            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 70px;">Objetos</th>
-            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 110px;">Ações</th>
+            <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 140px; white-space: nowrap;">Nome</th>
+            <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 590px; white-space: normal;">Descrição</th>
+            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 42px;">Seq.</th>
+            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 52px;">Objetos</th>
+            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 78px;">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -692,17 +956,18 @@
             <tr class="{% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}" style="border-bottom: 1px solid #eee;">
               <td style="padding: 2px 8px; color: #666;">{{ loop.index }}</td>
               <td style="padding: 2px 8px;"><code style="background: #f0f0f0; padding: 2px 4px; border-radius: 3px; font-size: 12px;">{{ g.group_id }}</code></td>
-              <td style="padding: 2px 8px;"><strong>{{ g.label }}</strong></td>
+              <td style="padding: 2px 8px; white-space: nowrap;"><strong>{{ g.label }}</strong></td>
+              <td style="padding: 2px 8px; color: #666; white-space: normal;">{{ g.description if g.description is defined else 'Sem descrição' }}</td>
               <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.sequence }}º</td>
               <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.objects|length if g.objects else 0 }}</td>
-              <td style="text-align: center; padding: 2px 8px !important; white-space: nowrap; font-size: 0;">
-                <form method="POST" style="display: inline-block; margin: 0; padding: 0; vertical-align: middle;">
+              <td class="actions-cell" style="text-align: center;">
+                <button class="icon-btn" onclick="document.getElementById('edit-form-{{ g.group_id }}').submit()" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar grupo">✏️</button><button class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este grupo?')) document.getElementById('remove-form-{{ g.group_id }}').submit()" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover grupo">🗑️</button>
+                <form id="edit-form-{{ g.group_id }}" method="POST" style="display: none;">
                   <input type="hidden" name="active_group_id" value="{{ g.group_id }}">
-                  <input type="hidden" id="reset_edit_mode" name="reset_edit_mode" value="1">
-                  <button type="submit" style="background: #2196F3; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; margin: 0 4px 0 0;" title="Editar grupo">✏️</button>
-                </form><form method="POST" style="display: inline-block; margin: 0; padding: 0; vertical-align: middle;" onsubmit="return confirm('Tem certeza que deseja remover este grupo?');">
+                  <input type="hidden" name="reset_edit_mode" value="1">
+                </form>
+                <form id="remove-form-{{ g.group_id }}" method="POST" style="display: none;">
                   <input type="hidden" name="remove_group_id" value="{{ g.group_id }}">
-                  <button type="submit" style="background: #f44336; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; margin: 0;" title="Remover grupo">🗑️</button>
                 </form>
               </td>
             </tr>
@@ -759,16 +1024,20 @@
       <fieldset style="margin-bottom: 24px;">
         <legend>📦 Objetos do Grupo ({{ current_group.data.objects|length }})</legend>
 
-        <table style="border-collapse: collapse; width: 100%; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <table class="group-objects-table" style="border-collapse: collapse; width: 100%; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
           <thead>
             <tr style="background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%); border-bottom: 2px solid #dee2e6;">
               <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 40px;">#</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057;">Nome Funcional</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 300px;">Nome Funcional</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 180px;">Tipo de Objeto</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 120px;">Deploy</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 150px;">Responsável</th>
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 120px;">Status Doc.</th>
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 100px;">Status Impl.</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 120px;">Tipo Deploy</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 50px;">Resp.</th>
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">📝 Doc.</th>
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">📦 Mig.</th>
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">💾 Exp.</th>
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">🚀 Dep.</th>
+              <th title="Validação" style="padding: 10px 2px; text-align: center; font-weight: 600; color: #495057; width: 32px; white-space: nowrap;">√</th>
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 90px;">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -799,26 +1068,72 @@
                 <td style="padding: 10px 12px; text-align: center;">
                   {% if obj.status and obj.status.documentation %}
                     <span class="badge-status {% if obj.status.documentation == 'DONE' %}badge-status-done{% elif obj.status.documentation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.documentation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
-                      {% if obj.status.documentation == 'DONE' %}✓ Concluído
-                      {% elif obj.status.documentation == 'IN_PROGRESS' %}⏳ Em Progresso
-                      {% elif obj.status.documentation == 'NOT_STARTED' %}○ Não Iniciado
-                      {% else %}{{ obj.status.documentation }}{% endif %}
+                      {% if obj.status.documentation == 'DONE' %}✓
+                      {% elif obj.status.documentation == 'IN_PROGRESS' %}⏳
+                      {% elif obj.status.documentation == 'NOT_STARTED' %}○
+                      {% else %}○{% endif %}
                     </span>
                   {% else %}
                     <span style="color: #adb5bd; font-size: 11px;">-</span>
                   {% endif %}
                 </td>
                 <td style="padding: 10px 12px; text-align: center;">
-                  {% if obj.status and obj.status.implementation %}
-                    <span class="badge-status {% if obj.status.implementation == 'DONE' %}badge-status-done{% elif obj.status.implementation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.implementation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
-                      {% if obj.status.implementation == 'DONE' %}✓ Concluído
-                      {% elif obj.status.implementation == 'IN_PROGRESS' %}⏳ Em Progresso
-                      {% elif obj.status.implementation == 'NOT_STARTED' %}○ Não Iniciado
-                      {% else %}{{ obj.status.implementation }}{% endif %}
+                  {% if obj.status and obj.status.migration_project %}
+                    <span class="badge-status {% if obj.status.migration_project == 'DONE' %}badge-status-done{% elif obj.status.migration_project == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.migration_project == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                      {% if obj.status.migration_project == 'DONE' %}✓
+                      {% elif obj.status.migration_project == 'IN_PROGRESS' %}⏳
+                      {% elif obj.status.migration_project == 'NOT_STARTED' %}○
+                      {% else %}○{% endif %}
                     </span>
                   {% else %}
                     <span style="color: #adb5bd; font-size: 11px;">-</span>
                   {% endif %}
+                </td>
+                <td style="padding: 10px 12px; text-align: center;">
+                  {% if obj.status and obj.status.export %}
+                    <span class="badge-status {% if obj.status.export == 'DONE' %}badge-status-done{% elif obj.status.export == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.export == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                      {% if obj.status.export == 'DONE' %}✓
+                      {% elif obj.status.export == 'IN_PROGRESS' %}⏳
+                      {% elif obj.status.export == 'NOT_STARTED' %}○
+                      {% else %}○{% endif %}
+                    </span>
+                  {% else %}
+                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                  {% endif %}
+                </td>
+                <td style="padding: 10px 12px; text-align: center;">
+                  {% if obj.status and obj.status.deploy %}
+                    <span class="badge-status {% if obj.status.deploy == 'DONE' %}badge-status-done{% elif obj.status.deploy == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.deploy == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                      {% if obj.status.deploy == 'DONE' %}✓
+                      {% elif obj.status.deploy == 'IN_PROGRESS' %}⏳
+                      {% elif obj.status.deploy == 'NOT_STARTED' %}○
+                      {% else %}○{% endif %}
+                    </span>
+                  {% else %}
+                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                  {% endif %}
+                </td>
+                <td style="padding: 10px 12px; text-align: center;">
+                  {% if obj.status and obj.status.validation %}
+                    <span class="badge-status {% if obj.status.validation == 'DONE' %}badge-status-done{% elif obj.status.validation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.validation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                      {% if obj.status.validation == 'DONE' %}✓
+                      {% elif obj.status.validation == 'IN_PROGRESS' %}⏳
+                      {% elif obj.status.validation == 'NOT_STARTED' %}○
+                      {% else %}○{% endif %}
+                    </span>
+                  {% else %}
+                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                  {% endif %}
+                </td>
+                <td class="actions-cell">
+                  <button class="icon-btn" onclick="document.getElementById('edit-obj-form-{{ loop.index0 }}').submit()" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar objeto">✏️</button><button class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este objeto?')) document.getElementById('remove-obj-form-{{ loop.index0 }}').submit()" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover objeto">🗑️</button>
+                  <form id="edit-obj-form-{{ loop.index0 }}" method="POST" style="display: none;">
+                    <input type="hidden" name="action" value="load_object">
+                    <input type="hidden" name="edit_object_index" value="{{ loop.index0 }}">
+                  </form>
+                  <form id="remove-obj-form-{{ loop.index0 }}" method="POST" style="display: none;">
+                    <input type="hidden" name="remove_object_index" value="{{ loop.index0 }}">
+                  </form>
                 </td>
               </tr>
             {% endfor %}
@@ -850,46 +1165,22 @@
 
     <fieldset style="border: 2px solid #4CAF50;">
       <legend>
-        Grupo Ativo — {{ active_group.label }}
+        Edição do Objeto — {{ current_object.name if current_object and current_object.name else 'Novo Objeto' }}
       </legend>
 
-      <p style="font-size: 13px; color: #555;">
-        Você está editando o grupo
-        <strong>{{ active_group.label }}</strong>
-        ({{ active_group.sequence }}º no fluxo).
-      </p>
-
-      <!-- Seção de Seleção/Criação de Objeto -->
-      {% if current_group.data and current_group.data.objects %}
-        <label for="edit_object_index" style="font-weight: bold; margin-top: 16px;">Editar Objeto Existente</label>
-        <input type="hidden" name="action" value="" id="form_action">
-        <select id="edit_object_index" name="edit_object_index" style="margin-bottom: 16px;" onchange="document.getElementById('form_action').value='load_object'; this.form.submit();">
-          <option value="">— Criar novo objeto —</option>
-
-          {% for obj in current_group.data.objects %}
-            <option value="{{ loop.index0 }}"
-              {% if edit_object_index == loop.index0 %}selected{% endif %}
-            >
-              {{ obj.name or ("Objeto " ~ loop.index) }} — {{ obj.object_type or obj.type }} · {{ obj.deployment_type }}
-            </option>
-          {% endfor %}
-        </select>
-      {% endif %}
-
-      <h4>{% if edit_object_index >= 0 %}Editar Objeto{% else %}Novo Objeto{% endif %}</h4>
-
-      <p style="font-size: 12px; color: #666; margin-bottom: 12px;">
+      <p style="font-size: 13px; color: #555; margin-bottom: 12px;">
+        Grupo selecionado: <strong>{{ active_group.label }}</strong> ({{ active_group.sequence }}º no fluxo) ·
         {% if edit_object_index >= 0 %}
-          <strong>Modo: Edição</strong> - Alterando objeto #{{ edit_object_index + 1 }}
+          Editando objeto #{{ edit_object_index + 1 }}
         {% else %}
-          <strong>Modo: Criação</strong> - Um novo objeto será adicionado ao grupo
+          Criando novo objeto
         {% endif %}
       </p>
 
       <!-- Formulário de Objeto -->
       <h4>Dados do Objeto</h4>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
         <div>
           <label><strong>Nome do Objeto *</strong></label>
           <input 
@@ -933,7 +1224,7 @@
       <!-- ========================================== -->
       <!-- SAVED QUERY (somente para tipo SAVED_QUERY) -->
       <!-- ========================================== -->
-      <div id="saved_query_block" style="display: none; margin-bottom: 16px;">
+      <div id="saved_query_block" style="display: none; margin-bottom: 12px;">
         <label><strong>Saved Query (SQL) *</strong></label>
         <textarea 
           name="saved_query_sql" 
@@ -947,9 +1238,9 @@
       <!-- ========================================== -->
       <!-- STATUS (sempre visível) - GRID LAYOUT     -->
       <!-- ========================================== -->
-      <h4 style="margin-top: 16px;">Status e Configuração</h4>
+      <h4 style="margin-top: 12px;">Status e Configuração</h4>
       
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
         <div>
           <label>📝 Documentação</label>
           <select name="status_documentation">
@@ -1014,9 +1305,9 @@
       <!-- ========================================== -->
       <!-- Informações Técnicas e Metadados         -->
       <!-- ========================================== -->
-      <h4 style="margin-top: 16px;">Informações Técnicas</h4>
+      <h4 style="margin-top: 12px;">Informações Técnicas</h4>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
         <div>
           <label>📋 OTM Table</label>
           <input type="text" name="object_otm_table" value="{{ current_object.otm_table if current_object else '' }}" placeholder="Ex: SAVED_QUERY" style="width: 100%;">
@@ -1043,6 +1334,7 @@
           <input type="text" name="identifiers[migration_project_id]" placeholder="ID do projeto" value="{{ current_object.identifiers.migration_project_id if current_object and current_object.identifiers else '' }}" style="width: 100%;">
         </div>
       </div>
+      <div style="margin-bottom: 12px;">
         <label>📝 Notas</label>
         <textarea 
           name="object_notes" 
@@ -1055,9 +1347,9 @@
       <!-- ========================================== -->
       <!-- Identificadores para Tipos Lógicos       -->
       <!-- ========================================== -->
-      <h4 style="margin-top: 24px;">Identificadores (Tipos Lógicos)</h4>
+      <h4 style="margin-top: 16px;">Identificadores (Tipos Lógicos)</h4>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
         <!-- SAVED_QUERY -->
         <div id="identifier_query_name" style="display:none;">
           <label>Query Name</label>

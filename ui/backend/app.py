@@ -4,11 +4,11 @@ import os
 
 from pathlib import Path
 
-from .loaders import load_all
-from .form_to_domain import form_to_domain
-from .validators import validate_project, DomainValidationError
-from .writers import load_project, save_project
-from .schema_repository import SchemaRepository
+from ui.backend.loaders import load_all
+from ui.backend.form_to_domain import form_to_domain
+from ui.backend.validators import validate_project, DomainValidationError
+from ui.backend.writers import load_project, save_project
+from ui.backend.schema_repository import SchemaRepository
 
 
 # -------------------------------------------------

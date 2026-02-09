@@ -25,6 +25,8 @@ def load_project():
     # Compatibilidade retroativa: adicionar 'name' e 'description' se não existirem
     if data.get("groups"):
         for group_idx, group in enumerate(data["groups"]):
+            if "description" not in group:
+                group["description"] = ""
             if group.get("objects"):
                 for obj_idx, obj in enumerate(group["objects"]):
                     if "name" not in obj:
@@ -33,7 +35,6 @@ def load_project():
                         obj["name"] = f"{obj_type} #{obj_idx + 1}"
                     if "description" not in obj:
                         obj["description"] = ""
-                    
                     # Garantir status existe
                     if "status" not in obj:
                         obj["status"] = {
@@ -46,7 +47,6 @@ def load_project():
                             obj["status"]["documentation"] = "PENDING"
                         if "deployment" not in obj["status"]:
                             obj["status"]["deployment"] = "PENDING"
-                    
                     # Garantir saved_query existe para SAVED_QUERY
                     obj_type = obj.get("object_type") or obj.get("type")
                     if obj_type == "SAVED_QUERY" and "saved_query" not in obj:

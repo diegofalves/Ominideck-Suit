@@ -93,7 +93,7 @@ function addObject(groupIndex) {
   objectDiv.innerHTML = `
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #eee;">
       <h4 style="margin: 0; color: #666;">Objeto #${objectIndex + 1}</h4>
-      <button type="button" onclick="removeObject(${groupIndex}, ${objectIndex})" style="background: #f44336; color: white; padding: 4px 8px; border: none; cursor: pointer; border-radius: 3px; font-size: 12px;">
+      <button type="button" onclick="removeObject(${groupIndex}, ${objectIndex})" style="background: #f44336; color: white; padding: 4px 8px; border: none; cursor: pointer; border-radius: 3px; font-size: 12px; display: inline-flex; align-items: center; gap: 4px;">
         🗑️ Remover
       </button>
     </div>
@@ -210,17 +210,33 @@ function removeObject(groupIndex, objectIndex) {
 // HISTÓRICO DE ALTERAÇÕES
 // ============================================================
 
+// Converter data de ISO (YYYY-MM-DD) para formato BR (DD/MM/YYYY)
+function formatDateToBR(dateStr) {
+  if (!dateStr) return '';
+  // Se já está no formato BR, retorna como está
+  if (dateStr.includes('/')) return dateStr;
+  // Converte de YYYY-MM-DD para DD/MM/YYYY
+  const parts = dateStr.split('-');
+  if (parts.length === 3) {
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+  }
+  return dateStr;
+}
+
 function buildChangeHistoryRow(index, data = {}) {
   const row = document.createElement("tr");
   row.className = "change-history-row";
   row.dataset.index = index;
   row.style.borderBottom = "1px solid #e0e0e0";
 
+  // Formatar data para padrão BR
+  const dateBR = formatDateToBR(data.date);
+
   // Modo visualização (padrão)
   row.innerHTML = `
     <td style="padding: 8px; font-size: 13px;">
-      <span class="view-mode" data-field="date">${data.date || '-'}</span>
-      <input type="text" class="edit-mode" name="change_history[${index}][date]" value="${data.date || ''}" style="display: none; width: 100%; padding: 4px; font-size: 12px;">
+      <span class="view-mode" data-field="date">${dateBR || '-'}</span>
+      <input type="text" class="edit-mode" name="change_history[${index}][date]" value="${dateBR || ''}" placeholder="DD/MM/YYYY" style="display: none; width: 100%; padding: 4px; font-size: 12px;">
     </td>
     <td style="padding: 8px; font-size: 13px;">
       <span class="view-mode" data-field="version">${data.version || '-'}</span>
@@ -234,14 +250,14 @@ function buildChangeHistoryRow(index, data = {}) {
       <span class="view-mode" data-field="author">${data.author || '-'}</span>
       <input type="text" class="edit-mode" name="change_history[${index}][author]" value="${data.author || ''}" style="display: none; width: 100%; padding: 4px; font-size: 12px;">
     </td>
-    <td style="padding: 8px; text-align: center;">
-      <button type="button" class="edit-btn" onclick="toggleEditHistoryRow(${index})" style="background: #2196F3; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; margin-right: 4px;" title="Editar">
+    <td style="padding: 2px 8px; text-align: center; font-size: 0;">
+      <button type="button" class="edit-btn" onclick="toggleEditHistoryRow(${index})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0;" title="Editar">
         ✏️
       </button>
-      <button type="button" class="save-btn" onclick="toggleEditHistoryRow(${index})" style="display: none; background: #4CAF50; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; margin-right: 4px;" title="Salvar">
+      <button type="button" class="save-btn" onclick="toggleEditHistoryRow(${index})" style="display: none; background: #4CAF50; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0;" title="Salvar">
         ✔️
       </button>
-      <button type="button" onclick="removeChangeHistoryRow(${index})" style="background: #f44336; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 11px;" title="Remover">
+      <button type="button" onclick="removeChangeHistoryRow(${index})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0;" title="Remover">
         🗑️
       </button>
     </td>
@@ -307,25 +323,82 @@ function updateVersionControl() {
   const historyContainer = document.getElementById("change-history-rows");
   if (!historyContainer) return;
   
-  const allRows = historyContainer.querySelectorAll('.change-history-row');
-  
-  // Pegar a última linha (mais recente)
-  if (allRows.length > 0) {
-    const lastRow = allRows[allRows.length - 1];
-    
-    const version = lastRow.querySelector('input[name*="[version]"]')?.value || '';
-    const date = lastRow.querySelector('input[name*="[date]"]')?.value || '';
-    const author = lastRow.querySelector('input[name*="[author]"]')?.value || '';
-    
-    // Atualizar campos de Controle de Versão
-    const versionField = document.getElementById('version_control_current_version');
-    const dateField = document.getElementById('version_control_last_update');
-    const authorField = document.getElementById('version_control_author');
-    
-    if (versionField) versionField.value = version;
-    if (dateField) dateField.value = date;
-    if (authorField) authorField.value = author;
+  const allRows = Array.from(historyContainer.querySelectorAll('.change-history-row'));
+
+  const parseHistoryDate = (rawDate) => {
+    if (!rawDate) return null;
+    const value = String(rawDate).trim();
+    if (!value) return null;
+
+    // DD/MM/YYYY
+    let match = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (match) {
+      const day = Number(match[1]);
+      const month = Number(match[2]) - 1;
+      const year = Number(match[3]);
+      return Date.UTC(year, month, day);
+    }
+
+    // YYYY-MM-DD
+    match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (match) {
+      const year = Number(match[1]);
+      const month = Number(match[2]) - 1;
+      const day = Number(match[3]);
+      return Date.UTC(year, month, day);
+    }
+
+    const timestamp = Date.parse(value);
+    return Number.isNaN(timestamp) ? null : timestamp;
+  };
+
+  const entries = allRows
+    .map((row, position) => ({
+      position,
+      version: row.querySelector('input[name*="[version]"]')?.value?.trim() || '',
+      date: row.querySelector('input[name*="[date]"]')?.value?.trim() || '',
+      author: row.querySelector('input[name*="[author]"]')?.value?.trim() || ''
+    }))
+    .filter((entry) => entry.version || entry.date || entry.author);
+
+  const versionField = document.getElementById('version_control_current_version');
+  const dateField = document.getElementById('version_control_last_update');
+  const authorField = document.getElementById('version_control_author');
+
+  if (entries.length === 0) {
+    if (versionField) versionField.value = '';
+    if (dateField) dateField.value = '';
+    if (authorField) authorField.value = '';
+    return;
   }
+
+  // Regra: usar a entrada mais recente por data. Se não houver data válida, usa a última preenchida.
+  let latestEntry = entries[0];
+  for (let i = 1; i < entries.length; i++) {
+    const candidate = entries[i];
+    const latestDate = parseHistoryDate(latestEntry.date);
+    const candidateDate = parseHistoryDate(candidate.date);
+
+    if (candidateDate !== null && latestDate !== null) {
+      if (candidateDate > latestDate || (candidateDate === latestDate && candidate.position > latestEntry.position)) {
+        latestEntry = candidate;
+      }
+      continue;
+    }
+
+    if (candidateDate !== null && latestDate === null) {
+      latestEntry = candidate;
+      continue;
+    }
+
+    if (candidateDate === null && latestDate === null && candidate.position > latestEntry.position) {
+      latestEntry = candidate;
+    }
+  }
+
+  if (versionField) versionField.value = latestEntry.version;
+  if (dateField) dateField.value = latestEntry.date;
+  if (authorField) authorField.value = latestEntry.author;
 }
 
 // Observar mudanças nos campos do histórico
