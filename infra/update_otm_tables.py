@@ -33,17 +33,36 @@ CORE_QUERY_TIMEOUT_SECONDS = 300
 SOURCE_SCRIPT_NAME = "update_otm_tables.py"
 
 CORE_DOMAIN_COUNT_SQL = """
+WITH candidate_tables AS (
+  SELECT
+    atc.table_name,
+    ats.num_rows,
+    ats.stale_stats,
+    ats.last_analyzed
+  FROM all_tab_columns atc
+  LEFT JOIN all_tab_statistics ats
+    ON ats.owner = atc.owner
+   AND ats.table_name = atc.table_name
+   AND ats.partition_name IS NULL
+  WHERE atc.owner = 'GLOGOWNER'
+    AND atc.column_name = 'DOMAIN_NAME'
+    AND atc.table_name NOT LIKE 'BIN$%'
+    AND atc.table_name NOT LIKE '%$%'
+)
 SELECT
   table_name,
-  dbms_xmlgen.getxmltype(
-    'SELECT (SELECT LISTAGG(domain_name || '': '' || cnt, '' | '') WITHIN GROUP (ORDER BY domain_name) ' ||
-    'FROM (SELECT domain_name, COUNT(*) cnt FROM GLOGOWNER."' || table_name || '" GROUP BY domain_name)) c FROM DUAL'
-  ).extract('//C/text()').getstringval() AS total_registros_geral
-FROM all_tab_columns
-WHERE owner = 'GLOGOWNER'
-  AND column_name = 'DOMAIN_NAME'
-  AND table_name NOT LIKE 'BIN$%'
-  AND table_name NOT LIKE '%$%'
+  CASE
+    WHEN last_analyzed IS NOT NULL
+     AND stale_stats = 'NO'
+     AND num_rows = 0
+    THEN ''
+    ELSE dbms_xmlgen.getxmltype(
+      'SELECT (SELECT LISTAGG(domain_name || '': '' || cnt, '' | '') WITHIN GROUP (ORDER BY domain_name) ' ||
+      'FROM (SELECT domain_name, COUNT(*) cnt FROM GLOGOWNER."' || table_name || '" ' ||
+      'WHERE domain_name IS NOT NULL GROUP BY domain_name)) c FROM DUAL'
+    ).extract('//C/text()').getstringval()
+  END AS total_registros_geral
+FROM candidate_tables
 ORDER BY table_name
 """
 
