@@ -279,6 +279,107 @@ def _ensure_domain_statistics_coverage(data: Dict[str, Any]) -> None:
             next_sequence += 1
 
 
+def _cleanup_group_zero_legacy_generic_autos(data: Dict[str, Any]) -> None:
+    """
+    Remove autos legados genéricos em SEM_GRUPO quando a cobertura por domínio
+    já existe para tabelas multi-domínio.
+    """
+    required_map = table_domain_map()
+    if not required_map:
+        return
+
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    group_zero = None
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        if _normalize_name(group.get("group_id")) == GROUP_ZERO_ID:
+            group_zero = group
+            break
+
+    if group_zero is None:
+        return
+
+    objects = _as_object_list(group_zero.get("objects"))
+    group_zero["objects"] = objects
+    if not objects:
+        return
+
+    coverage = object_domain_map(data.get("groups", []), required_map)
+    filtered: List[Dict[str, Any]] = []
+
+    for obj in objects:
+        table_name = _normalize_name(obj.get("object_type") or obj.get("otm_table"))
+        if not table_name:
+            filtered.append(obj)
+            continue
+
+        table_domains = [d for d in required_map.get(table_name, []) if d]
+        if len(table_domains) <= 1:
+            filtered.append(obj)
+            continue
+
+        is_auto = _is_truthy(obj.get("auto_generated"))
+        has_domain = bool(_normalize_name(obj.get("domainName") or obj.get("domain")))
+        generic_name = f"{table_name} (AUTO)"
+        is_generic_legacy = _normalize_name(obj.get("name")) == generic_name
+        has_full_coverage = all(
+            domain in coverage.get(table_name, set()) for domain in table_domains
+        )
+
+        if is_auto and is_generic_legacy and not has_domain and has_full_coverage:
+            continue
+
+        filtered.append(obj)
+
+    group_zero["objects"] = filtered
+
+
+def _deduplicate_group_zero_auto_objects(data: Dict[str, Any]) -> None:
+    """
+    Garante apenas 1 objeto auto por combinacao (tabela, dominio) no SEM_GRUPO.
+    """
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    group_zero = None
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        if _normalize_name(group.get("group_id")) == GROUP_ZERO_ID:
+            group_zero = group
+            break
+    if group_zero is None:
+        return
+
+    objects = _as_object_list(group_zero.get("objects"))
+    if not objects:
+        group_zero["objects"] = objects
+        return
+
+    deduped: List[Dict[str, Any]] = []
+    seen_auto_keys: Set[Tuple[str, str]] = set()
+
+    for obj in objects:
+        table_name = _normalize_name(obj.get("object_type") or obj.get("otm_table"))
+        domain_name = _normalize_name(obj.get("domainName") or obj.get("domain"))
+        is_auto = _is_truthy(obj.get("auto_generated"))
+
+        if is_auto and table_name:
+            auto_key = (table_name, domain_name)
+            if auto_key in seen_auto_keys:
+                continue
+            seen_auto_keys.add(auto_key)
+
+        deduped.append(obj)
+
+    group_zero["objects"] = deduped
+
+
 def _normalize_group_zero(data):
     """
     Garante o Grupo 0 e centraliza objetos sem grupo definido.
@@ -452,8 +553,12 @@ def load_project():
                         obj["saved_query"] = {"sql": ""}
 
     _normalize_group_zero(data)
+    # Primeiro normaliza aliases de dominio para evitar duplicacao por cobertura.
+    _normalize_object_domain_aliases(data)
     _ensure_domain_statistics_coverage(data)
     _normalize_object_domain_aliases(data)
+    _deduplicate_group_zero_auto_objects(data)
+    _cleanup_group_zero_legacy_generic_autos(data)
     normalized_signature = json.dumps(data, ensure_ascii=False, sort_keys=True)
     if normalized_signature != original_signature:
         PROJECT_PATH.write_text(
@@ -465,8 +570,11 @@ def load_project():
 
 def save_project(domain):
     _normalize_group_zero(domain)
+    _normalize_object_domain_aliases(domain)
     _ensure_domain_statistics_coverage(domain)
     _normalize_object_domain_aliases(domain)
+    _deduplicate_group_zero_auto_objects(domain)
+    _cleanup_group_zero_legacy_generic_autos(domain)
     PROJECT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(PROJECT_PATH, "w", encoding="utf-8") as f:
         json.dump(domain, f, indent=2, ensure_ascii=False)

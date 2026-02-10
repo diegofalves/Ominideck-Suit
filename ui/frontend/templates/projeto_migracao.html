@@ -1065,6 +1065,18 @@
   {% set change_history = project.project_metadata.change_history if project and project.project_metadata else [] %}
   <fieldset>
     <legend>Histórico de Alterações</legend>
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+      <button
+        type="button"
+        id="toggle-change-history-btn"
+        style="background: #374151; color: #fff; border: none; border-radius: 6px; padding: 6px 10px; font-size: 12px; cursor: pointer;"
+        aria-controls="change-history-content"
+        aria-expanded="true"
+      >
+        Recolher lista
+      </button>
+    </div>
+    <div id="change-history-content">
     <table id="change-history-table" style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
       <thead>
         <tr>
@@ -1078,6 +1090,7 @@
       <tbody id="change-history-rows">
       </tbody>
     </table>
+    </div>
     <button type="button" onclick="addChangeHistoryRow()" style="padding: 6px 12px; font-size: 13px;">➕ Adicionar linha</button>
   </fieldset>
 
@@ -1090,7 +1103,19 @@
     <p style="font-size: 13px; color: #555; margin-bottom: 12px;">
       Lista de todos os grupos criados. Para editar objetos, selecione o grupo ativo abaixo.
     </p>
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+      <button
+        type="button"
+        id="toggle-project-groups-btn"
+        style="background: #374151; color: #fff; border: none; border-radius: 6px; padding: 6px 10px; font-size: 12px; cursor: pointer;"
+        aria-controls="project-groups-content"
+        aria-expanded="true"
+      >
+        Recolher lista
+      </button>
+    </div>
 
+    <div id="project-groups-content">
     {% if project and project.groups %}
       <table class="group-summary-table" style="width: 100%; margin-bottom: 16px; border-collapse: collapse; font-size: 13px;">
         <thead>
@@ -1133,6 +1158,7 @@
     {% else %}
       <p style="color: #999; font-style: italic;">Nenhum grupo criado ainda.</p>
     {% endif %}
+    </div>
 
     <div id="groups-container"></div>
 
@@ -1179,7 +1205,19 @@
     {% if current_group.data and current_group.data.objects %}
       <fieldset style="margin-bottom: 24px;">
         <legend>📦 Objetos do Grupo ({{ current_group.data.objects|length }})</legend>
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+          <button
+            type="button"
+            id="toggle-group-objects-btn"
+            style="background: #374151; color: #fff; border: none; border-radius: 6px; padding: 6px 10px; font-size: 12px; cursor: pointer;"
+            aria-controls="group-objects-content"
+            aria-expanded="true"
+          >
+            Recolher lista
+          </button>
+        </div>
 
+        <div id="group-objects-content">
         <table class="group-objects-table" style="border-collapse: collapse; width: 100%; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
           <thead>
             <tr style="background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%); border-bottom: 2px solid #dee2e6;">
@@ -1307,6 +1345,7 @@
         <p style="font-size: 11px; color: #6c757d; margin-top: 12px;">
           💡 Selecione um objeto no dropdown abaixo para editá-lo.
         </p>
+        </div>
       </fieldset>
     {% endif %}
 
@@ -1766,7 +1805,7 @@
     form.submit();
   };
 
-  const submitMoveObject = (editIndex) => {
+    const submitMoveObject = (editIndex) => {
     const targetSelect = document.getElementById("move-to-group-id");
     const targetGroup = targetSelect && typeof targetSelect.value === "string"
       ? targetSelect.value.trim()
@@ -1785,8 +1824,8 @@
   window.submitProjectAction = submitProjectAction;
   window.submitMoveObject = submitMoveObject;
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const editPanel = document.getElementById("object-edit-panel");
+    document.addEventListener("DOMContentLoaded", () => {
+      const editPanel = document.getElementById("object-edit-panel");
     if (editPanel && window.location.hash === "#object-edit-panel") {
       editPanel.scrollIntoView({ behavior: "smooth", block: "start" });
       window.setTimeout(() => {
@@ -1794,11 +1833,101 @@
       }, 50);
     }
 
-    const objectTypeSelect = document.querySelector('select[name="object_type"]');
-    const otmTableDisplay = document.getElementById("object_otm_table_display");
-    const otmTableHidden = document.getElementById("object_otm_table");
+      const objectTypeSelect = document.querySelector('select[name="object_type"]');
+      const otmTableDisplay = document.getElementById("object_otm_table_display");
+      const otmTableHidden = document.getElementById("object_otm_table");
+      const toggleChangeHistoryBtn = document.getElementById("toggle-change-history-btn");
+      const changeHistoryContent = document.getElementById("change-history-content");
+      const toggleProjectGroupsBtn = document.getElementById("toggle-project-groups-btn");
+      const projectGroupsContent = document.getElementById("project-groups-content");
+      const toggleGroupObjectsBtn = document.getElementById("toggle-group-objects-btn");
+      const groupObjectsContent = document.getElementById("group-objects-content");
 
-    const syncOtmTableFromObjectType = () => {
+      if (toggleChangeHistoryBtn && changeHistoryContent) {
+        const storageKey = "omni.changeHistoryCollapsed";
+        const applyChangeHistoryState = (collapsed) => {
+          changeHistoryContent.style.display = collapsed ? "none" : "block";
+          toggleChangeHistoryBtn.textContent = collapsed ? "Expandir lista" : "Recolher lista";
+          toggleChangeHistoryBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+        };
+
+        let initialCollapsed = false;
+        try {
+          initialCollapsed = window.sessionStorage.getItem(storageKey) === "1";
+        } catch (err) {
+          initialCollapsed = false;
+        }
+        applyChangeHistoryState(initialCollapsed);
+
+        toggleChangeHistoryBtn.addEventListener("click", () => {
+          const isExpanded = toggleChangeHistoryBtn.getAttribute("aria-expanded") === "true";
+          const collapsedNow = isExpanded;
+          applyChangeHistoryState(collapsedNow);
+          try {
+            window.sessionStorage.setItem(storageKey, collapsedNow ? "1" : "0");
+          } catch (err) {
+            // Ignora indisponibilidade de storage no browser.
+          }
+        });
+      }
+
+      if (toggleProjectGroupsBtn && projectGroupsContent) {
+        const storageKey = "omni.projectGroupsCollapsed";
+        const applyProjectGroupsState = (collapsed) => {
+          projectGroupsContent.style.display = collapsed ? "none" : "block";
+          toggleProjectGroupsBtn.textContent = collapsed ? "Expandir lista" : "Recolher lista";
+          toggleProjectGroupsBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+        };
+
+        let initialCollapsed = false;
+        try {
+          initialCollapsed = window.sessionStorage.getItem(storageKey) === "1";
+        } catch (err) {
+          initialCollapsed = false;
+        }
+        applyProjectGroupsState(initialCollapsed);
+
+        toggleProjectGroupsBtn.addEventListener("click", () => {
+          const isExpanded = toggleProjectGroupsBtn.getAttribute("aria-expanded") === "true";
+          const collapsedNow = isExpanded;
+          applyProjectGroupsState(collapsedNow);
+          try {
+            window.sessionStorage.setItem(storageKey, collapsedNow ? "1" : "0");
+          } catch (err) {
+            // Ignora indisponibilidade de storage no browser.
+          }
+        });
+      }
+
+      if (toggleGroupObjectsBtn && groupObjectsContent) {
+        const storageKey = "omni.groupObjectsCollapsed";
+        const applyGroupObjectsState = (collapsed) => {
+          groupObjectsContent.style.display = collapsed ? "none" : "block";
+          toggleGroupObjectsBtn.textContent = collapsed ? "Expandir lista" : "Recolher lista";
+          toggleGroupObjectsBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+        };
+
+        let initialCollapsed = false;
+        try {
+          initialCollapsed = window.sessionStorage.getItem(storageKey) === "1";
+        } catch (err) {
+          initialCollapsed = false;
+        }
+        applyGroupObjectsState(initialCollapsed);
+
+        toggleGroupObjectsBtn.addEventListener("click", () => {
+          const isExpanded = toggleGroupObjectsBtn.getAttribute("aria-expanded") === "true";
+          const collapsedNow = isExpanded;
+          applyGroupObjectsState(collapsedNow);
+          try {
+            window.sessionStorage.setItem(storageKey, collapsedNow ? "1" : "0");
+          } catch (err) {
+            // Ignora indisponibilidade de storage no browser.
+          }
+        });
+      }
+
+      const syncOtmTableFromObjectType = () => {
       if (!objectTypeSelect || !otmTableDisplay || !otmTableHidden) {
         return;
       }
