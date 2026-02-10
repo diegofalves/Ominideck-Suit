@@ -77,7 +77,9 @@ SELECT
       'FROM (SELECT t.domain_name, COUNT(*) cnt FROM GLOGOWNER."' || table_name || '" t ' ||
       'LEFT JOIN GLOGOWNER.DOMAIN d ON d.domain_name = t.domain_name ' ||
       'WHERE t.domain_name IS NOT NULL ' ||
-      'AND (t.update_date IS NOT NULL OR (t.update_date IS NULL AND t.insert_date IS NOT NULL ' ||
+      'AND ((t.update_date IS NOT NULL AND (t.domain_name <> ''PUBLIC'' ' ||
+      'OR (t.insert_date IS NOT NULL AND t.update_date > (t.insert_date + (1/1440))))) ' ||
+      'OR (t.update_date IS NULL AND t.insert_date IS NOT NULL ' ||
       'AND d.insert_date IS NOT NULL AND t.insert_date > (d.insert_date + 1))) ' ||
       'GROUP BY t.domain_name)) c FROM DUAL'
     ).extract('//C/text()').getstringval()
