@@ -1746,6 +1746,37 @@
     </button>
     <span id="update-tables-status" style="font-size: 12px; color: #1f2937;"></span>
   </div>
+
+  <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px;">
+    <button
+      type="button"
+      id="update-object-cache-all-btn"
+      style="background-color: #00695C;"
+    >
+      Atualizar Cache (Todos)
+    </button>
+    <button
+      type="button"
+      id="update-object-cache-group-btn"
+      style="background-color: #2E7D32;"
+      {% if not project or not project.active_group_id %}disabled{% endif %}
+    >
+      Atualizar Cache (Grupo Ativo)
+    </button>
+    <button
+      type="button"
+      id="update-object-cache-object-btn"
+      style="background-color: #1565C0;"
+      {% if not current_object %}disabled{% endif %}
+    >
+      Atualizar Cache (Objeto em Edição)
+    </button>
+    <span id="update-object-cache-status" style="font-size: 12px; color: #1f2937;"></span>
+  </div>
+  <p style="font-size: 11px; color: #666; margin-top: 6px;">
+    Grupo ativo: <strong>{{ project.active_group_id if project and project.active_group_id else "-" }}</strong> |
+    Objeto em edição: <strong>{{ current_object.name if current_object else "-" }}</strong>
+  </p>
 </form>
 
 <!-- Injetar dados do projeto para reidratação -->
@@ -1824,6 +1855,9 @@
 
   window.submitProjectAction = submitProjectAction;
   window.submitMoveObject = submitMoveObject;
+
+    const activeGroupIdFromPage = {{ (project.active_group_id if project and project.active_group_id else "") | tojson }};
+    const currentObjectNameFromPage = {{ (current_object.name if current_object else "") | tojson }};
 
     document.addEventListener("DOMContentLoaded", () => {
       const editPanel = document.getElementById("object-edit-panel");
@@ -2050,6 +2084,164 @@
         updateButton.textContent = originalText;
       }
     });
+
+    const cacheAllButton = document.getElementById("update-object-cache-all-btn");
+    const cacheGroupButton = document.getElementById("update-object-cache-group-btn");
+    const cacheObjectButton = document.getElementById("update-object-cache-object-btn");
+    const cacheStatusLabel = document.getElementById("update-object-cache-status");
+
+    const cacheButtons = [cacheAllButton, cacheGroupButton, cacheObjectButton].filter(Boolean);
+    const cacheDefaultDisabledState = new Map(
+      cacheButtons.map((button) => [button, Boolean(button.disabled)])
+    );
+    let cacheProgressIntervalId = null;
+
+    const stopCacheProgressFallback = () => {
+      if (cacheProgressIntervalId !== null) {
+        window.clearInterval(cacheProgressIntervalId);
+        cacheProgressIntervalId = null;
+      }
+    };
+
+    const setCacheButtonsRunning = (isRunning) => {
+      cacheButtons.forEach((button) => {
+        if (isRunning) {
+          button.disabled = true;
+          return;
+        }
+        button.disabled = cacheDefaultDisabledState.get(button) === true;
+      });
+    };
+
+    const runObjectCacheAction = async (scope, triggerButton, confirmMessage, requestBody) => {
+      if (!triggerButton || !cacheStatusLabel) {
+        return;
+      }
+
+      const confirmed = window.confirm(confirmMessage);
+      if (!confirmed) {
+        return;
+      }
+
+      const originalText = triggerButton.textContent;
+      const startedAt = Date.now();
+      setCacheButtonsRunning(true);
+      triggerButton.textContent = "Executando (0s)";
+      cacheStatusLabel.style.color = "#1f2937";
+      cacheStatusLabel.textContent = "Processamento iniciado. Aguarde...";
+
+      stopCacheProgressFallback();
+      cacheProgressIntervalId = window.setInterval(() => {
+        const elapsedSeconds = Math.floor((Date.now() - startedAt) / 1000);
+        const elapsedText = formatElapsed(elapsedSeconds);
+        const dots = ".".repeat((elapsedSeconds % 3) + 1);
+        triggerButton.textContent = `Executando (${elapsedText})`;
+
+        if (elapsedSeconds < 20) {
+          cacheStatusLabel.style.color = "#1f2937";
+          cacheStatusLabel.textContent = `Atualização de cache em processamento${dots} Aguarde (${elapsedText}).`;
+          return;
+        }
+
+        cacheStatusLabel.style.color = "#8A6D1E";
+        cacheStatusLabel.textContent = `Atualização de cache ainda em processamento${dots} Isso pode levar alguns minutos (${elapsedText}).`;
+      }, 1000);
+
+      try {
+        const response = await fetch("/api/otm/update-object-cache", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestBody),
+        });
+        const payload = await response.json();
+
+        if (!response.ok || payload.status === "error") {
+          const errorMessage = payload.message || "Falha ao atualizar cache de objetos.";
+          cacheStatusLabel.style.color = "#C62828";
+          cacheStatusLabel.textContent = `${errorMessage} Processamento finalizado com erro.`;
+          console.error(`[Atualizar Cache][${scope}] Erro:`, payload);
+          return;
+        }
+
+        const result = payload.result || {};
+        const successCount = Number(result.successCount || 0);
+        const skippedCount = Number(result.skippedCount || 0);
+        const errorCount = Number(result.errorCount || 0);
+        const selectedObjects = Number(result.selectedObjects || 0);
+
+        if (payload.status === "partial_success") {
+          cacheStatusLabel.style.color = "#8A6D1E";
+          cacheStatusLabel.textContent =
+            `Cache atualizado parcialmente (${scope}). Selecionados: ${selectedObjects}. ` +
+            `Sucesso: ${successCount}, Ignorados: ${skippedCount}, Erros: ${errorCount}.`;
+          return;
+        }
+
+        cacheStatusLabel.style.color = "#2E7D32";
+        cacheStatusLabel.textContent =
+          `Cache atualizado com sucesso (${scope}). Selecionados: ${selectedObjects}. ` +
+          `Sucesso: ${successCount}, Ignorados: ${skippedCount}, Erros: ${errorCount}.`;
+      } catch (error) {
+        cacheStatusLabel.style.color = "#C62828";
+        cacheStatusLabel.textContent = "Erro de comunicacao ao atualizar cache de objetos. Processamento finalizado com erro.";
+        console.error(`[Atualizar Cache][${scope}] Erro inesperado:`, error);
+      } finally {
+        stopCacheProgressFallback();
+        setCacheButtonsRunning(false);
+        triggerButton.textContent = originalText;
+      }
+    };
+
+    if (cacheAllButton) {
+      cacheAllButton.addEventListener("click", async () => {
+        await runObjectCacheAction(
+          "all",
+          cacheAllButton,
+          "Deseja atualizar o cache de todos os objetos do projeto?",
+          { scope: "all" }
+        );
+      });
+    }
+
+    if (cacheGroupButton) {
+      cacheGroupButton.addEventListener("click", async () => {
+        const groupId = String(activeGroupIdFromPage || "").trim();
+        if (!groupId) {
+          window.alert("Nao existe grupo ativo para executar esta acao.");
+          return;
+        }
+
+        await runObjectCacheAction(
+          "group",
+          cacheGroupButton,
+          `Deseja atualizar o cache dos objetos do grupo ativo (${groupId})?`,
+          { scope: "group", group_id: groupId }
+        );
+      });
+    }
+
+    if (cacheObjectButton) {
+      cacheObjectButton.addEventListener("click", async () => {
+        const objectName = String(currentObjectNameFromPage || "").trim();
+        const groupId = String(activeGroupIdFromPage || "").trim();
+        if (!objectName) {
+          window.alert("Nao existe objeto em edicao para executar esta acao.");
+          return;
+        }
+
+        const requestBody = { scope: "object", object_name: objectName };
+        if (groupId) {
+          requestBody.group_id = groupId;
+        }
+
+        await runObjectCacheAction(
+          "object",
+          cacheObjectButton,
+          `Deseja atualizar o cache do objeto em edicao (${objectName})?`,
+          requestBody
+        );
+      });
+    }
   });
 </script>
 

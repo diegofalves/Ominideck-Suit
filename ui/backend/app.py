@@ -298,6 +298,186 @@ def api_otm_update_tables():
     )
 
 
+@app.route("/api/otm/update-object-cache", methods=["POST"])
+def api_otm_update_object_cache():
+    """
+    Executa atualizacao de cache de objetos OTM por escopo.
+
+    Body JSON:
+    {
+      scope: "all" | "group" | "object",
+      group_id?: str,
+      object_name?: str,
+      dry_run?: bool
+    }
+    """
+    script_path = PROJECT_ROOT / "infra" / "update_otm_object_cache.py"
+
+    if not script_path.exists():
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": f"Script nao encontrado: {script_path}",
+                    "result": None,
+                }
+            ),
+            404,
+        )
+
+    payload = request.get_json(silent=True) or {}
+    if not isinstance(payload, dict):
+        payload = {}
+
+    raw_scope = str(payload.get("scope") or "").strip().lower()
+    scope_aliases = {
+        "all": "all",
+        "all_objects": "all",
+        "group": "group",
+        "group_objects": "group",
+        "object": "object",
+        "single_object": "object",
+    }
+    scope = scope_aliases.get(raw_scope, "")
+
+    if not scope:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Parametro 'scope' invalido. Use: all, group ou object.",
+                    "result": None,
+                }
+            ),
+            400,
+        )
+
+    group_id = str(payload.get("group_id") or "").strip()
+    object_name = str(payload.get("object_name") or "").strip()
+    dry_run = _is_truthy(payload.get("dry_run"))
+
+    command = [sys.executable, str(script_path)]
+
+    if scope == "all":
+        command.append("--all-objects")
+    elif scope == "group":
+        if not group_id:
+            return (
+                jsonify(
+                    {
+                        "status": "error",
+                        "message": "Parametro 'group_id' e obrigatorio para scope=group.",
+                        "result": None,
+                    }
+                ),
+                400,
+            )
+        command.extend(["--group-id", group_id])
+    else:
+        if not object_name:
+            return (
+                jsonify(
+                    {
+                        "status": "error",
+                        "message": "Parametro 'object_name' e obrigatorio para scope=object.",
+                        "result": None,
+                    }
+                ),
+                400,
+            )
+        command.extend(["--object-name", object_name])
+        if group_id:
+            command.extend(["--group-id", group_id])
+
+    if dry_run:
+        command.append("--dry-run")
+
+    try:
+        completed = subprocess.run(
+            command,
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True,
+            timeout=1800,
+        )
+    except subprocess.TimeoutExpired:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Tempo limite atingido ao atualizar cache de objetos OTM.",
+                    "result": None,
+                }
+            ),
+            504,
+        )
+    except Exception as exc:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": f"Falha ao executar script de cache de objetos OTM: {exc}",
+                    "result": None,
+                }
+            ),
+            500,
+        )
+
+    stdout = (completed.stdout or "").strip()
+    stderr = (completed.stderr or "").strip()
+
+    parsed_result = None
+    if stdout:
+        try:
+            parsed_result = json.loads(stdout)
+        except json.JSONDecodeError:
+            parsed_result = {"raw_output": stdout}
+
+    script_status = ""
+    if isinstance(parsed_result, dict):
+        script_status = str(parsed_result.get("status") or "").strip().lower()
+
+    if script_status in {"success", "partial_success"}:
+        message = (
+            "Atualizacao de cache de objetos concluida."
+            if script_status == "success"
+            else "Atualizacao de cache de objetos concluida parcialmente."
+        )
+        return jsonify(
+            {
+                "status": script_status,
+                "message": message,
+                "result": parsed_result,
+                "stderr": stderr[-2000:] if stderr else None,
+            }
+        )
+
+    if completed.returncode != 0:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Script de cache de objetos OTM retornou erro.",
+                    "result": parsed_result,
+                    "stderr": stderr[-2000:] if stderr else None,
+                }
+            ),
+            500,
+        )
+
+    return (
+        jsonify(
+            {
+                "status": "error",
+                "message": "Resposta do script em formato inesperado para cache de objetos OTM.",
+                "result": parsed_result,
+                "stderr": stderr[-2000:] if stderr else None,
+            }
+        ),
+        502,
+    )
+
+
 # ===== MAIN ROUTES =====
 
 @app.route("/projeto-migracao", methods=["GET", "POST"])
