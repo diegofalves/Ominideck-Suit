@@ -22,9 +22,99 @@ app = Flask(
     static_folder="../frontend/static"
 )
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+GROUP_ZERO_ID = "SEM_GRUPO"
+LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
+IGNORED_GROUP_ID = "IGNORADOS"
+PROTECTED_GROUP_IDS = set(LEGACY_GROUP_ZERO_IDS) | {IGNORED_GROUP_ID}
+
 # -------------------------------------------------
 # Rotas
 # -------------------------------------------------
+
+
+def _is_truthy(value):
+    return str(value or "").strip().lower() in {"1", "true", "on", "yes", "y"}
+
+
+def _resolve_object_index(group, requested_index, object_name, object_type):
+    objects = group.get("objects", []) if isinstance(group, dict) else []
+    if not isinstance(objects, list):
+        return None
+
+    try:
+        idx = int(requested_index)
+    except (TypeError, ValueError):
+        idx = None
+
+    normalized_name = str(object_name or "").strip()
+    normalized_type = str(object_type or "").strip().upper()
+
+    if idx is not None and 0 <= idx < len(objects):
+        candidate = objects[idx] if isinstance(objects[idx], dict) else {}
+        cand_name = str(candidate.get("name") or "").strip()
+        cand_type = str(candidate.get("object_type") or "").strip().upper()
+        if (
+            not normalized_name
+            or not normalized_type
+            or (cand_name == normalized_name and cand_type == normalized_type)
+        ):
+            return idx
+
+    if normalized_name and normalized_type:
+        for pos, obj in enumerate(objects):
+            if not isinstance(obj, dict):
+                continue
+            cand_name = str(obj.get("name") or "").strip()
+            cand_type = str(obj.get("object_type") or "").strip().upper()
+            if cand_name == normalized_name and cand_type == normalized_type:
+                return pos
+
+    if idx is not None and 0 <= idx < len(objects):
+        return idx
+
+    return None
+
+
+def _get_form_value(form, key, default=""):
+    """
+    Retorna o ultimo valor nao vazio para uma chave do form.
+    Evita inconsistencias quando ha campos duplicados com mesmo name.
+    """
+    values = form.getlist(key)
+    if not values:
+        return default
+
+    for raw in reversed(values):
+        if raw is None:
+            continue
+        value = str(raw)
+        if value != "":
+            return value
+
+    last = values[-1]
+    if last is None:
+        return default
+    return str(last)
+
+
+def _apply_no_cache_headers(response):
+    """
+    Evita cache em navegador/proxy para garantir que o painel
+    sempre reflita o estado mais recente salvo em disco.
+    """
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
+
+@app.after_request
+def disable_cache_for_dynamic_routes(response):
+    path = request.path or ""
+    if path == "/projeto-migracao" or path.startswith("/api/"):
+        return _apply_no_cache_headers(response)
+    return response
 
 # ===== SCHEMA API ENDPOINTS =====
 
@@ -112,8 +202,7 @@ def api_otm_update_tables():
       result: dict | null
     }
     """
-    project_root = Path(__file__).resolve().parents[2]
-    script_path = project_root / "infra" / "update_otm_tables.py"
+    script_path = PROJECT_ROOT / "infra" / "update_otm_tables.py"
 
     if not script_path.exists():
         return (
@@ -130,7 +219,7 @@ def api_otm_update_tables():
     try:
         completed = subprocess.run(
             [sys.executable, str(script_path)],
-            cwd=str(project_root),
+            cwd=str(PROJECT_ROOT),
             capture_output=True,
             text=True,
             timeout=600,
@@ -217,12 +306,12 @@ def projeto_migracao():
     project = load_project()
 
     if request.method == "POST":
-        action = request.form.get("action", "")
-        reset_edit_mode = request.form.get("reset_edit_mode", "0")
+        action = _get_form_value(request.form, "action", "")
+        reset_edit_mode = _get_form_value(request.form, "reset_edit_mode", "0")
         
         # ===== REMOVER OBJETO =====
-        remove_object_index = request.form.get("remove_object_index")
-        if remove_object_index is not None and remove_object_index != "":
+        remove_object_index = _get_form_value(request.form, "remove_object_index", "")
+        if remove_object_index != "":
             try:
                 remove_idx = int(remove_object_index)
                 active_group_id = project.get("active_group_id")
@@ -247,9 +336,12 @@ def projeto_migracao():
                 return redirect("/projeto-migracao")
         
         # ===== REMOVER GRUPO =====
-        remove_group_id = request.form.get("remove_group_id")
-        if remove_group_id is not None and remove_group_id != "":
+        remove_group_id = _get_form_value(request.form, "remove_group_id", "")
+        if remove_group_id != "":
             try:
+                if str(remove_group_id).strip().upper() in PROTECTED_GROUP_IDS:
+                    return redirect("/projeto-migracao")
+
                 if project.get("groups"):
                     # Encontrar e remover o grupo
                     for i, group in enumerate(project["groups"]):
@@ -270,10 +362,10 @@ def projeto_migracao():
                 return redirect("/projeto-migracao")
         
         # ===== MOVER OBJETO PARA OUTRO GRUPO =====
-        move_object_index = request.form.get("move_object_index")
-        move_to_group_id = request.form.get("move_to_group_id")
+        move_object_index = _get_form_value(request.form, "move_object_index", "")
+        move_to_group_id = _get_form_value(request.form, "move_to_group_id", "")
         
-        if move_object_index is not None and move_object_index != "" and move_to_group_id:
+        if move_object_index != "" and move_to_group_id:
             try:
                 move_idx = int(move_object_index)
                 active_group_id = project.get("active_group_id")
@@ -313,7 +405,7 @@ def projeto_migracao():
         
         # Se reset_edit_mode está ativo (mudança de grupo), limpar estado de edição
         if reset_edit_mode == "1":
-            active_group_id = request.form.get("active_group_id", "")
+            active_group_id = _get_form_value(request.form, "active_group_id", "")
             if project.get("state") is None:
                 project["state"] = {}
             project["state"]["last_edit_object_index"] = None
@@ -323,14 +415,99 @@ def projeto_migracao():
         
         # Se ação é apenas carregar objeto, salvar apenas o state sem validar
         if action == "load_object":
-            edit_index = request.form.get("edit_object_index")
-            if edit_index:
-                project["state"]["last_edit_object_index"] = int(edit_index) if edit_index else None
+            edit_index = _get_form_value(request.form, "edit_object_index", "")
+            requested_group_id = _get_form_value(request.form, "active_group_id", "")
+            if edit_index != "":
+                if project.get("state") is None:
+                    project["state"] = {}
+                project["state"]["last_edit_object_index"] = int(edit_index)
+                if requested_group_id:
+                    project["active_group_id"] = requested_group_id
                 save_project(project)
+            return redirect("/projeto-migracao#object-edit-panel")
+
+        # Salvar apenas o objeto em edição (sem bloquear por validações globais do projeto).
+        # Também entra aqui quando a flag de ignore foi alterada no formulário.
+        should_save_object_partial = action == "save_object"
+        if not should_save_object_partial and request.form.get("object_ignore_table_present") is not None:
+            try:
+                group_id_probe = str(_get_form_value(request.form, "active_group_id", "") or "").strip()
+                idx_probe = _get_form_value(request.form, "edit_object_index", "")
+                name_probe = _get_form_value(request.form, "object_name", "")
+                type_probe = _get_form_value(request.form, "object_type", "") or _get_form_value(request.form, "object_otm_table", "")
+                if group_id_probe:
+                    for group in project.get("groups", []):
+                        if str(group.get("group_id") or "").strip().upper() != group_id_probe.upper():
+                            continue
+                        resolved_idx = _resolve_object_index(group, idx_probe, name_probe, type_probe)
+                        if resolved_idx is None:
+                            break
+                        objects = group.get("objects", []) or []
+                        current_ignore = _is_truthy(objects[resolved_idx].get("ignore_table"))
+                        requested_ignore = _is_truthy(_get_form_value(request.form, "object_ignore_table", ""))
+                        if current_ignore != requested_ignore:
+                            should_save_object_partial = True
+                        break
+            except Exception:
+                pass
+
+        if should_save_object_partial:
+            def _to_int_or_none(value):
+                try:
+                    return int(value)
+                except (TypeError, ValueError):
+                    return None
+
+            active_group_id = str(_get_form_value(request.form, "active_group_id", "") or "").strip()
+            edit_object_index = _to_int_or_none(_get_form_value(request.form, "edit_object_index", ""))
+            object_name = _get_form_value(request.form, "object_name", "")
+            object_type = _get_form_value(request.form, "object_type", "") or _get_form_value(request.form, "object_otm_table", "")
+
+            if not active_group_id:
+                return redirect("/projeto-migracao")
+
+            projected_domain = form_to_domain(request.form, existing_project=project)
+            source_group = None
+            for group in projected_domain.get("groups", []):
+                if str(group.get("group_id") or "").strip().upper() == active_group_id.upper():
+                    source_group = group
+                    break
+
+            if not isinstance(source_group, dict):
+                return redirect("/projeto-migracao")
+
+            resolved_source_idx = _resolve_object_index(
+                source_group,
+                edit_object_index,
+                object_name,
+                object_type,
+            )
+            if resolved_source_idx is None:
+                return redirect("/projeto-migracao")
+
+            updated_object = source_group["objects"][resolved_source_idx]
+            is_ignored = _is_truthy(updated_object.get("ignore_table"))
+            if projected_domain.get("state") is None:
+                projected_domain["state"] = {}
+            if is_ignored:
+                # Após salvar com ignore=true, o objeto migra para o grupo IGNORADOS.
+                # Selecionamos esse grupo para refletir imediatamente no painel.
+                projected_domain["active_group_id"] = IGNORED_GROUP_ID
+                projected_domain["state"]["last_edit_object_index"] = None
+            else:
+                # Se estiver editando dentro de IGNORADOS e remover o ignore,
+                # o objeto volta para SEM_GRUPO no save normalizado.
+                if active_group_id.upper() == IGNORED_GROUP_ID:
+                    projected_domain["active_group_id"] = GROUP_ZERO_ID
+                    projected_domain["state"]["last_edit_object_index"] = None
+                else:
+                    projected_domain["active_group_id"] = active_group_id
+                    projected_domain["state"]["last_edit_object_index"] = resolved_source_idx
+            save_project(projected_domain)
             return redirect("/projeto-migracao")
         
         # Caso contrário, validar e salvar normalmente
-        domain_data = form_to_domain(request.form)
+        domain_data = form_to_domain(request.form, existing_project=project)
 
         try:
             validate_project(domain_data)

@@ -1,5 +1,6 @@
 from collections import defaultdict
 from datetime import datetime
+import json
 
 
 # Tipos lógicos (não são tabelas OTM)
@@ -10,6 +11,10 @@ LOGICAL_OBJECT_TYPES = {
     "RATE",
     "EVENT_GROUP",
 }
+
+
+def _to_bool(value):
+    return str(value or "").strip().lower() in {"1", "true", "on", "yes", "y"}
 
 
 def _parse_history_date(raw_date):
@@ -62,7 +67,7 @@ def _latest_history_entry(change_history):
     return latest_entry
 
 
-def form_to_domain(form):
+def form_to_domain(form, existing_project=None):
     """
     Converte request.form (flat) em estrutura de domínio canônica.
     
@@ -173,6 +178,9 @@ def form_to_domain(form):
                 if "status" not in obj:
                     obj["status"] = {}
                 obj["status"]["validation"] = value
+
+            elif parts[4] == "ignore_table":
+                obj["ignore_table"] = _to_bool(value)
             
             else:
                 # Campos genéricos do objeto
@@ -186,7 +194,7 @@ def form_to_domain(form):
             pass  # Será tratado abaixo na normalização
     
     # Normaliza para lista ordenada
-    domain["groups"] = [
+    parsed_groups = [
         {
             "group_id": g.get("group_id"),
             "label": g.get("label"),
@@ -195,6 +203,14 @@ def form_to_domain(form):
         }
         for _, g in sorted(groups.items())
     ]
+    domain["groups"] = parsed_groups
+
+    # Fallback: se o POST não trouxe estrutura completa de groups[],
+    # reaproveita os grupos existentes para não perder contexto de edição.
+    if not domain["groups"] and isinstance(existing_project, dict):
+        existing_groups = existing_project.get("groups", [])
+        if isinstance(existing_groups, list):
+            domain["groups"] = json.loads(json.dumps(existing_groups))
     
     # Processar saved_query_sql do formulário de edição (não aninhado)
     saved_query_sql = form.get("saved_query_sql", "").strip()
@@ -207,10 +223,21 @@ def form_to_domain(form):
             return None
 
     active_group_index = _coerce_index(form.get("active_group_index"))
+    active_group_id = str(form.get("active_group_id") or "").strip()
     edit_object_index = _coerce_index(form.get("edit_object_index"))
+    if edit_object_index is None and isinstance(existing_project, dict):
+        state = existing_project.get("state", {})
+        edit_object_index = _coerce_index(state.get("last_edit_object_index"))
 
     # Se estamos editando/criando um objeto (campos não-aninhados presentes)
     if object_name or saved_query_sql or form.get("object_description") or form.get("object_responsible") or form.get("object_deployment_type"):
+        if active_group_index is None and active_group_id:
+            for idx, group in enumerate(domain["groups"]):
+                group_id = str(group.get("group_id") or "").strip()
+                if group_id.upper() == active_group_id.upper():
+                    active_group_index = idx
+                    break
+
         if active_group_index is not None:
             # Garantir grupo ativo existe
             while len(domain["groups"]) <= active_group_index:
@@ -247,6 +274,8 @@ def form_to_domain(form):
             object_type = form.get("object_type")
             if object_type:
                 target_obj["object_type"] = object_type
+                # Contrato canônico: otm_table espelha exatamente object_type.
+                target_obj["otm_table"] = object_type
             object_deployment_type = form.get("object_deployment_type")
             if object_deployment_type:
                 target_obj["deployment_type"] = object_deployment_type
@@ -256,8 +285,14 @@ def form_to_domain(form):
             object_notes = form.get("object_notes")
             if object_notes:
                 target_obj["notes"] = object_notes
+
+            # Flag canônica para excluir tabela da cobertura automática.
+            if form.get("object_ignore_table_present") is not None:
+                target_obj["ignore_table"] = _to_bool(form.get("object_ignore_table"))
+            # Fallback legado: se object_type vier vazio por algum motivo,
+            # ainda aceita o valor enviado em object_otm_table.
             object_otm_table = form.get("object_otm_table")
-            if object_otm_table:
+            if object_otm_table and not target_obj.get("object_type"):
                 target_obj["otm_table"] = object_otm_table
 
             # Status (5 campos)

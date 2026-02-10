@@ -10,6 +10,11 @@ class DomainValidationError(Exception):
     pass
 
 
+GROUP_ZERO_ID = "SEM_GRUPO"
+LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
+IGNORED_GROUP_ID = "IGNORADOS"
+
+
 # Tipos lógicos (não são tabelas OTM)
 LOGICAL_OBJECT_TYPES = {
     "SAVED_QUERY": ["query_name"],
@@ -18,6 +23,78 @@ LOGICAL_OBJECT_TYPES = {
     "RATE": ["rate_offering_gid"],
     "EVENT_GROUP": ["event_group_gid"],
 }
+
+
+def _normalize_otm_name(value: Any) -> str:
+    return str(value or "").strip().upper()
+
+
+def _is_logical_object_type(object_type: str) -> bool:
+    return _normalize_otm_name(object_type) in LOGICAL_OBJECT_TYPES
+
+
+def _is_ignored_object(obj: Dict[str, Any]) -> bool:
+    return str(obj.get("ignore_table") or "").strip().lower() in {"1", "true", "on", "yes", "y"}
+
+
+def _collect_otm_table_object_counts(groups: List[Dict[str, Any]]) -> Dict[str, int]:
+    """
+    Regra canônica:
+    Toda tabela OTM contida no projeto deve ter ao menos 1 objeto associado.
+    """
+    counts: Dict[str, int] = {}
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for obj in objects:
+            if not isinstance(obj, dict):
+                continue
+            if _is_ignored_object(obj):
+                continue
+
+            object_type = _normalize_otm_name(obj.get("object_type"))
+            if not object_type:
+                continue
+
+            if _is_logical_object_type(object_type):
+                continue
+
+            # A associação canônica de objeto -> tabela usa object_type.
+            counts[object_type] = counts.get(object_type, 0) + 1
+
+    return counts
+
+
+def _collect_declared_otm_tables(groups: List[Dict[str, Any]]) -> List[str]:
+    declared = set()
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for obj in objects:
+            if not isinstance(obj, dict):
+                continue
+            if _is_ignored_object(obj):
+                continue
+
+            otm_table = _normalize_otm_name(obj.get("otm_table"))
+            if not otm_table:
+                continue
+            if _is_logical_object_type(otm_table):
+                continue
+            declared.add(otm_table)
+
+    return sorted(declared)
 
 
 def validate_project(domain):
@@ -40,19 +117,25 @@ def validate_project(domain):
         errors.append("O projeto deve conter ao menos um grupo.")
 
     for g_idx, group in enumerate(groups, start=1):
+        group_id = str(group.get("group_id") or "").strip().upper()
+        is_group_zero = group_id in LEGACY_GROUP_ZERO_IDS
+        is_ignored_group = group_id == IGNORED_GROUP_ID
+
         if not group.get("label"):
             errors.append(f"Grupo {g_idx}: label é obrigatório.")
 
         seq = group.get("sequence")
         try:
             seq_int = int(seq)
-            if seq_int <= 0:
+            if is_group_zero and seq_int != 0:
+                errors.append(f"Grupo {g_idx}: sequência inválida para SEM_GRUPO (use 0).")
+            elif not is_group_zero and seq_int <= 0:
                 errors.append(f"Grupo {g_idx}: sequência inválida.")
         except (ValueError, TypeError):
             errors.append(f"Grupo {g_idx}: sequência inválida.")
 
         objects = group.get("objects", [])
-        if not objects:
+        if not objects and not is_group_zero and not is_ignored_group:
             errors.append(f"Grupo {g_idx}: deve conter ao menos um objeto.")
 
         for o_idx, obj in enumerate(objects, start=1):
@@ -64,6 +147,8 @@ def validate_project(domain):
             if not obj_type:
                 errors.append(f"Grupo {g_idx} / Objeto {o_idx}: object_type é obrigatório.")
                 continue
+            obj_type_normalized = _normalize_otm_name(obj_type)
+            otm_table_normalized = _normalize_otm_name(obj.get("otm_table"))
             
             # Validação: Saved Query SQL obrigatório para SAVED_QUERY
             if obj_type == "SAVED_QUERY":
@@ -89,26 +174,42 @@ def validate_project(domain):
                 continue
 
             # SE é tipo lógico (não tabela OTM)
-            if obj_type in LOGICAL_OBJECT_TYPES:
-                required_ids = LOGICAL_OBJECT_TYPES[obj_type]
+            if _is_logical_object_type(obj_type):
+                required_ids = LOGICAL_OBJECT_TYPES[obj_type_normalized]
                 identifiers = obj.get("identifiers", {})
 
                 for rid in required_ids:
                     if not identifiers.get(rid):
                         errors.append(
-                            f"Grupo {g_idx} / Objeto {o_idx}: {rid} é obrigatório para {obj_type}."
+                            f"Grupo {g_idx} / Objeto {o_idx}: {rid} é obrigatório para {obj_type_normalized}."
                         )
             
             # SE é tabela OTM (schema-driven)
             else:
+                if otm_table_normalized and otm_table_normalized != obj_type_normalized:
+                    errors.append(
+                        f"Grupo {g_idx} / Objeto {o_idx}: otm_table deve ser igual a object_type para tabela OTM."
+                    )
                 # Validar usando schema
                 data = obj.get("data", {})
-                schema_errors = validate_form_data_against_schema(obj_type, data)
+                schema_errors = validate_form_data_against_schema(obj_type_normalized, data)
                 
                 for schema_error in schema_errors:
                     errors.append(
                         f"Grupo {g_idx} / Objeto {o_idx}: {schema_error}"
                     )
+
+    # Regra canônica de processo:
+    # cada tabela OTM presente no projeto deve estar associada a >= 1 objeto.
+    # A cardinalidade superior é livre (1..N objetos por tabela).
+    declared_otm_tables = _collect_declared_otm_tables(groups)
+    otm_table_counts = _collect_otm_table_object_counts(groups)
+    for table_name in declared_otm_tables:
+        count = otm_table_counts.get(table_name, 0)
+        if count < 1:
+            errors.append(
+                f"Regra canônica: tabela OTM {table_name} sem objeto associado."
+            )
 
     if errors:
         raise DomainValidationError(errors)

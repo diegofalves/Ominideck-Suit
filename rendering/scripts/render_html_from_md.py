@@ -10,6 +10,7 @@ DEFAULT_JSON = BASE_DIR / "domain" / "projeto_migracao" / "projeto_migracao.json
 OUTPUT_FILE = BASE_DIR / "rendering" / "html" / "projeto_migracao.html"
 
 REQUIRED_STATUS = {"documentation", "migration_project", "export", "deploy", "validation"}
+SPECIAL_GROUP_IDS = {"SEM_GRUPO", "GROUP_0", "IGNORADOS"}
 
 def format_date_br(date_str):
     """Converte data para formato brasileiro DD/MM/YYYY"""
@@ -726,6 +727,10 @@ def _normalize(data: dict) -> dict:
 
     groups = []
     for group in data.get("groups", []):
+        group_id = str(group.get("group_id") or "").strip().upper()
+        if group_id in SPECIAL_GROUP_IDS:
+            continue
+
         objects = []
         for obj in group.get("objects", []):
             obj = dict(obj)
