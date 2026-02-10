@@ -3,6 +3,8 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from ui.backend.domain_stats import object_domain_map, table_domain_map
+
 BASE_DIR = Path(__file__).resolve().parents[2]
 PROJECT_PATH = BASE_DIR / "domain/projeto_migracao/projeto_migracao.json"
 DOMAIN_TABLE_STATS_PATH = BASE_DIR / "metadata" / "otm" / "domain_table_statistics.json"
@@ -65,33 +67,7 @@ def _split_ignored_objects(
 
 
 def _load_domain_statistics_tables() -> List[str]:
-    """
-    Carrega a lista canônica de tabelas OTM do metadata consolidado.
-    """
-    if not DOMAIN_TABLE_STATS_PATH.exists():
-        return []
-
-    try:
-        payload = json.loads(DOMAIN_TABLE_STATS_PATH.read_text(encoding="utf-8"))
-    except Exception:
-        return []
-
-    tables = payload.get("tables", [])
-    if not isinstance(tables, list):
-        return []
-
-    result: Set[str] = set()
-    for row in tables:
-        if not isinstance(row, dict):
-            continue
-        table_name = _normalize_name(row.get("tableName"))
-        if not table_name:
-            continue
-        if not re.fullmatch(r"[A-Z0-9_#$]+", table_name):
-            continue
-        result.add(table_name)
-
-    return sorted(result)
+    return sorted(table_domain_map().keys())
 
 
 def _collect_existing_otm_tables(data: Dict[str, Any]) -> Set[str]:
@@ -149,7 +125,7 @@ def _collect_ignored_otm_tables(data: Dict[str, Any]) -> Set[str]:
     return ignored
 
 
-def _build_auto_group_zero_object(table_name: str, sequence: int) -> Dict[str, Any]:
+def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: Optional[str] = None) -> Dict[str, Any]:
     auto_name = f"{table_name} (AUTO)"
     identifiers: Dict[str, str] = {}
     saved_query: Optional[Dict[str, str]] = None
@@ -188,19 +164,74 @@ def _build_auto_group_zero_object(table_name: str, sequence: int) -> Dict[str, A
     }
     if saved_query is not None:
         payload["saved_query"] = saved_query
+    if domain_name:
+        normalized_domain = domain_name.strip().upper()
+        if normalized_domain:
+            payload["domainName"] = normalized_domain
+            payload["domain"] = normalized_domain
+            payload["name"] = f"{table_name} ({normalized_domain} - AUTO)"
 
     return payload
 
 
+def _normalize_object_domain_aliases(data: Dict[str, Any]) -> None:
+    domain_map = table_domain_map()
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for obj in objects:
+            if not isinstance(obj, dict):
+                continue
+
+            domain_name = _normalize_name(obj.get("domainName"))
+            domain_alias = _normalize_name(obj.get("domain"))
+            table_name = _normalize_name(obj.get("object_type") or obj.get("otm_table"))
+
+            if domain_name:
+                obj["domainName"] = domain_name
+                obj["domain"] = domain_name
+                continue
+
+            if domain_alias:
+                obj["domain"] = domain_alias
+                obj["domainName"] = domain_alias
+                continue
+
+            if not table_name:
+                continue
+
+            table_domains = [d for d in domain_map.get(table_name, []) if d]
+
+            # Se houver apenas um dominio para a tabela, preenche automaticamente.
+            if len(table_domains) == 1:
+                only_domain = _normalize_name(table_domains[0])
+                if only_domain:
+                    obj["domainName"] = only_domain
+                    obj["domain"] = only_domain
+                continue
+
+            # Compatibilidade: objetos auto antigos podem ter dominio no nome.
+            if _is_truthy(obj.get("auto_generated")):
+                name = str(obj.get("name") or "")
+                match = re.search(r"\(([A-Z0-9_]+)\s*-\s*AUTO\)", name.upper())
+                if match:
+                    inferred_domain = _normalize_name(match.group(1))
+                    if inferred_domain:
+                        obj["domainName"] = inferred_domain
+                        obj["domain"] = inferred_domain
+
+
 def _ensure_domain_statistics_coverage(data: Dict[str, Any]) -> None:
-    """
-    Regra canônica:
-    Todas as tabelas existentes em metadata/otm/domain_table_statistics.json
-    devem ter ao menos um objeto associado no projeto final.
-    As ausentes são criadas automaticamente em SEM_GRUPO.
-    """
-    required_tables = _load_domain_statistics_tables()
-    if not required_tables:
+    required_map = table_domain_map()
+    if not required_map:
         return
     ignored_tables = _collect_ignored_otm_tables(data)
 
@@ -221,25 +252,31 @@ def _ensure_domain_statistics_coverage(data: Dict[str, Any]) -> None:
     objects = _as_object_list(group_zero.get("objects"))
     group_zero["objects"] = objects
 
-    effective_required_tables = [
-        table for table in required_tables if table not in ignored_tables
-    ]
-    existing_tables = _collect_existing_otm_tables(data)
-    missing_tables = [
-        table for table in effective_required_tables if table not in existing_tables
-    ]
-    if not missing_tables:
-        return
-
-    next_sequence = 1
-    for obj in objects:
-        if not isinstance(obj, dict):
+    existing_domains = object_domain_map(data.get("groups", []), required_map)
+    for table_name, domains in required_map.items():
+        if table_name in ignored_tables:
             continue
-        next_sequence = max(next_sequence, _to_int(obj.get("sequence")) + 1)
+        if not domains:
+            continue
+        required_domains = [d for d in domains if d]
+        missing = [
+            domain for domain in required_domains
+            if domain not in existing_domains.get(table_name, set())
+        ]
+        if not missing:
+            continue
 
-    for table_name in missing_tables:
-        objects.append(_build_auto_group_zero_object(table_name, next_sequence))
-        next_sequence += 1
+        next_sequence = 1
+        for obj in objects:
+            if not isinstance(obj, dict):
+                continue
+            next_sequence = max(next_sequence, _to_int(obj.get("sequence")) + 1)
+
+        for domain_name in missing:
+            objects.append(
+                _build_auto_group_zero_object(table_name, next_sequence, domain_name)
+            )
+            next_sequence += 1
 
 
 def _normalize_group_zero(data):
@@ -416,6 +453,7 @@ def load_project():
 
     _normalize_group_zero(data)
     _ensure_domain_statistics_coverage(data)
+    _normalize_object_domain_aliases(data)
     normalized_signature = json.dumps(data, ensure_ascii=False, sort_keys=True)
     if normalized_signature != original_signature:
         PROJECT_PATH.write_text(
@@ -428,6 +466,7 @@ def load_project():
 def save_project(domain):
     _normalize_group_zero(domain)
     _ensure_domain_statistics_coverage(domain)
+    _normalize_object_domain_aliases(domain)
     PROJECT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(PROJECT_PATH, "w", encoding="utf-8") as f:
         json.dump(domain, f, indent=2, ensure_ascii=False)

@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from ui.backend.domain_stats import unique_domain_names
+
 BASE_DIR = Path(__file__).resolve().parents[2]
 
 DOMAIN_DIR = BASE_DIR / "domain" / "projeto_migracao"
@@ -44,5 +46,6 @@ def load_all():
         "schema": load_schema(),
         "enums": load_enums(),
         "ui": load_ui_contract(),
-        "groups_catalog": load_groups()
+        "groups_catalog": load_groups(),
+        "domain_stats": {"domain_names": unique_domain_names()},
     }

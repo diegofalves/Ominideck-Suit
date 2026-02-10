@@ -285,6 +285,12 @@ def form_to_domain(form, existing_project=None):
             object_notes = form.get("object_notes")
             if object_notes:
                 target_obj["notes"] = object_notes
+            object_domain_name = form.get("object_domain_name", "").strip()
+            if object_domain_name:
+                normalized_domain = object_domain_name.upper()
+                target_obj["domainName"] = normalized_domain
+                # Contrato canônico: manter alias simples "domain" sincronizado.
+                target_obj["domain"] = normalized_domain
 
             # Flag canônica para excluir tabela da cobertura automática.
             if form.get("object_ignore_table_present") is not None:

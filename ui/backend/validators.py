@@ -3,12 +3,14 @@ Validadores de domínio para Projeto de Migração OTM
 Implementa regras de negócio e validações estruturais
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Set
 
 
 class DomainValidationError(Exception):
     pass
 
+
+from ui.backend.domain_stats import object_domain_map, table_domain_map
 
 GROUP_ZERO_ID = "SEM_GRUPO"
 LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
@@ -95,6 +97,21 @@ def _collect_declared_otm_tables(groups: List[Dict[str, Any]]) -> List[str]:
             declared.add(otm_table)
 
     return sorted(declared)
+
+
+def _collect_ignored_tables(groups: List[Dict[str, Any]]) -> Set[str]:
+    ignored = set()
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        for obj in group.get("objects", []):
+            if not isinstance(obj, dict):
+                continue
+            if _is_ignored_object(obj):
+                table = _normalize_otm_name(obj.get("object_type") or obj.get("otm_table"))
+                if table and table not in ignored:
+                    ignored.add(table)
+    return ignored
 
 
 def validate_project(domain):
@@ -210,6 +227,23 @@ def validate_project(domain):
             errors.append(
                 f"Regra canônica: tabela OTM {table_name} sem objeto associado."
             )
+
+    domain_map = table_domain_map()
+    if domain_map:
+        ignored_tables = _collect_ignored_tables(groups)
+        object_domains = object_domain_map(groups, domain_map)
+        for table_name, required_domains in domain_map.items():
+            if table_name in ignored_tables or not required_domains:
+                continue
+            missing = [
+                domain
+                for domain in required_domains
+                if domain not in object_domains.get(table_name, set())
+            ]
+            if missing:
+                errors.append(
+                    f"Regra canônica: tabela {table_name} precisa de objeto(s) para domínio(s) {', '.join(sorted(set(missing)))}."
+                )
 
     if errors:
         raise DomainValidationError(errors)

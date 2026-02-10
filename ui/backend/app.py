@@ -514,6 +514,7 @@ def projeto_migracao():
         except DomainValidationError as e:
             return render_template(
                 "projeto_migracao.html",
+                data=data,
                 schema=data["schema"],
                 enums=data["enums"],
                 ui=data["ui"],
@@ -527,6 +528,7 @@ def projeto_migracao():
 
     return render_template(
         "projeto_migracao.html",
+        data=data,
         schema=data["schema"],
         enums=data["enums"],
         ui=data["ui"],

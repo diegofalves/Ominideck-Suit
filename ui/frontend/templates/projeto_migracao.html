@@ -343,6 +343,9 @@
       width: 100%;
       table-layout: fixed;
     }
+    .group-objects-table {
+      table-layout: auto;
+    }
 
     .group-summary-table th,
     .group-summary-table td,
@@ -378,18 +381,22 @@
     .group-objects-table th:nth-child(2) { width: 18% !important; }
     .group-objects-table th:nth-child(3) { width: 26% !important; }
     .group-objects-table th:nth-child(4) { width: 12% !important; }
-    .group-objects-table th:nth-child(5) { width: 9% !important; }
-    .group-objects-table th:nth-child(6) {
+    .group-objects-table th:nth-child(5) {
+      width: 1% !important;
+      white-space: nowrap !important;
+    }
+    .group-objects-table th:nth-child(6) { width: 9% !important; }
+    .group-objects-table th:nth-child(7) {
       width: 9% !important;
       text-align: center !important;
       padding-left: 14px !important;
       padding-right: 14px !important;
     }
-    .group-objects-table th:nth-child(7),
     .group-objects-table th:nth-child(8),
     .group-objects-table th:nth-child(9),
     .group-objects-table th:nth-child(10),
-    .group-objects-table th:nth-child(11) {
+    .group-objects-table th:nth-child(11),
+    .group-objects-table th:nth-child(12) {
       width: 60px !important;
       min-width: 60px !important;
       max-width: 60px !important;
@@ -398,7 +405,7 @@
       text-align: center !important;
       white-space: nowrap !important;
     }
-    .group-objects-table th:nth-child(12) {
+    .group-objects-table th:nth-child(13) {
       width: 90px !important;
       text-align: center !important;
     }
@@ -407,8 +414,12 @@
     .group-objects-table td:nth-child(2) { width: 18% !important; }
     .group-objects-table td:nth-child(3) { width: 26% !important; }
     .group-objects-table td:nth-child(4) { width: 12% !important; }
-    .group-objects-table td:nth-child(5) { width: 9% !important; }
-    .group-objects-table td:nth-child(6) {
+    .group-objects-table td:nth-child(5) {
+      width: 1% !important;
+      white-space: nowrap !important;
+    }
+    .group-objects-table td:nth-child(6) { width: 9% !important; }
+    .group-objects-table td:nth-child(7) {
       width: 9% !important;
       text-align: center !important;
       padding-left: 14px !important;
@@ -417,11 +428,11 @@
       overflow-wrap: anywhere;
       word-break: break-word;
     }
-    .group-objects-table td:nth-child(7),
     .group-objects-table td:nth-child(8),
     .group-objects-table td:nth-child(9),
     .group-objects-table td:nth-child(10),
-    .group-objects-table td:nth-child(11) {
+    .group-objects-table td:nth-child(11),
+    .group-objects-table td:nth-child(12) {
       width: 60px !important;
       min-width: 60px !important;
       max-width: 60px !important;
@@ -430,7 +441,7 @@
       text-align: center !important;
       white-space: nowrap;
     }
-    .group-objects-table td:nth-child(12) {
+    .group-objects-table td:nth-child(13) {
       text-align: center !important;
       white-space: nowrap;
     }
@@ -439,6 +450,19 @@
       white-space: normal !important;
       overflow-wrap: anywhere;
       word-break: break-word;
+    }
+    .group-objects-table td:nth-child(4),
+    .group-objects-table td:nth-child(5) {
+      white-space: normal !important;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .group-objects-table td:nth-child(4) span,
+    .group-objects-table td:nth-child(5) span {
+      display: inline-block;
+      max-width: 100%;
+      white-space: normal;
+      line-height: 1.25;
     }
 
     /* ================================================
@@ -459,6 +483,7 @@
     }
 
     .object-edit-grid-2,
+    .object-edit-grid-3,
     .object-edit-grid-4,
     .object-edit-grid-5 {
       display: grid;
@@ -471,6 +496,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .object-edit-grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .object-edit-grid-4 {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
@@ -480,6 +509,7 @@
     }
 
     .object-edit-grid-2 > div,
+    .object-edit-grid-3 > div,
     .object-edit-grid-4 > div,
     .object-edit-grid-5 > div {
       min-width: 0;
@@ -528,10 +558,14 @@
       .object-edit-grid-4 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+      .object-edit-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 768px) {
       .object-edit-grid-2,
+      .object-edit-grid-3,
       .object-edit-grid-4,
       .object-edit-grid-5 {
         grid-template-columns: 1fr;
@@ -699,14 +733,14 @@
       margin: var(--space-4) auto 0;
       padding: 0 clamp(2px, 0.8vw, 10px);
       display: grid;
-      grid-template-columns: clamp(160px, 24vw, 280px) 1fr clamp(160px, 24vw, 280px);
+      grid-template-columns: clamp(120px, 18vw, 220px) minmax(0, 1fr) clamp(120px, 18vw, 220px);
       align-items: center;
-      column-gap: 34px;
+      column-gap: 20px;
     }
 
     .panel-brand::after {
       content: "";
-      width: clamp(160px, 24vw, 280px);
+      width: clamp(120px, 18vw, 220px);
       height: 1px;
       visibility: hidden;
     }
@@ -715,7 +749,7 @@
       grid-column: 1;
       justify-self: start;
       display: block;
-      width: clamp(160px, 24vw, 280px);
+      width: clamp(120px, 18vw, 220px);
       height: auto;
       filter: drop-shadow(0 10px 24px rgba(10, 30, 63, 0.45));
     }
@@ -728,16 +762,20 @@
       align-items: center;
       text-align: center;
       gap: 6px;
-      max-width: 720px;
+      width: 100%;
+      min-width: 0;
+      max-width: none;
     }
 
     .panel-brand__title {
       margin: 0;
-      font-size: clamp(24px, 2.8vw, 36px);
+      font-size: clamp(20px, 2.4vw, 34px);
       line-height: 1.1;
       color: #e9eef5;
       font-weight: 700;
       letter-spacing: 0.2px;
+      white-space: nowrap !important;
+      text-wrap: nowrap !important;
     }
 
     .panel-brand__subtitle {
@@ -768,6 +806,10 @@
       .panel-brand__content {
         text-align: center;
         align-items: center;
+      }
+
+      .panel-brand__title {
+        font-size: clamp(13px, 3.8vw, 20px);
       }
     }
 
@@ -1145,6 +1187,7 @@
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 176px;">Nome Funcional</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 324px;">Descrição Funcional</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 170px;">Tipo de Objeto</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057;">Dominio</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 110px;">Tipo Deploy</th>
               <th style="padding: 10px 14px; text-align: center; font-weight: 600; color: #495057; width: 90px;">Resp.</th>
               <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">📝 Doc.</th>
@@ -1173,6 +1216,15 @@
                   <span style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: 500; color: #0066cc;">
                     {{ obj.object_type or obj.type or "N/A" }}
                   </span>
+                </td>
+                <td style="padding: 10px 12px; color: #495057;">
+                  {% if obj.domainName or obj.domain %}
+                    <span style="background-color: #f3f4f6; padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: 500; color: #334155;">
+                      {{ obj.domainName or obj.domain }}
+                    </span>
+                  {% else %}
+                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                  {% endif %}
                 </td>
                 <td style="padding: 10px 12px; color: #495057;">
                   {% if obj.deployment_type %}
@@ -1297,7 +1349,7 @@
       <!-- Formulário de Objeto -->
       <h4>Dados do Objeto</h4>
 
-      <div class="object-edit-grid-2" style="margin-bottom: 12px;">
+      <div class="object-edit-grid-3" style="margin-bottom: 12px;">
         <div>
           <label><strong>Nome do Objeto *</strong></label>
           <input 
@@ -1325,6 +1377,22 @@
             <option value="">— Selecione —</option>
             <!-- Opções serão injetadas por schema-engine.js -->
           </select>
+        </div>
+        <div>
+          <label><strong>Domínio *</strong></label>
+          <input
+            list="domain-name-list"
+            name="object_domain_name"
+            required
+            placeholder="Ex: BAU"
+            value="{{ (current_object.domainName or current_object.domain) if current_object else '' }}"
+            style="width: 100%;"
+          >
+          <datalist id="domain-name-list">
+            {% for domain in data.domain_stats.domain_names %}
+              <option value="{{ domain }}">
+            {% endfor %}
+          </datalist>
         </div>
       </div>
 
