@@ -1573,6 +1573,7 @@
         <div>
           <label>🚀 Tipo de Deploy</label>
           <select name="object_deployment_type" style="width: 100%;">
+            <option value="" {% if not current_object or not current_object.deployment_type %}selected{% endif %}>-- Selecione --</option>
             {% for opt in enums.deployment_type %}
               <option value="{{ opt }}" {% if current_object and current_object.deployment_type == opt %}selected{% endif %}>
                 {{ opt }}

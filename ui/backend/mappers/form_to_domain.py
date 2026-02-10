@@ -105,6 +105,7 @@ def map_project(form, groups_catalog=None, existing_project=None):
                     obj = {
                         "type": object_type,
                         "deployment_type": form.get("object_deployment_type", "").strip(),
+                        "deployment_type_user_defined": bool(form.get("object_deployment_type", "").strip()),
                         "responsible": form.get("object_responsible", "").strip(),
                         "sequence": existing_obj["sequence"],  # Manter sequence original
                         "notes": form.get("object_notes", "").strip(),
@@ -118,6 +119,7 @@ def map_project(form, groups_catalog=None, existing_project=None):
                     obj = {
                         "type": object_type,
                         "deployment_type": form.get("object_deployment_type", "").strip(),
+                        "deployment_type_user_defined": bool(form.get("object_deployment_type", "").strip()),
                         "responsible": form.get("object_responsible", "").strip(),
                         "sequence": next_sequence,
                         "notes": form.get("object_notes", "").strip(),
@@ -144,4 +146,3 @@ def map_project(form, groups_catalog=None, existing_project=None):
         },
         "active_group_id": active_group_id
     }
-

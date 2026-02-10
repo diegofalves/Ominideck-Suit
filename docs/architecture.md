@@ -103,6 +103,8 @@ Campos obrigatórios:
 Regras:
 - sequence deve ser única dentro do grupo
 - otm_table deve existir na Metadata OTM
+- objetos auto_generated devem aplicar deployment_type com base no catalogo
+  metadata/otm/migration_project_eligible_tables.json (fallback vazio)
 
 ---
 

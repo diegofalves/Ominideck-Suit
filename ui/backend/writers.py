@@ -3,6 +3,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from ui.backend.deployment_policy import deployment_type_for_table
 from ui.backend.domain_stats import object_domain_map, table_domain_map
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -129,6 +130,8 @@ def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: O
     auto_name = f"{table_name} (AUTO)"
     identifiers: Dict[str, str] = {}
     saved_query: Optional[Dict[str, str]] = None
+    normalized_domain = _normalize_name(domain_name)
+    deployment_type = deployment_type_for_table(table_name, normalized_domain)
 
     if table_name in LOGICAL_REQUIRED_IDENTIFIERS:
         for identifier in LOGICAL_REQUIRED_IDENTIFIERS[table_name]:
@@ -144,7 +147,8 @@ def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: O
         ),
         "object_type": table_name,
         "otm_table": table_name,
-        "deployment_type": "MANUAL",
+        "deployment_type": deployment_type,
+        "deployment_type_user_defined": False,
         "sequence": sequence,
         "responsible": "",
         "status": {
@@ -164,12 +168,10 @@ def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: O
     }
     if saved_query is not None:
         payload["saved_query"] = saved_query
-    if domain_name:
-        normalized_domain = domain_name.strip().upper()
-        if normalized_domain:
-            payload["domainName"] = normalized_domain
-            payload["domain"] = normalized_domain
-            payload["name"] = f"{table_name} ({normalized_domain} - AUTO)"
+    if normalized_domain:
+        payload["domainName"] = normalized_domain
+        payload["domain"] = normalized_domain
+        payload["name"] = f"{table_name} ({normalized_domain} - AUTO)"
 
     return payload
 
@@ -227,6 +229,35 @@ def _normalize_object_domain_aliases(data: Dict[str, Any]) -> None:
                     if inferred_domain:
                         obj["domainName"] = inferred_domain
                         obj["domain"] = inferred_domain
+
+
+def _normalize_auto_generated_deployment_types(data: Dict[str, Any]) -> None:
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for obj in objects:
+            if not isinstance(obj, dict):
+                continue
+            if not _is_truthy(obj.get("auto_generated")):
+                continue
+            if _is_truthy(obj.get("deployment_type_user_defined")):
+                continue
+
+            table_name = _normalize_name(obj.get("object_type") or obj.get("otm_table"))
+            if not table_name:
+                continue
+
+            domain_name = _normalize_name(obj.get("domainName") or obj.get("domain"))
+            target_type = deployment_type_for_table(table_name, domain_name)
+            obj["deployment_type"] = target_type
 
 
 def _ensure_domain_statistics_coverage(data: Dict[str, Any]) -> None:
@@ -557,6 +588,7 @@ def load_project():
     _normalize_object_domain_aliases(data)
     _ensure_domain_statistics_coverage(data)
     _normalize_object_domain_aliases(data)
+    _normalize_auto_generated_deployment_types(data)
     _deduplicate_group_zero_auto_objects(data)
     _cleanup_group_zero_legacy_generic_autos(data)
     normalized_signature = json.dumps(data, ensure_ascii=False, sort_keys=True)
@@ -573,6 +605,7 @@ def save_project(domain):
     _normalize_object_domain_aliases(domain)
     _ensure_domain_statistics_coverage(domain)
     _normalize_object_domain_aliases(domain)
+    _normalize_auto_generated_deployment_types(domain)
     _deduplicate_group_zero_auto_objects(domain)
     _cleanup_group_zero_legacy_generic_autos(domain)
     PROJECT_PATH.parent.mkdir(parents=True, exist_ok=True)

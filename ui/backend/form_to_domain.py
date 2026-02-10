@@ -277,8 +277,12 @@ def form_to_domain(form, existing_project=None):
                 # Contrato canônico: otm_table espelha exatamente object_type.
                 target_obj["otm_table"] = object_type
             object_deployment_type = form.get("object_deployment_type")
-            if object_deployment_type:
-                target_obj["deployment_type"] = object_deployment_type
+            if object_deployment_type is not None:
+                normalized_deployment_type = str(object_deployment_type).strip()
+                target_obj["deployment_type"] = normalized_deployment_type
+                target_obj["deployment_type_user_defined"] = bool(
+                    normalized_deployment_type
+                )
             object_responsible = form.get("object_responsible")
             if object_responsible:
                 target_obj["responsible"] = object_responsible
