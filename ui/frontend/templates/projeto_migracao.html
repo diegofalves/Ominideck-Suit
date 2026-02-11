@@ -209,6 +209,19 @@
       outline: none;
     }
 
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: auto;
+      max-width: none;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
     input:hover:not(:disabled), 
     select:hover:not(:disabled), 
     textarea:hover:not(:disabled) {
@@ -1236,10 +1249,105 @@
             </tr>
           </thead>
           <tbody>
-            {% for obj in current_group.data.objects %}
+            {% set display_order = namespace(indices=[], consumed=[]) %}
+            {% for candidate_primary in current_group.data.objects %}
+              {% set candidate_primary_idx = loop.index0 %}
+              {% set candidate_primary_table = (candidate_primary.object_type or candidate_primary.otm_table or "")|string|trim|upper %}
+              {% set candidate_primary_domain = (candidate_primary.domainName or candidate_primary.domain or "")|string|trim|upper %}
+              {% set candidate_is_child = namespace(value=false) %}
+              {% if candidate_primary_table %}
+                {% for maybe_parent in current_group.data.objects %}
+                  {% if not candidate_is_child.value and loop.index0 != candidate_primary_idx %}
+                    {% set maybe_parent_domain = (maybe_parent.domainName or maybe_parent.domain or "")|string|trim|upper %}
+                    {% set maybe_parent_subtables = maybe_parent.otm_subtables if maybe_parent.otm_subtables is iterable and maybe_parent.otm_subtables is not string else [] %}
+                    {% for maybe_parent_subtable in maybe_parent_subtables %}
+                      {% set maybe_parent_subtable_name = (maybe_parent_subtable|string|trim|upper) %}
+                      {% if maybe_parent_subtable_name == candidate_primary_table and (not maybe_parent_domain or not candidate_primary_domain or maybe_parent_domain == candidate_primary_domain) %}
+                        {% set candidate_is_child.value = true %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
+              {% if not candidate_is_child.value %}
+                {% if candidate_primary_idx not in display_order.consumed %}
+                  {% set display_order.indices = display_order.indices + [candidate_primary_idx] %}
+                  {% set display_order.consumed = display_order.consumed + [candidate_primary_idx] %}
+                {% endif %}
+
+                {% set candidate_primary_subtables = candidate_primary.otm_subtables if candidate_primary.otm_subtables is iterable and candidate_primary.otm_subtables is not string else [] %}
+                {% for primary_subtable in candidate_primary_subtables %}
+                  {% set primary_subtable_name = (primary_subtable|string|trim|upper) %}
+                  {% if primary_subtable_name %}
+                    {% set subtable_already_picked = namespace(value=false) %}
+                    {% for candidate_child in current_group.data.objects %}
+                      {% if not subtable_already_picked.value %}
+                        {% set candidate_child_idx = loop.index0 %}
+                        {% set candidate_child_table = (candidate_child.object_type or candidate_child.otm_table or "")|string|trim|upper %}
+                        {% set candidate_child_domain = (candidate_child.domainName or candidate_child.domain or "")|string|trim|upper %}
+                        {% if candidate_child_idx != candidate_primary_idx and candidate_child_idx not in display_order.consumed and candidate_child_table == primary_subtable_name and (not candidate_primary_domain or not candidate_child_domain or candidate_primary_domain == candidate_child_domain) %}
+                          {% set display_order.indices = display_order.indices + [candidate_child_idx] %}
+                          {% set display_order.consumed = display_order.consumed + [candidate_child_idx] %}
+                          {% set subtable_already_picked.value = true %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+
+            {% for remaining_obj in current_group.data.objects %}
+              {% if loop.index0 not in display_order.consumed %}
+                {% set display_order.indices = display_order.indices + [loop.index0] %}
+                {% set display_order.consumed = display_order.consumed + [loop.index0] %}
+              {% endif %}
+            {% endfor %}
+
+            {% for obj_index in display_order.indices %}
+              {% set obj = current_group.data.objects[obj_index] %}
+              {% set row_number = namespace(value=(obj_index + 1)|string, is_subtable=false) %}
+              {% set object_table = (obj.object_type or obj.otm_table or "")|string|upper %}
+              {% set object_domain = (obj.domainName or obj.domain or "")|string|upper %}
+              {% if object_table %}
+                {% set relation = namespace(found=false, parent_index=0, sub_index=0) %}
+                {% for parent_obj in current_group.data.objects %}
+                  {% if not relation.found %}
+                    {% set parent_subtables = parent_obj.otm_subtables if parent_obj.otm_subtables is iterable and parent_obj.otm_subtables is not string else [] %}
+                    {% if parent_subtables %}
+                      {% set parent_domain = (parent_obj.domainName or parent_obj.domain or "")|string|upper %}
+                      {% set parent_sub_counter = namespace(value=0, match=0) %}
+                      {% for parent_subtable in parent_subtables %}
+                        {% set parent_sub_name = (parent_subtable|string|upper) %}
+                        {% if parent_sub_name %}
+                          {% set parent_sub_counter.value = parent_sub_counter.value + 1 %}
+                          {% if parent_sub_name == object_table and parent_sub_counter.match == 0 %}
+                            {% set parent_sub_counter.match = parent_sub_counter.value %}
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                      {% if parent_sub_counter.match > 0 and (not parent_domain or not object_domain or parent_domain == object_domain) %}
+                        {% set relation.found = true %}
+                        {% set relation.parent_index = loop.index %}
+                        {% set relation.sub_index = parent_sub_counter.match %}
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+                {% if relation.found %}
+                  {% set row_number.value = relation.parent_index ~ "." ~ relation.sub_index %}
+                  {% set row_number.is_subtable = true %}
+                {% endif %}
+              {% endif %}
               <tr class="table-row {% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}">
-                <td style="padding: 10px 12px; text-align: center; color: #6c757d; font-weight: 500;">{{ loop.index }}</td>
+                <td style="padding: 10px 12px; text-align: center; color: #6c757d; font-weight: 500;">
+                  {{ row_number.value }}
+                </td>
                 <td style="padding: 10px 12px;">
+                  {% if row_number.is_subtable %}
+                    <span style="display: inline-block; color: #6b7280; margin-right: 6px;">↳</span>
+                  {% endif %}
                   <strong style="color: #212529;">{{ obj.name or "Sem nome" }}</strong>
                 </td>
                 <td style="padding: 10px 12px; color: #495057;">
@@ -1341,7 +1449,7 @@
                   {% endif %}
                 </td>
                 <td class="actions-cell">
-                  <button type="button" class="icon-btn" onclick="submitProjectAction({'action': 'load_object', 'edit_object_index': '{{ loop.index0 }}', 'active_group_id': '{{ active_id }}'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar item">✏️</button><button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ loop.index0 }}', 'active_group_id': '{{ active_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover item">🗑️</button>
+                  <button type="button" class="icon-btn" onclick="submitProjectAction({'action': 'load_object', 'edit_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar item">✏️</button><button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover item">🗑️</button>
                 </td>
               </tr>
             {% endfor %}
@@ -1390,6 +1498,22 @@
           Criando novo item
         {% endif %}
       </p>
+      <div style="margin-bottom: 12px;">
+        {% set ignore_value = (current_object.ignore_table|string|lower) if current_object and current_object.ignore_table is defined else '' %}
+        <label style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap;">
+          <input
+            type="checkbox"
+            name="object_ignore_table"
+            value="1"
+            {% if ignore_value in ['1', 'true', 'on', 'yes', 'y'] %}checked{% endif %}
+          >
+          <input type="hidden" name="object_ignore_table_present" value="1">
+          Ignorar tabela no projeto
+        </label>
+        <p style="font-size: 11px; color: #6b7280; margin: 4px 0 0 0; white-space: nowrap;">
+          Remove esta tabela da pendencia automatica de cobertura e move o item para o grupo IGNORADOS.
+        </p>
+      </div>
 
       <!-- Formulario de Item -->
       <h4>Dados do Item</h4>
@@ -1539,29 +1663,18 @@
 
       <div class="object-edit-grid-4" style="margin-bottom: 12px;">
         <div>
-          <label>📋 Tabela OTM</label>
           {% set current_otm_table = (current_object.object_type if current_object and current_object.object_type else (current_object.otm_table if current_object else '')) %}
-          <input
-            type="text"
-            id="object_otm_table_display"
-            value="{{ current_otm_table }}"
-            readonly
-            style="width: 100%; background-color: #f5f5f5; color: #1f2937;"
-          >
           <input
             type="hidden"
             name="object_otm_table"
             id="object_otm_table"
             value="{{ current_otm_table }}"
           >
-          <p style="font-size: 11px; color: #6b7280; margin: 4px 0 0 0;">
-            Campo espelho, sincronizado automaticamente com "Tabela OTM".
-          </p>
           {% set current_otm_related_tables = current_object.otm_related_tables if current_object and current_object.otm_related_tables is iterable and current_object.otm_related_tables is not string else [] %}
           {% set current_otm_subtables = current_object.otm_subtables if current_object and current_object.otm_subtables is iterable and current_object.otm_subtables is not string else [] %}
           <input type="hidden" name="object_related_tables_present" value="1">
           <input type="hidden" name="object_subtable_selection_present" value="1">
-          <label style="margin-top: 8px; display: block;">Tabelas relacionadas (FROM)</label>
+          <label style="display: block;">Tabelas relacionadas (FROM)</label>
           <div
             id="related-tables-selector"
             style="border: 1px solid #d1d5db; border-radius: 6px; background-color: #ffffff; padding: 8px; min-height: 58px;"
@@ -1575,22 +1688,6 @@
             Marque como subtabela apenas as tabelas relacionadas que devem entrar no cache deste item.
           </p>
 
-          <div style="margin-top: 10px;">
-            {% set ignore_value = (current_object.ignore_table|string|lower) if current_object and current_object.ignore_table is defined else '' %}
-            <label style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap;">
-          <input
-            type="checkbox"
-            name="object_ignore_table"
-            value="1"
-            {% if ignore_value in ['1', 'true', 'on', 'yes', 'y'] %}checked{% endif %}
-          >
-          <input type="hidden" name="object_ignore_table_present" value="1">
-          Ignorar tabela no projeto
-        </label>
-            <p style="font-size: 11px; color: #6b7280; margin: 4px 0 0 0;">
-              Remove esta tabela da pendencia automatica de cobertura e move o item para o grupo IGNORADOS.
-            </p>
-          </div>
         </div>
 
         <div>
@@ -1896,6 +1993,7 @@
     const activeGroupLabelFromPage = {{ (groups_catalog.get(project.active_group_id).label if project and project.active_group_id and groups_catalog.get(project.active_group_id) else "") | tojson }};
     const currentMigrationItemNameFromPage = {{ (current_object.name if current_object else "") | tojson }};
     const currentMigrationItemIdFromPage = {{ (current_object.migration_item_id if current_object and current_object.migration_item_id else "") | tojson }};
+    const currentPrimaryTableFromPage = {{ ((current_object.object_type if current_object and current_object.object_type else (current_object.otm_table if current_object else "")) if current_object else "") | tojson }};
     const currentRelatedTablesFromPage = {{ (current_object.otm_related_tables if current_object and current_object.otm_related_tables is iterable and current_object.otm_related_tables is not string else []) | tojson }};
     const currentSubtablesFromPage = {{ (current_object.otm_subtables if current_object and current_object.otm_subtables is iterable and current_object.otm_subtables is not string else []) | tojson }};
 
@@ -1909,7 +2007,6 @@
     }
 
       const objectTypeSelect = document.querySelector('select[name="object_type"]');
-      const otmTableDisplay = document.getElementById("object_otm_table_display");
       const otmTableHidden = document.getElementById("object_otm_table");
       const toggleChangeHistoryBtn = document.getElementById("toggle-change-history-btn");
       const changeHistoryContent = document.getElementById("change-history-content");
@@ -2002,12 +2099,11 @@
         });
       }
 
-      const syncOtmTableFromObjectType = () => {
-      if (!objectTypeSelect || !otmTableDisplay || !otmTableHidden) {
+    const syncOtmTableFromObjectType = () => {
+      if (!objectTypeSelect || !otmTableHidden) {
         return;
       }
       const selectedType = (objectTypeSelect.value || "").trim();
-      otmTableDisplay.value = selectedType;
       otmTableHidden.value = selectedType;
     };
 
@@ -2155,19 +2251,22 @@
       return results;
     };
 
-    const renderRelatedTablesSelector = (relatedTables, selectedSubtables) => {
+    const renderRelatedTablesSelector = (relatedTables, selectedSubtables, primaryTableName) => {
       if (!relatedTablesSelector || !relatedTablesHiddenInputs) {
         return;
       }
 
+      const normalizedPrimary = normalizeTableName(primaryTableName);
       const normalizedSelected = new Set(
-        (selectedSubtables || []).map((table) => normalizeTableName(table)).filter(Boolean)
+        (selectedSubtables || [])
+          .map((table) => normalizeTableName(table))
+          .filter((table) => table && table !== normalizedPrimary)
       );
       const normalizedRelated = [];
       const seenRelated = new Set();
       (relatedTables || []).forEach((table) => {
         const normalized = normalizeTableName(table);
-        if (!normalized || seenRelated.has(normalized)) {
+        if (!normalized || normalized === normalizedPrimary || seenRelated.has(normalized)) {
           return;
         }
         seenRelated.add(normalized);
@@ -2186,34 +2285,63 @@
         return;
       }
 
-      const tableElement = document.createElement("table");
-      tableElement.style.width = "100%";
-      tableElement.style.borderCollapse = "collapse";
-      tableElement.style.fontSize = "12px";
+      const dropdown = document.createElement("details");
+      dropdown.style.border = "1px solid #d1d5db";
+      dropdown.style.borderRadius = "6px";
+      dropdown.style.backgroundColor = "#ffffff";
+      dropdown.style.padding = "6px 8px";
+      dropdown.style.textAlign = "left";
 
-      const header = document.createElement("tr");
-      header.innerHTML = `
-        <th style="text-align: left; padding: 6px; border-bottom: 1px solid #e5e7eb;">Tabela Relacionada</th>
-        <th style="text-align: center; padding: 6px; border-bottom: 1px solid #e5e7eb; width: 120px;">Subtabela</th>
-      `;
-      tableElement.appendChild(header);
+      const summary = document.createElement("summary");
+      summary.style.cursor = "pointer";
+      summary.style.fontSize = "12px";
+      summary.style.fontWeight = "600";
+      summary.style.color = "#1f2937";
+      summary.style.userSelect = "none";
+      summary.style.outline = "none";
+      summary.style.textAlign = "left";
+
+      const listWrapper = document.createElement("div");
+      listWrapper.style.marginTop = "8px";
+      listWrapper.style.maxHeight = "180px";
+      listWrapper.style.overflowY = "auto";
+      listWrapper.style.paddingRight = "4px";
+      listWrapper.style.textAlign = "left";
+      listWrapper.style.display = "flex";
+      listWrapper.style.flexDirection = "column";
+      listWrapper.style.gap = "4px";
 
       normalizedRelated.forEach((tableName) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td style="padding: 6px; border-bottom: 1px solid #f3f4f6; color: #1f2937;">
-            <code>${tableName}</code>
-          </td>
-          <td style="padding: 6px; border-bottom: 1px solid #f3f4f6; text-align: center;">
-            <input
-              type="checkbox"
-              name="object_otm_subtables"
-              value="${tableName}"
-              ${normalizedSelected.has(tableName) ? "checked" : ""}
-            >
-          </td>
-        `;
-        tableElement.appendChild(row);
+        const itemLabel = document.createElement("label");
+        itemLabel.style.display = "flex";
+        itemLabel.style.alignItems = "center";
+        itemLabel.style.justifyContent = "flex-start";
+        itemLabel.style.gap = "8px";
+        itemLabel.style.padding = "2px 0";
+        itemLabel.style.margin = "0";
+        itemLabel.style.fontSize = "12px";
+        itemLabel.style.color = "#1f2937";
+        itemLabel.style.textAlign = "left";
+        itemLabel.style.overflowWrap = "normal";
+        itemLabel.style.wordBreak = "normal";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.name = "object_otm_subtables";
+        checkbox.value = tableName;
+        checkbox.checked = normalizedSelected.has(tableName);
+        checkbox.style.margin = "0";
+
+        const text = document.createElement("span");
+        text.textContent = tableName;
+        text.style.textAlign = "left";
+        text.style.whiteSpace = "nowrap";
+        text.style.overflowWrap = "normal";
+        text.style.wordBreak = "normal";
+
+        itemLabel.appendChild(checkbox);
+        itemLabel.appendChild(text);
+        listWrapper.appendChild(itemLabel);
 
         const hiddenRelated = document.createElement("input");
         hiddenRelated.type = "hidden";
@@ -2222,7 +2350,17 @@
         relatedTablesHiddenInputs.appendChild(hiddenRelated);
       });
 
-      relatedTablesSelector.appendChild(tableElement);
+      const refreshSummary = () => {
+        const selectedCount = listWrapper.querySelectorAll('input[name="object_otm_subtables"]:checked').length;
+        summary.textContent = `Selecionar subtabelas (${selectedCount}/${normalizedRelated.length})`;
+      };
+
+      listWrapper.addEventListener("change", refreshSummary);
+      refreshSummary();
+
+      dropdown.appendChild(summary);
+      dropdown.appendChild(listWrapper);
+      relatedTablesSelector.appendChild(dropdown);
     };
 
     const syncRelatedTablesFromQuery = () => {
@@ -2231,7 +2369,11 @@
       }
 
       const currentPrimaryTable = normalizeTableName(
-        (otmTableHidden && otmTableHidden.value) || (objectTypeSelect && objectTypeSelect.value) || ""
+        (otmTableHidden && otmTableHidden.value)
+        || (objectTypeSelect && objectTypeSelect.value)
+        || (objectTypeSelect && objectTypeSelect.dataset && objectTypeSelect.dataset.currentType)
+        || currentPrimaryTableFromPage
+        || ""
       );
       const sqlQuery = extractionQueryTextarea ? extractionQueryTextarea.value : "";
       const parsedRelatedTables = extractRelatedTablesFromSql(sqlQuery, currentPrimaryTable);
@@ -2250,10 +2392,10 @@
         ? selectedFromUi
         : (Array.isArray(currentSubtablesFromPage) ? currentSubtablesFromPage : []);
 
-      renderRelatedTablesSelector(relatedTables, selectedSubtables);
+      renderRelatedTablesSelector(relatedTables, selectedSubtables, currentPrimaryTable);
     };
 
-    if (objectTypeSelect && otmTableDisplay && otmTableHidden) {
+    if (objectTypeSelect && otmTableHidden) {
       objectTypeSelect.addEventListener("change", () => {
         syncOtmTableFromObjectType();
         syncRelatedTablesFromQuery();

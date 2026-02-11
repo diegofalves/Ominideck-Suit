@@ -17692,7 +17692,14 @@
             "deployment": "PENDING"
           },
           "otm_table": "LEG",
-          "identifiers": {},
+          "identifiers": {
+            "migration_project_id": "",
+            "query_name": "",
+            "agent_gid": "",
+            "finder_set_gid": "",
+            "rate_offering_gid": "",
+            "event_group_gid": ""
+          },
           "notes": "",
           "domainName": "BAU",
           "domain": "BAU",
@@ -17700,20 +17707,19 @@
           "migration_item_name": "Itinerary Leg",
           "object_extraction_query": {
             "language": "SQL",
-            "content": "SELECT *\nFROM\n    ITINERARY ID,\n    ITINERARY_DETAIL ITD,\n    LEG L\nWHERE\n    ID.ITINERARY_GID = ITD.ITINERARY_GID\n    AND ITD.LEG_GID = L.LEG_GID\n    AND ID.DOMAIN_NAME = 'BAU'\nORDER BY\n    ID.ITINERARY_XID,\n    ITD.SEQUENCE_NO"
+            "content": "SELECT *\r\nFROM\r\n    ITINERARY ID,\r\n    ITINERARY_DETAIL ITD,\r\n    LEG L\r\nWHERE\r\n    ID.ITINERARY_GID = ITD.ITINERARY_GID\r\n    AND ITD.LEG_GID = L.LEG_GID\r\n    AND ID.DOMAIN_NAME = 'BAU'\r\nORDER BY\r\n    ID.ITINERARY_XID,\r\n    ITD.SEQUENCE_NO"
           },
           "technical_content": {
             "type": "NONE",
             "content": ""
           },
-          "otm_subtables": [
-            "ITINERARY",
-            "ITINERARY_DETAIL"
-          ],
+          "otm_subtables": [],
           "otm_related_tables": [
             "ITINERARY",
             "ITINERARY_DETAIL"
-          ]
+          ],
+          "deployment_type_user_defined": true,
+          "ignore_table": false
         },
         {
           "name": "Itineraries",
@@ -18901,7 +18907,7 @@
   ],
   "state": {
     "overall_status": "IN_PROGRESS",
-    "last_edit_object_index": 5
+    "last_edit_object_index": 11
   },
   "active_group_id": "PLANNING",
   "active_migration_group_id": "PLANNING",
