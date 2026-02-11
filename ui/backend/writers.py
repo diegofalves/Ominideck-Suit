@@ -21,6 +21,10 @@ IGNORED_GROUP_DESCRIPTION = (
     "Objetos marcados para ignorar cobertura automatica de tabela."
 )
 IGNORED_GROUP_SEQUENCE = 999
+MIGRATION_GROUP_ID_KEY = "migration_group_id"
+MIGRATION_ITEM_ID_KEY = "migration_item_id"
+MIGRATION_ITEM_NAME_KEY = "migration_item_name"
+ACTIVE_MIGRATION_GROUP_ID_KEY = "active_migration_group_id"
 LOGICAL_REQUIRED_IDENTIFIERS = {
     "SAVED_QUERY": ("query_name",),
     "AGENT": ("agent_gid",),
@@ -51,6 +55,29 @@ def _to_int(value: Any) -> int:
         return 0
 
 
+def _slug_token(value: Any, fallback: str) -> str:
+    normalized = _normalize_name(value)
+    slug = re.sub(r"[^A-Z0-9]+", "_", normalized).strip("_")
+    return slug or fallback
+
+
+def _build_migration_item_id(group_id: str, item: Dict[str, Any]) -> str:
+    group_token = _slug_token(group_id, "NO_GROUP")
+    table_token = _slug_token(
+        item.get("otm_table") or item.get("object_type"),
+        "NO_TABLE",
+    )
+    name_token = _slug_token(
+        item.get("name") or item.get(MIGRATION_ITEM_NAME_KEY),
+        "NO_NAME",
+    )
+    sequence_token = str(max(_to_int(item.get("sequence")), 0))
+    return (
+        f"MIGRATION_ITEM."
+        f"{group_token}.{table_token}.{name_token}.{sequence_token}"
+    )
+
+
 def _split_ignored_objects(
     objects: List[Dict[str, Any]]
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
@@ -65,6 +92,65 @@ def _split_ignored_objects(
             continue
         regular_objects.append(obj)
     return regular_objects, ignored_objects
+
+
+def _normalize_migration_group_item_aliases(data: Dict[str, Any]) -> None:
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    valid_group_ids: List[str] = []
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+
+        normalized_group_id = _normalize_name(
+            group.get(MIGRATION_GROUP_ID_KEY) or group.get("group_id")
+        )
+        if not normalized_group_id:
+            continue
+
+        group["group_id"] = normalized_group_id
+        group[MIGRATION_GROUP_ID_KEY] = normalized_group_id
+        valid_group_ids.append(normalized_group_id)
+
+        migration_items = _as_object_list(group.get("objects"))
+        group["objects"] = migration_items
+
+        for item in migration_items:
+            if not isinstance(item, dict):
+                continue
+
+            current_item_id = str(item.get(MIGRATION_ITEM_ID_KEY) or "").strip()
+            if current_item_id:
+                item[MIGRATION_ITEM_ID_KEY] = current_item_id
+            else:
+                item[MIGRATION_ITEM_ID_KEY] = _build_migration_item_id(
+                    normalized_group_id, item
+                )
+
+            migration_item_name = str(
+                item.get("name") or item.get(MIGRATION_ITEM_NAME_KEY) or ""
+            ).strip()
+            if migration_item_name:
+                item["name"] = migration_item_name
+                item[MIGRATION_ITEM_NAME_KEY] = migration_item_name
+
+    normalized_active_group_id = _normalize_name(
+        data.get(ACTIVE_MIGRATION_GROUP_ID_KEY) or data.get("active_group_id")
+    )
+    if normalized_active_group_id and normalized_active_group_id in set(valid_group_ids):
+        data["active_group_id"] = normalized_active_group_id
+        data[ACTIVE_MIGRATION_GROUP_ID_KEY] = normalized_active_group_id
+        return
+
+    fallback_active_group_id = _normalize_name(data.get("active_group_id"))
+    if fallback_active_group_id and fallback_active_group_id in set(valid_group_ids):
+        data[ACTIVE_MIGRATION_GROUP_ID_KEY] = fallback_active_group_id
+        return
+
+    if valid_group_ids:
+        data[ACTIVE_MIGRATION_GROUP_ID_KEY] = valid_group_ids[0]
 
 
 def _load_domain_statistics_tables() -> List[str]:
@@ -591,6 +677,7 @@ def load_project():
     _normalize_auto_generated_deployment_types(data)
     _deduplicate_group_zero_auto_objects(data)
     _cleanup_group_zero_legacy_generic_autos(data)
+    _normalize_migration_group_item_aliases(data)
     normalized_signature = json.dumps(data, ensure_ascii=False, sort_keys=True)
     if normalized_signature != original_signature:
         PROJECT_PATH.write_text(
@@ -608,6 +695,7 @@ def save_project(domain):
     _normalize_auto_generated_deployment_types(domain)
     _deduplicate_group_zero_auto_objects(domain)
     _cleanup_group_zero_legacy_generic_autos(domain)
+    _normalize_migration_group_item_aliases(domain)
     PROJECT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(PROJECT_PATH, "w", encoding="utf-8") as f:
         json.dump(domain, f, indent=2, ensure_ascii=False)

@@ -2,11 +2,11 @@
   "canonical_rules": {
     "otm_table_object_coverage": {
       "name": "OTM_TABLES_FROM_DOMAIN_STATISTICS_MUST_EXIST",
-      "description": "Toda tabela presente em metadata/otm/domain_table_statistics.json deve ter ao menos 1 objeto no arquivo final; se ausente, o objeto e criado automaticamente em SEM_GRUPO. Objetos marcados com ignore_table=true retiram a tabela da pendencia automatica e sao agrupados em IGNORADOS."
+      "description": "Toda tabela presente em metadata/otm/domain_table_statistics.json deve ter ao menos 1 MIGRATION_ITEM no arquivo final; se ausente, o MIGRATION_ITEM e criado automaticamente em SEM_GRUPO. MIGRATION_ITEMs marcados com ignore_table=true retiram a tabela da pendencia automatica e sao agrupados em IGNORADOS."
     },
     "auto_deployment_type_from_catalog": {
       "name": "AUTO_OBJECT_DEPLOYMENT_TYPE_FROM_ELIGIBILITY_CATALOG",
-      "description": "Objetos auto_generated usam metadata/otm/migration_project_eligible_tables.json para definir deployment_type (MIGRATION_PROJECT quando elegivel; fallback vazio quando nao elegivel)."
+      "description": "MIGRATION_ITEMs auto_generated usam metadata/otm/migration_project_eligible_tables.json para definir deployment_type (MIGRATION_PROJECT quando elegivel; fallback vazio quando nao elegivel)."
     }
   },
   "project": {
@@ -21,20 +21,23 @@
     }
   },
   "groups": {
-    "section": "Grupos de Objetos",
+    "section": "MIGRATION_GROUPS",
     "repeatable": true,
     "fields": {
-      "label": { "type": "text", "label": "Nome do Grupo" },
+      "migration_group_id": { "type": "text", "label": "MIGRATION_GROUP ID" },
+      "label": { "type": "text", "label": "Nome do MIGRATION_GROUP" },
       "sequence": { "type": "number", "label": "Sequência" },
-      "description": { "type": "textarea", "label": "Descrição do Grupo" }
+      "description": { "type": "textarea", "label": "Descrição do MIGRATION_GROUP" }
     },
     "objects": {
       "repeatable": true,
       "fields": {
-        "sequence": { "type": "number", "label": "Sequência do Objeto" },
+        "migration_item_id": { "type": "text", "label": "MIGRATION_ITEM ID" },
+        "migration_item_name": { "type": "text", "label": "Nome do MIGRATION_ITEM" },
+        "sequence": { "type": "number", "label": "Sequência do MIGRATION_ITEM" },
         "object_type": {
           "type": "select",
-          "label": "Tipo do Objeto",
+          "label": "Tipo do MIGRATION_ITEM",
           "enum": "object_type"
         },
         "otm_table": { "type": "text", "label": "Tabela OTM" },

@@ -913,7 +913,7 @@
   {% if project and project.active_group_id %}
     {% set active_id = project.active_group_id %}
     
-    <!-- Encontrar o grupo completo do projeto -->
+    <!-- Encontrar o MIGRATION_GROUP completo do projeto -->
     {% set current_group_ctx = namespace(data=none) %}
     {% if project.groups %}
       {% for g in project.groups %}
@@ -923,11 +923,11 @@
       {% endfor %}
     {% endif %}
 
-    <!-- Pegar o índice do objeto a editar -->
+    <!-- Pegar o indice do MIGRATION_ITEM a editar -->
     {% set last_edit_index = project.state.get('last_edit_object_index') if project and project.state else none %}
     {% set edit_object_index = last_edit_index | int if last_edit_index is not none else -1 %}
     
-    <!-- Pegar o objeto a editar (se índice válido) -->
+    <!-- Pegar o MIGRATION_ITEM a editar (se indice valido) -->
     {% set current_object = none %}
     {% if edit_object_index >= 0 and current_group_ctx.data and edit_object_index < current_group_ctx.data.objects | length %}
       {% set current_object = current_group_ctx.data.objects[edit_object_index] %}
@@ -1094,14 +1094,14 @@
     <button type="button" onclick="addChangeHistoryRow()" style="padding: 6px 12px; font-size: 13px;">➕ Adicionar linha</button>
   </fieldset>
 
-  <!-- ================= -->
-  <!-- Grupos Dinâmicos -->
-  <!-- ================= -->
+  <!-- =========================== -->
+  <!-- MIGRATION_GROUPs Dinamicos -->
+  <!-- =========================== -->
   <fieldset>
-    <legend>Grupos do Projeto</legend>
+    <legend>MIGRATION_GROUPs do Projeto</legend>
     
     <p style="font-size: 13px; color: #555; margin-bottom: 12px;">
-      Lista de todos os grupos criados. Para editar objetos, selecione o grupo ativo abaixo.
+      Lista de todos os MIGRATION_GROUPs criados. Para editar MIGRATION_ITEMs, selecione o MIGRATION_GROUP ativo abaixo.
     </p>
     <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
       <button
@@ -1121,11 +1121,11 @@
         <thead>
           <tr style="background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
             <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 40px;">#</th>
-            <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 180px;">ID Grupo</th>
-            <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 140px; white-space: nowrap;">Nome</th>
+            <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 180px;">ID MIGRATION_GROUP</th>
+            <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 140px; white-space: nowrap;">Nome do MIGRATION_GROUP</th>
             <th style="text-align: left; padding: 6px 8px; font-weight: 600; width: 590px; white-space: normal;">Descrição</th>
             <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 42px;">Seq.</th>
-            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 52px;">Objetos</th>
+            <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 52px;">MIGRATION_ITEMs</th>
             <th style="text-align: center; padding: 6px 8px; font-weight: 600; width: 78px;">Ações</th>
           </tr>
         </thead>
@@ -1146,9 +1146,9 @@
               <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.sequence }}º</td>
               <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.objects|length if g.objects else 0 }}</td>
               <td class="actions-cell" style="text-align: center;">
-                <button type="button" class="icon-btn" onclick="submitProjectAction({'active_group_id': '{{ g.group_id }}', 'reset_edit_mode': '1'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar grupo">✏️</button>
+                <button type="button" class="icon-btn" onclick="submitProjectAction({'active_group_id': '{{ g.group_id }}', 'reset_edit_mode': '1'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar MIGRATION_GROUP">✏️</button>
                 {% if g.group_id|string|upper not in ['SEM_GRUPO', 'GROUP_0', 'IGNORADOS'] %}
-                  <button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este grupo?')) submitProjectAction({'remove_group_id': '{{ g.group_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover grupo">🗑️</button>
+                  <button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este MIGRATION_GROUP?')) submitProjectAction({'remove_group_id': '{{ g.group_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover MIGRATION_GROUP">🗑️</button>
                 {% endif %}
               </td>
             </tr>
@@ -1156,38 +1156,38 @@
         </tbody>
       </table>
     {% else %}
-      <p style="color: #999; font-style: italic;">Nenhum grupo criado ainda.</p>
+      <p style="color: #999; font-style: italic;">Nenhum MIGRATION_GROUP criado ainda.</p>
     {% endif %}
     </div>
 
     <div id="groups-container"></div>
 
-    <button type="button" onclick="addGroup()">➕ Adicionar Grupo</button>
+    <button type="button" onclick="addGroup()">➕ Adicionar MIGRATION_GROUP</button>
   </fieldset>
 
-  <!-- ================================== -->
-  <!-- Descrição do Grupo Ativo -->
-  <!-- ================================== -->
+  <!-- =========================================== -->
+  <!-- Descricao do MIGRATION_GROUP Ativo -->
+  <!-- =========================================== -->
   {% if project and project.active_group_id %}
     {% set active_group = groups_catalog.get(project.active_group_id) %}
     {% if active_group %}
       <fieldset style="margin-bottom: 24px; background-color: #f0f8ff; border-left: 4px solid #0066cc;">
-        <legend style="color: #0066cc; font-weight: 600;">📝 Descrição do Grupo</legend>
+        <legend style="color: #0066cc; font-weight: 600;">📝 Descrição do MIGRATION_GROUP</legend>
         <p style="color: #333; line-height: 1.6; margin: 0;">
-          {{ active_group.description or '<span style="color: #999; font-style: italic;">Nenhuma descrição fornecida para este grupo.</span>' | safe }}
+          {{ active_group.description or '<span style="color: #999; font-style: italic;">Nenhuma descrição fornecida para este MIGRATION_GROUP.</span>' | safe }}
         </p>
       </fieldset>
     {% endif %}
   {% endif %}
 
-  <!-- ================================== -->
-  <!-- Painel Condicional - Grupo Ativo -->
-  <!-- ================================== -->
+  <!-- =========================================== -->
+  <!-- Painel Condicional - MIGRATION_GROUP Ativo -->
+  <!-- =========================================== -->
   {% if project and project.active_group_id %}
     {% set active_id = project.active_group_id %}
     {% set active_group = groups_catalog.get(active_id) %}
 
-    <!-- Encontrar o grupo completo do projeto e índice -->
+    <!-- Encontrar o MIGRATION_GROUP completo do projeto e indice -->
     {% set current_group = namespace(data=none) %}
     {% set active_group_index = namespace(value=none) %}
     {% if project.groups %}
@@ -1199,12 +1199,12 @@
       {% endfor %}
     {% endif %}
 
-    <!-- ================================== -->
-    <!-- Lista de Objetos do Grupo (MOVIDA) -->
-    <!-- ================================== -->
+    <!-- ======================================================= -->
+    <!-- Lista de MIGRATION_ITEMs do MIGRATION_GROUP (MOVIDA) -->
+    <!-- ======================================================= -->
     {% if current_group.data and current_group.data.objects %}
       <fieldset style="margin-bottom: 24px;">
-        <legend>📦 Objetos do Grupo ({{ current_group.data.objects|length }})</legend>
+        <legend>📦 MIGRATION_ITEMs do MIGRATION_GROUP ({{ current_group.data.objects|length }})</legend>
         <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
           <button
             type="button"
@@ -1224,7 +1224,7 @@
               <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 40px;">#</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 176px;">Nome Funcional</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 324px;">Descrição Funcional</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 170px;">Tipo de Objeto</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 170px;">Tabela OTM / Tipo</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057;">Dominio</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 110px;">Tipo Deploy</th>
               <th style="padding: 10px 14px; text-align: center; font-weight: 600; color: #495057; width: 90px;">Resp.</th>
@@ -1335,7 +1335,7 @@
                   {% endif %}
                 </td>
                 <td class="actions-cell">
-                  <button type="button" class="icon-btn" onclick="submitProjectAction({'action': 'load_object', 'edit_object_index': '{{ loop.index0 }}', 'active_group_id': '{{ active_id }}'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar objeto">✏️</button><button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este objeto?')) submitProjectAction({'remove_object_index': '{{ loop.index0 }}', 'active_group_id': '{{ active_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover objeto">🗑️</button>
+                  <button type="button" class="icon-btn" onclick="submitProjectAction({'action': 'load_object', 'edit_object_index': '{{ loop.index0 }}', 'active_group_id': '{{ active_id }}'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar MIGRATION_ITEM">✏️</button><button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este MIGRATION_ITEM?')) submitProjectAction({'remove_object_index': '{{ loop.index0 }}', 'active_group_id': '{{ active_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover MIGRATION_ITEM">🗑️</button>
                 </td>
               </tr>
             {% endfor %}
@@ -1343,7 +1343,7 @@
         </table>
         
         <p style="font-size: 11px; color: #6c757d; margin-top: 12px;">
-          💡 Selecione um objeto no dropdown abaixo para editá-lo.
+          💡 Selecione um MIGRATION_ITEM no dropdown abaixo para editá-lo.
         </p>
         </div>
       </fieldset>
@@ -1361,7 +1361,7 @@
       {% endfor %}
     {% endif %}
 
-    <!-- Calcular índice do formulário (para novo objeto ou edição) -->
+    <!-- Calcular indice do formulario (para novo MIGRATION_ITEM ou edicao) -->
     {% set last_edit_index = project.state.get('last_edit_object_index') if project and project.state else none %}
     {% set edit_object_index = last_edit_index | int if last_edit_index is not none else -1 %}
     {% set object_form_index = edit_object_index if edit_object_index >= 0 else (current_group.data.objects | length if current_group.data and current_group.data.objects else 0) %}
@@ -1373,24 +1373,24 @@
       style="border: 2px solid #4CAF50; scroll-margin-top: 18px;"
     >
       <legend>
-        Edição do Objeto — {{ current_object.name if current_object and current_object.name else 'Novo Objeto' }}
+        Edição do MIGRATION_ITEM — {{ current_object.name if current_object and current_object.name else 'Novo MIGRATION_ITEM' }}
       </legend>
 
       <p style="font-size: 13px; color: #555; margin-bottom: 12px;">
-        Grupo selecionado: <strong>{{ active_group.label }}</strong> ({{ active_group.sequence }}º no fluxo) ·
+        MIGRATION_GROUP selecionado: <strong>{{ active_group.label }}</strong> ({{ active_group.sequence }}º no fluxo) ·
         {% if edit_object_index >= 0 %}
-          Editando objeto #{{ edit_object_index + 1 }}
+          Editando MIGRATION_ITEM #{{ edit_object_index + 1 }}
         {% else %}
-          Criando novo objeto
+          Criando novo MIGRATION_ITEM
         {% endif %}
       </p>
 
-      <!-- Formulário de Objeto -->
-      <h4>Dados do Objeto</h4>
+      <!-- Formulario de MIGRATION_ITEM -->
+      <h4>Dados do MIGRATION_ITEM</h4>
 
       <div class="object-edit-grid-3" style="margin-bottom: 12px;">
         <div>
-          <label><strong>Nome do Objeto *</strong></label>
+          <label><strong>Nome do MIGRATION_ITEM *</strong></label>
           <input 
             type="text" 
             name="object_name" 
@@ -1402,7 +1402,7 @@
         </div>
 
         <div>
-          <label><strong>Tipo do Objeto / OTM Table *</strong></label>
+          <label><strong>Tabela OTM / Tipo *</strong></label>
           <select
             name="object_type"
             id="object_type"
@@ -1440,7 +1440,7 @@
         <textarea 
           name="object_description" 
           rows="3" 
-          placeholder="Explique o propósito funcional deste objeto no projeto"
+          placeholder="Explique o propósito funcional deste MIGRATION_ITEM no projeto"
           style="width: 100%; padding: 6px; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
         >{{ current_object.description if current_object else '' }}</textarea>
       </div>
@@ -1527,13 +1527,13 @@
       </div>
 
       <!-- ========================================== -->
-      <!-- Informações Técnicas e Metadados         -->
+      <!-- Informacoes Tecnicas e Metadados         -->
       <!-- ========================================== -->
       <h4 style="margin-top: 12px;">Informações Técnicas</h4>
 
       <div class="object-edit-grid-4" style="margin-bottom: 12px;">
         <div>
-          <label>📋 Tipo do Objeto / OTM Table</label>
+          <label>📋 Tabela OTM / Tipo</label>
           {% set current_otm_table = (current_object.object_type if current_object and current_object.object_type else (current_object.otm_table if current_object else '')) %}
           <input
             type="text"
@@ -1549,7 +1549,7 @@
             value="{{ current_otm_table }}"
           >
           <p style="font-size: 11px; color: #6b7280; margin: 4px 0 0 0;">
-            Campo espelho, sincronizado automaticamente com "Tipo do Objeto / OTM Table".
+            Campo espelho, sincronizado automaticamente com "Tabela OTM / Tipo".
           </p>
 
           <div style="margin-top: 10px;">
@@ -1565,7 +1565,7 @@
           Ignorar tabela no projeto
         </label>
             <p style="font-size: 11px; color: #6b7280; margin: 4px 0 0 0;">
-              Remove esta tabela da pendência automática de cobertura e move o objeto para o grupo IGNORADOS.
+              Remove esta tabela da pendencia automatica de cobertura e move o MIGRATION_ITEM para o MIGRATION_GROUP IGNORADOS.
             </p>
           </div>
         </div>
@@ -1597,7 +1597,7 @@
         <textarea 
           name="object_notes" 
           rows="2" 
-          placeholder="Observações adicionais sobre este objeto"
+          placeholder="Observações adicionais sobre este MIGRATION_ITEM"
           style="width: 100%; padding: 6px; font-family: Arial, sans-serif; font-size: 12px; border: 1px solid #ccc; border-radius: 3px;"
         >{{ current_object.notes if current_object else '' }}</textarea>
       </div>
@@ -1684,7 +1684,7 @@
       <!-- Hidden field para manter edit_object_index no POST -->
       <input type="hidden" name="edit_object_index" value="{{ edit_object_index if edit_object_index >= 0 else '' }}">
 
-      <!-- Seção de Ações do Objeto -->
+      <!-- Secao de Acoes do MIGRATION_ITEM -->
       {% if edit_object_index >= 0 %}
         <div style="margin-top: 24px; padding: 16px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px;">
           <p style="font-size: 12px; color: #856404; margin: 0 0 12px 0;">
@@ -1692,16 +1692,16 @@
           </p>
 
           <div class="object-edit-actions" style="display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%;">
-            <!-- Botão Salvar Objeto -->
+            <!-- Botao Salvar MIGRATION_ITEM -->
             <button type="submit" name="action" value="save_object" style="background-color: #4CAF50; color: white; padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; white-space: nowrap;">
-              💾 Salvar Objeto
+              💾 Salvar MIGRATION_ITEM
             </button>
 
-            <!-- Mover Objeto para outro grupo -->
+            <!-- Mover MIGRATION_ITEM para outro MIGRATION_GROUP -->
             <div class="action-inline-form" style="display: grid; grid-template-columns: auto auto auto; gap: 8px; align-items: center; margin: 0; min-width: 0; width: auto; justify-self: start;">
               <label style="font-size: 12px; margin: 0; white-space: nowrap;">Mover para:</label>
               <select id="move-to-group-id" style="width: clamp(270px, 30vw, 360px); min-width: 270px; max-width: 360px; box-sizing: border-box; padding: 6px 10px; font-size: 12px; border-radius: 3px; border: 1px solid #ccc;">
-                <option value="">-- Selecione o grupo --</option>
+                <option value="">-- Selecione o MIGRATION_GROUP --</option>
                 {% if project and project.groups %}
                   {% for g in project.groups %}
                     {% if g.group_id != project.active_group_id %}
@@ -1715,27 +1715,27 @@
               </button>
             </div>
 
-            <!-- Botão Remover (formulário separado) -->
+            <!-- Botao Remover (formulario separado) -->
             <div class="action-inline-form" style="display: inline; margin: 0;">
-              <button type="button" onclick="if(confirm('Tem certeza que deseja remover este objeto?')) submitProjectAction({'remove_object_index': '{{ edit_object_index }}', 'active_group_id': '{{ project.active_group_id if project else '' }}'})" style="background-color: #e53935; color: white; padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; white-space: nowrap;">
-                🗑️ Remover Objeto
+              <button type="button" onclick="if(confirm('Tem certeza que deseja remover este MIGRATION_ITEM?')) submitProjectAction({'remove_object_index': '{{ edit_object_index }}', 'active_group_id': '{{ project.active_group_id if project else '' }}'})" style="background-color: #e53935; color: white; padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; white-space: nowrap;">
+                🗑️ Remover MIGRATION_ITEM
               </button>
             </div>
           </div>
 
           <p style="font-size: 11px; color: #856404; margin-top: 8px;">
-            💡 Use "Salvar Objeto" para gravar alterações | "Mover" transfere o objeto para outro grupo | "Remover" exclui permanentemente.
+            💡 Use "Salvar MIGRATION_ITEM" para gravar alterações | "Mover" transfere o MIGRATION_ITEM para outro MIGRATION_GROUP | "Remover" exclui permanentemente.
           </p>
         </div>
       {% endif %}
     </fieldset>
   {% else %}
     <p style="color: #999;">
-      Selecione um grupo ativo para começar a edição.
+      Selecione um MIGRATION_GROUP ativo para começar a edição.
     </p>
   {% endif %}
 
-  <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+  <div style="display: flex; gap: 10px; align-items: center; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap;">
     <button type="submit" name="action" value="save_project">Salvar Projeto</button>
     <button
       type="button"
@@ -1744,10 +1744,6 @@
     >
       Atualizar Tabelas
     </button>
-    <span id="update-tables-status" style="font-size: 12px; color: #1f2937;"></span>
-  </div>
-
-  <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px;">
     <button
       type="button"
       id="update-object-cache-all-btn"
@@ -1761,7 +1757,7 @@
       style="background-color: #2E7D32;"
       {% if not project or not project.active_group_id %}disabled{% endif %}
     >
-      Atualizar Cache (Grupo Ativo)
+      Atualizar Cache (MIGRATION_GROUP Ativo)
     </button>
     <button
       type="button"
@@ -1769,13 +1765,17 @@
       style="background-color: #1565C0;"
       {% if not current_object %}disabled{% endif %}
     >
-      Atualizar Cache (Objeto em Edição)
+      Atualizar Cache (MIGRATION_ITEM em Edição)
     </button>
+  </div>
+
+  <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px;">
+    <span id="update-tables-status" style="font-size: 12px; color: #1f2937;"></span>
     <span id="update-object-cache-status" style="font-size: 12px; color: #1f2937;"></span>
   </div>
   <p style="font-size: 11px; color: #666; margin-top: 6px;">
-    Grupo ativo: <strong>{{ project.active_group_id if project and project.active_group_id else "-" }}</strong> |
-    Objeto em edição: <strong>{{ current_object.name if current_object else "-" }}</strong>
+    MIGRATION_GROUP ativo: <strong>{{ project.active_group_id if project and project.active_group_id else "-" }}</strong> |
+    MIGRATION_ITEM em edição: <strong>{{ current_object.name if current_object else "-" }}</strong>
   </p>
 </form>
 
@@ -1787,7 +1787,7 @@
 <script src="{{ url_for('static', filename='js/schema-engine.js') }}"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
-<!-- Injeta dados do objeto existente para SchemaEngine -->
+<!-- Injeta dados do MIGRATION_ITEM existente para SchemaEngine -->
 <script>
   // Disponibilizar dados de edição para SchemaEngine
   {% if current_object and current_object.data %}
@@ -1797,7 +1797,7 @@
   {% endif %}
   
   // Log para debug
-  console.log("[Template] Dados do objeto existente:", window.ExistingObjectData);
+  console.log("[Template] Dados do MIGRATION_ITEM existente:", window.ExistingObjectData);
 
   const submitProjectAction = (fields) => {
     const form = document.getElementById("project-form");
@@ -1843,7 +1843,7 @@
       ? targetSelect.value.trim()
       : "";
     if (!targetGroup) {
-      window.alert("Selecione o grupo de destino para mover o objeto.");
+      window.alert("Selecione o MIGRATION_GROUP de destino para mover o MIGRATION_ITEM.");
       return;
     }
     submitProjectAction({
@@ -1857,7 +1857,8 @@
   window.submitMoveObject = submitMoveObject;
 
     const activeGroupIdFromPage = {{ (project.active_group_id if project and project.active_group_id else "") | tojson }};
-    const currentObjectNameFromPage = {{ (current_object.name if current_object else "") | tojson }};
+    const currentMigrationItemNameFromPage = {{ (current_object.name if current_object else "") | tojson }};
+    const currentMigrationItemIdFromPage = {{ (current_object.migration_item_id if current_object and current_object.migration_item_id else "") | tojson }};
 
     document.addEventListener("DOMContentLoaded", () => {
       const editPanel = document.getElementById("object-edit-panel");
@@ -2156,7 +2157,7 @@
         const payload = await response.json();
 
         if (!response.ok || payload.status === "error") {
-          const errorMessage = payload.message || "Falha ao atualizar cache de objetos.";
+          const errorMessage = payload.message || "Falha ao atualizar cache de MIGRATION_ITEMs.";
           cacheStatusLabel.style.color = "#C62828";
           cacheStatusLabel.textContent = `${errorMessage} Processamento finalizado com erro.`;
           console.error(`[Atualizar Cache][${scope}] Erro:`, payload);
@@ -2164,26 +2165,34 @@
         }
 
         const result = payload.result || {};
-        const successCount = Number(result.successCount || 0);
-        const skippedCount = Number(result.skippedCount || 0);
-        const errorCount = Number(result.errorCount || 0);
-        const selectedObjects = Number(result.selectedObjects || 0);
+        const pickMetric = (...candidates) => {
+          for (const candidate of candidates) {
+            if (candidate !== undefined && candidate !== null && candidate !== "") {
+              return Number(candidate);
+            }
+          }
+          return 0;
+        };
+        const successCount = pickMetric(result.successMigrationItems, result.successCount, 0);
+        const skippedCount = pickMetric(result.skippedMigrationItems, result.skippedCount, 0);
+        const errorCount = pickMetric(result.errorMigrationItems, result.errorCount, 0);
+        const selectedMigrationItems = pickMetric(result.selectedMigrationItems, result.selectedObjects, 0);
 
         if (payload.status === "partial_success") {
           cacheStatusLabel.style.color = "#8A6D1E";
           cacheStatusLabel.textContent =
-            `Cache atualizado parcialmente (${scope}). Selecionados: ${selectedObjects}. ` +
+            `Cache atualizado parcialmente (${scope}). Selecionados: ${selectedMigrationItems}. ` +
             `Sucesso: ${successCount}, Ignorados: ${skippedCount}, Erros: ${errorCount}.`;
           return;
         }
 
         cacheStatusLabel.style.color = "#2E7D32";
         cacheStatusLabel.textContent =
-          `Cache atualizado com sucesso (${scope}). Selecionados: ${selectedObjects}. ` +
+          `Cache atualizado com sucesso (${scope}). Selecionados: ${selectedMigrationItems}. ` +
           `Sucesso: ${successCount}, Ignorados: ${skippedCount}, Erros: ${errorCount}.`;
       } catch (error) {
         cacheStatusLabel.style.color = "#C62828";
-        cacheStatusLabel.textContent = "Erro de comunicacao ao atualizar cache de objetos. Processamento finalizado com erro.";
+        cacheStatusLabel.textContent = "Erro de comunicacao ao atualizar cache de MIGRATION_ITEMs. Processamento finalizado com erro.";
         console.error(`[Atualizar Cache][${scope}] Erro inesperado:`, error);
       } finally {
         stopCacheProgressFallback();
@@ -2197,7 +2206,7 @@
         await runObjectCacheAction(
           "all",
           cacheAllButton,
-          "Deseja atualizar o cache de todos os objetos do projeto?",
+          "Deseja atualizar o cache de todos os MIGRATION_ITEMs do projeto?",
           { scope: "all" }
         );
       });
@@ -2207,37 +2216,43 @@
       cacheGroupButton.addEventListener("click", async () => {
         const groupId = String(activeGroupIdFromPage || "").trim();
         if (!groupId) {
-          window.alert("Nao existe grupo ativo para executar esta acao.");
+          window.alert("Nao existe MIGRATION_GROUP ativo para executar esta acao.");
           return;
         }
 
         await runObjectCacheAction(
-          "group",
+          "migration_group",
           cacheGroupButton,
-          `Deseja atualizar o cache dos objetos do grupo ativo (${groupId})?`,
-          { scope: "group", group_id: groupId }
+          `Deseja atualizar o cache dos MIGRATION_ITEMs do MIGRATION_GROUP ativo (${groupId})?`,
+          { scope: "migration_group", migration_group_id: groupId }
         );
       });
     }
 
     if (cacheObjectButton) {
       cacheObjectButton.addEventListener("click", async () => {
-        const objectName = String(currentObjectNameFromPage || "").trim();
+        const migrationItemName = String(currentMigrationItemNameFromPage || "").trim();
+        const migrationItemId = String(currentMigrationItemIdFromPage || "").trim();
         const groupId = String(activeGroupIdFromPage || "").trim();
-        if (!objectName) {
-          window.alert("Nao existe objeto em edicao para executar esta acao.");
+        if (!migrationItemName && !migrationItemId) {
+          window.alert("Nao existe MIGRATION_ITEM em edicao para executar esta acao.");
           return;
         }
 
-        const requestBody = { scope: "object", object_name: objectName };
-        if (groupId) {
-          requestBody.group_id = groupId;
+        const requestBody = { scope: "migration_item" };
+        if (migrationItemId) {
+          requestBody.migration_item_id = migrationItemId;
+        } else if (migrationItemName) {
+          requestBody.migration_item_name = migrationItemName;
+        }
+        if (groupId && !migrationItemId) {
+          requestBody.migration_group_id = groupId;
         }
 
         await runObjectCacheAction(
-          "object",
+          "migration_item",
           cacheObjectButton,
-          `Deseja atualizar o cache do objeto em edicao (${objectName})?`,
+          `Deseja atualizar o cache do MIGRATION_ITEM em edicao (${migrationItemId || migrationItemName})?`,
           requestBody
         );
       });

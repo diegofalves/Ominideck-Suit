@@ -3,9 +3,9 @@
 This directory stores local cache files generated from OTM extraction queries.
 
 Rules:
-- One JSON file per migration object.
+- One JSON file per `MIGRATION_ITEM`.
 - Extraction query comes from `technical_content.content`.
-- `ROOT_NAME` is always the object `otm_table`.
+- `ROOT_NAME` is always the `MIGRATION_ITEM` `otm_table`.
 - Rows are normalized by the canonical schema in `metadata/otm/tables/<TABLE>.json`.
 - Every schema column is always present in each row.
 - Missing values are persisted as empty string (`""`).
@@ -15,15 +15,15 @@ Current output path:
 
 Examples:
 ```bash
-# Atualizar todos os objetos do projeto
-python3 infra/update_otm_object_cache.py --all-objects
+# Atualizar todos os MIGRATION_ITEMs do projeto
+python3 infra/update_otm_object_cache.py --all-migration-items
 
-# Atualizar todos os objetos de um grupo
-python3 infra/update_otm_object_cache.py --group-id "PLANNING"
+# Atualizar todos os MIGRATION_ITEMs de um MIGRATION_GROUP
+python3 infra/update_otm_object_cache.py --migration-group-id "PLANNING"
 
-# Atualizar um objeto especifico
-python3 infra/update_otm_object_cache.py --object-name "Itineraries"
+# Atualizar um MIGRATION_ITEM especifico
+python3 infra/update_otm_object_cache.py --migration-item-name "Itineraries"
 
-# Objeto especifico com desambiguacao de grupo
-python3 infra/update_otm_object_cache.py --object-name "Itineraries" --group-id "PLANNING"
+# MIGRATION_ITEM especifico com desambiguacao de MIGRATION_GROUP
+python3 infra/update_otm_object_cache.py --migration-item-name "Itineraries" --migration-group-id "PLANNING"
 ```

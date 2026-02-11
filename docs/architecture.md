@@ -15,8 +15,13 @@ são considerados **adapters** e nunca contêm regras de negócio.
 
 #### Papel
 O Projeto de Migração é a entidade orquestradora do OmniDeck.
-Ele governa o escopo, os objetos, as regras e o estado de uma migração OTM,
+Ele governa o escopo, os MIGRATION_ITEMs, as regras e o estado de uma migração OTM,
 servindo como fonte única para documentação e acompanhamento.
+
+Vocabulário canônico:
+- MIGRATION_GROUP: agrupador lógico de execução dentro do projeto.
+- MIGRATION_ITEM: item de migração vinculado a um MIGRATION_GROUP e a uma tabela OTM.
+- OTM_OBJECT: cada linha retornada pelas queries de extração no OTM.
 
 ---
 
@@ -25,8 +30,8 @@ servindo como fonte única para documentação e acompanhamento.
 Pertencem ao Projeto de Migração:
 
 - Identidade do projeto (código, nome, versão, responsável, ambientes)
-- Grupos de objetos de migração
-- Objetos de migração e seus atributos
+- MIGRATION_GROUPs
+- MIGRATION_ITEMs e seus atributos
 - Tipos de deploy aplicáveis
 - Status por fase da migração
 - Regras de obrigatoriedade e consistência
@@ -42,7 +47,7 @@ Não pertencem ao Projeto de Migração:
 - HTML final
 - PDF final
 - Arquivos Markdown de renderização
-- Cache técnico de objetos
+- Cache técnico de MIGRATION_ITEMs
 - Scripts de extração ou parsing
 - Lógica de UI
 - Detalhes visuais ou de layout
@@ -80,7 +85,7 @@ Regras:
 
 ---
 
-### 2. Validações de Grupo
+### 2. Validações de MIGRATION_GROUP
 
 Campos obrigatórios:
 - label
@@ -88,29 +93,29 @@ Campos obrigatórios:
 
 Regras:
 - sequence deve ser única dentro do projeto
-- Grupos são ordenáveis pela propriedade sequence
+- MIGRATION_GROUPs são ordenáveis pela propriedade sequence
 
 ---
 
-### 3. Validações de Objeto (gerais)
+### 3. Validações de MIGRATION_ITEM (gerais)
 
 Campos obrigatórios:
 - sequence (inteiro >= 1)
 - object_type (enum válido)
 - deployment_type (enum válido)
-- identifiers deve ser um objeto válido
+- identifiers deve ser uma estrutura válida
 
 Regras:
-- sequence deve ser única dentro do grupo
+- sequence deve ser única dentro do MIGRATION_GROUP
 - otm_table deve existir na Metadata OTM
-- objetos auto_generated devem aplicar deployment_type com base no catalogo
+- MIGRATION_ITEMs auto_generated devem aplicar deployment_type com base no catalogo
   metadata/otm/migration_project_eligible_tables.json (fallback vazio)
 
 ---
 
-### 4. Validações condicionais por Tipo de Objeto
+### 4. Validações condicionais por Tipo de MIGRATION_ITEM
 
-Cada tipo de objeto exige identificadores específicos:
+Cada tipo de MIGRATION_ITEM exige identificadores específicos:
 
 - SAVED_QUERY  
   - identifiers.query_name
@@ -157,7 +162,7 @@ Campos obrigatórios:
 
 Regras:
 - overall_status pode ser calculado ou definido manualmente
-- overall_status = DONE somente se todos os objetos estiverem com validation = DONE
+- overall_status = DONE somente se todos os MIGRATION_ITEMs estiverem com validation = DONE
 
 ---
 

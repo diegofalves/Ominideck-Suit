@@ -94,7 +94,8 @@ def form_to_domain(form, existing_project=None):
             "overall_status": form.get("overall_status") or "PENDING",
             "last_edit_object_index": form.get("edit_object_index") or None
         },
-        "active_group_id": form.get("active_group_id") or None
+        "active_group_id": form.get("active_group_id") or form.get("active_migration_group_id") or None,
+        "active_migration_group_id": form.get("active_migration_group_id") or form.get("active_group_id") or None,
     }
 
     groups = defaultdict(lambda: {"objects": []})
@@ -109,6 +110,11 @@ def form_to_domain(form, existing_project=None):
         group_idx = int(parts[1])
 
         if parts[2] == "group_id":
+            groups[group_idx]["group_id"] = value
+            groups[group_idx]["migration_group_id"] = value
+
+        elif parts[2] == "migration_group_id":
+            groups[group_idx]["migration_group_id"] = value
             groups[group_idx]["group_id"] = value
 
         elif parts[2] == "label":
@@ -125,6 +131,8 @@ def form_to_domain(form, existing_project=None):
 
             while len(groups[group_idx]["objects"]) <= obj_idx:
                 groups[group_idx]["objects"].append({
+                    "migration_item_id": "",
+                    "migration_item_name": "",
                     "name": "",  # Nome funcional obrigatório
                     "description": "",  # Descrição funcional opcional
                     "identifiers": {},
@@ -181,10 +189,19 @@ def form_to_domain(form, existing_project=None):
 
             elif parts[4] == "ignore_table":
                 obj["ignore_table"] = _to_bool(value)
+
+            elif parts[4] == "migration_item_id":
+                obj["migration_item_id"] = value
+
+            elif parts[4] == "migration_item_name":
+                obj["migration_item_name"] = value
+                obj["name"] = value
             
             else:
                 # Campos genéricos do objeto
                 obj[parts[4]] = value
+                if parts[4] == "name":
+                    obj["migration_item_name"] = value
     
     # Processar campos não aninhados (saved_query_sql, etc)
     for key, value in form.items():
@@ -196,7 +213,8 @@ def form_to_domain(form, existing_project=None):
     # Normaliza para lista ordenada
     parsed_groups = [
         {
-            "group_id": g.get("group_id"),
+            "group_id": g.get("group_id") or g.get("migration_group_id"),
+            "migration_group_id": g.get("migration_group_id") or g.get("group_id"),
             "label": g.get("label"),
             "sequence": g.get("sequence"),
             "objects": g.get("objects", [])
@@ -223,7 +241,9 @@ def form_to_domain(form, existing_project=None):
             return None
 
     active_group_index = _coerce_index(form.get("active_group_index"))
-    active_group_id = str(form.get("active_group_id") or "").strip()
+    active_group_id = str(
+        form.get("active_group_id") or form.get("active_migration_group_id") or ""
+    ).strip()
     edit_object_index = _coerce_index(form.get("edit_object_index"))
     if edit_object_index is None and isinstance(existing_project, dict):
         state = existing_project.get("state", {})
@@ -241,7 +261,15 @@ def form_to_domain(form, existing_project=None):
         if active_group_index is not None:
             # Garantir grupo ativo existe
             while len(domain["groups"]) <= active_group_index:
-                domain["groups"].append({"label": "", "sequence": None, "objects": []})
+                domain["groups"].append(
+                    {
+                        "group_id": "",
+                        "migration_group_id": "",
+                        "label": "",
+                        "sequence": None,
+                        "objects": [],
+                    }
+                )
             target_group = domain["groups"][active_group_index]
 
             # Definir índice do objeto (editar ou criar novo no fim)
@@ -249,6 +277,8 @@ def form_to_domain(form, existing_project=None):
 
             while len(target_group["objects"]) <= target_obj_index:
                 target_group["objects"].append({
+                    "migration_item_id": "",
+                    "migration_item_name": "",
                     "name": "",
                     "description": "",
                     "identifiers": {},
@@ -268,6 +298,7 @@ def form_to_domain(form, existing_project=None):
             # Campos básicos
             if object_name:
                 target_obj["name"] = object_name
+                target_obj["migration_item_name"] = object_name
             object_description = form.get("object_description", "")
             if object_description:
                 target_obj["description"] = object_description
@@ -402,5 +433,10 @@ def form_to_domain(form, existing_project=None):
         "version_control": version_control,
         "change_history": change_history
     }
+
+    active_group_id = str(domain.get("active_group_id") or "").strip().upper()
+    if active_group_id:
+        domain["active_group_id"] = active_group_id
+        domain["active_migration_group_id"] = active_group_id
 
     return domain

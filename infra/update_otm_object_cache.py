@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Build local OTM object cache files from projeto_migracao objects.
+Build local OTM object cache files from projeto_migracao migration items.
 
 Core rules:
 - Extraction query comes from technical_content.content.
-- ROOT_NAME always matches object otm_table.
+- ROOT_NAME always matches migration item otm_table.
 - Output rows always contain every column from metadata/otm/tables/<TABLE>.json.
 - Missing values in OTM response are filled with empty string.
 """
@@ -31,6 +31,9 @@ TABLES_DIR = BASE_DIR / "metadata" / "otm" / "tables"
 CACHE_DIR = BASE_DIR / "metadata" / "otm" / "cache" / "objects"
 SCRIPT_NAME = "update_otm_object_cache.py"
 QUERY_TIMEOUT_SECONDS = 300
+MIGRATION_GROUP_ID_KEY = "migration_group_id"
+MIGRATION_ITEM_ID_KEY = "migration_item_id"
+MIGRATION_ITEM_NAME_KEY = "migration_item_name"
 
 
 def _timestamp_utc_z() -> str:
@@ -45,6 +48,14 @@ def _slugify(value: Any) -> str:
     raw = str(value or "").strip().upper()
     slug = re.sub(r"[^A-Z0-9]+", "_", raw).strip("_")
     return slug or "OBJECT"
+
+
+def _build_migration_item_id(group_id: str, item: Dict[str, Any]) -> str:
+    group_token = _slugify(group_id or "NO_GROUP")
+    table_token = _slugify(item.get("otm_table") or item.get("object_type") or "NO_TABLE")
+    name_token = _slugify(item.get("name") or item.get(MIGRATION_ITEM_NAME_KEY) or "NO_NAME")
+    sequence = str(item.get("sequence") or "0").strip() or "0"
+    return f"MIGRATION_ITEM.{group_token}.{table_token}.{name_token}.{sequence}"
 
 
 def _find_by_local_name(node: Dict[str, Any], local_name: str) -> Any:
@@ -108,48 +119,79 @@ def _iter_project_objects(project_data: Dict[str, Any]) -> Iterable[Tuple[str, D
     for group in groups:
         if not isinstance(group, dict):
             continue
-        group_id = str(group.get("group_id") or "")
-        objects = group.get("objects", [])
-        if not isinstance(objects, list):
+        migration_group_id = str(
+            group.get(MIGRATION_GROUP_ID_KEY) or group.get("group_id") or ""
+        ).strip()
+        migration_items = group.get("migration_items")
+        if not isinstance(migration_items, list):
+            migration_items = group.get("objects", [])
+        if not isinstance(migration_items, list):
             continue
-        for obj in objects:
+        for obj in migration_items:
             if isinstance(obj, dict):
-                pairs.append((group_id, obj))
+                pairs.append((migration_group_id, obj))
     return pairs
 
 
 def _select_object(
     project_data: Dict[str, Any],
-    object_name: str,
-    group_id: str | None,
+    migration_item_name: str,
+    migration_group_id: str | None,
 ) -> Tuple[str, Dict[str, Any]]:
-    target_name = object_name.strip().lower()
-    target_group = _normalize_name(group_id) if group_id else ""
+    target_name = migration_item_name.strip().lower()
+    target_group = _normalize_name(migration_group_id) if migration_group_id else ""
 
     matches: List[Tuple[str, Dict[str, Any]]] = []
-    for current_group_id, obj in _iter_project_objects(project_data):
-        current_name = str(obj.get("name") or "").strip().lower()
+    for current_group_id, item in _iter_project_objects(project_data):
+        current_name = str(
+            item.get(MIGRATION_ITEM_NAME_KEY) or item.get("name") or ""
+        ).strip().lower()
         if current_name != target_name:
             continue
         if target_group and _normalize_name(current_group_id) != target_group:
             continue
-        matches.append((current_group_id, obj))
+        matches.append((current_group_id, item))
 
     if not matches:
         raise ValueError(
-            "Objeto nao encontrado no projeto. "
-            f"name={object_name!r}, group_id={group_id!r}"
+            "MIGRATION_ITEM nao encontrado no projeto. "
+            f"name={migration_item_name!r}, migration_group_id={migration_group_id!r}"
         )
 
     if len(matches) > 1:
         labels = ", ".join(
-            f"{str(obj.get('name') or '')} [group={gid}]"
-            for gid, obj in matches
+            f"{str(item.get('name') or '')} [migration_group={gid}]"
+            for gid, item in matches
         )
         raise ValueError(
-            "Mais de um objeto encontrado com esse nome. "
-            "Informe --group-id para desambiguar. "
+            "Mais de um MIGRATION_ITEM encontrado com esse nome. "
+            "Informe --migration-group-id para desambiguar. "
             f"Candidatos: {labels}"
+        )
+
+    return matches[0]
+
+
+def _select_object_by_migration_item_id(
+    project_data: Dict[str, Any],
+    migration_item_id: str,
+) -> Tuple[str, Dict[str, Any]]:
+    target_item_id = str(migration_item_id or "").strip()
+    if not target_item_id:
+        raise ValueError("migration_item_id vazio.")
+
+    matches: List[Tuple[str, Dict[str, Any]]] = []
+    for current_group_id, item in _iter_project_objects(project_data):
+        current_item_id = str(item.get(MIGRATION_ITEM_ID_KEY) or "").strip()
+        if current_item_id == target_item_id:
+            matches.append((current_group_id, item))
+
+    if not matches:
+        raise ValueError(f"MIGRATION_ITEM nao encontrado para migration_item_id='{target_item_id}'.")
+
+    if len(matches) > 1:
+        raise ValueError(
+            f"Mais de um MIGRATION_ITEM encontrado para migration_item_id='{target_item_id}'."
         )
 
     return matches[0]
@@ -157,11 +199,11 @@ def _select_object(
 
 def _select_group_objects(
     project_data: Dict[str, Any],
-    group_id: str,
+    migration_group_id: str,
 ) -> List[Tuple[str, Dict[str, Any]]]:
-    target_group = _normalize_name(group_id)
+    target_group = _normalize_name(migration_group_id)
     if not target_group:
-        raise ValueError("group_id vazio.")
+        raise ValueError("migration_group_id vazio.")
 
     matches: List[Tuple[str, Dict[str, Any]]] = []
     for current_group_id, obj in _iter_project_objects(project_data):
@@ -170,14 +212,14 @@ def _select_group_objects(
         matches.append((current_group_id, obj))
 
     if not matches:
-        raise ValueError(f"Nenhum objeto encontrado para o grupo '{group_id}'.")
+        raise ValueError(f"Nenhum MIGRATION_ITEM encontrado para o MIGRATION_GROUP '{migration_group_id}'.")
     return matches
 
 
 def _load_table_columns(table_name: str) -> Tuple[List[str], Dict[str, Any]]:
     normalized_table = _normalize_name(table_name)
     if not normalized_table:
-        raise ValueError("Objeto sem otm_table definido.")
+        raise ValueError("MIGRATION_ITEM sem otm_table definido.")
 
     table_path = TABLES_DIR / f"{normalized_table}.json"
     if not table_path.exists():
@@ -261,11 +303,18 @@ def _query_rows(sql_query: str, root_name: str) -> List[Dict[str, Any]]:
 
 def _build_output_path(obj: Dict[str, Any], table_name: str) -> Path:
     domain_name = str(obj.get("domainName") or obj.get("domain") or "NO_DOMAIN")
+    migration_item_token = _slugify(
+        obj.get(MIGRATION_ITEM_ID_KEY)
+        or obj.get(MIGRATION_ITEM_NAME_KEY)
+        or obj.get("name")
+        or obj.get("object_type")
+        or "MIGRATION_ITEM"
+    )
     filename = "__".join(
         [
             _slugify(domain_name),
             _slugify(table_name),
-            _slugify(obj.get("name") or obj.get("object_type") or "OBJECT"),
+            migration_item_token,
         ]
     ) + ".json"
     return CACHE_DIR / filename
@@ -282,19 +331,48 @@ def _build_cache_payload(
     extra_fields: List[str],
 ) -> Dict[str, Any]:
     table_meta = table_schema.get("table", {}) if isinstance(table_schema, dict) else {}
+    migration_group_id = _normalize_name(
+        obj.get(MIGRATION_GROUP_ID_KEY) or group_id
+    )
+    migration_item_name = str(
+        obj.get(MIGRATION_ITEM_NAME_KEY) or obj.get("name") or ""
+    ).strip()
+    migration_item_id = str(obj.get(MIGRATION_ITEM_ID_KEY) or "").strip()
+    if not migration_item_id:
+        migration_item_id = _build_migration_item_id(
+            migration_group_id,
+            {
+                **obj,
+                "name": migration_item_name,
+            },
+        )
+
+    migration_item_payload = {
+        "migrationItemId": migration_item_id,
+        "migrationItemName": migration_item_name,
+        "migrationGroupId": migration_group_id,
+        "objectType": str(obj.get("object_type") or ""),
+        "otmTable": table_name,
+        "domainName": str(obj.get("domainName") or obj.get("domain") or ""),
+        "sequence": obj.get("sequence"),
+        "deploymentType": str(obj.get("deployment_type") or ""),
+    }
+
     return {
         "cacheType": "OTM_OBJECT_CACHE",
         "version": "1.0",
         "generatedAt": _timestamp_utc_z(),
         "source": SCRIPT_NAME,
+        "migrationItem": migration_item_payload,
+        # Compatibilidade retroativa: manter estrutura legado "object"
         "object": {
-            "name": str(obj.get("name") or ""),
-            "groupId": group_id,
-            "objectType": str(obj.get("object_type") or ""),
-            "otmTable": table_name,
-            "domainName": str(obj.get("domainName") or obj.get("domain") or ""),
-            "sequence": obj.get("sequence"),
-            "deploymentType": str(obj.get("deployment_type") or ""),
+            "name": migration_item_payload["migrationItemName"],
+            "groupId": migration_item_payload["migrationGroupId"],
+            "objectType": migration_item_payload["objectType"],
+            "otmTable": migration_item_payload["otmTable"],
+            "domainName": migration_item_payload["domainName"],
+            "sequence": migration_item_payload["sequence"],
+            "deploymentType": migration_item_payload["deploymentType"],
         },
         "extraction": {
             "technicalContentType": str(obj.get("technical_content", {}).get("type", "")),
@@ -326,15 +404,32 @@ def _extract_single_object_cache(
     dry_run: bool,
     strict_extractability: bool,
 ) -> Dict[str, Any]:
-    object_name = str(obj.get("name") or "")
+    migration_group_id = _normalize_name(obj.get(MIGRATION_GROUP_ID_KEY) or group_id)
+    migration_item_name = str(
+        obj.get(MIGRATION_ITEM_NAME_KEY) or obj.get("name") or ""
+    ).strip()
+    migration_item_id = str(obj.get(MIGRATION_ITEM_ID_KEY) or "").strip()
+    if not migration_item_id:
+        migration_item_id = _build_migration_item_id(
+            migration_group_id,
+            {
+                **obj,
+                "name": migration_item_name,
+            },
+        )
+
     technical_content = obj.get("technical_content", {})
     if not isinstance(technical_content, dict):
         if strict_extractability:
-            raise ValueError(f"Objeto '{object_name}' sem technical_content valido.")
+            raise ValueError(f"MIGRATION_ITEM '{migration_item_name}' sem technical_content valido.")
         return {
             "status": "skipped",
-            "groupId": group_id,
-            "object": object_name,
+            "migrationGroupId": migration_group_id,
+            "migrationItemId": migration_item_id,
+            "migrationItem": migration_item_name,
+            # Compatibilidade retroativa
+            "groupId": migration_group_id,
+            "object": migration_item_name,
             "reason": "technical_content invalido",
         }
 
@@ -343,21 +438,29 @@ def _extract_single_object_cache(
     if technical_type != "SQL":
         if strict_extractability:
             raise ValueError(
-                f"Objeto '{object_name}' nao possui technical_content.type=SQL."
+                f"MIGRATION_ITEM '{migration_item_name}' nao possui technical_content.type=SQL."
             )
         return {
             "status": "skipped",
-            "groupId": group_id,
-            "object": object_name,
+            "migrationGroupId": migration_group_id,
+            "migrationItemId": migration_item_id,
+            "migrationItem": migration_item_name,
+            # Compatibilidade retroativa
+            "groupId": migration_group_id,
+            "object": migration_item_name,
             "reason": "technical_content.type diferente de SQL",
         }
     if not sql_query:
         if strict_extractability:
-            raise ValueError(f"Objeto '{object_name}' sem technical_content.content.")
+            raise ValueError(f"MIGRATION_ITEM '{migration_item_name}' sem technical_content.content.")
         return {
             "status": "skipped",
-            "groupId": group_id,
-            "object": object_name,
+            "migrationGroupId": migration_group_id,
+            "migrationItemId": migration_item_id,
+            "migrationItem": migration_item_name,
+            # Compatibilidade retroativa
+            "groupId": migration_group_id,
+            "object": migration_item_name,
             "reason": "technical_content.content vazio",
         }
 
@@ -374,7 +477,7 @@ def _extract_single_object_cache(
         extra_fields_union.update(row_extra_fields)
 
     payload = _build_cache_payload(
-        group_id=group_id,
+        group_id=migration_group_id,
         obj=obj,
         table_name=table_name,
         table_schema=table_schema,
@@ -388,8 +491,12 @@ def _extract_single_object_cache(
 
     return {
         "status": "success",
-        "groupId": group_id,
-        "object": object_name,
+        "migrationGroupId": migration_group_id,
+        "migrationItemId": migration_item_id,
+        "migrationItem": migration_item_name,
+        # Compatibilidade retroativa
+        "groupId": migration_group_id,
+        "object": migration_item_name,
         "table": table_name,
         "rows": len(normalized_rows),
         "file": str(output_path.relative_to(BASE_DIR)),
@@ -399,27 +506,47 @@ def _extract_single_object_cache(
 def _parse_args(argv: List[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Extrai objetos do projeto e grava cache local em JSON "
-            "(1 arquivo por objeto)."
+            "Extrai MIGRATION_ITEMs do projeto e grava cache local em JSON "
+            "(1 arquivo por MIGRATION_ITEM)."
         )
+    )
+    parser.add_argument(
+        "--all-migration-items",
+        action="store_true",
+        help="Atualiza cache de todos os MIGRATION_ITEMs do projeto.",
     )
     parser.add_argument(
         "--all-objects",
         action="store_true",
-        help="Atualiza cache de todos os objetos do projeto.",
+        help="Alias legado de --all-migration-items.",
+    )
+    parser.add_argument(
+        "--migration-item-id",
+        default="",
+        help="ID canônico do MIGRATION_ITEM (migration_item_id).",
+    )
+    parser.add_argument(
+        "--migration-item-name",
+        default="",
+        help="Nome exato do MIGRATION_ITEM em domain/projeto_migracao/projeto_migracao.json.",
     )
     parser.add_argument(
         "--object-name",
         default="",
-        help="Nome exato do objeto em domain/projeto_migracao/projeto_migracao.json",
+        help="Alias legado de --migration-item-name.",
+    )
+    parser.add_argument(
+        "--migration-group-id",
+        default="",
+        help=(
+            "Escopo de MIGRATION_GROUP (quando --migration-item-name nao for informado) "
+            "ou desambiguacao de MIGRATION_GROUP para --migration-item-name."
+        ),
     )
     parser.add_argument(
         "--group-id",
         default="",
-        help=(
-            "Escopo de grupo (quando --object-name nao for informado) "
-            "ou desambiguacao de grupo para --object-name."
-        ),
+        help="Alias legado de --migration-group-id.",
     )
     parser.add_argument(
         "--dry-run",
@@ -428,14 +555,35 @@ def _parse_args(argv: List[str]) -> argparse.Namespace:
     )
     args = parser.parse_args(argv)
 
-    has_all = bool(args.all_objects)
-    has_object = bool(str(args.object_name).strip())
-    has_group = bool(str(args.group_id).strip())
+    args.resolved_all = bool(args.all_migration_items or args.all_objects)
+    args.resolved_migration_item_id = str(args.migration_item_id or "").strip()
+    args.resolved_migration_item_name = str(
+        args.migration_item_name or args.object_name or ""
+    ).strip()
+    args.resolved_migration_group_id = str(
+        args.migration_group_id or args.group_id or ""
+    ).strip()
 
-    if sum([has_all, has_object, has_group]) == 0:
-        parser.error("Informe um escopo: --all-objects, --group-id ou --object-name.")
-    if has_all and (has_object or has_group):
-        parser.error("--all-objects nao pode ser combinado com --group-id/--object-name.")
+    has_all = bool(args.resolved_all)
+    has_item_id = bool(args.resolved_migration_item_id)
+    has_item_name = bool(args.resolved_migration_item_name)
+    has_group = bool(args.resolved_migration_group_id)
+
+    if sum([has_all, has_item_id, has_item_name, has_group]) == 0:
+        parser.error(
+            "Informe um escopo: --all-migration-items, "
+            "--migration-item-id, --migration-item-name ou --migration-group-id."
+        )
+    if has_all and (has_item_id or has_item_name or has_group):
+        parser.error(
+            "--all-migration-items nao pode ser combinado com "
+            "--migration-item-id/--migration-item-name/--migration-group-id."
+        )
+    if has_item_id and (has_item_name or has_group):
+        parser.error(
+            "--migration-item-id nao pode ser combinado com "
+            "--migration-item-name/--migration-group-id."
+        )
 
     return args
 
@@ -449,23 +597,35 @@ def main(argv: List[str]) -> int:
         targets: List[Tuple[str, Dict[str, Any]]] = []
         strict_extractability = False
 
-        if args.all_objects:
-            mode = "all_objects"
+        if args.resolved_all:
+            mode = "all_migration_items"
             targets = list(_iter_project_objects(project_data))
             strict_extractability = False
-        elif str(args.object_name).strip():
-            mode = "single_object"
+        elif args.resolved_migration_item_id:
+            mode = "single_migration_item"
+            targets = [
+                _select_object_by_migration_item_id(
+                    project_data,
+                    migration_item_id=args.resolved_migration_item_id,
+                )
+            ]
+            strict_extractability = True
+        elif args.resolved_migration_item_name:
+            mode = "single_migration_item"
             targets = [
                 _select_object(
                     project_data,
-                    object_name=args.object_name,
-                    group_id=args.group_id or None,
+                    migration_item_name=args.resolved_migration_item_name,
+                    migration_group_id=args.resolved_migration_group_id or None,
                 )
             ]
             strict_extractability = True
         else:
-            mode = "group_objects"
-            targets = _select_group_objects(project_data, group_id=args.group_id)
+            mode = "migration_group_items"
+            targets = _select_group_objects(
+                project_data,
+                migration_group_id=args.resolved_migration_group_id,
+            )
             strict_extractability = False
 
         processed: List[Dict[str, Any]] = []
@@ -483,6 +643,12 @@ def main(argv: List[str]) -> int:
             except Exception as exc:
                 current_error = {
                     "status": "error",
+                    "migrationGroupId": group_id,
+                    "migrationItemId": str(obj.get(MIGRATION_ITEM_ID_KEY) or ""),
+                    "migrationItem": str(
+                        obj.get(MIGRATION_ITEM_NAME_KEY) or obj.get("name") or ""
+                    ),
+                    # Compatibilidade retroativa
                     "groupId": group_id,
                     "object": str(obj.get("name") or ""),
                     "error_message": str(exc),
@@ -498,6 +664,11 @@ def main(argv: List[str]) -> int:
             "status": "success" if not errors else "partial_success",
             "mode": mode,
             "dryRun": bool(args.dry_run),
+            "selectedMigrationItems": len(targets),
+            "successMigrationItems": success_count,
+            "skippedMigrationItems": skipped_count,
+            "errorMigrationItems": len(errors),
+            # Compatibilidade retroativa
             "selectedObjects": len(targets),
             "successCount": success_count,
             "skippedCount": skipped_count,

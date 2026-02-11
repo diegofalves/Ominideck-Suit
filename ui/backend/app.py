@@ -301,13 +301,14 @@ def api_otm_update_tables():
 @app.route("/api/otm/update-object-cache", methods=["POST"])
 def api_otm_update_object_cache():
     """
-    Executa atualizacao de cache de objetos OTM por escopo.
+    Executa atualizacao de cache de MIGRATION_ITEMs por escopo.
 
     Body JSON:
     {
-      scope: "all" | "group" | "object",
-      group_id?: str,
-      object_name?: str,
+      scope: "all" | "migration_group" | "migration_item",
+      migration_group_id?: str,
+      migration_item_name?: str,
+      migration_item_id?: str,
       dry_run?: bool
     }
     """
@@ -332,11 +333,15 @@ def api_otm_update_object_cache():
     raw_scope = str(payload.get("scope") or "").strip().lower()
     scope_aliases = {
         "all": "all",
+        "all_migration_items": "all",
         "all_objects": "all",
+        "migration_group": "group",
         "group": "group",
         "group_objects": "group",
-        "object": "object",
-        "single_object": "object",
+        "migration_item": "item",
+        "object": "item",
+        "single_object": "item",
+        "single_migration_item": "item",
     }
     scope = scope_aliases.get(raw_scope, "")
 
@@ -345,49 +350,67 @@ def api_otm_update_object_cache():
             jsonify(
                 {
                     "status": "error",
-                    "message": "Parametro 'scope' invalido. Use: all, group ou object.",
+                    "message": (
+                        "Parametro 'scope' invalido. "
+                        "Use: all, migration_group ou migration_item."
+                    ),
                     "result": None,
                 }
             ),
             400,
         )
 
-    group_id = str(payload.get("group_id") or "").strip()
-    object_name = str(payload.get("object_name") or "").strip()
+    migration_group_id = str(
+        payload.get("migration_group_id") or payload.get("group_id") or ""
+    ).strip()
+    migration_item_name = str(
+        payload.get("migration_item_name") or payload.get("object_name") or ""
+    ).strip()
+    migration_item_id = str(payload.get("migration_item_id") or "").strip()
     dry_run = _is_truthy(payload.get("dry_run"))
 
     command = [sys.executable, str(script_path)]
 
     if scope == "all":
-        command.append("--all-objects")
+        command.append("--all-migration-items")
     elif scope == "group":
-        if not group_id:
+        if not migration_group_id:
             return (
                 jsonify(
                     {
                         "status": "error",
-                        "message": "Parametro 'group_id' e obrigatorio para scope=group.",
+                        "message": (
+                            "Parametro 'migration_group_id' e obrigatorio "
+                            "para scope=migration_group."
+                        ),
                         "result": None,
                     }
                 ),
                 400,
             )
-        command.extend(["--group-id", group_id])
+        command.extend(["--migration-group-id", migration_group_id])
     else:
-        if not object_name:
+        # Compatibilidade: scope=object segue equivalente a migration_item.
+        if migration_item_id:
+            command.extend(["--migration-item-id", migration_item_id])
+        elif migration_item_name:
+            command.extend(["--migration-item-name", migration_item_name])
+            if migration_group_id:
+                command.extend(["--migration-group-id", migration_group_id])
+        else:
             return (
                 jsonify(
                     {
                         "status": "error",
-                        "message": "Parametro 'object_name' e obrigatorio para scope=object.",
+                        "message": (
+                            "Parametro 'migration_item_name' ou 'migration_item_id' "
+                            "e obrigatorio para scope=migration_item."
+                        ),
                         "result": None,
                     }
                 ),
                 400,
             )
-        command.extend(["--object-name", object_name])
-        if group_id:
-            command.extend(["--group-id", group_id])
 
     if dry_run:
         command.append("--dry-run")
@@ -405,7 +428,7 @@ def api_otm_update_object_cache():
             jsonify(
                 {
                     "status": "error",
-                    "message": "Tempo limite atingido ao atualizar cache de objetos OTM.",
+                    "message": "Tempo limite atingido ao atualizar cache de MIGRATION_ITEMs.",
                     "result": None,
                 }
             ),
@@ -416,7 +439,7 @@ def api_otm_update_object_cache():
             jsonify(
                 {
                     "status": "error",
-                    "message": f"Falha ao executar script de cache de objetos OTM: {exc}",
+                    "message": f"Falha ao executar script de cache de MIGRATION_ITEMs: {exc}",
                     "result": None,
                 }
             ),
@@ -439,9 +462,9 @@ def api_otm_update_object_cache():
 
     if script_status in {"success", "partial_success"}:
         message = (
-            "Atualizacao de cache de objetos concluida."
+            "Atualizacao de cache de MIGRATION_ITEMs concluida."
             if script_status == "success"
-            else "Atualizacao de cache de objetos concluida parcialmente."
+            else "Atualizacao de cache de MIGRATION_ITEMs concluida parcialmente."
         )
         return jsonify(
             {
@@ -457,7 +480,7 @@ def api_otm_update_object_cache():
             jsonify(
                 {
                     "status": "error",
-                    "message": "Script de cache de objetos OTM retornou erro.",
+                    "message": "Script de cache de MIGRATION_ITEMs retornou erro.",
                     "result": parsed_result,
                     "stderr": stderr[-2000:] if stderr else None,
                 }
@@ -469,7 +492,7 @@ def api_otm_update_object_cache():
         jsonify(
             {
                 "status": "error",
-                "message": "Resposta do script em formato inesperado para cache de objetos OTM.",
+                "message": "Resposta do script em formato inesperado para cache de MIGRATION_ITEMs.",
                 "result": parsed_result,
                 "stderr": stderr[-2000:] if stderr else None,
             }
@@ -489,7 +512,7 @@ def projeto_migracao():
         action = _get_form_value(request.form, "action", "")
         reset_edit_mode = _get_form_value(request.form, "reset_edit_mode", "0")
         
-        # ===== REMOVER OBJETO =====
+        # ===== REMOVER MIGRATION_ITEM =====
         remove_object_index = _get_form_value(request.form, "remove_object_index", "")
         if remove_object_index != "":
             try:
@@ -501,7 +524,7 @@ def projeto_migracao():
                         if group.get("group_id") == active_group_id:
                             if 0 <= remove_idx < len(group.get("objects", [])):
                                 removed_obj = group["objects"].pop(remove_idx)
-                                print(f"✅ Objeto removido: {removed_obj.get('name', 'Sem nome')}")
+                                print(f"✅ MIGRATION_ITEM removido: {removed_obj.get('name', 'Sem nome')}")
                                 
                                 # Limpar estado de edição
                                 if project.get("state"):
@@ -512,10 +535,10 @@ def projeto_migracao():
                 
                 return redirect("/projeto-migracao")
             except (ValueError, KeyError) as e:
-                print(f"⚠️ Erro ao remover objeto: {e}")
+                print(f"⚠️ Erro ao remover MIGRATION_ITEM: {e}")
                 return redirect("/projeto-migracao")
         
-        # ===== REMOVER GRUPO =====
+        # ===== REMOVER MIGRATION_GROUP =====
         remove_group_id = _get_form_value(request.form, "remove_group_id", "")
         if remove_group_id != "":
             try:
@@ -523,13 +546,13 @@ def projeto_migracao():
                     return redirect("/projeto-migracao")
 
                 if project.get("groups"):
-                    # Encontrar e remover o grupo
+                    # Encontrar e remover o MIGRATION_GROUP
                     for i, group in enumerate(project["groups"]):
                         if group.get("group_id") == remove_group_id:
                             removed_group = project["groups"].pop(i)
-                            print(f"✅ Grupo removido: {removed_group.get('label', 'Sem nome')}")
+                            print(f"✅ MIGRATION_GROUP removido: {removed_group.get('label', 'Sem nome')}")
                             
-                            # Se era o grupo ativo, desativar
+                            # Se era o MIGRATION_GROUP ativo, desativar
                             if project.get("active_group_id") == remove_group_id:
                                 project["active_group_id"] = None
                             
@@ -538,10 +561,10 @@ def projeto_migracao():
                 
                 return redirect("/projeto-migracao")
             except (ValueError, KeyError) as e:
-                print(f"⚠️ Erro ao remover grupo: {e}")
+                print(f"⚠️ Erro ao remover MIGRATION_GROUP: {e}")
                 return redirect("/projeto-migracao")
         
-        # ===== MOVER OBJETO PARA OUTRO GRUPO =====
+        # ===== MOVER MIGRATION_ITEM PARA OUTRO MIGRATION_GROUP =====
         move_object_index = _get_form_value(request.form, "move_object_index", "")
         move_to_group_id = _get_form_value(request.form, "move_to_group_id", "")
         
@@ -551,7 +574,7 @@ def projeto_migracao():
                 active_group_id = project.get("active_group_id")
                 
                 if active_group_id and project.get("groups"):
-                    # Encontrar grupo de origem
+                    # Encontrar MIGRATION_GROUP de origem
                     source_group = None
                     target_group = None
                     
@@ -562,15 +585,15 @@ def projeto_migracao():
                             target_group = group
                     
                     if source_group and target_group and 0 <= move_idx < len(source_group.get("objects", [])):
-                        # Remover do grupo de origem
+                        # Remover do MIGRATION_GROUP de origem
                         moved_obj = source_group["objects"].pop(move_idx)
                         
-                        # Adicionar ao grupo de destino
+                        # Adicionar ao MIGRATION_GROUP de destino
                         if "objects" not in target_group:
                             target_group["objects"] = []
                         target_group["objects"].append(moved_obj)
                         
-                        print(f"✅ Objeto '{moved_obj.get('name', 'Sem nome')}' movido de '{source_group.get('label')}' para '{target_group.get('label')}'")
+                        print(f"✅ MIGRATION_ITEM '{moved_obj.get('name', 'Sem nome')}' movido de '{source_group.get('label')}' para '{target_group.get('label')}'")
                         
                         # Limpar estado de edição
                         if project.get("state"):
@@ -580,10 +603,10 @@ def projeto_migracao():
                 
                 return redirect("/projeto-migracao")
             except (ValueError, KeyError) as e:
-                print(f"⚠️ Erro ao mover objeto: {e}")
+                print(f"⚠️ Erro ao mover MIGRATION_ITEM: {e}")
                 return redirect("/projeto-migracao")
         
-        # Se reset_edit_mode está ativo (mudança de grupo), limpar estado de edição
+        # Se reset_edit_mode esta ativo (mudanca de MIGRATION_GROUP), limpar estado de edicao
         if reset_edit_mode == "1":
             active_group_id = _get_form_value(request.form, "active_group_id", "")
             if project.get("state") is None:
@@ -593,7 +616,7 @@ def projeto_migracao():
             save_project(project)
             return redirect("/projeto-migracao")
         
-        # Se ação é apenas carregar objeto, salvar apenas o state sem validar
+        # Se acao e apenas carregar MIGRATION_ITEM, salvar apenas o state sem validar
         if action == "load_object":
             edit_index = _get_form_value(request.form, "edit_object_index", "")
             requested_group_id = _get_form_value(request.form, "active_group_id", "")
@@ -606,7 +629,7 @@ def projeto_migracao():
                 save_project(project)
             return redirect("/projeto-migracao#object-edit-panel")
 
-        # Salvar apenas o objeto em edição (sem bloquear por validações globais do projeto).
+        # Salvar apenas o MIGRATION_ITEM em edicao (sem bloquear por validacoes globais do projeto).
         # Também entra aqui quando a flag de ignore foi alterada no formulário.
         should_save_object_partial = action == "save_object"
         if not should_save_object_partial and request.form.get("object_ignore_table_present") is not None:
@@ -670,13 +693,13 @@ def projeto_migracao():
             if projected_domain.get("state") is None:
                 projected_domain["state"] = {}
             if is_ignored:
-                # Após salvar com ignore=true, o objeto migra para o grupo IGNORADOS.
-                # Selecionamos esse grupo para refletir imediatamente no painel.
+                # Apos salvar com ignore=true, o MIGRATION_ITEM migra para o MIGRATION_GROUP IGNORADOS.
+                # Selecionamos esse MIGRATION_GROUP para refletir imediatamente no painel.
                 projected_domain["active_group_id"] = IGNORED_GROUP_ID
                 projected_domain["state"]["last_edit_object_index"] = None
             else:
                 # Se estiver editando dentro de IGNORADOS e remover o ignore,
-                # o objeto volta para SEM_GRUPO no save normalizado.
+                # o MIGRATION_ITEM volta para SEM_GRUPO no save normalizado.
                 if active_group_id.upper() == IGNORED_GROUP_ID:
                     projected_domain["active_group_id"] = GROUP_ZERO_ID
                     projected_domain["state"]["last_edit_object_index"] = None
