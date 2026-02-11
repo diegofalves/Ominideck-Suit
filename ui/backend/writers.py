@@ -32,6 +32,18 @@ LOGICAL_REQUIRED_IDENTIFIERS = {
     "RATE": ("rate_offering_gid",),
     "EVENT_GROUP": ("event_group_gid",),
 }
+FROM_CLAUSE_TERMINATORS = {
+    "WHERE",
+    "GROUP",
+    "ORDER",
+    "HAVING",
+    "CONNECT",
+    "START",
+    "UNION",
+    "MINUS",
+    "INTERSECT",
+    "MODEL",
+}
 
 
 def _as_object_list(value):
@@ -233,6 +245,7 @@ def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: O
         ),
         "object_type": table_name,
         "otm_table": table_name,
+        "otm_subtables": [],
         "deployment_type": deployment_type,
         "deployment_type_user_defined": False,
         "sequence": sequence,
@@ -285,6 +298,349 @@ def _resolve_object_extraction_query(obj: Dict[str, Any]) -> Dict[str, str]:
     return {"language": "SQL", "content": ""}
 
 
+def _iter_top_level_word_tokens(sql: str):
+    """
+    Itera tokens de palavra no nível top-level do SQL (fora de strings, comentários e parênteses).
+    """
+    if not isinstance(sql, str):
+        return
+
+    length = len(sql)
+    idx = 0
+    paren_depth = 0
+    in_string = False
+    in_line_comment = False
+    in_block_comment = False
+
+    while idx < length:
+        char = sql[idx]
+        next_char = sql[idx + 1] if idx + 1 < length else ""
+
+        if in_line_comment:
+            if char in {"\n", "\r"}:
+                in_line_comment = False
+            idx += 1
+            continue
+
+        if in_block_comment:
+            if char == "*" and next_char == "/":
+                in_block_comment = False
+                idx += 2
+                continue
+            idx += 1
+            continue
+
+        if in_string:
+            if char == "'" and next_char == "'":
+                idx += 2
+                continue
+            if char == "'":
+                in_string = False
+            idx += 1
+            continue
+
+        if char == "-" and next_char == "-":
+            in_line_comment = True
+            idx += 2
+            continue
+
+        if char == "/" and next_char == "*":
+            in_block_comment = True
+            idx += 2
+            continue
+
+        if char == "'":
+            in_string = True
+            idx += 1
+            continue
+
+        if char == "(":
+            paren_depth += 1
+            idx += 1
+            continue
+
+        if char == ")":
+            paren_depth = max(paren_depth - 1, 0)
+            idx += 1
+            continue
+
+        if paren_depth == 0 and (char.isalpha() or char == "_"):
+            start = idx
+            idx += 1
+            while idx < length:
+                current = sql[idx]
+                if current.isalnum() or current in {"_", "$", "#"}:
+                    idx += 1
+                    continue
+                break
+            yield sql[start:idx].upper(), start, idx
+            continue
+
+        idx += 1
+
+
+def _extract_main_from_clause(sql: str) -> str:
+    if not isinstance(sql, str):
+        return ""
+
+    tokens = list(_iter_top_level_word_tokens(sql))
+    from_end = -1
+    for token, _start, end in tokens:
+        if token == "FROM":
+            from_end = end
+            break
+
+    if from_end < 0:
+        return ""
+
+    end_pos = len(sql)
+    for token, start, _end in tokens:
+        if start <= from_end:
+            continue
+        if token in FROM_CLAUSE_TERMINATORS:
+            end_pos = start
+            break
+
+    return sql[from_end:end_pos]
+
+
+def _split_top_level_commas(text: str) -> List[str]:
+    if not isinstance(text, str) or not text.strip():
+        return []
+
+    parts: List[str] = []
+    current: List[str] = []
+    paren_depth = 0
+    in_string = False
+    in_line_comment = False
+    in_block_comment = False
+    idx = 0
+    length = len(text)
+
+    while idx < length:
+        char = text[idx]
+        next_char = text[idx + 1] if idx + 1 < length else ""
+
+        if in_line_comment:
+            current.append(char)
+            if char in {"\n", "\r"}:
+                in_line_comment = False
+            idx += 1
+            continue
+
+        if in_block_comment:
+            current.append(char)
+            if char == "*" and next_char == "/":
+                current.append(next_char)
+                in_block_comment = False
+                idx += 2
+                continue
+            idx += 1
+            continue
+
+        if in_string:
+            current.append(char)
+            if char == "'" and next_char == "'":
+                current.append(next_char)
+                idx += 2
+                continue
+            if char == "'":
+                in_string = False
+            idx += 1
+            continue
+
+        if char == "-" and next_char == "-":
+            current.append(char)
+            current.append(next_char)
+            in_line_comment = True
+            idx += 2
+            continue
+
+        if char == "/" and next_char == "*":
+            current.append(char)
+            current.append(next_char)
+            in_block_comment = True
+            idx += 2
+            continue
+
+        if char == "'":
+            current.append(char)
+            in_string = True
+            idx += 1
+            continue
+
+        if char == "(":
+            current.append(char)
+            paren_depth += 1
+            idx += 1
+            continue
+
+        if char == ")":
+            current.append(char)
+            paren_depth = max(paren_depth - 1, 0)
+            idx += 1
+            continue
+
+        if char == "," and paren_depth == 0:
+            segment = "".join(current).strip()
+            if segment:
+                parts.append(segment)
+            current = []
+            idx += 1
+            continue
+
+        current.append(char)
+        idx += 1
+
+    tail = "".join(current).strip()
+    if tail:
+        parts.append(tail)
+    return parts
+
+
+def _skip_parenthesized_expression(text: str, start: int) -> int:
+    length = len(text)
+    if start >= length or text[start] != "(":
+        return start
+
+    idx = start
+    depth = 0
+    in_string = False
+    while idx < length:
+        char = text[idx]
+        next_char = text[idx + 1] if idx + 1 < length else ""
+
+        if in_string:
+            if char == "'" and next_char == "'":
+                idx += 2
+                continue
+            if char == "'":
+                in_string = False
+            idx += 1
+            continue
+
+        if char == "'":
+            in_string = True
+            idx += 1
+            continue
+
+        if char == "(":
+            depth += 1
+            idx += 1
+            continue
+
+        if char == ")":
+            depth -= 1
+            idx += 1
+            if depth <= 0:
+                return idx
+            continue
+
+        idx += 1
+
+    return idx
+
+
+def _normalize_table_identifier(identifier: str) -> str:
+    token = str(identifier or "").strip()
+    if not token:
+        return ""
+
+    token = token.split("@", 1)[0]
+    token = token.strip()
+    if not token:
+        return ""
+
+    parts = [part.strip() for part in token.split(".") if part.strip()]
+    if not parts:
+        return ""
+
+    table_part = parts[-1]
+    if table_part.startswith('"') and table_part.endswith('"') and len(table_part) >= 2:
+        table_part = table_part[1:-1]
+    table_part = table_part.strip()
+    return _normalize_name(table_part)
+
+
+def _read_identifier(text: str, start: int) -> Tuple[str, int]:
+    length = len(text)
+    idx = start
+    while idx < length and text[idx].isspace():
+        idx += 1
+    if idx >= length:
+        return "", idx
+
+    if text[idx] == '"':
+        end = idx + 1
+        while end < length and text[end] != '"':
+            end += 1
+        if end < length:
+            return text[idx : end + 1], end + 1
+        return text[idx:], length
+
+    ident_chars = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_$.#@")
+    end = idx
+    while end < length and text[end] in ident_chars:
+        end += 1
+
+    if end == idx:
+        return "", idx
+    return text[idx:end], end
+
+
+def _read_table_after_position(text: str, start: int) -> Tuple[str, int]:
+    length = len(text)
+    idx = start
+    while idx < length and text[idx].isspace():
+        idx += 1
+    if idx >= length:
+        return "", idx
+
+    if text[idx] == "(":
+        return "", _skip_parenthesized_expression(text, idx)
+
+    identifier, next_idx = _read_identifier(text, idx)
+    if not identifier:
+        return "", idx
+
+    if _normalize_name(identifier) == "ONLY":
+        return _read_table_after_position(text, next_idx)
+
+    return _normalize_table_identifier(identifier), next_idx
+
+
+def _extract_table_names_from_from_clause(from_clause: str) -> List[str]:
+    segments = _split_top_level_commas(from_clause)
+    if not segments:
+        return []
+
+    tables: List[str] = []
+    seen: Set[str] = set()
+
+    for segment in segments:
+        base_table, _ = _read_table_after_position(segment, 0)
+        if base_table and base_table not in seen:
+            tables.append(base_table)
+            seen.add(base_table)
+
+        for token, _start, end in _iter_top_level_word_tokens(segment):
+            if token != "JOIN":
+                continue
+            join_table, _ = _read_table_after_position(segment, end)
+            if join_table and join_table not in seen:
+                tables.append(join_table)
+                seen.add(join_table)
+
+    return tables
+
+
+def _extract_sql_tables(sql: str) -> List[str]:
+    from_clause = _extract_main_from_clause(sql)
+    if not from_clause:
+        return []
+    return _extract_table_names_from_from_clause(from_clause)
+
+
 def _normalize_object_extraction_queries(data: Dict[str, Any]) -> None:
     groups = data.get("groups", [])
     if not isinstance(groups, list):
@@ -301,6 +657,44 @@ def _normalize_object_extraction_queries(data: Dict[str, Any]) -> None:
             if not isinstance(obj, dict):
                 continue
             obj["object_extraction_query"] = _resolve_object_extraction_query(obj)
+
+
+def _normalize_otm_table_hierarchy(data: Dict[str, Any]) -> None:
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for obj in objects:
+            if not isinstance(obj, dict):
+                continue
+
+            primary_table = _normalize_name(obj.get("object_type") or obj.get("otm_table"))
+            if primary_table:
+                obj["otm_table"] = primary_table
+
+            extraction_query = _resolve_object_extraction_query(obj)
+            sql = extraction_query.get("content", "")
+            tables_in_from = _extract_sql_tables(sql) if sql else []
+
+            subtables: List[str] = []
+            seen_subtables: Set[str] = set()
+            for table_name in tables_in_from:
+                normalized_table = _normalize_name(table_name)
+                if not normalized_table or normalized_table == primary_table:
+                    continue
+                if normalized_table in seen_subtables:
+                    continue
+                subtables.append(normalized_table)
+                seen_subtables.add(normalized_table)
+
+            obj["otm_subtables"] = subtables
 
 
 def _normalize_technical_content(data: Dict[str, Any]) -> None:
@@ -736,6 +1130,7 @@ def load_project():
 
     _normalize_group_zero(data)
     _normalize_object_extraction_queries(data)
+    _normalize_otm_table_hierarchy(data)
     _normalize_technical_content(data)
     # Primeiro normaliza aliases de dominio para evitar duplicacao por cobertura.
     _normalize_object_domain_aliases(data)
@@ -757,6 +1152,7 @@ def load_project():
 def save_project(domain):
     _normalize_group_zero(domain)
     _normalize_object_extraction_queries(domain)
+    _normalize_otm_table_hierarchy(domain)
     _normalize_technical_content(domain)
     _normalize_object_domain_aliases(domain)
     _ensure_domain_statistics_coverage(domain)

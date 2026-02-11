@@ -4,7 +4,7 @@ Build local OTM object cache files from projeto_migracao migration items.
 
 Core rules:
 - Extraction query comes from object_extraction_query.content.
-- ROOT_NAME always matches migration item otm_table.
+- ROOT_NAME uses migration item otm_table and its otm_subtables when available.
 - Output rows always contain every column from metadata/otm/tables/<TABLE>.json.
 - Missing values in OTM response are filled with empty string.
 - INSERT_DATE/UPDATE_DATE are managed as local cache lifecycle fields when present in schema.
@@ -88,6 +88,165 @@ def _resolve_object_extraction_query(item: Dict[str, Any]) -> Tuple[str, str, st
             return "SQL", content, "saved_query"
 
     return "SQL", "", "none"
+
+
+def _normalize_table_identifier(raw_identifier: str) -> str:
+    token = str(raw_identifier or "").strip()
+    if not token:
+        return ""
+
+    token = token.rstrip(")")
+    token = token.split("@", 1)[0].strip()
+    if token.startswith('"') and token.endswith('"') and len(token) >= 2:
+        token = token[1:-1]
+
+    parts = [part.strip() for part in token.split(".") if part.strip()]
+    if not parts:
+        return ""
+
+    return _normalize_name(parts[-1])
+
+
+def _split_top_level_commas(text: str) -> List[str]:
+    if not isinstance(text, str) or not text.strip():
+        return []
+
+    parts: List[str] = []
+    current: List[str] = []
+    paren_depth = 0
+    in_string = False
+    idx = 0
+    length = len(text)
+
+    while idx < length:
+        char = text[idx]
+        next_char = text[idx + 1] if idx + 1 < length else ""
+
+        if in_string:
+            current.append(char)
+            if char == "'" and next_char == "'":
+                current.append(next_char)
+                idx += 2
+                continue
+            if char == "'":
+                in_string = False
+            idx += 1
+            continue
+
+        if char == "'":
+            current.append(char)
+            in_string = True
+            idx += 1
+            continue
+
+        if char == "(":
+            current.append(char)
+            paren_depth += 1
+            idx += 1
+            continue
+
+        if char == ")":
+            current.append(char)
+            paren_depth = max(paren_depth - 1, 0)
+            idx += 1
+            continue
+
+        if char == "," and paren_depth == 0:
+            segment = "".join(current).strip()
+            if segment:
+                parts.append(segment)
+            current = []
+            idx += 1
+            continue
+
+        current.append(char)
+        idx += 1
+
+    tail = "".join(current).strip()
+    if tail:
+        parts.append(tail)
+    return parts
+
+
+def _extract_main_from_clause(sql_query: str) -> str:
+    if not isinstance(sql_query, str):
+        return ""
+    match = re.search(
+        r"(?is)\bFROM\b(?P<from>.*?)(?:\bWHERE\b|\bGROUP\s+BY\b|\bORDER\s+BY\b|\bHAVING\b|\bCONNECT\s+BY\b|\bSTART\s+WITH\b|\bUNION\b|\bMINUS\b|\bINTERSECT\b|$)",
+        sql_query,
+    )
+    if not match:
+        return ""
+    return str(match.group("from") or "").strip()
+
+
+def _extract_tables_from_sql_query(sql_query: str) -> List[str]:
+    from_clause = _extract_main_from_clause(sql_query)
+    if not from_clause:
+        return []
+
+    table_names: List[str] = []
+    seen: Set[str] = set()
+
+    segments = _split_top_level_commas(from_clause)
+    if not segments:
+        segments = [from_clause]
+
+    for segment in segments:
+        segment_text = str(segment or "").strip()
+        if not segment_text or segment_text.startswith("("):
+            continue
+
+        base_match = re.match(
+            r"(?is)^\s*(?:ONLY\s*\(\s*)?(?P<table>[A-Z0-9_.$\"#@]+)",
+            segment_text,
+        )
+        if base_match:
+            base_table = _normalize_table_identifier(base_match.group("table"))
+            if base_table and base_table not in seen:
+                table_names.append(base_table)
+                seen.add(base_table)
+
+        for join_match in re.finditer(
+            r"(?is)\bJOIN\b\s+(?:ONLY\s*\(\s*)?(?P<table>[A-Z0-9_.$\"#@]+)",
+            segment_text,
+        ):
+            join_table = _normalize_table_identifier(join_match.group("table"))
+            if join_table and join_table not in seen:
+                table_names.append(join_table)
+                seen.add(join_table)
+
+    return table_names
+
+
+def _resolve_item_tables(obj: Dict[str, Any], primary_table: str, sql_query: str) -> List[str]:
+    target_tables: List[str] = []
+    seen_tables: Set[str] = set()
+
+    normalized_primary = _normalize_name(primary_table)
+    if normalized_primary:
+        target_tables.append(normalized_primary)
+        seen_tables.add(normalized_primary)
+
+    raw_subtables = obj.get("otm_subtables")
+    candidate_values: List[str] = []
+    if isinstance(raw_subtables, list):
+        candidate_values.extend(str(value or "") for value in raw_subtables)
+    elif isinstance(raw_subtables, str):
+        candidate_values.extend(part.strip() for part in raw_subtables.split(","))
+
+    candidate_values.extend(_extract_tables_from_sql_query(sql_query))
+
+    for candidate in candidate_values:
+        normalized_candidate = _normalize_name(candidate)
+        if not normalized_candidate:
+            continue
+        if normalized_candidate in seen_tables:
+            continue
+        target_tables.append(normalized_candidate)
+        seen_tables.add(normalized_candidate)
+
+    return target_tables
 
 
 def _find_by_local_name(node: Dict[str, Any], local_name: str) -> Any:
@@ -385,7 +544,10 @@ def _normalize_existing_row_by_schema(
     return normalized
 
 
-def _load_existing_cache_context(output_path: Path) -> Tuple[List[Dict[str, Any]], str]:
+def _load_existing_cache_context(
+    output_path: Path,
+    table_name: str,
+) -> Tuple[List[Dict[str, Any]], str]:
     if not output_path.exists():
         return [], ""
 
@@ -397,8 +559,43 @@ def _load_existing_cache_context(output_path: Path) -> Tuple[List[Dict[str, Any]
     if not isinstance(payload, dict):
         return [], ""
 
-    rows_raw = payload.get("rows", [])
-    rows = rows_raw if isinstance(rows_raw, list) else []
+    normalized_table = _normalize_name(table_name)
+
+    rows: List[Dict[str, Any]] = []
+    tables_payload = payload.get("tables")
+    if isinstance(tables_payload, dict) and normalized_table:
+        table_section = tables_payload.get(normalized_table)
+        if not isinstance(table_section, dict):
+            for key, candidate in tables_payload.items():
+                if _normalize_name(key) == normalized_table and isinstance(candidate, dict):
+                    table_section = candidate
+                    break
+        if isinstance(table_section, dict):
+            section_rows = table_section.get("rows", [])
+            if isinstance(section_rows, list):
+                rows = section_rows
+
+    if not rows:
+        migration_item = payload.get("migrationItem")
+        legacy_object = payload.get("object")
+        schema_meta = payload.get("schema")
+        if not isinstance(migration_item, dict):
+            migration_item = {}
+        if not isinstance(legacy_object, dict):
+            legacy_object = {}
+        if not isinstance(schema_meta, dict):
+            schema_meta = {}
+
+        fallback_primary_table = _normalize_name(
+            migration_item.get("otmTable")
+            or legacy_object.get("otmTable")
+            or schema_meta.get("tableName")
+            or ""
+        )
+        if not fallback_primary_table or fallback_primary_table == normalized_table:
+            rows_raw = payload.get("rows", [])
+            rows = rows_raw if isinstance(rows_raw, list) else []
+
     generated_at = str(payload.get("generatedAt") or "").strip()
     return rows, generated_at
 
@@ -417,7 +614,10 @@ def _apply_local_row_lifecycle_dates(
     if not has_insert_date and not has_update_date:
         return
 
-    existing_rows_raw, existing_generated_at = _load_existing_cache_context(output_path)
+    existing_rows_raw, existing_generated_at = _load_existing_cache_context(
+        output_path=output_path,
+        table_name=table_name,
+    )
 
     existing_by_identity: Dict[str, List[Dict[str, str]]] = {}
     existing_by_signature: Dict[str, List[Dict[str, str]]] = {}
@@ -513,19 +713,68 @@ def _build_output_path(obj: Dict[str, Any], table_name: str) -> Path:
     return CACHE_DIR / filename
 
 
-def _build_cache_payload(
-    group_id: str,
-    obj: Dict[str, Any],
+def _build_table_cache_section(
+    *,
     table_name: str,
     table_schema: Dict[str, Any],
     schema_columns: List[str],
-    sql_query: str,
     query_language: str,
     query_source: str,
+    sql_query: str,
     normalized_rows: List[Dict[str, str]],
     extra_fields: List[str],
 ) -> Dict[str, Any]:
     table_meta = table_schema.get("table", {}) if isinstance(table_schema, dict) else {}
+    return {
+        "tableName": table_name,
+        "schema": {
+            "owner": str(table_meta.get("schema") or ""),
+            "tableName": str(table_meta.get("name") or table_name.lower()),
+            "columnCount": len(schema_columns),
+            "columns": schema_columns,
+        },
+        "extraction": {
+            "queryLanguage": query_language,
+            "querySource": query_source,
+            "rootName": table_name,
+            "query": sql_query,
+            "normalizedRowCount": len(normalized_rows),
+            "nonSchemaFieldsDetected": extra_fields,
+        },
+        "rows": normalized_rows,
+    }
+
+
+def _build_cache_payload(
+    group_id: str,
+    obj: Dict[str, Any],
+    primary_table_name: str,
+    sql_query: str,
+    query_language: str,
+    query_source: str,
+    table_sections: Dict[str, Dict[str, Any]],
+    skipped_subtables_no_schema: List[str],
+) -> Dict[str, Any]:
+    primary_table = _normalize_name(primary_table_name)
+    if primary_table not in table_sections and table_sections:
+        primary_table = next(iter(table_sections.keys()))
+
+    primary_section = table_sections.get(primary_table, {})
+    if not isinstance(primary_section, dict):
+        primary_section = {}
+
+    primary_schema = primary_section.get("schema", {})
+    if not isinstance(primary_schema, dict):
+        primary_schema = {}
+    primary_extraction = primary_section.get("extraction", {})
+    if not isinstance(primary_extraction, dict):
+        primary_extraction = {}
+    primary_rows_raw = primary_section.get("rows", [])
+    primary_rows = primary_rows_raw if isinstance(primary_rows_raw, list) else []
+
+    all_table_names = list(table_sections.keys())
+    subtable_names = [table for table in all_table_names if table != primary_table]
+
     migration_group_id = _normalize_name(
         obj.get(MIGRATION_GROUP_ID_KEY) or group_id
     )
@@ -547,7 +796,8 @@ def _build_cache_payload(
         "migrationItemName": migration_item_name,
         "migrationGroupId": migration_group_id,
         "objectType": str(obj.get("object_type") or ""),
-        "otmTable": table_name,
+        "otmTable": primary_table,
+        "otmSubtables": subtable_names,
         "domainName": str(obj.get("domainName") or obj.get("domain") or ""),
         "sequence": obj.get("sequence"),
         "deploymentType": str(obj.get("deployment_type") or ""),
@@ -578,18 +828,24 @@ def _build_cache_payload(
                 if isinstance(obj.get("technical_content"), dict)
                 else ""
             ),
-            "rootName": table_name,
+            "rootName": primary_table,
             "query": sql_query,
-            "normalizedRowCount": len(normalized_rows),
-            "nonSchemaFieldsDetected": extra_fields,
+            "normalizedRowCount": int(primary_extraction.get("normalizedRowCount") or len(primary_rows)),
+            "nonSchemaFieldsDetected": primary_extraction.get("nonSchemaFieldsDetected", []),
+            "tableCount": len(all_table_names),
+            "tableNames": all_table_names,
+            "skippedSubtablesNoSchema": skipped_subtables_no_schema,
         },
-        "schema": {
-            "owner": str(table_meta.get("schema") or ""),
-            "tableName": str(table_meta.get("name") or table_name.lower()),
-            "columnCount": len(schema_columns),
-            "columns": schema_columns,
+        "tableHierarchy": {
+            "primaryTable": primary_table,
+            "subtables": subtable_names,
+            "allTables": all_table_names,
+            "skippedSubtablesNoSchema": skipped_subtables_no_schema,
         },
-        "rows": normalized_rows,
+        "tables": table_sections,
+        # Compatibilidade retroativa com leitores que ainda usam formato legado.
+        "schema": primary_schema,
+        "rows": primary_rows,
     }
 
 
@@ -609,6 +865,39 @@ def _iter_cache_files() -> List[Path]:
 def _build_row_hash(normalized_row: Dict[str, str]) -> str:
     serialized = json.dumps(normalized_row, ensure_ascii=False, sort_keys=True)
     return hashlib.sha1(serialized.encode("utf-8")).hexdigest()
+
+
+def _iter_payload_table_sections(
+    payload: Dict[str, Any],
+    fallback_table_name: str,
+) -> List[Tuple[str, List[Dict[str, Any]]]]:
+    sections: List[Tuple[str, List[Dict[str, Any]]]] = []
+    tables_payload = payload.get("tables")
+    if isinstance(tables_payload, dict):
+        for key, table_payload in tables_payload.items():
+            if not isinstance(table_payload, dict):
+                continue
+            schema_meta = table_payload.get("schema", {})
+            if not isinstance(schema_meta, dict):
+                schema_meta = {}
+            table_name = _normalize_name(
+                table_payload.get("tableName") or schema_meta.get("tableName") or key
+            )
+            if not table_name:
+                continue
+            rows_raw = table_payload.get("rows", [])
+            rows = rows_raw if isinstance(rows_raw, list) else []
+            sections.append((table_name, rows))
+
+    if sections:
+        return sections
+
+    rows_raw = payload.get("rows", [])
+    rows = rows_raw if isinstance(rows_raw, list) else []
+    table_name = _normalize_name(fallback_table_name)
+    if not table_name:
+        return []
+    return [(table_name, rows)]
 
 
 def _build_cache_index_payload() -> Dict[str, Any]:
@@ -666,60 +955,75 @@ def _build_cache_index_payload() -> Dict[str, Any]:
         if not migration_item_id:
             migration_item_id = f"MIGRATION_ITEM.FILE.{_slugify(cache_file.stem)}"
 
-        if table_name not in pk_columns_by_table:
-            try:
-                _, table_schema = _load_table_columns(table_name)
-                pk_columns_by_table[table_name] = _extract_primary_key_columns(table_schema)
-            except Exception:
-                pk_columns_by_table[table_name] = []
-        pk_columns = pk_columns_by_table[table_name]
-
-        rows_raw = payload.get("rows", [])
-        rows = rows_raw if isinstance(rows_raw, list) else []
+        table_sections = _iter_payload_table_sections(payload, table_name)
+        if not table_name and table_sections:
+            table_name = table_sections[0][0]
 
         file_row_count = 0
         file_indexed_count = 0
         file_unverifiable_count = 0
-        for row_number, row in enumerate(rows, start=1):
-            if not isinstance(row, dict):
-                continue
-            file_row_count += 1
+        file_table_summary: List[Dict[str, Any]] = []
 
-            normalized_row: Dict[str, str] = {}
-            for key, value in row.items():
-                normalized_key = _normalize_name(key)
-                if not normalized_key:
+        for section_table_name, section_rows in table_sections:
+            if section_table_name not in pk_columns_by_table:
+                try:
+                    _, table_schema = _load_table_columns(section_table_name)
+                    pk_columns_by_table[section_table_name] = _extract_primary_key_columns(table_schema)
+                except Exception:
+                    pk_columns_by_table[section_table_name] = []
+            pk_columns = pk_columns_by_table[section_table_name]
+
+            section_row_count = 0
+            for section_row_number, row in enumerate(section_rows, start=1):
+                if not isinstance(row, dict):
                     continue
-                normalized_row[normalized_key] = _stringify_value(value)
 
-            identity_key = _build_object_identity_key(
-                normalized_row=normalized_row,
-                table_name=table_name,
-                domain_name=domain_name,
-                pk_columns=pk_columns,
-            )
+                file_row_count += 1
+                section_row_count += 1
 
-            row_locator = {
-                "file": relative_file,
-                "rowNumber": row_number,
-                "migrationItemId": migration_item_id,
-                "migrationItemName": migration_item_name,
-                "migrationGroupId": migration_group_id,
-                "table": table_name,
-                "domainName": domain_name,
-            }
+                normalized_row: Dict[str, str] = {}
+                for key, value in row.items():
+                    normalized_key = _normalize_name(key)
+                    if not normalized_key:
+                        continue
+                    normalized_row[normalized_key] = _stringify_value(value)
 
-            if identity_key:
-                object_locator_by_key.setdefault(identity_key, []).append(row_locator)
-                file_indexed_count += 1
-            else:
-                file_unverifiable_count += 1
-                unverifiable_rows.append(
-                    {
-                        **row_locator,
-                        "rowHash": _build_row_hash(normalized_row),
-                    }
+                identity_key = _build_object_identity_key(
+                    normalized_row=normalized_row,
+                    table_name=section_table_name,
+                    domain_name=domain_name,
+                    pk_columns=pk_columns,
                 )
+
+                row_locator = {
+                    "file": relative_file,
+                    "rowNumber": file_row_count,
+                    "tableRowNumber": section_row_number,
+                    "migrationItemId": migration_item_id,
+                    "migrationItemName": migration_item_name,
+                    "migrationGroupId": migration_group_id,
+                    "table": section_table_name,
+                    "domainName": domain_name,
+                }
+
+                if identity_key:
+                    object_locator_by_key.setdefault(identity_key, []).append(row_locator)
+                    file_indexed_count += 1
+                else:
+                    file_unverifiable_count += 1
+                    unverifiable_rows.append(
+                        {
+                            **row_locator,
+                            "rowHash": _build_row_hash(normalized_row),
+                        }
+                    )
+
+            file_table_summary.append(
+                {
+                    "table": section_table_name,
+                    "rowCount": section_row_count,
+                }
+            )
 
         total_rows += file_row_count
         indexed_rows += file_indexed_count
@@ -735,6 +1039,8 @@ def _build_cache_index_payload() -> Dict[str, Any]:
                 "rowCount": file_row_count,
                 "indexedObjectRows": file_indexed_count,
                 "unverifiableRows": file_unverifiable_count,
+                "tableCount": len(file_table_summary),
+                "tables": file_table_summary,
             }
         )
 
@@ -871,54 +1177,93 @@ def _extract_single_object_cache(
             "reason": "object_extraction_query.content vazio",
         }
 
-    table_name = _normalize_name(obj.get("otm_table"))
-    schema_columns, table_schema = _load_table_columns(table_name)
-    pk_columns = _extract_primary_key_columns(table_schema)
+    primary_table_name = _normalize_name(obj.get("otm_table"))
+    if not primary_table_name:
+        raise ValueError(
+            f"MIGRATION_ITEM '{migration_item_name}' sem tabela principal definida em otm_table."
+        )
 
-    raw_rows = _query_rows(sql_query, root_name=table_name)
+    target_tables = _resolve_item_tables(obj, primary_table_name, sql_query)
+    output_path = _build_output_path(obj, primary_table_name)
 
-    normalized_rows: List[Dict[str, str]] = []
-    extra_fields_union: Set[str] = set()
-    object_identity_keys: Set[str] = set()
-    unverifiable_row_count = 0
-    for row in raw_rows:
-        normalized_row, row_extra_fields = _normalize_row_by_schema(row, schema_columns)
-        normalized_rows.append(normalized_row)
-        extra_fields_union.update(row_extra_fields)
-        identity_key = _build_object_identity_key(
-            normalized_row=normalized_row,
-            table_name=table_name,
+    table_sections: Dict[str, Dict[str, Any]] = {}
+    table_rows_by_name: Dict[str, int] = {}
+    table_unverifiable_by_name: Dict[str, int] = {}
+    skipped_subtables_no_schema: List[str] = []
+    primary_object_identity_keys: Set[str] = set()
+
+    normalized_query_language = _normalize_name(query_language) or "SQL"
+    for current_table_name in target_tables:
+        try:
+            schema_columns, table_schema = _load_table_columns(current_table_name)
+        except FileNotFoundError:
+            if current_table_name == primary_table_name:
+                raise
+            skipped_subtables_no_schema.append(current_table_name)
+            continue
+
+        pk_columns = _extract_primary_key_columns(table_schema)
+        raw_rows = _query_rows(sql_query, root_name=current_table_name)
+
+        normalized_rows: List[Dict[str, str]] = []
+        extra_fields_union: Set[str] = set()
+        table_unverifiable_count = 0
+        for row in raw_rows:
+            normalized_row, row_extra_fields = _normalize_row_by_schema(row, schema_columns)
+            normalized_rows.append(normalized_row)
+            extra_fields_union.update(row_extra_fields)
+
+            identity_key = _build_object_identity_key(
+                normalized_row=normalized_row,
+                table_name=current_table_name,
+                domain_name=domain_name,
+                pk_columns=pk_columns,
+            )
+            if identity_key:
+                if current_table_name == primary_table_name:
+                    primary_object_identity_keys.add(identity_key)
+            else:
+                table_unverifiable_count += 1
+
+        _apply_local_row_lifecycle_dates(
+            normalized_rows,
+            schema_columns=schema_columns,
+            output_path=output_path,
+            table_name=current_table_name,
             domain_name=domain_name,
             pk_columns=pk_columns,
         )
-        if identity_key:
-            object_identity_keys.add(identity_key)
-        else:
-            unverifiable_row_count += 1
 
-    output_path = _build_output_path(obj, table_name)
-    _apply_local_row_lifecycle_dates(
-        normalized_rows,
-        schema_columns=schema_columns,
-        output_path=output_path,
-        table_name=table_name,
-        domain_name=domain_name,
-        pk_columns=pk_columns,
-    )
+        table_sections[current_table_name] = _build_table_cache_section(
+            table_name=current_table_name,
+            table_schema=table_schema,
+            schema_columns=schema_columns,
+            query_language=normalized_query_language,
+            query_source=query_source,
+            sql_query=sql_query,
+            normalized_rows=normalized_rows,
+            extra_fields=sorted(extra_fields_union),
+        )
+        table_rows_by_name[current_table_name] = len(normalized_rows)
+        table_unverifiable_by_name[current_table_name] = table_unverifiable_count
 
     payload = _build_cache_payload(
         group_id=migration_group_id,
         obj=obj,
-        table_name=table_name,
-        table_schema=table_schema,
-        schema_columns=schema_columns,
+        primary_table_name=primary_table_name,
         sql_query=sql_query,
-        query_language=_normalize_name(query_language) or "SQL",
+        query_language=normalized_query_language,
         query_source=query_source,
-        normalized_rows=normalized_rows,
-        extra_fields=sorted(extra_fields_union),
+        table_sections=table_sections,
+        skipped_subtables_no_schema=sorted(skipped_subtables_no_schema),
     )
     _write_output(output_path, payload, dry_run=dry_run)
+
+    primary_rows = int(table_rows_by_name.get(primary_table_name) or 0)
+    total_rows = int(sum(table_rows_by_name.values()))
+    total_unverifiable_rows = int(sum(table_unverifiable_by_name.values()))
+    processed_tables = list(table_sections.keys())
+    processed_subtables = [table for table in processed_tables if table != primary_table_name]
 
     return {
         "status": "success",
@@ -928,10 +1273,15 @@ def _extract_single_object_cache(
         # Compatibilidade retroativa
         "groupId": migration_group_id,
         "object": migration_item_name,
-        "table": table_name,
-        "rows": len(normalized_rows),
-        "unverifiableRows": unverifiable_row_count,
-        "objectIdentityKeys": sorted(object_identity_keys),
+        "table": primary_table_name,
+        "rows": primary_rows,
+        "unverifiableRows": total_unverifiable_rows,
+        "totalRows": total_rows,
+        "tableRows": table_rows_by_name,
+        "tablesProcessed": processed_tables,
+        "subtablesProcessed": processed_subtables,
+        "skippedSubtablesNoSchema": sorted(skipped_subtables_no_schema),
+        "objectIdentityKeys": sorted(primary_object_identity_keys),
         "file": str(output_path.relative_to(BASE_DIR)),
     }
 

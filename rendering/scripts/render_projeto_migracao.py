@@ -37,6 +37,7 @@ def _normalize(data: dict) -> dict:
             obj.setdefault("technical_content", {})
             obj.setdefault("status", {})
             obj.setdefault("otm_table", "")
+            obj.setdefault("otm_subtables", [])
             obj.setdefault("migration_type", "")
             obj.setdefault("description", "")
             obj.setdefault("responsible", "")

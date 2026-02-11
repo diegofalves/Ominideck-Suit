@@ -135,6 +135,7 @@ def form_to_domain(form, existing_project=None):
                     "migration_item_name": "",
                     "name": "",  # Nome funcional obrigatório
                     "description": "",  # Descrição funcional opcional
+                    "otm_subtables": [],
                     "identifiers": {},
                     "data": {},
                     "status": {
@@ -297,6 +298,7 @@ def form_to_domain(form, existing_project=None):
                     "migration_item_name": "",
                     "name": "",
                     "description": "",
+                    "otm_subtables": [],
                     "identifiers": {},
                     "data": {},
                     "status": {
@@ -325,6 +327,7 @@ def form_to_domain(form, existing_project=None):
                 target_obj["object_type"] = object_type
                 # Contrato canônico: otm_table espelha exatamente object_type.
                 target_obj["otm_table"] = object_type
+                target_obj["otm_subtables"] = target_obj.get("otm_subtables", [])
             object_deployment_type = form.get("object_deployment_type")
             if object_deployment_type is not None:
                 normalized_deployment_type = str(object_deployment_type).strip()
