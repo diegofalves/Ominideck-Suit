@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-11T13:06:04Z",
+  "generatedAt": "2026-02-11T20:13:17Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.MASTER_DATA.COMMODITY.COMMODITIES.1",
@@ -23,7 +23,9 @@
     "deploymentType": "MIGRATION_PROJECT"
   },
   "extraction": {
-    "technicalContentType": "SQL",
+    "objectExtractionQueryLanguage": "SQL",
+    "objectExtractionQuerySource": "object_extraction_query",
+    "technicalContentType": "NONE",
     "rootName": "COMMODITY",
     "query": "SELECT\n  DOMAIN_NAME,\n  COMMODITY_GID,\n  COMMODITY_XID,\n  COMMODITY_NAME,\n  COMMODITY_DESCRIPTION,\n  REQ_EQPMT_GROUP_PROFILE_GID\nFROM\n  COMMODITY\nWHERE\n  DOMAIN_NAME = 'BAU'\n  AND COMMODITY_GID IN (\n    SELECT COMMODITY_GID FROM ITEM WHERE DOMAIN_NAME = 'BAU' AND COMMODITY_GID IS NOT NULL\n  )\nORDER BY COMMODITY_XID",
     "normalizedRowCount": 4,
@@ -60,7 +62,7 @@
       "REQ_EQPMT_GROUP_PROFILE_GID": "BAU.EQUIP_REFRIGERADO",
       "DOMAIN_NAME": "BAU",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:04Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": "",
       "COMMODITY_DESCRIPTION": "Chocobiscuit - Produtos de chocolate em geral (requer controle de temperatura)"
@@ -75,7 +77,7 @@
       "REQ_EQPMT_GROUP_PROFILE_GID": "",
       "DOMAIN_NAME": "BAU",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:04Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": "",
       "COMMODITY_DESCRIPTION": "Biscoitos, Cookies, etc (Quando consolidado com Choco, o veículo deve ser climatizado)"
@@ -90,7 +92,7 @@
       "REQ_EQPMT_GROUP_PROFILE_GID": "",
       "DOMAIN_NAME": "BAU",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:04Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": "",
       "COMMODITY_DESCRIPTION": "Pao de forma, Bisnaguinha, Pao de hot-dog (Quando consolidado com Choco, o veículo deve ser climatizado)"
@@ -105,7 +107,7 @@
       "REQ_EQPMT_GROUP_PROFILE_GID": "",
       "DOMAIN_NAME": "BAU",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:04Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": "",
       "COMMODITY_DESCRIPTION": "Produtos para Campanha Natal (Panetone, Chocotone) e Campanha Páscoa (Colomba Pascal) (Quando consolidado com Choco, o veículo deve ser climatizado)"

@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-11T13:06:26Z",
+  "generatedAt": "2026-02-11T20:13:37Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.PLANNING.AUDIT_TRAIL.AUDIT_TRAIL.1",
@@ -23,7 +23,9 @@
     "deploymentType": "MIGRATION_PROJECT"
   },
   "extraction": {
-    "technicalContentType": "SQL",
+    "objectExtractionQueryLanguage": "SQL",
+    "objectExtractionQuerySource": "object_extraction_query",
+    "technicalContentType": "NONE",
     "rootName": "AUDIT_TRAIL",
     "query": "SELECT\n  c.DOMAIN_NAME AS CONTACT_DOMAIN_NAME,\n  c.CONTACT_GID,\n  c.CONTACT_XID,\n  c.CONTACT_TYPE,\n  c.IS_PRIMARY_CONTACT,\n  ccm.COM_METHOD_GID,\n  ccm.COM_METHOD_RANK,\n  nsc.NOTIFY_SUBJECT_GID,\n  nsc.CONSOLIDATED_NOTIFY_ONLY,\n  nsc.PARAMETERS\nFROM\n  CONTACT c\n  LEFT JOIN CONTACT_COM_METHOD ccm ON ccm.CONTACT_GID = c.CONTACT_GID\n  LEFT JOIN NOTIFY_SUBJECT_CONTACT nsc ON nsc.CONTACT_GID = c.CONTACT_GID AND nsc.COM_METHOD_GID = ccm.COM_METHOD_GID\nWHERE\n  c.DOMAIN_NAME = 'BAU'\n  AND\n  c.CONTACT_GID = 'BAU.AUD'\nORDER BY\n  c.CONTACT_GID,\n  ccm.COM_METHOD_RANK,\n  nsc.NOTIFY_SUBJECT_GID",
     "normalizedRowCount": 45,
@@ -97,7 +99,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -125,7 +127,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -153,7 +155,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -181,7 +183,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -209,7 +211,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -237,7 +239,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -265,7 +267,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -293,7 +295,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -321,7 +323,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -349,7 +351,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -377,7 +379,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -405,7 +407,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -433,7 +435,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -461,7 +463,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -489,7 +491,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -517,7 +519,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -545,7 +547,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -573,7 +575,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -601,7 +603,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -629,7 +631,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -657,7 +659,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -685,7 +687,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -713,7 +715,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -741,7 +743,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -769,7 +771,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -797,7 +799,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -825,7 +827,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -853,7 +855,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -881,7 +883,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -909,7 +911,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -937,7 +939,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -965,7 +967,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -993,7 +995,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1021,7 +1023,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1049,7 +1051,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1077,7 +1079,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1105,7 +1107,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1133,7 +1135,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1161,7 +1163,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1189,7 +1191,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1217,7 +1219,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1245,7 +1247,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1273,7 +1275,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1301,7 +1303,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     },
@@ -1329,7 +1331,7 @@
       "MARKED_FOR_PURGE": "",
       "DOMAIN_NAME": "",
       "INSERT_USER": "",
-      "INSERT_DATE": "",
+      "INSERT_DATE": "2026-02-11T13:06:26Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": ""
     }

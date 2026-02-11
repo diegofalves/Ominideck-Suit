@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-11T13:06:11Z",
+  "generatedAt": "2026-02-11T20:13:23Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.MASTER_DATA.CONTACT.CONTACTS.6",
@@ -23,7 +23,9 @@
     "deploymentType": "CSV"
   },
   "extraction": {
-    "technicalContentType": "SQL",
+    "objectExtractionQueryLanguage": "SQL",
+    "objectExtractionQuerySource": "object_extraction_query",
+    "technicalContentType": "NONE",
     "rootName": "CONTACT",
     "query": "SELECT\n  C.DOMAIN_NAME,\n  C.CONTACT_XID,\n  C.FIRST_NAME,\n  C.LAST_NAME,\n  C.EMAIL_ADDRESS,\n  C.PHONE1,\n  C.LANGUAGE_SPOKEN,\n  C.IS_PRIMARY_CONTACT,\n  C.CONTACT_TYPE,\n  C.LOCATION_GID,\n  CCM.COM_METHOD_GID\nFROM\n  CONTACT C,\n  CONTACT_COM_METHOD CCM\nWHERE\n  C.CONTACT_GID = CCM.CONTACT_GID\nORDER BY\n  FIRST_NAME",
     "normalizedRowCount": 0,

@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-11T13:06:24Z",
+  "generatedAt": "2026-02-11T20:13:34Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.EXTENSION_QUALIFIERS.RATE_GEO_REFNUM_QUAL.RATE_GEO_REFNUM_QUALIFIER.8",
@@ -23,7 +23,9 @@
     "deploymentType": "MIGRATION_PROJECT"
   },
   "extraction": {
-    "technicalContentType": "SQL",
+    "objectExtractionQueryLanguage": "SQL",
+    "objectExtractionQuerySource": "object_extraction_query",
+    "technicalContentType": "NONE",
     "rootName": "RATE_GEO_REFNUM_QUAL",
     "query": "SELECT\n  DOMAIN_NAME,\n  RATE_GEO_REFNUM_QUAL_XID,\n  RATE_GEO_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  DEFAULT_REFNUM_BN_TYPE_GID,\n  UPDATE_FLAG\nFROM\n  RATE_GEO_REFNUM_QUAL\nWHERE RATE_GEO_REFNUM_QUAL_GID IN (SELECT RATE_GEO_REFNUM_QUAL_GID FROM RATE_GEO_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  RATE_GEO_REFNUM_QUAL_XID",
     "normalizedRowCount": 0,

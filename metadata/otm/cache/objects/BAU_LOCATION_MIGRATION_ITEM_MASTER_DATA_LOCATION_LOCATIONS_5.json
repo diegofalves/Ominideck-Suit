@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-11T13:06:09Z",
+  "generatedAt": "2026-02-11T20:13:21Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.MASTER_DATA.LOCATION.LOCATIONS.5",
@@ -23,7 +23,9 @@
     "deploymentType": "INTEGRATION"
   },
   "extraction": {
-    "technicalContentType": "SQL",
+    "objectExtractionQueryLanguage": "SQL",
+    "objectExtractionQuerySource": "object_extraction_query",
+    "technicalContentType": "NONE",
     "rootName": "LOCATION",
     "query": "SELECT\n  L.DOMAIN_NAME,\n  L.LOCATION_XID,\n  L.LOCATION_NAME,\n  L.CITY,\n  L.PROVINCE_CODE,\n  L.POSTAL_CODE,\n  L.COUNTRY_CODE3_GID,\n  L.ZONE4,\n  L.LAT,\n  L.LON,\n  L.DESCRIPTION,\n  LR.LOCATION_REFNUM_QUAL_GID,\n  LR.LOCATION_REFNUM_VALUE\nFROM\n  LOCATION L,\n  LOCATION_REFNUM LR\nWHERE\n  L.LOCATION_GID = LR.LOCATION_GID\nORDER BY\n  L.LOCATION_NAME",
     "normalizedRowCount": 0,

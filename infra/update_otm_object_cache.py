@@ -7,6 +7,7 @@ Core rules:
 - ROOT_NAME always matches migration item otm_table.
 - Output rows always contain every column from metadata/otm/tables/<TABLE>.json.
 - Missing values in OTM response are filled with empty string.
+- INSERT_DATE/UPDATE_DATE are managed as local cache lifecycle fields when present in schema.
 """
 
 from __future__ import annotations
@@ -18,7 +19,7 @@ import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Set, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 
 try:
     from infra.otm_query_executor import execute_otm_query
@@ -37,6 +38,8 @@ MIGRATION_GROUP_ID_KEY = "migration_group_id"
 MIGRATION_ITEM_ID_KEY = "migration_item_id"
 MIGRATION_ITEM_NAME_KEY = "migration_item_name"
 INVALID_DOMAIN_TOKENS = {"", "NO_DOMAIN", "NONE", "NULL"}
+LOCAL_INSERT_DATE_COLUMN = "INSERT_DATE"
+LOCAL_UPDATE_DATE_COLUMN = "UPDATE_DATE"
 
 
 def _timestamp_utc_z() -> str:
@@ -361,6 +364,118 @@ def _normalize_row_by_schema(
 
     extra_fields = {k for k in row_source.keys() if k not in set(schema_columns)}
     return normalized_row, extra_fields
+
+
+def _row_signature_without_local_dates(row: Dict[str, str]) -> str:
+    comparable_row = {
+        key: str(value or "")
+        for key, value in row.items()
+        if key not in {LOCAL_INSERT_DATE_COLUMN, LOCAL_UPDATE_DATE_COLUMN}
+    }
+    return json.dumps(comparable_row, ensure_ascii=False, sort_keys=True)
+
+
+def _normalize_existing_row_by_schema(
+    row: Dict[str, Any],
+    schema_columns: List[str],
+) -> Dict[str, str]:
+    normalized: Dict[str, str] = {}
+    for column in schema_columns:
+        normalized[column] = _stringify_value(row.get(column))
+    return normalized
+
+
+def _load_existing_cache_context(output_path: Path) -> Tuple[List[Dict[str, Any]], str]:
+    if not output_path.exists():
+        return [], ""
+
+    try:
+        payload = json.loads(output_path.read_text(encoding="utf-8"))
+    except Exception:
+        return [], ""
+
+    if not isinstance(payload, dict):
+        return [], ""
+
+    rows_raw = payload.get("rows", [])
+    rows = rows_raw if isinstance(rows_raw, list) else []
+    generated_at = str(payload.get("generatedAt") or "").strip()
+    return rows, generated_at
+
+
+def _apply_local_row_lifecycle_dates(
+    normalized_rows: List[Dict[str, str]],
+    *,
+    schema_columns: List[str],
+    output_path: Path,
+    table_name: str,
+    domain_name: str,
+    pk_columns: List[str],
+) -> None:
+    has_insert_date = LOCAL_INSERT_DATE_COLUMN in set(schema_columns)
+    has_update_date = LOCAL_UPDATE_DATE_COLUMN in set(schema_columns)
+    if not has_insert_date and not has_update_date:
+        return
+
+    existing_rows_raw, existing_generated_at = _load_existing_cache_context(output_path)
+
+    existing_by_identity: Dict[str, List[Dict[str, str]]] = {}
+    existing_by_signature: Dict[str, List[Dict[str, str]]] = {}
+    for existing_row_raw in existing_rows_raw:
+        if not isinstance(existing_row_raw, dict):
+            continue
+
+        existing_row = _normalize_existing_row_by_schema(existing_row_raw, schema_columns)
+        identity_key = _build_object_identity_key(
+            normalized_row=existing_row,
+            table_name=table_name,
+            domain_name=domain_name,
+            pk_columns=pk_columns,
+        )
+        if identity_key:
+            existing_by_identity.setdefault(identity_key, []).append(existing_row)
+
+        signature = _row_signature_without_local_dates(existing_row)
+        existing_by_signature.setdefault(signature, []).append(existing_row)
+
+    now_ts = _timestamp_utc_z()
+    fallback_insert_ts = existing_generated_at or now_ts
+
+    for row in normalized_rows:
+        identity_key = _build_object_identity_key(
+            normalized_row=row,
+            table_name=table_name,
+            domain_name=domain_name,
+            pk_columns=pk_columns,
+        )
+
+        previous_row: Optional[Dict[str, str]] = None
+        if identity_key:
+            matches = existing_by_identity.get(identity_key)
+            if matches:
+                previous_row = matches.pop(0)
+
+        if previous_row is None:
+            signature = _row_signature_without_local_dates(row)
+            matches = existing_by_signature.get(signature)
+            if matches:
+                previous_row = matches.pop(0)
+
+        if has_insert_date:
+            if previous_row is not None:
+                previous_insert = str(previous_row.get(LOCAL_INSERT_DATE_COLUMN) or "").strip()
+                row[LOCAL_INSERT_DATE_COLUMN] = previous_insert or fallback_insert_ts
+            else:
+                row[LOCAL_INSERT_DATE_COLUMN] = now_ts
+
+        if has_update_date:
+            if previous_row is not None:
+                previous_update = str(previous_row.get(LOCAL_UPDATE_DATE_COLUMN) or "").strip()
+                previous_signature = _row_signature_without_local_dates(previous_row)
+                current_signature = _row_signature_without_local_dates(row)
+                row[LOCAL_UPDATE_DATE_COLUMN] = now_ts if current_signature != previous_signature else previous_update
+            else:
+                row[LOCAL_UPDATE_DATE_COLUMN] = ""
 
 
 def _query_rows(sql_query: str, root_name: str) -> List[Dict[str, Any]]:
@@ -781,6 +896,16 @@ def _extract_single_object_cache(
         else:
             unverifiable_row_count += 1
 
+    output_path = _build_output_path(obj, table_name)
+    _apply_local_row_lifecycle_dates(
+        normalized_rows,
+        schema_columns=schema_columns,
+        output_path=output_path,
+        table_name=table_name,
+        domain_name=domain_name,
+        pk_columns=pk_columns,
+    )
+
     payload = _build_cache_payload(
         group_id=migration_group_id,
         obj=obj,
@@ -793,7 +918,6 @@ def _extract_single_object_cache(
         normalized_rows=normalized_rows,
         extra_fields=sorted(extra_fields_union),
     )
-    output_path = _build_output_path(obj, table_name)
     _write_output(output_path, payload, dry_run=dry_run)
 
     return {
