@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-11T20:13:24Z",
+  "generatedAt": "2026-02-11T20:33:32Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.MASTER_DATA.ITEM.ITEMS.8",
@@ -27,7 +27,7 @@
     "objectExtractionQuerySource": "object_extraction_query",
     "technicalContentType": "NONE",
     "rootName": "ITEM",
-    "query": "SELECT\n  ssp.DOMAIN_NAME,\n  ssp.STYLESHEET_PROFILE_GID,\n  ssp.STYLESHEET_PROFILE_XID,\n  ssp.RAW_XML,\n  ssp.FORMAT,\n  ssp.SUBJECT_PROPKEY,\n  ssp.OUT_XML_PROFILE_GID,\n  ssp.DOCUMENT_ATTACH_TYPE,\n  ssp.DIRECTION,\n  ssp.TYPE,\n  ssp.IS_FOR_NOTIFICATION_XML,\n  ssp.IS_FOR_TRANSMISSION_XML,\n  ssp.IS_FOR_MESSAGE_XML,\n  ssp.CONTENT_GID,\n  ssp.OTM_RELEASE\nFROM\n  STYLESHEET_PROFILE ssp\nWHERE\n  ssp.CONTENT_GID IN (\n    SELECT\n      sc.STYLESHEET_CONTENT_GID\n    FROM\n      STYLESHEET_CONTENT sc\n    WHERE\n      sc.DOMAIN_NAME = 'BAU'\n  )",
+    "query": "SELECT *\nFROM\n  STYLESHEET_PROFILE ssp\nWHERE\n  ssp.CONTENT_GID IN (\n    SELECT\n      sc.STYLESHEET_CONTENT_GID\n    FROM\n      STYLESHEET_CONTENT sc\n    WHERE\n      sc.DOMAIN_NAME = 'BAU'\n  )",
     "normalizedRowCount": 8,
     "nonSchemaFieldsDetected": [
       "CONTENT_GID",
@@ -43,6 +43,7 @@
       "STYLESHEET_PROFILE_GID",
       "STYLESHEET_PROFILE_XID",
       "SUBJECT_PROPKEY",
+      "TEMPLATE_NAME",
       "TYPE"
     ]
   },

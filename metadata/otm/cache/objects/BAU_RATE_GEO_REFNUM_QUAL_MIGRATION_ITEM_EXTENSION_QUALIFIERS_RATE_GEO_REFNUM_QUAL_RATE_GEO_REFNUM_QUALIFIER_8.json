@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-11T20:13:34Z",
+  "generatedAt": "2026-02-11T20:33:43Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.EXTENSION_QUALIFIERS.RATE_GEO_REFNUM_QUAL.RATE_GEO_REFNUM_QUALIFIER.8",
@@ -27,8 +27,8 @@
     "objectExtractionQuerySource": "object_extraction_query",
     "technicalContentType": "NONE",
     "rootName": "RATE_GEO_REFNUM_QUAL",
-    "query": "SELECT\n  DOMAIN_NAME,\n  RATE_GEO_REFNUM_QUAL_XID,\n  RATE_GEO_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  DEFAULT_REFNUM_BN_TYPE_GID,\n  UPDATE_FLAG\nFROM\n  RATE_GEO_REFNUM_QUAL\nWHERE RATE_GEO_REFNUM_QUAL_GID IN (SELECT RATE_GEO_REFNUM_QUAL_GID FROM RATE_GEO_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  RATE_GEO_REFNUM_QUAL_XID",
-    "normalizedRowCount": 0,
+    "query": "SELECT *\nFROM\n  RATE_GEO_REFNUM_QUAL\nWHERE RATE_GEO_REFNUM_QUAL_GID IN (SELECT RATE_GEO_REFNUM_QUAL_GID FROM RATE_GEO_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  RATE_GEO_REFNUM_QUAL_XID",
+    "normalizedRowCount": 1,
     "nonSchemaFieldsDetected": []
   },
   "schema": {
@@ -48,5 +48,18 @@
       "UPDATE_DATE"
     ]
   },
-  "rows": []
+  "rows": [
+    {
+      "RATE_GEO_REFNUM_QUAL_GID": "BAU.RFN_RR_TIPO_EMBARQUE",
+      "RATE_GEO_REFNUM_QUAL_XID": "RFN_RR_TIPO_EMBARQUE",
+      "RATE_GEO_REFNUM_QUAL_DESC": "ID DO TIPO DE EMBARQUE",
+      "DEFAULT_REFNUM_BN_TYPE_GID": "",
+      "UPDATE_FLAG": "UPDATE_OK",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "2026-02-11T20:33:43Z",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": ""
+    }
+  ]
 }
