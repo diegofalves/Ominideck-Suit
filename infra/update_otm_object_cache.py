@@ -12,6 +12,7 @@ Core rules:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -29,11 +30,13 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 PROJECT_PATH = BASE_DIR / "domain" / "projeto_migracao" / "projeto_migracao.json"
 TABLES_DIR = BASE_DIR / "metadata" / "otm" / "tables"
 CACHE_DIR = BASE_DIR / "metadata" / "otm" / "cache" / "objects"
+CACHE_INDEX_PATH = BASE_DIR / "metadata" / "otm" / "cache" / "objects_index.json"
 SCRIPT_NAME = "update_otm_object_cache.py"
 QUERY_TIMEOUT_SECONDS = 300
 MIGRATION_GROUP_ID_KEY = "migration_group_id"
 MIGRATION_ITEM_ID_KEY = "migration_item_id"
 MIGRATION_ITEM_NAME_KEY = "migration_item_name"
+INVALID_DOMAIN_TOKENS = {"", "NO_DOMAIN", "NONE", "NULL"}
 
 
 def _timestamp_utc_z() -> str:
@@ -56,6 +59,13 @@ def _build_migration_item_id(group_id: str, item: Dict[str, Any]) -> str:
     name_token = _slugify(item.get("name") or item.get(MIGRATION_ITEM_NAME_KEY) or "NO_NAME")
     sequence = str(item.get("sequence") or "0").strip() or "0"
     return f"MIGRATION_ITEM.{group_token}.{table_token}.{name_token}.{sequence}"
+
+
+def _resolve_domain_name(item: Dict[str, Any]) -> str:
+    domain_name = _normalize_name(item.get("domainName") or item.get("domain"))
+    if domain_name in INVALID_DOMAIN_TOKENS:
+        return ""
+    return domain_name
 
 
 def _find_by_local_name(node: Dict[str, Any], local_name: str) -> Any:
@@ -249,6 +259,55 @@ def _load_table_columns(table_name: str) -> Tuple[List[str], Dict[str, Any]]:
     return columns, schema
 
 
+def _extract_primary_key_columns(table_schema: Dict[str, Any]) -> List[str]:
+    pk_columns_raw = table_schema.get("primaryKey", [])
+    if not isinstance(pk_columns_raw, list):
+        return []
+
+    pk_columns: List[str] = []
+    for pk in pk_columns_raw:
+        if not isinstance(pk, dict):
+            continue
+        col_name = _normalize_name(pk.get("columnName"))
+        if col_name:
+            pk_columns.append(col_name)
+    return pk_columns
+
+
+def _build_object_identity_key(
+    normalized_row: Dict[str, str],
+    table_name: str,
+    domain_name: str,
+    pk_columns: List[str],
+) -> str:
+    # Preferência: chave primária declarada no metadata da tabela.
+    if pk_columns:
+        pk_parts: List[str] = []
+        for col in pk_columns:
+            value = str(normalized_row.get(col) or "").strip()
+            if not value:
+                pk_parts = []
+                break
+            pk_parts.append(f"{col}={value}")
+        if pk_parts:
+            return f"{domain_name}|{table_name}|PK|{'|'.join(pk_parts)}"
+
+    # Fallback 1: <TABLE>_GID.
+    gid_col = f"{table_name}_GID"
+    gid_value = str(normalized_row.get(gid_col) or "").strip()
+    if gid_value:
+        return f"{domain_name}|{table_name}|GID|{gid_value}"
+
+    # Fallback 2: <TABLE>_XID + DOMAIN_NAME.
+    xid_col = f"{table_name}_XID"
+    xid_value = str(normalized_row.get(xid_col) or "").strip()
+    row_domain = str(normalized_row.get("DOMAIN_NAME") or "").strip() or domain_name
+    if xid_value and row_domain:
+        return f"{row_domain}|{table_name}|XID|{xid_value}"
+
+    return ""
+
+
 def _stringify_value(value: Any) -> str:
     if value is None:
         return ""
@@ -310,7 +369,7 @@ def _build_output_path(obj: Dict[str, Any], table_name: str) -> Path:
         or obj.get("object_type")
         or "MIGRATION_ITEM"
     )
-    filename = "__".join(
+    filename = "_".join(
         [
             _slugify(domain_name),
             _slugify(table_name),
@@ -398,6 +457,210 @@ def _write_output(path: Path, payload: Dict[str, Any], dry_run: bool) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _iter_cache_files() -> List[Path]:
+    if not CACHE_DIR.exists():
+        return []
+    return sorted(path for path in CACHE_DIR.glob("*.json") if path.is_file())
+
+
+def _build_row_hash(normalized_row: Dict[str, str]) -> str:
+    serialized = json.dumps(normalized_row, ensure_ascii=False, sort_keys=True)
+    return hashlib.sha1(serialized.encode("utf-8")).hexdigest()
+
+
+def _build_cache_index_payload() -> Dict[str, Any]:
+    cache_files = _iter_cache_files()
+    pk_columns_by_table: Dict[str, List[str]] = {}
+    files_summary: List[Dict[str, Any]] = []
+    malformed_files: List[Dict[str, str]] = []
+    object_locator_by_key: Dict[str, List[Dict[str, Any]]] = {}
+    unverifiable_rows: List[Dict[str, Any]] = []
+
+    total_rows = 0
+    indexed_rows = 0
+    total_unverifiable_rows = 0
+
+    for cache_file in cache_files:
+        relative_file = str(cache_file.relative_to(BASE_DIR))
+        try:
+            payload = json.loads(cache_file.read_text(encoding="utf-8"))
+        except Exception as exc:
+            malformed_files.append(
+                {
+                    "file": relative_file,
+                    "errorMessage": str(exc),
+                }
+            )
+            continue
+
+        migration_item = payload.get("migrationItem", {})
+        legacy_object = payload.get("object", {})
+        if not isinstance(migration_item, dict):
+            migration_item = {}
+        if not isinstance(legacy_object, dict):
+            legacy_object = {}
+        schema_meta = payload.get("schema", {})
+        if not isinstance(schema_meta, dict):
+            schema_meta = {}
+
+        migration_group_id = _normalize_name(
+            migration_item.get("migrationGroupId") or legacy_object.get("groupId") or ""
+        )
+        migration_item_name = str(
+            migration_item.get("migrationItemName") or legacy_object.get("name") or ""
+        ).strip()
+        migration_item_id = str(migration_item.get("migrationItemId") or "").strip()
+        table_name = _normalize_name(
+            migration_item.get("otmTable")
+            or legacy_object.get("otmTable")
+            or schema_meta.get("tableName")
+            or ""
+        )
+        domain_name = _normalize_name(
+            migration_item.get("domainName") or legacy_object.get("domainName") or ""
+        )
+
+        if not migration_item_id:
+            migration_item_id = f"MIGRATION_ITEM.FILE.{_slugify(cache_file.stem)}"
+
+        if table_name not in pk_columns_by_table:
+            try:
+                _, table_schema = _load_table_columns(table_name)
+                pk_columns_by_table[table_name] = _extract_primary_key_columns(table_schema)
+            except Exception:
+                pk_columns_by_table[table_name] = []
+        pk_columns = pk_columns_by_table[table_name]
+
+        rows_raw = payload.get("rows", [])
+        rows = rows_raw if isinstance(rows_raw, list) else []
+
+        file_row_count = 0
+        file_indexed_count = 0
+        file_unverifiable_count = 0
+        for row_number, row in enumerate(rows, start=1):
+            if not isinstance(row, dict):
+                continue
+            file_row_count += 1
+
+            normalized_row: Dict[str, str] = {}
+            for key, value in row.items():
+                normalized_key = _normalize_name(key)
+                if not normalized_key:
+                    continue
+                normalized_row[normalized_key] = _stringify_value(value)
+
+            identity_key = _build_object_identity_key(
+                normalized_row=normalized_row,
+                table_name=table_name,
+                domain_name=domain_name,
+                pk_columns=pk_columns,
+            )
+
+            row_locator = {
+                "file": relative_file,
+                "rowNumber": row_number,
+                "migrationItemId": migration_item_id,
+                "migrationItemName": migration_item_name,
+                "migrationGroupId": migration_group_id,
+                "table": table_name,
+                "domainName": domain_name,
+            }
+
+            if identity_key:
+                object_locator_by_key.setdefault(identity_key, []).append(row_locator)
+                file_indexed_count += 1
+            else:
+                file_unverifiable_count += 1
+                unverifiable_rows.append(
+                    {
+                        **row_locator,
+                        "rowHash": _build_row_hash(normalized_row),
+                    }
+                )
+
+        total_rows += file_row_count
+        indexed_rows += file_indexed_count
+        total_unverifiable_rows += file_unverifiable_count
+        files_summary.append(
+            {
+                "file": relative_file,
+                "migrationItemId": migration_item_id,
+                "migrationItemName": migration_item_name,
+                "migrationGroupId": migration_group_id,
+                "table": table_name,
+                "domainName": domain_name,
+                "rowCount": file_row_count,
+                "indexedObjectRows": file_indexed_count,
+                "unverifiableRows": file_unverifiable_count,
+            }
+        )
+
+    sorted_object_locator = {
+        key: sorted(
+            locations,
+            key=lambda loc: (str(loc.get("file") or ""), int(loc.get("rowNumber") or 0)),
+        )
+        for key, locations in sorted(object_locator_by_key.items())
+    }
+
+    duplicate_object_keys: List[Dict[str, Any]] = []
+    for object_key, locations in sorted_object_locator.items():
+        migration_item_ids = sorted(
+            {
+                str(loc.get("migrationItemId") or "").strip()
+                for loc in locations
+                if str(loc.get("migrationItemId") or "").strip()
+            }
+        )
+        if len(migration_item_ids) <= 1:
+            continue
+        duplicate_object_keys.append(
+            {
+                "objectKey": object_key,
+                "migrationItemIds": migration_item_ids,
+                "occurrences": locations,
+            }
+        )
+
+    return {
+        "cacheType": "OTM_OBJECT_CACHE_INDEX",
+        "version": "1.0",
+        "generatedAt": _timestamp_utc_z(),
+        "source": SCRIPT_NAME,
+        "objectLocatorByKey": sorted_object_locator,
+        "unverifiableRows": sorted(
+            unverifiable_rows,
+            key=lambda row: (str(row.get("file") or ""), int(row.get("rowNumber") or 0)),
+        ),
+        "files": sorted(files_summary, key=lambda item: str(item.get("file") or "")),
+        "duplicatesAcrossMigrationItems": duplicate_object_keys,
+        "malformedCacheFiles": sorted(
+            malformed_files, key=lambda item: str(item.get("file") or "")
+        ),
+        "stats": {
+            "cacheFileCount": len(cache_files),
+            "validCacheFileCount": len(files_summary),
+            "malformedCacheFileCount": len(malformed_files),
+            "totalRows": total_rows,
+            "indexedObjectRows": indexed_rows,
+            "unverifiableRows": total_unverifiable_rows,
+            "uniqueObjectKeys": len(sorted_object_locator),
+            "duplicateObjectKeysAcrossMigrationItems": len(duplicate_object_keys),
+        },
+    }
+
+
+def _write_cache_index(dry_run: bool) -> Dict[str, Any]:
+    index_payload = _build_cache_index_payload()
+    if not dry_run:
+        CACHE_INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
+        CACHE_INDEX_PATH.write_text(
+            json.dumps(index_payload, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+    return index_payload
+
+
 def _extract_single_object_cache(
     group_id: str,
     obj: Dict[str, Any],
@@ -417,6 +680,23 @@ def _extract_single_object_cache(
                 "name": migration_item_name,
             },
         )
+
+    domain_name = _resolve_domain_name(obj)
+    if not domain_name:
+        if strict_extractability:
+            raise ValueError(
+                f"MIGRATION_ITEM '{migration_item_name}' sem dominio valido (domainName/domain)."
+            )
+        return {
+            "status": "skipped",
+            "migrationGroupId": migration_group_id,
+            "migrationItemId": migration_item_id,
+            "migrationItem": migration_item_name,
+            # Compatibilidade retroativa
+            "groupId": migration_group_id,
+            "object": migration_item_name,
+            "reason": "item sem dominio valido",
+        }
 
     technical_content = obj.get("technical_content", {})
     if not isinstance(technical_content, dict):
@@ -466,15 +746,28 @@ def _extract_single_object_cache(
 
     table_name = _normalize_name(obj.get("otm_table"))
     schema_columns, table_schema = _load_table_columns(table_name)
+    pk_columns = _extract_primary_key_columns(table_schema)
 
     raw_rows = _query_rows(sql_query, root_name=table_name)
 
     normalized_rows: List[Dict[str, str]] = []
     extra_fields_union: Set[str] = set()
+    object_identity_keys: Set[str] = set()
+    unverifiable_row_count = 0
     for row in raw_rows:
         normalized_row, row_extra_fields = _normalize_row_by_schema(row, schema_columns)
         normalized_rows.append(normalized_row)
         extra_fields_union.update(row_extra_fields)
+        identity_key = _build_object_identity_key(
+            normalized_row=normalized_row,
+            table_name=table_name,
+            domain_name=domain_name,
+            pk_columns=pk_columns,
+        )
+        if identity_key:
+            object_identity_keys.add(identity_key)
+        else:
+            unverifiable_row_count += 1
 
     payload = _build_cache_payload(
         group_id=migration_group_id,
@@ -499,6 +792,8 @@ def _extract_single_object_cache(
         "object": migration_item_name,
         "table": table_name,
         "rows": len(normalized_rows),
+        "unverifiableRows": unverifiable_row_count,
+        "objectIdentityKeys": sorted(object_identity_keys),
         "file": str(output_path.relative_to(BASE_DIR)),
     }
 
@@ -630,6 +925,8 @@ def main(argv: List[str]) -> int:
 
         processed: List[Dict[str, Any]] = []
         errors: List[Dict[str, Any]] = []
+        object_key_registry: Dict[str, str] = {}
+        duplicate_conflicts = 0
 
         for group_id, obj in targets:
             try:
@@ -639,6 +936,34 @@ def main(argv: List[str]) -> int:
                     dry_run=bool(args.dry_run),
                     strict_extractability=strict_extractability,
                 )
+                if result.get("status") == "success":
+                    current_item_id = str(result.get("migrationItemId") or "")
+                    current_file_rel = str(result.get("file") or "")
+                    identity_keys = result.pop("objectIdentityKeys", [])
+                    if not isinstance(identity_keys, list):
+                        identity_keys = []
+
+                    duplicate_messages: List[str] = []
+                    for key in identity_keys:
+                        if not isinstance(key, str) or not key:
+                            continue
+                        owner_item_id = object_key_registry.get(key)
+                        if owner_item_id and owner_item_id != current_item_id:
+                            duplicate_messages.append(
+                                f"Objeto duplicado entre itens: key='{key}' "
+                                f"(owner='{owner_item_id}', current='{current_item_id}')."
+                            )
+                            continue
+                        object_key_registry[key] = current_item_id
+
+                    if duplicate_messages:
+                        duplicate_conflicts += 1
+                        if current_file_rel:
+                            output_path = BASE_DIR / current_file_rel
+                            if output_path.exists():
+                                output_path.unlink()
+                        raise ValueError(" ".join(duplicate_messages))
+
                 processed.append(result)
             except Exception as exc:
                 current_error = {
@@ -659,6 +984,26 @@ def main(argv: List[str]) -> int:
 
         success_count = sum(1 for item in processed if item.get("status") == "success")
         skipped_count = sum(1 for item in processed if item.get("status") == "skipped")
+        cache_index_summary: Dict[str, Any] = {
+            "updated": False,
+            "file": str(CACHE_INDEX_PATH.relative_to(BASE_DIR)),
+        }
+        if not args.dry_run:
+            index_payload = _write_cache_index(dry_run=False)
+            stats = index_payload.get("stats", {})
+            if not isinstance(stats, dict):
+                stats = {}
+            cache_index_summary = {
+                "updated": True,
+                "file": str(CACHE_INDEX_PATH.relative_to(BASE_DIR)),
+                "cacheFileCount": int(stats.get("cacheFileCount") or 0),
+                "validCacheFileCount": int(stats.get("validCacheFileCount") or 0),
+                "indexedObjectRows": int(stats.get("indexedObjectRows") or 0),
+                "unverifiableRows": int(stats.get("unverifiableRows") or 0),
+                "duplicateObjectKeysAcrossMigrationItems": int(
+                    stats.get("duplicateObjectKeysAcrossMigrationItems") or 0
+                ),
+            }
 
         summary = {
             "status": "success" if not errors else "partial_success",
@@ -668,11 +1013,13 @@ def main(argv: List[str]) -> int:
             "successMigrationItems": success_count,
             "skippedMigrationItems": skipped_count,
             "errorMigrationItems": len(errors),
+            "duplicateObjectConflicts": duplicate_conflicts,
             # Compatibilidade retroativa
             "selectedObjects": len(targets),
             "successCount": success_count,
             "skippedCount": skipped_count,
             "errorCount": len(errors),
+            "cacheIndex": cache_index_summary,
             "results": processed,
             "errors": errors,
         }

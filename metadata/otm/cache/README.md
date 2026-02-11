@@ -6,12 +6,16 @@ Rules:
 - One JSON file per `MIGRATION_ITEM`.
 - Extraction query comes from `technical_content.content`.
 - `ROOT_NAME` is always the `MIGRATION_ITEM` `otm_table`.
+- Queries run only for `MIGRATION_ITEM`s with valid domain (`domainName`/`domain`).
+- The same OTM table can exist in multiple `MIGRATION_ITEM`s and in multiple domains.
+- The same OTM object must not exist in caches of different `MIGRATION_ITEM`s (validation by PK/GID/XID when available).
 - Rows are normalized by the canonical schema in `metadata/otm/tables/<TABLE>.json`.
 - Every schema column is always present in each row.
 - Missing values are persisted as empty string (`""`).
 
 Current output path:
 - `metadata/otm/cache/objects/*.json`
+- `metadata/otm/cache/objects_index.json` (index global para localizar objetos por chave)
 
 Examples:
 ```bash
