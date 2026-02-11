@@ -4,7 +4,8 @@ This directory stores local cache files generated from OTM extraction queries.
 
 Rules:
 - One JSON file per `MIGRATION_ITEM`.
-- Extraction query comes from `technical_content.content`.
+- Extraction query comes from `object_extraction_query.content`.
+- `technical_content` remains available in the project model for non-extraction technical notes.
 - `ROOT_NAME` is always the `MIGRATION_ITEM` `otm_table`.
 - Queries run only for `MIGRATION_ITEM`s with valid domain (`domainName`/`domain`).
 - The same OTM table can exist in multiple `MIGRATION_ITEM`s and in multiple domains.

@@ -61,7 +61,7 @@ def _load_json() -> dict:
 
 
 def validate_json() -> Tuple[ValidationResult, Dict[str, dict]]:
-    """Valida JSON: cada objeto com technical_content.type == SQL deve ter conteúdo não vazio."""
+    """Valida JSON: cada objeto com query de extração SQL deve ter conteúdo não vazio."""
     result = ValidationResult("JSON")
     data = _load_json()
     
@@ -70,26 +70,42 @@ def validate_json() -> Tuple[ValidationResult, Dict[str, dict]]:
     for group in data.get("groups", []):
         for obj in group.get("objects", []):
             obj_name = obj.get("name", "Unknown")
-            tech_content = obj.get("technical_content", {})
-            
-            if tech_content.get("type") == "SQL":
-                sql = tech_content.get("content", "").strip()
-                
-                if sql and len(sql) >= 15:  # Mínimo realista: "SELECT * FROM X" = 16 chars
-                    objects_with_sql[obj_name] = {
-                        "sql": sql,
-                        "object_type": obj.get("object_type"),
-                        "group": group.get("label")
-                    }
-                    result.add_pass()
-                else:
-                    result.add_fail(obj_name, "SQL vazio ou muito curto (min 15 chars)")
+            extraction = obj.get("object_extraction_query", {})
+            if not isinstance(extraction, dict):
+                extraction = {}
+
+            language = str(extraction.get("language") or "").strip().upper()
+            sql = str(extraction.get("content") or "").strip()
+
+            if not sql and isinstance(obj.get("saved_query"), dict):
+                language = "SQL"
+                sql = str(obj.get("saved_query", {}).get("sql") or "").strip()
+
+            if language == "NONE":
+                language = "SQL"
+
+            if not sql:
+                continue
+
+            if language != "SQL":
+                result.add_fail(obj_name, f"Linguagem não suportada para validação: {language}")
+                continue
+
+            if len(sql) >= 15:  # Mínimo realista: "SELECT * FROM X" = 16 chars
+                objects_with_sql[obj_name] = {
+                    "sql": sql,
+                    "object_type": obj.get("object_type"),
+                    "group": group.get("label")
+                }
+                result.add_pass()
+            else:
+                result.add_fail(obj_name, "SQL vazio ou muito curto (min 15 chars)")
     
     return result, objects_with_sql
 
 
 def validate_md(objects_with_sql: Dict[str, dict]) -> ValidationResult:
-    """Valida MD: cada objeto deve ter 'Query de Extração' com bloco sql."""
+    """Valida MD: cada objeto deve ter 'Query de Extração de Objetos' com bloco sql."""
     result = ValidationResult("MD")
     
     md_content = MD_FILE.read_text(encoding="utf-8")
@@ -99,13 +115,13 @@ def validate_md(objects_with_sql: Dict[str, dict]) -> ValidationResult:
         
         # Procurar seção "Query de Extração" próxima ao nome do objeto
         pattern = re.compile(
-            rf"### {re.escape(obj_name)}.*?### Query de Extração\s*```sql\s*(.*?)```",
+            rf"### {re.escape(obj_name)}.*?### Query de Extração de Objetos\s*```sql\s*(.*?)```",
             re.DOTALL
         )
         match = pattern.search(md_content)
         
         if not match:
-            result.add_fail(obj_name, "Query de Extração ausente no MD")
+            result.add_fail(obj_name, "Query de Extração de Objetos ausente no MD")
             continue
         
         md_sql = _normalize_sql(match.group(1))

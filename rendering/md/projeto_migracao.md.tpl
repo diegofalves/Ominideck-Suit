@@ -149,17 +149,17 @@ Esta seção apresenta os conjuntos de objetos do Oracle Transportation Manageme
 **Validação:** {{ object.status.validation }}
 </div>
 
-{% if object.technical_content and object.technical_content.content %}
-**Conteúdo Técnico:**
-```{{ object.technical_content.type | lower }}
-{{ object.technical_content.content }}
+{% if object.object_extraction_query and object.object_extraction_query.content %}
+### Query de Extração de Objetos
+```{{ object.object_extraction_query.language | lower }}
+{{ object.object_extraction_query.content }}
 ```
 {% endif %}
 
-{% if object.saved_query %}
-### Query de Extração
-```sql
-{{ object.saved_query.sql }}
+{% if object.technical_content and object.technical_content.content %}
+### Conteúdo Técnico
+```{{ object.technical_content.type | lower }}
+{{ object.technical_content.content }}
 ```
 {% endif %}
 

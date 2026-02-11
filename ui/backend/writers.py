@@ -245,6 +245,7 @@ def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: O
             "validation": "PENDING",
             "deployment": "PENDING",
         },
+        "object_extraction_query": {"language": "SQL", "content": ""},
         "technical_content": {"type": "NONE", "content": ""},
         "identifiers": identifiers,
         "data": {},
@@ -260,6 +261,70 @@ def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: O
         payload["name"] = f"{table_name} ({normalized_domain} - AUTO)"
 
     return payload
+
+
+def _resolve_object_extraction_query(obj: Dict[str, Any]) -> Dict[str, str]:
+    if not isinstance(obj, dict):
+        return {"language": "SQL", "content": ""}
+
+    extraction_query = obj.get("object_extraction_query")
+    if isinstance(extraction_query, dict):
+        language = str(
+            extraction_query.get("language") or extraction_query.get("type") or "SQL"
+        ).strip().upper() or "SQL"
+        content = str(extraction_query.get("content") or "").strip()
+        if content:
+            return {"language": language, "content": content}
+
+    saved_query = obj.get("saved_query")
+    if isinstance(saved_query, dict):
+        sql = str(saved_query.get("sql") or "").strip()
+        if sql:
+            return {"language": "SQL", "content": sql}
+
+    return {"language": "SQL", "content": ""}
+
+
+def _normalize_object_extraction_queries(data: Dict[str, Any]) -> None:
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for obj in objects:
+            if not isinstance(obj, dict):
+                continue
+            obj["object_extraction_query"] = _resolve_object_extraction_query(obj)
+
+
+def _normalize_technical_content(data: Dict[str, Any]) -> None:
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for obj in objects:
+            if not isinstance(obj, dict):
+                continue
+            technical = obj.get("technical_content")
+            if not isinstance(technical, dict):
+                technical = {}
+            obj["technical_content"] = {
+                "type": str(technical.get("type") or "NONE").strip().upper() or "NONE",
+                "content": str(technical.get("content") or "").strip(),
+            }
 
 
 def _normalize_object_domain_aliases(data: Dict[str, Any]) -> None:
@@ -670,6 +735,8 @@ def load_project():
                         obj["saved_query"] = {"sql": ""}
 
     _normalize_group_zero(data)
+    _normalize_object_extraction_queries(data)
+    _normalize_technical_content(data)
     # Primeiro normaliza aliases de dominio para evitar duplicacao por cobertura.
     _normalize_object_domain_aliases(data)
     _ensure_domain_statistics_coverage(data)
@@ -689,6 +756,8 @@ def load_project():
 
 def save_project(domain):
     _normalize_group_zero(domain)
+    _normalize_object_extraction_queries(domain)
+    _normalize_technical_content(domain)
     _normalize_object_domain_aliases(domain)
     _ensure_domain_statistics_coverage(domain)
     _normalize_object_domain_aliases(domain)

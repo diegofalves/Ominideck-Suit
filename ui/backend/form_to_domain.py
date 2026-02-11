@@ -144,7 +144,9 @@ def form_to_domain(form, existing_project=None):
                         "deploy": "PENDING",
                         "validation": "PENDING"
                     },
-                    "saved_query": {"sql": ""}  # Inicializar vazio
+                    "saved_query": {"sql": ""},  # Inicializar vazio
+                    "object_extraction_query": {"language": "SQL", "content": ""},
+                    "technical_content": {"type": "NONE", "content": ""},
                 })
 
             obj = groups[group_idx]["objects"][obj_idx]
@@ -232,6 +234,12 @@ def form_to_domain(form, existing_project=None):
     
     # Processar saved_query_sql do formulário de edição (não aninhado)
     saved_query_sql = form.get("saved_query_sql", "").strip()
+    object_extraction_query_content = form.get("object_extraction_query_content", "").strip()
+    object_extraction_query_language = (
+        form.get("object_extraction_query_language", "SQL").strip().upper() or "SQL"
+    )
+    technical_content_type = form.get("technical_content_type", "NONE").strip().upper() or "NONE"
+    technical_content_content = form.get("technical_content_content", "").strip()
     object_name = form.get("object_name", "").strip()
 
     def _coerce_index(value):
@@ -250,7 +258,15 @@ def form_to_domain(form, existing_project=None):
         edit_object_index = _coerce_index(state.get("last_edit_object_index"))
 
     # Se estamos editando/criando um objeto (campos não-aninhados presentes)
-    if object_name or saved_query_sql or form.get("object_description") or form.get("object_responsible") or form.get("object_deployment_type"):
+    if (
+        object_name
+        or saved_query_sql
+        or object_extraction_query_content
+        or technical_content_content
+        or form.get("object_description")
+        or form.get("object_responsible")
+        or form.get("object_deployment_type")
+    ):
         if active_group_index is None and active_group_id:
             for idx, group in enumerate(domain["groups"]):
                 group_id = str(group.get("group_id") or "").strip()
@@ -290,7 +306,9 @@ def form_to_domain(form, existing_project=None):
                         "deploy": "PENDING",
                         "validation": "PENDING"
                     },
-                    "saved_query": {"sql": ""}
+                    "saved_query": {"sql": ""},
+                    "object_extraction_query": {"language": "SQL", "content": ""},
+                    "technical_content": {"type": "NONE", "content": ""},
                 })
 
             target_obj = target_group["objects"][target_obj_index]
@@ -360,19 +378,31 @@ def form_to_domain(form, existing_project=None):
             if status_val:
                 target_obj["status"]["validation"] = status_val
 
-            # Saved Query SQL (legado - será migrado para technical_content)
+            # Saved Query SQL (legado para tipo SAVED_QUERY)
             if saved_query_sql:
                 if "saved_query" not in target_obj:
                     target_obj["saved_query"] = {}
                 target_obj["saved_query"]["sql"] = saved_query_sql
 
-            # Technical Content (novo modelo canônico v1.1)
-            technical_content_type = form.get("technical_content_type", "NONE")
-            technical_content_content = form.get("technical_content_content", "").strip()
-            
-            if "technical_content" not in target_obj:
+            if not object_extraction_query_content and saved_query_sql:
+                # Para SAVED_QUERY, reaproveita SQL informado quando a query canônica
+                # não foi preenchida explicitamente.
+                object_extraction_query_content = saved_query_sql
+
+            if (
+                "object_extraction_query" not in target_obj
+                or not isinstance(target_obj.get("object_extraction_query"), dict)
+            ):
+                target_obj["object_extraction_query"] = {"language": "SQL", "content": ""}
+
+            target_obj["object_extraction_query"]["language"] = object_extraction_query_language
+            target_obj["object_extraction_query"]["content"] = object_extraction_query_content
+
+            if (
+                "technical_content" not in target_obj
+                or not isinstance(target_obj.get("technical_content"), dict)
+            ):
                 target_obj["technical_content"] = {"type": "NONE", "content": ""}
-            
             target_obj["technical_content"]["type"] = technical_content_type
             target_obj["technical_content"]["content"] = technical_content_content
 

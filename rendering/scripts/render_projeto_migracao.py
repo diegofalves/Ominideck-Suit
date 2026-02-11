@@ -33,6 +33,7 @@ def _normalize(data: dict) -> dict:
         for obj in group.get("objects", []):
             obj = dict(obj)
             obj.setdefault("identifiers", {})
+            obj.setdefault("object_extraction_query", {})
             obj.setdefault("technical_content", {})
             obj.setdefault("status", {})
             obj.setdefault("otm_table", "")
@@ -44,12 +45,39 @@ def _normalize(data: dict) -> dict:
             obj.setdefault("notes", "")
             obj.setdefault("sequence", "")
             obj.setdefault("name", "")
-            
-            # Gerar saved_query canônico a partir de technical_content
+
+            extraction_query = obj.get("object_extraction_query", {})
+            if not isinstance(extraction_query, dict):
+                extraction_query = {}
+
+            if (
+                not extraction_query.get("content")
+                and isinstance(obj.get("saved_query"), dict)
+                and obj["saved_query"].get("sql")
+            ):
+                extraction_query = {
+                    "language": "SQL",
+                    "content": str(obj["saved_query"].get("sql") or ""),
+                }
+
+            extraction_language = str(extraction_query.get("language") or "SQL").upper()
+            extraction_content = str(extraction_query.get("content") or "")
+            obj["object_extraction_query"] = {
+                "language": extraction_language,
+                "content": extraction_content,
+            }
             technical_content = obj.get("technical_content", {})
-            if technical_content.get("content") and technical_content.get("type") == "SQL":
+            if not isinstance(technical_content, dict):
+                technical_content = {}
+            obj["technical_content"] = {
+                "type": str(technical_content.get("type") or "NONE").upper(),
+                "content": str(technical_content.get("content") or ""),
+            }
+
+            # Gerar saved_query canônico a partir da Query de Extração de Objetos
+            if extraction_content and extraction_language == "SQL":
                 obj["saved_query"] = {
-                    "sql": technical_content["content"],
+                    "sql": extraction_content,
                     "type": "extraction"
                 }
             else:

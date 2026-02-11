@@ -637,7 +637,19 @@ TEMPLATE_HTML = r"""
                         {% endif %}
                     </div>
 
-                    <!-- Conteúdo Técnico -->
+                    <!-- Query de Extração de Objetos -->
+                    {% if object.object_extraction_query and object.object_extraction_query.content %}
+                    <section class="code-section" aria-label="Query de extração de objetos">
+                        <header class="code-section__header">
+                            <h4 class="code-section__title">Query de Extração de Objetos</h4>
+                            <span class="code-section__lang">{{ object.object_extraction_query.language | upper }}</span>
+                        </header>
+                        <div class="code-section__content">
+                            <pre class="code-block"><code class="language-{{ object.object_extraction_query.language | lower }}">{{ object.object_extraction_query.content }}</code></pre>
+                        </div>
+                    </section>
+                    {% endif %}
+
                     {% if object.technical_content and object.technical_content.content %}
                     <section class="code-section" aria-label="Conteúdo técnico">
                         <header class="code-section__header">
@@ -646,19 +658,6 @@ TEMPLATE_HTML = r"""
                         </header>
                         <div class="code-section__content">
                             <pre class="code-block"><code class="language-{{ object.technical_content.type | lower }}">{{ object.technical_content.content }}</code></pre>
-                        </div>
-                    </section>
-                    {% endif %}
-
-                    <!-- Query de Extração (apenas se for um campo independente) -->
-                    {% if object.saved_query and object.saved_query.sql and object.saved_query.type != "extraction" %}
-                    <section class="code-section code-section--query" aria-label="Query de extração">
-                        <header class="code-section__header">
-                            <h4 class="code-section__title">Query de Extração</h4>
-                            <span class="code-section__lang">SQL</span>
-                        </header>
-                        <div class="code-section__content">
-                            <pre class="code-block code-block--sql"><code class="language-sql">{{ object.saved_query.sql }}</code></pre>
                         </div>
                     </section>
                     {% endif %}
@@ -735,6 +734,7 @@ def _normalize(data: dict) -> dict:
         for obj in group.get("objects", []):
             obj = dict(obj)
             obj.setdefault("identifiers", {})
+            obj.setdefault("object_extraction_query", {})
             obj.setdefault("technical_content", {})
             obj.setdefault("status", {})
             obj.setdefault("otm_table", "")
@@ -746,10 +746,34 @@ def _normalize(data: dict) -> dict:
             obj.setdefault("notes", "")
             obj.setdefault("sequence", "")
             obj.setdefault("name", "")
-            
-            # Não gerar automaticamente saved_query a partir de technical_content
-            # Deixar saved_query apenas para campos independentes no JSON
-            obj.setdefault("technical_content", {})
+
+            extraction_query = obj.get("object_extraction_query", {})
+            if not isinstance(extraction_query, dict):
+                extraction_query = {}
+
+            if (
+                not extraction_query.get("content")
+                and isinstance(obj.get("saved_query"), dict)
+                and obj["saved_query"].get("sql")
+            ):
+                extraction_query = {
+                    "language": "SQL",
+                    "content": str(obj["saved_query"].get("sql") or ""),
+                }
+
+            obj["object_extraction_query"] = {
+                "language": str(extraction_query.get("language") or "SQL").upper(),
+                "content": str(extraction_query.get("content") or ""),
+            }
+
+            technical_content = obj.get("technical_content", {})
+            if not isinstance(technical_content, dict):
+                technical_content = {}
+            obj["technical_content"] = {
+                "type": str(technical_content.get("type") or "NONE").upper(),
+                "content": str(technical_content.get("content") or ""),
+            }
+
             obj.setdefault("saved_query", None)
             
             objects.append(obj)

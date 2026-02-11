@@ -1646,35 +1646,48 @@
       </div>
 
       <!-- ========================================== -->
-      <!-- Query de Extração (technical_content)     -->
+      <!-- Query de Extração de Objetos              -->
       <!-- ========================================== -->
       <fieldset style="background-color: #f5f5f5; border: 1px solid #2196F3;">
-        <legend style="color: #1976D2;">🔍 Query de Extração</legend>
+        <legend style="color: #1976D2;">🔍 Query de Extração de Objetos</legend>
+
+        <input type="hidden" name="object_extraction_query_language" value="SQL">
+        <p style="font-size: 11px; color: #0d47a1; margin: 0 0 8px 0;">
+          Linguagem da Query: <strong>SQL</strong>
+        </p>
+
+        <label style="margin-top: 12px;"><strong>Query SQL de Extração:</strong></label>
+        <textarea
+          name="object_extraction_query_content"
+          rows="12"
+          placeholder="Cole aqui a query SQL que extrai os objetos OTM para este item..."
+          style="font-family: 'Courier New', monospace; font-size: 12px; background-color: #263238; color: #aed581; padding: 12px; border: 1px solid #37474f; width: 100%; max-width: 100%;"
+        >{{ current_object.object_extraction_query.content if current_object and current_object.object_extraction_query and current_object.object_extraction_query.content is not none else (current_object.saved_query.sql if current_object and current_object.saved_query and current_object.saved_query.sql is not none else '') }}</textarea>
         
-        <label><strong>Tipo de Conteúdo:</strong></label>
-        <select name="technical_content_type" style="max-width: 200px; background-color: #e3f2fd; border: 1px solid #64b5f6;">
+        <p style="font-size: 11px; color: #666; margin-top: 8px;">
+          💡 Esta query é usada para extrair objetos OTM e gerar o cache local do item de migração.
+        </p>
+      </fieldset>
+
+      <fieldset style="background-color: #f7f7f7; border: 1px solid #9e9e9e;">
+        <legend style="color: #424242;">🧠 Conteúdo Técnico</legend>
+
+        <label><strong>Tipo:</strong></label>
+        <select name="technical_content_type" style="max-width: 220px;">
           <option value="NONE" {% if not current_object or not current_object.technical_content or current_object.technical_content.type == 'NONE' %}selected{% endif %}>Nenhum</option>
-          <option value="SQL" {% if current_object and current_object.technical_content and current_object.technical_content.type == 'SQL' %}selected{% endif %}>SQL Query</option>
           <option value="TEXT" {% if current_object and current_object.technical_content and current_object.technical_content.type == 'TEXT' %}selected{% endif %}>Texto Técnico</option>
           <option value="SCRIPT" {% if current_object and current_object.technical_content and current_object.technical_content.type == 'SCRIPT' %}selected{% endif %}>Script</option>
           <option value="RULE" {% if current_object and current_object.technical_content and current_object.technical_content.type == 'RULE' %}selected{% endif %}>Regra</option>
         </select>
-        
-        <label style="margin-top: 12px;"><strong>Conteúdo (SQL / Script / Texto):</strong></label>
+
+        <label style="margin-top: 12px;"><strong>Conteúdo Técnico (opcional):</strong></label>
         <textarea
           name="technical_content_content"
-          rows="12"
-          placeholder="Cole aqui a query SQL, script ou texto técnico..."
-          style="font-family: 'Courier New', monospace; font-size: 12px; background-color: #263238; color: #aed581; padding: 12px; border: 1px solid #37474f; width: 100%; max-width: 100%;"
-        >{{ current_object.technical_content.content if current_object and current_object.technical_content else '' }}</textarea>
-        
-        <p style="font-size: 11px; color: #666; margin-top: 8px;">
-          💡 Esta query/script é usada para extrair dados do ambiente de origem ou descrever lógica técnica.
-        </p>
+          rows="6"
+          placeholder="Adicione aqui observações técnicas, regras, snippets ou orientações de implementação..."
+          style="font-family: 'Courier New', monospace; font-size: 12px; background-color: #1f2937; color: #f9fafb; padding: 12px; border: 1px solid #4b5563; width: 100%; max-width: 100%;"
+        >{{ current_object.technical_content.content if current_object and current_object.technical_content and current_object.technical_content.content is not none else '' }}</textarea>
       </fieldset>
-
-      <label>Observações Técnicas</label>
-      <textarea name="object_notes" rows="3">{{ current_object.notes if current_object else '' }}</textarea>
 
       <!-- Hidden field para manter active_group_id no POST -->
       <input type="hidden" name="active_group_id" value="{{ project.active_group_id if project else '' }}">

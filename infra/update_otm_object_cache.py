@@ -3,7 +3,7 @@
 Build local OTM object cache files from projeto_migracao migration items.
 
 Core rules:
-- Extraction query comes from technical_content.content.
+- Extraction query comes from object_extraction_query.content.
 - ROOT_NAME always matches migration item otm_table.
 - Output rows always contain every column from metadata/otm/tables/<TABLE>.json.
 - Missing values in OTM response are filled with empty string.
@@ -66,6 +66,25 @@ def _resolve_domain_name(item: Dict[str, Any]) -> str:
     if domain_name in INVALID_DOMAIN_TOKENS:
         return ""
     return domain_name
+
+
+def _resolve_object_extraction_query(item: Dict[str, Any]) -> Tuple[str, str, str]:
+    extraction_query = item.get("object_extraction_query")
+    if isinstance(extraction_query, dict):
+        language = str(
+            extraction_query.get("language") or extraction_query.get("type") or "SQL"
+        ).strip().upper() or "SQL"
+        content = str(extraction_query.get("content") or "").strip()
+        if content:
+            return language, content, "object_extraction_query"
+
+    saved_query = item.get("saved_query")
+    if isinstance(saved_query, dict):
+        content = str(saved_query.get("sql") or "").strip()
+        if content:
+            return "SQL", content, "saved_query"
+
+    return "SQL", "", "none"
 
 
 def _find_by_local_name(node: Dict[str, Any], local_name: str) -> Any:
@@ -386,6 +405,8 @@ def _build_cache_payload(
     table_schema: Dict[str, Any],
     schema_columns: List[str],
     sql_query: str,
+    query_language: str,
+    query_source: str,
     normalized_rows: List[Dict[str, str]],
     extra_fields: List[str],
 ) -> Dict[str, Any]:
@@ -434,7 +455,14 @@ def _build_cache_payload(
             "deploymentType": migration_item_payload["deploymentType"],
         },
         "extraction": {
-            "technicalContentType": str(obj.get("technical_content", {}).get("type", "")),
+            "objectExtractionQueryLanguage": query_language,
+            "objectExtractionQuerySource": query_source,
+            # Compatibilidade retroativa
+            "technicalContentType": str(
+                obj.get("technical_content", {}).get("type", "")
+                if isinstance(obj.get("technical_content"), dict)
+                else ""
+            ),
             "rootName": table_name,
             "query": sql_query,
             "normalizedRowCount": len(normalized_rows),
@@ -698,27 +726,11 @@ def _extract_single_object_cache(
             "reason": "item sem dominio valido",
         }
 
-    technical_content = obj.get("technical_content", {})
-    if not isinstance(technical_content, dict):
-        if strict_extractability:
-            raise ValueError(f"MIGRATION_ITEM '{migration_item_name}' sem technical_content valido.")
-        return {
-            "status": "skipped",
-            "migrationGroupId": migration_group_id,
-            "migrationItemId": migration_item_id,
-            "migrationItem": migration_item_name,
-            # Compatibilidade retroativa
-            "groupId": migration_group_id,
-            "object": migration_item_name,
-            "reason": "technical_content invalido",
-        }
-
-    technical_type = _normalize_name(technical_content.get("type"))
-    sql_query = str(technical_content.get("content") or "").strip()
-    if technical_type != "SQL":
+    query_language, sql_query, query_source = _resolve_object_extraction_query(obj)
+    if _normalize_name(query_language) != "SQL":
         if strict_extractability:
             raise ValueError(
-                f"MIGRATION_ITEM '{migration_item_name}' nao possui technical_content.type=SQL."
+                f"MIGRATION_ITEM '{migration_item_name}' sem object_extraction_query.language=SQL."
             )
         return {
             "status": "skipped",
@@ -728,11 +740,11 @@ def _extract_single_object_cache(
             # Compatibilidade retroativa
             "groupId": migration_group_id,
             "object": migration_item_name,
-            "reason": "technical_content.type diferente de SQL",
+            "reason": "object_extraction_query.language diferente de SQL",
         }
     if not sql_query:
         if strict_extractability:
-            raise ValueError(f"MIGRATION_ITEM '{migration_item_name}' sem technical_content.content.")
+            raise ValueError(f"MIGRATION_ITEM '{migration_item_name}' sem object_extraction_query.content.")
         return {
             "status": "skipped",
             "migrationGroupId": migration_group_id,
@@ -741,7 +753,7 @@ def _extract_single_object_cache(
             # Compatibilidade retroativa
             "groupId": migration_group_id,
             "object": migration_item_name,
-            "reason": "technical_content.content vazio",
+            "reason": "object_extraction_query.content vazio",
         }
 
     table_name = _normalize_name(obj.get("otm_table"))
@@ -776,6 +788,8 @@ def _extract_single_object_cache(
         table_schema=table_schema,
         schema_columns=schema_columns,
         sql_query=sql_query,
+        query_language=_normalize_name(query_language) or "SQL",
+        query_source=query_source,
         normalized_rows=normalized_rows,
         extra_fields=sorted(extra_fields_union),
     )
