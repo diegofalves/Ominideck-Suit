@@ -1557,15 +1557,23 @@
           <p style="font-size: 11px; color: #6b7280; margin: 4px 0 0 0;">
             Campo espelho, sincronizado automaticamente com "Tabela OTM".
           </p>
+          {% set current_otm_related_tables = current_object.otm_related_tables if current_object and current_object.otm_related_tables is iterable and current_object.otm_related_tables is not string else [] %}
           {% set current_otm_subtables = current_object.otm_subtables if current_object and current_object.otm_subtables is iterable and current_object.otm_subtables is not string else [] %}
-          <label style="margin-top: 8px; display: block;">Subtabelas OTM (derivadas da query)</label>
-          <input
-            type="text"
-            value="{{ current_otm_subtables | join(', ') if current_otm_subtables else '' }}"
-            readonly
-            placeholder="Sem subtabelas identificadas no FROM"
-            style="width: 100%; background-color: #f5f5f5; color: #4b5563;"
+          <input type="hidden" name="object_related_tables_present" value="1">
+          <input type="hidden" name="object_subtable_selection_present" value="1">
+          <label style="margin-top: 8px; display: block;">Tabelas relacionadas (FROM)</label>
+          <div
+            id="related-tables-selector"
+            style="border: 1px solid #d1d5db; border-radius: 6px; background-color: #ffffff; padding: 8px; min-height: 58px;"
           >
+            <p style="margin: 0; font-size: 11px; color: #6b7280;">
+              A lista será carregada a partir da Query de Extração de Objetos.
+            </p>
+          </div>
+          <div id="related-tables-hidden-inputs"></div>
+          <p style="font-size: 11px; color: #6b7280; margin: 6px 0 0 0;">
+            Marque como subtabela apenas as tabelas relacionadas que devem entrar no cache deste item.
+          </p>
 
           <div style="margin-top: 10px;">
             {% set ignore_value = (current_object.ignore_table|string|lower) if current_object and current_object.ignore_table is defined else '' %}
@@ -1888,6 +1896,8 @@
     const activeGroupLabelFromPage = {{ (groups_catalog.get(project.active_group_id).label if project and project.active_group_id and groups_catalog.get(project.active_group_id) else "") | tojson }};
     const currentMigrationItemNameFromPage = {{ (current_object.name if current_object else "") | tojson }};
     const currentMigrationItemIdFromPage = {{ (current_object.migration_item_id if current_object and current_object.migration_item_id else "") | tojson }};
+    const currentRelatedTablesFromPage = {{ (current_object.otm_related_tables if current_object and current_object.otm_related_tables is iterable and current_object.otm_related_tables is not string else []) | tojson }};
+    const currentSubtablesFromPage = {{ (current_object.otm_subtables if current_object and current_object.otm_subtables is iterable and current_object.otm_subtables is not string else []) | tojson }};
 
     document.addEventListener("DOMContentLoaded", () => {
       const editPanel = document.getElementById("object-edit-panel");
@@ -2001,13 +2011,264 @@
       otmTableHidden.value = selectedType;
     };
 
+    const extractionQueryTextarea = document.querySelector('textarea[name="object_extraction_query_content"]');
+    const relatedTablesSelector = document.getElementById("related-tables-selector");
+    const relatedTablesHiddenInputs = document.getElementById("related-tables-hidden-inputs");
+
+    const normalizeTableName = (value) => String(value || "").trim().toUpperCase();
+
+    const normalizeTableIdentifier = (rawIdentifier) => {
+      let token = String(rawIdentifier || "").trim();
+      if (!token) {
+        return "";
+      }
+
+      token = token.replace(/\)+$/, "").split("@", 1)[0].trim();
+      if (!token) {
+        return "";
+      }
+
+      if (token.startsWith('"') && token.endsWith('"') && token.length >= 2) {
+        token = token.slice(1, -1);
+      }
+
+      const parts = token
+        .split(".")
+        .map((part) => part.trim())
+        .filter(Boolean);
+      if (!parts.length) {
+        return "";
+      }
+
+      return normalizeTableName(parts[parts.length - 1]);
+    };
+
+    const splitTopLevelByComma = (text) => {
+      const source = String(text || "");
+      const parts = [];
+      let current = "";
+      let depth = 0;
+      let inString = false;
+
+      for (let idx = 0; idx < source.length; idx += 1) {
+        const char = source[idx];
+        const nextChar = idx + 1 < source.length ? source[idx + 1] : "";
+
+        if (inString) {
+          current += char;
+          if (char === "'" && nextChar === "'") {
+            current += nextChar;
+            idx += 1;
+            continue;
+          }
+          if (char === "'") {
+            inString = false;
+          }
+          continue;
+        }
+
+        if (char === "'") {
+          current += char;
+          inString = true;
+          continue;
+        }
+
+        if (char === "(") {
+          current += char;
+          depth += 1;
+          continue;
+        }
+
+        if (char === ")") {
+          current += char;
+          depth = Math.max(depth - 1, 0);
+          continue;
+        }
+
+        if (char === "," && depth === 0) {
+          const segment = current.trim();
+          if (segment) {
+            parts.push(segment);
+          }
+          current = "";
+          continue;
+        }
+
+        current += char;
+      }
+
+      const tail = current.trim();
+      if (tail) {
+        parts.push(tail);
+      }
+      return parts;
+    };
+
+    const extractMainFromClause = (sqlQuery) => {
+      const source = String(sqlQuery || "");
+      const match = source.match(
+        /\bFROM\b([\s\S]*?)(?:\bWHERE\b|\bGROUP\s+BY\b|\bORDER\s+BY\b|\bHAVING\b|\bCONNECT\s+BY\b|\bSTART\s+WITH\b|\bUNION\b|\bMINUS\b|\bINTERSECT\b|$)/i
+      );
+      return match ? String(match[1] || "").trim() : "";
+    };
+
+    const extractRelatedTablesFromSql = (sqlQuery, primaryTableName) => {
+      const fromClause = extractMainFromClause(sqlQuery);
+      if (!fromClause) {
+        return [];
+      }
+
+      const primaryTable = normalizeTableName(primaryTableName);
+      const seen = new Set();
+      const results = [];
+      const segments = splitTopLevelByComma(fromClause);
+      const targets = segments.length ? segments : [fromClause];
+
+      const pushTable = (rawTable) => {
+        const normalized = normalizeTableIdentifier(rawTable);
+        if (!normalized || normalized === primaryTable || seen.has(normalized)) {
+          return;
+        }
+        seen.add(normalized);
+        results.push(normalized);
+      };
+
+      targets.forEach((segment) => {
+        const segmentText = String(segment || "").trim();
+        if (!segmentText || segmentText.startsWith("(")) {
+          return;
+        }
+
+        const baseMatch = segmentText.match(/^\s*(?:ONLY\s*\(\s*)?([A-Z0-9_.$"#@]+)/i);
+        if (baseMatch && baseMatch[1]) {
+          pushTable(baseMatch[1]);
+        }
+
+        const joinRegex = /\bJOIN\b\s+(?:ONLY\s*\(\s*)?([A-Z0-9_.$"#@]+)/gi;
+        let joinMatch = joinRegex.exec(segmentText);
+        while (joinMatch) {
+          pushTable(joinMatch[1]);
+          joinMatch = joinRegex.exec(segmentText);
+        }
+      });
+
+      return results;
+    };
+
+    const renderRelatedTablesSelector = (relatedTables, selectedSubtables) => {
+      if (!relatedTablesSelector || !relatedTablesHiddenInputs) {
+        return;
+      }
+
+      const normalizedSelected = new Set(
+        (selectedSubtables || []).map((table) => normalizeTableName(table)).filter(Boolean)
+      );
+      const normalizedRelated = [];
+      const seenRelated = new Set();
+      (relatedTables || []).forEach((table) => {
+        const normalized = normalizeTableName(table);
+        if (!normalized || seenRelated.has(normalized)) {
+          return;
+        }
+        seenRelated.add(normalized);
+        normalizedRelated.push(normalized);
+      });
+
+      relatedTablesSelector.innerHTML = "";
+      relatedTablesHiddenInputs.innerHTML = "";
+
+      if (!normalizedRelated.length) {
+        relatedTablesSelector.innerHTML = `
+          <p style="margin: 0; font-size: 11px; color: #6b7280;">
+            Sem tabelas relacionadas identificadas no FROM da query.
+          </p>
+        `;
+        return;
+      }
+
+      const tableElement = document.createElement("table");
+      tableElement.style.width = "100%";
+      tableElement.style.borderCollapse = "collapse";
+      tableElement.style.fontSize = "12px";
+
+      const header = document.createElement("tr");
+      header.innerHTML = `
+        <th style="text-align: left; padding: 6px; border-bottom: 1px solid #e5e7eb;">Tabela Relacionada</th>
+        <th style="text-align: center; padding: 6px; border-bottom: 1px solid #e5e7eb; width: 120px;">Subtabela</th>
+      `;
+      tableElement.appendChild(header);
+
+      normalizedRelated.forEach((tableName) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td style="padding: 6px; border-bottom: 1px solid #f3f4f6; color: #1f2937;">
+            <code>${tableName}</code>
+          </td>
+          <td style="padding: 6px; border-bottom: 1px solid #f3f4f6; text-align: center;">
+            <input
+              type="checkbox"
+              name="object_otm_subtables"
+              value="${tableName}"
+              ${normalizedSelected.has(tableName) ? "checked" : ""}
+            >
+          </td>
+        `;
+        tableElement.appendChild(row);
+
+        const hiddenRelated = document.createElement("input");
+        hiddenRelated.type = "hidden";
+        hiddenRelated.name = "object_related_tables";
+        hiddenRelated.value = tableName;
+        relatedTablesHiddenInputs.appendChild(hiddenRelated);
+      });
+
+      relatedTablesSelector.appendChild(tableElement);
+    };
+
+    const syncRelatedTablesFromQuery = () => {
+      if (!relatedTablesSelector) {
+        return;
+      }
+
+      const currentPrimaryTable = normalizeTableName(
+        (otmTableHidden && otmTableHidden.value) || (objectTypeSelect && objectTypeSelect.value) || ""
+      );
+      const sqlQuery = extractionQueryTextarea ? extractionQueryTextarea.value : "";
+      const parsedRelatedTables = extractRelatedTablesFromSql(sqlQuery, currentPrimaryTable);
+
+      let relatedTables = parsedRelatedTables;
+      if (!relatedTables.length) {
+        relatedTables = (Array.isArray(currentRelatedTablesFromPage) ? currentRelatedTablesFromPage : [])
+          .map((table) => normalizeTableName(table))
+          .filter((table) => table && table !== currentPrimaryTable);
+      }
+
+      const selectedFromUi = Array.from(
+        document.querySelectorAll('input[name="object_otm_subtables"]:checked')
+      ).map((checkbox) => normalizeTableName(checkbox.value));
+      const selectedSubtables = selectedFromUi.length
+        ? selectedFromUi
+        : (Array.isArray(currentSubtablesFromPage) ? currentSubtablesFromPage : []);
+
+      renderRelatedTablesSelector(relatedTables, selectedSubtables);
+    };
+
     if (objectTypeSelect && otmTableDisplay && otmTableHidden) {
-      objectTypeSelect.addEventListener("change", syncOtmTableFromObjectType);
+      objectTypeSelect.addEventListener("change", () => {
+        syncOtmTableFromObjectType();
+        syncRelatedTablesFromQuery();
+      });
       syncOtmTableFromObjectType();
       window.setTimeout(syncOtmTableFromObjectType, 0);
       window.setTimeout(syncOtmTableFromObjectType, 120);
       window.setTimeout(syncOtmTableFromObjectType, 600);
     }
+
+    if (extractionQueryTextarea) {
+      extractionQueryTextarea.addEventListener("input", syncRelatedTablesFromQuery);
+      extractionQueryTextarea.addEventListener("change", syncRelatedTablesFromQuery);
+    }
+    syncRelatedTablesFromQuery();
 
     const updateButton = document.getElementById("update-tables-btn");
     const statusLabel = document.getElementById("update-tables-status");

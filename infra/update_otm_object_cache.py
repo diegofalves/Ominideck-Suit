@@ -4,7 +4,7 @@ Build local OTM object cache files from projeto_migracao migration items.
 
 Core rules:
 - Extraction query comes from object_extraction_query.content.
-- ROOT_NAME uses migration item otm_table and its otm_subtables when available.
+- ROOT_NAME uses migration item otm_table and only user-selected otm_subtables.
 - Output rows always contain every column from metadata/otm/tables/<TABLE>.json.
 - Missing values in OTM response are filled with empty string.
 - INSERT_DATE/UPDATE_DATE are managed as local cache lifecycle fields when present in schema.
@@ -50,10 +50,21 @@ def _normalize_name(value: Any) -> str:
     return str(value or "").strip().upper()
 
 
+def _is_truthy(value: Any) -> bool:
+    return str(value or "").strip().lower() in {"1", "true", "on", "yes", "y"}
+
+
 def _slugify(value: Any) -> str:
     raw = str(value or "").strip().upper()
     slug = re.sub(r"[^A-Z0-9]+", "_", raw).strip("_")
     return slug or "OBJECT"
+
+
+def _short_slug(value: Any, max_len: int) -> str:
+    slug = _slugify(value)
+    if len(slug) <= max_len:
+        return slug
+    return slug[:max_len].rstrip("_") or slug[:max_len]
 
 
 def _build_migration_item_id(group_id: str, item: Dict[str, Any]) -> str:
@@ -219,7 +230,7 @@ def _extract_tables_from_sql_query(sql_query: str) -> List[str]:
     return table_names
 
 
-def _resolve_item_tables(obj: Dict[str, Any], primary_table: str, sql_query: str) -> List[str]:
+def _resolve_item_tables(obj: Dict[str, Any], primary_table: str, _sql_query: str) -> List[str]:
     target_tables: List[str] = []
     seen_tables: Set[str] = set()
 
@@ -234,8 +245,6 @@ def _resolve_item_tables(obj: Dict[str, Any], primary_table: str, sql_query: str
         candidate_values.extend(str(value or "") for value in raw_subtables)
     elif isinstance(raw_subtables, str):
         candidate_values.extend(part.strip() for part in raw_subtables.split(","))
-
-    candidate_values.extend(_extract_tables_from_sql_query(sql_query))
 
     for candidate in candidate_values:
         normalized_candidate = _normalize_name(candidate)
@@ -694,23 +703,62 @@ def _query_rows(sql_query: str, root_name: str) -> List[Dict[str, Any]]:
     return _extract_transaction_rows(payload, root_name)
 
 
-def _build_output_path(obj: Dict[str, Any], table_name: str) -> Path:
-    domain_name = str(obj.get("domainName") or obj.get("domain") or "NO_DOMAIN")
-    migration_item_token = _slugify(
-        obj.get(MIGRATION_ITEM_ID_KEY)
-        or obj.get(MIGRATION_ITEM_NAME_KEY)
-        or obj.get("name")
-        or obj.get("object_type")
-        or "MIGRATION_ITEM"
-    )
-    filename = "_".join(
-        [
-            _slugify(domain_name),
-            _slugify(table_name),
-            migration_item_token,
-        ]
-    ) + ".json"
+def _build_output_path(
+    *,
+    domain_name: str,
+    table_name: str,
+    migration_group_id: str,
+    migration_item_id: str,
+    migration_item_name: str,
+    sequence: Any,
+) -> Path:
+    domain_token = _slugify(domain_name or "NO_DOMAIN")
+    table_token = _slugify(table_name or "NO_TABLE")
+    group_token = _short_slug(migration_group_id or "NO_GROUP", 18)
+    name_token = _short_slug(migration_item_name or "ITEM", 24)
+    sequence_token = re.sub(r"[^0-9]+", "", str(sequence or "").strip()) or "0"
+
+    # Sem hash: nome curto e determinístico.
+    filename = f"{domain_token}_{table_token}_{name_token}_{sequence_token}_{group_token}.json"
     return CACHE_DIR / filename
+
+
+def _remove_stale_cache_files_for_item(
+    *,
+    migration_item_id: str,
+    keep_path: Path,
+    dry_run: bool,
+) -> int:
+    migration_item_id = str(migration_item_id or "").strip()
+    if not migration_item_id or not CACHE_DIR.exists():
+        return 0
+
+    removed = 0
+    for cache_file in CACHE_DIR.glob("*.json"):
+        if cache_file.resolve() == keep_path.resolve():
+            continue
+        if not cache_file.is_file():
+            continue
+
+        try:
+            payload = json.loads(cache_file.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(payload, dict):
+            continue
+
+        migration_item = payload.get("migrationItem", {})
+        if not isinstance(migration_item, dict):
+            migration_item = {}
+        current_item_id = str(migration_item.get("migrationItemId") or "").strip()
+        if current_item_id != migration_item_id:
+            continue
+
+        removed += 1
+        if not dry_run:
+            cache_file.unlink(missing_ok=True)
+
+    return removed
 
 
 def _build_table_cache_section(
@@ -900,11 +948,150 @@ def _iter_payload_table_sections(
     return [(table_name, rows)]
 
 
+def _collect_substituted_migration_items_from_project() -> Tuple[Dict[str, str], Set[str]]:
+    """
+    Retorna mapeamento de itens substituídos no índice.
+
+    Regra:
+    - quando um MIGRATION_ITEM AUTO tem sua tabela principal marcada como subtabela
+      de outro item no mesmo domínio, o item AUTO é suprimido no índice
+      para evitar duplicidade com o cache do item "dono".
+
+    Saída:
+    - substitution_owner_by_item_id: {child_item_id: owner_item_id}
+    - ambiguous_subtable_keys: chaves (DOMAIN|TABLE) onde mais de um dono foi definido.
+    """
+    try:
+        project_data = _load_project()
+    except Exception:
+        return {}, set()
+
+    items: List[Dict[str, Any]] = []
+    for group_id, item in _iter_project_objects(project_data):
+        if not isinstance(item, dict):
+            continue
+
+        migration_group_id = _normalize_name(item.get(MIGRATION_GROUP_ID_KEY) or group_id)
+        migration_item_name = str(
+            item.get(MIGRATION_ITEM_NAME_KEY) or item.get("name") or ""
+        ).strip()
+        migration_item_id = str(item.get(MIGRATION_ITEM_ID_KEY) or "").strip()
+        if not migration_item_id:
+            migration_item_id = _build_migration_item_id(
+                migration_group_id,
+                {**item, "name": migration_item_name},
+            )
+
+        primary_table = _normalize_name(item.get("otm_table") or item.get("object_type"))
+        domain_name = _resolve_domain_name(item)
+        if not primary_table or not domain_name:
+            continue
+
+        raw_subtables = item.get("otm_subtables")
+        subtables: List[str] = []
+        seen_subtables: Set[str] = set()
+        if isinstance(raw_subtables, list):
+            candidates = [str(value or "") for value in raw_subtables]
+        elif isinstance(raw_subtables, str):
+            candidates = [part.strip() for part in raw_subtables.split(",")]
+        else:
+            candidates = []
+        for candidate in candidates:
+            normalized_candidate = _normalize_name(candidate)
+            if (
+                not normalized_candidate
+                or normalized_candidate == primary_table
+                or normalized_candidate in seen_subtables
+            ):
+                continue
+            subtables.append(normalized_candidate)
+            seen_subtables.add(normalized_candidate)
+
+        items.append(
+            {
+                "migrationItemId": migration_item_id,
+                "migrationItemName": migration_item_name,
+                "groupId": migration_group_id,
+                "domainName": domain_name,
+                "primaryTable": primary_table,
+                "subtables": subtables,
+                "sequence": int(item.get("sequence") or 0),
+                "isAuto": _is_truthy(item.get("auto_generated"))
+                or migration_item_name.upper().endswith("(AUTO)"),
+            }
+        )
+
+    owner_by_key: Dict[str, str] = {}
+    ambiguous_keys: Set[str] = set()
+    owner_candidates_by_key: Dict[str, List[Dict[str, Any]]] = {}
+
+    owners_sorted = sorted(
+        items,
+        key=lambda itm: (
+            int(itm.get("sequence") or 0),
+            str(itm.get("migrationItemId") or ""),
+        ),
+    )
+    for owner in owners_sorted:
+        owner_id = str(owner.get("migrationItemId") or "").strip()
+        owner_domain = str(owner.get("domainName") or "").strip()
+        if not owner_id or not owner_domain:
+            continue
+        for subtable in owner.get("subtables") or []:
+            subtable_name = _normalize_name(subtable)
+            if not subtable_name:
+                continue
+            key = f"{owner_domain}|{subtable_name}"
+            owner_candidates_by_key.setdefault(key, []).append(
+                {
+                    "migrationItemId": owner_id,
+                    "sequence": int(owner.get("sequence") or 0),
+                    "subtableCount": len(owner.get("subtables") or []),
+                }
+            )
+
+    for key, candidates in owner_candidates_by_key.items():
+        if not candidates:
+            continue
+        if len(candidates) > 1:
+            ambiguous_keys.add(key)
+        selected_candidate = sorted(
+            candidates,
+            key=lambda candidate: (
+                int(candidate.get("subtableCount") or 0),
+                int(candidate.get("sequence") or 0),
+                str(candidate.get("migrationItemId") or ""),
+            ),
+        )[0]
+        selected_owner_id = str(selected_candidate.get("migrationItemId") or "").strip()
+        if selected_owner_id:
+            owner_by_key[key] = selected_owner_id
+
+    substitution_owner_by_item_id: Dict[str, str] = {}
+    for item in items:
+        item_id = str(item.get("migrationItemId") or "").strip()
+        if not item_id:
+            continue
+        if not bool(item.get("isAuto")):
+            continue
+        key = f"{item.get('domainName')}|{item.get('primaryTable')}"
+        owner_item_id = owner_by_key.get(key)
+        if not owner_item_id or owner_item_id == item_id:
+            continue
+        substitution_owner_by_item_id[item_id] = owner_item_id
+
+    return substitution_owner_by_item_id, ambiguous_keys
+
+
 def _build_cache_index_payload() -> Dict[str, Any]:
     cache_files = _iter_cache_files()
+    substitution_owner_by_item_id, ambiguous_subtable_keys = (
+        _collect_substituted_migration_items_from_project()
+    )
     pk_columns_by_table: Dict[str, List[str]] = {}
     files_summary: List[Dict[str, Any]] = []
     malformed_files: List[Dict[str, str]] = []
+    excluded_files_by_substitution: List[Dict[str, Any]] = []
     object_locator_by_key: Dict[str, List[Dict[str, Any]]] = {}
     unverifiable_rows: List[Dict[str, Any]] = []
 
@@ -954,6 +1141,21 @@ def _build_cache_index_payload() -> Dict[str, Any]:
 
         if not migration_item_id:
             migration_item_id = f"MIGRATION_ITEM.FILE.{_slugify(cache_file.stem)}"
+
+        owner_item_id = substitution_owner_by_item_id.get(migration_item_id)
+        if owner_item_id:
+            excluded_files_by_substitution.append(
+                {
+                    "file": relative_file,
+                    "migrationItemId": migration_item_id,
+                    "migrationItemName": migration_item_name,
+                    "migrationGroupId": migration_group_id,
+                    "table": table_name,
+                    "domainName": domain_name,
+                    "substitutedByMigrationItemId": owner_item_id,
+                }
+            )
+            continue
 
         table_sections = _iter_payload_table_sections(payload, table_name)
         if not table_name and table_sections:
@@ -1082,6 +1284,22 @@ def _build_cache_index_payload() -> Dict[str, Any]:
             key=lambda row: (str(row.get("file") or ""), int(row.get("rowNumber") or 0)),
         ),
         "files": sorted(files_summary, key=lambda item: str(item.get("file") or "")),
+        "excludedCacheFilesBySubstitution": sorted(
+            excluded_files_by_substitution, key=lambda item: str(item.get("file") or "")
+        ),
+        "substitutionRules": {
+            "substitutedMigrationItems": sorted(
+                [
+                    {
+                        "migrationItemId": child_id,
+                        "substitutedByMigrationItemId": owner_id,
+                    }
+                    for child_id, owner_id in substitution_owner_by_item_id.items()
+                ],
+                key=lambda item: str(item.get("migrationItemId") or ""),
+            ),
+            "ambiguousSubtableKeys": sorted(ambiguous_subtable_keys),
+        },
         "duplicatesAcrossMigrationItems": duplicate_object_keys,
         "malformedCacheFiles": sorted(
             malformed_files, key=lambda item: str(item.get("file") or "")
@@ -1089,6 +1307,7 @@ def _build_cache_index_payload() -> Dict[str, Any]:
         "stats": {
             "cacheFileCount": len(cache_files),
             "validCacheFileCount": len(files_summary),
+            "excludedBySubstitutionCacheFileCount": len(excluded_files_by_substitution),
             "malformedCacheFileCount": len(malformed_files),
             "totalRows": total_rows,
             "indexedObjectRows": indexed_rows,
@@ -1184,7 +1403,14 @@ def _extract_single_object_cache(
         )
 
     target_tables = _resolve_item_tables(obj, primary_table_name, sql_query)
-    output_path = _build_output_path(obj, primary_table_name)
+    output_path = _build_output_path(
+        domain_name=domain_name,
+        table_name=primary_table_name,
+        migration_group_id=migration_group_id,
+        migration_item_id=migration_item_id,
+        migration_item_name=migration_item_name,
+        sequence=obj.get("sequence"),
+    )
 
     table_sections: Dict[str, Dict[str, Any]] = {}
     table_rows_by_name: Dict[str, int] = {}
@@ -1258,6 +1484,11 @@ def _extract_single_object_cache(
         skipped_subtables_no_schema=sorted(skipped_subtables_no_schema),
     )
     _write_output(output_path, payload, dry_run=dry_run)
+    stale_files_removed = _remove_stale_cache_files_for_item(
+        migration_item_id=migration_item_id,
+        keep_path=output_path,
+        dry_run=dry_run,
+    )
 
     primary_rows = int(table_rows_by_name.get(primary_table_name) or 0)
     total_rows = int(sum(table_rows_by_name.values()))
@@ -1281,6 +1512,7 @@ def _extract_single_object_cache(
         "tablesProcessed": processed_tables,
         "subtablesProcessed": processed_subtables,
         "skippedSubtablesNoSchema": sorted(skipped_subtables_no_schema),
+        "staleFilesRemoved": stale_files_removed,
         "objectIdentityKeys": sorted(primary_object_identity_keys),
         "file": str(output_path.relative_to(BASE_DIR)),
     }

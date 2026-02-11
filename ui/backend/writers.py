@@ -67,6 +67,24 @@ def _to_int(value: Any) -> int:
         return 0
 
 
+def _normalize_table_list(raw_values: Any) -> List[str]:
+    values: List[Any] = []
+    if isinstance(raw_values, list):
+        values = raw_values
+    elif isinstance(raw_values, str):
+        values = [part.strip() for part in raw_values.split(",")]
+
+    normalized: List[str] = []
+    seen: Set[str] = set()
+    for value in values:
+        table_name = _normalize_name(value)
+        if not table_name or table_name in seen:
+            continue
+        normalized.append(table_name)
+        seen.add(table_name)
+    return normalized
+
+
 def _slug_token(value: Any, fallback: str) -> str:
     normalized = _normalize_name(value)
     slug = re.sub(r"[^A-Z0-9]+", "_", normalized).strip("_")
@@ -245,6 +263,7 @@ def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: O
         ),
         "object_type": table_name,
         "otm_table": table_name,
+        "otm_related_tables": [],
         "otm_subtables": [],
         "deployment_type": deployment_type,
         "deployment_type_user_defined": False,
@@ -683,17 +702,34 @@ def _normalize_otm_table_hierarchy(data: Dict[str, Any]) -> None:
             sql = extraction_query.get("content", "")
             tables_in_from = _extract_sql_tables(sql) if sql else []
 
-            subtables: List[str] = []
-            seen_subtables: Set[str] = set()
+            related_tables: List[str] = []
+            seen_related: Set[str] = set()
             for table_name in tables_in_from:
                 normalized_table = _normalize_name(table_name)
                 if not normalized_table or normalized_table == primary_table:
                     continue
-                if normalized_table in seen_subtables:
+                if normalized_table in seen_related:
                     continue
-                subtables.append(normalized_table)
-                seen_subtables.add(normalized_table)
+                related_tables.append(normalized_table)
+                seen_related.add(normalized_table)
 
+            if not related_tables:
+                # Fallback: preserva estrutura já existente quando o parser não
+                # consegue extrair tabelas da query.
+                related_tables = [
+                    table_name
+                    for table_name in _normalize_table_list(obj.get("otm_related_tables"))
+                    if table_name != primary_table
+                ]
+
+            raw_subtables = _normalize_table_list(obj.get("otm_subtables"))
+            if related_tables:
+                related_lookup = set(related_tables)
+                subtables = [table for table in raw_subtables if table in related_lookup]
+            else:
+                subtables = [table for table in raw_subtables if table != primary_table]
+
+            obj["otm_related_tables"] = related_tables
             obj["otm_subtables"] = subtables
 
 
@@ -774,6 +810,227 @@ def _normalize_object_domain_aliases(data: Dict[str, Any]) -> None:
                     if inferred_domain:
                         obj["domainName"] = inferred_domain
                         obj["domain"] = inferred_domain
+
+
+def _inherit_subtable_item_from_primary(
+    primary_obj: Dict[str, Any],
+    subtable_obj: Dict[str, Any],
+    subtable_name: str,
+) -> None:
+    if not isinstance(primary_obj, dict) or not isinstance(subtable_obj, dict):
+        return
+
+    normalized_subtable = _normalize_name(subtable_name)
+    if normalized_subtable:
+        subtable_obj["object_type"] = normalized_subtable
+        subtable_obj["otm_table"] = normalized_subtable
+
+    primary_domain = _normalize_name(primary_obj.get("domainName") or primary_obj.get("domain"))
+    if primary_domain:
+        subtable_obj["domainName"] = primary_domain
+        subtable_obj["domain"] = primary_domain
+
+    primary_extraction = _resolve_object_extraction_query(primary_obj)
+    extraction_sql = str(primary_extraction.get("content") or "").strip()
+    if extraction_sql:
+        subtable_obj["object_extraction_query"] = {
+            "language": str(primary_extraction.get("language") or "SQL").strip().upper() or "SQL",
+            "content": extraction_sql,
+        }
+
+    is_auto_generated = _is_truthy(subtable_obj.get("auto_generated"))
+    primary_deployment = str(primary_obj.get("deployment_type") or "").strip()
+    if primary_deployment and (
+        is_auto_generated or not str(subtable_obj.get("deployment_type") or "").strip()
+    ):
+        subtable_obj["deployment_type"] = primary_deployment
+        subtable_obj["deployment_type_user_defined"] = True
+
+    primary_responsible = str(primary_obj.get("responsible") or "").strip()
+    if primary_responsible and (
+        is_auto_generated or not str(subtable_obj.get("responsible") or "").strip()
+    ):
+        subtable_obj["responsible"] = primary_responsible
+
+    primary_notes = str(primary_obj.get("notes") or "").strip()
+    if primary_notes and (is_auto_generated or not str(subtable_obj.get("notes") or "").strip()):
+        subtable_obj["notes"] = primary_notes
+
+    primary_status = primary_obj.get("status")
+    if isinstance(primary_status, dict):
+        current_status = subtable_obj.get("status")
+        if not isinstance(current_status, dict):
+            current_status = {}
+        if is_auto_generated:
+            subtable_obj["status"] = json.loads(json.dumps(primary_status, ensure_ascii=False))
+        else:
+            for status_key, status_value in primary_status.items():
+                if status_key not in current_status or not str(current_status.get(status_key) or "").strip():
+                    current_status[status_key] = status_value
+            subtable_obj["status"] = current_status
+
+    primary_technical = primary_obj.get("technical_content")
+    if isinstance(primary_technical, dict):
+        normalized_technical = {
+            "type": str(primary_technical.get("type") or "NONE").strip().upper() or "NONE",
+            "content": str(primary_technical.get("content") or "").strip(),
+        }
+        current_technical = subtable_obj.get("technical_content")
+        if not isinstance(current_technical, dict):
+            current_technical = {"type": "NONE", "content": ""}
+        if is_auto_generated:
+            subtable_obj["technical_content"] = normalized_technical
+        else:
+            if normalized_technical["type"] != "NONE" and (
+                str(current_technical.get("type") or "").strip().upper() in {"", "NONE"}
+            ):
+                current_technical["type"] = normalized_technical["type"]
+            if normalized_technical["content"] and not str(current_technical.get("content") or "").strip():
+                current_technical["content"] = normalized_technical["content"]
+            subtable_obj["technical_content"] = current_technical
+
+    subtable_obj["otm_related_tables"] = _normalize_table_list(subtable_obj.get("otm_related_tables"))
+    subtable_obj["otm_subtables"] = _normalize_table_list(subtable_obj.get("otm_subtables"))
+
+
+def _relocate_group_zero_subtables(data: Dict[str, Any]) -> None:
+    groups = data.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    group_zero: Optional[Dict[str, Any]] = None
+    manual_groups: List[Dict[str, Any]] = []
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        normalized_group_id = _normalize_name(group.get("group_id"))
+        if normalized_group_id == GROUP_ZERO_ID:
+            group_zero = group
+            continue
+        if normalized_group_id in {IGNORED_GROUP_ID, ""}:
+            continue
+        manual_groups.append(group)
+
+    if group_zero is None:
+        return
+
+    group_zero_objects = _as_object_list(group_zero.get("objects"))
+    group_zero["objects"] = group_zero_objects
+    if not group_zero_objects:
+        return
+
+    consumed_group_zero_indexes: Set[int] = set()
+
+    def _find_candidate_index(table_name: str, domain_name: str) -> Optional[int]:
+        table_token = _normalize_name(table_name)
+        domain_token = _normalize_name(domain_name)
+        if not table_token:
+            return None
+
+        def _matches(idx: int, require_domain: Optional[bool]) -> bool:
+            if idx in consumed_group_zero_indexes:
+                return False
+            candidate = group_zero_objects[idx]
+            if not isinstance(candidate, dict):
+                return False
+            if _is_truthy(candidate.get("ignore_table")):
+                return False
+            candidate_table = _normalize_name(candidate.get("object_type") or candidate.get("otm_table"))
+            if candidate_table != table_token:
+                return False
+            candidate_domain = _normalize_name(candidate.get("domainName") or candidate.get("domain"))
+            if require_domain is True:
+                return bool(domain_token) and candidate_domain == domain_token
+            if require_domain is False:
+                return candidate_domain == ""
+            return True
+
+        if domain_token:
+            for idx in range(len(group_zero_objects)):
+                if _matches(idx, True):
+                    return idx
+            for idx in range(len(group_zero_objects)):
+                if _matches(idx, False):
+                    return idx
+
+        for idx in range(len(group_zero_objects)):
+            if _matches(idx, None):
+                return idx
+        return None
+
+    def _find_target_object(
+        target_objects: List[Dict[str, Any]],
+        table_name: str,
+        domain_name: str,
+    ) -> Optional[Dict[str, Any]]:
+        table_token = _normalize_name(table_name)
+        domain_token = _normalize_name(domain_name)
+        if not table_token:
+            return None
+        for candidate in target_objects:
+            if not isinstance(candidate, dict):
+                continue
+            if _is_truthy(candidate.get("ignore_table")):
+                continue
+            candidate_table = _normalize_name(candidate.get("object_type") or candidate.get("otm_table"))
+            if candidate_table != table_token:
+                continue
+            candidate_domain = _normalize_name(candidate.get("domainName") or candidate.get("domain"))
+            if domain_token and candidate_domain and candidate_domain != domain_token:
+                continue
+            return candidate
+        return None
+
+    for group in manual_groups:
+        target_objects = _as_object_list(group.get("objects"))
+        group["objects"] = target_objects
+        if not target_objects:
+            continue
+
+        primary_items = list(target_objects)
+        for primary_obj in primary_items:
+            if not isinstance(primary_obj, dict):
+                continue
+
+            primary_table = _normalize_name(primary_obj.get("object_type") or primary_obj.get("otm_table"))
+            if not primary_table:
+                continue
+
+            selected_subtables = _normalize_table_list(primary_obj.get("otm_subtables"))
+            if not selected_subtables:
+                continue
+
+            primary_domain = _normalize_name(primary_obj.get("domainName") or primary_obj.get("domain"))
+            for subtable_name in selected_subtables:
+                if subtable_name == primary_table:
+                    continue
+
+                existing_target = _find_target_object(target_objects, subtable_name, primary_domain)
+                if existing_target is not None:
+                    _inherit_subtable_item_from_primary(primary_obj, existing_target, subtable_name)
+
+                candidate_idx = _find_candidate_index(subtable_name, primary_domain)
+                if candidate_idx is None:
+                    continue
+
+                candidate_obj = group_zero_objects[candidate_idx]
+                if not isinstance(candidate_obj, dict):
+                    consumed_group_zero_indexes.add(candidate_idx)
+                    continue
+
+                if existing_target is None:
+                    _inherit_subtable_item_from_primary(primary_obj, candidate_obj, subtable_name)
+                    candidate_obj[MIGRATION_ITEM_ID_KEY] = ""
+                    target_objects.append(candidate_obj)
+
+                consumed_group_zero_indexes.add(candidate_idx)
+
+    if consumed_group_zero_indexes:
+        group_zero["objects"] = [
+            obj
+            for idx, obj in enumerate(group_zero_objects)
+            if idx not in consumed_group_zero_indexes
+        ]
 
 
 def _normalize_auto_generated_deployment_types(data: Dict[str, Any]) -> None:
@@ -1111,6 +1368,10 @@ def load_project():
                         obj["name"] = f"{obj_type} #{obj_idx + 1}"
                     if "description" not in obj:
                         obj["description"] = ""
+                    if "otm_related_tables" not in obj:
+                        obj["otm_related_tables"] = []
+                    if "otm_subtables" not in obj:
+                        obj["otm_subtables"] = []
                     # Garantir status existe
                     if "status" not in obj:
                         obj["status"] = {
@@ -1134,6 +1395,7 @@ def load_project():
     _normalize_technical_content(data)
     # Primeiro normaliza aliases de dominio para evitar duplicacao por cobertura.
     _normalize_object_domain_aliases(data)
+    _relocate_group_zero_subtables(data)
     _ensure_domain_statistics_coverage(data)
     _normalize_object_domain_aliases(data)
     _normalize_auto_generated_deployment_types(data)
@@ -1155,6 +1417,7 @@ def save_project(domain):
     _normalize_otm_table_hierarchy(domain)
     _normalize_technical_content(domain)
     _normalize_object_domain_aliases(domain)
+    _relocate_group_zero_subtables(domain)
     _ensure_domain_statistics_coverage(domain)
     _normalize_object_domain_aliases(domain)
     _normalize_auto_generated_deployment_types(domain)

@@ -17,6 +17,34 @@ def _to_bool(value):
     return str(value or "").strip().lower() in {"1", "true", "on", "yes", "y"}
 
 
+def _normalize_table_name(value):
+    return str(value or "").strip().upper()
+
+
+def _normalize_table_list(values):
+    normalized = []
+    seen = set()
+    for value in values or []:
+        table_name = _normalize_table_name(value)
+        if not table_name or table_name in seen:
+            continue
+        normalized.append(table_name)
+        seen.add(table_name)
+    return normalized
+
+
+def _get_form_list(form, key):
+    if hasattr(form, "getlist"):
+        return [v for v in form.getlist(key) if str(v or "").strip()]
+    value = form.get(key)
+    if isinstance(value, list):
+        return [v for v in value if str(v or "").strip()]
+    if value is None:
+        return []
+    text = str(value).strip()
+    return [text] if text else []
+
+
 def _parse_history_date(raw_date):
     if not raw_date:
         return None
@@ -135,6 +163,7 @@ def form_to_domain(form, existing_project=None):
                     "migration_item_name": "",
                     "name": "",  # Nome funcional obrigatório
                     "description": "",  # Descrição funcional opcional
+                    "otm_related_tables": [],
                     "otm_subtables": [],
                     "identifiers": {},
                     "data": {},
@@ -242,6 +271,8 @@ def form_to_domain(form, existing_project=None):
     technical_content_type = form.get("technical_content_type", "NONE").strip().upper() or "NONE"
     technical_content_content = form.get("technical_content_content", "").strip()
     object_name = form.get("object_name", "").strip()
+    object_related_tables = _normalize_table_list(_get_form_list(form, "object_related_tables"))
+    object_otm_subtables = _normalize_table_list(_get_form_list(form, "object_otm_subtables"))
 
     def _coerce_index(value):
         try:
@@ -298,6 +329,7 @@ def form_to_domain(form, existing_project=None):
                     "migration_item_name": "",
                     "name": "",
                     "description": "",
+                    "otm_related_tables": [],
                     "otm_subtables": [],
                     "identifiers": {},
                     "data": {},
@@ -327,6 +359,7 @@ def form_to_domain(form, existing_project=None):
                 target_obj["object_type"] = object_type
                 # Contrato canônico: otm_table espelha exatamente object_type.
                 target_obj["otm_table"] = object_type
+                target_obj["otm_related_tables"] = target_obj.get("otm_related_tables", [])
                 target_obj["otm_subtables"] = target_obj.get("otm_subtables", [])
             object_deployment_type = form.get("object_deployment_type")
             if object_deployment_type is not None:
@@ -356,6 +389,28 @@ def form_to_domain(form, existing_project=None):
             object_otm_table = form.get("object_otm_table")
             if object_otm_table and not target_obj.get("object_type"):
                 target_obj["otm_table"] = object_otm_table
+
+            primary_table = _normalize_table_name(
+                target_obj.get("object_type") or target_obj.get("otm_table")
+            )
+
+            if form.get("object_related_tables_present") is not None:
+                target_obj["otm_related_tables"] = [
+                    table_name for table_name in object_related_tables if table_name != primary_table
+                ]
+            elif object_related_tables:
+                target_obj["otm_related_tables"] = [
+                    table_name for table_name in object_related_tables if table_name != primary_table
+                ]
+
+            if form.get("object_subtable_selection_present") is not None:
+                target_obj["otm_subtables"] = [
+                    table_name for table_name in object_otm_subtables if table_name != primary_table
+                ]
+            elif object_otm_subtables:
+                target_obj["otm_subtables"] = [
+                    table_name for table_name in object_otm_subtables if table_name != primary_table
+                ]
 
             # Status (5 campos)
             if "status" not in target_obj:

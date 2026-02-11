@@ -7,6 +7,7 @@ Rules:
 - Extraction query comes from `object_extraction_query.content`.
 - `technical_content` remains available in the project model for non-extraction technical notes.
 - `ROOT_NAME` is always the `MIGRATION_ITEM` `otm_table`.
+- Additional cache sections run only for related tables explicitly marked in `otm_subtables`.
 - Queries run only for `MIGRATION_ITEM`s with valid domain (`domainName`/`domain`).
 - The same OTM table can exist in multiple `MIGRATION_ITEM`s and in multiple domains.
 - The same OTM object must not exist in caches of different `MIGRATION_ITEM`s (validation by PK/GID/XID when available).
@@ -17,6 +18,10 @@ Rules:
 Current output path:
 - `metadata/otm/cache/objects/*.json`
 - `metadata/otm/cache/objects_index.json` (index global para localizar objetos por chave)
+
+File naming:
+- Compact pattern: `<DOMAIN>_<TABLE>_<MIGRATION_ITEM_NAME_SHORT>_<SEQUENCE>_<MIGRATION_GROUP_SHORT>.json`
+- Older long filenames for the same `migrationItemId` are automatically removed on refresh.
 
 Examples:
 ```bash
