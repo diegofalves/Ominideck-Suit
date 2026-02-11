@@ -1,0 +1,43 @@
+{
+  "cacheType": "OTM_OBJECT_CACHE",
+  "version": "1.0",
+  "generatedAt": "2026-02-10T22:43:24Z",
+  "source": "update_otm_object_cache.py",
+  "object": {
+    "name": "Shipment Stop Refnum Qualifier",
+    "groupId": "EXTENSION_QUALIFIERS",
+    "objectType": "SHIPMENT_STOP_REFNUM_QUAL",
+    "otmTable": "SHIPMENT_STOP_REFNUM_QUAL",
+    "domainName": "",
+    "sequence": 7,
+    "deploymentType": "MIGRATION_PROJECT"
+  },
+  "extraction": {
+    "technicalContentType": "SQL",
+    "rootName": "SHIPMENT_STOP_REFNUM_QUAL",
+    "query": "SELECT\n  DOMAIN_NAME,\n  SHIPMENT_STOP_REFNUM_QUAL_XID,\n  SHIPMENT_STOP_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  UPDATE_FLAG\nFROM\n  SHIPMENT_STOP_REFNUM_QUAL\nWHERE SHIPMENT_STOP_REFNUM_QUAL_GID IN (SELECT SHIPMENT_STOP_REFNUM_QUAL_GID FROM SHIPMENT_STOP_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  SHIPMENT_STOP_REFNUM_QUAL_XID",
+    "normalizedRowCount": 0,
+    "nonSchemaFieldsDetected": []
+  },
+  "schema": {
+    "owner": "glogowner",
+    "tableName": "shipment_stop_refnum_qual",
+    "columnCount": 13,
+    "columns": [
+      "SHIPMENT_STOP_REFNUM_QUAL_GID",
+      "SHIPMENT_STOP_REFNUM_QUAL_XID",
+      "DESCRIPTION",
+      "IS_VISIBLE_IF_MASTER_CARR",
+      "UPDATE_FLAG",
+      "REFNUM_SEQUENCE_NO",
+      "IS_REMOVE_ON_SERVPROV_CHANGE",
+      "DEFAULT_REFNUM_BN_TYPE_GID",
+      "DOMAIN_NAME",
+      "INSERT_USER",
+      "INSERT_DATE",
+      "UPDATE_USER",
+      "UPDATE_DATE"
+    ]
+  },
+  "rows": []
+}

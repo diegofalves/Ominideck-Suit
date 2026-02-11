@@ -1,0 +1,40 @@
+{
+  "cacheType": "OTM_OBJECT_CACHE",
+  "version": "1.0",
+  "generatedAt": "2026-02-10T22:43:21Z",
+  "source": "update_otm_object_cache.py",
+  "object": {
+    "name": "Packaged Item Refnum Qualifier",
+    "groupId": "EXTENSION_QUALIFIERS",
+    "objectType": "PACKAGED_ITEM_REFNUM_QUAL",
+    "otmTable": "PACKAGED_ITEM_REFNUM_QUAL",
+    "domainName": "",
+    "sequence": 4,
+    "deploymentType": "MIGRATION_PROJECT"
+  },
+  "extraction": {
+    "technicalContentType": "SQL",
+    "rootName": "PACKAGED_ITEM_REFNUM_QUAL",
+    "query": "SELECT\n  DOMAIN_NAME,\n  PACKAGED_ITEM_REFNUM_QUAL_XID,\n  PACKAGED_ITEM_REFNUM_QUAL_DESC,\n  IS_VISIBLE_IF_MASTER_CARR,\n  UPDATE_FLAG\nFROM\n  PACKAGED_ITEM_REFNUM_QUAL\nWHERE PACKAGED_ITEM_REFNUM_QUAL_GID IN (SELECT PACKAGED_ITEM_REFNUM_QUAL_GID FROM PACKAGED_ITEM_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  PACKAGED_ITEM_REFNUM_QUAL_XID",
+    "normalizedRowCount": 0,
+    "nonSchemaFieldsDetected": []
+  },
+  "schema": {
+    "owner": "glogowner",
+    "tableName": "packaged_item_refnum_qual",
+    "columnCount": 10,
+    "columns": [
+      "PACKAGED_ITEM_REFNUM_QUAL_GID",
+      "PACKAGED_ITEM_REFNUM_QUAL_XID",
+      "PACKAGED_ITEM_REFNUM_QUAL_DESC",
+      "IS_VISIBLE_IF_MASTER_CARR",
+      "UPDATE_FLAG",
+      "DOMAIN_NAME",
+      "INSERT_USER",
+      "INSERT_DATE",
+      "UPDATE_USER",
+      "UPDATE_DATE"
+    ]
+  },
+  "rows": []
+}

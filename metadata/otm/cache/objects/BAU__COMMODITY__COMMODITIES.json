@@ -1,0 +1,104 @@
+{
+  "cacheType": "OTM_OBJECT_CACHE",
+  "version": "1.0",
+  "generatedAt": "2026-02-10T22:43:03Z",
+  "source": "update_otm_object_cache.py",
+  "object": {
+    "name": "Commodities",
+    "groupId": "MASTER_DATA",
+    "objectType": "COMMODITY",
+    "otmTable": "COMMODITY",
+    "domainName": "BAU",
+    "sequence": 1,
+    "deploymentType": "MIGRATION_PROJECT"
+  },
+  "extraction": {
+    "technicalContentType": "SQL",
+    "rootName": "COMMODITY",
+    "query": "SELECT\n  DOMAIN_NAME,\n  COMMODITY_GID,\n  COMMODITY_XID,\n  COMMODITY_NAME,\n  COMMODITY_DESCRIPTION,\n  REQ_EQPMT_GROUP_PROFILE_GID\nFROM\n  COMMODITY\nWHERE\n  DOMAIN_NAME = 'BAU'\n  AND COMMODITY_GID IN (\n    SELECT COMMODITY_GID FROM ITEM WHERE DOMAIN_NAME = 'BAU' AND COMMODITY_GID IS NOT NULL\n  )\nORDER BY COMMODITY_XID",
+    "normalizedRowCount": 4,
+    "nonSchemaFieldsDetected": []
+  },
+  "schema": {
+    "owner": "glogowner",
+    "tableName": "commodity",
+    "columnCount": 13,
+    "columns": [
+      "COMMODITY_GID",
+      "COMMODITY_XID",
+      "COMMODITY_NAME",
+      "TEMPERATURE_CONTROL_GID",
+      "MODE_PROFILE_GID",
+      "IS_TEMP_CONTROL",
+      "REQ_EQPMT_GROUP_PROFILE_GID",
+      "DOMAIN_NAME",
+      "INSERT_USER",
+      "INSERT_DATE",
+      "UPDATE_USER",
+      "UPDATE_DATE",
+      "COMMODITY_DESCRIPTION"
+    ]
+  },
+  "rows": [
+    {
+      "COMMODITY_GID": "BAU.CHOCO",
+      "COMMODITY_XID": "CHOCO",
+      "COMMODITY_NAME": "CHOCO",
+      "TEMPERATURE_CONTROL_GID": "",
+      "MODE_PROFILE_GID": "",
+      "IS_TEMP_CONTROL": "",
+      "REQ_EQPMT_GROUP_PROFILE_GID": "BAU.EQUIP_REFRIGERADO",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": "",
+      "COMMODITY_DESCRIPTION": "Chocobiscuit - Produtos de chocolate em geral (requer controle de temperatura)"
+    },
+    {
+      "COMMODITY_GID": "BAU.LINHA",
+      "COMMODITY_XID": "LINHA",
+      "COMMODITY_NAME": "LINHA",
+      "TEMPERATURE_CONTROL_GID": "",
+      "MODE_PROFILE_GID": "",
+      "IS_TEMP_CONTROL": "",
+      "REQ_EQPMT_GROUP_PROFILE_GID": "",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": "",
+      "COMMODITY_DESCRIPTION": "Biscoitos, Cookies, etc (Quando consolidado com Choco, o veículo deve ser climatizado)"
+    },
+    {
+      "COMMODITY_GID": "BAU.PAO",
+      "COMMODITY_XID": "PAO",
+      "COMMODITY_NAME": "PAO",
+      "TEMPERATURE_CONTROL_GID": "",
+      "MODE_PROFILE_GID": "",
+      "IS_TEMP_CONTROL": "",
+      "REQ_EQPMT_GROUP_PROFILE_GID": "",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": "",
+      "COMMODITY_DESCRIPTION": "Pao de forma, Bisnaguinha, Pao de hot-dog (Quando consolidado com Choco, o veículo deve ser climatizado)"
+    },
+    {
+      "COMMODITY_GID": "BAU.SAZONAL",
+      "COMMODITY_XID": "SAZONAL",
+      "COMMODITY_NAME": "SAZONAL",
+      "TEMPERATURE_CONTROL_GID": "",
+      "MODE_PROFILE_GID": "",
+      "IS_TEMP_CONTROL": "",
+      "REQ_EQPMT_GROUP_PROFILE_GID": "",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": "",
+      "COMMODITY_DESCRIPTION": "Produtos para Campanha Natal (Panetone, Chocotone) e Campanha Páscoa (Colomba Pascal) (Quando consolidado com Choco, o veículo deve ser climatizado)"
+    }
+  ]
+}

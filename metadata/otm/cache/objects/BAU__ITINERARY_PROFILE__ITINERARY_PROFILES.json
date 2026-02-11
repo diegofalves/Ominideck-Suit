@@ -1,0 +1,98 @@
+{
+  "cacheType": "OTM_OBJECT_CACHE",
+  "version": "1.0",
+  "generatedAt": "2026-02-10T22:43:35Z",
+  "source": "update_otm_object_cache.py",
+  "object": {
+    "name": "Itinerary Profiles",
+    "groupId": "PLANNING",
+    "objectType": "ITINERARY_PROFILE",
+    "otmTable": "ITINERARY_PROFILE",
+    "domainName": "BAU",
+    "sequence": 7,
+    "deploymentType": "MIGRATION_PROJECT"
+  },
+  "extraction": {
+    "technicalContentType": "SQL",
+    "rootName": "ITINERARY_PROFILE",
+    "query": "SELECT\n  IP.ITINERARY_PROFILE_GID,\n  IP.ITINERARY_PROFILE_XID,\n  IP.ITINERARY_PROFILE_NAME,\n  IP.IS_COMPATIBLE,\n  IP.DOMAIN_NAME,\n  IPD.ITINERARY_GID,\n  IPD.DOMAIN_NAME AS DETAIL_DOMAIN_NAME\nFROM ITINERARY_PROFILE IP\nJOIN ITINERARY_PROFILE_D IPD\n  ON IP.ITINERARY_PROFILE_GID = IPD.ITINERARY_PROFILE_GID\nWHERE\n  IP.DOMAIN_NAME = 'BAU'\nORDER BY\n  IP.ITINERARY_PROFILE_XID,\n  IPD.ITINERARY_GID",
+    "normalizedRowCount": 5,
+    "nonSchemaFieldsDetected": [
+      "DETAIL_DOMAIN_NAME",
+      "ITINERARY_GID"
+    ]
+  },
+  "schema": {
+    "owner": "glogowner",
+    "tableName": "itinerary_profile",
+    "columnCount": 9,
+    "columns": [
+      "ITINERARY_PROFILE_GID",
+      "ITINERARY_PROFILE_XID",
+      "ITINERARY_PROFILE_NAME",
+      "IS_COMPATIBLE",
+      "DOMAIN_NAME",
+      "INSERT_USER",
+      "INSERT_DATE",
+      "UPDATE_USER",
+      "UPDATE_DATE"
+    ]
+  },
+  "rows": [
+    {
+      "ITINERARY_PROFILE_GID": "BAU.BAU_ITI_PROFILE_OV",
+      "ITINERARY_PROFILE_XID": "BAU_ITI_PROFILE_OV",
+      "ITINERARY_PROFILE_NAME": "",
+      "IS_COMPATIBLE": "Y",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": ""
+    },
+    {
+      "ITINERARY_PROFILE_GID": "BAU.BAU_ITI_PROFILE_OV",
+      "ITINERARY_PROFILE_XID": "BAU_ITI_PROFILE_OV",
+      "ITINERARY_PROFILE_NAME": "",
+      "IS_COMPATIBLE": "Y",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": ""
+    },
+    {
+      "ITINERARY_PROFILE_GID": "BAU.BAU_ITI_PROFILE_RED",
+      "ITINERARY_PROFILE_XID": "BAU_ITI_PROFILE_RED",
+      "ITINERARY_PROFILE_NAME": "",
+      "IS_COMPATIBLE": "Y",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": ""
+    },
+    {
+      "ITINERARY_PROFILE_GID": "BAU.BAU_ITI_PROFILE_REM",
+      "ITINERARY_PROFILE_XID": "BAU_ITI_PROFILE_REM",
+      "ITINERARY_PROFILE_NAME": "",
+      "IS_COMPATIBLE": "Y",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": ""
+    },
+    {
+      "ITINERARY_PROFILE_GID": "BAU.BAU_ITI_PROFILE_REM",
+      "ITINERARY_PROFILE_XID": "BAU_ITI_PROFILE_REM",
+      "ITINERARY_PROFILE_NAME": "",
+      "IS_COMPATIBLE": "Y",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": ""
+    }
+  ]
+}
