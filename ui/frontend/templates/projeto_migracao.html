@@ -394,14 +394,14 @@
     .group-objects-table th:nth-child(1) { width: 4% !important; text-align: center !important; }
     .group-objects-table th:nth-child(2) { width: 18% !important; }
     .group-objects-table th:nth-child(3) { width: 26% !important; }
-    .group-objects-table th:nth-child(4) { width: 12% !important; }
+    .group-objects-table th:nth-child(4) { width: 15% !important; }
     .group-objects-table th:nth-child(5) {
       width: 1% !important;
       white-space: nowrap !important;
     }
     .group-objects-table th:nth-child(6) { width: 9% !important; }
     .group-objects-table th:nth-child(7) {
-      width: 9% !important;
+      width: 6% !important;
       text-align: center !important;
       padding-left: 14px !important;
       padding-right: 14px !important;
@@ -427,14 +427,14 @@
     .group-objects-table td:nth-child(1) { width: 4% !important; text-align: center !important; }
     .group-objects-table td:nth-child(2) { width: 18% !important; }
     .group-objects-table td:nth-child(3) { width: 26% !important; }
-    .group-objects-table td:nth-child(4) { width: 12% !important; }
+    .group-objects-table td:nth-child(4) { width: 15% !important; }
     .group-objects-table td:nth-child(5) {
       width: 1% !important;
       white-space: nowrap !important;
     }
     .group-objects-table td:nth-child(6) { width: 9% !important; }
     .group-objects-table td:nth-child(7) {
-      width: 9% !important;
+      width: 6% !important;
       text-align: center !important;
       padding-left: 14px !important;
       padding-right: 14px !important;
@@ -1173,11 +1173,11 @@
             {% endif %}
             <tr class="{% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}" style="border-bottom: 1px solid #eee;">
               <td style="padding: 2px 8px; text-align: center; color: #666;">
-                {{ 0 if is_special_group else manual_group_rank.value }}
+                {{ "—" if is_special_group else manual_group_rank.value }}
               </td>
               <td style="padding: 2px 8px; white-space: nowrap;"><strong>{{ g.label }}</strong></td>
               <td style="padding: 2px 8px; color: #666; white-space: normal;">{{ g.description if g.description is defined else 'Sem descrição' }}</td>
-              <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.sequence }}º</td>
+              <td style="text-align: center; padding: 2px 8px; color: #666;">{{ "—" if is_special_group else (g.sequence ~ "º") }}</td>
               <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.objects|length if g.objects else 0 }}</td>
               <td class="actions-cell" style="text-align: center;">
                 <button type="button" class="icon-btn" onclick="submitProjectAction({'active_group_id': '{{ g.group_id }}', 'reset_edit_mode': '1'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar grupo">✏️</button>
@@ -1258,10 +1258,10 @@
               <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 72px;">#</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 176px;">Nome Funcional</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 324px;">Descrição Funcional</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 170px;">Tabela OTM</th>
+              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 220px;">Tabela OTM</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057;">Dominio</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 110px;">Tipo Deploy</th>
-              <th style="padding: 10px 14px; text-align: center; font-weight: 600; color: #495057; width: 90px;">Resp.</th>
+              <th style="padding: 10px 14px; text-align: center; font-weight: 600; color: #495057; width: 70px;">Resp.</th>
               <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">📝 Doc.</th>
               <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">📦 Mig.</th>
               <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">💾 Exp.</th>
@@ -1523,8 +1523,14 @@
         Edição do Item — {{ current_object.name if current_object and current_object.name else 'Novo Item' }}
       </legend>
 
+      {% set active_group_is_special = (active_group.group_id|string|upper in ['SEM_GRUPO', 'GROUP_0', 'IGNORADOS']) %}
       <p style="font-size: 13px; color: #555; margin-bottom: 12px;">
-        Grupo selecionado: <strong>{{ active_group.label }}</strong> ({{ active_group.sequence }}º no fluxo) ·
+        Grupo selecionado: <strong>{{ active_group.label }}</strong>
+        {% if active_group_is_special %}
+          (grupo de sistema) ·
+        {% else %}
+          ({{ active_group.sequence }}º no fluxo) ·
+        {% endif %}
         {% if edit_object_index >= 0 %}
           Editando item #{{ edit_object_index + 1 }}
         {% else %}
