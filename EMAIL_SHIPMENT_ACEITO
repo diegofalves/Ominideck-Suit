@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:otm="http://xmlns.oracle.com/apps/otm/transmission/v6.4" exclude-result-prefixes="otm" version="1.0">
+  <xsl:output method="html" encoding="UTF-8"/>
+
+  <xsl:template name="format-date-br">
+    <xsl:param name="dt"/>
+    <xsl:variable name="s" select="normalize-space($dt)"/>
+    <xsl:choose>
+      <xsl:when test="string-length($s) &gt;= 19 and substring($s, 5, 1) = '-' and substring($s, 8, 1) = '-'">
+        <xsl:value-of select="concat(substring($s, 9, 2), '/', substring($s, 6, 2), '/', substring($s, 1, 4), substring($s, 11))"/>
+      </xsl:when>
+      <xsl:when test="string-length($s) = 10 and substring($s, 5, 1) = '-' and substring($s, 8, 1) = '-'">
+        <xsl:value-of select="concat(substring($s, 9, 2), '/', substring($s, 6, 2), '/', substring($s, 1, 4))"/>
+      </xsl:when>
+      <xsl:when test="string-length($s) &gt;= 14 and translate(substring($s, 1, 14), '0123456789', '') = ''">
+        <xsl:value-of select="concat(substring($s, 7, 2), '/', substring($s, 5, 2), '/', substring($s, 1, 4), ' ', substring($s, 9, 2), ':', substring($s, 11, 2), ':', substring($s, 13, 2))"/>
+      </xsl:when>
+      <xsl:when test="string-length($s) &gt;= 8 and translate(substring($s, 1, 8), '0123456789', '') = ''">
+        <xsl:value-of select="concat(substring($s, 7, 2), '/', substring($s, 5, 2), '/', substring($s, 1, 4))"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$s"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="format-location">
+    <xsl:param name="loc"/>
+    <xsl:param name="fallbackXid"/>
+
+    <xsl:variable name="locName" select="normalize-space($loc/otm:LocationName)"/>
+    <xsl:variable name="locXid" select="normalize-space($loc/otm:LocationGid/otm:Gid/otm:Xid)"/>
+    <xsl:variable name="city" select="normalize-space($loc/otm:Address/otm:City)"/>
+    <xsl:variable name="state" select="normalize-space(($loc/otm:Address/otm:ProvinceCode | $loc/otm:Address/otm:Province)[1])"/>
+    <xsl:variable name="postal" select="normalize-space($loc/otm:Address/otm:PostalCode)"/>
+
+    <xsl:choose>
+      <xsl:when test="$locName != ''">
+        <xsl:value-of select="$locName"/>
+        <xsl:variable name="xidToShow">
+          <xsl:choose>
+            <xsl:when test="$locXid != ''">
+              <xsl:value-of select="$locXid"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="normalize-space($fallbackXid)"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:if test="normalize-space($xidToShow) != ''">
+          <xsl:text> (</xsl:text>
+          <xsl:value-of select="normalize-space($xidToShow)"/>
+          <xsl:text>)</xsl:text>
+        </xsl:if>
+      </xsl:when>
+      <xsl:when test="$locXid != ''">
+        <xsl:value-of select="$locXid"/>
+      </xsl:when>
+      <xsl:when test="normalize-space($fallbackXid) != ''">
+        <xsl:value-of select="normalize-space($fallbackXid)"/>
+      </xsl:when>
+      <xsl:otherwise>-</xsl:otherwise>
+    </xsl:choose>
+
+    <xsl:if test="$city != '' or $state != '' or $postal != ''">
+      <br/>
+      <xsl:if test="$city != ''">
+        <xsl:value-of select="$city"/>
+      </xsl:if>
+      <xsl:if test="$state != ''">
+        <xsl:if test="$city != ''">
+          <xsl:text>/</xsl:text>
+        </xsl:if>
+        <xsl:value-of select="$state"/>
+      </xsl:if>
+      <xsl:if test="$postal != ''">
+        <xsl:if test="$city != '' or $state != ''">
+          <xsl:text> - </xsl:text>
+        </xsl:if>
+        <xsl:text>CEP </xsl:text>
+        <xsl:value-of select="$postal"/>
+      </xsl:if>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="format-location-detail">
+    <xsl:param name="loc"/>
+    <xsl:variable name="locName" select="normalize-space($loc/otm:LocationName)"/>
+    <xsl:variable name="city" select="normalize-space($loc/otm:Address/otm:City)"/>
+    <xsl:variable name="state" select="normalize-space(($loc/otm:Address/otm:ProvinceCode | $loc/otm:Address/otm:Province)[1])"/>
+    <xsl:variable name="postal" select="normalize-space($loc/otm:Address/otm:PostalCode)"/>
+    <xsl:variable name="hasCityStatePostal" select="$city != '' or $state != '' or $postal != ''"/>
+
+    <xsl:choose>
+      <xsl:when test="$locName != ''">
+        <xsl:value-of select="$locName"/>
+        <xsl:if test="$hasCityStatePostal">
+          <br/>
+          <xsl:if test="$city != ''">
+            <xsl:value-of select="$city"/>
+          </xsl:if>
+          <xsl:if test="$state != ''">
+            <xsl:if test="$city != ''">
+              <xsl:text>/</xsl:text>
+            </xsl:if>
+            <xsl:value-of select="$state"/>
+          </xsl:if>
+          <xsl:if test="$postal != ''">
+            <xsl:if test="$city != '' or $state != ''">
+              <xsl:text> - </xsl:text>
+            </xsl:if>
+            <xsl:text>CEP </xsl:text>
+            <xsl:value-of select="$postal"/>
+          </xsl:if>
+        </xsl:if>
+      </xsl:when>
+      <xsl:when test="$hasCityStatePostal">
+        <xsl:if test="$city != ''">
+          <xsl:value-of select="$city"/>
+        </xsl:if>
+        <xsl:if test="$state != ''">
+          <xsl:if test="$city != ''">
+            <xsl:text>/</xsl:text>
+          </xsl:if>
+          <xsl:value-of select="$state"/>
+        </xsl:if>
+        <xsl:if test="$postal != ''">
+          <xsl:if test="$city != '' or $state != ''">
+            <xsl:text> - </xsl:text>
+          </xsl:if>
+          <xsl:text>CEP </xsl:text>
+          <xsl:value-of select="$postal"/>
+        </xsl:if>
+      </xsl:when>
+      <xsl:otherwise>-</xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="/notify">
+    <xsl:variable name="refnumNodes" select="Shipment/RefnumList/Refnum | Shipment/ShipmentRefnum | Shipment/ShipmentHeader/RefnumList/Refnum | Shipment/ShipmentHeader/ShipmentRefnum | Shipment/References/Reference | Shipment/ShipmentHeader/References/Reference"/>
+
+    <xsl:variable name="refnumDtNode" select="$refnumNodes[RefnumQualifierGid='BAU.RFN_SHP_NUMERO_DT' or RefnumQualifierGid='RFN_SHP_NUMERO_DT' or ShipmentRefnumQualifierGid='BAU.RFN_SHP_NUMERO_DT' or ShipmentRefnumQualifierGid='RFN_SHP_NUMERO_DT' or RefnumQualifierGid/Gid/Xid='RFN_SHP_NUMERO_DT' or ShipmentRefnumQualifierGid/Gid/Xid='RFN_SHP_NUMERO_DT' or RefnumQualifierGid/Xid='RFN_SHP_NUMERO_DT' or ShipmentRefnumQualifierGid/Xid='RFN_SHP_NUMERO_DT' or @Qual='BAU.RFN_SHP_NUMERO_DT' or @Qual='RFN_SHP_NUMERO_DT' or @QUAL='BAU.RFN_SHP_NUMERO_DT' or @QUAL='RFN_SHP_NUMERO_DT' or @qual='BAU.RFN_SHP_NUMERO_DT' or @qual='RFN_SHP_NUMERO_DT'][1]"/>
+    <xsl:variable name="refnumDt" select="normalize-space(($refnumDtNode/RefnumValue | $refnumDtNode/ShipmentRefnumValue | $refnumDtNode/@Value | $refnumDtNode/@value | $refnumDtNode/text())[1])"/>
+
+    <xsl:variable name="refnumPalletsNode" select="$refnumNodes[RefnumQualifierGid='BAU.RFN_SHP_QTD_PALLETS' or RefnumQualifierGid='RFN_SHP_QTD_PALLETS' or ShipmentRefnumQualifierGid='BAU.RFN_SHP_QTD_PALLETS' or ShipmentRefnumQualifierGid='RFN_SHP_QTD_PALLETS' or RefnumQualifierGid/Gid/Xid='RFN_SHP_QTD_PALLETS' or ShipmentRefnumQualifierGid/Gid/Xid='RFN_SHP_QTD_PALLETS' or RefnumQualifierGid/Xid='RFN_SHP_QTD_PALLETS' or ShipmentRefnumQualifierGid/Xid='RFN_SHP_QTD_PALLETS' or @Qual='BAU.RFN_SHP_QTD_PALLETS' or @Qual='RFN_SHP_QTD_PALLETS' or @QUAL='BAU.RFN_SHP_QTD_PALLETS' or @QUAL='RFN_SHP_QTD_PALLETS' or @qual='BAU.RFN_SHP_QTD_PALLETS' or @qual='RFN_SHP_QTD_PALLETS'][1]"/>
+    <xsl:variable name="refnumPallets" select="normalize-space(($refnumPalletsNode/RefnumValue | $refnumPalletsNode/ShipmentRefnumValue | $refnumPalletsNode/@Value | $refnumPalletsNode/@value | $refnumPalletsNode/text())[1])"/>
+
+    <xsl:variable name="refnumCaixasEstivadoNode" select="$refnumNodes[RefnumQualifierGid='BAU.RFN_SHP_QTD_CAIXAS_ESTIVADO' or RefnumQualifierGid='RFN_SHP_QTD_CAIXAS_ESTIVADO' or ShipmentRefnumQualifierGid='BAU.RFN_SHP_QTD_CAIXAS_ESTIVADO' or ShipmentRefnumQualifierGid='RFN_SHP_QTD_CAIXAS_ESTIVADO' or RefnumQualifierGid/Gid/Xid='RFN_SHP_QTD_CAIXAS_ESTIVADO' or ShipmentRefnumQualifierGid/Gid/Xid='RFN_SHP_QTD_CAIXAS_ESTIVADO' or RefnumQualifierGid/Xid='RFN_SHP_QTD_CAIXAS_ESTIVADO' or ShipmentRefnumQualifierGid/Xid='RFN_SHP_QTD_CAIXAS_ESTIVADO' or @Qual='BAU.RFN_SHP_QTD_CAIXAS_ESTIVADO' or @Qual='RFN_SHP_QTD_CAIXAS_ESTIVADO' or @QUAL='BAU.RFN_SHP_QTD_CAIXAS_ESTIVADO' or @QUAL='RFN_SHP_QTD_CAIXAS_ESTIVADO' or @qual='BAU.RFN_SHP_QTD_CAIXAS_ESTIVADO' or @qual='RFN_SHP_QTD_CAIXAS_ESTIVADO'][1]"/>
+    <xsl:variable name="refnumCaixasEstivado" select="normalize-space(($refnumCaixasEstivadoNode/RefnumValue | $refnumCaixasEstivadoNode/ShipmentRefnumValue | $refnumCaixasEstivadoNode/@Value | $refnumCaixasEstivadoNode/@value | $refnumCaixasEstivadoNode/text())[1])"/>
+
+    <xsl:variable name="refnumTipoCarregamentoNode" select="$refnumNodes[RefnumQualifierGid='BAU.RFN_SHP_TIPO_CARREGAMENTO' or RefnumQualifierGid='RFN_SHP_TIPO_CARREGAMENTO' or ShipmentRefnumQualifierGid='BAU.RFN_SHP_TIPO_CARREGAMENTO' or ShipmentRefnumQualifierGid='RFN_SHP_TIPO_CARREGAMENTO' or RefnumQualifierGid/Gid/Xid='RFN_SHP_TIPO_CARREGAMENTO' or ShipmentRefnumQualifierGid/Gid/Xid='RFN_SHP_TIPO_CARREGAMENTO' or RefnumQualifierGid/Xid='RFN_SHP_TIPO_CARREGAMENTO' or ShipmentRefnumQualifierGid/Xid='RFN_SHP_TIPO_CARREGAMENTO' or @Qual='BAU.RFN_SHP_TIPO_CARREGAMENTO' or @Qual='RFN_SHP_TIPO_CARREGAMENTO' or @QUAL='BAU.RFN_SHP_TIPO_CARREGAMENTO' or @QUAL='RFN_SHP_TIPO_CARREGAMENTO' or @qual='BAU.RFN_SHP_TIPO_CARREGAMENTO' or @qual='RFN_SHP_TIPO_CARREGAMENTO'][1]"/>
+    <xsl:variable name="refnumTipoCarregamento" select="normalize-space(($refnumTipoCarregamentoNode/RefnumValue | $refnumTipoCarregamentoNode/ShipmentRefnumValue | $refnumTipoCarregamentoNode/@Value | $refnumTipoCarregamentoNode/@value | $refnumTipoCarregamentoNode/text())[1])"/>
+
+    <xsl:variable name="refnumTipoEmbarqueNode" select="$refnumNodes[RefnumQualifierGid='BAU.RFN_SHP_TIPO_EMBARQUE' or RefnumQualifierGid='RFN_SHP_TIPO_EMBARQUE' or ShipmentRefnumQualifierGid='BAU.RFN_SHP_TIPO_EMBARQUE' or ShipmentRefnumQualifierGid='RFN_SHP_TIPO_EMBARQUE' or RefnumQualifierGid/Gid/Xid='RFN_SHP_TIPO_EMBARQUE' or ShipmentRefnumQualifierGid/Gid/Xid='RFN_SHP_TIPO_EMBARQUE' or RefnumQualifierGid/Xid='RFN_SHP_TIPO_EMBARQUE' or ShipmentRefnumQualifierGid/Xid='RFN_SHP_TIPO_EMBARQUE' or @Qual='BAU.RFN_SHP_TIPO_EMBARQUE' or @Qual='RFN_SHP_TIPO_EMBARQUE' or @QUAL='BAU.RFN_SHP_TIPO_EMBARQUE' or @QUAL='RFN_SHP_TIPO_EMBARQUE' or @qual='BAU.RFN_SHP_TIPO_EMBARQUE' or @qual='RFN_SHP_TIPO_EMBARQUE'][1]"/>
+    <xsl:variable name="refnumTipoEmbarque" select="normalize-space(($refnumTipoEmbarqueNode/RefnumValue | $refnumTipoEmbarqueNode/ShipmentRefnumValue | $refnumTipoEmbarqueNode/@Value | $refnumTipoEmbarqueNode/@value | $refnumTipoEmbarqueNode/text())[1])"/>
+
+    <xsl:variable name="shipmentXid" select="normalize-space(Shipment/Xid)"/>
+    <xsl:variable name="shipmentRef" select="normalize-space(Shipment/Reference)"/>
+
+    <xsl:variable name="schemaShipmentMatch" select="schema//otm:Shipment[normalize-space(otm:ShipmentHeader/otm:ShipmentGid/otm:Gid/otm:Xid) = $shipmentXid or concat(normalize-space(otm:ShipmentHeader/otm:ShipmentGid/otm:Gid/otm:DomainName), '.', normalize-space(otm:ShipmentHeader/otm:ShipmentGid/otm:Gid/otm:Xid)) = $shipmentRef][1]"/>
+    <xsl:variable name="schemaShipment" select="$schemaShipmentMatch | schema//otm:Shipment[not($schemaShipmentMatch)][1]"/>
+    <xsl:variable name="schemaShipmentHeader" select="$schemaShipment/otm:ShipmentHeader"/>
+    <xsl:variable name="schemaLocations" select="/notify/schema//otm:Location"/>
+    <xsl:variable name="schemaReleaseIds" select="schema//otm:Release/otm:ReleaseGid/otm:Gid/otm:Xid"/>
+    <xsl:variable name="orderReleaseList">
+      <xsl:for-each select="$schemaReleaseIds">
+        <xsl:variable name="rid" select="normalize-space(.)"/>
+        <xsl:if test="$rid != ''">
+          <xsl:if test="position() &gt; 1">
+            <xsl:text>,</xsl:text>
+          </xsl:if>
+          <xsl:value-of select="$rid"/>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="shipmentIdDisplay">
+      <xsl:choose>
+        <xsl:when test="$shipmentRef != ''">
+          <xsl:value-of select="$shipmentRef"/>
+        </xsl:when>
+        <xsl:when test="$shipmentXid != ''">
+          <xsl:value-of select="$shipmentXid"/>
+        </xsl:when>
+        <xsl:when test="normalize-space($schemaShipmentHeader/otm:ShipmentGid/otm:Gid/otm:Xid) != ''">
+          <xsl:value-of select="concat(normalize-space($schemaShipmentHeader/otm:ShipmentGid/otm:Gid/otm:DomainName), '.', normalize-space($schemaShipmentHeader/otm:ShipmentGid/otm:Gid/otm:Xid))"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="tipoCarga" select="normalize-space((Shipment/Attribute2 | Shipment/ShipmentHeader/Attribute2 | Shipment/ShipmentHeader2/Attribute2 | $schemaShipment/otm:Attribute2 | $schemaShipmentHeader/otm:Attribute2 | $schemaShipment/otm:ShipmentHeader2/otm:Attribute2)[1])"/>
+    <xsl:variable name="tipoCargaFinal">
+      <xsl:choose>
+        <xsl:when test="$refnumTipoCarregamento != ''">
+          <xsl:value-of select="$refnumTipoCarregamento"/>
+        </xsl:when>
+        <xsl:when test="$tipoCarga != ''">
+          <xsl:value-of select="$tipoCarga"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="palletsNum" select="number($refnumPallets)"/>
+    <xsl:variable name="caixasNum" select="number($refnumCaixasEstivado)"/>
+    <xsl:variable name="palletsIsNumber" select="$palletsNum = $palletsNum"/>
+    <xsl:variable name="caixasIsNumber" select="$caixasNum = $caixasNum"/>
+    <xsl:variable name="tipoCarregamento">
+      <xsl:choose>
+        <xsl:when test="$palletsIsNumber and $caixasIsNumber and $caixasNum = 0 and $palletsNum != 0">
+          <xsl:text>PALETIZADO</xsl:text>
+        </xsl:when>
+        <xsl:when test="$palletsIsNumber and $caixasIsNumber and $palletsNum = 0 and $caixasNum != 0">
+          <xsl:text>ESTIVADA</xsl:text>
+        </xsl:when>
+        <xsl:when test="$palletsIsNumber and $caixasIsNumber and $palletsNum != 0 and $caixasNum != 0">
+          <xsl:text>MISTO</xsl:text>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="pesoTotalValue" select="normalize-space((Shipment/TotalWeightVolume/WeightVolume/Weight/WeightValue | Shipment/TotalWeightVolume/Weight/WeightValue | Shipment/TotalGrossWeightVolume/Weight/WeightValue | Shipment/TotalGrossWeight/WeightValue | Shipment/TotalGrossWeight/Weight/WeightValue | Shipment/TotalWeight/WeightValue | Shipment/TotalWeight/Weight/WeightValue | $schemaShipmentHeader/otm:TotalWeightVolume/otm:WeightVolume/otm:Weight/otm:WeightValue | $schemaShipmentHeader/otm:TotalGrossWeightVolume/otm:Weight/otm:WeightValue | $schemaShipmentHeader/otm:TotalNetWeightVolume/otm:Weight/otm:WeightValue)[1])"/>
+    <xsl:variable name="pesoTotalUom" select="normalize-space((Shipment/TotalWeightVolume/WeightVolume/Weight/WeightUOMGid/Gid/Xid | Shipment/TotalWeightVolume/WeightVolume/Weight/WeightUOMGid/Xid | Shipment/TotalWeightVolume/Weight/WeightUOMGid/Gid/Xid | Shipment/TotalWeightVolume/Weight/WeightUOMGid/Xid | Shipment/TotalGrossWeightVolume/Weight/WeightUOMGid/Gid/Xid | Shipment/TotalGrossWeightVolume/Weight/WeightUOMGid/Xid | Shipment/TotalGrossWeight/WeightUOMGid/Gid/Xid | Shipment/TotalGrossWeight/WeightUOMGid/Xid | Shipment/TotalWeight/WeightUOMGid/Gid/Xid | Shipment/TotalWeight/WeightUOMGid/Xid | $schemaShipmentHeader/otm:TotalWeightVolume/otm:WeightVolume/otm:Weight/otm:WeightUOMGid/otm:Gid/otm:Xid | $schemaShipmentHeader/otm:TotalGrossWeightVolume/otm:Weight/otm:WeightUOMGid/otm:Gid/otm:Xid | $schemaShipmentHeader/otm:TotalNetWeightVolume/otm:Weight/otm:WeightUOMGid/otm:Gid/otm:Xid)[1])"/>
+    <xsl:variable name="pesoTotal">
+      <xsl:choose>
+        <xsl:when test="$pesoTotalValue != '' and number($pesoTotalValue) = number($pesoTotalValue)">
+          <xsl:value-of select="format-number(number($pesoTotalValue), '#0.000')"/>
+          <xsl:if test="$pesoTotalUom != ''">
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="$pesoTotalUom"/>
+          </xsl:if>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/TotalWeight) != ''">
+          <xsl:value-of select="normalize-space(Shipment/TotalWeight)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/TotalGrossWeight) != ''">
+          <xsl:value-of select="normalize-space(Shipment/TotalGrossWeight)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="volumeTotalValue" select="normalize-space((Shipment/TotalWeightVolume/WeightVolume/Volume/VolumeValue | Shipment/TotalWeightVolume/Volume/VolumeValue | Shipment/TotalGrossWeightVolume/Volume/VolumeValue | Shipment/TotalGrossVolume/VolumeValue | Shipment/TotalGrossVolume/Volume/VolumeValue | Shipment/TotalVolume/VolumeValue | Shipment/TotalVolume/Volume/VolumeValue | $schemaShipmentHeader/otm:TotalWeightVolume/otm:WeightVolume/otm:Volume/otm:VolumeValue | $schemaShipmentHeader/otm:TotalGrossWeightVolume/otm:Volume/otm:VolumeValue | $schemaShipmentHeader/otm:TotalNetWeightVolume/otm:Volume/otm:VolumeValue)[1])"/>
+    <xsl:variable name="volumeTotalUom" select="normalize-space((Shipment/TotalWeightVolume/WeightVolume/Volume/VolumeUOMGid/Gid/Xid | Shipment/TotalWeightVolume/WeightVolume/Volume/VolumeUOMGid/Xid | Shipment/TotalWeightVolume/Volume/VolumeUOMGid/Gid/Xid | Shipment/TotalWeightVolume/Volume/VolumeUOMGid/Xid | Shipment/TotalGrossWeightVolume/Volume/VolumeUOMGid/Gid/Xid | Shipment/TotalGrossWeightVolume/Volume/VolumeUOMGid/Xid | Shipment/TotalGrossVolume/VolumeUOMGid/Gid/Xid | Shipment/TotalGrossVolume/VolumeUOMGid/Xid | Shipment/TotalVolume/VolumeUOMGid/Gid/Xid | Shipment/TotalVolume/VolumeUOMGid/Xid | $schemaShipmentHeader/otm:TotalWeightVolume/otm:WeightVolume/otm:Volume/otm:VolumeUOMGid/otm:Gid/otm:Xid | $schemaShipmentHeader/otm:TotalGrossWeightVolume/otm:Volume/otm:VolumeUOMGid/otm:Gid/otm:Xid | $schemaShipmentHeader/otm:TotalNetWeightVolume/otm:Volume/otm:VolumeUOMGid/otm:Gid/otm:Xid)[1])"/>
+    <xsl:variable name="volumeTotal">
+      <xsl:choose>
+        <xsl:when test="$volumeTotalValue != '' and number($volumeTotalValue) = number($volumeTotalValue)">
+          <xsl:value-of select="format-number(number($volumeTotalValue), '#0.000')"/>
+          <xsl:if test="$volumeTotalUom != ''">
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="$volumeTotalUom"/>
+          </xsl:if>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/TotalVolume) != ''">
+          <xsl:value-of select="normalize-space(Shipment/TotalVolume)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/TotalGrossVolume) != ''">
+          <xsl:value-of select="normalize-space(Shipment/TotalGrossVolume)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="numParadas">
+      <xsl:choose>
+        <xsl:when test="normalize-space(Shipment/StopCount) != ''">
+          <xsl:value-of select="normalize-space(Shipment/StopCount)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/NumberOfStops) != ''">
+          <xsl:value-of select="normalize-space(Shipment/NumberOfStops)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space($schemaShipmentHeader/otm:StopCount) != ''">
+          <xsl:value-of select="normalize-space($schemaShipmentHeader/otm:StopCount)"/>
+        </xsl:when>
+        <xsl:when test="StopInfo/Stop">
+          <xsl:value-of select="count(StopInfo/Stop)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="tipoEquipamentoXid" select="normalize-space((Shipment/FirstEquipmentGroupGid/Gid/Xid | Shipment/FirstEquipmentGroupGid/Xid | Shipment/EquipmentGroupGid/Gid/Xid | Shipment/EquipmentGroupGid/Xid | Shipment/EquipmentGroupProfileGid/Gid/Xid | Shipment/EquipmentGroupProfileGid/Xid | Shipment/SEquipment/EquipmentGroupGid/Gid/Xid | Shipment/SEquipment/EquipmentGroupGid/Xid | $schemaShipment/otm:FirstEquipmentGroupGid/otm:Gid/otm:Xid | $schemaShipment/otm:EquipmentGroupGid/otm:Gid/otm:Xid | $schemaShipment/otm:EquipmentGroupProfileGid/otm:Gid/otm:Xid | $schemaShipment/otm:SEquipment/otm:EquipmentGroupGid/otm:Gid/otm:Xid | $schemaShipment/otm:SEquipment/otm:EquipmentGroupGid/otm:Xid)[1])"/>
+    <xsl:variable name="tipoEquipamento">
+      <xsl:choose>
+        <xsl:when test="$tipoEquipamentoXid != ''">
+          <xsl:value-of select="$tipoEquipamentoXid"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/FirstEquipmentGroupGid) != ''">
+          <xsl:value-of select="normalize-space(Shipment/FirstEquipmentGroupGid)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/EquipmentGroupGid) != ''">
+          <xsl:value-of select="normalize-space(Shipment/EquipmentGroupGid)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/EquipmentGroupProfileGid) != ''">
+          <xsl:value-of select="normalize-space(Shipment/EquipmentGroupProfileGid)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="freteBaseAmountNodes" select="$schemaShipmentHeader/otm:ShipmentCost[normalize-space(otm:CostType) = 'B']/otm:Cost/otm:FinancialAmount/otm:MonetaryAmount"/>
+    <xsl:variable name="freteAcessAmountNodes" select="$schemaShipmentHeader/otm:ShipmentCost[normalize-space(otm:CostType) = 'A']/otm:Cost/otm:FinancialAmount/otm:MonetaryAmount"/>
+    <xsl:variable name="freteBaseTotal" select="sum($freteBaseAmountNodes)"/>
+    <xsl:variable name="freteAcessTotal" select="sum($freteAcessAmountNodes)"/>
+    <xsl:variable name="freteCurrency" select="normalize-space((($schemaShipmentHeader/otm:ShipmentCost[normalize-space(otm:CostType) = 'B'] | $schemaShipmentHeader/otm:ShipmentCost[normalize-space(otm:CostType) = 'A'])/otm:Cost/otm:FinancialAmount/otm:GlobalCurrencyCode | $schemaShipmentHeader/otm:TotalPlannedCost/otm:FinancialAmount/otm:GlobalCurrencyCode)[1])"/>
+    <xsl:variable name="freteTotalValue" select="normalize-space($schemaShipmentHeader/otm:TotalPlannedCost/otm:FinancialAmount/otm:MonetaryAmount)"/>
+    <xsl:variable name="freteTotal">
+      <xsl:choose>
+        <xsl:when test="$freteTotalValue != '' and number($freteTotalValue) = number($freteTotalValue)">
+          <xsl:value-of select="number($freteTotalValue)"/>
+        </xsl:when>
+        <xsl:when test="count($freteBaseAmountNodes) &gt; 0 or count($freteAcessAmountNodes) &gt; 0">
+          <xsl:value-of select="$freteBaseTotal + $freteAcessTotal"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="hasFrete" select="count($freteBaseAmountNodes) &gt; 0 or count($freteAcessAmountNodes) &gt; 0 or $freteTotalValue != ''"/>
+
+    <xsl:variable name="originName" select="normalize-space(Shipment/OriginLocation/LocationName)"/>
+    <xsl:variable name="originXid" select="normalize-space(Shipment/OriginLocation/LocationXid)"/>
+    <xsl:variable name="destName" select="normalize-space(Shipment/DestLocation/LocationName)"/>
+    <xsl:variable name="destXid" select="normalize-space(Shipment/DestLocation/LocationXid)"/>
+    <xsl:variable name="shipDate" select="normalize-space(Shipment/ShipDate)"/>
+    <xsl:variable name="plannedStart" select="normalize-space(($schemaShipmentHeader/otm:StartDt/otm:GLogDate | $schemaShipmentHeader/otm:LatestStartDt/otm:GLogDate)[1])"/>
+    <xsl:variable name="plannedEnd" select="normalize-space($schemaShipmentHeader/otm:EndDt/otm:GLogDate)"/>
+    <xsl:variable name="transportMode">
+      <xsl:choose>
+        <xsl:when test="normalize-space($schemaShipmentHeader/otm:TransportModeGid/otm:Gid/otm:Xid) != ''">
+          <xsl:value-of select="normalize-space($schemaShipmentHeader/otm:TransportModeGid/otm:Gid/otm:Xid)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space($schemaShipmentHeader/otm:TransportModeGid/otm:Xid) != ''">
+          <xsl:value-of select="normalize-space($schemaShipmentHeader/otm:TransportModeGid/otm:Xid)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/TransportModeGid/Gid/Xid) != ''">
+          <xsl:value-of select="normalize-space(Shipment/TransportModeGid/Gid/Xid)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/TransportModeGid/Xid) != ''">
+          <xsl:value-of select="normalize-space(Shipment/TransportModeGid/Xid)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="transportModeNorm" select="normalize-space(string($transportMode))"/>
+    <xsl:variable name="transportModeDisplay">
+      <xsl:choose>
+        <xsl:when test="$transportModeNorm = 'TL'">LOTACAO</xsl:when>
+        <xsl:when test="$transportModeNorm = 'LTL' or $transportModeNorm = 'BAU.LTL'">FRACIONADO</xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$transportModeNorm"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="originLocXid" select="normalize-space((StopInfo/Stop[1]/LocationXid | $schemaShipment/otm:ShipmentStop[1]/otm:LocationRef/otm:LocationGid/otm:Gid/otm:Xid)[1])"/>
+    <xsl:variable name="destLocXid" select="normalize-space((StopInfo/Stop[last()]/LocationXid | $schemaShipment/otm:ShipmentStop[last()]/otm:LocationRef/otm:LocationGid/otm:Gid/otm:Xid)[1])"/>
+    <xsl:variable name="schemaOriginLoc" select="schema//otm:Location[normalize-space(otm:LocationGid/otm:Gid/otm:Xid) = $originLocXid][1]"/>
+    <xsl:variable name="schemaDestLoc" select="schema//otm:Location[normalize-space(otm:LocationGid/otm:Gid/otm:Xid) = $destLocXid][1]"/>
+
+    <xsl:variable name="spName">
+      <xsl:choose>
+        <xsl:when test="normalize-space(ServiceProvider/ServiceProviderName) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/ServiceProviderName)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/Name) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Name)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProviderName) != ''">
+          <xsl:value-of select="normalize-space(ServiceProviderName)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'name')][1]) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'name')][1])"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/ServiceProviderName) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/ServiceProviderName)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Name) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Name)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProviderName) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProviderName)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'name')][1]) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'name')][1])"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="spId">
+      <xsl:choose>
+        <xsl:when test="normalize-space(ServiceProvider/ServiceProviderXid) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/ServiceProviderXid)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/Xid) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Xid)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'xid') or translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'id'][1]) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'xid') or translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'id'][1])"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/ServiceProviderXid) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/ServiceProviderXid)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Xid) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Xid)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="spEmail">
+      <xsl:choose>
+        <xsl:when test="normalize-space(ServiceProvider/EmailAddress) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/EmailAddress)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/Contact/EmailAddress) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Contact/EmailAddress)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/PrimaryContact/EmailAddress) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/PrimaryContact/EmailAddress)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'email')][1]) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'email')][1])"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/EmailAddress) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/EmailAddress)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Contact/EmailAddress) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Contact/EmailAddress)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/PrimaryContact/EmailAddress) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/PrimaryContact/EmailAddress)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'email')][1]) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'email')][1])"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="spPhone1">
+      <xsl:choose>
+        <xsl:when test="normalize-space(ServiceProvider/Phone1) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Phone1)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/Contact/Phone1) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Contact/Phone1)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/PrimaryContact/Phone1) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/PrimaryContact/Phone1)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/Phone) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Phone)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'phone')][1]) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'phone')][1])"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Phone1) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Phone1)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Contact/Phone1) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Contact/Phone1)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/PrimaryContact/Phone1) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/PrimaryContact/Phone1)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Phone) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Phone)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'phone')][1]) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'phone')][1])"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="spPhone2">
+      <xsl:choose>
+        <xsl:when test="normalize-space(ServiceProvider/Phone2) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Phone2)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/Contact/Phone2) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Contact/Phone2)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/PrimaryContact/Phone2) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/PrimaryContact/Phone2)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Phone2) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Phone2)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Contact/Phone2) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Contact/Phone2)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/PrimaryContact/Phone2) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/PrimaryContact/Phone2)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="spFax">
+      <xsl:choose>
+        <xsl:when test="normalize-space(ServiceProvider/Fax) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Fax)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/Contact/Fax) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/Contact/Fax)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/PrimaryContact/Fax) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/PrimaryContact/Fax)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'fax')][1]) != ''">
+          <xsl:value-of select="normalize-space(ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'fax')][1])"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Fax) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Fax)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/Contact/Fax) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/Contact/Fax)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/PrimaryContact/Fax) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/PrimaryContact/Fax)"/>
+        </xsl:when>
+        <xsl:when test="normalize-space(Shipment/ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'fax')][1]) != ''">
+          <xsl:value-of select="normalize-space(Shipment/ServiceProvider/*[contains(translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'fax')][1])"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="spOtmDomain" select="normalize-space(($schemaShipmentHeader/otm:ServiceProviderGid/otm:Gid/otm:DomainName)[1])"/>
+    <xsl:variable name="spOtmXid" select="normalize-space(($schemaShipmentHeader/otm:ServiceProviderGid/otm:Gid/otm:Xid | $schemaShipmentHeader/otm:ServiceProviderGid/otm:Xid)[1])"/>
+    <xsl:variable name="spOtmGid">
+      <xsl:choose>
+        <xsl:when test="$spOtmDomain != '' and $spOtmXid != ''">
+          <xsl:value-of select="concat($spOtmDomain, '.', $spOtmXid)"/>
+        </xsl:when>
+        <xsl:when test="$spOtmXid != ''">
+          <xsl:value-of select="$spOtmXid"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="spAliasGlog" select="normalize-space(($schemaShipmentHeader/otm:ServiceProviderAlias[normalize-space(otm:ServiceProviderAliasQualifierGid/otm:Gid/otm:Xid) = 'GLOG']/otm:ServiceProviderAliasValue)[1])"/>
+    <xsl:variable name="spSchemaLoc" select="$schemaLocations[normalize-space(otm:LocationGid/otm:Gid/otm:Xid) = $spOtmXid][1]"/>
+    <xsl:variable name="spSchemaName" select="normalize-space($spSchemaLoc/otm:LocationName)"/>
+    <xsl:variable name="spSchemaEmail" select="normalize-space(($spSchemaLoc/otm:Contact/otm:EmailAddress)[1])"/>
+    <xsl:variable name="spSchemaPhone" select="normalize-space(($spSchemaLoc/otm:Contact/otm:Phone1)[1])"/>
+    <xsl:variable name="spSchemaAddressLine" select="normalize-space(($spSchemaLoc/otm:Address/otm:AddressLines/otm:AddressLine)[1])"/>
+    <xsl:variable name="spSchemaCity" select="normalize-space($spSchemaLoc/otm:Address/otm:City)"/>
+    <xsl:variable name="spSchemaState" select="normalize-space(($spSchemaLoc/otm:Address/otm:ProvinceCode | $spSchemaLoc/otm:Address/otm:Province)[1])"/>
+    <xsl:variable name="spSchemaPostal" select="normalize-space($spSchemaLoc/otm:Address/otm:PostalCode)"/>
+    <xsl:variable name="spNameFinal">
+      <xsl:choose>
+        <xsl:when test="$spName != ''">
+          <xsl:value-of select="$spName"/>
+        </xsl:when>
+        <xsl:when test="$spSchemaName != ''">
+          <xsl:value-of select="$spSchemaName"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="spEmailFinal">
+      <xsl:choose>
+        <xsl:when test="normalize-space(string($spEmail)) != ''">
+          <xsl:value-of select="normalize-space(string($spEmail))"/>
+        </xsl:when>
+        <xsl:when test="$spSchemaEmail != ''">
+          <xsl:value-of select="$spSchemaEmail"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="spPhoneFinal">
+      <xsl:choose>
+        <xsl:when test="$spPhone1 != ''">
+          <xsl:value-of select="$spPhone1"/>
+        </xsl:when>
+        <xsl:when test="$spSchemaPhone != ''">
+          <xsl:value-of select="$spSchemaPhone"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="hasDetails" select="$originName != '' or $originXid != '' or $destName != '' or $destXid != '' or $shipDate != '' or $plannedStart != '' or $plannedEnd != '' or string($transportModeDisplay) != '' or $originLocXid != '' or $destLocXid != '' or $schemaOriginLoc or $schemaDestLoc"/>
+    <xsl:variable name="hasServiceProvider" select="$spName != '' or $spId != '' or string($spEmail) != '' or $spPhone1 != '' or $spPhone2 != '' or $spFax != '' or string($spOtmGid) != '' or $spAliasGlog != ''"/>
+    <xsl:variable name="otmUrlFixed" select="'https://otmgtm-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.com/GC3/glog.webserver.finder.WindowOpenFramesetServlet/nss?bcKey=MTc2NzYyODAwMTg5Mjox&amp;url=%2FGC3%2Fglog.webserver.finder.FinderServlet%3FbcKey%3Dnew%26query_name%3Dglog.server.query.shipment.BuyShipmentQuery%26finder_set_gid%3DBAU.BAU_SERVPROV_FLEET'"/>
+    <xsl:variable name="otmUrlNotify" select="normalize-space(Shipment/ShipmentManagementURL)"/>
+    <xsl:variable name="otmUrlObjectManager" select="normalize-space(ObjectManager)"/>
+    <xsl:variable name="otmUrl">
+      <xsl:choose>
+        <xsl:when test="$otmUrlFixed != ''">
+          <xsl:value-of select="$otmUrlFixed"/>
+        </xsl:when>
+        <xsl:when test="$otmUrlNotify != ''">
+          <xsl:value-of select="$otmUrlNotify"/>
+        </xsl:when>
+        <xsl:when test="$otmUrlObjectManager != ''">
+          <xsl:choose>
+            <xsl:when test="contains(substring-after($otmUrlObjectManager, 'http'), 'http')">
+              <xsl:value-of select="concat('http', substring-before(substring-after($otmUrlObjectManager, 'http'), 'http'))"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$otmUrlObjectManager"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+      <html>
+        <body style="font-family:Verdana, Arial, Helvetica; font-size:12px; color:#000066;">
+          <table width="600" cellpadding="4" cellspacing="0">
+              <tr>
+                <td>
+                  Prezado Analista,<br/><br/>
+                  <b>
+                    <xsl:choose>
+                      <xsl:when test="normalize-space(string($spNameFinal)) != ''">
+                        O transportador <xsl:value-of select="string($spNameFinal)"/> aceitou a viagem da Bauducco.
+                      </xsl:when>
+                      <xsl:otherwise>
+                        O transportador aceitou a viagem da Bauducco.
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </b><br/><br/>
+                  Consulte o OTM para visualizar os detalhes desta viagem.
+                  <xsl:if test="$otmUrl != ''">
+                    <br/><br/>
+                    <a href="{$otmUrl}">Abrir viagem no OTM</a>
+                  </xsl:if>
+                </td>
+              </tr>
+
+          <tr><td><hr/></td></tr>
+
+          <xsl:if test="$hasServiceProvider">
+            <tr><td><br/></td></tr>
+            <tr>
+              <td><b>Prestador de Serviço</b></td>
+            </tr>
+            <tr>
+              <td>
+                <table width="100%" cellpadding="3" cellspacing="0" border="1">
+                  <tr>
+                    <td>Nome</td>
+                    <td>
+                      <xsl:choose>
+                        <xsl:when test="normalize-space(string($spNameFinal)) != ''">
+                          <xsl:value-of select="string($spNameFinal)"/>
+                        </xsl:when>
+                        <xsl:otherwise>-</xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>ID OTM</td>
+                    <td>
+                      <xsl:choose>
+                        <xsl:when test="string($spOtmGid) != ''">
+                          <xsl:value-of select="string($spOtmGid)"/>
+                        </xsl:when>
+                        <xsl:otherwise>-</xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>
+                      <xsl:choose>
+                        <xsl:when test="normalize-space(string($spEmailFinal)) != ''">
+                          <xsl:value-of select="string($spEmailFinal)"/>
+                        </xsl:when>
+                        <xsl:otherwise>-</xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Telefone</td>
+                    <td>
+                      <xsl:choose>
+                        <xsl:when test="normalize-space(string($spPhoneFinal)) != ''">
+                          <xsl:value-of select="string($spPhoneFinal)"/>
+                        </xsl:when>
+                        <xsl:otherwise>-</xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                  <xsl:if test="$spSchemaAddressLine != '' or $spSchemaCity != '' or $spSchemaState != '' or $spSchemaPostal != ''">
+                    <tr>
+                      <td>Endereço</td>
+                      <td>
+                        <xsl:if test="$spSchemaAddressLine != ''">
+                          <xsl:value-of select="$spSchemaAddressLine"/>
+                          <xsl:if test="$spSchemaCity != '' or $spSchemaState != '' or $spSchemaPostal != ''">
+                            <br/>
+                          </xsl:if>
+                        </xsl:if>
+                        <xsl:if test="$spSchemaCity != ''">
+                          <xsl:value-of select="$spSchemaCity"/>
+                        </xsl:if>
+                        <xsl:if test="$spSchemaState != ''">
+                          <xsl:if test="$spSchemaCity != ''">
+                            <xsl:text>/</xsl:text>
+                          </xsl:if>
+                          <xsl:value-of select="$spSchemaState"/>
+                        </xsl:if>
+                        <xsl:if test="$spSchemaPostal != ''">
+                          <xsl:if test="$spSchemaCity != '' or $spSchemaState != ''">
+                            <xsl:text> - </xsl:text>
+                          </xsl:if>
+                          <xsl:text>CEP </xsl:text>
+                          <xsl:value-of select="$spSchemaPostal"/>
+                        </xsl:if>
+                      </td>
+                    </tr>
+                  </xsl:if>
+                </table>
+              </td>
+            </tr>
+          </xsl:if>
+          <tr>
+            <td><b>Detalhes do Carregamento</b></td>
+          </tr>
+
+	          <tr>
+	            <td>
+  		      <table width="100%" cellpadding="3" cellspacing="0" border="1">
+		                <tr>
+		                  <td>Documento de Transporte (DT)</td>
+		                  <td>
+		                    <xsl:choose>
+		                      <xsl:when test="$refnumDt != ''">
+		                        <xsl:value-of select="$refnumDt"/>
+		                      </xsl:when>
+		                      <xsl:otherwise>-</xsl:otherwise>
+		                    </xsl:choose>
+		                  </td>
+		                </tr>
+		                <tr>
+		                  <td>Shipment</td>
+		                  <td>
+                        <xsl:choose>
+                          <xsl:when test="string($shipmentIdDisplay) != ''">
+                            <xsl:value-of select="string($shipmentIdDisplay)"/>
+                          </xsl:when>
+                          <xsl:otherwise>-</xsl:otherwise>
+                        </xsl:choose>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Tipo Carga</td>
+                      <td>
+                        <xsl:choose>
+                          <xsl:when test="string($tipoCargaFinal) != ''">
+	                        <xsl:value-of select="string($tipoCargaFinal)"/>
+                      </xsl:when>
+                      <xsl:otherwise>-</xsl:otherwise>
+	                    </xsl:choose>
+	                  </td>
+	                </tr>
+	                <tr>
+	                  <td>Tipo de Embarque</td>
+	                  <td>
+	                    <xsl:choose>
+	                      <xsl:when test="$refnumTipoEmbarque != ''">
+	                        <xsl:value-of select="$refnumTipoEmbarque"/>
+	                      </xsl:when>
+	                      <xsl:otherwise>-</xsl:otherwise>
+	                    </xsl:choose>
+	                  </td>
+	                </tr>
+	                <tr>
+	                  <td>Tipo de Carregamento</td>
+	                  <td>
+	                    <xsl:choose>
+	                      <xsl:when test="string($tipoCarregamento) != ''">
+	                        <xsl:value-of select="string($tipoCarregamento)"/>
+	                      </xsl:when>
+	                      <xsl:otherwise>-</xsl:otherwise>
+	                    </xsl:choose>
+	                  </td>
+	                </tr>
+	                <tr>
+	                  <td>Quantidade de Pallets</td>
+	                  <td>
+	                    <xsl:choose>
+	                      <xsl:when test="$refnumPallets != ''">
+	                        <xsl:value-of select="$refnumPallets"/>
+	                      </xsl:when>
+	                      <xsl:otherwise>-</xsl:otherwise>
+	                    </xsl:choose>
+	                  </td>
+	                </tr>
+	                <tr>
+	                  <td>Quantidade de Caixas Estivado</td>
+	                  <td>
+	                    <xsl:choose>
+	                      <xsl:when test="$refnumCaixasEstivado != ''">
+	                        <xsl:value-of select="$refnumCaixasEstivado"/>
+	                      </xsl:when>
+	                      <xsl:otherwise>-</xsl:otherwise>
+	                    </xsl:choose>
+	                  </td>
+	                </tr>
+	                <tr>
+	                  <td>Peso Total</td>
+	                  <td>
+	                    <xsl:choose>
+                      <xsl:when test="string($pesoTotal) != ''">
+                        <xsl:value-of select="string($pesoTotal)"/>
+                      </xsl:when>
+                      <xsl:otherwise>-</xsl:otherwise>
+                    </xsl:choose>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Volume Total</td>
+                  <td>
+                    <xsl:choose>
+                      <xsl:when test="string($volumeTotal) != ''">
+                        <xsl:value-of select="string($volumeTotal)"/>
+                      </xsl:when>
+                      <xsl:otherwise>-</xsl:otherwise>
+                    </xsl:choose>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Num Paradas</td>
+                  <td>
+                    <xsl:choose>
+                      <xsl:when test="string($numParadas) != ''">
+                        <xsl:value-of select="string($numParadas)"/>
+                      </xsl:when>
+                      <xsl:otherwise>-</xsl:otherwise>
+                    </xsl:choose>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Tipo de Equipamento</td>
+                  <td>
+                    <xsl:choose>
+                      <xsl:when test="string($tipoEquipamento) != ''">
+                        <xsl:value-of select="string($tipoEquipamento)"/>
+                      </xsl:when>
+                      <xsl:otherwise>-</xsl:otherwise>
+                    </xsl:choose>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td><br/></td></tr>
+          <tr>
+            <td><b>Remessas Vinculadas</b></td>
+          </tr>
+          <tr>
+            <td>
+              <table width="100%" cellpadding="3" cellspacing="0" border="1">
+                <tr>
+                  <td>Remessas</td>
+                  <td>
+                    <xsl:choose>
+                      <xsl:when test="normalize-space($orderReleaseList) != ''">
+                        <xsl:value-of select="$orderReleaseList"/>
+                      </xsl:when>
+                      <xsl:otherwise>-</xsl:otherwise>
+                    </xsl:choose>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <xsl:if test="$hasFrete">
+            <tr><td><br/></td></tr>
+            <tr>
+              <td><b>Detalhes de Frete</b></td>
+            </tr>
+            <tr>
+              <td>
+	                <table width="100%" cellpadding="3" cellspacing="0" border="1">
+	                  <tr>
+	                    <th>Tipo</th>
+	                    <th>Código</th>
+	                    <th>Valor</th>
+	                  </tr>
+	                  <tr>
+	                    <td>Frete Base</td>
+	                    <td>-</td>
+	                    <td>
+	                      <xsl:choose>
+	                        <xsl:when test="count($freteBaseAmountNodes) &gt; 0 and $freteBaseTotal = $freteBaseTotal">
+	                          <xsl:value-of select="format-number($freteBaseTotal, '#0.00')"/>
+	                          <xsl:if test="$freteCurrency != ''">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="$freteCurrency"/>
+                          </xsl:if>
+                        </xsl:when>
+                        <xsl:otherwise>-</xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                  <xsl:for-each select="$schemaShipmentHeader/otm:ShipmentCost[normalize-space(otm:CostType) = 'A']">
+	                    <xsl:sort select="normalize-space(otm:AccessorialCodeGid/otm:Gid/otm:Xid)" order="ascending"/>
+	                    <xsl:sort select="normalize-space(otm:ShipmentCostSeqno)" data-type="number" order="ascending"/>
+	                    <xsl:variable name="accCodeRaw" select="normalize-space((otm:AccessorialCodeGid/otm:Gid/otm:Xid | otm:AccessorialCodeGid/otm:Xid | otm:AccessorialCodeGid)[1])"/>
+	                    <xsl:variable name="accCodeNoDomain">
+	                      <xsl:choose>
+	                        <xsl:when test="contains($accCodeRaw, '.')">
+	                          <xsl:value-of select="substring-after($accCodeRaw, '.')"/>
+	                        </xsl:when>
+	                        <xsl:otherwise>
+	                          <xsl:value-of select="$accCodeRaw"/>
+	                        </xsl:otherwise>
+	                      </xsl:choose>
+	                    </xsl:variable>
+	                    <xsl:variable name="accCode">
+	                      <xsl:choose>
+	                        <xsl:when test="starts-with(normalize-space(string($accCodeNoDomain)), 'BAU') and string-length(normalize-space(string($accCodeNoDomain))) &gt; 3">
+	                          <xsl:value-of select="substring(normalize-space(string($accCodeNoDomain)), 4)"/>
+	                        </xsl:when>
+	                        <xsl:otherwise>
+	                          <xsl:value-of select="normalize-space(string($accCodeNoDomain))"/>
+	                        </xsl:otherwise>
+	                      </xsl:choose>
+	                    </xsl:variable>
+	                    <xsl:variable name="accAmountValue" select="normalize-space(otm:Cost/otm:FinancialAmount/otm:MonetaryAmount)"/>
+	                    <xsl:variable name="accCurrency" select="normalize-space(otm:Cost/otm:FinancialAmount/otm:GlobalCurrencyCode)"/>
+	                    <tr>
+	                      <td>Custo Acessório</td>
+	                      <td>
+	                        <xsl:choose>
+	                          <xsl:when test="normalize-space(string($accCode)) != ''">
+	                            <xsl:value-of select="normalize-space(string($accCode))"/>
+	                          </xsl:when>
+	                          <xsl:otherwise>-</xsl:otherwise>
+	                        </xsl:choose>
+	                      </td>
+	                      <td>
+	                        <xsl:choose>
+	                          <xsl:when test="$accAmountValue != '' and number($accAmountValue) = number($accAmountValue)">
+	                            <xsl:value-of select="format-number(number($accAmountValue), '#0.00')"/>
+	                            <xsl:choose>
+                              <xsl:when test="$accCurrency != ''">
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="$accCurrency"/>
+                              </xsl:when>
+                              <xsl:when test="$freteCurrency != ''">
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="$freteCurrency"/>
+                              </xsl:when>
+                            </xsl:choose>
+                          </xsl:when>
+	                          <xsl:otherwise>-</xsl:otherwise>
+	                        </xsl:choose>
+	                      </td>
+	                    </tr>
+	                  </xsl:for-each>
+	                  <tr>
+	                    <td>Frete Total</td>
+	                    <td>-</td>
+	                    <td>
+	                      <xsl:choose>
+	                        <xsl:when test="string($freteTotal) != '' and number($freteTotal) = number($freteTotal)">
+	                          <xsl:value-of select="format-number(number($freteTotal), '#0.00')"/>
+	                          <xsl:if test="$freteCurrency != ''">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="$freteCurrency"/>
+                          </xsl:if>
+                        </xsl:when>
+                        <xsl:otherwise>-</xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </xsl:if>
+          <xsl:if test="$hasDetails">
+            <tr><td><br/></td></tr>
+            <tr>
+              <td><b>Detalhes da Viagem</b></td>
+            </tr>
+		            <tr>
+		              <td>
+		                <table width="100%" cellpadding="3" cellspacing="0" border="1">
+		                  <xsl:if test="$shipDate != ''">
+		                    <tr>
+		                      <td>Data de Embarque</td>
+		                      <td>
+		                        <xsl:call-template name="format-date-br">
+		                          <xsl:with-param name="dt" select="$shipDate"/>
+		                        </xsl:call-template>
+		                      </td>
+		                    </tr>
+		                  </xsl:if>
+		                  <xsl:if test="string($transportModeDisplay) != ''">
+		                    <tr>
+		                      <td>Modal</td>
+		                      <td><xsl:value-of select="string($transportModeDisplay)"/></td>
+		                    </tr>
+		                  </xsl:if>
+		                  <xsl:if test="$plannedStart != '' or $plannedEnd != ''">
+		                    <tr>
+		                      <td>Início/Fim (planejado)</td>
+		                      <td>
+		                        <xsl:if test="$plannedStart != ''">
+		                          <xsl:call-template name="format-date-br">
+		                            <xsl:with-param name="dt" select="$plannedStart"/>
+		                          </xsl:call-template>
+		                        </xsl:if>
+		                        <xsl:if test="$plannedStart != '' and $plannedEnd != ''">
+		                          <xsl:text> - </xsl:text>
+		                        </xsl:if>
+		                        <xsl:if test="$plannedEnd != ''">
+		                          <xsl:call-template name="format-date-br">
+		                            <xsl:with-param name="dt" select="$plannedEnd"/>
+		                          </xsl:call-template>
+		                        </xsl:if>
+		                      </td>
+		                    </tr>
+		                  </xsl:if>
+		                  <xsl:if test="$schemaOriginLoc or $originLocXid != '' or $originName != '' or $originXid != ''">
+		                    <tr>
+		                      <td>Origem</td>
+	                      <td>
+	                        <xsl:choose>
+	                          <xsl:when test="$schemaOriginLoc or $originLocXid != ''">
+	                            <xsl:call-template name="format-location">
+	                              <xsl:with-param name="loc" select="$schemaOriginLoc"/>
+	                              <xsl:with-param name="fallbackXid" select="$originLocXid"/>
+	                            </xsl:call-template>
+	                          </xsl:when>
+	                          <xsl:otherwise>
+	                            <xsl:choose>
+	                              <xsl:when test="$originName != ''">
+	                                <xsl:value-of select="$originName"/>
+	                                <xsl:if test="$originXid != ''">
+	                                  <xsl:text> (</xsl:text>
+	                                  <xsl:value-of select="$originXid"/>
+	                                  <xsl:text>)</xsl:text>
+	                                </xsl:if>
+	                              </xsl:when>
+	                              <xsl:otherwise>
+	                                <xsl:value-of select="$originXid"/>
+	                              </xsl:otherwise>
+	                            </xsl:choose>
+	                          </xsl:otherwise>
+	                        </xsl:choose>
+	                      </td>
+	                    </tr>
+		                  </xsl:if>
+		                  <xsl:if test="$schemaDestLoc or $destLocXid != '' or $destName != '' or $destXid != ''">
+		                    <tr>
+		                      <td>Destino Final</td>
+		                      <td>
+	                        <xsl:choose>
+	                          <xsl:when test="$schemaDestLoc or $destLocXid != ''">
+	                            <xsl:call-template name="format-location">
+	                              <xsl:with-param name="loc" select="$schemaDestLoc"/>
+	                              <xsl:with-param name="fallbackXid" select="$destLocXid"/>
+	                            </xsl:call-template>
+	                          </xsl:when>
+	                          <xsl:otherwise>
+	                            <xsl:choose>
+	                              <xsl:when test="$destName != ''">
+	                                <xsl:value-of select="$destName"/>
+	                                <xsl:if test="$destXid != ''">
+	                                  <xsl:text> (</xsl:text>
+	                                  <xsl:value-of select="$destXid"/>
+	                                  <xsl:text>)</xsl:text>
+	                                </xsl:if>
+	                              </xsl:when>
+	                              <xsl:otherwise>
+	                                <xsl:value-of select="$destXid"/>
+	                              </xsl:otherwise>
+	                            </xsl:choose>
+	                          </xsl:otherwise>
+	                        </xsl:choose>
+		                      </td>
+		                    </tr>
+		                  </xsl:if>
+	                </table>
+	              </td>
+            </tr>
+          </xsl:if>
+
+          <xsl:if test="StopInfo/Stop">
+            <tr><td><br/></td></tr>
+            <tr>
+              <td><b>Paradas Programadas</b></td>
+            </tr>
+            <tr>
+              <td>
+                <table width="100%" cellpadding="3" cellspacing="0" border="1">
+                  <tr>
+                    <th>Sequência</th>
+                    <th>Local (BP)</th>
+                    <th>Detalhes do Local</th>
+                    <th>Chegada planejada</th>
+                    <th>Partida planejada</th>
+                    <th>Tipo de parada</th>
+                    <th>Remessas</th>
+                    <th>Status agendamento</th>
+                  </tr>
+                  <xsl:for-each select="StopInfo/Stop">
+                    <xsl:sort select="number(normalize-space(StopNum))" data-type="number" order="ascending"/>
+                    <xsl:sort select="normalize-space(StopNum)" order="ascending"/>
+                        <xsl:variable name="stopSeq" select="normalize-space(StopNum)"/>
+                        <xsl:variable name="stopLocXid" select="normalize-space(LocationXid)"/>
+                        <xsl:variable name="schemaStopBySeq" select="$schemaShipment/otm:ShipmentStop[normalize-space(otm:StopSequence) = $stopSeq][1]"/>
+                        <xsl:variable name="schemaStopByLoc" select="$schemaShipment/otm:ShipmentStop[normalize-space(otm:LocationRef/otm:LocationGid/otm:Gid/otm:Xid) = $stopLocXid][1]"/>
+                        <xsl:variable name="schemaStop" select="($schemaStopBySeq | $schemaStopByLoc[not($schemaStopBySeq)])[1]"/>
+                        <xsl:variable name="schemaStopLoc" select="$schemaLocations[normalize-space(otm:LocationGid/otm:Gid/otm:Xid) = $stopLocXid][1]"/>
+                        <xsl:variable name="plannedArrNotify" select="normalize-space(PlannedArrival)"/>
+                        <xsl:variable name="plannedDepNotify" select="normalize-space(PlannedDeparture)"/>
+                        <xsl:variable name="plannedArrSchema" select="normalize-space($schemaStop/otm:ArrivalTime/otm:EventTime/otm:PlannedTime/otm:GLogDate)"/>
+                        <xsl:variable name="plannedDepSchema" select="normalize-space($schemaStop/otm:DepartureTime/otm:EventTime/otm:PlannedTime/otm:GLogDate)"/>
+                        <xsl:variable name="plannedArrFinal">
+                          <xsl:choose>
+                            <xsl:when test="$plannedArrNotify != ''">
+                              <xsl:value-of select="$plannedArrNotify"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <xsl:value-of select="$plannedArrSchema"/>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="plannedDepFinal">
+                          <xsl:choose>
+                            <xsl:when test="$plannedDepNotify != ''">
+                              <xsl:value-of select="$plannedDepNotify"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <xsl:value-of select="$plannedDepSchema"/>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="activityP" select="$schemaStop/otm:ShipmentStopDetail[normalize-space(otm:Activity) = 'P'][1]"/>
+                        <xsl:variable name="activityD" select="$schemaStop/otm:ShipmentStopDetail[normalize-space(otm:Activity) = 'D'][1]"/>
+                        <xsl:variable name="stopRemarkAgendamento" select="$schemaStop/otm:Remark[normalize-space(otm:RemarkQualifierGid/otm:Gid/otm:Xid) = 'RMK_STATUS_AGENDAMENTO_STOP'][1]"/>
+                        <xsl:variable name="stopStatusAgendamento" select="normalize-space(($stopRemarkAgendamento/otm:RemarkText)[1])"/>
+                        <xsl:variable name="orderReleaseIds">
+                          <xsl:for-each select="$schemaShipment/otm:Release/otm:OrderMovement[normalize-space(otm:ShipFromLocationRef/otm:LocationRef/otm:Location/otm:LocationGid/otm:Gid/otm:Xid) = $stopLocXid or normalize-space(otm:ShipToLocationRef/otm:LocationRef/otm:Location/otm:LocationGid/otm:Gid/otm:Xid) = $stopLocXid]/otm:OrderReleaseGid/otm:Gid/otm:Xid">
+                            <xsl:variable name="xidRaw" select="normalize-space(.)"/>
+                            <xsl:variable name="xidNoDomain">
+                              <xsl:choose>
+                                <xsl:when test="contains($xidRaw, '.')">
+                                  <xsl:value-of select="substring-after($xidRaw, '.')"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                  <xsl:value-of select="$xidRaw"/>
+                                </xsl:otherwise>
+                              </xsl:choose>
+                            </xsl:variable>
+                            <xsl:if test="$xidNoDomain != ''">
+                              <xsl:if test="position() &gt; 1">
+                                <xsl:text>,</xsl:text>
+                              </xsl:if>
+                              <xsl:value-of select="$xidNoDomain"/>
+                            </xsl:if>
+                          </xsl:for-each>
+                        </xsl:variable>
+		                    <tr>
+		                      <td>
+                            <xsl:choose>
+                              <xsl:when test="$stopSeq != ''">
+                                <xsl:value-of select="$stopSeq"/>
+                              </xsl:when>
+                              <xsl:otherwise>-</xsl:otherwise>
+                            </xsl:choose>
+                          </td>
+		                      <td>
+                            <xsl:choose>
+                              <xsl:when test="$stopLocXid != ''">
+                                <xsl:value-of select="$stopLocXid"/>
+                              </xsl:when>
+                              <xsl:otherwise>-</xsl:otherwise>
+                            </xsl:choose>
+                          </td>
+                          <td>
+                            <xsl:choose>
+                              <xsl:when test="$schemaStopLoc">
+                                <xsl:call-template name="format-location-detail">
+                                  <xsl:with-param name="loc" select="$schemaStopLoc"/>
+                                </xsl:call-template>
+                              </xsl:when>
+                              <xsl:otherwise>-</xsl:otherwise>
+                            </xsl:choose>
+                          </td>
+                          <td>
+                            <xsl:choose>
+                              <xsl:when test="normalize-space($plannedArrFinal) != ''">
+                                <xsl:call-template name="format-date-br">
+                                  <xsl:with-param name="dt" select="normalize-space($plannedArrFinal)"/>
+                                </xsl:call-template>
+                              </xsl:when>
+                              <xsl:otherwise>-</xsl:otherwise>
+                            </xsl:choose>
+                          </td>
+                          <td>
+                            <xsl:choose>
+                              <xsl:when test="normalize-space($plannedDepFinal) != ''">
+                                <xsl:call-template name="format-date-br">
+                                  <xsl:with-param name="dt" select="normalize-space($plannedDepFinal)"/>
+                                </xsl:call-template>
+                              </xsl:when>
+                              <xsl:otherwise>-</xsl:otherwise>
+                            </xsl:choose>
+                          </td>
+                          <td>
+                            <xsl:choose>
+                              <xsl:when test="$activityP">
+                                <xsl:text>COLETA</xsl:text>
+                              </xsl:when>
+                              <xsl:when test="$activityD">
+                                <xsl:text>ENTREGA</xsl:text>
+                              </xsl:when>
+                              <xsl:otherwise>-</xsl:otherwise>
+                            </xsl:choose>
+                          </td>
+	                          <td>
+	                            <xsl:choose>
+	                              <xsl:when test="$activityP">-</xsl:when>
+	                              <xsl:when test="normalize-space($orderReleaseIds) != ''">
+	                                <xsl:value-of select="translate(normalize-space($orderReleaseIds), ' ', '')"/>
+	                              </xsl:when>
+	                              <xsl:otherwise>-</xsl:otherwise>
+	                            </xsl:choose>
+	                          </td>
+                          <td>
+                            <xsl:choose>
+                              <xsl:when test="$stopStatusAgendamento != ''">
+                                <xsl:value-of select="$stopStatusAgendamento"/>
+                              </xsl:when>
+                              <xsl:otherwise>-</xsl:otherwise>
+                            </xsl:choose>
+                          </td>
+		                    </tr>
+		                  </xsl:for-each>
+		                </table>
+		              </td>
+            </tr>
+          </xsl:if>
+
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
