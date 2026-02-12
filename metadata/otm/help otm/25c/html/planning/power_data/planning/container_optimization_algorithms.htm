@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../../.." src="../../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../../assets/css/redwood.css" type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="Planning\power_data\planning\container_optimization_algorithms.htm">
+  <meta name="template" content="../../../assets/masterpages/operational planning.htt">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Container Optimization Algorithms</title>
+  <link rel="StyleSheet" href="../../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="container optimization:algorithms,algorithms,column generation algorithm,container optimization algorithms">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:13+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Container Optimization Algorithms","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Container Optimization Algorithms</span></h1>
+  <div role="main">
+    <p>To select algorithms, go to the <a href="logic_configuration.htm">Logic Configuration</a> page and select a Logic Configuration type of <a href="logic_configuration_container_optimization.htm">Container Optimization</a>.</p>
+    <p class="Note"><span class="Bold">Note</span>: The use of column generation with any 3D based algorithm (e.g. 3D load configuration, pattern based load configuration, tree search based load configuration) is not recommended.</p>
+    <p>The following diagram shows the interaction and incompatibilities of the Column Generation algorithm with other algorithms.Â </p>
+    <p class="Note"><span class="Bold">Note</span>: The following diagram is only applicable when choosing Column Generation or Multi-Container MIP. Other packing algorithms (e.g., Quick Packing, Enumeration, Single Container MIP, Multi-Container Heuristic, 3D Load Config, Pattern Based Load Config, and Tree Search Load Config) can be used independently without using Column Generation Algorithm or Multi-Container MIP.</p>
+    <p></p>
+    <p><img alt="A diagram showing the results of choosing Column Generation over Multi-Container MIP. Column Generation leads to an array featuring Quick Packing, Enumerative, Single Container MIP, and Multi-Container Heuristic. Or it leads to a second array containing 3D Load Config, Pattern-Based Load Config, Tree Search Load Config, and Multi-Container Heuristic with 3D Load Config." src="../../../assets/images/column_gen.svg"></p>
+    <p>The Column Generation algorithm employs other seed algorithms to generate various combinations of packing units into pieces of equipment. The other algorithms that you select, in addition to the Column Generation algorithm, are used as seed algorithms. However, there are some restrictions on choosing the seed algorithms.</p>
+    <ul>
+      <li>If no other algorithm is selected, then Quick Packing is used as the default seed algorithm for column generation.</li>
+      <li>If one or more of the non-load-configuration only algorithms (i.e. Quick Packing, Enumerative, Single Container MIP, Multi-Container Heuristic) are selected along with the Column Generation algorithm, all of them will be used as seed algorithms for column generation.</li>
+      <li>If one or more of only load-configuration algorithms (3D Load Config, Pattern Based Load Config, Tree Search Load Config, and Multi-Container Heuristic with 3D Load Config) are selected along with the Column Generation algorithm, all of them will be used as seed algorithms for column generation.</li>
+      <li>If one or more non-load-configuration algorithms are selected along with one or more algorithms from the load-configuration set, then only the algorithms selected from the load-configuration set will be used as seed algorithms for column generation.</li>
+      <li>If the Multi-container MIP algorithm is selected along with the Column Generation algorithm, the multi-container MIP algorithm is ignored.</li>
+    </ul>
+    <h2><a id="categorization"></a>Categorization of Container Optimization Algorithms</h2>
+    <p>You need to select at least one algorithm for Container optimization to work. In all algorithms, the inputs are 1) Ship units (along with the counts) and 2) Equipment Groups (possibly with capacity limits) and the output is a set of containers (from the input eq groups) packed with the input ship units. There are various ways to achieve this with varying complexity, each having a different solution quality and run time consequences.</p>
+    <p>The algorithms can be categorized into two depending on whether OTM is packing all items into multiple containers at once (multi-container algorithms) OR pack one container at a time in an iterative manner until all items are packed (single container algorithms). In the latter, the idea is to pack one container of all equipment groups with the items, and greedily pick the container based on an objective such as utilization and continue again with the left over items and the left over distinct equipment groups. Once a container is picked along with the items in the algorithm, OTM does not go back and move around items to improve the utilization or change the equipment group at that time.</p>
+    <p>The algorithms can be categorized into two depending on whether the packing considers dimensions of the items and not just the weight and volume. Considering dimensions of the items and associated constraints, and showing exact placements of each ship unit piece is called Load Configuration. OTM has &quot;Load Configuration&quot; based algorithms and some non-load configuration Â based.</p>
+    <p>Also, some of the algorithms use iterative algorithms/heuristics. Some others use Mathematical programming techniques (MIP - Mixed Integer Programming). Math programming techniques require modeling the problem at hand using variables and constraints, optimizing the objective (such as cost, utilization etc). This is another way of categorization.</p>
+    Â 
+    <table title="actions algorithms Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Algorithms</p>
+          </th>
+          <th>
+            <p>Single container algorithm?</p>
+          </th>
+          <th>
+            <p>Math programming technique used?</p>
+          </th>
+          <th>
+            <p>Is it load configuration based?</p>
+          </th>
+          <th>
+            <p>Is it an exact algorithm?</p>
+          </th>
+          <th>
+            <p>Run time increases exponentially with problem size</p>
+          </th>
+        </tr>
+        <tr>
+          <td>USE 3D BASED LOAD CONFIGURATION</td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+        </tr>
+        <tr>
+          <td>USE COLUMN GENERATION ALGORITHM</td>
+          <td>
+            <p></p>
+          </td>
+          <td>
+            <p></p>
+          </td>
+          <td>
+            <p></p>
+          </td>
+          <td>
+            <p></p>
+          </td>
+          <td>
+            <p></p>
+          </td>
+        </tr>
+        <tr>
+          <td>USE ENUMERATIVE ALGORITHM</td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+        </tr>
+        <tr>
+          <td>USE MULTICONTAINER HEURISTIC ALGORITHM</td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y/N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+        </tr>
+        <tr>
+          <td>USE MULTICONTAINER MIP</td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+        </tr>
+        <tr>
+          <td>USE PATTERN BASED LOAD CONFIGURATION</td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+        </tr>
+        <tr>
+          <td>USE QUICK PACKING ALGORITHM</td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+        </tr>
+        <tr>
+          <td>USE SINGLE CONTAINER MIP</td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+        </tr>
+        <tr>
+          <td>USE TREE SEARCH LOAD CONFIGURATION</td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+          <td>
+            <p>N</p>
+          </td>
+          <td>
+            <p>Y</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    Â 
+    <p>The default is &quot;Use Quick Packing Algorithm&quot;. This is an algorithm where the items are sorted based on a certain metric. You can select multiple algorithms. Once you decide whether to use Load Configuration or not, you should select algorithms within that family. You should not mix Quick Packing and 3D Load Config, for example.</p>
+    <p><span class="Bold">Quick Packing:</span> The ship units are sorted based on a metric selected in the Container Optimization Metrics section. While packing a container, the algorithm packs the ship units from the sorted list one after the other until the container is full. This process is repeated with different equipment groups (same item list) and one equipment group is picked based on an objective selected in the Container Optimization Objectives section. After selecting the equipment, the items packed are removed from the list and the process is repeated with the updated item list and remaining equipment groups to pick the next equipment and so on.</p>
+    <p><span class="Bold">Single Container MIP: </span>This is a single container packing algorithm (like Quick packing) but this does not pack items from a sorted list but optimizes the items in order to pack the single container. This usually results in better packing but can take more run time. However, this is still packing one container at a time and hence the greediness of single container algorithms still exist.</p>
+    <p><span class="Bold">Enumerative Algorithm:</span> The algorithm and even the solution is the same as Single Container MIP. The difference is that solution is derived based on an algorithm iteratively using Dynamic Programming whereas Single Container MIP uses Math programming techniques. Both are solving the same problem called Knapsack problem, which is quite popular in the Computer algorithm/Operations Research communities.</p>
+    <p><span class="Bold">Multicontainer MIP:</span> This algorithm is an exact one that works well for smaller size Container Optimization problems. First, it estimates the maximum number of each equipment group that is needed to pack all the items. Then, using Math programming techniques, it assigns items to each instance of various equipment groups without violating constraints. This is an exact algorithm and can work well in cases when there are not too many equipment groups to work with.Â </p>
+    <p class="Note"><span class="Bold">Note</span>: Enable the log ID &#39;<span class="Bold"><a href="../../process_manager/process_manager/logs/system_log_ids.htm#OptMipData">OptMipData</a>&#39;Â </span>to export a CSV file of column generation information (like columns, dual, variable names and their OTM object references, load points) when it is used. This log can be used to analyse the solution obtained from the column generation.</p>
+    <h3><span class="Bold">Load configuration algorithms</span></h3>
+    <p><span class="Bold">3D Load Configuration:</span> This is an algorithm where each ship unit piece is placed individually in the container, after ensuring that the constraints such as Space (cannot go out of container), Stacking constraints (stacking index, max weight, max height, stacking layer), overhang constraint, load bearing constraints, orientation constraints etc. are not violated. 3D scoring acts on top of the basic algorithm which tends to favor better utilization with higher run times. This is not an exact algorithm to minimize the loading length or minimize the equipment packed. This also packs one container at a time and is part of the single container algorithms. There is also a flavor here that uses auto-generated patterns as well as User-defined patterns.</p>
+    <p><span class="Bold">Pattern Based Load Configuration:</span> In this algorithm, each ship unit (all count) is packed in patterns. It has capability to pack boxes as well as cylinders. For boxes, it looks at patterns such as Lengthwise, Crosswise, Pinwheel (some lengthwise and some crosswise). For cylindrical shaped ship units, it considers Standing Straight, Standing Nested, Rolling, Cannon patterns. It can stack the same ship unit in multiple layers. If there&#39;s a remnant floor area leftover after placing a ship unit, the algorithm tries to place the next ship unit in that remnant area before trying new space away from the nose.</p>
+    <p><span class="Bold">Tree Search Load Configuration: </span>In this algorithm, there is logic to look ahead and consider what items are yet to be placed in order to determine what item to place now. This is a variation of 3D load configuration algorithm. This also considers all user defined constraints.</p>
+    <p><span class="Bold">Multicontainer Heuristic</span>: This is a heuristic that tries to pack items into multiple pieces of equipment at once rather than one piece of equipment at a time. This is still not an exact algorithm like Multicontainer MIP but it can scale well to larger problems. Also, this is a hybrid algorithm that can solve both non-3D as well as 3D. This algorithm in turn resorts to calling Quick packing/3D algorithm iteratively to solve the multi-container problem.</p>
+  </div>
+  <h2><a name="related" id="related"></a>Related Topics</h2>
+  <p class="LinkList"><a href="../../../bulk_plan_manager/bulk_plan_performance_and_tuning.htm">Bulk Plan Performance and Tuning</a></p>
+  <p class="LinkList"><a href="../../../bulk_plan_manager/solution_quality_tuning/bulk_plan_tuning_cont_opt_logic.htm">Bulk Plan Tuning Container Optimization Logic</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../../.."
+    gCommonRootRelPath = "../../.."
+    gTopicId = "1"
+  
+//]]></script>
+
+
+  <script src="../../../template/scripts/topicpage.js"></script>
+  <script src="../../../whxdata/layoutconfig.js"></script>
+  <script src="../../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

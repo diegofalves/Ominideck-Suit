@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="template" content="../../assets/masterpages/operational planning.htt">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="integration\actions\message_hub_actions.htm">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Bulk Plan Multi-Threading</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="bulk plan:multi-threading,multi-threading:bulk plan">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content><meta name="brsnext" value="bulk_plan_manager/performance_tuning/multi-threading_logic.htm"><meta name="brsprev" value="bulk_plan_manager/performance_tuning/understanding_the_bulk_plan_run.htm">
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Bulk Plan Multi-Threading","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Bulk Plan Multi-Threading</span></h1>
+  <div role="main">
+    <p>OTM provides two key ways to take advantage of multiple CPUs when running bulk plans. You can run several bulk-plans simultaneously by setting up multiple batch threads or by bulk plan partitioning.Â <a href="bulk_plan_partitioning.htm">Bulk plan partitioning</a> is a way to partition the order releases or order movements through pre-defined saved queries, and then run each partition in its own thread. In order to understand and effectively use multi-threading, it is important to understand how OTMâs <a href="multi-threading_logic.htm">multi-threading logic</a> works.Â </p>
+    <p>In addition to bulk plan partitioning, you can configure OTM to multi-thread several time consuming areas within the bulk plan logic. The following areas in bulk-plan support multi-threading:</p>
+    <ul>
+      <li>Shipment Building of Order Releases and Order Movements</li>
+      <li>Multi-stop</li>
+      <li>Committing Shipments</li>
+      <li>Driver and Equipment Assignment Actions</li>
+      <li>Continuous Moves</li>
+    </ul>
+    <h2>Running Multiple Bulk Plans Simultaneously</h2>
+    <h3>Setting Up Properties for Multi-threading</h3>
+    <p>The threading for bulk plan is set up via thread group settings. The thread group name for the bulk plan is &quot;batch&quot; and the number of threads for this group is set as follows: <span class="Bold">glog.workflow.queueThreads.batch=2.</span></p>
+    <p>By default, the batch thread group is assigned 2 threads. Depending on the number of processors and the load on the system, you can increase this to more than 2. The group thread counts should be set before starting the server.Â </p>
+    <p>You can also change the batch threads through the Event Queues page. However, the recommended approach is to set the group thread counts before starting the server. If the threads are changed through the Event Queues page, the changes will be lost once the server is brought down.Â The Event Queues page can be accessed via <span class="Bold">Configuration and Administration &gt; Technical Support &gt; Diagnostics and Tools &gt; Event Management &gt; Event Queues</span>. You must be logged into OTM has DBA.ADMIN to access the Event Queues page.</p>
+    <p>Once on the screen, click on <span class="Bold">Show Threads</span> button at the bottom to see all the threads. To increase the number of threads, click on <span class="Bold">Threads</span>. To kill a thread (if it hangs up), click on the thread to terminate. Remember that killing a thread will not terminate any existing bulk plans. No future bulk plans will be scheduled to run on that thread though.</p>
+    <h3>Running Bulk Plans</h3>
+    <p>Once the threads are set up, you can run multiple bulk plans simultaneously. If there are more bulk plans than the number of threads, then the bulk plans will be queued up and will start executing as soon as the threads get freed up.Â </p>
+    <h2>Threads Inside Bulk Plans</h2>
+    <p>While the entire set of bulk plans can be run in parallel, you can also set up threads for processing key functions inside a bulk plan in parallel. These functions are described in the table below. Similar to the bulk plan process thread group called &quot;batch&quot;, the areas within the bulk plans are assigned many functional thread groups. These areas are also called task groups. The table below describes the default thread count settings for these task groups.Â These properties can be found in glog.task properties file and can be overridden in glog.properties file.</p>
+    <table title="the default thread count settings for task groups">
+      <tbody>
+        <tr>
+          <th>
+            <p>Functional Area (Task Type)</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+          <th>
+            <p>Default Thread Group</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>Build Shipments</p>
+            <p>(BuildShipments)</p>
+          </td>
+          <td>
+            <p>For every order bundle on a single leg, OTM plans them onto a shipment using the shipment building logic.Â Several bundles can be simultaneously built into shipments.</p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Build Shipment Graphs</p>
+            <p>(BuildShipmentGraphs)</p>
+          </td>
+          <td>
+            <p>This is the logic for building the shipments on various legs of an itinerary.Â </p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Build Shipment Graph Collections</p>
+            <p>(BuildShipmentGraphCollections)</p>
+          </td>
+          <td>
+            <p>This logic is used for building several shipmentÂ graphs for an order bundle based on order releases.</p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Build Shipment Graphs for Order Movements</p>
+            <p>(BuildShipmentGraphsForOrderMovements)</p>
+          </td>
+          <td>
+            <p>The shipment building logic for building shipments for a bundle of order movements.</p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Commit Shipment Graphs</p>
+            <p>(CommitShipmentGraphs)</p>
+          </td>
+          <td>
+            <p>This logic commits shipments to the database at the end of order release bulk plan.</p>
+          </td>
+          <td>
+            <p>planningCommit</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Commit Shipment Graphs for Order Movements</p>
+            <p>(CommitShipmentGraphsForOrderMovements)</p>
+          </td>
+          <td>
+            <p>This logic commits shipments to the database at the end of order movement bulk plan.</p>
+          </td>
+          <td>
+            <p>planningCommit</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Compute Transit Time</p>
+            <p>(ComputeTransitTime)</p>
+          </td>
+          <td>
+            <p>Compute transit time happens as part of Route Orders process of bulk plan that uses Network Routing</p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Delete Shipment Graph</p>
+            <p>(DeleteShipmentGraph)</p>
+          </td>
+          <td>
+            <p>During unassign stage in bulk plan order releases, if the shipments are to be deleted instead of to be updated, the deleting process can be configured in multi-thread</p>
+          </td>
+          <td>
+            <p>planningCommit</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Fleet Assignment</p>
+            <p>(FleetAssignment)</p>
+          </td>
+          <td>
+            <p>Driver and Equipment assignment actions.</p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>NR Network Rater</p>
+            <p>(NRNetworkRater)</p>
+          </td>
+          <td>
+            <p>This logic computes rating information for itinerary and network legs inside the Network Routing logic.</p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>SNRO Build Shipment for Order Movements</p>
+            <p>(SNROBuildShipmentForOrderMovements)</p>
+          </td>
+          <td>
+            <p>This logic computes shipment information during the Show Network Routing Options - Ocean action.</p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Savings Algorithm</p>
+            <p>(SavingsAlgorithm)</p>
+          </td>
+          <td>
+            <p>Inside the multi-stop algorithm, pairs of shipments are evaluated for combining, determining the potential savings.Â These tasks can be run in parallel to achieve potential savings.</p>
+          </td>
+          <td>
+            <p>planningBuild</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Shortest Path</p>
+            <p>(ShortestPath)</p>
+          </td>
+          <td>
+            <p>The shortest path logic inside Dispatch Plan Optimization (DPO) algorithm.</p>
+          </td>
+          <td>
+            <p>planningOptimization</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    Â 
+    <p>Although several task groups inside the bulk plan use the same thread group, you can override the default and create your own thread group. For example, you can create a thread group for Fleet Assignment for the driver and equipment assignment actions, so that these actions do not contend with for the same threads that shipment building logic uses.</p>
+    <h2><a name="Definition_of_Terms" id="Definition_of_Terms"></a>Definition of Terms</h2>
+    <p>In order to understand how multi-threading works and how to set up the threads and their properties, it is important to know certain terms.</p>
+    <h3>Tasks and Task Types</h3>
+    <p>A task is an atomic unit of work. A task runs on a single thread. It cannot be distributed across threads. Examples of tasks in OTM are building a shipment for one order release bundle, building a shipment for one order movement bundle, evaluating the savings of combining two shipments, committing a shipment graph, etc. Each task is characterized by its Task Type â such as BuildShipment, CommitShipments, etc.</p>
+    <h3>Task Batch and Batch Size</h3>
+    <p>A task batch is a collection of similar tasks that are processed sequentially on a single thread. For example, a task batch can be comprised of one hundred order bundles (similar tasks). Each of these hundred order bundles are processed one at a time sequentially on a single thread to build shipments. The number of tasks within a task batch represents the batch size of the task batch.</p>
+    <h3>Thread Group</h3>
+    <p>A thread group is a collection of threads. In the table above, planningBuild is a thread group. A thread group contains a certain number of threads available for that group. All the tasks in a task batch are processed by a thread within a thread group sequentially. The task batches assigned to different threads in a thread group are run in parallel. Each thread group is allocated a certain number of threads as follows:</p>
+    <p><span class="Bold">glog.workflow.queueThreads.planningBuild=16</span></p>
+    <p>Please note that setting the multi-valued thread group setting glog.workflow.topicGroup=&lt;queue&gt;,&lt;threadCount&gt; has been deprecated and is not supported. Â It has been replaced with glog.workflow.queueThreads.&lt;queue&gt;=&lt;threadCount&gt;.</p>
+    <p>In order to change the topic group assignment of PlanningBuild to 10, you can override the property in the CUSTOM property set as follows:</p>
+    <p><span class="Bold">glog.workflow.queueThreads.planningBuild=10</span></p>
+    <h3>Example</h3>
+    <p>In the above example, the thread group âplanningBuildâ has 10 threads. When a task batch arrives at the thread group for processing, it will start processing the batch immediately using a free thread. If all the threads are busy, then the batch waits until one of the threads is freed up. It is important to note that the thread groups are common across all bulk plans. For example, if there are 4 bulk plans that are running simultaneously, and there are only 2 threads defined for planningCommit thread group, then only 2 shipment graphs can be committed at a given time across various bulk plans. It is highly recommended that the number of threads in a functional thread group be set higher than the Bulk Plan thread group.</p>
+    <h2>Multi-thread Properties Associated to Each Task Type</h2>
+    <table title="Multi-thread Properties Associated to Each Task Type">
+      <tbody>
+        <tr>
+          <th>
+            <p>Property</p>
+          </th>
+          <th>
+            <p>Definition</p>
+          </th>
+          <th>
+            <p>Default Value</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>glog.workflow.task.blockTimeout.&lt;task type&gt;</p>
+          </td>
+          <td>
+            <p>This is the timeout, in seconds, for a task list execution.</p>
+            <p>Example: glog.workflow.task.blockTimeout.BuildShipment =300</p>
+            <p>Optional. The amount of the time that each batch processing is allowed before it times out.</p>
+          </td>
+          <td>
+            <p>Â </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>glog.workflow.task.desiredBatchSize.&lt;task type&gt;</p>
+          </td>
+          <td>
+            <p>Number of tasks per batch | QUEUE</p>
+            <p>Example:</p>
+            <p>glog.workflow.task.desiredBatchSize.BuildShipment= QUEUE</p>
+            <div data-conref="../../assets/snippets/mutlithread_desired_batch_size.hts">
+<p class="TableText" style="color: #000000;"><span style="color: #000000;">Optional. 
+ The desired number of tasks per batch. If QUEUE, the number will be determined 
+ by balancing the workload over the event queue threads. For example, 1000 
+ tasks using a queue with 5 threads would result in 5 batches with 200 
+ tasks each. Note that QUEUE presumes you have a dedicated queue for the 
+ task type.</span></p>
+<p class="TableText" style="color: #000000;">If, on the other hand, the 
+ desired batch size is 300, then 4 batches will be created with 300 tasks 
+ in the first 3 batches and 100 tasks in the 4th batch.</p>
+
+</div>
+            <p>Â </p>
+          </td>
+          <td>
+            <p>QUEUE</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>glog.workflow.task.flags.&lt;task type&gt;</p>
+          </td>
+          <td>
+            <p>Allowed flags are:</p>
+            <p>WAIT_ON_LIFETIME. If set, the TaskList.execute method blocks on all activity related to the batches, including agents and notification. Otherwise, the method blocks only on the execution of the tasks.</p>
+            <p>ABORT_ON_TIMEOUT. If set, any timeout in the TaskList.execute method removes any related batches from the event queues. Active batches are not interrupted. This flag results in indeterminate behavior and should only be used to reduce unnecessary work on the application server.</p>
+            <p>LOG_BATCHES</p>
+          </td>
+          <td>
+            <p>Â </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>glog.workflow.task.group.&lt;task type&gt;</p>
+          </td>
+          <td>
+            <p>The task type equals the event queue.</p>
+            <p>Example:</p>
+            <p>glog.workflow.task.group.BuildShipment=planningBuild</p>
+            <p>glog.workflow.task.group.CommitShipment=planningCommit</p>
+            <p>glog.workflow.task.group.Rating</p>
+            <p>The thread group assigned to the task type.</p>
+            <p>Configuring the âratingâ queue with multiple threads will allocate same number of threads for evaluating multiple rate geos instead of single thread processing all rate geos.</p>
+          </td>
+          <td>
+            <p>Required â no defaults associated</p>
+          </td>
+        </tr>
+        <tr>
+          <td>glog.workflow.task.minimumBatchSize.&lt;task type&gt;</td>
+          <td>
+            <p>Minimum number of tasks per batch.</p>
+            <p>Example: glog.workflow.task.minimumBatchSize.BuildShipment = 1</p>
+            <div data-conref="../../assets/snippets/multithread_min_batch_size.hts">
+<p style="color: #000000;">Optional. Batches can have overhead due to shared 
+ resources and workflow processing. This property allows you to assign 
+ a minimum number of tasks in any batch. If the total # of tasks is less 
+ than the minimum, OTM creates a single batch to process the tasks.</p>
+
+</div>
+          </td>
+          <td>Â </td>
+        </tr>
+        <tr>
+          <td>glog.workflow.task.parallelThreshold.&lt;task type&gt;</td>
+          <td>
+            <p>Minimum number of batches before allowing parallel execution.</p>
+            <p>Example: glog.workflow.task.parallelThreshold.BuildShipment =2</p>
+            <p>Optional. If the total number of batches is less than the threshold, all tasks are processed on the calling thread (or single threaded). Otherwise, the batches are processed in parallel using the treads in the topic group.</p>
+          </td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+    Â 
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="multi-threading_logic.htm">Multi-threading Logic</a></p>
+  <p class="LinkList"><a href="../bulk_plan_performance_and_tuning.htm">Bulk Plan Performance and Tuning Overview</a></p>
+  <p class="LinkList"><a href="bulk_plan_performance_tuning.htm">Bulk Plan Performance Tuning</a></p>
+  <p class="LinkList"><a href="../../properties/glog/workflow.property.htm">glog.workflow Properties</a></p>
+  <p class="LinkList"><a href="../../assets/docs/bulk_plan_performance_and_tuning_guide.pdf">Bulk Plan Performance and Tuning PDF</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "31.3.6.0_3"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

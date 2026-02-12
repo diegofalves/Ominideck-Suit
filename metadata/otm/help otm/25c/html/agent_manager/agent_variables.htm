@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath=".." src="../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../assets/css/redwood.css" type="text/css">
+  <meta name="template" content="../assets/masterpages/business process automation.htt">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="agent_manager\agent_variables.htm">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Agent Variables</title>
+  <link rel="StyleSheet" href="../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="agents,agent variables">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Agent Variables","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Business Process Automation</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Agent Variables</span></h1>
+  <div role="main">
+    <p>Agent Variables provide the ability to add variables to agents in order to make agent programming more flexible.</p>
+    <p>Using Agent Variables, saved queries can be used to look up values not currently available to agents. These values can then be plugged into agents and used to perform specific actions.</p>
+    <p>Agents support variable assignments and variable references in agent actions. Variables are also allowed in saved queries, which can then be used in agent saved conditions.</p>
+    <p>Variables are global, and can be used in the saved query screen, the finder screens, and the action tab of the agent manager.</p>
+    <p>As shown below, the syntax for variables is (where the $ sign indicates the use of a variable):</p>
+    <p><span class="Code">$varName</span></p>
+    <h2><a id="Agent Actions"></a>In Agent Actions</h2>
+    <p>Oracle Transportation Management provides an agent action to perform variable assignments from a saved query. This is done through the Agent Manager (Agent Manager is accessed via <span class="Bold">Business Process Automation &gt; Agents and Milestones &gt; Automation Agent</span>. It is on the <span class="Bold">Actions</span> tab). This action has two input fields:</p>
+    <ul>
+      <li>Variable Name</li>
+      <li>Saved Query Name</li>
+    </ul>
+    <p>In the following example, created through the Agent Manager, the result of the SQL query SLG is assigned to a variable called $sourceLocationGid. This variable is then used in the agent as defined.</p>
+    <ul>
+      <li>Variable Name: <span class="Code">$sourceLocationGid</span></li>
+      <li>Saved Query Name: <span class="Code">SLG</span><span class="Code"></span></li>
+    </ul>
+    <p><span class="Code">select source_location_gid from shipment</span></p>
+    <p><span class="Code">where shipment_gid = $shipmentGid</span></p>
+    <h2><a id="Saved Queries"></a>In Saved Queries</h2>
+    <p>The following is an example of variables in a saved query (in this example you would name the query what you wanted -- this shows the SQL and the variables assigned in it). This can be created through a saved query in the Agent Manager, or through saved queries in Power Data.</p>
+    <p><span class="Code">select shipment_gid from shipment_stop</span></p>
+    <p><span class="Code">where shipment_gid = $gid and stop_num = $stopNum</span></p>
+    <h2><a id="Pre-Defined Variables"></a>Pre-Defined Variables</h2>
+    <p>A set of predefined agent variables for events has been set up in the system. The following pre-defined variables are defined:</p>
+    <h3>All Events</h3>
+    <table title="all events Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$agent_instance</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the unique hash ID for the agent workflow. This matches the agent ID included in the logs.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$child_event_gids</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>comma separated list of child event GIDs</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$document</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>document GID, if applicable</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$documentType</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>document definition GID</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_Gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>agent event GID, if applicable</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>Primary key of event. For transaction agents, the i-transaction_no of the transaction record.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$log_process</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the Log process ID for the top-level process triggering the agent.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$transaction</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the transaction ID. This is only available when the agent is triggered as part of an inbound transmission.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>$transmission</td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the transmission ID.Â This is only available when the agent is triggered as part of an inbound transmission.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <h3>All Shipment Events</h3>
+    <table title="all shipment events Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$shipment_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>shipment GID</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <h3><a name="error_block" id="error_block"></a>Error Block</h3>
+    <p>These agent variables are available to the Error block if an error is encountered in the normal action block. For more on handling errors, see the <a href="agent_error_handler.htm">Error Handling</a> topic.</p>
+    <table title="error block Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$error.action.gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the GID context of the faulty action</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$error.action.name</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the name of the faulty action</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$error.action.parameters</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the parameters of the faulty action</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$error.action.sequence</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>the database sequence number of the faulty action</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$error.action.type</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the data query type for the faulty action</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$error.message</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>the error message for the first exception causing the fault</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <h3>Shipment Status Events / Shipment Group Status Events</h3>
+    <table title="shipment group status events Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$i_transaction_no</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>event transaction number</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_date</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>time stamp for the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$status_code_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>status code of the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$status_reason_code_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>reason code of the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$insert_date</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>insertion time for the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_group_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event group</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_group</p>
+          </td>
+          <td>
+            <p>Map</p>
+          </td>
+          <td>
+            <p>event group attribute map</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$location_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event location</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$location_xid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event location XID</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$stop_num,stopNum</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>stop number</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$ship_group_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>shipment group or the event (shipment group status events only)</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <h3>Shipment Stop</h3>
+    <table title="shipment stop Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$shipment_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>shipment GID</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$stop_num</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>stop number</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <h3>Shipment Special Service</h3>
+    <table title="shipment special service Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$shipment_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>shipment GID</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$shipment_spcl_svc_seq</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>shipment special services sequence number</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <h3>Order Base Status Events / Order Release Status Events</h3>
+    <table title="order base / release status events Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$i_transaction_no</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>event transaction number</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_date</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>time stamp for the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$bs_status_code_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>status code of the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$bs_status_reason_code_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>reason code of the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$insert_date</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>insertion time for the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_group_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event group</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_group</p>
+          </td>
+          <td>
+            <p>Map</p>
+          </td>
+          <td>
+            <p>event group attribute map</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$order_base_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>order base of the event (order base status events only)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$lines, $obLineGid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>comma separated list of order base line GIDs (order base status events only)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$order_gid</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>order release of the event (order release of the event only)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$lines, %orLineGid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>comma separated list of order release line GIDs (order release of the event only)</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <h3>Tracking Events</h3>
+    <table title="tracking events Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$AHEAD_LATE</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>gets the hours early or late by taking the difference between planned arrival and estimated arrival times</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$AHEAD_LATE_ABSOLUTE VALUE</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>subtracts the planned time from the ETA â always a positive number</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$CAR_DEST_ETA</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>gets the ETA time from the tracking event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$PLANNED_ARRIVAL_TIME</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>gets the planned arrival time from the associated shipment</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$i_transaction_no</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>event transaction number</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_date</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>time stamp for the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_group_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event group</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_group</p>
+          </td>
+          <td>
+            <p>Map</p>
+          </td>
+          <td>
+            <p>event group attribute map</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$status_code_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>status code of the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$status_reason_code_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>reason code of the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>$event_recieved_date</td>
+          <td>Date</td>
+          <td>time stamp of event receipt by Oracle Transportation Management</td>
+        </tr>
+        <tr>
+          <td>
+            <p>$location_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event location</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$stop_num</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>stop number</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <p>Following are some additional agent variables for shipments that can be used in expressions for agent actions when listening to the SHIPMENT STATUS - RECEIVED or the SHIPMENT STATUS - TRACKING event:</p>
+    <table title="additional agent variables Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Name</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>$i_transaction_no</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>event transaction number</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_date</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>time stamp for the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_group_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event group</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$event_group</p>
+          </td>
+          <td>
+            <p>Map</p>
+          </td>
+          <td>
+            <p>event group attribute map</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$insert_date</p>
+          </td>
+          <td>
+            <p>Date</p>
+          </td>
+          <td>
+            <p>insertion time for the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$location_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event location</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$location_xid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>event location XID</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$status_code_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>status code of the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$status_reason_code_gid</p>
+          </td>
+          <td>
+            <p>String</p>
+          </td>
+          <td>
+            <p>reason code of the event</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$stop_num</p>
+          </td>
+          <td>
+            <p>Number</p>
+          </td>
+          <td>
+            <p>stop number</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    Â 
+    <p>Simple Oracle RDBMS expressions are permissible as well. For example, the following is valid:</p>
+    <p><span class="Code">$weight + $deltaWeight</span></p>
+    <p>You can also search for variable results in a Search page. The agent containing the variable definition has to have run and assigned a value to the variable in order for the search page to return a result. For example, if you defined a variable named $contact, then you can search for $contact in the Contact ID field in the Contact tab under Transportation Planning and Execution &gt; Location Management &gt; Location Manager. If the agent containing the $contact definition ran and assigned a value to it, then your search will return a result to you.</p>
+    <h2><a id="Use_Nested_GID_in_Agent_Data_Type_Association"></a>Use Nested GID in Agent Data Type Association</h2>
+    <p>This impacts an agent with a Data Type Association sub-loop. E.g., assume you have a Shipment Agent with actions:</p>
+    <p><span class="Code">LOG: Shipment=$GID</span></p>
+    <p><span class="Code">(</span><span class="Code">SHIPMENT TO ORDER RELEASE) LOG: Shipment=$GID</span></p>
+    <p>The variable PARENT for these nested loops allows you to write actions like:</p>
+    <p><span class="Code">LOG: Shipment=$GID</span></p>
+    <p><span class="Code">(SHIPMENT TO ORDER RELEASE) LOG: Order=$GID, Shipment=$PARENT</span></p>
+    <p>The GID variable is remapped to the order release ID in the second statement while the shipment ID is available in a PARENT variable. Note that this mapping of PARENT and GID is always available for FOR loops.</p>
+    <h2><a name="child" id="child"></a>CHILD_EVENT_GIDS Variable</h2>
+    <p>The CHILD_EVENT_GIDS variable will be populated only for &quot;MOD&quot; events including user-defined MOD events. If there are child events defined and detected for the raised parent event, the child events will be populated as a comma separated list in the &quot;CHILD_EVENT_GIDS&quot; variable.</p>
+    <h3>Example</h3>
+    <p>An agent listens for ORDER BASE - MODIFIED event with child events ORDER BASE - INVOLVED PARTIES MODIFIED, ORDER BASE - DATES MODIFIED, and ORDER BASE - STATUS CHANGED being selected as parameters. If in a transaction the order base dates and status are changed, the ORDER BASE - MODIFIED event with child events ORDER BASE - DATES MODIFIED and ORDER BASE - STATUS CHANGED events will be raised. In this case, the &quot;CHILD_EVENT_GIDS&quot; variable will be populated with &quot;ORDER BASE - DATES MODIFIED, ORDER BASE - STATUS CHANGED&quot;.</p>
+    <h3>IN Operator</h3>
+    <p>The IN operator takes the expression to the left of the operator and checks to see if its value exists in the list of values represented by the variable to the right of the operator. This operator works like the &quot;=&quot; operator when used with a variable that evaluates in to a single value.</p>
+    <p>Usage:</p>
+    <p><span class="Code">IF ORDER BASE - STATUS CHANGED IN $CHILD_EVENT_GIDS {<br>
+        &amp;<br>
+        }<br>
+        ELSE IF ORDER BASE - DATES MODIFIED IN $CHILD_EVENT_GIDS {</span></p>
+    <p><span class="Code">}</span></p>
+    <h2><a name="Steps" id="Steps"></a>Sample Steps</h2>
+    <p>The following is a step-by-step example of how to set up and use agent variables. In this example, there is a multi-leg shipment with three stops. You want to set up an agent that listens for delayed shipments. After detecting a late shipment, it will identify what stop is next, look up the contact for that stop location, and email them a notification.</p>
+    <ol>
+      <li>Create a new <a href="new_workflow_agent.htm">Agent</a>.</li>
+      <li>Name the Agent ID = LISTEN_FOR_DELAYED_SHIPMENT.</li>
+      <li>Select SHIPMENT as the Agent Type, and mark it as Active.</li>
+      <li>Select SHIPMENT-STATUS DELAYED as the Event, and do not enter a Condition.</li>
+      <li>Create a new <a href="actions.htm">Action</a>.</li>
+      <li>Select ASSIGN VARIABLE from the list.</li>
+      <li>Name the Variable Name = $STOP_CONTACT_GID.</li>
+      <li>Create a new <a href="saved_query.htm">Saved Query</a>, name it NOTIFY_CONTACT, and do not mark Use In Finder.</li>
+      <li>Select SHIPMENT for the Object Type ID.</li>
+      <li>In the SQL Query fields, type<br>
+        <br>
+        <span class="Code">SELECT C.CONTACT_GID FROM CONTACT C, SHIPMENT_STOP SS WHERE SS.SHIPMENT_GID = $GID AND SS.STOP_NUM = $STOP_NUM AND SS.LOCATION_GID = C.LOCATION_GID</span>
+      </li>
+      <li>After saving, create another new Action.</li>
+      <li>Select NOTIFY CONTACT from the list.</li>
+      <li>For the Contact type $STOP_CONTACT_GID.</li>
+    </ol>
+    <p class="Note"><span class="Bold">Note</span>: Make sure to appropriately save and finish your work at each point.</p>
+  </div>
+  <h2><a name="related" id="related"></a>Related Topics</h2>
+  <p><a href="actions.htm">Agent Actions</a></p>
+  <p><a href="new_workflow_agent.htm">Automation Agent</a></p>
+  <p><a href="saved_query.htm">Saved Queries</a></p>
+  <p class="LinkList"><a href="savedquery_sql.htm">Saved Query Definition - SQL</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = ".."
+    gCommonRootRelPath = ".."
+    gTopicId = "1"
+  
+//]]></script>
+
+
+  <script src="../template/scripts/topicpage.js"></script>
+  <script src="../whxdata/layoutconfig.js"></script>
+  <script src="../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

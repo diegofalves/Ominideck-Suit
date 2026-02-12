@@ -1,0 +1,1064 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="agent_manager\agent_actions_by_object\utility_agent_actions.htm">
+  <meta name="template" content="../../assets/masterpages/business process automation.htt">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Utility Agent Actions</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="agent actions:utility,utility:agent actions">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Utility Agent Actions","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Business Process Automation</p>
+  </div>
+  <div><noscript> If you have any questions or comments about this topic or the online help, please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact us.</a> </noscript>
+  <h1><span data-field="title" data-format="default">Utility Agent Actions</span></h1>
+  <div role="main">
+    <p>Utility agent actions are general purpose agent actions that are available to many business objects. Not all utility agent actions are available for all business objects.</p>
+    <p>Utility agent actions include support for notification and control flow. For example, IF, ELSE IF, ELSE, and END IF are special agent actions that implement branch logic within an automation agent. The IF agent action checks the business object for a condition. If met, subsequent agent actions continue to process until an ELSE IF, ELSE, or END IF agent action is encountered. If not, control is passed to the next ELSE IF, ELSE. or END IF agent action. The ELSE IF agent action also checks the business object for a condition and acts identically to the IF agent action. The Else and End If agent actions delineate control blocks and have no explicit behavior.</p>
+    <p>Related object looping performed in agent is limited in order to reduce the impact on performance of incorrect SQL Queries matching too many related records.</p>
+    <p>Limits are on the following agent actions:</p>
+    <ul>
+      <li>ADD DOCUMENT TO</li>
+      <li>COPY FLEXFIELDS</li>
+      <li>COPY FLEXFIELDS TO</li>
+      <li>COPY INVOLVED PARTIES FROM</li>
+      <li>COPY INVOLVED PARTIES TO</li>
+      <li>COPY REFNUMS FROM</li>
+      <li>COPY REFNUMS TO</li>
+      <li>COPY REMARKS FROM</li>
+      <li>COPY REMARKS TO</li>
+      <li>Data Type Association Loops (e.g. an agent action applied SHIPMENT TO DOCUMENT)</li>
+      <li>FOR</li>
+      <li>FOR EACH</li>
+      <li>IF - LINE ITEM</li>
+      <li>LOCK</li>
+    </ul>
+    <p>In addition, certain SKU operations selecting related shipments for update are limited.</p>
+    <p>The limit is set to 5000 related records. If the limit is exceeded, the agent fails. Only Oracle Support can modify this limit, for all objects or a particular type of related object.</p>
+    <table title="utility Agent actions Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Utility Action</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="add_transactional_interest" id="add_transactional_interest"></a>Add Transactional Interest</span></p>
+          </td>
+          <td>
+            <p>Adds a contact&#39;s transactional interest in a particular event. The contact is notified of the event via the specified communication method and stylesheet.</p>
+            <p>Transactional events are available on the following business objects:</p>
+            <ul>
+              <li>Bill</li>
+              <li>Invoice</li>
+              <li>Job</li>
+              <li>Order Base</li>
+              <li>Order Release</li>
+              <li>Quote</li>
+              <li>Buy Shipment</li>
+              <li>Sell Shipment</li>
+              <li>Shipment Group</li>
+            </ul>
+            <p>For more information on transactional events, see <a href="../../planning/power_data/workflow/transactional_event_contacts.htm">Transactional Events</a> and <a href="../../communication/contact_manager/notification.htm">Message Notification</a>.</p>
+            <p><span class="Bold">Parameters:</span></p>
+            <p><a href="../../communication/contact_manager/create_new_contact.htm">Contact</a> (required)</p>
+            <p><a href="../../communication/contact_manager/notification.htm#trans">Transactional Event</a>: The event that will trigger the notification. This is required.</p>
+            <p><a href="../../communication/contact_manager/notification.htm#Communications">Communication Method</a></p>
+            <p><a href="../../planning/power_data/workflow/profile_stylesheet.htm">Stylesheet Profile</a>: The stylesheet profile used for this notification.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="adhoc_notify_contact" id="adhoc_notify_contact"></a>Ad Hoc Notify Contact</span></p>
+          </td>
+          <td>
+            <p>This agent action allows for ad hoc notification and is similar to the <a href="#contact">Notify Contact</a> agent action with the following differences:</p>
+            <ul>
+              <li>Instead of a Contact primary key, this agent action requires contact information in a free format text field that can either be an email address or a fax number.</li>
+              <li>The communication methods for this agent action are limited to EMAIL and FAX.</li>
+            </ul>
+            <p><span class="Bold">Example:</span></p>
+            <p>In order to use this agent action while dynamically looking up an email address from the database, an agent can be set up as follows:</p>
+            <ul>
+              <li><a href="utility_agent_actions.htm#assign">Assign Variable</a> agent action which assigns the variable name of $EMAIL_ADDRESS to a saved query that returns an email address</li>
+              <li>Notify Ad Hoc Contact agent action with a contact notification of $EMAIL_ADDRESS and a communication method of EMAIL.</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Contact Information (required)</p>
+            <p>Communication Method: Limited to EMAIL and FAX.</p>
+            <p>Subject: Text that is used in the subject of the notification.</p>
+            <p><a href="../../planning/power_data/workflow/profile_stylesheet.htm">Stylesheet Profile</a>: The XSL stylesheet that is used for this notification.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Assign_General_Ledger_Codes" id="Assign_General_Ledger_Codes"></a>Assign Order General Ledger Codes</span></p>
+          </td>
+          <td>
+            <p>See the <a href="../../planning/order_manager/order_rel_actions/assign_general_ledger.htm">Assign General Ledger Codes</a> action.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Perspective: Values are B (buy), S (sell) or A (all)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Assign_Shipment_General_Ledger_Codes" id="Assign_Shipment_General_Ledger_Codes"></a>Assign Shipment General Ledger Codes</span></p>
+          </td>
+          <td>
+            <p>See the <a href="../../planning/shipment_manager/assign_shipment_general_ledger_codes.htm">Assign Shipment General Ledger Codes</a> action.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="assign" id="assign"></a>Assign Variable</span></p>
+          </td>
+          <td>
+            <p>Provides the ability to add variables to automation agents in order to make automation agent programming more flexible.</p>
+            <p>Using agent variables, saved queries can be used to look up values that are not currently available to agents. These values can then be plugged into agents and used to perform specific agent actions.</p>
+            <p>Variable names must have a prefix of $, for example, $sourceLocationGid</p>
+            <p>By using the Assign Variable action with the <a href="utility_agent_actions.htm#Log">Log</a> action, you can add the result of ad-hoc queries to agent or system logs.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../agent_manager/agent_variables.htm">Variable Name</a>: Oracle Transportation Management runs the saved query listed in the Saved Query field and assigns the result to this variable name.</p>
+            <p><a href="../../agent_manager/saved_query.htm">Saved Query</a>: The query that is to be run as part of an agent. The result of this query is assigned to the above variable name.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Call_Service" id="Call_Service"></a>Call Service</span></p>
+          </td>
+          <td>
+            <p>This agent action allows the Oracle Transportation Management automation agent to invoke an <a href="../../web_service_manager/web_service_manager.htm">external web service</a>. This makes it possible to invoke a business service in an external application as long as the service is wrapped as a web service. This in turn allows for a business process that spans across Oracle Transportation Management and other external applications to be set up within Oracle Transportation Management.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a id="Copy_Flex_Fields"></a>Copy Flexfields</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to copy flex field attributes from the object for which the agent is triggered to the associated objects. If there are multiple related objects, the flex fields are copied to each one.</p>
+            <p>This agent action is available on the following agent types:</p>
+            <ul>
+              <li>CLAIM</li>
+              <li>CONSOL</li>
+              <li>GTM TRANSACTION</li>
+              <li>GTM TRANSACTION LINE</li>
+              <li>INVOICE</li>
+              <li>ITEM</li>
+              <li>JOB</li>
+              <li>LOCATION</li>
+              <li>ORDER BASE</li>
+              <li>ORDER BASE LINE</li>
+              <li>ORDER BASE SHIP UNIT</li>
+              <li>ORDER MOVEMENT</li>
+              <li>ORDER RELEASE</li>
+              <li>ORDER RELEASE LINE</li>
+              <li>ROUTE INSTANCE</li>
+              <li>ROUTE INSTANCE LEG</li>
+              <li>SELL SIDE SHIPMENT</li>
+              <li>SHIPMENT</li>
+              <li>SHIPMENT GROUP</li>
+              <li>TRACKING EVENT</li>
+              <li>VOUCHER</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Associated Object (data type association): Select the related target object to which flex fields are copied.</p>
+            <p>FlexField Attributes: Select one or multiple flex field attributes which needs to be copied to the associated object. If flex field attributes are not selected then all the flex fields attributes are copied.</p>
+            <p class="Note"><span class="Bold">Note</span>: If the selected flex field attributes are not present in either of the associated objects then the agent action will fail.</p>
+            <p class="Note"><span class="Bold">Note</span>: The object on which this agent action is triggered, is locked, i.e. the source object (from which data is being copied) gets locked. Now the target object (to which data is being copied) can be locked to avoid simultaneous any overwrite operation. To avail this feature, you need to enable the <a href="../../user_management/optional_features.htm">optional feature</a> &#39;AGENT LOOP LOCK SUPPRESSION&#39;. By default, the feature is disabled.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a id="Copy_Flexfields_to"></a>Copy Flexfields to</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to copy flex field attributes to the object for which the agent is triggered from the related objects. If there are multiple related objects, the flex field attributes are copied to each one. If there are multiple flex field attributes, all of them are copied.</p>
+            <p>This agent action is available on the following agent types:</p>
+            <ul>
+              <li>CLAIM</li>
+              <li>CONSOL</li>
+              <li>CONTACT</li>
+              <li>GTM TRANSACTION</li>
+              <li>GTM TRANSACTION LINE</li>
+              <li>GTM SHIPMENT</li>
+              <li>GTM SHIPMENT LINE</li>
+              <li>INVOICE</li>
+              <li>ITEM</li>
+              <li>JOB</li>
+              <li>LOCATION</li>
+              <li>ORDER BASE</li>
+              <li>ORDER BASE LINE</li>
+              <li>ORDER BASE SHIP UNIT</li>
+              <li>ORDER MOVEMENT</li>
+              <li>ORDER RELEASE</li>
+              <li>ORDER RELEASE LINE</li>
+              <li>ROUTE INSTANCE</li>
+              <li>ROUTE INSTANCE LEG</li>
+              <li>SELL SIDE SHIPMENT</li>
+              <li>SHIP UNIT</li>
+              <li>SHIPMENT</li>
+              <li>SHIPMENT GROUP</li>
+              <li>TRACKING EVENT</li>
+              <li>VOUCHER</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Associated Object: Select the related object from which flex fields are copied.</p>
+            <p>FlexField Attributes: Select one or multiple flex field attributes which needs to be copied to the associated object. If flex field attributes are not selected then all the flex fields attributes are copied.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="copyfrom" id="copyfrom"></a>Copy Involved Parties from &lt;object&gt;</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to copy involved parties from the related objects to the object for which the agent is triggered. If there are multiple related objects, the involved parties are copied from each one.</p>
+            <p>This agent action is available for the following business objects:</p>
+            <ul>
+              <li>Claim</li>
+              <li>GTM Transaction</li>
+              <li>GTM Shipment</li>
+              <li>Invoice</li>
+              <li>Job</li>
+              <li>Order Base</li>
+              <li>Order Release</li>
+              <li>Sell Side Shipment</li>
+              <li>Shipment</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Associated Object: Choose the target related object to which the involved parties will be copied.</p>
+            <p>From/To Involved Party Qualifier: Specify a qualifier that will limit which involved parties are copied and which qualifier will be assigned after the copy.</p>
+            <p class="Note"><span class="Bold">Note</span>: The object on which this agent action is triggered, is locked, i.e. the source object (from which data is being copied) gets locked. Now the target object (to which data is being copied) can be locked to avoid simultaneous any overwrite operation. To avail this feature, you need to enable the <a href="../../user_management/optional_features.htm">optional feature</a> &#39;AGENT LOOP LOCK SUPPRESSION&#39;. By default, the feature is disabled.</p>
+            <p class="Note"><span class="Bold">Note</span>: If no qualifier is selected, all the involved parties from the source object will be copied on to the target object&#39;s selected qualifier. If no qualifier is selected on target object as well, all the involved parties from the source object will be copied on to the corresponding qualifiers of the target object.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="copyto" id="copyto"></a>Copy Involved Parties to &lt;object&gt;</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to copy involved parties to the object for which the agent is triggered from the related objects. If there are multiple related objects, the involved parties are copied to each one. If there are multiple involved parties, all of them are copied.</p>
+            <p>This agent action is available for the following business objects:</p>
+            <ul>
+              <li>Claim</li>
+              <li>GTM Transaction</li>
+              <li>Invoice</li>
+              <li>Job</li>
+              <li>Order Base</li>
+              <li>Order Release</li>
+              <li>Sell Side Shipment</li>
+              <li>Shipment</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Associated Object: Choose the target related object to which the involved parties will be copied.</p>
+            <p>From/To Involved Party Qualifier: Specify a qualifier that will limit which involved parties are copied and which qualifier will be assigned after the copy.</p>
+            <p class="Note"><span class="Bold">Note</span>: If no qualifier is selected, all the involved parties from the source object will be copied on to the target object&#39;s selected qualifier. If no qualifier is selected on target object as well, all the involved parties from the source object will be copied on to the corresponding qualifiers of the target object.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Copy_Refnum_from__object_" id="Copy_Refnum_from__object_"></a>Copy Refnums from &lt;object&gt;</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to copy reference numbers from the related objects to the object for which the agent is triggered. If there are multiple related objects, the reference numbers are copied from each one. If there are multiple reference numbers, all of them are copied.</p>
+            <p>This agent action is available on the following agent types:</p>
+            <ul>
+              <li>CHARTER VOYAGE</li>
+              <li>CLAIM</li>
+              <li>CLAIM LINE ITEM</li>
+              <li>CONSOL</li>
+              <li>GTM TRANSACTION</li>
+              <li>GTM SHIPMENT</li>
+              <li>INVOICE</li>
+              <li>ITEM</li>
+              <li>JOB</li>
+              <li>LOCATION</li>
+              <li>ORDER BASE</li>
+              <li>ORDER BASE LINE</li>
+              <li>ORDER BASE SHIP UNIT</li>
+              <li>ORDER MOVEMENT</li>
+              <li>ORDER RELEASE</li>
+              <li>ORDER RELEASE LINE</li>
+              <li>SELL SIDE SHIPMENT (SELL SHIPMENT)</li>
+              <li>SHIPMENT</li>
+              <li>SHIPMENT GROUP</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Associated Object: Choose the target related object to which the reference numbers will be copied.</p>
+            <p>From/To Refnum Qualifier: Specify a qualifier that will limit which reference numbers are copied and which qualifier will be assigned after the copy.</p>
+            <p class="Note"><span class="Bold">Note</span>: If the object on which this agent action is triggered is locked, the source object (from which data is being copied) gets locked. Now the target object (to which data is being copied) can be locked to avoid simultaneous any overwrite operation. To avail this feature, you need to enable the <a href="../../user_management/optional_features.htm">optional feature</a> &#39;AGENT LOOP LOCK SUPPRESSION&#39;. By default, the feature is disabled.</p>
+            <p class="Note"><span class="Bold">Note</span>: If no qualifier is selected, all the reference numbers from the source object will be copied on to the target object&#39;s selected qualifier. If no qualifier is selected on target object as well, all the reference numbers from the source object will be copied on to the corresponding qualifiers of the target object.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Copy_Refnum_to__object_" id="Copy_Refnum_to__object_"></a>Copy Refnums to &lt;object&gt;</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to copy reference numbers to the related objects to the object for which the agent is triggered. If there are multiple related objects, the reference numbers are copied to each one. If there are multiple reference numbers, all of them are copied.</p>
+            <p>This agent action is available on the following agent types:</p>
+            <ul>
+              <li>CHARTER VOYAGE</li>
+              <li>CLAIM</li>
+              <li>CLAIM LINE ITEM</li>
+              <li>CONSOL</li>
+              <li>GTM TRANSACTION</li>
+              <li>GTM SHIPMENT</li>
+              <li>INVOICE</li>
+              <li>ITEM</li>
+              <li>JOB</li>
+              <li>LOCATION</li>
+              <li>ORDER BASE</li>
+              <li>ORDER BASE LINE</li>
+              <li>ORDER BASE SHIP UNIT</li>
+              <li>ORDER MOVEMENT</li>
+              <li>ORDER RELEASE</li>
+              <li>ORDER RELEASE LINE</li>
+              <li>SHIPMENT</li>
+              <li>SHIPMENT GROUP</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Associated Object: Choose the target related object to which the reference numbers will be copied.</p>
+            <p>From/To Refnum Qualifier: Specify a qualifier that will limit which reference numbers are copied and which qualifier will be assigned after the copy.</p>
+            <p class="Note"><span class="Bold">Note</span>: If no qualifier is selected, all the reference numbers from the source object will be copied on to the target object&#39;s selected qualifier. If no qualifier is selected on target object as well, all the reference numbers from the source object will be copied on to the corresponding qualifiers of the target object.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Copy_Remark_from__object_" id="Copy_Remark_from__object_"></a>Copy Remarks from &lt;object&gt;</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to copy remarks from the related objects to the object for which the agent is triggered. If there are multiple related objects, the remarks are copied from each one. If there are multiple remarks, all of them are copied.</p>
+            <p>This agent action is available on the following agent types:</p>
+            <ul>
+              <li>CLAIM</li>
+              <li>CONSOL</li>
+              <li>GTM TRANSACTION</li>
+              <li>GTM SHIPMENT</li>
+              <li>ITEM</li>
+              <li>JOB</li>
+              <li>LOCATION</li>
+              <li>ORDER BASE</li>
+              <li>ORDER BASE LINE</li>
+              <li>ORDER BASE SHIP UNIT</li>
+              <li>ORDER MOVEMENT</li>
+              <li>ORDER RELEASE</li>
+              <li>ORDER RELEASE LINE</li>
+              <li>SHIPMENT</li>
+              <li>TRACKING EVENT</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Associated Object: Choose the target related object to which the remarks will be copied.</p>
+            <p>From/To Remark Qualifier: Specify a qualifier that will limit which remarks are copied and which qualifier will be assigned after the copy.</p>
+            <p class="Note"><span class="Bold">Note</span>: The object on which this agent action is triggered, is locked, i.e. the source object (from which data is being copied) gets locked. Now the target object (to which data is being copied) can be locked to avoid simultaneous any overwrite operation. To avail this feature, you need to enable the <a href="../../user_management/optional_features.htm">optional feature</a> &#39;AGENT LOOP LOCK SUPPRESSION&#39;. By default, the feature is disabled.</p>
+            <p class="Note"><span class="Bold">Note</span>: If no qualifier is selected, all the remarks from the source object will be copied on to the target object&#39;s selected qualifier. If no qualifier is selected on target object as well, all the remarks from the source object will be copied on to the corresponding qualifiers of the target object.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Copy_Remark_to__object_" id="Copy_Remark_to__object_"></a>Copy Remarks to &lt;object&gt;</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to copy remarks to the related objects for which the agent is triggered. If there are multiple related objects, the remarks are copied to each one. If there are multiple remarks, all of them are copied.</p>
+            <p>This agent action is available on the following agent types:</p>
+            <ul>
+              <li>CLAIM</li>
+              <li>CONSOL</li>
+              <li>GTM TRANSACTION</li>
+              <li>GTM SHIPMENT</li>
+              <li>ITEM</li>
+              <li>JOB</li>
+              <li>LOCATION</li>
+              <li>ORDER BASE</li>
+              <li>ORDER BASE LINE</li>
+              <li>ORDER BASE SHIP UNIT</li>
+              <li>ORDER MOVEMENT</li>
+              <li>ORDER RELEASE</li>
+              <li>ORDER RELEASE LINE</li>
+              <li>SHIPMENT</li>
+              <li>TRACKING EVENT</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Associated Object: Choose the target related object to which the remarks will be copied.</p>
+            <p>From/To Remark Qualifier: Specify a qualifier that will limit which remarks are copied and which qualifier will be assigned after the copy.</p>
+            <p class="Note"><span class="Bold">Note</span>: If no qualifier is selected, all the remarks from the source object will be copied on to the target object&#39;s selected qualifier. If no qualifier is selected on target object as well, all the remarks from the source object will be copied on to the corresponding qualifiers of the target object.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="sql" id="sql"></a>Direct SQL Update</span></p>
+          </td>
+          <td>
+            <p>This agent action executes a SQL DML statement or stored procedure directly against Oracle Transportation Management or related tables. Direct SQL Update supports insert, update, delete and merge statements. For the automatic update of caches, it is recommended that you use DML Returning. This mechanism asks the system to return a list of impacted records. Then the system broadcasts out any needed cache updates based on this list.</p>
+            <p>Merge does not support DML Returning. If you are using merge, you will need to use another option (e.g. SQL Select) to specify what records were modified.</p>
+            <p>Update supports DML Returning, but only if the update statement does not use sub-selects to update columns.</p>
+            <p class="Note">Note: Only child elements of the parent object for which the agent runs can be modified. For example, shipment events are not considered children of shipments.</p>
+            <p>For complete details, see <a href="direct_sql_update_agent_action.htm">Direct SQL Update Utility Agent Action</a>.</p>
+            <p><span class="Bold">Parameters:</span></p>
+            <p>SQL statement or a PL/SQL procedure</p>
+            <p>Statement Type</p>
+            <p>Refresh Cache</p>
+            <p>Select SQL for Cache Refresh</p>
+            <p>Enable Lock</p>
+            <p>SQL Description</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Don_t1" id="Don_t1"></a>Don&#39;t Persist</span></p>
+          </td>
+          <td>
+            <p>Used to filter incoming XML on events with the <a href="../../communication/contact_manager/event_restrictions.htm#persist">Before Persist option</a> on the automation agent event. Informs Oracle Transportation Management not to save the data into the database (e.g. the order base or shipment).</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Else" id="Else"></a>Else</span></p>
+          </td>
+          <td>
+            <p>Executes agent actions following the Else agent action, prior to the next <a href="utility_agent_actions.htm#Endif">Endif</a> agent action. Only receives control if the preceding <a href="utility_agent_actions.htm#If">IF</a> or <a href="utility_agent_actions.htm#Elseif">Elseif</a> agent action&#39;s condition was not met.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Elseif" id="Elseif"></a>Elseif</span></p>
+          </td>
+          <td>
+            <p>Checks a condition and executes agent actions following the Elseif agent action, prior to the next Elseif, <a href="utility_agent_actions.htm#Else">Else</a> or <a href="utility_agent_actions.htm#Endif">Endif</a> agent action. Only receives control if the preceding If or Elseif agent action&#39;s condition was not met.</p>
+            <p>Automation agents can access values of in-memory objects in order to perform data checks. The check is available as an expression check in the <a href="utility_agent_actions.htm#If">IF</a> and ELSEIF agent actions. The syntax of the expression to perform an in-memory check is as follows:</p>
+            <p><span class="Code">#TABLE_NAME [PRIMARY KEY] / .../TABLE_NAME [PRIMARY KEY] / COLUMN_NAME VALUE</span></p>
+            <p>Here TABLE_NAME refers to the table name of the data that is being accessed. It can extend n levels deep. The left side expression has to end with a column name (COLUMN_NAME) which is the specific set of data being accessed. Following are some additional rules and requirements for this functionality:</p>
+            <ul>
+              <li>The expression is matched starting with the first child table name. So the top most parent table name does not need to be included in the expression. For example for an order release agent the expression does not need to start with ORDER_RELEASE. In order to check the value of an order remark the expression should start with <span class="Code">ORDER_RELEASE_REMARK/&amp;</span></li>
+              <li>If a column on the parent object is to be accessed the column name is referred to directly. For example to check the value of the quote GID on the order release the expression would read <span class="Code">#QUOTE_GID = ...</span></li>
+              <li>The <span class="Code">[PRIMARY KEY]</span> syntax is optional in order to access a specific child object.</li>
+              <li>The matching of table names, column names and values is case insensitive.</li>
+              <li>The expression has to start with the &quot;#&quot; character to indicate that this is an in-memory data object check.</li>
+              <li>This feature is available only to automation agents triggered by &quot;before-persist&quot; data modification (insert, update and delete) lifetime events. Any attempt to use this with &quot;after persist&quot; lifetime events or lifetime events not associated with a data modification (insert, update and delete) will result in the <a href="utility_agent_actions.htm#If">IF</a> or ELSEIF agent action evaluating false.</li>
+              <li>Instead of using database table and column names the expressions can also utilize the table and field names convention used by the code generated &quot;data&quot; classes. For example &quot;<span class="Code">#ORDER_RELEASE_REMARK/REMARK_TEXT = ORDER ACTUALS</span>&quot; can also be written as &quot;<span class="Code">#ORDERRELEASEREMARKDATA/REMARKTEXT = ORDER ACTUALS</span>&quot;. However in most cases using the database table and column names is more legible.</li>
+              <li>The expression check is limited to the use of &quot;=&quot;, &quot;IN&quot; and &quot;&lt;&gt;&quot; operators. Currently the &quot;=&quot; and &quot;IN&quot; operators have the exact same evaluation and thus lead to the same results. So using the &quot;=&quot; operator implies that the right hand side value is equal to the left hand side expression if it evaluates to a single value. If the left hand side expression evaluates to multiple values using the &quot;=&quot; operator implies the right hand side value matches one of these left hand side values. Using the &quot;&lt;&gt;&quot; operator checks that the right hand side value does not match the evaluation of the left hand side expression if it returns a single value and none of them if it returns multiple values.</li>
+            </ul>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../planning/power_data/workflow/complex_expression.htm">Complex Expression</a></p>
+            <p><a href="../../planning/power_data/workflow/attribute_rule.htm">Attribute Rule</a></p>
+            <p><a href="../../planning/power_data/workflow/saved_condition.htm">Saved Condition</a></p>
+            <p><a href="../../threshold_manager/object.htm">Threshold</a>: If within threshold tolerance, no agent action will occur. Passing Threshold Tolerance results in the agent actions defined in the Elseif agent action to occur. For example, if a weight tolerance was set up for an Order Base at 50 pounds, no agent actions would occur up until 50pounds. Any weight greater then 50 pounds triggers the agent actions defined within the Elseif agent action to occur.</p>
+            <p>Expression</p>
+            <p>Plugin Class</p>
+            <p>Pass Always: the default is to process the action only if the saved condition is true. Select the checkbox to always process the agent action regardless of the saved condition.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Endfor" id="Endfor"></a>Endfor</span></p>
+          </td>
+          <td>
+            <p>This agent action is used to terminate a <a href="utility_agent_actions.htm#For">FOR</a> block of agent actions. This action is automatically added by the system and cannot be manually added.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Endif" id="Endif"></a>Endif</span></p>
+          </td>
+          <td>
+            <p>Ends an <a href="utility_agent_actions.htm#If">IF</a> block of agent actions. Oracle Transportation Management automatically includes this agent action when you add an IF agent action to the action body. This action is automatically added by the system and cannot be manually added.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><a name="endlock" id="endlock"></a><span class="Bold">Endlock</span></p>
+          </td>
+          <td>
+            <p>Terminates a <a href="#lock">Lock</a> statement. This action is automatically added by the system and cannot be manually added.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a id="Estimate_Distance"></a>Estimate Distance</span></p>
+          </td>
+          <td>
+            <p>This agent action will take the latitude and longitude values (these values will be populated from a saved query) for both source and destination points and will return the distance.</p>
+            <p>To use this agent action:</p>
+            <ol>
+              <li>
+                <p>Use the Assign Variable agent action to populate latitude and longitude for source and destination points using a saved query.</p>
+              </li>
+              <li>
+                <p>Select the Estimate Distance agent action. It will use the five variable names specified in Assign Variable agent action as input and calculate the distance.</p>
+              </li>
+            </ol>
+            <p><span class="Bold">Parameters:</span></p>
+            <p>Source Latitude Variable Name</p>
+            <p>Source Longitude Variable Name</p>
+            <p>Destination Latitude Variable Name</p>
+            <p>Destination Longitude Variable Name</p>
+            <p>Distance Variable Name</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="For" id="For"></a>For</span></p>
+          </td>
+          <td>
+            <p>The FOR agent action determines the elements to loop through using a data type association. The object type of the &quot;TO&quot; object in the data type association determines the agent actions that will be available in the FOR loop.</p>
+            <p>The FOR loop is available for all agent types. You can have multiple FOR loops as many as needed. These can be nested within one another. FOR loops support proper data type association actions within the block. E.g., a FOR loop from Tracking Event to Shipment can contain a data type association object of Shipment to Order Release. Once a data type association for the FOR loop is selected and saved, it cannot be edited. This would invalidate enclosed actions.</p>
+            <p><span class="Bold">Parameters:</span></p>
+            <p>Associated Object (required)</p>
+            <p>Lock: Locks each related object for the duration of the loop.</p>
+            <p>Activity: Tracks the block with object lock diagnostics</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="forrelated" id="forrelated"></a>For Each</span></p>
+          </td>
+          <td>
+            <p>Executes the SQL stored in the <a href="../savedquery_sql.htm#check">SQL Check One field</a> in the <a href="../savedquery_sql.htm">Saved Query</a> and raises a custom event for each resulting GID returned from the SQL query.</p>
+            <p>The first agent and the triggered agents form a parent-child relationship. The agent variables work as follows:</p>
+            <ol>
+              <li>
+                <p>Variables in the parent agent are inherited by and visible to its child agents.</p>
+              </li>
+              <li>
+                <p>Child agent can define variables that shadow the inherited variables with identical names.</p>
+              </li>
+              <li>
+                <p>Variables defined in a child agent are not visible in the parent or its siblings.</p>
+              </li>
+            </ol>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../planning/power_data/workflow/saved_condition.htm">Saved Condition</a></p>
+            <p>Custom Event: A custom <a href="../../planning/power_data/workflow/agent_events.htm">agent even</a>t.</p>
+            <p><a name="create_new_process" id="create_new_process"></a>Create New Process: If selected, the related objects run in a separate workflow process. The initial agent does not wait for the related object actions to complete. This provides you a way to avoid deadlock potential when raising custom events.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="generate_refnum" id="generate_refnum"></a>Generate Refnum</span></p>
+          </td>
+          <td>
+            <p>Automatically generates and assigns a reference number value based on the BN Type (business number type) specified and assigns the reference number qualifier specified in the parameter to this value.</p>
+            <p>For example, you could create an agent that detects when new orders are added and then automatically assign an Order Reference Number of a specific value and qualifier.</p>
+            <p>The BN type you select when running the Generate Refnum agent action must have a BN context that supports the type of reference number being generated. Supported reference number types for each context are indicated in the <a href="../../planning/power_data/business_numbers/business_number_context.htm">business number context</a>.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Reference Number Qualifier ID</p>
+            <p><a href="../../planning/power_data/business_numbers/business_number_type.htm">BN Type ID</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="If" id="If"></a>If</span></p>
+          </td>
+          <td>
+            <p>Checks a condition and executes agent actions following the IF agent action, prior to the next <a href="utility_agent_actions.htm#Else">Else</a>, <a href="utility_agent_actions.htm#Elseif">Elseif</a> or <a href="utility_agent_actions.htm#Endif">Endif</a> agent action.</p>
+            <p>Like the Elseif agent action, the IF agent action can perform data checks on in-memory data objects. See <a href="utility_agent_actions.htm#Elseif">Elseif</a> for more information.</p>
+            <p>When using a Replacement Value in an agent IF statement, the values must be separated by a space. For example, the following will not work:</p>
+            <p>IF: #EARLY_DELIVERY_DATE=$JDE_DATE</p>
+            <p>Instead, it must be (notice spaces around the = sign)</p>
+            <p>IF: #EARLY_DELIVERY_DATE = $JDE_DATE</p>
+            <p>The actual comparison for the expression of the values on either side of the operator (=) is a string comparison, so these value strings need to match exactly (case does not matter though).</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../planning/power_data/workflow/complex_expression.htm">Complex Expression</a></p>
+            <p><a href="../../planning/power_data/workflow/attribute_rule.htm">Attribute Rule</a></p>
+            <p><a href="../../planning/power_data/workflow/saved_condition.htm">Saved Condition</a></p>
+            <p><a href="../../threshold_manager/object.htm">Threshold</a>: If within threshold tolerance, no agent action will occur. Passing Threshold Tolerance results in the agent actions defined in the If agent action Â to occur. For example, if a weight tolerance was set up for an Order Base at 50 pounds, no agent actions would occur up until 50pounds. Any weight greater then 50 pounds triggers the agent actions defined within the If agent action to occur.</p>
+            <p>Expression</p>
+            <p>Plugin Class</p>
+            <p>Pass Always: the default is to process the action only if the saved condition is true. Mark the checkbox to always process the action regardless of the saved condition.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><a name="lock" id="lock"></a><span class="Bold">Lock</span></p>
+          </td>
+          <td>
+            <p>This agent action takes an optional data query type association to determine which objects to lock. If left blank, the agent action locks the current business object for the duration of the block. This could be the agent&#39;s business object, if the action is top-level; or an associated business object, if the LOCK is part of a FOR loop or a data query type association.</p>
+            <p>If a data query type association is provided, all related objects are locked for the duration of the block. Note that this differs from the FOR block as that action only locks one related object at a time. The agent actions with the LOCK block act on the business object, not a related object. This allows an agent to lock related order releases for a block of shipment agent actions, which can be useful to reduce redundant locking in data query type associations.</p>
+            <p>The LOCK agent action takes an optional activity string, used to track the lock within object lock diagnostics.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Activity</p>
+            <p>Associated Object</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Log" id="Log"></a>Log</span></p>
+          </td>
+          <td>
+            <p>Logs a message to the system/agent logs. By using the <a href="utility_agent_actions.htm#assign">Assign Variable</a> action with the Log action, you can add the result of ad-hoc queries to agent logs.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Message (any text)</p>
+            <p>Destination: allow a message to be written to the System Log, the Agent Log, or both. If not defined, the default is the System Log.</p>
+            <p>Severity: assign a severity to the logged message. If not defined, the default is Information. Note that Severity is only used by the agent log.</p>
+            <p>Log ID: assign a specific Log ID to messages written to the System Log. If not defined, the default is Workflow.</p>
+            <p>See <a href="../../configuration/configure_agent_logging_and_statistics.htm">Configuring Agent Logging and Statistics</a> for more information on using this.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="log_to_transmission_report" id="log_to_transmission_report"></a>Log to Transmission Report</span></p>
+          </td>
+          <td>
+            <p>This action checks to see if $transmission is available (i.e. the process firing the agent was triggered by an inbound transmission). If so, the action adds a record to the I_LOG table for $transmission and $transaction.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Message Class: This is a drop list with the values &#39;Information&#39;, &#39;Warning&#39; or &#39;Error&#39;, mapping to the I_LOG.I_MESSAGE_CLASS values I/W/E. If set to Error, the integration subsystem will mark the entire transmission as FAILED.</p>
+            <p>Message: This is the free-form remarks the agent writes to I_LOG.I_MESSAGE_TEXT. It can be up to 2000 characters long.</p>
+            <p>Message Code: This is a text code, describing the type of message being sent to I_LOG.I_MESSAGE_CODE. If left blank, it is set to &#39;TRANSACTION_MESSAGE&#39;.</p>
+            <p>Written By: This is the originator of the I_LOG record, written to I_LOG.WRITTEN_BY. If left blank it is set to &#39;Agent &lt;agent GID&gt;&#39; where &lt;agent GID&gt; is the GID of the agent invoking the action.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="contact" id="contact"></a>Notify Contact</span></p>
+          </td>
+          <td>
+            <p>Sends a notification of the event to a contact.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../communication/contact_manager/create_new_contact.htm">Contact</a></p>
+            <p><a href="../../communication/contact_manager/notification.htm#Communications">Communication Method</a></p>
+            <p>Subject: text that is used in the subject of the notification. You can define subjects. See <a href="../../planning/power_data/workflow/subject_property_key.htm">Subject Property Key</a>.</p>
+            <p><a href="../../planning/power_data/workflow/profile_stylesheet.htm">Stylesheet Profile</a>: the XSL stylesheet that is used for this notification.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="ip" id="ip"></a>Notify Involved Party</span></p>
+          </td>
+          <td>
+            <p>Sends a notification of the event to any contact assigned to the Involved Party Qualifier that you provide as a parameter.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Involved Party</p>
+            <p><a href="../../communication/contact_manager/notification.htm#Communications">Communication Method</a></p>
+            <p>Subject: text that is used in the subject of the notification.</p>
+            <p><a href="../../planning/power_data/workflow/profile_stylesheet.htm">Stylesheet Profile</a>: the XSL stylesheet that is used for this notification.</p>
+            <p><a href="../saved_query.htm">Based on Saved Query</a>: When you use a saved query to find the involved party, Oracle Transportation Management incorporates the object GID of the agent as well as the involved party qualifier specified above into bind variables :1 and :2 respectively. The object GID must be linked to :1 and the qualifier must be :2, with the object GID appearing first. For example, the saved query should have a where clause similar to &quot;SHIPMENT_GID=:1 and INVOLVED_PARTY_QUAL_GID = :2.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="sp" id="sp"></a>Notify Service Provider</span></p>
+          </td>
+          <td>
+            <p>Sends a notification of the event to the service provider assigned to the shipment.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Subject: text that is used in the subject of the notification.</p>
+            <p><a href="../../planning/power_data/workflow/profile_stylesheet.htm">Stylesheet Profile</a>: the XSL stylesheet that is used for this notification.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Persist" id="Persist"></a>Persist</span></p>
+          </td>
+          <td>
+            <p>Used to filter incoming XML on events with the <a href="../../communication/contact_manager/event_restrictions.htm#persist">Before Persist option</a> on the agent event restrictions. Save the data into the database.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a id="print_document"></a>Print Document</span></p>
+          </td>
+          <td>
+            <p>Generates the reports defined in the Report Set and raises the REPORT - READY event.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../analysis/report_set_modify.htm">Report Set</a></p>
+            <p>Format</p>
+            <p>Language</p>
+            <p>Country</p>
+            <p>Date Format</p>
+            <p>Printer</p>
+            <p>Number of Copies</p>
+            <p>Page Ranges</p>
+            <p>ODS: An ODS is an Offline Data Store. If you want to run the report against an offline database, such as one consisting of archived OTM data, enter the ODS. An ODS can be defined on the <a href="../../database/database_connections.htm">Data Source Manager</a>.</p>
+            <p>The application will alsoÂ pass the time and date format to Business Intelligence Publisher (BIP) request with the attributes P_DATE_FORMAT, and P_TIME_FORMAT along with P_DATE_TIME_FORMAT while running the agent action &quot;Print Document&quot;.Â </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Prepare_Document" id="Prepare_Document"></a>Prepare Document</span></p>
+          </td>
+          <td>
+            <p>See the <a href="../../document_manager/actions/generate_document.htm">Generate Document</a> action.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../planning/power_data/reports/document_type.htm">Document Type</a></p>
+            <p>Language</p>
+            <p>Country</p>
+            <p>Date Format</p>
+            <p>The <a href="../../user_management/optional_features.htm">optional feature</a> &quot;SEND DATE AND TIME FORMAT&quot;Â is introduced to pass the time and date format to Business Intelligence Publisher (BIP) request with the attributes P_DATE_FORMAT, and P_TIME_FORMAT along with P_DATE_TIME_FORMAT while running the agent action &quot;Prepare Document&quot;. If the optional feature is enabled, then the attributes P_DATE_FORMAT, P_TIME_FORMAT, and P_DATE_TIME_FORMAT are included in the BIP request. If the optional feature is disabled, then the attributes P_DATE_FORMAT, and P_TIME_FORMAT are not included in the BIP request along with P_DATE_TIME_FORMAT.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Prepare_Report" id="Prepare_Report"></a>Prepare Report</span></p>
+          </td>
+          <td>
+            <p>Generates the specified report. Optionally attaches the report to a document on the business object.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../planning/power_data/reports/reports.htm">Report</a></p>
+            <p>Format</p>
+            <p>Storage</p>
+            <p>Allow Multiple Versions</p>
+            <p>Language</p>
+            <p>Country</p>
+            <p>Date Format</p>
+            <p class="Note"><span class="Bold">Note</span>:Â T<span>he formats of Excel (html), Excel (mhtml) and Excel (.xls) are not supported for reports from <span>Oracle Analytics Cloud</span>.</span></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Queue_Event" id="Queue_Event"></a>Queue Event</span></p>
+          </td>
+          <td>
+            <p>This agent action allows you to queue user-defined lifetime events into the LIFETIME data queue in response to related events.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Custom Event: A custom <a href="../../planning/power_data/workflow/agent_events.htm">agent even</a>t.</p>
+            <p><a href="utility_agent_actions.htm#create_new_process">Create New Process</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="error" id="error"></a>Raise Error</span></p>
+          </td>
+          <td>
+            <p>This agent action stops the processing of the current agent and transfers control to the agents error handler. It accepts an optional error message to return to any process waiting on the agent.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Error Message: the message to display and log when an error is raised.</p>
+            <p><a href="../../planning/power_data/25_general/failure_reason.htm">Error Code</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="event" id="event"></a>Raise Event</span></p>
+          </td>
+          <td>
+            <p>This agent action raises a custom event. The event is constrained by the agent type. This agent action provides a way to chain one agent to another agent.</p>
+            <p>The first agent and the triggered agents form a parent-child relationship. The agent variables work as follows:</p>
+            <ol>
+              <li>
+                <p>Variables in the parent agent are inherited by and visible to its child agents.</p>
+              </li>
+              <li>
+                <p>Child agent can define variables that shadow the inherited variables with identical names.</p>
+              </li>
+              <li>
+                <p>Variables defined in a child agent are not visible in the parent or its siblings.</p>
+              </li>
+            </ol>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Custom Event: A custom <a href="../../planning/power_data/workflow/agent_events.htm">agent even</a>t.</p>
+            <p><a href="utility_agent_actions.htm#create_new_process">Create New Process</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="ievent" id="ievent"></a>Raise Internal Event</span></p>
+          </td>
+          <td>
+            <p>Raises an Oracle Transportation Management event.</p>
+            <p>The first agent and the triggered agents form a parent-child relationship. The agent variables work as follows:</p>
+            <ol>
+              <li>
+                <p>Variables in the parent agent are inherited by and visible to its child agents.</p>
+              </li>
+              <li>
+                <p>Child agent can define variables that shadow the inherited variables with identical names.</p>
+              </li>
+              <li>
+                <p>Variables defined in a child agent are not visible in the parent or its siblings.</p>
+              </li>
+            </ol>
+            <p><span class="Bold">Parameter</span>:</p>
+            <p><a href="../../planning/power_data/workflow/agent_events.htm">Internal Event</a>: a valid Oracle Transportation Management event.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="reeval_auto_assign" id="reeval_auto_assign"></a>Reevaluate Auto Assign</span></p>
+          </td>
+          <td>
+            <p><span class="Bold">Parameter</span>:</p>
+            <p><a href="../../assignment_rule/auto_assignment_rule.htm">Auto Assign Rules</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Remove_Transactional_Interest" id="Remove_Transactional_Interest"></a>Remove Transactional Interest</span></p>
+          </td>
+          <td>
+            <p>Removes a contact&#39;s transactional interest in a particular event. Transactional events are available on the following business objects:</p>
+            <ul>
+              <li>Bill</li>
+              <li>Invoice</li>
+              <li>Job</li>
+              <li>Order Base</li>
+              <li>Order Release</li>
+              <li>Quote</li>
+              <li>Buy Shipment</li>
+              <li>Sell Shipment</li>
+              <li>Shipment Group</li>
+            </ul>
+            <p>For more information on transactional events, see <a href="../../planning/power_data/workflow/transactional_event_contacts.htm">Transactional Events</a> and <a href="../../communication/contact_manager/notification.htm">Message Notification</a>.</p>
+            <p><span class="Bold">Parameters:</span></p>
+            <p><a href="../../communication/contact_manager/create_new_contact.htm">Contact</a></p>
+            <p><a href="../../communication/contact_manager/notification.htm#trans">Transactional Event</a>: The event that will trigger the notification.</p>
+            <p><a href="../../communication/contact_manager/notification.htm#Communications">Communication Method</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="scheduleevent" id="scheduleevent"></a>Schedule Event</span></p>
+          </td>
+          <td>
+            <p>This agent action schedules a custom event to occur at a designated date and time.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Custom Event: A custom <a href="../../planning/power_data/workflow/agent_events.htm">agent even</a>t.</p>
+            <p>In</p>
+            <p>At</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Send_Allocation" id="Send_Allocation"></a>Send Allocation</span></p>
+          </td>
+          <td>
+            <p>This agent action selects and posts as XML any allocations that are related to the selected business object. You can specify full text or ID only, remarks, the recipient external system, and whether or not to stage the transmission.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Notify Method: Communication method used to send the transmission.</p>
+            <p><a href="../../communication/contact_manager/new_external_system.htm">External System</a>: The ID of system to which the XML document is transmitted.</p>
+            <p>Remarks: Any text that you want sent with the XML document.</p>
+            <p>Send ID Only</p>
+            <p>Stage Transmission</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Send" id="Send"></a>Send Integration</span></p>
+          </td>
+          <td>
+            <p>This agent action posts the business object as XML to an external system. You specify the recipient of the post, along with an optional transaction code and remarks. The agent action sets the processing code to the event and adds remarks for the agent ID.</p>
+            <p>All transmissions sent out for the SHIPMENT - REMOVED event automatically go out as if the Send ID only checkbox is marked, regardless if it really is marked in the action. For other events, Oracle Transportation Management looks at the Send ID Only checkbox when building the transmission.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Notify Method: Communication method used to send the transmission.</p>
+            <p><a href="../../communication/contact_manager/new_external_system.htm">External System</a>: The ID of external system where the XML document is transmitted.</p>
+            <p><a href="../../field_definitions/transaction_code.htm">Transaction Code</a></p>
+            <p><a href="../../field_definitions/transaction_code.htm">Reference Object Transaction Code</a></p>
+            <p>Remark: any text that you want sent with the XML document.</p>
+            <p>Send ID only: Oracle Transportation Management only sends the ID of the shipment.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="indicator" id="indicator"></a>Set Indicator</span></p>
+          </td>
+          <td>
+            <p>This agent action sets the Indicator field of buy and sell shipments, shipment group, order base, order release, tracking event, invoice, or bill to the specified indicator value.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Indicator Value: G (green), Y (yellow), R (red), W (white), B (blue), O (orange), and blank.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="istat" id="istat"></a>Set Internal Status</span></p>
+          </td>
+          <td>
+            <p>Sets a valid internal status type/value for the business object.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Status Value: Includes status type and value.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="stat" id="stat"></a>Set Status</span></p>
+          </td>
+          <td>
+            <p>Sets an external status type/value for the following OTM Business objects: order base, order release, shipment, bill, and invoice. Also supports the following GTM business objects:contact, shipment, shipment line, transaction, and transaction line.</p>
+            <p>Although agent and action conditions can key off of any set of statuses (internal and external), the Set Status action is constrained to external statuses. See the <a href="utility_agent_actions.htm#istat">Set Internal Status</a> agent action for setting internal Oracle Transportation Management status.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>Status Value: an external status type and value.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold">Send Rest Event</span></p>
+          </td>
+          <td>
+            <p>Sends a notification message to advise external clients that, for example, updated resource content can be retrieved.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p>External System</p>
+            <p>Reference Value</p>
+            <p>Override Resource Name</p>
+            <p>Send Reason</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="image1" id="image1"></a>Set User-defined Image</span></p>
+          </td>
+          <td>
+            <p>This agent action assigns an image reference to a business object based on the conditions and object type defined in the agent.</p>
+            <p>You can detach an image by selecting the corresponding <span class="Bold">Remove Image</span> checkbox.</p>
+            <p><span class="Bold">Parameters</span>:</p>
+            <p><a href="../../planning/power_data/25_general/icons.htm">Image</a> one through five.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Stop1" id="Stop1"></a>Stop</span></p>
+          </td>
+          <td>
+            <p>Halts the automation agent. Use this agent action to stop the agent based on some <a href="utility_agent_actions.htm#If">IF</a> condition.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="update_status_external_event" id="update_status_external_event"></a>Update Status for External Event</span></p>
+          </td>
+          <td>
+            <p>Updates the status type to the status value configured in the <a href="../../planning/power_data/25_status_messages/event_group.htm">event group</a>.</p>
+            <p>This agent action is not available for all agent types.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><span class="Bold"><a name="Wait" id="Wait"></a>Wait</span></p>
+          </td>
+          <td>
+            <p>Halts execution of the Oracle Transportation Management automation agent for the interval specified as input to the agent action. Once the interval period expires, the next agent action listed in the automation agent is executed. The WAIT agent action is only long-running if the wait time exceeds <a href="../../properties/glog/agentaction.properties.htm">glog.agentAction.wait.numSecondsForLongRunningTask</a>.</p>
+            <p><span class="Bold">Parameter:</span></p>
+            <p>Seconds</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Â </p>
+  </div>
+  <h2><a name="related" id="related"></a>Related Topics</h2>
+  <p class="LinkList"><a href="../business_actions.htm">Agent Actions</a></p>
+  <p class="LinkList"><a href="direct_sql_update_agent_action.htm">Direct SQL Updated Agent Action</a></p>
+  <p class="LinkList"><a href="../../properties/glog/dbupdate.properties.htm">glog.dbupdate Properties</a></p>
+  <p class="LinkList"><a href="../../configuration/configure_agent_logging_and_statistics.htm">Configuring Agent Logging and Statistics</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "1"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="Bulk Rating Actions">
+  <meta name="topic-check-list" content="First Draft">
+  <meta name="topic-status" content="Complete">
+  <meta name="template" content="../../assets/masterpages/operational planning.htt">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Bulk Plan Tuning Container Optimization Logic</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="bulk plan:container optimization tuning,bulk plan:heuristics algorithms non-3D,bulk plan:heuristics algorithms 3D,bulk plan:column generation,bulk plan:multi-container MIP,tuning:container optimization">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content><meta name="brsnext" value="bulk_plan_manager/solution_quality_tuning/bulk_plan_tuning_continuous_moves_logic.htm"><meta name="brsprev" value="bulk_plan_manager/solution_quality_tuning/bulk_plan_tuning_direct_shipment_building.htm">
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Bulk Plan Tuning Container Optimization Logic","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Bulk Plan Tuning Container Optimization Logic</span></h1>
+  <div role="main">
+    <p><a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm">Container optimization</a> is used to:</p>
+    <ul>
+      <li>Determine the optimal equipment combination for packing a set of ship units. This optimally can either be based on cost or equipment usage; Â </li>
+      <li>Determine the placement of ship units into pieces of equipment and their compartments. This is achieved through <a href="../../planning/power_data/load_configuration/load_config_3d_pattern.htm">3D load configuration</a>;</li>
+      <li>Test whether a group of items can fit into a container;</li>
+      <li>Make splitting decisions for <a href="bulk_plan_tuning_order_bundling_logic.htm">order bundles</a>;</li>
+      <li>Make bundle size decisions.</li>
+    </ul>
+    <p>Oracle Transportation Management provides several algorithms for packing items into containers â ranging from simple packing algorithms for speed to more robust mixed integer programming (MIP) based approaches such as the <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_single_container_mip">single container MIP</a> and the <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_column_gen_alg">column generation algorithm</a>. The packing algorithm also includes placing rectangular and cylindrical shared objects into the equipment through various 3D load configuration algorithms. The figure below shows all the algorithms that Oracle Transportation Management supports for packing.</p>
+    <p>You can select a container optimization logic configuration through the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#container_opt_config">CONTAINER OPT CONFIG ID</a>. You can also have the option of providing multiple container optimization configuration IDs through the parameter, <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#logic_config">LOGIC CONFIG SET ID</a>. If set, Oracle Transportation Management performs container optimization using each logic configuration parameter in the set, and chooses the one that is most optimal.</p>
+    <p>This figure shows the packing algorithms; Quick Packing, Single Container MIP, Enumerative, 3D Load Packing and Pattern Based Packing, as well as the other algorithms Column Generation, Multi-container Heuristic and Multi-container MIP that can all be used with container optimization.</p>
+    <p><img alt="This figure shows the packing algorithms; Quick Packing, Single Container MIP, Enumerative, 3D Load Packing and Pattern Based Packing, as well as the other algorithms Column Generation, Multi-container Heuristic and Multi-container MIP that can all be used with container optimization." src="../../assets/images/container_opt_algorithms.svg"></p>
+    <h2>Container Optimization Algorithms</h2>
+    <p>Container optimization algorithms primarily deal with two different types of problems.</p>
+    <ul>
+      <li>Determine the optimal set of equipment needed to pack all the items.</li>
+      <li>For a given equipment, pack as tightly as possible â or as many items as possible. This is done using one of the packing algorithms â <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_quick_packing_alg">quick packing</a>, <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_single_container_mip">single container MIP</a>, <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_enumerative_alg">enumerative algorithm</a>, 3D load packing (greedy and <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#tree">tree-search</a>), and <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_patt_based_load_config">pattern based packing algorithm</a>).</li>
+    </ul>
+    <p>Both problems, optimal choice of equipment and tight packing of each equipment, are related to each other, as tight packing typically leads to the smallest number of containers needed to pack. The determination of the optimal set of equipment is done by one of the following algorithms:</p>
+    <ul>
+      <li>Non 3D load configuration based heuristics</li>
+      <li><a href="../../planning/power_data/load_configuration/load_configuration_engine_type.htm">3D load configuration based heuristics</a></li>
+      <li><a href="bulk_plan_tuning_cont_opt_logic.htm#column_generation_alg">Column generation</a> (using one or more packers used for tightly packing the container)</li>
+      <li><a href="bulk_plan_tuning_cont_opt_logic.htm#multicontainer_mip">Multi-container MIP</a></li>
+    </ul>
+    <p class="Note"><span class="Bold">Note</span>: The property <a href="../../properties/glog/optimization_properties.htm#glog.optimization.packingsolver.maxTotalPackedResources">glog.optimization.packingsolver.maxTotalPackedResources</a> specifies the maximum number of equipment that can be used in the packing solution. If the number of equipment packed for an order bundle exceeds the limit you mentioned in the property, the container optimization packing process fails.Â Enable the log ID &#39;<span class="Bold"><a href="../../planning/process_manager/process_manager/logs/system_log_ids.htm#OptMipData">OptMipData</a>&#39;Â </span>to export a CSV file of column generation information (like columns, dual, variable names and their OTM object references, load points) when it is used. This log can be used to analyse the solution obtained from the column generation.</p>
+    <h2><a name="non_3d_based_heuristics_alg" id="non_3d_based_heuristics_alg"></a>Heuristics Algorithms â Non 3D Based</h2>
+    <p>Heuristics algorithms are used to quickly determine the right set of equipment to pack all the items. The following algorithms are considered heuristic algorithms that are not 3D based. This means that the items are placed into the container and are checked only against weight, volume, and ERUs. These algorithms do not check if they can be feasibly placed using box or cylinder geometry.</p>
+    <ul>
+      <li>Quick packing algorithm â set the parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_quick_packing_alg">USE QUICK PACKING ALGORITHM</a></li>
+      <li>Single container MIP â set the parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_single_container_mip">USE SINGLE CONTAINER MIP</a></li>
+      <li>Enumerative algorithm â set the parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_enumerative_alg">USE ENUMERATIVE ALGORITHM</a></li>
+    </ul>
+    <p>More than one algorithm from this group can be selected in the same logic configuration. If more than one algorithm is set to true, Oracle Transportation Management will run all the selected algorithms and choose the best solution.</p>
+    <p>The three non-3D based packing algorithms are described below. The input to the packing algorithms are one container (with or without compartments) and a set of ship units with counts.</p>
+    <h3>Quick Packing Algorithm</h3>
+    <p>This is the simplest packing algorithm. For a given resource or container, this <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_quick_packing_alg">quick packing</a> algorithm will pack the sorted list of items one at a time until the resource is full. It first packs items without splitting. Once no more items can be packed, it then considers splitting the items for packing.</p>
+    <p>In order to use quick packing only, the USE QUICK PACKING ALGORITHM parameter is the only algorithm that needs to be turned on. If the number of items to pack is less than the size of the container, it is the best algorithm to use as it is the fastest.</p>
+    <p class="Note"><span class="Bold">Note</span><span class="Bold">:</span> In order to use the 3D load configuration algorithm, set the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#lcenginetype">LOAD CONFIG ENGINE TYPE</a> to No Load Config. In addition, one or more of these container optimization logic configuration parameters must be set â Â <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_3d_based_load_config">USE 3D BASED LOAD CONFIGURATION</a>, <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_patt_based_load_config">USE PATTERN BASED LOAD CONFIGURATION</a>, and <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#tree">USE TREE SEARCH LOAD CONFIGURATION</a>.</p>
+    <h3>Single Container MIP Algorithm</h3>
+    <p>The <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_single_container_mip">single container MIP</a> algorithm uses the mixed integer programming (MIP) algorithm to optimally pack the best set of items into the container. The algorithm checks the constraints of weight, volume, and equipment reference units to create a solution.</p>
+    <p>However, there are constraints that cannot be handled in the single container MIP. Constraints involving compatibility among the packed items, such as mixing rule, commodity to commodity compatibility, etc., are only checked after the solve. Once the MIP completes, these constraints are checked to ensure that the items can be packed on to the container. This post check might cause the solution to be sub-optimal.</p>
+    <h3>Enumerative Algorithm</h3>
+    <p>The <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_enumerative_alg">enumerative algorithm</a>, like the single container MIP, produces tightly packed containers. Since it is based on a technique known as dynamic programming, it has a tendency to enumerate all possible combinations â and hence could be computationally expensive.</p>
+    <p>Unlike the single container MIP, this algorithm does check for all the constraints during the main solve and not afterward. In situations where the placement of a shipment unit into a container depends on other ship units already placed, this is a superior algorithm to single container MIP.</p>
+    <h2><a id="3d_based_heuristics_alg"></a>Heuristics Algorithms â 3D Based</h2>
+    <p>To handle a richer set of problems, you can use the <a href="../../planning/power_data/load_configuration/load_configuration_engine_type.htm">3D load configuration algorithms</a> available via the container optimization logic configuration parameters. In order to use the updated algorithm, the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#lcenginetype">LOAD CONFIG ENGINE TYPE</a> must be set to No Load Config.Â In addition, one or more of the 3D load configuration engines must be selected in the <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm">container optimization logic configuration</a>.</p>
+    <p>You still have access to the older legacy 3D load configuration algorithm via parameters. To use the legacy 3D load configuration algorithm, select one of the legacy algorithms in the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#lcenginetype">LOAD CONFIG ENGINE TYPE</a>. The legacy algorithms are Pattern Based, Pattern Based Optimize, and Volume Estimation.</p>
+    <p>The following algorithms are considered as heuristic algorithms for placing regular shaped objects such as boxes, pallets or cylindrical objects. These algorithms determine the coordinates of where the items are placed in the container. In addition to checking for constraints pertaining to 3D placement, these algorithms also check for weight, volume, and ERU constraints.</p>
+    <h3>3D Based Load Configuration</h3>
+    <p>3D based load configuration is designed to pack a number of different sizes of 3 dimensional (3D) objects into containers with known dimensions subject to many different constraints such as orientations and stacking compatibilities. Set the <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_3d_based_load_config">USE 3D BASED LOAD CONFIGURATION</a> logic configuration parameter. Note that, in order to guarantee 3D scoring mechanism always returns a solution with a better solution quality, OTM also spends one iteration to pack equipment with a non-scoring packing algorithm.</p>
+    <p><span class="Bold"><a id="scoring_palcements_in_3d"></a>3D SCORING MECHANISM</span>: The 3D scoring mechanism can be used to find better or equal packing options when using the 3D load configuration algorithm. Performance will be impacted based on the <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#3D_SCORING_NUMBER_OF_ITERATIONS">3D Scoring Number of Iterations</a> parameter and the number of items to be packed. Performance will be slower as either or both values get higher.</p>
+    <p>Solution quality improvement: The 3D based load configuration algorithm finds the first feasible item-orientation-space combination and uses the placement combination in the container. With the scoring mechanism on, all item-orientation combinations are evaluated in a fixed space and each placement is scored to estimate the best combination based on the criteria.</p>
+    <p>Related Parameters and Properties: There are <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm">Logic Configuration - Container Optimization</a> parameters that let you define your preferences. These are in the CONTAINER OPTIMIZATION 3D SCORING section.</p>
+    <ul>
+      <li>
+        <p class="LinkList"><a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#consider_scoring__logic_in_3d_placement">CONSIDER SCORING LOGIC IN 3D PLACEMENT</a> Used to turn on/off the 3D scoring mechanism so must be set to true to use this functionality. The following parameters are not considered when this parameter is true:</p>
+        <ul>
+          <li>EMPTY SPACE SORT CRITERIA</li>
+          <li>EVALUATION DEPTH</li>
+          <li>ITEM SORT CRITERIA</li>
+          <li>LOAD PLACEMENT ITERATION CRITERIA</li>
+        </ul>
+      </li>
+      <li>3D SCORING NUMBER OF ITERATIONS: This parameter limits the number of times the 3D scoring mechanism will run.</li>
+      <li>3D SCORING MAXIMUM ITERATIONS WITHOUT IMPROVEMENT: This parameter limits how many iterations the 3D scoring mechanism will try without seeing improvement.</li>
+      <li><a id="max_and_min_parameters"></a>Max and Min parameters: The following parameters work together to determine the priority, or weighting, of the criteria for placement. There is a minimum and maximum for each. By setting lower and higher values for these parameters, you can indicate the importance of that criteria. If you do not want a criterion considered, set the minimum and maximum values to zero. If you only want one criterion used, set all others to zero and set a non-zero value for that one. If you want two criteria used, such as both box size loading height criteria and box space dimension match criteria, set non-zero values for those parameters - the more important one, with higher values. The remaining parameters can be set to &#39;0&#39; for both the maximum and minimum. Note that weight does not refer to the actual weight but weighting or priority of the criteria.
+        <ul>
+          <li>MAX/MIN WEIGHT FOR BOX SIZE LOADING HEIGHT CRITERIA: This criterion tries to pack items with larger volumes closer to the floor. The rationale here is to allow smaller items to be stacked on larger items.</li>
+          <li>MAX/MIN WEIGHT FOR BOX SPACE DIMENSION MATCH CRITERIA: This criterion measures how well an item fits into the space being evaluated.</li>
+          <li>MAX/MIN WEIGHT FOR COLUMN BUILDING CRITERIA: OTM looks at the number of units with the same dimensions that can be stacked into a column. If many identical items of a particular item type can be placed as a row, column, or stack, thus utilizing the space more efficiently and reducing the fragmentation, then it follows that it must be a good placement.</li>
+          <li>MAX/MIN WEIGHT FOR LOAD BEARING CRITERIA: This criterion impacts placement of high load bearing weight items in the stacking layers and puts low weight bearing items in the top most layer.Â </li>
+          <li>MAX/MIN WEIGHT FOR SPACE DEFRAGMENTATION CRITERIA: This criterion impacts placement that reduces the number of fragmented spaces. The default is 100.</li>
+          <li>MAX/MIN WEIGHT FOR UNUSABLE SPACE CRITERIA: When placing an item, new spaces are generated. If no item can fit into the new spaces generated, the space is considered as wasted space. Placement which generates minimum wasted space is preferred.</li>
+        </ul>
+      </li>
+      <li><span class="Bold"><a href="../../properties/glog/optimization_properties.htm#packingparameters.randomizationSeed">glog.optimization.packingparameters.randomizationSeed</a></span>: This property is used when using 3D scoring mechanism. It is used to initialize the random number generator. Changing this value can change the resulting shipments from bulkplan.</li>
+      <li><span class="Bold"><a href="../../properties/glog/optimization_properties.htm#optimization.packingparameters.scoringInMultistop">glog.optimization.packingparameters.scoringInMultistop</a></span>: This property needs to be enabled (in addition to the parameter) to use the 3D scoring mechanism inside the Multistop logic.</li>
+    </ul>
+    <p>Priorities: In order to handle priorities in 3D scoring, a multi-pass approach is used. In the first pass, the items are treated equally â as though they are all of the same priority and OTM tries to do packing with a simplified (one iteration) scoring algorithm. The first pass is to get an estimate of the volume of items packed in the partially filled last container. Once this is done, if the solution generates more than one equipment, the total volume of the last equipment (typically partially filled) is used to take out all of the low priority items that add up to this volume. Internally, two priorities are created â high and low, high being the items that could potentially fill all the full equipment and low are those low priority items that will fill the last container. The number of items with low priorities are increased until the maximum priority of items in the last container is not greater than the minimum priority of items in other containers. Note that it is possible that another container has some small fragment space which is not large enough for big high priority items, but large enough for small low priority items. In this case, OTM will fill those fragment spaces with low priority items to maximize utilization.</p>
+    <ul>
+      <li><span class="Bold"><a href="../../properties/glog/optimization_properties.htm#packingparameters.enforcePropertyGroup">glog.optimization.packingparameters.enforcePropertyGroup</a></span>: This property determines how scoring logic will place higher priority and lower priority releases.</li>
+      <li><span class="Bold"><a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#USE_LAST_CONTAINER_PRIORITY_HEURISTIC">USE LAST CONTAINER PRIORITY HEURISTIC</a></span>: This Logic Configuration Container Optimization parameter controls packing when scoring and priority are both enabled.</li>
+    </ul>
+    <h3>Pattern Based Load Configuration</h3>
+    <p>Pattern based load configuration is used for packing objects based on a specific loading pattern such as lengthwise, pinwheel, and standing nested. Set the <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_patt_based_load_config">USE PATTERN BASED LOAD CONFIGURATION</a> logic configuration parameter.</p>
+    <h3>Tree Search Load Configuration</h3>
+    <p>Tree search load configuration has the potential of producing higher quality load placements than 3D based load configuration or pattern based load configuration algorithms by exploring many more placement combinations. The increased solution quality does come at the expense of increased run time. Set the <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#tree">USE TREE SEARCH LOAD CONFIGURATION</a> logic configuration parameter.</p>
+    <p>As with non-3D based heuristic algorithms, more than one algorithm from this group can be selected and the one with the best result will be used.</p>
+    <p class="Note"><span class="Bold">Note</span><span class="Bold">:</span> If you select algorithms from both 3D based and non-3D based groups, Oracle Transportation Management will use the 3D based algorithms and ignore the non-3D based algorithms. The reason is that Oracle Transportation Management cannot compare the results of the 3D and non-3D, as the non-3D based algorithms will produce more tightly packed loads, but may be infeasible from a 3D perspective.</p>
+    <h2><a name="column_generation_alg" id="column_generation_alg"></a>Column Generation Algorithms</h2>
+    <p>The column generation algorithms, whether intended for packing, multi-stop or any other purpose, contain two major parts â solution generators (or column generators) and the optimizer to select the best combination of solutions (or columns). The optimizer in Oracle Transportation Management is a third party mixed integer programming solver â FICOâs XPressMP. Â </p>
+    <p>To generate solution combinations, the column generation algorithm in container optimization uses one or more seed heuristic packing algorithms. You can turn on column generation algorithm by setting the parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_column_gen_alg">USE COLUMN GENERATION ALGORITHM</a> to true. Along with this parameter, you can choose one or more algorithms from the non-3D based heuristics set or the 3D based heuristic set. The number of column generation iterations can be controlled via the parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#conopt_col_gen_num_iterations">CONOPT COLUMN GENERATION NUMBER OF ITERATIONS</a>. The iterations specify the number of times the seed algorithms are invoked in order to generate the solutions. To explain this a bit further, consider the following settings:</p>
+    <ul>
+      <li>parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_column_gen_alg">USE COLUMN GENERATION ALGORITHM</a> set to true</li>
+      <li>parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_single_container_mip">USE SINGLE CONTAINER MIP</a> set to true</li>
+      <li>parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#conopt_col_gen_num_iterations">CONOPT COLUMN GENERATION NUMBER OF ITERATIONS</a> set to 5</li>
+    </ul>
+    <p>Since the column generation algorithm is set to true, OTM will use the seed algorithm, single container MIP, to generate the solutions. The single container MIP algorithm will be invoked at most 5 times. Each time the single container MIP is invoked, it will update âvalueâ to improve the column generation solution.</p>
+    <p class="Note"><span class="Bold">Note</span><span class="Bold">:</span> With the above settings, the single container MIP algorithm is used as a seed algorithm for column generation by using <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_single_container_mip">USE SINGLE CONTAINER MIP</a> set to true. However, other algorithms (e.g. quick packing, enumerative) can be used for this purpose.</p>
+    <h2><a name="multicontainer_mip" id="multicontainer_mip"></a>Multi-Container MIP</h2>
+    <p>The <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#USE">multi-container MIP algorithm</a> uses mixed integer programming to select the right set of equipment (and the compartments therein) to pack a given collection of ship units. The multi-container MIP is limited in functionality as it cannot 3D load configuration, order priorities and various item-to-resource and item-to-item incompatibilities. Note that, since the Multi-container MIP formulation uses a lot of binary and integer variables, and its size can increase dramatically with the increase of number of orders and equipment in the bulk plan. Therefore, we do not recommend this algorithm for very large bulk plans.</p>
+    <h2><a id="multicontainer_heuristic"></a>Multicontainer Heuristic</h2>
+    <p>Most of the container optimization algorithms in OTM are very efficient in packing the items tightly to achieve high equipment utilization. However, they sometimes make &quot;greedy&quot; decisions while trying to obtain a solution quickly and fall short of the optimal solution. The Multicontainer Heuristic algorithm is designed to avoid such greedy decisions as much as possible. This algorithm is suitable for planning cases where multiple equipment choices are available, and it is particularly very effective when the objective is to minimize the cost of the equipment combination.</p>
+    <p>This algorithm runs primarily in two iterative steps. In the first step, the algorithm solves a mixed integer programming model to determine the combination of resources required to pack all the items. In the second step, the algorithm tries to pack the items based on the solution from Step 1, and sends feedback information back to step 1 to improve the solution, if necessary.</p>
+    <p>To use this algorithm, set the logic configuration - container optimization parameter &quot;<a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_multicontainer_heuristic">USE MULTICONTAINER HEURISTIC ALGORITHM</a>&quot; to true. Further, this algorithm will use 3D based load configuration to pack items when the container optimization parameter &quot;<a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_3d_in_mc_heauristic">USE 3D IN MULTICONTAINER HEURISTIC</a>&quot; is true.</p>
+    <h2><a id="group_packing"></a>Group Packing</h2>
+    <p>To achieve high equipment utilization, Container Optimization logic can mix items from different orders and ship unit lines in the 3D placement of items in an equipment. Therefore the group of items from an order or from a ship unit may not always be collated and placed together in the equipment. However, at times it may be desirable to collate items in such groups and place every group of items in a contiguous manner. In this situation, the Container Optimization logic configuration parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#item_grouping_criteria">ITEM GROUPING CRITERIA</a> can be used to pack items in groups using one of the following grouping criteria:</p>
+    <ol>
+      <li>Group by Order: All ship unit items in an order will be put in one group.</li>
+      <li>Group by Ship Unit: All ship unit items with the same dimensions (across all orders and the ship unit lines) will be put into one group.</li>
+      <li>Group by Order and Ship Unit: All ship unit items of a ship unit line in an order will be put in one group.</li>
+    </ol>
+    <p>Group packing mainly achieves the following objectives:</p>
+    <ul>
+      <li>maintain continuity in the 3D placement of group items in an equipment</li>
+      <li>help reduce splitting of item groups.</li>
+    </ul>
+    <p>For example, when the ITEM GROUPING CRITERIA parameter is set to â1. Group by Order&quot;, all the items in every order are packed in continuum. In this case, while packing items of an order, if the equipment capacity is exhausted before the order is fully packed, the next equipment will be packed starting with the same order. This not only achieves continuity in the packing of same order items, but it also helps reduce splitting of the orders.</p>
+    <p>The group packing approach can be used with all packing algorithms in OTM except Multicontainer MIP and Column Generation packing algorithms. In every algorithm, item groups are first sorted based on the container optimization metric and then packed one after the other starting with the largest group.</p>
+    <p>When order priority is used in container optimization (i.e. <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#use_priority_in_conopt_setting">USE PRIORITY IN CONOPT SORTING</a> = true), group packing satisfies both the priority and grouping criteria. To understand this, consider the following orders with priority:</p>
+    <ul>
+      <li>Order 1: Weight = 100 LB, Priority = 3</li>
+      <li>Order 2: Weight = 200 LB, Priority = 2</li>
+      <li>Order 3: Weight = 300 LB, Priority = 2</li>
+      <li>Order 4: Weight = 400 LB, Priority = 1</li>
+    </ul>
+    <p>In this example, container optimization logic will pack the above orders in the following manner in different priority/grouping situations.</p>
+    <p>1. USE PRIORITY IN CONOPT SORTING = false, ITEM GROUPING CRITERIA = None</p>
+    <p>Orders will be packed in the following sequence: Order 4, Order 3, Order 2, Order 1. Since group packing is not used, items of each order may not be packed in a contiguous manner.</p>
+    <p>2. USE PRIORITY IN CONOPT SORTING = false, ITEM GROUPING CRITERIA = Group by Order</p>
+    <p>Orders will be packed in the following sequence: Order 4, Order 3, Order 2, Order 1. Since items are grouped by order, items of each order will be contiguously packed.</p>
+    <p>3. USE PRIORITY IN CONOPT SORTING = true, ITEM GROUPING CRITERIA = None</p>
+    <p>Orders will be packed in the following sequence: Order 1, Order 3, Order 2, Order 4. Note that, even though priority enforces continuity in the packing of same-priority items, items from different orders with the same priority can still get mixed up. So, in this case, items of Order 2 or Order 3 may not be contiguously packed.</p>
+    <p>4. USE PRIORITY IN CONOPT SORTING = true, ITEM GROUPING CRITERIA = Group by Order</p>
+    <p>Orders will be packed in the following sequence: Order 1, Order 3, Order 2, Order 4. In this case, not only are priority expectations honored in packing, items of every order will also be contiguously packed.</p>
+    <p>When a 3D Load Configuration based packing algorithm is used, the Container Optimization logic configuration parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#use_similarity_sorting_in_group_packing">USE SIMILARITY SORTING IN GROUP PACKING</a> can be set to true to keep item groups containing similar sized ship unit items close to each other in group packing sequence. This improves the consistency in item placement and also helps increase equipment utilization.</p>
+    <p>Additionally, in 3D Load Configuration, the Container Optimization parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#remove_fragment_space_in_group_packing">REMOVE FRAGMENT SPACE IN GROUP PACKING</a> can be set to true to eliminate the possibility of using the constricted space atop one packed group of items. Though this improves the arrangement of the group load placement, it can lead to reduced equipment utilization.</p>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="../bulk_plan_performance_and_tuning.htm">Bulk Plan Performance and Tuning Overview</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_order_bundling_logic.htm">Bulk Plan Tuning Order Bundling Logic</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_direct_shipment_building.htm">Bulk Plan Tuning Direct Shipment Building</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_multistop_ship_logic.htm">Bulk Plan Tuning Multi-stop Shipment Logic</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_continuous_moves_logic.htm">Bulk Plan Tuning Continuous Moves Logic</a></p>
+  <p class="LinkList"><a href="../../assets/docs/bulk_plan_performance_and_tuning_guide.pdf">Bulk Plan Performance and Tuning PDF</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "31.3.4.0_4"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="template" content="../../assets/masterpages/sourcing.htt">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="integration\actions\message_hub_actions.htm">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Rate Maintenance Multi-threading</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="multi-threading:rate maintenance,rate maintenance:multi-threading">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:15+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Rate Maintenance Multi-threading","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Sourcing</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Rate Maintenance Multi-threading</span></h1>
+  <div role="main">
+    <p>In order to understand and effectively use multi-threading in rate maintenance, it is important to understand how OTMâs <a href="../../bulk_plan_manager/performance_tuning/multi-threading_logic.htm">multi-threading logic</a> works.Â </p>
+    <p>You can configure OTM to multi-thread several time consuming areas within the rate maintenance. The following areas in rate maintenance support multi-threading:</p>
+    <ul>
+      <li>Downloading Rate Offerings</li>
+      <li>Downloading Rate Records</li>
+      <li>Uploading Rate Offerings</li>
+      <li>Uploading Rate Records</li>
+    </ul>
+    <h2><a id="Running_Multiple_Uploads_or_Downloads_Simultaneously"></a>Uploading or Download Bulk Rates using Multi-threading</h2>
+    <h3>Setting Up Properties for Multi-threading</h3>
+    <p>By default, the topic group is assigned 2 thread groups. Depending on the number of processors and the load on the system, you can increase this to more than 2. The topic groups should be set before starting the server.Â </p>
+    <p>You can also change the threads through the Event Queues page. However, the recommended approach is to set the thread group before starting the server. If the threads are changed through the Event Queues page, the changes will be lost once the server is brought down.Â The Event Queues page can be accessed via <span class="Bold">Configuration and Administration &gt; Technical Support &gt; Diagnostics and Tools &gt; Event Management &gt; Event Queues</span>. You must be logged into OTM has DBA.ADMIN to access the Event Queues page.</p>
+    <p>Once on the screen, click on <span class="Bold">Show Threads</span> button at the bottom to see all the threads. To increase the number of threads, click on <span class="Bold">Threads</span>. To kill a thread (if it hangs up), click on the thread to terminate. Remember that killing a thread will not terminate any existing download or upload. No future download or uploads will be scheduled to run on that thread though.</p>
+    <h3>Uploading/Downloading Bulk Rates</h3>
+    <p>Once the threads are set up, you can upload or download rates simultaneously. If there are more uploads or downloads than the number of threads, then the upload or download will be queued up and will start executing as soon as the threads get freed up.</p>
+    <h2><a id="Threads_Inside_Rate_Maintenance"></a>Threads Inside Rate Maintenance</h2>
+    <p>Within rate maintenance, the download and upload of rates are multi-threaded. These areas are assigned functional topic groups. The table below describes the default thread settings for these functional topic groups. These properties can be found in glog.task.properties file and can be overridden in glog.properties. These areas are also called task groups.</p>
+    <table title="Thread Settings Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Functional Area (Task Type)</p>
+          </th>
+          <th>
+            <p>Description</p>
+          </th>
+          <th>
+            <p>Default Topic Group</p>
+          </th>
+          <th>
+            <p>Default Number of Threads</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>Rate Offering Upload</p>
+          </td>
+          <td>
+            <p>Validates and persists the rate offering rows uploaded using spreadsheet.</p>
+          </td>
+          <td>
+            <p>rateOfferingLoading</p>
+          </td>
+          <td>
+            <p>2</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Rate Record Upload</p>
+          </td>
+          <td>
+            <p>Validate and persists the rate record rows uploaded using spreadsheet.</p>
+          </td>
+          <td>
+            <p>rateGeoLoading</p>
+          </td>
+          <td>
+            <p>2</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Rate Offering Download</p>
+          </td>
+          <td>
+            <p>Generates the rate offering rows selected for download and adds them to spreadsheet.</p>
+          </td>
+          <td>
+            <p>rateOfferingLoading</p>
+          </td>
+          <td>
+            <p>2</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Rate Record Download</p>
+          </td>
+          <td>
+            <p>Generates the rate record rows selected for download and adds them to spreadsheet.</p>
+          </td>
+          <td>
+            <p>rateGeoLoading</p>
+          </td>
+          <td>
+            <p>2</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    Â 
+    <h2><a id="Multi-thread_Properties_Associated_to_Each_Task_Type"></a>Multi-thread Properties Associated to Each Task Type</h2>
+    <p>These properties can be found in glog.workflow.task.properties file and can be overridden in glog.properties.Â </p>
+    <table title="Multi-thread Properties Table">
+      <tbody>
+        <tr>
+          <th>
+            <p>Property</p>
+          </th>
+          <th>
+            <p>Definition</p>
+          </th>
+          <th>
+            <p>Default Value</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>Queue Threads</p>
+          </td>
+          <td>
+            <p>glog.workflow.queueThreads.&lt;event queue&gt;=&lt;# of threads&gt;</p>
+            <p>Example:</p>
+            <p>glog.workflow.queueThreads.rateGeoLoading=2</p>
+            <p>The number of threads assigned to a topic group.</p>
+          </td>
+          <td>
+            <p>2</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Group</p>
+          </td>
+          <td>
+            <p>glog.task.group.&lt;task type&gt;=&lt;event queue&gt;</p>
+            <p>Example:</p>
+            <p>glog.task.group.RateOfferingUpload=rateOfferingLoading</p>
+            <p>The topic group assigned to the task type.</p>
+          </td>
+          <td>
+            <p>Required â no defaults associated</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Desired Batch Size</p>
+          </td>
+          <td>
+            <p>glog.task.desiredBatchSize.&lt;task type&gt;=&lt;# of tasks per batch | QUEUE&gt;</p>
+            <p>Example:</p>
+            <p>glog.task.desiredBatchSize.RateOfferingUpload=QUEUE</p>
+            <div data-conref="../../assets/snippets/mutlithread_desired_batch_size.hts">
+<p class="TableText" style="color: #000000;"><span style="color: #000000;">Optional. 
+ The desired number of tasks per batch. If QUEUE, the number will be determined 
+ by balancing the workload over the event queue threads. For example, 1000 
+ tasks using a queue with 5 threads would result in 5 batches with 200 
+ tasks each. Note that QUEUE presumes you have a dedicated queue for the 
+ task type.</span></p>
+<p class="TableText" style="color: #000000;">If, on the other hand, the 
+ desired batch size is 300, then 4 batches will be created with 300 tasks 
+ in the first 3 batches and 100 tasks in the 4th batch.</p>
+
+</div>
+            <p></p>
+          </td>
+          <td>
+            <p>QUEUE</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Minimum Batch Size</p>
+          </td>
+          <td>
+            <p>glog.task.minimumBatchSize.&lt;task type&gt;=&lt;minimum # of tasks per batch&gt;</p>
+            <p>Example:</p>
+            <p>glog.task.minimumBatchSize.RateOfferingUpload=50</p>
+            <div data-conref="../../assets/snippets/multithread_min_batch_size.hts">
+<p style="color: #000000;">Optional. Batches can have overhead due to shared 
+ resources and workflow processing. This property allows you to assign 
+ a minimum number of tasks in any batch. If the total # of tasks is less 
+ than the minimum, OTM creates a single batch to process the tasks.</p>
+
+</div>
+            <p></p>
+          </td>
+          <td>
+            <p>1</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Parallel Threshold</p>
+          </td>
+          <td>
+            <p>glog.task.parallelThreshold.&lt;task type&gt;=&lt;minimum # of batches before allowing parallel execution&gt;</p>
+            <p>Example: glog.task.parallelThreshold.RateOfferingUpload=2</p>
+            <p>Optional. If the total # of batches is less than the threshold, all tasks are processed on the calling thread (or single threaded). Otherwise, the batches are processed in parallel using the threads in the topic.</p>
+          </td>
+          <td>
+            <p>2</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Time out in Seconds</p>
+          </td>
+          <td>
+            <p>glog.task.blockTimeout.&lt;task type&gt;=&lt;timeout, in seconds, for a task list execution&gt;</p>
+            <p>Example: glog.task.blockTimeout.RateOfferingUpload=7200</p>
+            <p>Optional. The amount of the time that each batch processing is allowed before it times out.</p>
+          </td>
+          <td>
+            <p>10800 Seconds</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    Â 
+  </div>
+  <h2><a id="Related_Topics"></a>Related Topics</h2>
+  <p class="LinkList"><a href="../../bulk_plan_manager/performance_tuning/multi-threading_logic.htm">Multi-threading Logic</a></p>
+  <p class="LinkList"></p>
+  <p class="LinkList"><a href="rate_maintenance_flow.htm">Rate Maintenance Process Flow</a></p>
+  <p class="LinkList"><a href="download_rates.htm">Downloading Rates</a></p>
+  <p class="LinkList"><a href="upload_rates.htm">Upload Rates</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "12.1.0_4"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-priority" content="0">
+    <meta name="topic-time-estimate" content="0">
+    <meta name="topic-comment" content>
+    <meta name="topic-id" content="Bulk Rating Actions">
+    <meta name="topic-check-list" content="First Draft">
+    <meta name="topic-status" content="Complete">
+    <meta name="template" content="../../assets/masterpages/operational planning.htt">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="generator" content="Adobe RoboHelp 2022">
+    <title>Bulk Plan Network Routing</title>
+    <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+    <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+    <meta name="rh-index-keywords" content="bulk plan:routing method,bulk plan:network routing,network routing:bulk plan">
+  <meta name="rh-version" content="2022.6.34"><meta name="description" content><meta name="brsnext" value="bulk_plan_manager/bulk_plan_algorithm/network_routing_and_carrier_capacity.htm"><meta name="brsprev" value="bulk_plan_manager/bulk_plan_algorithm/cost_based_routing.htm">
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Bulk Plan Network Routing","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div>
+    <noscript> Â If you have any questions or comments about this topic or the online help, please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact us.</a> </noscript>
+    <h1><span data-field="title" data-format="default">Bulk Plan Network Routing</span></h1>
+    <div role="main">
+      <p>The network routing logic optimizes the routes for the order releases by considering all the order releases and network leg options simultaneously. In order to use network routing, order planning must use a parameter set with the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#orderrouting">ORDER ROUTING METHOD</a> set to Network Routing. The parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#network_routing_config_id">NETWORK ROUTING CONFIG ID</a> points to the <a href="../../planning/power_data/planning/logic_configuration_network_routing.htm">network routing logic configuration</a>, which specifies a number of different network routing logic parameters.</p>
+      <p>The figure below shows the logic flow at a high level.</p>
+      <p><img alt="One order is bundled per release. Then leg options for matched itineraries are created. Next orders are routed and order movements created. Order movements are then bundled. Next you plan single and multi-stop shipments. Optimize the carrier capacities and commitments, and location capacities." class="Flow" src="../../assets/images/bulk_plan_logic_network_based_routing.svg"></p>
+      <p>Let&#39;s look at the <a href="../../planning/itinerary_manager/network_routing_flow.htm">network routing</a> steps in the above flow chart which are different from those in cost based routing.</p>
+      <ul>
+        <li>First, each order release is matched to all the active <a href="../data_setup/itineraries_and_bulk_plan.htm">itineraries</a> for which it qualifies. These itineraries represent the possible ways that the order releases can travel from source to destination.</li>
+        <li>The set of itineraries (that have now been matched to the input order releases) is converted to a single network (representing all the itineraries) with different possible leg options on the <a href="../data_setup/itinerary_legs_and_bulk_planning.htm">legs</a>.</li>
+        <li>The network routing engine takes in this network and the order releases as inputs and creates order movements using the network routing algorithm. In this step, for each order release, a path is determined that will route the order release from its source to its destination and order movements will be created for this path. The order movements may be itinerary-leg-level (ordinary) order movements and/or network routable (parent) and network-leg-level (child) order movements if the order is routed through a routing network.</li>
+        <li>Once these order movements are available, these can be planned into shipments using logic similar to the logic that the order movement bulk plan process uses.</li>
+      </ul>
+      <h2><a id="parameters"></a>NETWORK ROUTING LOGIC CONFIGURATION PARAMETERS</h2>
+      <h3>PATH FINDER ALGORITHM PARAMETER</h3>
+      <p>The parameter <a href="../../planning/power_data/planning/logic_configuration_network_routing.htm#path_finder">PATH FINDER ALGORITHM</a> specifies the algorithm to find routes for the orders through the routing network. The âEnumerationâ algorithm finds all possible routes for an order from its source to its destination. Though considering all possible routes can improve the routing solution quality, this improvement comes are the expense of additional run time. Therefore the Enumeration algorithm is recommended for only small networks.</p>
+      <p>The âShortest Pathâ and âIterative Shortest Pathâ algorithms run faster, and they can be used for larger networks. In the Iterative Shortest Path algorithm, the maximum number of routes to be generated can be limited through the logic parameter <a href="../../planning/power_data/planning/logic_configuration_network_routing.htm#max_num">MAX NUM SHORTEST PATHS</a>.</p>
+      <p class="Note"><span class="Bold">Note</span>: When finding routes in a multi-leg scenario, if the order window is large and the route involves legs with <a href="../../schedule_manager/ground_schedule.htm">ground schedule</a> shipments at different times, using &quot;Shortest Path&quot; as <a href="../../planning/power_data/planning/logic_configuration_network_routing.htm#path_finder">PATH FINDER ALGORITHM</a>Â should be allowed to consider multiple ground schedule shipments.
+        <br>
+        This parameter allows all the ground schedule shipments within a certain threshold time from the earliest ground schedule shipment time to be considered as valid options while finding a route. This ensures that cheaper options with ground schedule shipments, that start later but still reach within the order window time are not eliminated, thus, not generating costlier options. This threshold number of days is controlled by the <a href="../../planning/power_data/planning/logic_configuration_network_routing.htm">parameter</a> MAX NUM DAYS TO EXTEND PATH WITH GS SHIPMENTS.</p>
+      <h3>EXTEND LEG BY LEG OPTIONÂ PARAMETER</h3>
+      <p>While finding routes for an order, if the logic parameter <a href="../../planning/power_data/planning/logic_configuration_network_routing.htm#extend_leg_by_leg_option">EXTEND LEG BY LEG OPTION</a> is set to true, OTM will create separate routes through various possible leg options (e.g. with different transport modes, equipment, rates etc.) along a network leg.</p>
+      <p>If this parameter is set to false, OTM will save time by creating a route only through the cheapest cost leg option along a leg. This option is recommended for avoiding excessive run-time within the route finding logic in case of networks with a very large number of leg options.</p>
+      <h3>PERFORM DYNAMIC CLUSTER LOGICÂ PARAMETER</h3>
+      <p>Network Routing logic makes certain cost and consolidation related approximations to make routing decisions in a time-effective manner. However, for more effective routing, Network Routing can use the Dynamic Clustering logic which simulates direct and multi-stop consolidations on all applicable first legs (if the parameter <a href="../../planning/power_data/planning/logic_configuration_network_routing.htm#perform_dynamic_cluster_logic">PERFORM DYNAMIC CLUSTER LOGIC</a> FOR SOURCE REGIONS is true) and last legs (if the parameter PERFORM DYNAMIC CLUSTER LOGIC FOR DEST REGIONS is true) of the orders to determine realistic costs and consolidation opportunities at the source and destination locations of the orders. Dynamic Clustering logic typically causes higher run times in network routing.</p>
+      <h3>ROUTING SOLUTION METHODÂ PARAMETER</h3>
+      <p>Some bulk plan scenarios using network routing may have straightforward routing decisions. In that case, the logic parameter <a href="../../planning/power_data/planning/logic_configuration_network_routing.htm#routing_solution_method">ROUTING SOLUTION METHOD</a> can help save time by disabling the logic associated with route optimization. When this parameter is set to âSimple Solve With Ratingâ, OTM rates the network, but does not perform route optimization. This option is useful for networks where there is only one route possible for every order.</p>
+      <p>When this parameter is set to âSimple Solve With No Ratingâ, OTM neither rates the network, nor performs route optimization. This option is useful when the planning scenario (e.g. single leg itinerary with no network set up) does not necessitate going through most of the Network Routing logic.</p>
+      <h3>ORDER REMNANT ROUTING PARAMETER</h3>
+      <p><a href="../../planning/power_data/planning/logic_configuration_network_routing.htm#PERFORM_ORDER_REMNANT_ROUTING">PERFORM ORDER REMNANT ROUTING</a>: Though network routing logic does not generally split an order along different routes, the order remnant routing feature can be used in certain planning scenarios to split orders along different routes to save cost.</p>
+      <p><a href="../../planning/power_data/planning/logic_configuration_network_routing.htm#DESIRED_EQUIPMENT_UTILIZATION_PERCENTAGE">DESIRED EQUIPMENT UTILIZATION PERCENTAGE</a>: Specifies the desired minimum equipment utilization for full containers in order remnant routing. If the equipment utilization is equal or more than this value in at least one metric (for example, weight, volume, or ERU), the packed equipment is considered as fully utilized.</p>
+      <p>Â See <a href="order_remnant_routing.htm">Order Remnant Routing</a>.</p>
+      <h3>HANDLE PARTLY PLANNED ORDERS PARAMETER</h3>
+      <p>Within the network routing bulk plan logic for order releases, the routing logic may be able to route an order through the network, but the shipment building logic might be unable to build a shipment on a particular leg for that order. This is because there are specific shipment building constraints that are not fully considered in the routing logic, for example, capacity limit or location capacity constraints. Â In this case, the order has been only partly planned.</p>
+      <p>The HANDLE PARTLY PLANNED ORDERS logic parameter determines what the bulk plan should do in case of a partly planned order release.</p>
+      <ul>
+        <li><span class="Bold">Allow Partly Planned Orders</span>: Bulk plan will leave the order partly planned. The order release will be in PLANNED â FINAL status, and for the leg where the order was not planned, there will be a corresponding unplanned order movement.</li>
+        <li><span class="Bold">Disband All Related Shipments</span>: Bulk plan will result in this order being completely unplanned. Because simply leaving this order unplanned affects the consolidation and rating for orders that were planned with it onto shipments on other legs, all of these other orders will also be completely unplanned (i.e., the shipment graph will be completely unplanned). All unplanned orders will be in PLANNING â FAILED status, and no order movements will be created.Â </li>
+      </ul>
+      <h2><a id="use_of_representative_location"></a>Use of Representative Location</h2>
+      <p>In Network Routing, the <a href="../../planning/power_data/geography/regions.htm#representative_location">representative location</a> of a region is used as a stand-in for the true source/destination locations in that region. While creating the network, the leg options on the source/destination legs are created considering only the representative location of the source/destination regions so that the network creation logic does not need to rate with every source/destination location in the regions.</p>
+      <p>However, the representative location based approximations can sometimes lead to sub-optimal routing decisions when there are source/destination legs that do not allow multistop consolidation. Relevant scenarios include LTL and Parcel legs, Ocean/Air/Rail legs, and TL legs with no multistop consolidation. Though the Dynamic Clustering logic is typically used to avoid issues related to representative location based approximations, it is a time intensive step, and it also applies to all source/destination legs. In this case, as an alternative to using the Dynamic Clustering logic, you can check the &quot;Ignore Representative Location&quot; field on the relevant source/destination leg.</p>
+      <h2><a id="limitations"></a>Limitations</h2>
+      <p>The following are not handled in this path of the bulk plan:</p>
+      <ul>
+        <li>Trailer Builds</li>
+        <li>Route Execution</li>
+      </ul>
+      <h2>Ground Schedule and Consol Shipment</h2>
+      <p>When routingÂ order release through the network based on various constraints, the system takes the capacity of ground schedule&#39;s remaining capacity and use them as the route orders through the network. The difference between consol shipment and ground schedule is that ground schedule has only one equipment but ocean FCL consol shipment can have multiple equipment. Â Each equipment has a remaining capacity. The system adds all the remaining capacity of each equipment on a consol shipment as the total remaining capacity of the consol and use this as the routingÂ constraints. If there is enough capacity the order movements will be created. The below scenarios explains how an order movement has been created but failed to plan to a consol shipment:</p>
+      <ul>
+        <li><span class="Bold">First Scenario</span>: If the order release Splittable checkbox is not selected and order release has a quantity that can fit the total capacity of the consol shipment but it cannot fit in any individual equipment. The system considers the total remaining capacity during routingÂ (not individual equipment remaining capacity) so the system would route the order on the consol leg but later when you plan order movement on this leg, it will fail because order release cannot be split across multiple equipment.</li>
+        <li><span class="Bold">Second Scenario</span>: Order release splitting at ship unit level. If you have ship unit with count of two, per ship unit quantity can not fit in the smallest remaining equipment but overall quantity can fit in the consol shipment remaining capacity.</li>
+        <li><span class="Bold">Third Scenario</span>: If the consol shipment contains an order that is not compatible with the order being added.</li>
+      </ul>
+    </div>
+    <h2>Related Topics</h2>
+    <p class="LinkList"><a href="../bulk_plan_performance_and_tuning.htm">Bulk Plan Performance and Tuning Overview</a></p>
+    <p class="LinkList"><a href="../data_setup/bulk_plan_data_setup.htm">Bulk Plan Data Setup</a></p>
+    <p class="LinkList"><a href="../solution_quality_tuning/bulk_plan_solution_quality_tuning.htm">Bulk Plan Solution Quality Tuning</a></p>
+    <p class="LinkList"><a href="../performance_tuning/bulk_plan_performance_tuning.htm">Bulk Plan Performance Tuning</a></p>
+    <p class="LinkList"><a href="../../properties/glog/cache.property.htm#RateInqTOrderReleaseCache.capacity">glog.cache Properties</a></p>
+    <p class="LinkList"><a href="network_routing_and_carrier_capacity.htm">Network Routing and Carrier Capacity</a></p>
+    <p class="LinkList"><a href="../../assets/docs/bulk_plan_performance_and_tuning_guide.pdf">Bulk Plan Performance and Tuning PDF</a></p>
+    <script type="text/javascript" language="JavaScript1.2"> //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]></script>
+  
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "31.3.3.0_3"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

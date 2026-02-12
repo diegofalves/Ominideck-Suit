@@ -734,12 +734,15 @@ def main() -> None:
 
     removed_versions = _clean_old_versions(HELP_ROOT, doc_version)
     os.makedirs(meta_dir, exist_ok=True)
-    if not args.incremental:
-        if os.path.isdir(html_dir):
-            shutil.rmtree(html_dir, ignore_errors=True)
-        os.makedirs(html_dir, exist_ok=True)
-    else:
-        os.makedirs(html_dir, exist_ok=True)
+
+    # build-index-only deve apenas recalcular indices: nunca apagar HTML local.
+    if not args.build_index_only:
+        if not args.incremental:
+            if os.path.isdir(html_dir):
+                shutil.rmtree(html_dir, ignore_errors=True)
+            os.makedirs(html_dir, exist_ok=True)
+        else:
+            os.makedirs(html_dir, exist_ok=True)
 
     print("Iniciando varredura do Oracle OTM Help (modo leitura)...")
     print(f"Versao detectada no ambiente: {detected_doc_version}")

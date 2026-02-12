@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta name="template" content="../../assets/masterpages/operational planning.htt">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="Bulk Rating Actions">
+  <meta name="topic-check-list" content="First Draft">
+  <meta name="topic-status" content="Complete">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Bulk Plan Tuning Order Bundling Logic</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="bulk plan:order bundling logic,bulk plan:order source and destination locations,bulk plan:order time windows,bulk plan:order data emphasis,bulk plan:bundling,bulk plan:size of order bundles,bulk plan:ship with group,bulk plan:order priority,bulk plan:routing sequence">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content><meta name="brsnext" value="bulk_plan_manager/solution_quality_tuning/bulk_plan_tuning_direct_shipment_building.htm"><meta name="brsprev" value="bulk_plan_manager/solution_quality_tuning/bulk_plan_solution_quality_tuning.htm">
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Bulk Plan Tuning Order Bundling Logic","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Bulk Plan Tuning Order Bundling Logic</span></h1>
+  <div role="main">
+    <p>In Oracle Transportation Management, order bundles are internal structures that hold several order releases or order movements together. A bundle is a separate unit inside the bulk plan where the orders always stay together during the bulk plan run. There are only two places inside bulk plan where an order bundle can get split â container optimization logic and the LTL (less-than-truckload) split logic. Though this order bundle structure is internal, it is important to understand the criteria for bundling. Also, if two orders do not get bundled together in the bundling stage, they could still be consolidated into the same shipment at a later stage of bulk plan.</p>
+    <p>When split configurations are defined on the pallets, OTM works as follows. Since the preference is to avoid splitting the pallet, OTM first places as many full pallets as possible and when no more full pallets can fit, the remaining pallets are attempted to be placed based on their split configurations. Consider a scenario where there are 10 pallets sorted according to priority. If the first 9 full pallets can be placed successfully but there is no space for the 10th full pallet, OTM looks at its (10th pallet) split configuration and if defined, splits the pallet accordingly and places the partials, if possible, into the spaces available.</p>
+    <p>However, in the above scenario, if there is no split configuration defined on the 10th pallet (lowest priority pallet), OTM cannot place it in this container and will be placed in the next container. Moreover, if split configuration were defined on another pallet (say 5th pallet), OTM does not go back and split the 5th one as it has already been placed as a full pallet. In other words, the priority of the pallet is given the highest importance in placement and if the leftovers have split configurations defined, they will be split and packed for better utilization.</p>
+    <p>The property <a href="../../properties/glog/business.property.htm#ordersort">glog.business.consolidation.bulkplan.orderSortByDateType</a> specifies which date is used to sort the orders in order bundling.</p>
+    <p class="Note"><span class="Bold">Note</span>: Unless specified, this pertains to both order releases and order movements.</p>
+    <p>Let&#39;s review the following criteria for bundling orders:</p>
+    <h2><a name="src_and_dest_loc" id="src_and_dest_loc"></a>Source and Destination Location</h2>
+    <p>All the orders in the order bundle will have the same source and destination location. The source and destination location on the order release can be changed by setting the <a href="../../planning/order_manager/or_edit.htm#Plan">Plan From Location ID and Plan To Location ID</a>. If Plan From location and/or Plan To location IDs are set on the order releases, all the orders in the bundle must have the same plan from location ID and plan to location ID. See also <a href="../../field_definitions/plan_from_to_location.htm">Plan From/To Location</a>.</p>
+    <p>By default, all orders in the order bundle will also have the same source location load point, and the same destination location unload point. If applicable, they will also have the same Plan From location load point and the same Plan To location unload point. However, if the Container Optimization logic parameter <a href="../../planning/power_data/planning/logic_configuration_container_optimization.htm#USE_LOAD_POINT_PENALTIES_IN_PACKING">USE LOAD POINT PENALTIES IN PACKING IN PACKING</a> is true, then the order bundle logic will ignore load points and unload points, and orders in the same bundle may have different load points and unload points.</p>
+    <h2><a name="time_window_overlap" id="time_window_overlap"></a>Time Window Overlap</h2>
+    <p>In order for two orders to be bundled together, they must have overlapping pickup and delivery time windows. The resulting bundle will contain the overlapping time window. The bundle overlapping time window can be relaxed by using the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#max_bundle_overlap_tolerance">MAX BUNDLE OVERLAP TOLERANCE</a>. The MAX BUNDLE OVERLAP TOLERANCE extends the overlapping time window of the order bundle by the tolerance amount on both pickup and delivery windows.</p>
+    <p>The parameter &quot;<a href="../../planning/power_data/planning/list_of_planning_parameters.htm#MIN_BUNDLING_TIME_WINDOW_FOR_PLANNING">MIN BUNDLING TIME WINDOW FOR PLANNING</a>&quot; impacts order release and order movement bundling. If this is set, order movements can bundle if the resulting bundle pickup and delivery early/late time windows are each at least as long as specified duration. Also, order releases or order movements with identical pickup and delivery windows can bundle together even if these windows are shorter than the specified duration.</p>
+    <h2><a name="date_emph" id="date_emph"></a>Date Emphasis</h2>
+    <p>The <a href="../../field_definitions/date_emphasis.htm">Date Emphasis field</a> on the order releases influences the order bundleâs time windows and influences the ability for order releases to be in the same bundle.</p>
+    <h2><a name="bundle_or_not" id="bundle_or_not"></a>To Bundle or Not to Bundle?</h2>
+    <p>A frequently asked question is whether to bundle the orders. The answer is not straightforward and it depends on various factors. The advantage of creating a large bundle out of many small orders is to give the <a href="bulk_plan_tuning_cont_opt_logic.htm">container optimization algorithm</a> an opportunity to right-size the bundles based on equipment availability and costs. On the other hand, if the order bundle is not large enough for container optimization to split, but during <a href="bulk_plan_tuning_multistop_ship_logic.htm">multi-stop logic</a> it needs to be split in order to form fully utilized pieces of equipment, then having each order on a separate bundle is more useful.</p>
+    <p>If the parameters <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#max_wt_per_bundle">MAX WEIGHT PER BUNDLE</a> and/or <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#max_vol_per_bundle">MAX VOLUME PER BUNDLE</a> are set, then the combined weight/volume of the order bundles must not exceed these parameter values; however, a single order release bundle can exceed these parameter values. Thus setting the maximum weight or volume per bundle to 0 will not bundle two orders together, but will still create a bundle for individual order releases.</p>
+    <p class="Note"><span class="Bold">Note</span><span class="Bold">:</span> Setting the MAX WEIGHT PER BUNDLE or MAX VOLUME PER BUNDLE to 0 ensures that the orders do not get bundled.</p>
+    <p>In addition, you should also disable the same origin/destination (OD) pairing logic in multi-stop. The same OD pairing logic will essentially do the same thing as bundling and defeats the purpose of disabling bundling.</p>
+    <p class="Note"><span class="Bold">Note</span><span class="Bold">:</span> In order to have multi-stop logic perform the consolidation of orders as individual order bundles, set the <a href="../../planning/power_data/planning/logic_configuration_multistop.htm">multi-stop logic configuration</a> parameter <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#multistop_disable">MULTISTOP DISABLE SAME OD PAIRING</a> to TRUE.</p>
+    <h2><a name="optimize_bundle_size" id="optimize_bundle_size"></a>Optimize the Size of Bundles</h2>
+    <p>The parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#perform_ord_bundle_split_conopt">PERFORM ORDER BUNDLE SPLITTING USING CONTAINER OPT</a> can be used to create bundles that are optimized based on the available equipment. This parameter will take one large order bundle and break it into optimized bundles using the various <a href="bulk_plan_tuning_cont_opt_logic.htm">algorithms</a> available in container optimization. If this parameter is set to true, on the Performance tab of the <a href="../bulk_plan.htm">Bulk Plan</a> details page, you see a line for Split Order Bundles under Planning Milestone ID.</p>
+    <h2><a name="order_constraint_ship_with_group" id="order_constraint_ship_with_group"></a>Order Constraint of Ship with Group</h2>
+    <p>Bundling logic will only bundle orders together if the <a href="../../planning/order_manager/order_plan_constraints.htm#ship_with_group">Ship With Group</a> values are the same. See the order release constraints help topic for more details about the <a href="../../planning/order_manager/order_plan_constraints.htm#ship_with_group">Ship With Group</a> field.</p>
+    <p>The bulk plan logic in Oracle Transportation Management treats the ship with group values on the orders as a soft constraint. The logic will attempt to keep the orders with the same ship with group together. However, orders with the same ship with group value can go on different shipments for various reasons. One such case is when the total weight of volume of the orders exceeds the capacity of the equipment. Likewise, orders with different ship with group values can be on the same shipment.</p>
+    <p>In order to have multi-stop logic favor orders that have the same ship with group, set the multi-stop logic configuration parameter <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#multistopfavor">MULTISTOP FAVOR SAME SHIP WITH GROUP</a> to TRUE.</p>
+    <p>When the parameter MULTISTOP FAVOR SAME SHIP WITH GROUP is set to true, the multi-stop logic configuration parameter <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#multistop_same_shipwithgroup_emp">MULTISTOP SAME SHIP WITH GROUP EMPHASIS</a> can be set to control how much the bulk plan logic favors those shipment combinations that have multiple orders containing the same ship with group value. The parameter MULTISTOP SAME SHIP WITH GROUP EMPHASIS is a currency value that is added to the cost associated with the uncombined shipments, so that the combined shipment appears to have a very large cost savings when it is combining orders having the same ship with group value. By default, this parameter is very large (1,000,000) so consolidation within the same ship with group value is strongly encouraged.</p>
+    <p>Also see the property â<a href="../../properties/glog/business.property.htm#consolidation.bulkplan.favorSameSWGConsolidation">glog.business.consolidation.bulkplan.favorSameSWGConsolidation</a>â.</p>
+    <h2><a name="order_priority" id="order_priority"></a>Order Priority</h2>
+    <p>A <a href="../../planning/order_manager/or_edit.htm#or_priority">priority</a> can be assigned to order releases and order movements. Orders with high priorities are given preferences over orders with lower priorities when there is a short supply of resources. Valid values are 1-999, the higher the number, the higher the priority. You can define its use as well as the upper limit of the low priority and medium priority by using Â parameters <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#upper_limit_low_priority">UPPER LIMIT FOR LOW PRIORITY RANGE</a> and <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#upper_limit_med_priority">UPPER LIMIT FOR MEDIUM PRIORITY RANGE</a>.</p>
+    <p>During the order bundling process, the orders with similar priorities are bundled together. All the other bundling criteria such as same source and destination location and overlapping time windows still have to be met. You can optionally ignore consideration of order priorities in bundling through the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#use_priority_in_bundling">USE PRIORITY IN BUNDLING</a>. The order priorities can be completely ignored everywhere inside bulk plan by setting the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#priority_in_use">PRIORITY IN USE</a> to false. Â </p>
+    <p>To have priority honored in ship unit building, you need to turn on the following two parameters: &quot;PRIORITY_IN_USE&quot; and &quot;USE_PRIORITY_IN_CONOPT_SORTING&quot;..</p>
+    <h2><a name="routing_seq" id="routing_seq"></a>Routing Sequence</h2>
+    <p>Through <a href="../../planning/power_data/planning/routing_sequence.htm">routing sequences</a>, you can control the sequence of the stops based on order release or location. Orders that have a lower pickup routing sequence will get picked up earlier than orders that have a higher routing sequence. Routing sequences also can be specified at the location level. See the section <a href="bulk_plan_tuning_multistop_ship_logic.htm#generate_stop_sequences">Generating Stop Sequences</a> in the Bulk Plan Tuning Multistop Shipment Logic help topic for a detailed description of routing sequences.</p>
+    <p>Order bundling logic will bundle orders that have similar routing sequences â both pickup routing sequence and delivery routing sequence. Use of routing sequences can be disabled by turning off the multi-stop logic configuration parameter <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#ms_use_route_seq_contraints">MULTISTOP USE ROUTING SEQUENCE CONSTRAINTS</a>.</p>
+    <h2>Some Relevant Properties</h2>
+    <p>The following properties are relevant to order bundling:</p>
+    <p><a href="../../properties/glog/business.property.htm#ordersort">glog.business.consolidation.bulkplan.orderSortByDateType</a>: specifies which date is used to sort the orders in order bundling.</p>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="../bulk_plan_performance_and_tuning.htm">Bulk Plan Performance and Tuning Overview</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_cont_opt_logic.htm">Bulk Plan Tuning Container Optimization Logic</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_continuous_moves_logic.htm">Bulk Plan Tuning Continuous Moves Logic</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_direct_shipment_building.htm">Bulk Plan Tuning Direct Shipment Building</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_multistop_ship_logic.htm">Bulk Plan Tuning Multi-stop Shipment Logic</a></p>
+  <p class="LinkList"><a href="../../assets/docs/bulk_plan_performance_and_tuning_guide.pdf">Bulk Plan Performance and Tuning PDF</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "31.3.4.0_2"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

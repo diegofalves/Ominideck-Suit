@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../../.." src="../../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../../assets/css/redwood.css" type="text/css">
+  <meta name="template" content="../../../assets/masterpages/contract and rate management.htt">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="Build Logistics Guide for Pool/Cross Dock">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Generate Rush Hour Data</title>
+  <link rel="StyleSheet" href="../../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="rush hour:generate data,generate rush hour data">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:14+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Generate Rush Hour Data","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Contract and Rate Management</p>
+  </div>
+  <div><noscript> If you have any questions or comments about this topic or the online help, please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact us.</a> </noscript>
+  <h1><span data-field="title" data-format="default">Generate Rush Hour Data</span></h1>
+  <div role="main">
+    <p>The Generate Rush Hour Data process is accessed via <span class="Bold">Contract and Rate Management &gt; Process Management &gt; Generate Rush Hour Data.</span></p>
+    <p>TheÂ Generate Rush Hour Data process allows you to use historical traffic data in creating shipments. This process generates data in the RUSH_HOUR table for a specified geography and time period, by calling a third party external service engine, such as PC*MILER (ALK) or HERE. The rush hour delays for a specific lane at a specific time are calculated by calling the external service engine without traffic effects and then calling it again with traffic effects for the specific time.</p>
+    <p class="Note"><span class="Bold">Note</span>: If using PC*Miler to generate rush hour data for European locations, you must use version 30 (or newer) This is defined by setting the propertyÂ <a href="../../../properties/glog/externaldistance.engine.properties.htm#glog.ExternalDistanceEngine.PCMilerWS.DataVersion">glog.ExternalDistanceEngine.PCMilerWS.DataVersion</a> to 30 (or higher).</p>
+    <p class="Note"><span class="Bold">Note</span>: If using HERE to generate rush hour data, there are two options</p>
+    <p>The process creates rush hour data for 15 minute time periods. This is not configurable. OTM provides public Rush Hour Calendar data, specifically for Rush Hour Calendars. Each Rush Hour calendar specifies a single 15 minute period for a specific day-of-week and time-of-day, using the activity type RUSHHOURS. Each new RUSH HOUR entry uses one of these public Rush Hour calendars.</p>
+    <p>OTM ships with 672 public rush hour calendars. (4 (increments per hour) * 24 * 7 = 672 Calendars.). Public calendars are named according to the syntax &quot;RUSH HOUR &lt;DAY&gt; &lt;HOUR&gt;&lt;MINUTE&gt;&quot;. For example: &quot;RUSH HOUR MONDAY 0800&quot;, &quot;RUSH HOUR MONDAY 0815&quot;. Note that these calendars and their names should not be changed.</p>
+    <p>The input Calendar ID specifies the time periods for which rush hour data is generated. It is not the calendar entry for the new RUSH HOUR data. This input calendar should be configured with the activity type RUSHHOURS (perform). The input calendar, like any calendar, can specify different periods on different days. Typically it is configured to specify rush hour periods for a given day (1 day period), or for a given day-of-week (7 day period).</p>
+    <p>The &quot;override&quot; dates on the input calendar are ignored since OTM is not creating PUBLIC Rush Hour Calendars for override dates.</p>
+    <p>The start date on the input calendar defines the week for which the new RUSH HOUR data is computed. Choose a week that has no local holidays for the lanes in question, as the external service engine (ESE) includes historical data for holidays that you do not want to capture. (For example, you will not use the week including July 4 in the US, because the process will then be using the July 4 holiday rush hour data for that particular day-of-week, e.g., Tuesday, which would be wrong.)</p>
+    <p>The External Service Engines require a source location and a destination location in order to provide transit time data. HERE External Service Engine has two services that can be used to query transit times between locations:</p>
+    <ul>
+      <li>Calculate Route: This service takes in a location pair as an input, and returns the travel time between the source and destination. When the property <a href="../../../properties/glog/externaldistance.engine.properties.htm">glog.ExternalDistanceEngine.HERE.authenticationType</a> is set to ApiKey and HERE_LATLONG_TO_LATLONG ESE is selected, the default service URL is fetched from the <a href="../../../properties/here/here_engine_properties.htm">here.route.host</a> property. When the property <a href="../../../properties/glog/externaldistance.engine.properties.htm">glog.ExternalDistanceEngine.HERE.authenticationType</a> is set to OAuth, and if the HERE_LATLONG_TO_LATLONG or HERE_ROUTING_LATLONG_TO_LATLONG ESE is selected, the URL is fetched from the external system configured in the ESE.</li>
+      <li>
+        <p>Calculate Matrix: Gets the transit time between locations and generates rush hour data from those times. The benefit of using this service is the fact that the system can supply a list of source locations, and a list of destination locations, and make one query to the HERE engine to get travel times.Â To use this service, first change the <a href="../../../properties/glog/business.property.htm#glog.business.session.useMatrixServiceToGenerateRushHours">glog.business.session.useMatrixServiceToGenerateRushHours</a> property to true. When the property <a href="../../../properties/glog/externaldistance.engine.properties.htm">glog.ExternalDistanceEngine.HERE.authenticationType</a> is set to ApiKey, and HERE_LATLONG_TO_LATLONG ESE is selected, the default service URL is fetched from the <a href="../../../properties/here/here_engine_properties.htm">here.route.matrix.host</a> property. When the property <a href="../../../properties/glog/externaldistance.engine.properties.htm">glog.ExternalDistanceEngine.HERE.authenticationType</a> is set to OAuth, and if the HERE_LATLONG_TO_LATLONG or HERE_ROUTING_MATRIX_LATLONG_TO_LATLONG ESE is selected, the URL is fetched from the external system configured in the ESE. This new service might not always improve performance.<br>
+          <br>
+          WhenÂ <a href="../../../properties/glog/business.property.htm">glog.business.HereRoutingBatch.isAsyncMatrixCall</a> is set to true, the HERE V8 Matrix Asynchronous API is used while calculating the travel times using the matrix.Â 
+        </p>
+      </li>
+    </ul>
+    <p class="Note"><span class="Bold">Note</span>: The ESE, HERE_LATLONG_TO_LATLONG is for the V7 version of HERE API whereas HERE_ROUTING_LATLONG_TO_LATLONG, andÂ HERE_ROUTING_MATRIX_LATLONG_TO_LATLONG are for the V8 version of HERE API. To use the matrix service in HERE V8, you should select theÂ HERE_ROUTING_MATRIX_LATLONG_TO_LATLONG ESE.</p>
+    <h2><span class="Bold"><a id="Regions_and_Lanes"></a>Regions and Lanes</span></h2>
+    <p>The Generate Rush Hour Data process provides several inputs. The input Source/Destination Region Group ID, Source/Destination Location Profile ID, and Consider Lanes Bi-directional checkbox indicate the relevant geographies for the Generate Rush Hour Data process. The generated RUSH HOUR data needs to have lanes, and these lanes may need to be generated by the process. Locations need a latitude and longitude to be valid.</p>
+    <p>A Region Group is a set of regions. The generated RUSH HOUR data will have lanes based on the regions from the group. These lanes will be:</p>
+    <ul>
+      <li>Inter-Region / Location Lanes: These are lanes from each region (or location profile location) to each other region (or location profile location) (but not from a region to itself).</li>
+      <li>Intra-Region Lanes: These are lanes from each region to itself. (That is, each lane is for driving from a location in a region to another location in the same region.)</li>
+    </ul>
+    <p><a id="input"></a>From the input Source Region Group ID, Destination Region Group ID, Source Location Profile ID, and Destination Location Profile ID the list of lanes for this run of the Generate Rush Hour Data process are determined. For example:</p>
+    <ul>
+      <li>Only Source Region Group (example regions, SR1 and SR2): includes inter-regional and intra-regional lanes within the source region group. Will always consider bi-directional lanes regardless of what the Consider Lanes Bi-directional checkbox is set to. For example,
+        <ul>
+          <li>SR1 to SR2</li>
+          <li>SR2 to SR1</li>
+          <li>SR1 to SR1</li>
+          <li>SR2 to SR2</li>
+        </ul>
+      </li>
+      <li>Only Source Location Profile (SL1 and SL2): includes lanes for each location in the source location profile to each other location in the source location profile. Will always consider bi-directional lanes regardless of what the Consider Lanes Bi-directional checkbox is set to. For example,
+        <ul>
+          <li>SL1 to SL2</li>
+          <li>SL2 to SL1</li>
+        </ul>
+      </li>
+      <li>Source Location Profile (SL1 and SL2) and Source Region Group (SR1 and SR2): includes inter-regional and intra-regional lanes within the source region group, lanes for each location in the source location profile to each other location in the source location profile, and from every region in the source region group to every location on the source location profile. This applies to the reverse direction as well. Will always consider bi-directional lanes regardless of what the Consider Lanes Bi-directional checkbox is set to. For example,
+        <ul>
+          <li>SR1 to SR2</li>
+          <li>SR2 to SR1</li>
+          <li>SR1 to SR1</li>
+          <li>SR2 to SR2</li>
+          <li>SL1 to SL2</li>
+          <li>SL2 to SL1</li>
+          <li>SR1 to SL1</li>
+          <li>SR2 to SL1</li>
+          <li>SR1 to SL2</li>
+          <li>SR2 to SL2</li>
+          <li>SL1 to SR1</li>
+          <li>SL1 to SR2</li>
+          <li>SL2 to SR1</li>
+          <li>SL2 to SR2</li>
+        </ul>
+      </li>
+      <li>Source Region Group (SR1 and SR2) and Destination Region Group (DR1 and DR2): includes lanes from every region in the source region group to every region on the destination region group, as well as intra-region lanes. For example, if Consider Lanes Bi-directional is not selected the following lanes are used:
+        <ul>
+          <li>SR1 to DR1</li>
+          <li>SR1 to DR2</li>
+          <li>SR2 to DR2</li>
+          <li>SR2 to DR1</li>
+          <li>SR1 to SR1</li>
+          <li>SR2 to SR2</li>
+          <li>DR1 to DR1</li>
+          <li>DR2 to DR2</li>
+        </ul>
+      </li>
+      <li>Source Region Group (SR1 and SR2) and Destination Location Profile (DL1 and DL2): includes lanes from every region in the source region group to every location on the destination location profile, as well as intra-region lanes. For example, if Consider Lanes Bi-directional is not selected the following lanes are used:
+        <ul>
+          <li>SR1 to DL1</li>
+          <li>SR1 to DL2</li>
+          <li>SR2 to DL1</li>
+          <li>SR2 to DL2</li>
+          <li>SR1 to SR1</li>
+          <li>SR2 to SR2</li>
+        </ul>
+      </li>
+      <li>Source Region Group (SR1 and SR2), Source Location Profile (SL1 and SL2), Destination Region Group (DR1 and DR2), and Destination Location Profile (DL1 and DL2) which includes the following lanes if Consider Lanes Bi-directional is not selected.
+        <ul>
+          <li>For each region in the source region group to each other region in the destination region group. For example,
+            <ul>
+              <li>SR1 to DR1</li>
+              <li>SR1 to DR2</li>
+              <li>SR2 to DR2</li>
+              <li>SR2 to DR1</li>
+            </ul>
+          </li>
+          <li>For each region in the source region group to each other location in the destination location profile. For example,
+            <ul>
+              <li>SR1 to DL1</li>
+              <li>SR1 to DL2</li>
+              <li>SR2 to DL1</li>
+              <li>SR2 to DL2</li>
+            </ul>
+          </li>
+          <li>For each location in the source location profile to each other region in the destination region group. For example,
+            <ul>
+              <li>SL1 to DR1</li>
+              <li>SL1 to DR2</li>
+              <li>SL2 to DR2</li>
+              <li>SL2 to DR1</li>
+            </ul>
+          </li>
+          <li>For each location in the source location profile to each other location in the destination location profile. For example,
+            <ul>
+              <li>SL1 to DL1</li>
+              <li>SL1 to DL2</li>
+              <li>SL2 to DL1</li>
+              <li>SL2 to DL2</li>
+            </ul>
+          </li>
+          <li>Intra-regional lanes for source region group. For example,
+            <ul>
+              <li>SR1 to SR1</li>
+              <li>SR2 to SR2</li>
+            </ul>
+          </li>
+          <li>Intra-regional lanes for destination region group. For example,
+            <ul>
+              <li>DR1 to DR1</li>
+              <li>DR2 to DR2</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2><span class="Bold"><a id="Inter-Region_Lanes"></a>Inter-Region Lanes</span></h2>
+    <p>When calling the external service engine for an inter-region lane, the call uses the Representative Locations for the regions. If a region has no representative location, it is not used to generate any lanes (or identify any lanes that can be re-used). The system also uses every location in the input Location Profile. (Note: OTM only allows Location Profiles with the &quot;Compatible&quot; checkbox selected. This is to avoid a very easy error whereby almost every location in the domain is accidentally brought into the process.)</p>
+    <p>In the illustration below, the factory and the large buildings represent the Representative Locations of the respective regions, while the specified locations are obtained from the list of locations in the input Location Profile.</p>
+    <p><img alt="Four zones are displayed representing a generalized map. Location 1, on the left, is a factory. It has lines connecting it with Location 2, and Regions 1 and 2. Location 2 is a store. Regions 1 and 2 have a large building surrounded by 5 smaller buildings." class="Flow" src="../../../assets/images/interregion.svg"></p>
+    <h2><span class="Bold"><a id="Intra-Region_Lanes"></a>Intra-Region Lanes</span></h2>
+    <p>For each region there can be a maximum of one intra-region lane. Also, for an intra-region lane, you need one valid representative location and one other valid location defined in the region.</p>
+    <h2><span class="Bold"><a id="Scenario"></a>Scenario</span></h2>
+    <p>Each time the new Generate Rush Hour Data process is run, OTM generates new RUSH HOUR data. However, you may be running the process several times in order to test or to determine the correct inputs, or because the External Service Engine data has been updated.</p>
+    <p>The scenario ID is an identifier used to identify the set of Rush Hour data generated for a particular scenario. The SCENARIO_NAME is not a GID, but a user-defined string. The Scenario ID matches the SCENARIO_NAME column for the RUSH_HOUR table.</p>
+    <p>The first step of the Generate Rush Hour Data process is to delete any rush hour data with the same scenario name as the input Scenario ID.</p>
+    <p>So, for example, you have a scenario ID of HOUSTON. As you run and re-run the Generate Rush Hour Data process with this scenario, the old rush hour data for the previous run is replaced with the newly generated rush hour data. (This is regardless of whether the other inputs have changed or not.)</p>
+    <p>If some primary keys of the generated Rush Hour Data match some of the existing entries in the RUSH_HOUR table, OTMÂ updates that entry. This implies that scenario_name, rush_hour_transit_time_delay etc. can change for an existing entry in the RUSH_HOUR table. For example:</p>
+    <p>Existing Entry: X_LANE_GID = ABC, IS_APPLY_TO_SRC=Y, CALENDAR_GID= RUSH HOUR MONDAY 0600, RUSH_HOUR_TRANSIT_TIME_DELAY = 400, SCENARIO_NAME = &quot;TEST&quot;</p>
+    <p>Now run this process with the Scenario ID of &quot;TEST2&quot;. OTM generates data with the same primary key as the above entry, SCENARIO_NAME is updated to &quot;TEST2&quot;.</p>
+    <p>It is useful to think of different scenarios as different geographies.</p>
+    <h2><a id="Generating_Rush_Hour_Data"></a>Generating Rush Hour Data</h2>
+    <ol>
+      <li>In the <span class="Bold">External Service Engine ID</span> field, specify which External Service Engine (ESE) is used.</li>
+      <li>Enter a <span class="Bold">Calendar ID</span> to specify the time periods for which rush hour data should be computed. Note that setting up a calendar with more than 7 days in cycle does not make sense for this process.</li>
+      <li>The <span class="Bold">Source Region Group ID</span>, <span class="Bold">Source Location Profile ID</span>, <span class="Bold">Destination Region Group ID</span>, and <span class="Bold">Destination Location Profile ID</span> determine the region geographies for which rush hour data is generated. Depending on which of these fields have data specified, the process evaluates ESE rush hour data as explained <a href="generate_rush_hour_data.htm#input">above</a>. If some of these lanes already exist, they will be identified and used. Otherwise, new lanes will be generated by the process.</li>
+      <li>The <span class="Bold">Consider Lanes Bi-directional</span> checkbox indicates that the process considers all lanes as specified and then reverses them. For example, a lane from Source A to Destination B (A &gt; B) is used and then reversed as B &gt; A and both are used to calculate rush hour.<br>
+        <br>
+        This defaults to selected.<br>
+        <br>
+        Selecting this option doubles the runtime for the Generate Rush Hour Data process, as the process evaluates twice the amount of lanes.<br>
+        <br>
+        This option is ignored if only Source Region Group and/or Source Location Profile are specified.
+      </li>
+      <li>The <span class="Bold">Scenario ID</span> is used as an identifier by which the generated rush hour data can be identified and controlled.</li>
+      <li>The <span class="Bold">Rush Hour Delay Threshold</span> determines the duration input. This specifies the minimum Rush Hour Delay time needed to create an entry in the RUSH_HOUR table. For example, for a difference of 5 minutes, you may not care.</li>
+      <li>
+        <div data-conref="../../../assets/snippets/user role.hts">
+Enter a <a href="../../../user_management/user_role.htm"><span class="Bold">User 
+ Role</span></a>. When you run, publish, or schedule a recurring process, 
+ you can specify the user role used to perform the process, just like when 
+ you run agents. The user role can be used to specify a separate VPD role 
+ or another domain to run the agent. When a recurring process is modified, 
+ the user role of the recurring process can be modified as well. 
+
+</div>
+      </li>
+      <li>
+        <div data-conref="../../../assets/snippets/log_profile_steps.hts">Select a <span class="Bold"><a href="../../power_data/25_general/log_profile.htm">Log Profile</a></span>Â to generate focused logging when reproducing an error for the specific action. You cannot select a log profile when you choose to schedule a process, as automatic generation of action logs is not supported.</div>
+      </li>
+      <li>
+        <div data-conref="../../../assets/snippets/Scheduling.hts">
+Select <span class="Bold"><a href="scheduling.htm">Execute</a></span>, 
+ <span class="Bold"><a href="scheduling.htm">Publish</a></span>, 
+ or <span class="Bold"><a href="scheduling.htm" style="-weight: Bold;">Schedule</a></span> 
+ to determine when the process will be executed. 
+
+</div>
+      </li>
+      <li>Click <span class="Bold">Submit</span>.</li>
+    </ol>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="process_man_contract_rate.htm">Process Management: Contract and Rate Management</a></p>
+  <p class="LinkList"><a href="../../../properties/glog/business.property.htm">glog.business Properties</a></p>
+  <p class="LinkList"><a href="../../../properties/here/here_engine_properties.htm">HERE Properties</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../../.."
+    gCommonRootRelPath = "../../.."
+    gTopicId = "1"
+  
+//]]></script>
+
+
+  <script src="../../../template/scripts/topicpage.js"></script>
+  <script src="../../../whxdata/layoutconfig.js"></script>
+  <script src="../../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

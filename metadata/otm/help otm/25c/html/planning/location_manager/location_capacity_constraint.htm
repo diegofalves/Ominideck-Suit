@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="template" content="../../assets/masterpages/operational planning.htt">
+    <meta name="topic-status" content="Complete">
+    <meta name="topic-priority" content="0">
+    <meta name="topic-time-estimate" content="0">
+    <meta name="topic-comment" content>
+    <meta name="topic-id" content="Planning\location_manager\location_capacity_constraint.htm">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="generator" content="Adobe RoboHelp 2022">
+    <title>Location Capacity</title>
+    <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+    <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+    <meta name="rh-index-keywords" content="capacity:location,locations:capacity,location capacities,location capacity">
+  <meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:11+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Location Capacity","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div>
+    <noscript> If you have any questions or comments about this topic or the online help, please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact us.</a> </noscript>
+    <h1><span data-field="title" data-format="default">Location Capacity</span></h1>
+    <div role="main">
+      <p>Location capacity allows you to define different types of constraints for a particular location. These constraints limit the amount of work you can do for a specific activity during a time frame (bucket). The system captures the location constraints and reports constraint violations after a shipment is built.</p>
+      <p>When the <a href="../power_data/planning/list_of_planning_parameters.htm#check_location_capacity">Check Location Capacity</a> parameter is set to TRUE, the planning work flow enters the location capacity assignment logic at the final phase of bulk-plan. There are two assignment algorithms to choose from:</p>
+      <ul>
+        <li><span class="Bold">Optimization algorithm</span>: this optimizes the start times so as to minimize the total sum of penalties (above and below target penalties) across all the buckets that the shipment hits. If maximum capacity penalties are violated, the bulk plan fails and does not allow violating the maximum capacity constraints. The shipment start times considered in optimization are dependent on two parameters: <a href="../power_data/planning/list_of_planning_parameters.htm#location_capacity_opt_time_span">Location Capacity Optimizer Time Span</a> and <a href="../power_data/planning/list_of_planning_parameters.htm#location_capacity_opt_time_step">Location Capacity Optimizer Time Step</a>.</li>
+        <li><span class="Bold"><a href="../power_data/planning/list_of_planning_parameters.htm#use_greedy_caapcity_assignment_alg">Greedy Capacity Assignment algorithm</a></span>: this is a quicker but potentially less optimal algorithm. It is turned on by setting the <a href="../power_data/planning/list_of_planning_parameters.htm#use_greedy_caapcity_assignment_alg">USE GREEDY CAPACITY ASSIGNMENT ALGORITHM</a> parameter to true. See the <a href="#location_capacity_greedy_assignment_alg">Greedy Capacity Assignment Algorithm</a> section below for details.</li>
+      </ul>
+      <p class="Note"><span class="Bold">Note</span>: A location is assumed to have unlimited capacity unless it is imposed by capacity constraints.</p>
+      <p>An example of where a capacity constraint could be used is when a distribution center has a finite number of dock doors. In this instance, you have a constraint on the amount of shipments you can receive but also possibly on equipment and/or labor to unload the merchandise.</p>
+      <p>The property <a href="../../properties/glog/business.property.htm#location.locationCapacityOptimizer.CalculateStopWaitUsingLCinBP">glog.business.location.locationCapacityOptimizer.CalculateStopWaitUsingLCinBP</a> when False (default), checks location capacity after the service time calculation. If True, OTMt changes the stop wait time inside service time calculation. Afterward, OTM will not re-check the location capacity. The default is False.</p>
+      <p>The property <a href="../../properties/glog/business.property.htm#location.locationCapacityOptimizer.locationCapacityLoadingTimeWindow">glog.business.location.locationCapacityOptimizer.locationCapacityLoadingTimeWindow</a> determines the duration on each side of the early pickup or late delivery if one of them is not specified. The location capacity information of the locations is loaded once up front for the time window thus determined. Duration in Number of Days.</p>
+      <p>The property</p>
+      <p class="Note"><span class="Bold">Note</span>: Location capacity constraints only works with calenders that use activities Pickup/Receive.</p>
+      <h2><a id="location_capacity_greedy_assignment_alg"></a>Location Capacity Greedy Assignment Algorithm</h2>
+      <p>This algorithm is turned on by setting the <a href="../power_data/planning/list_of_planning_parameters.htm#use_greedy_caapcity_assignment_alg">USE GREEDY CAPACITY ASSIGNMENT ALGORITHM</a> parameter to true. It assigns the location capacity bucket one shipment at a time based on priority or late delivery date of the shipment (depending on the setting of the parameter <a href="../power_data/planning/list_of_planning_parameters.htm#loc_cap_shipment_graph_sort_criteria">LOCATION CAPACITY SHIPMENT GRAPH SORT CRITERIA</a>). There are two major benefits of this algorithm. First, it can take priority into consideration. Secondly, the computation effort required is much less than the optimization algorithm. Note that the greedy assignment algorithm only works for capacity types of Shipment. (The path through the network is not being influenced by the location capacity. )</p>
+      <p>Given a location and a list of shipments:</p>
+      <ul>
+        <li>the algorithm will assign the sorted shipments, one at a time, to the earliest available bucket, making sure that the assignments will not exceed the bucket maximums.</li>
+        <li>if the capacity usage of all the available buckets have not met the target value, OTM will keep assigning shipments to the earliest available bucket until that bucket meets the target capacity usage.</li>
+        <li>if the capacity usage of all the available buckets have already met the target value, OTM will distribute the usage in a smoothing (even) manner. OTM will try to assign shipments evenly. If the bucket has more capacity usage than another bucket, OTM will assign shipments to the less loaded bucket.</li>
+      </ul>
+      <p><span class="Bold">Example:</span></p>
+      <p>There are 5 buckets with a maximum of 5 shipments per day and 15 shipments to assign. No targets. Both algorithms, the Optimization algorithm and the Greedy Capacity Assignment algorithm, will fill the buckets like in table 1 below. The only difference is that the Greedy Capacity algorithm will consider priority when filling the buckets so the first shipments assigned will be the highest priority shipments. The original Optimization algorithm does not consider priority so any 5 shipments can be used for filling the buckets.</p>
+      <table title="location capacity table1">
+        <tbody>
+          <tr>
+            <th>
+              <p>Monday</p>
+            </th>
+            <th>
+              <p>Tuesday</p>
+            </th>
+            <th>
+              <p>Wednesday</p>
+            </th>
+            <th>
+              <p>Thursday</p>
+            </th>
+            <th>
+              <p>Friday</p>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <p>5</p>
+            </td>
+            <td>
+              <p>5</p>
+            </td>
+            <td>
+              <p>5</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>With the Greedy Assignment algorithm and a target value of 3 per day for the same set of 15 shipments, the shipments will be assigned like in table 2 below. Again, priority is also considered.</p>
+      <table title="location capacity table 2 Table">
+        <tbody>
+          <tr>
+            <th>
+              <p>Monday</p>
+            </th>
+            <th>
+              <p>Tuesday</p>
+            </th>
+            <th>
+              <p>Wednesday</p>
+            </th>
+            <th>
+              <p>Thursday</p>
+            </th>
+            <th>
+              <p>Friday</p>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <p>3</p>
+            </td>
+            <td>
+              <p>3</p>
+            </td>
+            <td>
+              <p>3</p>
+            </td>
+            <td>
+              <p>3</p>
+            </td>
+            <td>
+              <p>3</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2><a id="Adding_a_Location_Capacity_ID"></a>Adding a Location Capacity ID</h2>
+      <p>This page is accessed via <span class="Bold">Operational Planning &gt; Location Capacity Rule Management &gt; Location Capacity.</span></p>
+      <ol>
+        <li>Enter a <span class="Bold">Location Capacity ID</span> to uniquely identify the capacity constraint&#39;s name for a location.</li>
+        <li>In order to set a location time constraint, you need to create a capacity <span class="Bold">Calendar</span>. The purpose of the capacity calendar is to describe what activities can take place during periods of the day. Multiple activities that have different capacities are allowed to occur simultaneously. For instance, a capacity calendar at a distribution center can be set up to both PICK UP and RECEIVE during the hours 8am to 5pm daily. Below is an example of a capacity calendar that is cyclical:
+          <br>
+          <br>
+          Day 1 09:00 a.m. until 05:00 p.m. perform RECEIVE
+          <br>
+          Day 2 09:00 a.m. until 05:00 p.m. perform PICKUP
+          <br>
+          Day 3 09:00 a.m. until 05:00 p.m. perform RECEIVE
+          <br>
+          Day 3 09:00 a.m. until 05:00 p.m. perform PICKUP
+          <br>
+          Day 4 09:00 a.m. until 05:00 p.m. perform DEPOT
+          <br>
+          Day 5 09:00 a.m. until 12:00 p.m. perform RECEIVE
+          <br>
+          Day 5 12:00 p.m. until 05:00 p.m. perform RECEIVE
+          <br>
+          Day 6 12:00 a.m. until 11:59 p.m. perform CLOSED
+          <br>
+          Day 7 12:00 a.m. until 11:59 p.m. perform CLOSED
+          <br>
+          <br>
+          On &quot;Day 1&quot; the RECEIVE activity is the only activity that can take place between the hours of 9 a.m. to 5 p.m. Notice&quot;Day 3&quot; is repeated in the calendar since the PICKUP and RECEIVE activities can happen together throughout the day. On &quot;Day 5&quot;, the same activity is listed twice. By breaking up the day into time blocks, you are giving greater capacity flexibility to an activity throughout the day.
+          <br>
+          <br>
+          While a capacity calendar is closely related to the business calendar, they should not be combined. When creating a capacity calendar, keep in mind the business calendar of the location. For example, do not set activities to occur when the location is closed. Also,when creating a capacity calendar for a location, Oracle Transportation Management will not recognize the &quot;Don&#39;t Perform&quot; and &quot;Override&quot; portion of the business calendar.
+          <br>
+          <br>
+          The relationship between the capacity calendar and a location is established in the location manager roles tab by attaching a <span class="Bold"><a href="location_capacity_group_manager.htm">location capacity group</a></span> to the location.
+          <p class="Note"><span class="Bold">Note</span>: If a calendar is not assigned to the location, then a 24-hours-a-day, 7-days-a-week schedule is assigned.</p>
+        </li>
+        <li>The <span class="Bold">Active</span> checkbox turns the location capacity on or off.</li>
+        <li>Select the <span class="Bold">Domain Name</span> in which you want to create the location capacity. Only domains to which you have access privileges display.</li>
+      </ol>
+      <h2><a id="location Capacity Detail"></a>Location Capacity Detail</h2>
+      <p>Location capacity details recognize that certain activities have different capacity limitations. A location capacity detail relates an activity to a capacity limitation factor and defines how the capacity should be used during a bucket of time.</p>
+      <p class="Note"><span class="Bold">Note</span>: The Distribute Capacity Allocation Rule does not work if the Capacity Types are Shipment, FEU, or TEU.</p>
+      <ol>
+        <li>Select the activity that has a capacity constraint for the location in the <span class="Bold">Activity ID</span> from the drop-down list.
+          <p class="Note"><span class="Bold">Note</span>: If DEPOT is selected, the Capacity Type must be SHIPMENT and have a Capacity Allocation Rule of either ALL BUCKETS or FIRST BUCKET.</p>
+        </li>
+        <li>The <span class="Bold">Capacity Type</span> is the limiting factor for the Activity selected. You can have multiple Capacity Types that affect one Activity. For instance, the Activity RECEIVE could have a Capacity Type of X number of shipments and have a weight capacity of X pounds per time bucket.</li>
+        <li>Use the <span class="Bold">Capacity</span> <span class="Bold">Allocation Rule</span> to describe how a shipment at a stop consumes the capacities at your location during a time bucket. There are several ways to distribute your capacity:
+          <ul>
+            <li><span class="Bold">All Buckets:</span> This allocates the entire quantity in each bucket. Thus, if a bucket size is one hour, and the loading activity takes three hours, and you are loading 10,000 pounds of product, this rule assumes that each bucket requires enough resources to load 10,000 pounds each hour. This type of allocation is used when there is a limited number of dock doors available at a location.</li>
+            <li><span class="Bold">Distribute:</span> This type of allocation evenly spreads the quantity to each bucket based on the amount of time spent in the bucket. For example, if you had three time buckets of one hour, with a maximum capacity of 1,000 pounds per bucket, your time bucket allocation would spread a 2,500 pound shipment into two 1,000 pound buckets and one 500 pound bucket over two and a half hours. The 500 pounds not used in the third time bucket could be used for another shipment.</li>
+          </ul>
+          <ul>
+            <li><span class="Bold">First Bucket:</span> This Capacity Allocation Rule applies the entire quantity in the first bucket out of X buckets it takes to perform the activity. First bucket allocation does not take up any capacity from any other time bucket.</li>
+          </ul>
+        </li>
+        <li>The <span class="Bold">Time Duration Bucket</span> needs to be set up for each <a href="activity_type_capacity.htm">activity</a> instance. A time bucket is a measurement of time that varies for each specific instance.</li>
+        <li>Click <span class="Bold">Save</span> for each location capacity detail you enter.</li>
+        <li>Click <span class="Bold">Finished</span>.</li>
+      </ol>
+    </div>
+    <h2><a name="related" id="related"></a>Related Topics</h2>
+    <p class="LinkList"><a href="activity_type_capacity.htm">Activity Type Capacity</a></p>
+    <p class="LinkList"><a href="location_capacity_group_manager.htm">Location Capacity Group</a></p>
+    <p class="LinkList"><a href="view_location_capacity_usage.htm">Location Capacity Usage</a></p>
+    <p class="LinkList"><a href="../../bulk_plan_manager/data_setup/location_capacities_and_bulk_planning.htm">Location Capacities and Bulk Planning</a></p>
+    <script type="text/javascript" language="JavaScript1.2"> //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]></script>
+  
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "7.6.0_1"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

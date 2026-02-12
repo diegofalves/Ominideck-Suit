@@ -1,0 +1,1769 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath=".." src="../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../assets/css/redwood.css" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="date" content="01 7, 2002 12:27:07 PM">
+    <meta name="template" content="../assets/masterpages/financials.htt">
+    <meta name="topic-status" content="Ready for Review">
+    <meta name="topic-priority" content="0">
+    <meta name="topic-time-estimate" content="0">
+    <meta name="topic-comment" content>
+    <meta name="topic-id" content="configuration\allocation_of_costs_and_assigning_general_ledger_codes.htm">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="generator" content="Adobe RoboHelp 2022">
+    <title>Generation and Adjustment of Invoice or Bill using Invoice/Bill Rule</title>
+    <link rel="StyleSheet" href="../assets/css/redwood.css" type="text/css">
+    <link type>
+    <script type="text/javascript" language="JavaScript1.2" src="../assets/js/feedback.js"></script>
+    <meta name="rh-index-keywords" content="generation and adjustment of invoice or bill using invoice/bill rule">
+  <meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:08+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Generation and Adjustment of Invoice or Bill using Invoice/Bill Rule","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Financials</p>
+  </div>
+  <div>
+    <noscript> If you have any questions or comments about this topic or the online help, please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact us.</a> </noscript>
+    <h1><span data-field="title" data-format="default">Generation and Adjustment of Invoice or Bill using Invoice/Bill Rule</span></h1>
+    <div role="main">
+      <p>Multiple invoice/bills can be generated from a single buy or sell shipment in OTM. <a href="../planning/power_data/rates_and_codes/split_rule.htm">Invoice/bill rules</a> are designed for auto generation and adjustment of invoices or bills by grouping the cost lines/allocated cost lines of the shipment based on the invoice/bill rules. For example, you can generate one invoice or bill for each group of lines with same currency, you can generate one invoice or bill for each group of lines with same involved party, etc.</p>
+      <p>Invoice/bill rule can be specified in one of the following ways to generate an invoice or a bill:</p>
+      <ul>
+        <li>Specify an invoice/bill rule ID. The UI action or agent action will use the specified rule to generate the invoice/bill from the shipment.</li>
+        <li>Specify rule in planning parameter &#39;Invoice Split Rule&#39; or &#39;Bill Split Rule&#39;. If a rule is used for all the invoices and bills for a planning parameter scope this value can be set here and the user will not have to enter it for all actions.</li>
+        <li>Use the Match Rule checkbox to look up an invoice/bill rule for the shipment. Here user-specific rules, Incoterms, etc can be used to match the shipment with a rule to be used to generate the invoice/bill.</li>
+      </ul>
+      <p>Invoice/bill rule is used for the following purposes:</p>
+      <ul>
+        <li>To specify rule constraint set for matching the rule with shipment.</li>
+        <li>To specify the source (i.e. line origin) for the invoice. Following are the supported line origins:
+          <ul>
+            <li>Shipment cost: Shipment cost records will be used as source for generating invoice or bill.</li>
+            <li>Order release allocation: Order release allocated records will be used as source for generating invoice or bill.</li>
+            <li>Order release line allocation: Order release line allocated records will be used as source for generating invoice or bill.</li>
+            <li>Order base line allocation: Order base line allocated records will be used as source for generating invoice or bill.</li>
+          </ul>
+        </li>
+        <li>For assignment of <a href="../planning/power_data/rates_and_codes/bill_to_party_assignment.htm">Bill To party</a> to each cost.</li>
+        <li>For line grouping. After getting invoice or bill lines based on the line origin, they can be grouped based on certain criteria such as cost type, remarks etc. One invoice or bill will be generated per group.</li>
+      </ul>
+      <h2><a id="Matching_and_Validation_of_Invoice_Bill_Rule"></a>Matching and Validation of Invoice/Bill Rule</h2>
+      <p>An invoice/bill rule can be identified for the shipment to generate an invoice or a bill using the &quot;Match Rule&quot; setting. The invoice/bill rule will be matched for the shipment based on following criteria:</p>
+      <ul>
+        <li>The rule must be active.</li>
+        <li>Start date of the shipment must be in range of the effective and the expiry dates specified on the rule. Blank values in these fields will also be considered as a validate match.</li>
+        <li>If there are multiple rule matches, then the rule will be picked up based on the priority sequence (&#39;1&#39; will be considered as highest priority).</li>
+        <li>If a rule constraint set is present, rule will be matched based on the criteria specified in it. Following is the list of constraint types:
+          <ul>
+            <li>Shipment Incoterm</li>
+            <li>Shipment Refnum</li>
+            <li>Shipment Involved party</li>
+            <li>Shipment String flex field</li>
+            <li>Shipment Number flex field</li>
+          </ul>
+        </li>
+      </ul>
+      <p>For a valid match, the values (constraint set details) provided on the constraint set must match with the values present on the shipment.Â For example:</p>
+      <h3>Invoice/Bill Rule: Rule 1</h3>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice or Bill</li>
+        <li><span class="Bold">Active</span>: Yes</li>
+        <li><span class="Bold">Priority Sequence</span>: 5</li>
+        <li><span class="Bold">Constraint set type</span>: INVOICE - MATCH RULE or BILL - MATCH RULE</li>
+        <li><span class="Bold">Constraint type</span>:Â Values</li>
+        <li><span class="Bold">Shipment Incoterm</span>:Â FCA</li>
+        <li><span class="Bold">Shipment Involved party</span>:
+          <ul>
+            <li><span class="Bold">Qualifier</span>: ShipperÂ </li>
+            <li><span class="Bold">Contact or Party</span>: WAL</li>
+          </ul>
+        </li>
+      </ul>
+      <h3>Invoice/Bill Rule: Rule 2</h3>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice or BillÂ Â  Â </li>
+        <li><span class="Bold">Active</span>: YesÂ Â  Â </li>
+        <li><span class="Bold">Priority Sequence</span>: 1Â Â  Â </li>
+        <li><span class="Bold">Constraint set type</span>: INVOICE - MATCH RULE or BILL - MATCH RULE
+          <ul>
+            <li><span class="Bold">Constraint type</span>: Values</li>
+            <li><span class="Bold">Shipment Incoterm</span>: FCA</li>
+            <li><span class="Bold">Shipment Involved party</span>: NA (blank) /Â NA (blank)</li>
+          </ul>
+        </li>
+      </ul>
+      <h3>Shipment S1</h3>
+      <ul>
+        <li><span class="Bold">Incoterm</span>: FCA</li>
+        <li><span class="Bold">Involved parties</span>:
+          <ul>
+            <li><span class="Bold">Qualifier</span>:Â Shipper</li>
+            <li><span class="Bold">Value</span>:Â WAL</li>
+          </ul>
+        </li>
+      </ul>
+      <p>Invoice/bill rule &quot;Rule 2&quot; and &quot;Rule 2&quot; both are matching with shipment &quot;S1&quot;, but Rule 2 will be picked up based on the priority sequence.</p>
+      <p>If an invoice/bill rule is directly specified on the UI or as a planning parameter to generate invoice or bill, the rule will be validated using the same set of criteria (used for match rule).</p>
+      <h2><a id="Line_Grouping"></a>Line Grouping</h2>
+      <p>Cost lines fetched based on the line origin can be grouped as per grouping criteria specified in the line grouping constraint set of the invoice/bill rule.</p>
+      <p>One invoice or bill will be generated per group and the attributes or the constraint set details used for line grouping will be persisted on the generated invoice or bill for that group.</p>
+      <p class="Note"><span class="Bold">Note</span>: In case of reference number, whether to persist all reference numbers or only the matched reference numbers on the generated invoice or bill will be decided based on the property glog.invoice.lineGrouping.copyAllRefnums. If true, all reference numbers from line items will be copied. If false, only matched reference numbers will be copied, i.e. if reference numbers were used as matching criteria. The default value of the property is true.</p>
+      <h2><a id="Example_of_Generating_Invoice_using_Invoice_Bill_Rule"></a>Examples to Generate Invoice using Invoice/Bill Rule</h2>
+      <p class="Note"><span class="Bold">Note</span>: This example is for invoice but the same set of invoice/bill rule scenarios would work on bill as well.</p>
+      <h3>Shipment S1 with Shipment Costs</h3>
+      <table title="example Table">
+        <tbody>
+          <tr>
+            <th>
+              <p>Sequence</p>
+            </th>
+            <th>
+              <p>Cost Type</p>
+            </th>
+            <th>
+              <p>Shipment Cost</p>
+            </th>
+            <th>
+              <p>Accessorial Code</p>
+            </th>
+            <th>
+              <p>Special Service Code</p>
+            </th>
+            <th>
+              <p>Payment Method Code</p>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <p>1.</p>
+            </td>
+            <td>
+              <p>Base</p>
+            </td>
+            <td>
+              <p>$100</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p>FCA</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>2.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>$100</p>
+            </td>
+            <td>
+              <p>Loading</p>
+            </td>
+            <td>Loading</td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>3.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>â¬100Â </p>
+            </td>
+            <td>
+              <p>Handling</p>
+            </td>
+            <td></td>
+            <td>
+              <p>FAS</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>4.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>â¬200</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>5.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>$200</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <h3>Order Releases associated with Shipment S1</h3>
+      <table title="example Table">
+        <tbody>
+          <tr>
+            <th>
+              <p></p>
+            </th>
+            <th>
+              <p></p>
+            </th>
+            <th colspan="2">
+              <p>Order Release 1</p>
+            </th>
+            <th colspan="2">
+              <p>Order Release 2</p>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <p>Sequence</p>
+            </th>
+            <th>
+              <p></p>
+            </th>
+            <th>
+              <p>Qualifier</p>
+            </th>
+            <th>
+              <p>Value</p>
+            </th>
+            <th>Qualifier</th>
+            <th>
+              <p>Value</p>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <p>a.</p>
+            </td>
+            <td>
+              <p>Involved Party</p>
+            </td>
+            <td>
+              <p>Buyer</p>
+            </td>
+            <td>
+              <p>WAL</p>
+            </td>
+            <td>Seller</td>
+            <td>
+              <p>WOR</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p></p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td>
+              <p>Order Owner</p>
+            </td>
+            <td>
+              <p>WAL</p>
+            </td>
+            <td>Order Owner</td>
+            <td>
+              <p>WOR</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>b.</p>
+            </td>
+            <td>
+              <p>Remark</p>
+            </td>
+            <td>
+              <p>Business Unit Â </p>
+            </td>
+            <td>
+              <p>WAL-WL</p>
+            </td>
+            <td>Business Unit</td>
+            <td>
+              <p>Â WOR-OR</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>c.</p>
+            </td>
+            <td>
+              <p>Refnum</p>
+            </td>
+            <td>
+              <p>OP_UNIT Â Â </p>
+            </td>
+            <td>
+              <p>WAL-WL</p>
+            </td>
+            <td>OP_UNIT</td>
+            <td>
+              <p>WOR-OR</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>d.</p>
+            </td>
+            <td>
+              <p>String Flex Field</p>
+            </td>
+            <td>
+              <p>Attribute1 Â Â </p>
+            </td>
+            <td>
+              <p>xyz</p>
+            </td>
+            <td>Attribute1</td>
+            <td>
+              <p>abc</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>e.</p>
+            </td>
+            <td>
+              <p>Number Flex Field</p>
+            </td>
+            <td>
+              <p>AttributeNumber1</p>
+            </td>
+            <td>
+              <p>123</p>
+            </td>
+            <td>AttributeNumber1</td>
+            <td>
+              <p>456</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>f.</p>
+            </td>
+            <td>
+              <p>Date Flex Field</p>
+            </td>
+            <td>
+              <p>AttributeDate1 Â </p>
+            </td>
+            <td>
+              <p>10-NOV-2020</p>
+            </td>
+            <td>Â AttributeDate1</td>
+            <td>
+              <p>10-DEC-2020</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <h3>Invoice/Bill Rule Used to Generate Invoice</h3>
+      <h4>Group by ShipmentÂ Cost</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Line grouping constraint set</span>: Not required (Leave this field blank)</li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group, one group will be created per cost line.</p>
+      <p>For the above example, five invoices (one for each cost line) will be generated:</p>
+      <table title="Invoice example">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td>Invoice1</td>
+            <td>Base</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Invoice2</td>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Invoice3</td>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Invoice4</td>
+            <td>Accessorial</td>
+            <td>â¬200</td>
+          </tr>
+          <tr>
+            <td>Invoice5</td>
+            <td>Accessorial</td>
+            <td>$200</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Group by cost type</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li>Type: Invoice</li>
+        <li>Line origin: Shipment cost</li>
+        <li>Line grouping constraint set:
+          <ul>
+            <li>Constraint set type: Invoice line - grouping</li>
+            <li>Constraint type:Â INVOICE LINE â COST TYPE</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same cost type.</p>
+      <p>or above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with lines of base cost type.</li>
+        <li>Â Invoice with lines of accessorial cost type.</li>
+      </ol>
+      <table title="Results of invoice generation">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td>Invoice1</td>
+            <td>Base</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="4">Invoice2</td>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬200</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$200</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Group by Accessorial Code</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>:Â Invoice</li>
+        <li><span class="Bold">Line origin</span>:Â Â Shipment cost</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>:Â Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>:Â INVOICE LINE â ACCESSORIAL CODE</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same set of accessorial cost with accessorial code and special service code.</p>
+      <p>In above example, four invoices will be generated:</p>
+      <ol>
+        <li>Invoice with lines with non-accessorial cost types i.e. for one base cost line.</li>
+        <li>Two invoices, one for each distinct combination of accessorial cost with accessorial code and special service code.</li>
+        <li>Invoice with two accessorial cost lines without any accessorial code or special service code.</li>
+      </ol>
+      <table title="Results of invoice generation">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td>Invoice1</td>
+            <td>Base</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1">Invoice2</td>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1">Invoice3</td>
+            <td>Accessorial</td>
+            <td>â¬100Â </td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="2">Invoice4</td>
+            <td>Accessorial</td>
+            <td>â¬200</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$200</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Group by Payment Method Code</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Line grouping constraint set:</span>
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>: INVOICE LINE â PAYMENT METHOD</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same payment method.</p>
+      <p>In the above example, three invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with payment method [FCA].</li>
+        <li>Invoice with cost lines with payment method [FAS].</li>
+        <li>Invoice with cost lines with payment method [Not available].</li>
+      </ol>
+      <table title="Results of invoice generation">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td>
+              <p>Invoice1</p>
+              <p>Payment Method</p>
+              <p>FCA</p>
+            </td>
+            <td>Base</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1">
+              <p>Invoice2</p>
+              <p>Payment Method</p>
+              <p>FAS</p>
+            </td>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="3">
+              <p>Invoice3</p>
+              <p>Payment Method</p>
+            </td>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬200</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$200</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Group by Currency</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>:Â INVOICE LINE â CURRENCY</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same currency.</p>
+      <p><span data-highlight-container="true">Assuming <span data-highlight="true">cost</span> has been allocated equally for order releases., i</span>n above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with currency [$].</li>
+        <li>Invoice with cost lines with currency [â¬].</li>
+      </ol>
+      <table title="Results of invoice generation">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td rowspan="2">
+              <p>Invoice1</p>
+              <p>Currency</p>
+              <p>$</p>
+            </td>
+            <td>Base</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="2">
+              <p>Invoice2</p>
+              <p>Currency</p>
+              <p>â¬</p>
+            </td>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬200</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Group by Reference Numbers</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: order release allocation</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>: INVOICE LINE â REFNUMS with qualifier [OP_UNIT]</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same currency.</p>
+      <p>In above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with reference number [OP_UNIT , WAL-WL].</li>
+        <li>Invoice with cost lines with reference number [OP_UNIT , WOR-OR].</li>
+      </ol>
+      <table title="Results of invoice generation">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="5">
+              <p>Invoice1</p>
+              <p><span class="Bold">Reference number qualifier</span>: OP_UNIT</p>
+              <p><span class="Bold">Value</span>: WAL-WL</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="5">
+              <p>Invoice2</p>
+              <p><span class="Bold">Reference number qualifier</span>: OP_UNIT</p>
+              <p><span class="Bold">Value</span>: WOR-OR</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Group by Remarks</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li>Type: Invoice</li>
+        <li>Line origin: order release allocation</li>
+        <li>Line grouping constraint set:
+          <ul>
+            <li>Constraint set type: Invoice line - grouping</li>
+            <li>Constraint type: INVOICE LINE â Â REMARKS with qualifier [Business Unit]</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same set of remark (qualifier and value).</p>
+      <p>In above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with remark [Business Unit, WAL-WL].</li>
+        <li>Invoice with cost lines with remark [Business Unit, WOR-OR].</li>
+      </ol>
+      <table title="Results of invoice generation">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="5">
+              <p>Invoice1</p>
+              <p><span class="Bold">Remark qualifier</span>: Business Unit</p>
+              <p><span class="Bold">Value</span>: WAL-WL</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="5">
+              <p>Invoice2</p>
+              <p><span class="Bold">Remark qualifier</span>: Business Unit</p>
+              <p><span class="Bold">Value</span>:Â WOR-OR</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Group by Involved Parties</h4>
+      <h5>Without Bill To Party Assignment</h5>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>: INVOICE LINE â INVOLVED PARTIES with qualifier [Order owner]</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same set of involved party qualifier and its value (party).</p>
+      <p>In above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with involved party [Order owner, WAL].</li>
+        <li>Invoice with cost lines with involved party [Order owner, WOR].</li>
+      </ol>
+      <table title="Results of invoice generation">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="5">
+              <p>Invoice1</p>
+              <p><span class="Bold">Involved party qualifier</span>: Order owner</p>
+              <p><span class="Bold">Value</span>: WAL</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="5">
+              <p>Invoice2</p>
+              <p><span class="Bold">Involved party qualifier</span>: Order owner</p>
+              <p><span class="Bold">Value</span>:Â WOR</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5>With Bill To Party Assignment
+        <br>
+        Bill to Party Assignment</h5>
+      <ul>
+        <li><span class="Bold">Name</span>: BPA</li>
+        <li><span class="Bold">Bill To Party Qualifier</span>: bill-to</li>
+      </ul>
+      <p></p>
+      <table title="Bill to Party Assignment Table">
+        <tbody>
+          <tr>
+            <th>Seq #</th>
+            <th>Cost type</th>
+            <th>Accessorial Code</th>
+            <th>Cost Identifier</th>
+            <th>Involved Party Qualifier</th>
+          </tr>
+          <tr>
+            <td>1.</td>
+            <td>Base</td>
+            <td></td>
+            <td></td>
+            <td>BUYER</td>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>Accessorial</td>
+            <td>Loading</td>
+            <td></td>
+            <td>SELLER</td>
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>Accessorial</td>
+            <td>Handling</td>
+            <td></td>
+            <td>SELLER</td>
+          </tr>
+          <tr>
+            <td>4.</td>
+            <td>Accessorial</td>
+            <td></td>
+            <td></td>
+            <td>BUYER</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Base type or accessorial type cost lines: Involved parties associated with the qualifier &quot;BUYER&quot;Â for the line origin will be set on these cost lines as party with qualifier (bill-to).</p>
+      <p>Accessorial type cost lines with accessorial code (Loading or Handling): Involved parties associated with the qualifier &quot;SELLER&quot;Â for the line origin will be set on these cost lines as party with qualifier (bill-to).</p>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Bill to Party Assignment</span>: BPA</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>: INVOICE LINE â INVOLVED PARTIES with qualifier [ bill-to ]</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same set of involved party qualifier and its value (party).</p>
+      <p>In above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with involved party [bill-to, WAL]</li>
+        <li>Invoice with cost lines with involved party [bill-to, WOR].</li>
+      </ol>
+      <table title="Results of invoice generation">
+        <tbody>
+          <tr>
+            <th>Invoice</th>
+            <th colspan="2" rowspan="1">Line Items</th>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="6">
+              <p>Invoice1</p>
+              <p><span class="Bold">Involved party qualifier</span>: bill-to</p>
+              <p><span class="Bold">Value</span>: WAL</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="4">
+              <p>Invoice2</p>
+              <p><span class="Bold">Involved party qualifier</span>: bill-to</p>
+              <p><span class="Bold">Value</span>:Â WOR</p>
+            </td>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Group by String Flex Fields</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Bill to Party Assignment</span>: BPA</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>: INVOICE LINE â STRING FLEX FIELDS with field [attribute1]</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same set of string flex field and its value.</p>
+      <p>In above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with string flex field [attribute1, xyz].</li>
+        <li>Invoice with cost lines with string flex field [attribute1, abc].</li>
+      </ol>
+      <table title="Invoice results">
+        <tbody>
+          <tr>
+            <th>Invoices Â </th>
+            <th colspan="2">Line Items</th>
+          </tr>
+          <tr>
+            <td rowspan="5">
+              <p>Invoice1</p>
+              <p><span class="Bold">String flex field</span>: attribute1</p>
+              <p><span class="Bold">Value</span>: xyz</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td rowspan="5">
+              <p>Invoice2</p>
+              <p><span class="Bold">String flex field</span>: attribute1</p>
+              <p><span class="Bold">Value</span>: abcÂ </p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <h4>Group by Number Flex Fields</h4>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Bill to Party Assignment</span>: BPA</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>: INVOICE LINE â NUMBER FLEX FIELDS with field [attributeNumber1]</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same set of number flex field and its value.</p>
+      <p>In above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with number flex field [attributeNumber1,123].</li>
+        <li>Invoice with cost lines with number flex field [attributeNumber1,456].</li>
+      </ol>
+      <table title="Invoice results">
+        <tbody>
+          <tr>
+            <th>Invoices</th>
+            <th colspan="2">Line Items</th>
+          </tr>
+          <tr>
+            <td rowspan="5">
+              <p>Invoice1</p>
+              <p><span class="Bold">Number flex field</span>: attributeNumber1</p>
+              <p><span class="Bold">Value</span>: 123</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td rowspan="5">
+              <p>Invoice2</p>
+              <p><span class="Bold">Number flex field</span>: attributeNumber1</p>
+              <p><span class="Bold">Value</span>: 456</p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <h5>Group by Date Flex Fields</h5>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Bill to Party Assignment</span>: BPA</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>: INVOICE LINE â DATE FLEX FIELDS with field [attributeDate1]</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same set of date flex field and its value.</p>
+      <p>In above example, two invoices will be generated:</p>
+      <ol>
+        <li>Invoice with cost lines with date flex field [attributeDate1, 10-NOV-2020].</li>
+        <li>Invoice with cost lines with date flex field [attributeDate1, 10-DEC-2020].</li>
+      </ol>
+      <table title="Invoice results">
+        <tbody>
+          <tr>
+            <th>Invoices</th>
+            <th colspan="2">Line Items</th>
+          </tr>
+          <tr>
+            <td rowspan="5">
+              <p>Invoice1</p>
+              <p><span class="Bold">Date flex field</span>:Â attributeDate1</p>
+              <p><span class="Bold">Value</span>:Â 10-NOV-2020Â </p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td rowspan="5">
+              <p>Invoice2</p>
+              <p><span class="Bold">Date flex field</span>:Â attributeDate1</p>
+              <p><span class="Bold">Value</span>:Â 10-DEC-2020Â </p>
+            </td>
+            <td>Base</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬50</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2><a id="Generate_Invoice_or_Bill_without_using_Invoice_Bill_Rule"></a>Generate Invoice or Bill without using Invoice/Bill Rule</h2>
+      <p>Run the web or the agent action by leaving the input fields (Invoice/Bill Rule ID and Match Rule checkbox) and planning parameters &#39;Invoice Split Rule&#39; or &#39;Bill Split Rule&#39; as blank.</p>
+      <h2><a id="Adjustment_of_Invoice_Bill"></a>Adjustment of Invoice/Bill</h2>
+      <p>While adjusting invoices or bills you can use the same inputs, i.e. Invoice/Bill Rule ID and Match Rule checkbox, to identify respective invoices or bills that have already been generated and adjust the amounts accordingly.</p>
+      <p>Scenarios of adjustment:</p>
+      <ol>
+        <li>Modification on line origin (Shipment/Order release/Order release line/Order base line) for the fields specified in grouping criteria (line grouping constraint set). For example:
+          <ol>
+            <li>If invoices generated using grouping criteria is âInvoice line â Involve partiesâ i.e. each invoice will be a group of lines with same set of involved parties.</li>
+            <li>Later, if the contact/party value for that involved party qualifier is changed on line origin (such as order release,) then all cost lines will be adjusted as per grouping criteria.</li>
+          </ol>
+        </li>
+        <li>Updating/deletion/addition of shipment cost.</li>
+      </ol>
+      <p class="Note"><span class="Bold">Note</span>: Whenever shipment costs are modified and the line origin is allocated cost, then you will have to reallocate the shipment costs. This can be performed with the UI action or configured as an automation agent.</p>
+      <p>The high level steps involved in this process are:</p>
+      <ol>
+        <li>Select adjust invoice or bill web or agent action on shipment.</li>
+        <li>Invoice/bill rule can be specified in one of the following ways to run adjustment:
+          <ol>
+            <li>Specify an invoice/bill rule ID.</li>
+            <li>Specify rule in planning parameter âInvoice Split Ruleâ or âBill Split Ruleâ.</li>
+            <li>Use Match Rule checkbox to look up a rule for shipment.</li>
+          </ol>
+        </li>
+        <li>Steps for identifying adjusted costs:
+          <ol>
+            <li>Fetch the cost lines based on line origin.</li>
+            <li>Create cost group for all cost lines based on grouping criteria (line grouping constraint set).</li>
+            <li>Find matching invoice or bill for each cost group based on grouping criteria.
+              <ul>
+                <li>If matching invoice or bill is found, the cost lines present on that group will be compared with the existing invoice lines present on the matched invoice. The adjustments are found by comparing each group of cost lines and existing invoice lines. The cost lines and existing invoices lines are grouped by cost type, accessorial code, payment method code and general ledger code. The difference or adjusted lines will be added to the same matched invoice. If it is approved or rejected, then a new invoice or bill for the adjusted lines will be created.</li>
+              </ul>
+            </li>
+            <li>If no matching invoice or bill is found for a cost group, then a new invoice or bill will be generated with all the cost lines present in that cost group.</li>
+            <li>For invoices or bills which did not match to any cost groups, negative lines for each of the existing invoice or bill lines will be added to the same invoice or bill. If the invoice or bill is approved or rejected then a new invoice or bill will be generated with negative lines.</li>
+          </ol>
+        </li>
+        <li>For adjustment without using an invoice/bill rule, run the web/agent action by leaving the input fields (Invoice/Bill Rule ID and Match Rule checkbox) and planning parameters âInvoice Split Ruleâ or âBill Split Ruleâ blank.</li>
+      </ol>
+      <h2><a id="Example_of_Adjustment_using_Invoice_Bill_Rule_"></a>Example of Adjustment using Invoice/Bill Rule</h2>
+      <h3>Shipment S1 with shipment costs</h3>
+      <table title="example Table">
+        <tbody>
+          <tr>
+            <th>
+              <p>Sequence</p>
+            </th>
+            <th>
+              <p>Cost Type</p>
+            </th>
+            <th>
+              <p>Shipment Cost</p>
+            </th>
+            <th>
+              <p>Accessorial Code</p>
+            </th>
+            <th>
+              <p>Special Service Code</p>
+            </th>
+            <th>
+              <p>Payment Method Code</p>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <p>1.</p>
+            </td>
+            <td>
+              <p>Base</p>
+            </td>
+            <td>
+              <p>$100</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p>FCA</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>2.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>$100</p>
+            </td>
+            <td>
+              <p>Loading</p>
+            </td>
+            <td>Loading</td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>3.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>â¬100</p>
+            </td>
+            <td>
+              <p>Handling</p>
+            </td>
+            <td></td>
+            <td>
+              <p>FAS</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>4.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>â¬200</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>5.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>$200</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <h3>Payment method on Shipment</h3>
+      <p>Payment Method Code:Â FAS</p>
+      <h3>Invoice/bill rule used to generate invoice/bill</h3>
+      <h5>Invoice/Bill Rule Detail</h5>
+      <ul>
+        <li><span class="Bold">Type</span>: Invoice</li>
+        <li><span class="Bold">Line origin</span>: Shipment cost</li>
+        <li><span class="Bold">Line grouping constraint set</span>:
+          <ul>
+            <li><span class="Bold">Constraint set type</span>: Invoice line - grouping</li>
+            <li><span class="Bold">Constraint type</span>: INVOICE LINE â CURRENCY and INVOICE LINE â PAYMENT METHOD</li>
+          </ul>
+        </li>
+      </ul>
+      <h5>Result</h5>
+      <p>OTM will generate one invoice for each group of cost lines with same set of currency and payment method.</p>
+      <p>For above example, four invoices will be generated:</p>
+      <ol>
+        <li>Invoice with 1 cost line (Currency $ , Payment method FCA)</li>
+        <li>Invoice with 2 cost lines (Currency $ , Payment method - null )</li>
+        <li>Invoice with 1 cost line (Currency â¬ , Payment method FAS)</li>
+        <li>Invoice with 1 cost line (Currency â¬ , Payment method - null )</li>
+      </ol>
+      <table title="invoice example">
+        <tbody>
+          <tr>
+            <th>Invoice Â </th>
+            <th colspan="2">Line Items</th>
+          </tr>
+          <tr>
+            <td>
+              <p>Invoice1</p>
+              <p><span class="Bold">Payment method</span>:Â FCA</p>
+            </td>
+            <td>Base</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td rowspan="2">
+              <p>Invoice2</p>
+              <p><span class="Bold">Payment method</span>:Â NullÂ </p>
+            </td>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$200</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Invoice3</p>
+              <p><span class="Bold">Payment method</span>:Â FASÂ </p>
+            </td>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Invoice4</p>
+              <p><span class="Bold">Payment method</span>:Â NullÂ </p>
+            </td>
+            <td>Accessorial</td>
+            <td>â¬200</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Modify Shipment Cost</h2>
+      <p>Â Update base cost to $200, add new base cost â¬50 and remove one accessorial cost $200.</p>
+      <table title="example Table">
+        <tbody>
+          <tr>
+            <th>
+              <p>Sequence</p>
+            </th>
+            <th>
+              <p>Cost Type</p>
+            </th>
+            <th>
+              <p>Shipment Cost</p>
+            </th>
+            <th>
+              <p>Accessorial Code</p>
+            </th>
+            <th>
+              <p>Special Service Code</p>
+            </th>
+            <th>
+              <p>Payment Method Code</p>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <p>1.</p>
+            </td>
+            <td>
+              <p>Base</p>
+            </td>
+            <td>
+              <p>$200</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p>FCA</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>2.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>$100</p>
+            </td>
+            <td>
+              <p>Loading</p>
+            </td>
+            <td>Loading</td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>3.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>â¬100</p>
+            </td>
+            <td>
+              <p>Handling</p>
+            </td>
+            <td></td>
+            <td>
+              <p>FAS</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>4.</p>
+            </td>
+            <td>
+              <p>Accessorial</p>
+            </td>
+            <td>
+              <p>â¬200</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>5.</p>
+            </td>
+            <td>
+              <p>Base</p>
+            </td>
+            <td>
+              <p>â¬50</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
+            <td></td>
+            <td>
+              <p></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <p>On running the adjustment web/agent action on the shipment with the same rule</p>
+      <p>For above example, three invoices will be adjusted :</p>
+      <ol>
+        <li>Invoice1: Â Adjusted with new line of base cost 100$</li>
+        <li>Invoice2: Â Adjusted with negative amount of removed accessorial (200$)</li>
+        <li>Invoice4: Adjusted with new line of base cost(Currency â¬ , Payment method null)</li>
+      </ol>
+      <table title="Invoice creation results">
+        <tbody>
+          <tr>
+            <th>Invoice Â </th>
+            <th colspan="2">Line Items</th>
+          </tr>
+          <tr>
+            <td rowspan="2">
+              <p>Invoice1</p>
+              <p>Payment method: FCAÂ </p>
+            </td>
+            <td>Base</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Base</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td rowspan="3">
+              <p>Invoice2</p>
+              <p>Payment method: nullÂ </p>
+            </td>
+            <td>Accessorial</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>$200</td>
+          </tr>
+          <tr>
+            <td>Accessorial</td>
+            <td>-$200</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Invoice3</p>
+              <p>Payment method: FASÂ </p>
+            </td>
+            <td>Accessorial</td>
+            <td>â¬100</td>
+          </tr>
+          <tr>
+            <td rowspan="2">
+              <p>Invoice4</p>
+              <p>Payment method: nullÂ </p>
+            </td>
+            <td>Accessorial</td>
+            <td>â¬200</td>
+          </tr>
+          <tr>
+            <td>Base</td>
+            <td>â¬50</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Related Topics</h2>
+    <p class="LinkList"><a href="../planning/power_data/rates_and_codes/split_rule.htm">Invoice/Bill Rule</a></p>
+    <p class="LinkList"><a href="../planning/power_data/rates_and_codes/bill_to_party_assignment.htm">Bill to Party Assignment</a></p>
+    <p class="LinkList"><a href="../planning/shipment_manager/generate_invoice.htm">Create Invoice</a></p>
+    <p class="LinkList"><a href="../planning/shipment_manager/generate_customer_bill.htm">Generate Bill</a></p>
+    <p class="LinkList"><a href="../planning/shipment_manager/invoice_adjusted_costs.htm">Invoice Adjustment Costs</a></p>
+    <p class="LinkList"><a href="../planning/shipment_manager/bill_adjusted_costs.htm">Bill Adjusted Costs</a></p>
+    <script type="text/javascript" language="JavaScript1.2"> //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]></script>
+  
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = ".."
+    gCommonRootRelPath = ".."
+    gTopicId = "31.9_29"
+  
+//]]></script>
+
+
+  <script src="../template/scripts/topicpage.js"></script>
+  <script src="../whxdata/layoutconfig.js"></script>
+  <script src="../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta name="template" content="../../assets/masterpages/master data.htt">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="gtm\service_configuration\service_parameter.htm">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Dice</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="match engine overview:dice,Dice engine">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content><meta name="brsnext" value="gtm/restricted_party_screening/inverse_index.htm"><meta name="brsprev" value="gtm/restricted_party_screening/keyword_match.htm">
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:10+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Dice","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Master Data</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Dice</span></h1>
+  <div role="main">
+    <p>You can select the engine to be used for screening by specifying it in <span class="Bold">Master Data &gt; Power Data &gt; Configurations &gt; <a href="../service_configuration/service_preference.htm">Service Preference</a></span>.</p>
+    <p>This engine uses the occurrence of bigram characters (two characters) in the party and the restricted party data to compare and compute a coefficient value, which in turn is used to determine the match percentage. The output match factor can vary from 0 to 1. Dice can be employed to compare double-byte characters as well.</p>
+    <h2>Matching Factor Calculation by Dice Engine</h2>
+    <p>The Dice engine performs screening using the following process:</p>
+    <ol>
+      <li>Simplify abbreviations.<br>
+        Abbreviations can contain spaces or full stops (.).<br>
+        Abbreviations containing a space will have the space removed. For example, &quot;U S A&quot; will be changed to &quot;USA&quot;.<br>
+        With the <a href="../../user_management/optional_features.htm">optional feature</a> &quot;RPLS - AVOID SPACE IN PLACE OF ABBREVIATION&quot; enabled and the list of punctuation marks specified in the propertyÂ <a href="../../properties/gtm/gtm.rpsservice.htm#punctuationmarks">gtm.rpsservice.punctuationmarks</a> containing a period (.), abbreviations having a full stop will have it removed from the logic. For example, &quot;U.S.A.&quot; will be changed to &quot;USA&quot;.</li>
+      <li>Remove punctuationÂ based on the propertyÂ gtm.rpsservice.punctuationmarks. All the punctuation marks mentioned in this property will be converted to a space.</li>
+      <li>Split the party and the restricted party details into words.</li>
+      <li>Since there can be multiple words for the party and the restricted party, GTM prepares all possible combinations of two words (one from party detail and another from restricted party detail), computes their bigrams and then checks for their matching percentage using Dice Coefficient.
+        <p>GTM calculates the Dice Coefficients between two words (one from the party and other from the denied party) using the following formula:</p>
+        <p><span class="Code">Dice Coefficient Formula = [2 * NC/{NC + Maximum(N1 , N2)}]<br>
+            where,<br>
+            Number of Bigrams of Party word = N1<br>
+            Number of Bigrams of Restricted Party word = N2<br>
+            Number of common Bigrams of Party and Restricted Party word= NC</span></p>
+      </li>
+      <li>Remove all that are not a match: two words with zero Dice Coefficient is not a match.</li>
+      <li>For every party word, identify the best target word match.</li>
+      <li>Calculate the match factor using the best matches.</li>
+    </ol>
+    <h3>Detailed Example of Match Factor Calculation Using Dice Engine (Forward and Backward Configuration):</h3>
+    <p>Let us take an example of a restricted party with the name &quot;ZIDAN EMAD ABDELHADIE&quot; and party &quot;ZIDA ABDELHADI&quot; with same address. You can configure a match threshold of 0.85 for name parameter match. Following are the steps showing how the forward and backward match factor is calculated.</p>
+    <ol>
+      <li>Split the party and the restricted party full name into words.
+        <ol>
+          <li>Source Tokens = {ZIDAN, EMAD, ABDELHADIE}</li>
+          <li>Target Tokens = {ZIDA, ABDELHADI}</li>
+        </ol>
+      </li>
+      <li>Create bigrams of every party and restricted party word.
+        <table title="Table of example of bigrams for party and restricted party words">
+          <tbody>
+            <tr>
+              <th>
+                <p>Party</p>
+              </th>
+              <th>
+                <p>Restricted Party</p>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <p>ZIDAN = ZI, ID, DA, AN [4 BIGRAMS]</p>
+                <p>EMAD = EM, MA, AD [3 BIGRAMS]</p>
+                <p>ABDELHADIE = AB, BD, DE, EL, LH, HA, AD, DI, IE [9 BIGRAMS]</p>
+              </td>
+              <td>
+                <p>ZIDA = ZI, ID, DA [3 BIGRAMS]</p>
+                <p>ABDELHADI = AB, BD, DE, EL, LH, HA, AD, DI [8 BIGRAMS]</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>Prepare a combination of two words (one from the party and the other from the restricted party) and calculate Dice Coefficient for each such combination.
+        <table title="Table of examples of combinations of two words (one from the party and the other from the restricted party) and how to calculate Dice Coefficient">
+          <tbody>
+            <tr>
+              <th>
+                <p>Party: Name</p>
+              </th>
+              <th>
+                <p>Restricted Party: Name</p>
+              </th>
+              <th>
+                <p>Common Bigrams</p>
+              </th>
+              <th>
+                <p>Number of Common Bigrams</p>
+              </th>
+              <th>
+                <p>Dice Coefficient Formula = [2 * NC/{NC + Maximum(N1 , N2)}]</p>
+              </th>
+            </tr>
+            <tr>
+              <td rowspan="2">
+                <p>ZIDAN = ZI, ID, DA, AN [4 BIGRAMS]</p>
+              </td>
+              <td>
+                <p>ZIDA = ZI, ID, DA</p>
+                <p>[3 BIGRAMS]</p>
+              </td>
+              <td>
+                <p>ZI, ID, DA</p>
+              </td>
+              <td>3</td>
+              <td>
+                <p>2*3/[3+ Max(4, 3)] = 6/7 = 0.85</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ABDELHADI = AB, BD, DE, EL, LH, HA, AD, DI</p>
+                <p>[8 BIGRAMS]</p>
+              </td>
+              <td>
+                <p>Nil</p>
+              </td>
+              <td>0</td>
+              <td>
+                <p>2*0/[0+ Max(4, 8)] = 0</p>
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="2">EMAD = EM, MA, AD [3 BIGRAMS]</td>
+              <td>
+                <p>ZIDA = ZI, ID, DA</p>
+                <p>[3 BIGRAMS]</p>
+              </td>
+              <td>
+                <p>Nil</p>
+              </td>
+              <td>0</td>
+              <td>
+                <p>2*0/[0+ Max(3, 3)] = 0</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ABDELHADI = AB, BD, DE, EL, LH, HA, AD, DI</p>
+                <p>[8 BIGRAMS]</p>
+              </td>
+              <td>
+                <p>AD</p>
+              </td>
+              <td>
+                <p>1</p>
+              </td>
+              <td>
+                <p>2*1/[1+ Max(3, 8)] = 2/9 = 0.22</p>
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="2">ABDELHADIE = AB, BD, DE, EL, LH, HA, AD, DI, IE [9 BIGRAMS]</td>
+              <td>
+                <p>ZIDA = ZI, ID, DA</p>
+                <p>[3 BIGRAMS]</p>
+              </td>
+              <td>
+                <p>Nil</p>
+              </td>
+              <td>0</td>
+              <td>
+                <p>2*1/[1+ Max(3, 8)] = 2/9 = 0.22</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ABDELHADI = AB, BD, DE, EL, LH, HA, AD, DI</p>
+                <p>[8 BIGRAMS]</p>
+              </td>
+              <td>
+                <p>AB, BD, DE, EL, LH, HA, AD, DI</p>
+              </td>
+              <td>
+                <p>8</p>
+              </td>
+              <td>
+                <p>2*8/[8+ Max(9, 8)] = 16/17 = 0.94</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>Remove all non-matches (i.e. with zero Dice Coefficient) and arrange the remaining matches in the order of Dice Coefficient.
+        <p>The remaining combinations are:</p>
+        <table title="Table listing non-matches">
+          <tbody>
+            <tr>
+              <th>
+                <p>Party: Name</p>
+              </th>
+              <th>
+                <p>Restricted Party: Name</p>
+              </th>
+              <th>
+                <p>Dice Coefficient</p>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <p>ABDELHADIE</p>
+              </td>
+              <td>
+                <p>ABDELHADI</p>
+              </td>
+              <td>
+                <p>0.94</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZIDAN</p>
+              </td>
+              <td>
+                <p>ZIDA</p>
+              </td>
+              <td>
+                <p>0.85</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>EMAD</p>
+              </td>
+              <td>
+                <p>ABDELHADI</p>
+              </td>
+              <td>
+                <p>0.22</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        Â 
+        <p>Identify the best matches among the remaining combinations. ABDELHADI from Restricted Party is considered a better match with the ABDELHADIE from Party (94%) than EMAD from party (22%). Hence, EMAD vs ABDELHADI (22%) is discarded. Thus remains:</p>
+        <table title="Table listing restricted party matches to discard">
+          <tbody>
+            <tr>
+              <th>
+                <p>Party: Name</p>
+              </th>
+              <th>
+                <p>Restricted Party: Name</p>
+              </th>
+              <th>
+                <p>Dice Coefficient</p>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <p>ABDELHADIE</p>
+              </td>
+              <td>
+                <p>ABDELHADI</p>
+              </td>
+              <td>
+                <p>0.94</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZIDAN</p>
+              </td>
+              <td>
+                <p>ZIDA</p>
+              </td>
+              <td>
+                <p>0.85</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>Calculating the number of characters for each party and restricted party word and calculating forward and backward match factor:<br>
+        Party = ZIDAN [5 Characters â 85% matching] + EMAD [4 Characters - 0% matching] + ABDELHADIE [10 characters - 94% matching] = 19 Characters<br>
+        <br>
+        Restricted Party = ZIDA [4 Characters â 85% matching] + ABDELHADI [9 characters - 94% matching] = 13 Characters<br>
+        <br>
+        Forward Match Factor = Total Number of Matching Characters of Party/Total Number of Characters of Party<br>
+        = (0.85 * 5 + 0 * 4 + 0.94 * 10)/ (5 + 4 + 10)<br>
+        = (4.25 + 0 + 9.4)/19<br>
+        = 13.65/19<br>
+        = 0.71<br>
+        <br>
+        Backward Match Factor = Total Number of Matching Characters of Restricted Party /Total Number of Characters of Restricted Party<br>
+        = (0.85 * 4 + 0.94 * 9)/ (4 + 9)<br>
+        = (3.4 + 8.46)/13<br>
+        = 11.86/13<br>
+        = 0.91<br>
+        <br>
+        Here, the party will be considered as match to restricted party using backward direction as 0.91 match factor is greater than 0.85 threshold. But it will not be considered as a match using forward direction as 0.71 is less than 0.85 threshold. It is possible that the data of party and restricted party might be the other way causing the forward match factor to be 0.91 and backward match factor to be 0.71. You can use &#39;Both&#39; option as match direction to perform both forward and backward match and take the best out of the two.
+      </li>
+    </ol>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="match_engine_overview.htm">Match Engine Overview</a></p>
+  <p class="LinkList"><a href="exact_match.htm">Exact Match</a></p>
+  <p class="LinkList"><a href="substring_match.htm">Substring Match</a></p>
+  <p class="LinkList"><a href="keyword_match.htm">Keyword Match</a></p>
+  <p class="LinkList"><a href="inverse_index.htm">Inverted Index</a></p>
+  <p class="LinkList"><a href="soundex.htm">Soundex</a></p>
+  <p class="LinkList"><a href="metaphone.htm">Metaphone</a></p>
+  <p class="LinkList"><a href="../../assets/docs/restricted_party_screening.pdf">Restricted Party Screening PDF</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "30.1.3.0_5"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

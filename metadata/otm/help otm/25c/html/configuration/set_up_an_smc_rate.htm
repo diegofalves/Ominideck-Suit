@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath=".." src="../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../assets/css/redwood.css" type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="date" content="10 31, 2001 10:13:12 AM">
+  <meta name="template" content="../assets/masterpages/contract and rate management.htt">
+  <meta name="topic-status" content="Ready for Review">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="How to Set Up an SMC Rate">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>How to Set Up an SMC3 Rate</title>
+  <link rel="StyleSheet" href="../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="Rateware,external rating,SMC3:setting up rates,how to:set up an SMC rate,carrierconnect">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:08+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"How to Set Up an SMC3 Rate","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Contract and Rate Management</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">How to Set Up an SMC3 Rate</span></h1>
+  <div role="main">
+    <h2><a name="SMC" id="guide_How_to_Set_Up_an_SMC3_Rate"></a>SMC3</h2>
+    <p>With Oracle Transportation Management you can use external rates provided by SMC products like RatewareXL. RatewareXL performs rate lookups and calculations while using multiple tariff tables. Then Oracle Transportation Management can request those rates and make them part of rate offerings within the Rate Manager.</p>
+    <p>The request calls can be made from OTM to get the rates via:</p>
+    <ul>
+      <li><a id="SMC_Web_service"></a>Web service (via the OTM external rating engine ID of RATEWAREXL and RATEWAREXL WITH CARRIERCONNECT): Here OTM uses SOAP protocol to communicate with external rating engine to get the rates. See <a href="set_up_an_smc_rate.htm#Setting">Setting up SMC3 Rates</a> section for more details.</li>
+    </ul>
+    <p>There are additional properties that are relevant. See <a href="../properties/glog/ratingengine.properties.htm">glog.RatingEngine Properties</a>.</p>
+    <h2>CarrierConnect</h2>
+    <p>CarrierConnect is another licensed product from SMC3 which offers calculation of transit time between two locations. You can use the following rating engines with CarrierConnect:</p>
+    <ul>
+      <li><span class="Bold">SMC3 WITH CARRIERCONNECT</span> (on-premise): This socket server application helps the shippers to determine transit time and rates for LTL carriers. For CarrierConnect, In addition to setting up SMC3 rates below, the glog.RatingEngine.Rateware.NewAPI property must be set to True. The default is False. Additionally, the service provider must have a valid SCAC code.</li>
+      <li><span class="Bold">RATEWAREXL WITH CARRIERCONNECT</span> (web service): This web service, coupled with RateWareXL and Carrier Connect XL3.0, is used for calculating the cost of the LTL shipment and getting transit time based on SCAC code in two separate calls. One call is made to Carrier Connect XL 3.0 for getting the transit time and the second call is made to RatewareXL for getting the rates. Oracle Transportation Management makes two calls separately to Carrier Connect XL 3.0 and RatewareXL. From the response of Carrier Connect XL 3.0, Oracle Transportation Management gets the movement type (Direct or Indirect) and the transit days. Based on the movement type, OTM has to send the correct set of discounts to SMC.</li>
+    </ul>
+    <p>For both the engines SMC3 WITH CARRIERCONNECT and RATEWAREXL WITH CARRIERCONNECT, in the directions below, the Master is set up to provide a discount for the SMC3 rates returned at a Lane level. If you purchased the CarrierConnect product from SMC3 (in addition to the RateWare product), Oracle Transportation Management provides the ability to differentiate the discounts on a lane depending on the movement type, i.e. whether the source and destination locations on the shipment are serviced directly or indirectly. Points that are serviced directly typically receive a higher discount than indirect points. This option is only available if you licensed both the RateWare and CarrierConnect products. If you have both, then the rates returned to Oracle Transportation Management from RateWare indicate if the Source or Destination or Source and Destination locations on the shipment are Direct or Indirect points.</p>
+    <p>Following are the CarrierConnect XL movement type designators:</p>
+    <ul>
+      <li><span class="Bold">DIRECT</span>: originating carrier is in control of a shipment for the entire transit time</li>
+      <li><span class="Bold">INDIRECT</span>: shipment is handed off to a different carrier in transit</li>
+      <li><span class="Bold">PARTNER</span>: shipment is handed off to a partner carrier in transit</li>
+      <li><span class="Bold">CUSTOM</span>: adds flexibility for a carrier to designate a special type of movement type that is different from DIRECT, INDIRECT, or PARTNER</li>
+    </ul>
+    <p>To discount based on movement type, you then define different rate record details with different discounts using rate basis indicators:</p>
+    <ul>
+      <li>SMC3 Destination location routing flag (null, Direct, Indirect)</li>
+      <li>SMC3 Source location routing flag (null, Direct, Indirect)</li>
+    </ul>
+    <p class="Note"><span class="Bold">Note</span>: In case the discount for a particular movement type is not defined then Oracle Transportation Management will look for a discount which doesn&#39;t have any movement type associated with it. For example if the movement type returned by CarrierConnect XL is INDIRECT and there is no discount defined for INDIRECT movement type, then the default discount will be applied, i.e. the discount with a blank movement type.</p>
+    <p class="Note"><span class="Bold">Note</span>: For RATEWAREXL WITH CARRIERCONNECT, if you have taken all of the steps required to bring in Direct and Indirect points from CarrierConnect, you can also bring in transit days from CarrierConnect via RateWare by setting the Rate Service Type to EXTERNALTRANSITDAYS.</p>
+    <p>There are additional properties that are relevant. See <a href="../properties/glog/ratingengine.properties.htm">glog.RatingEngine Properties</a>.</p>
+    <h2><a name="Setting" id="Setting"></a>Setting Up SMC3 Rates</h2>
+    <p>When creating LTL rates for SMC3, you need to create two rate offerings and two rate records in Oracle Transportation Management as follows:</p>
+    <ul>
+      <li>Base rate offering pointing to SMC3&#39;s RatewareXL</li>
+      <li>Rate record associated to the base rate offering</li>
+      <li>Master rate offering pointing to the base rate offering</li>
+      <li>Rate record associated to the master rate offering</li>
+    </ul>
+    <p class="Note"><span class="Bold">Note</span>: When setting up a new SMC3 rate using an <a href="../planning/power_data/item_classifications/nmfc_class_codes.htm">NMFC class code</a>, NMFC class codes need to be created in the Public domain.</p>
+    <p>The rest of this section details requirements for setting up these two rate offering/rate record pairs.</p>
+    <h3><a name="ltl_base_ro" id="ltl_base_ro"></a>LTL Base Rate Offering</h3>
+    <p>The <a href="../planning/power_data/rates_and_codes/rate_offer_type_def.htm#LTL-Base">LTL base rate offering</a> is required by Oracle Transportation Management if you want to use SMC3&#39;s RatewareXL. Minimally, you must include the following on the LTL base rate offering.</p>
+    <p>On <a href="../planning/rate_manager/create_rate_offering.htm">Rate Header</a> tab:</p>
+    <ol>
+      <li>Select an Offering Type of <a href="../planning/power_data/rates_and_codes/rate_offer_type_def.htm#LTL-SMC">LTL-SMC</a>.</li>
+      <li>Leave the Service Provider ID field blank. Since the offering type is LTL-SMC, you cannot enter a service provider ID.</li>
+      <li>Complete the required fields of <a href="../planning/rate_manager/create_rate_service.htm">Rate Service ID</a> and <a href="../planning/power_data/rates_and_codes/rate_version.htm">Version</a>.</li>
+      <li>Select a Transport Mode of LTL.</li>
+      <li>Specify an <a href="../planning/rate_manager/create_rate_offering.htm">Exchange Rate ID</a> as expected by SMC3 RATEWAREXL.</li>
+    </ol>
+    <p class="Note"><span class="Bold">Note</span>: To use Oracle Transportation Sourcing for LTL rates, you must use RATEWAREXL.</p>
+    <p>On <a href="../planning/rate_manager/rate_offering_attributes.htm">Attributes</a> tab:</p>
+    <ol>
+      <li>Select a <a href="../planning/power_data/rates_and_codes/rate_distance.htm">Rate Distance</a> ID since this is required.</li>
+      <li>Select L â Ship Unit Lines for <a href="../planning/rate_manager/rate_offering_attributes.htm#package_count">Package Count is determined by</a>.</li>
+      <li>Select an <a href="../planning/rate_manager/rate_offering_attributes.htm#misc">External Rating Engine ID</a>. The following rating engines can be configured:
+        <ul>
+          <li><span class="Bold">RATEWAREXL</span>: This is a web service call to get rates.</li>
+          <li><span class="Bold">RATEWAREXL WITH CARRIERCONNECT</span>: This is a web service call to get rates and transit time. Here also, you have to choose Rate Service Type (in the Rate Header tab) to EXTERNALTRANSITDAYS to get the transit time details. Additionally, the service provider must have a valid SCAC code.</li>
+          <li>
+            <p class="Note"><span class="Bold">Note</span>: For more information, see <a href="../planning/rate_manager/external_rating_engine_id.htm">List of External Rating Engine IDs</a>.</p>
+          </li>
+        </ul>
+      </li>
+      <li>Enter the Tariff Effective Date.</li>
+      <li>Specify a <a href="../planning/rate_manager/rate_offering_attributes.htm#misc">Tariff Name</a> as required by your SMC3 RATEWAREXL setup.</li>
+    </ol>
+    <p class="Note"><span class="Bold">Note</span>: If you create a rate offering type that uses the rate attribute &quot;SMC3 RATE SHIP UNITS&quot;, you can use the ship unit weight instead of line item weights whenever there is a National Motor Freight Classification (NMFC) code supplied directly on the ship unit.</p>
+    <p class="Note"><span class="Bold">Note</span>: You can include a discount structure to be used when determining the base cost on either the LTL-Master or the LTL-SMC rate offering. If discounts are present on both rate offerings, the discount on the LTL-Master takes precedence. See <a href="../planning/rate_manager/smc_discounts.htm">SMC Discounts</a> for more details.</p>
+    <h3><a name="ltl_base_rr" id="ltl_base_rr"></a>LTL Base Rate Record</h3>
+    <p>Create a <a href="../planning/rate_manager/create_rate_record.htm">rate record</a> from the LTL base rate offering created above. No cost information should be included in this rate record as it will not be used by either Oracle Transportation Management or Oracle Transportation Sourcing to create costs. However, it is required by Oracle Transportation Management for SMC3.</p>
+    <p>Minimally, this LTL base rate record must include the following:</p>
+    <p>On the <a href="../planning/rate_manager/create_rate_record.htm#lane">Lane Info</a> tab:</p>
+    <ol>
+      <li>Specify a Rate Offering ID of the LTL-SMC base rate offering created above.</li>
+      <li>Select <span class="Bold">Country</span> for both Source Geo Hierarchy and Destination Geo Hierarchy.</li>
+    </ol>
+    <p>On the <a href="../planning/rate_manager/rate_record_attributes.htm">Attributes</a> tab, enter USA in both of the resulting Country fields.</p>
+    <p>On the Rate Costs tab, do not input a rate cost.</p>
+    <h3><a name="ltl_mast_ro" id="ltl_mast_ro"></a>LTL Master Rate Offering</h3>
+    <p>Minimally, you must include the following on the master rate offering:</p>
+    <p>On the <a href="../planning/rate_manager/create_rate_offering.htm">Rate Header</a> tab:</p>
+    <ol>
+      <li>Select an Offering Type of <a href="../planning/power_data/rates_and_codes/rate_offer_type_def.htm#LTL-Master">LTL - MASTER</a>.</li>
+      <li>Service provider ID must be specified since it is a required field.</li>
+      <li>Select a Rate Service ID and Version since they are required fields.</li>
+      <li>Transport Mode of LTL.</li>
+      <li>Specify an Exchange Rate ID as expected by SMC3 RATEWAREXL.</li>
+    </ol>
+    <p>On the <a href="../planning/rate_manager/rate_offering_attributes.htm">Attributes</a> tab:</p>
+    <ol>
+      <li>Enter a Rate Distance ID since this field is required.</li>
+      <li>Enter the Base Rate Offering created above.</li>
+      <li>Select L â Ship Unit Lines for Package Count is determined by.</li>
+      <li>Specify a Tariff Name as required by your SMC3 RATEWAREXL setup.
+        <p class="Note"><span class="Bold">Note</span>: If you create a rate offering type that uses the rate attribute &quot;SMC_USE_GROSS_SHIPUNIT_WEIGHTS&quot;, you can use shipment weight instead of ship unit or ship unit line weights whenever there is a National Motor Freight Classification (NMFC) code supplied directly on Master rate offering (Attributes tab) with âSpecified Commodityâ option being selected.</p>
+      </li>
+    </ol>
+    <h3><a name="ltl_mast_rr" id="ltl_mast_rr"></a>LTL Master Rate Record</h3>
+    <p>Create a rate record from the LTL master rate offering created above. This LTL master rate record will be used by Oracle Transportation Sourcing as the <a href="../field_definitions/rate_record_template.htm">rate record template</a>. As a result, it must include all costs that you want your carrier to bid on and that you may want to transform into Oracle Transportation Management rates later in the sourcing process.</p>
+    <p>Minimally, this rate record must include the following:</p>
+    <p>On the <a href="../planning/rate_manager/create_rate_record.htm">Lane Info</a> tab:</p>
+    <ol>
+      <li>Select a Rate Offering ID of the LTL master rate created above.</li>
+      <li>Specify a Source Geo Hierarchy and a Destination Geo Hierarchy.</li>
+    </ol>
+    <p>On the <a href="../planning/rate_manager/rate_record_attributes.htm">Attributes</a> tab, specify a Source Geography and a Destination Geography.</p>
+    <p>On the <a href="../planning/rate_manager/rate_costs.htm">Rate Costs</a> tab, specify a rate cost with a <a href="../planning/rate_manager/rate_costs_details.htm#Cost">Cost Type</a> of Discount and the appropriate Apply Discount __ %.</p>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="../planning/rate_manager/create_rate_offering.htm">Rate Offering</a></p>
+  <p class="LinkList"><a href="../planning/rate_manager/create_rate_record.htm">Rate Record</a></p>
+  <p class="LinkList"><a href="../properties/glog/ratingengine.properties.htm">glog.RatingEngine Properties</a></p>
+  <p class="LinkList"><a href="../properties/glog/rateware_properties.htm">glog.rateware Property</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = ".."
+    gCommonRootRelPath = ".."
+    gTopicId = "31.9_51"
+  
+//]]></script>
+
+
+  <script src="../template/scripts/topicpage.js"></script>
+  <script src="../whxdata/layoutconfig.js"></script>
+  <script src="../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

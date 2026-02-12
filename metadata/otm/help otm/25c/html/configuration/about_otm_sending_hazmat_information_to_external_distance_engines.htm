@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath=".." src="../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../assets/css/redwood.css" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="date" content="12 10, 2001 10:07:22 AM">
+    <meta name="template" content="../assets/masterpages/general.htt">
+    <meta name="topic-status" content="Ready for Review">
+    <meta name="topic-priority" content="0">
+    <meta name="topic-time-estimate" content="0">
+    <meta name="topic-comment" content>
+    <meta name="topic-id" content="configuration\milestone_setup.htm">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="generator" content="Adobe RoboHelp 2022">
+    <title>About OTM Sending Hazmat Information to External Distance Engines</title>
+    <link rel="StyleSheet" href="../assets/css/redwood.css" type="text/css">
+    <script type="text/javascript" language="JavaScript1.2" src="../assets/js/feedback.js"></script>
+    <meta name="rh-index-keywords" content="hazmat external distance engine mapping,external distance engine mapping,hazmat mapping">
+  <meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:08+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"About OTM Sending Hazmat Information to External Distance Engines","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <noscript> If you have any questions or comments about this topic or the online help, please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact us.</a> </noscript>
+    <h1><span data-field="title" data-format="default">About OTM Sending Hazmat Information to External Distance Engines</span></h1>
+    <div role="main">
+      <p>When you route an order between two locations, there can be restrictions related to the materials being transported. If the material is hazardous, then certain routes are restricted for the hazardous movement, because of which you need to take a different route. External distance engines like PC*Miler web services and HERE have the capability of routing the hazardous material based on the classification of the material being moved.</p>
+      <p>OTM sends hazmat information of an order to the <a href="../planning/power_data/rates_and_codes/distance_engine.htm">External Distance Engine</a> (EDE) and then calculates distance between two locations considering the hazmat routing configuration. The process of sending hazmat information to EDE is based on the following criteria:</p>
+      <ul>
+        <li>Setting the Hazardous checkbox on the order release line or packaged item.</li>
+        <li>Creating a hazardous item for a hazardous classification which can vary by transport mode, region, and packaged item.</li>
+        <li>Mapping hazardous items to EDE.</li>
+        <li>Specifying the Hazmat Item on the order release line or configuring the RUN HAZMAT QUALIFICATION PROCESS parameter so that OTM looks up the hazardous item for the packaged item based on the transport mode and region.</li>
+        <li>Configuring the HAZMAT_ROUTING parameter in EDE.</li>
+      </ul>
+      <p>This topic describes the process involved in configuring and sending hazardous material information to EDE using the OTM user interface to get the distance.</p>
+      <h2><a id="Configuration"></a>Configuration</h2>
+      <p>You need to configure the following parameters and business objects as a pre-requisite:</p>
+      <ul>
+        <li>Create a <a href="../planning/hazmat_manager/create_haz_item.htm">hazardous item</a>.
+          <ul>
+            <li>Set the Hazardous checkbox based on the hazardous mode and the region.
+              <ul>
+                <li>The hazardous mode is an attribute of the itinerary and models the capability to comply with multi-leg and multi-modal regulations.</li>
+                <li>The region, which is based on the destination, also allows the compliance with regulations for cross border shipments.</li>
+              </ul>
+            </li>
+            <li>The hazardous item must be related to a packaged item.</li>
+          </ul>
+        </li>
+        <li>You can either specify a hazardous item on an order release line which gets populated automatically on the shipment ship unit line, or OTM will look up the appropriate hazardous item corresponding to the <a href="../planning/material_manager/create_pack_info.htm">packaged item</a> based on the transport mode and region.</li>
+        <li>Map the hazmat items to the corresponding hazmat types and EDE type using <a href="../planning/power_data/25_general/hazmat_ede_mapping.htm">Hazmat External Distance Engine Mapping</a>. This could vary based on the external distance engines. Currently, HERE and PC*Miler (ALK) available.</li>
+        <li>Create a parameter set and set the <a href="../planning/power_data/planning/list_of_planning_parameters.htm#run_hazmat">RUN HAZMAT QUALIFICATION PROCESS</a> parameter to true.
+          <p class="Note"><span class="Bold">Note</span>: Only when you set this parameter to true, OTM will look up the hazardous Item for the packaged item based on the transport mode, region, and populate it on the corresponding shipment ship unit line. You do not have to set this parameter, if the hazardous item is populated on the Order release Line. For more details on how OTM populates various hazardous material flags and fields on the shipment given different combinations of hazardous material information provided on the order, see <a href="../planning/hazmat_manager/hazardous_material_settings_and_implications.htm">Hazardous Material Settings and Implications</a>.</p>
+        </li>
+        <li>Create HERE or PC*Miler web servicesÂ external distance engines and set the <a href="../planning/power_data/rates_and_codes/external_distance_engine_properties.htm#hazmat_routing">HAZMAT_ROUTING</a> parameter value as Y to consider hazardous item information and calculate hazmat routing distance.</li>
+        <li>Perform bulk planning on an order to create a shipment in which distance is to be calculated based on hazardous material being transported.</li>
+      </ul>
+      <h2><a id="Process"></a>Process</h2>
+      <p>This section will explain the process involved in sending the hazmat information to EDE thereby calculating the distance between two locations based on the hazmat routing.</p>
+      <p>Now letâs review the process in more detail along with examples.</p>
+      <h3>Creating a Hazardous Item</h3>
+      <p>For example, you need to create a hazardous item which you are sending from source location New Haven, CT to destination location Richmond, VA, and you want to avoid the Harbor Tunnel in Baltimore because hazmat is prohibited. You are shipping Calcium Carbide, which is dangerous when wet. So create a hazardous item for Calcium Carbide in a container specified on the packaged item for a specific mode of shipment and for the USA region.</p>
+      <p>The following fields are required (values are given as examples along with description) on the Hazardous Item page to classify the state of a hazardous item:</p>
+      <ul>
+        <li>HazRegion ID - HAZREGION-USA (specifies the classification and description for shipping CALCIUM CARBIDE hazardous item for the designated mode (TL), in the USA according to DOT regulation).</li>
+        <li>Hazmat Generic ID - UN1402 (the UN1001 (UN number) is a 4-digit numbering system assigned to âCALCIUM CARBIDEâ by the United Nations Committee of Experts for a quick identification of dangerous goods).</li>
+        <li>Mode - TL. (determines whether the material is hazardous when transported by air, rail, truck, or ocean).</li>
+        <li>49 STCC ID - Â the STCC number is a unique seven (7) digit code used to classify a commodity for the purpose of emergency response. This is not a commodity classification.</li>
+        <li>Packaged Item ID - the associated packaged item is a mandatory field as the hazardous attributes apply specifically to how the packaged item is packaged. For example, as bulk or in a container.</li>
+      </ul>
+      <h3>Enabling Hazmat Parameter</h3>
+      <p>Configuring a parameter value enables OTM to perform specific business process according to your requirement. Â </p>
+      <p>First, you must create a parameter set in your domain and set the RUN HAZMAT QUALIFICATION PROCESS parameter to true. For example, create CANS parameter set ID and assign it to your domain. In the CANS parameter set ID, set the RUN HAZMAT QUALIFICATION PROCESS parameter to True. If this parameter is set to true and no hazmat item is specified on order release line level, OTM will look up the hazmat item based on the packaged item, Â transport mode, and region.</p>
+      <p>If the hazardous flag is selected on the order release line or the on the packaged Item, and no hazardous Item is found in the look up process, then a warning message appears and the shipment flag is set to hazardous as a fail-safe. For more details, see <a href="../planning/hazmat_manager/hazardous_material_settings_and_implications.htm">Hazardous Material Settings and Implications</a>.</p>
+      <h3>Configuring External Distance Engine</h3>
+      <p>When you use hazmat routing between two locations and the hazmat items being transported between two locations can vary, you must disable the cache for the external distance engines.</p>
+      <p><a id="Nocache"></a>To disable the in memory cache of the external distance engines, set the value of the property below:</p>
+      <p>glog.distance.noCache.extEngineJavaClass=glog.business.rate.ratedistance.external.PCMilerEngineWS,glog.business.rate.ratedistance.external.HereEngine</p>
+      <p>Also, in the EDE which you created, select Cache Off from the Cache Control Type drop-down list.</p>
+      <p>You can configure an existing external distance engine and set the HAZMAT_ROUTING parameter to Y, which enables OTM to send the hazmat information to EDE. For example, create the PCMILER_SHORTEST_HAZ_ROUTING external distance engine and set the HAZMAT_ROUTING parameter to Y.Â In this case, OTM will enable the PCMILER engine to consider the hazmat route instead of the default route to move your goods from source to destination locations and calculates the distance accordingly.</p>
+      <p>You must associate the EDE to a rate distance. For example, associate the PCMILER_SHORTEST_HAZ_ROUTING external distance engine to the PCMILER WS LAT LONG rate distance. Add this rate distance to your rate offering (TL-AMERICANFREIGHTER) so that OTM uses this rate offering information while performing a bulk plan on an order.</p>
+      <h3>Mapping Hazmat Item to External Distance Engine Type</h3>
+      <p>Use the <a href="../planning/power_data/25_general/hazmat_ede_mapping.htm">Hazmat External Distance Engine Mapping</a> page to send hazmat information of the order to External Distance Engines.</p>
+      <p>Map the hazmat items to the corresponding hazmat types based on the following external distance engine types:</p>
+      <ul>
+        <li>ALKÂ (PC*MILER Web Service)</li>
+        <li>HERE</li>
+      </ul>
+      <p>To view hazmat types for PC*Miler, see https://maps.alk.com/PCMDoc/SharedMembers#RouteOptions.</p>
+      <p>The table below contains various PC*Miler hazmat types and description.</p>
+      <table title="Max factor Value Table">
+        <tbody>
+          <tr>
+            <th>
+              <p>Mapping Value</p>
+            </th>
+            <th>
+              <p>Description</p>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <p>None</p>
+            </td>
+            <td>
+              <p>Indicates that there is no hazardous material.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>General</p>
+            </td>
+            <td>
+              <p>Indicates general hazardous materials.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Caustic</p>
+            </td>
+            <td>
+              <p>Indicates caustic hazardous materials.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Explosives</p>
+            </td>
+            <td>
+              <p>Indicates explosive hazardous materials.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Flammable</p>
+            </td>
+            <td>
+              <p>Indicates flammable hazardous materials</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Inhalants</p>
+            </td>
+            <td>
+              <p>Indicates that the hazardous materials are inhalants.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Radioactive</p>
+            </td>
+            <td>
+              <p>Indicates radioactive hazardous materials.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <p>The following is a list of HERE hazmat types:</p>
+      <ul>
+        <li>explosive</li>
+        <li>gas</li>
+        <li>flammable</li>
+        <li>combustible</li>
+        <li>organic</li>
+        <li>poison</li>
+        <li>radioActive</li>
+        <li>corrosive</li>
+        <li>poisonousInhalation</li>
+        <li>harmfulToWater</li>
+        <li>other</li>
+      </ul>
+      <h3>Calculating Shipment Distance</h3>
+      <p>After you configure the parameter set and business objects mentioned above, OTM determines the hazmat items on the shipment based on the order configuration and settings in the RUN HAZMAT QUALIFICATION PROCESS parameter. OTM verifies whether there is a mapping between EDE Type and Hazmat Type. Based on the hazmat mapping, OTM verifies if there is an external distance engine available with the Hazmat_Routing parameter marked as Y.</p>
+      <p>For example, create the CANSWITCH.ALK-HAZMAT order release from New Haven to Richmond with the Hazmat item (Calcium Carbide) specified on the packaged item based on hazardous mode (TL) and destination region. When you bulk plan the CANSWITCH.ALK-HAZMAT order release, OTM allows you to select the CANS parameter set ID in which the RUN HAZMAT QUALIFICATION PROCESS parameter is set to True. OTM will look up the hazardous Item on the packaged item based on the transport mode and region, and populate it on the corresponding shipment ship unit line.</p>
+      <p>OTM then calculates the distance by hazmat routing between New Haven to Richmond by considering the hazmat routing of the order as it contains the Calcium Carbide hazmat item. To obtain this distance correctly, the Calcium Carbide hazmat item needs to be mapped to the appropriate hazmat type of the PCMILER_SHORTEST_HAZ_ROUTING external distance engine (with HAZMAT_ROUTING marked as Y) Â which is provided in the rate distance associated to a rate offering by which a shipment is planned.</p>
+    </div>
+    <h2>Related Topics</h2>
+    <p class="LinkList"><a href="../planning/hazmat_manager/create_haz_gen_1.htm">Hazardous Material</a></p>
+    <p class="LinkList"><a href="../planning/hazmat_manager/hazardous_material_settings_and_implications.htm">Hazardous Material Settings and Implications</a></p>
+    <p class="LinkList"><a href="../planning/power_data/rates_and_codes/external_distance_engine_properties.htm">External Distance Engine Parameters</a></p>
+    <script type="text/javascript" language="JavaScript1.2"> //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]></script>
+  
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = ".."
+    gCommonRootRelPath = ".."
+    gTopicId = "31.9_5"
+  
+//]]></script>
+
+
+  <script src="../template/scripts/topicpage.js"></script>
+  <script src="../whxdata/layoutconfig.js"></script>
+  <script src="../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

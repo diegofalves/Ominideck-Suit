@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta name="template" content="../../assets/masterpages/financials.htt">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="date" content="12 19, 2001 5:15:34 PM">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="Planning\rate_manager\exchange_rate_definition.htm">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Demurrage Process Flow</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="how to:demurrage process flow,demurrage">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:14+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Demurrage Process Flow","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Financials</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Demurrage Process Flow</span></h1>
+  <div role="main">
+    <p>Following is the process flow for <a href="about_demurrage.htm">Demurrage</a>.</p>
+    <p style="text-align: center"><img alt="A tracking event is created via the tracking event manager or the a tracking event XML file. Then the Match and Propagation agent turns it into a demurrage transaction. The Calculate Charges action will generate interim accrued changes and monthly settlement reports." border="0" height="600" src="../../assets/images/demurrage_flow.svg" style="border: none;" width="331"></p>
+    <p>Â </p>
+    <h2><a id="Tracking_Events"></a>Tracking Events</h2>
+    <p>Tracking events can be entered via integration or the tracking event manager. Since demurrage charges are time based charges for the extended use of a resource and are typically only considered upon the end of the cycle, you have to first capture the start and end events of the carrier or railroad in order to determine the demurrage start and end times. Using asset tracking or shipment status events sent at different times, OTM will create a single demurrage transaction for a particular resource, location, and SCAC and within specific time period.</p>
+    <p>Configure OTM to listen to all necessary events (based on status code, reason code, source type and reporting SCAC) which in turn will execute the set of agent actions to match and create or update the demurrage transaction. This demurrage transaction will capture information about the resource, location, start and end times, shipment details etc. When the end event is received, it notes the time to stop the demurrage charges.</p>
+    <p>The demurrage transaction creation can be initiated by an event or manually. See <a href="about_demurrage.htm">About Demurrage</a> for details on events. For example:</p>
+    <ul>
+      <li>Freight Cars - Â Events - D, Y, Z</li>
+      <li>Constructive Place must also use the destination city (station) to update the start city (station).</li>
+      <li>Freight Cars â Manual â Car Order Confirmation, Want Date, Ordered In, Ordered Out</li>
+      <li>Intermodal â Events Â - AR, UR, NT, OA</li>
+      <li>Intermodal â Manual â Reservation, Reservation Date</li>
+    </ul>
+    <p>All subsequent events look for a matching demurrage transaction based on reporting SCAC, equipment initial, number, destination station/state, date range and/or bill of lading and update event details on matched demurrage transaction.</p>
+    <h2><span class="Bold"><a id="Setup_Steps"></a>Setup Steps</span></h2>
+    <ul>
+      <li>Define Status Codes and Reason Codes for tracking events (i.e. status code AR, UR, NT, OA, I, AL) or reuse public status code.</li>
+      <li>Define Status Code Profiles, Status Group, Status Group Profile, Responsible Party and Responsibility Party Profile.</li>
+      <li>Link Responsibility party profile to tracking event audit action.</li>
+      <li>Set up agents for Processing Tracking events. Have a separate agent to listen for each event (i.e. status code AR, UR, NT, OA, I, AL). In order to enable quick and easy understanding towards creation of demurrage transaction based on events, there are some <a href="../../agent_manager/tracking_event_public_auto_agents.htm">tracking event public agents</a>. By default, these public agents are not active. Copy, create and activate new agents from these public agents. You can modify or create new agent actions based on your needs.</li>
+    </ul>
+    <h2><span class="Bold"><a id="Processing_Steps"></a>Processing Steps</span></h2>
+    <p>The demurrage management solution in OTM is driven by shipment status events (for example: - CLM/EDI 322). Upon receiving these tracking events via integration, OTM saves the XML content into the transactions and transmission entities. OTM tracking event processing uses the shipment status XML and saves the transaction into the tracking event entity. This publishes the lifetime tracking event â tracking event created, which in turn triggers the actions. See <a href="../../agent_manager/tracking_event_public_auto_agents.htm">Tracking Event Public Automation Agents</a> and <a href="../../agent_manager/agent_actions_by_object/tracking_event_agent_actions.htm">Tracking Event Agent Actions</a>.</p>
+    <p>Once the demurrage event is created or updated, it raises demurrage transaction lifetime events.</p>
+    <p class="Note"><span class="Bold">Note</span>: As part of demurrage, it is possible to raise ordered in and ordered out messages instructing carrier/railroad to move in or out of a particular facility. It is a two step process: a) run the Set Event Status action on a group of demurrage transactions with the appropriate ordered in or ordered out status code and then b) trigger the Send Interface action on a group of demurrage transactions that will send out the XML message to the carrier or railroad.</p>
+    <h2><a id="Match_and_Propagation"></a>Match and Propagation</h2>
+    <p>When the tracking event occurs, a demurrage event is created or updated based on the Create or Update Transaction <a href="../../agent_manager/agent_actions_by_object/tracking_event_agent_actions.htm">Tracking Event agent action</a>.</p>
+    <h2><a id="Demurrage_Transaction_Manager"></a>Demurrage Transaction Manager</h2>
+    <p>Click here for the <a href="../shipment_manager/demurrage_transaction.htm">Demurrage Transaction</a> manager.</p>
+    <h2><a id="Demurrage_Transaction_Charges"></a>Demurrage Transaction Charges</h2>
+    <p>See the <a href="demurrage_transaction_charges.htm">Demurrage Transaction Charges</a> topic for details.</p>
+    <h2><a id="Settlement"></a>Settlement</h2>
+    <p>See the <a href="demurrage_settlement.htm">Demurrage Settlement</a> topic for details on Settlement including interim acrrued charges (liability reports) and monthly settlement reports.</p>
+  </div>
+  <h2><a name="related" id="related"></a>Related Topics</h2>
+  <p class="LinkList"><a href="about_demurrage.htm">About Demurrage</a></p>
+  <p class="LinkList"><a href="demurrage_rule.htm">Demurrage Rules</a></p>
+  <p class="LinkList"><a href="../shipment_manager/demurrage_transaction.htm">Demurrage Transactions</a></p>
+  <p class="LinkList"><a href="../shipment_manager/demurrage_transaction_actions_smartlinks.htm">Demurrage Transaction Actions and SmartLinks</a></p>
+  <p class="LinkList"><a href="../shipment_manager/demurrage_transaction_status.htm">Demurrage Transaction Status</a></p>
+  <p class="LinkList"><a href="../../agent_manager/tracking_event_public_auto_agents.htm">Tracking Event Public Automation Agents</a></p>
+  <p class="LinkList"><a href="../../agent_manager/agent_actions_by_object/tracking_event_agent_actions.htm">Tracking Event Agent Actions</a></p>
+  <p class="LinkList"><a href="demurrage_settlement.htm">Demurrage Settlement</a></p>
+  <p class="LinkList"><a href="../../analysis/report_manager.htm">Report Manager</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "33.0_2"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

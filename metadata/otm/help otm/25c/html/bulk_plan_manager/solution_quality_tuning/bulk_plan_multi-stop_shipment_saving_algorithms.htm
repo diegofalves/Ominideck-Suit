@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta name="template" content="../../assets/masterpages/operational planning.htt">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="Bulk Rating Actions">
+  <meta name="topic-check-list" content="First Draft">
+  <meta name="topic-status" content="Complete">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Bulk Plan Multi-stop Shipment Saving Algorithms</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="bulk plan:savings algorithms,bulk plan:multi-stop shipment savings algorithms">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content><meta name="brsnext" value="bulk_plan_manager/solution_quality_tuning/multi-stop_shipment_complete_enumeration_alg.htm"><meta name="brsprev" value="bulk_plan_manager/solution_quality_tuning/bulk_plan_tuning_multistop_ship_logic.htm">
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Bulk Plan Multi-stop Shipment Saving Algorithms","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Bulk Plan Multi-stop Shipment Saving Algorithms</span></h1>
+  <div role="main">
+    <h2>Savings Algorithm</h2>
+    <p>The savings algorithm works by creating a savings matrix for every pair of shipments that are feasible to combine. The savings is defined as follows:</p>
+    <p>savings = cost of shipments before consolidation â cost of shipment after consolidation</p>
+    <p>Once the savings matrix is created, the pair with the best positive savings is combined and the new savings with the combined shipment with the rest of the shipments is evaluated. This continues until there is no combination that results in positive savings.</p>
+    <p>You can influence the savings value through <a href="../../planning/power_data/planning/logic_configuration_multistop.htm">multi-stop logic configuration parameters</a> and influence the shape and consolidation of the shipments. For example, you can make the shipments with the same <a href="bulk_plan_tuning_order_bundling_logic.htm#order_constraint_ship_with_group">SHIP WITH GROUP</a> attract each other even at the expense of traveling extra distance or incurring extra cost. Similarly, <a href="bulk_plan_tuning_order_bundling_logic.htm#order_priority">order priorities</a> can be used to inflate or deflate the savings value.</p>
+    <p>There are two steps in the savings algorithm:</p>
+    <h3>Step One</h3>
+    <p>The first step is the savings calculation for all pairs of shipments. The savings calculation can be very time consuming. This step can be multi-threaded speeding up the savings calculations. See the help topic on <a href="../performance_tuning/bulk_plan_multi-threading.htm">bulk plan multi-threading</a> for information on how to set up multi-threading.</p>
+    <h3>Step Two</h3>
+    <p>The second step involves choosing the best savings pair and combining the shipments in the pair. Once the new shipment is formed, the old shipments are removed from the savings matrix and savings are calculated for pairing up the newly created shipment with the rest of the shipments in the matrix.</p>
+    <h2>Important Multi-stop Parameters</h2>
+    <p>There are several parameters that influence the performance and quality of multi-stop shipment creation. While there are several such parameters, a few of the very important and often used are listed here:</p>
+    <h3>Multi-stop Cost Savings Check Type</h3>
+    <p>The savings calculations can be sped up by looking at only the distances during the savings calculation. This can be done by turning on the multi-stop logic configuration parameter <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#cost_saving_check">MULTISTOP COST SAVINGS CHECK TYPE</a> to â1. Perform cost savings check after each iteration.â This setting performs distance based savings calculations thus eliminating the need for detailed rating. However, a cost based check is still made whenever two shipments are combined together.</p>
+    <p>When the parameter MULTISTOP COST SAVINGS CHECK TYPE is set to â4. Calculate cost for all paired shipments,â the savings calculations are based on actual costs rather than distances. This causes logic to run longer, but will compute more accurate savings.</p>
+    <p>There are other options, â2. Perform cost savings check at the end of processâ and â3. Do not perform cost savings check.â Â Do not use option 3 at all as it is very important to perform cost savings check. Option 2, performs cost savings check at the very end, but this has a bad side effect. If the cost savings check fails for combining the shipments, then the shipments do not get merged, and they will go unconsolidated. The recommendation is to use option 1 when the costs are proportional to distances or run time is a concern. Otherwise, the recommendation is to use option 4, where cost savings are calculated for each pair of shipments.</p>
+    <p>Following parameter and property settings in OTM provide options to influence multi-stop savings calculations based on the priorities of shipment contents.</p>
+    <ul>
+      <li>Parameter USE PRIORITY IN COST SAVINGS (add link to this parameter)</li>
+      <li>Property <a href="../../properties/glog/business.property.htm#consolidation.multistop.prioritysavingsalgorithm">glog.business.consolidation.multistop.prioritysavingsalgorithm</a></li>
+      <li>Property <a href="../../properties/glog/business.property.htm#consolidation.multistop.priorityaggressiveness">glog.business.consolidation.multistop.priorityagressiveness</a> Â </li>
+    </ul>
+    <h3>Multi-stop Rate Distance ID</h3>
+    <p>It is recommended that you use <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#rate_distance_id">MULTISTOP RATE DISTANCE ID</a> set to Estimate. Using Estimate, the logic uses latitudes and longitudes of locations and estimates the distances. This gives close enough distances to perform the necessary optimization quickly. Using Lookup has the additional overhead of querying the distances from a lookup table, but will give more accurate distances for computations. Using an external distance engine will slow down the process considerably and should be avoided unless that level of accuracy is needed.Â Remember that this setting only influences the distances used during the multi-stop logic. The actual rating and the final shipment are still based on the true distances as specified on the rate.</p>
+    <h2>Types of Savings Algorithms</h2>
+    <p>Savings algorithms come in the following types:</p>
+    <ul>
+      <li>Sequential Savings</li>
+      <li>Concurrent Savings</li>
+      <li>Look Ahead Savings</li>
+      <li>Iterative Savings</li>
+    </ul>
+    <h3>Sequential Savings</h3>
+    <p><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#consolidation_algorithm_type">MULTISTOP CONSOLIDATION ALGORITHM</a> = Sequential Savings</p>
+    <p>In sequential savings, the focus is to complete the formation of one multi-stop shipment before starting a new multi-stop shipment. This is useful when you need to form shipments with higher utilization. In sequential savings, the shipments are consolidated as follows.</p>
+    <ul>
+      <li>Shipment12 = shipment1 + shipment2</li>
+      <li>Shipment123 = Shipment12 + Shipment3</li>
+      <li>Shipment1234 = Shipment123 + Shipment4</li>
+    </ul>
+    <p>The savings are still used to select the next shipment to consolidate.</p>
+    <p>The parameter <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#MULTISTOP_SEQUENTIAL_SAVINGS_SORT_METHOD">MULTISTOP SEQUENTIAL SAVINGS SORT METHOD</a> allows you to choose which method to use in determining the first shipment from which to build a multi-stop shipment using the Sequential Savings merge algorithm.</p>
+    <p>The parameter <a href="../../planning/power_data/planning/logic_configuration_resource_scheduler.htm#RS_PAIRWISE_CONSOLIDATION">RS PAIRWISE CONSOLIDATION</a> provides the option of adding shipment pairs to the work assignment string, instead of individual shipments. Â Â Â </p>
+    <h3>Concurrent Savings (Recommended Option)</h3>
+    <p><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#consolidation_algorithm_type">MULTISTOP CONSOLIDATION ALGORITHM</a> = Concurrent Savings</p>
+    <p>The concurrent savings algorithm works by consolidating the best savings pairs in the order of the savings. At any stage of the multi-stop logic using concurrent savings, there could be several multi-stop shipments that are partially formed. This approach tends to pair up shipments that have big savings. Here is a sample of how the concurrent savings logic might consolidate:</p>
+    <ul>
+      <li>Shipment12 = Shipment1 +Shipment 2</li>
+      <li>Shipment35 = Shipment3 + Shipment5</li>
+      <li>Shipment124 = Shipment12 + Shipment4</li>
+    </ul>
+    <p>Once two shipments are consolidated, they cannot be separated. In the example above, the logic will not create Shipment1234 by separating shipments 3 and 5 and then combining 3 with Shipment124.</p>
+    <h3>Look Ahead Savings</h3>
+    <p><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#consolidation_algorithm_type">MULTISTOP CONSOLIDATION ALGORITHM</a> = Look Ahead</p>
+    <p>There are times when combining two shipments might be more attractive than other pairs. However, Oracle Transportation Management might not combine these shipments. The concurrent savings algorithm described above suffers from the possibility of combining two shipments too early. The look ahead savings algorithm ranks the shipments based on the difference of the savings of the first best pair and second best pair. The shipment that has the greatest difference in savings will be selected and its best pair will be chosen for combining.</p>
+    <h3>Iterative Savings</h3>
+    <p><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#consolidation_algorithm_type">MULTISTOP CONSOLIDATION ALGORITHM</a> = Iterative Savings</p>
+    <p>In this algorithm, OTM increases the search space to look for an optimal route. It follows an approach similar to concurrent savings to form routes at each iteration. This is an iterative algorithm. In each iteration, multistop shipments are generated and considered as a potential candidate for the final result. Finally, the set-covering problem is solved to pick the cheapest solution so that all order releases/order movements are fulfilled.</p>
+    <h4><span class="Bold">Parameters:</span></h4>
+    <ul>
+      <li><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#consolidation_algorithm_type">MULTISTOP CONSOLIDATION ALGORITHM TYPE</a> = Iterative Savings</li>
+      <li><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#ms_colgen_savings_alg_type">MULTISTOP COLGEN SAVINGS ALGORITHM TYPE</a> = &#39;0-Concurrent&#39; (only value supported with Iterative Savings)</li>
+      <li><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#ms_colgen_num_iterations">MULTISTOP COLGEN NUMBER OF ITERATIONS</a> = 5</li>
+      <li><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#MULTISTOP_SAVINGS_COST_TOLERANCE_PERCENTAGE">MULTISTOP SAVINGS COST TOLERANCE PERCENTAGE</a> = 15</li>
+    </ul>
+    <p class="Note"><span class="Bold">Note</span>: Increasing number of iterations increases run-time almost proportionally in most of the cases but also guarantees a better or same quality solution.</p>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="../bulk_plan_performance_and_tuning.htm">Bulk Plan Performance and Tuning Overview</a></p>
+  <p class="LinkList"><a href="bulk_plan_solution_quality_tuning.htm">Bulk Plan Solution Quality Tuning</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_order_bundling_logic.htm">Bulk Plan Tuning Order Bundling Logic</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_direct_shipment_building.htm">Bulk Plan Tuning Direct Shipment Building</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_cont_opt_logic.htm">Bulk Plan Tuning Container Optimization Logic</a></p>
+  <p class="LinkList"><a href="bulk_plan_tuning_continuous_moves_logic.htm">Bulk Plan Tuning Continuous Moves Logic</a></p>
+  <p class="LinkList"><a href="../../assets/docs/bulk_plan_performance_and_tuning_guide.pdf">Bulk Plan Performance and Tuning PDF</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "31.3.4.1.0_2"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

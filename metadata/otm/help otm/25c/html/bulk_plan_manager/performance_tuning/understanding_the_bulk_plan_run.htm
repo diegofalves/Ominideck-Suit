@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="template" content="../../assets/masterpages/operational planning.htt">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="integration\actions\message_hub_actions.htm">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Understanding the Bulk Plan Run</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="bulk plan:understanding the run">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content><meta name="brsnext" value="bulk_plan_manager/performance_tuning/bulk_plan_multi-threading.htm"><meta name="brsprev" value="bulk_plan_manager/performance_tuning/bulk_plan_performance_tuning.htm">
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Understanding the Bulk Plan Run","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Understanding the Bulk Plan Run</span></h1>
+  <div role="main">
+    <p>The <a href="../bulk_plan.htm#Performance">performance tab</a> of the bulk plan manager provides useful information regarding performance.Â Performance metrics are gathered if the number of orders is greater than the value set in the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#minimum_orders_milestone_collection">MINIMUM ORDERS FOR MILESTONE COLLECTION</a>. This parameter is set to 50 by default. To generate the information in the performance tab for smaller bulk plans, you should set this parameter to 1.</p>
+    <p>The following processes in bulk plan have been identified as taking the most time. The next few sections provide typical processes and tips on how to improve performance. Remember that bulk plan run times are dependent on various factors and the problem may be very complex and require the time taken to produce quality solutions.</p>
+    <h2><a name="Key_Process_Steps" id="Key_Process_Steps"></a>Key Process Steps</h2>
+    <h3>Bundle Orders</h3>
+    <p><a href="../solution_quality_tuning/bulk_plan_tuning_order_bundling_logic.htm">Order bundling</a> is typically the first step during a bulk plan run and often includes querying order releases. If you encounter slowness during order bundling, a likely suspect is slow queries. There may be opportunities for tuning the database for faster queries. Order bundling is not multi-threaded and hence the multi-thread settings will not help order bundling performance.</p>
+    <h3>Find Itineraries</h3>
+    <p>The run time during the find itinerary step can be improved by specifying a particular itinerary on the order releases and reducing the need for evaluating different <a href="../data_setup/itineraries_and_bulk_plan.htm">itineraries</a>. The find itineraries step is not multi-threaded.</p>
+    <h3>Direct Shipment Building</h3>
+    <p>Following are some reasons for long <a href="../solution_quality_tuning/bulk_plan_tuning_direct_shipment_building.htm">direct shipment building</a> run times and tips for improving performance.</p>
+    <h3>Complex Itineraries</h3>
+    <p>If there are itineraries that have several legs and each leg has several routing options, carrier options and equipment options, the number of combinations to evaluate will be huge. Reducing the number of available options for routing orders can result in huge performance gains.</p>
+    <h3>Number of Itineraries</h3>
+    <p>Having too many itineraries to consider may negatively impact performance. Reduce the number of itineraries for each order by specifying an itinerary GID on the order releases.</p>
+    <h3>Setup Multi-threading in Planning Build</h3>
+    <p>The shipment building process is multi-threaded. Setting up the right number of threads to take advantage of the processes on the server will improve the overall performance of direct shipment building. See the topic <a href="bulk_plan_multi-threading.htm">Bulk Plan Multi-threading</a> for further information on how to setup multi-thread properties.</p>
+    <h3>True Container Optimization for Performance</h3>
+    <p>The shipment building process invokes container optimization for packing ship units into containers.Â Ensure that there is only one <a href="../solution_quality_tuning/bulk_plan_tuning_cont_opt_logic.htm">container optimization algorithm</a>, one metric, and one objective chosen so that only one container optimization run is performed for each call. Choosing <a href="../solution_quality_tuning/bulk_plan_tuning_cont_opt_logic.htm#multicontainer_mip">Multi-Container MIP</a>, <a href="../solution_quality_tuning/bulk_plan_tuning_cont_opt_logic.htm#column_generation_alg">Column Generation</a>, or <a href="../solution_quality_tuning/bulk_plan_tuning_cont_opt_logic.htm#non_3d_based_heuristics_alg">Enumerative</a> packing could result in significant computational time. Use <a href="../solution_quality_tuning/bulk_plan_tuning_cont_opt_logic.htm#non_3d_based_heuristics_alg">Quick Packing</a> instead.</p>
+    <h3>Multi-Stop Shipments</h3>
+    <p>If the performance issue is during <a href="../solution_quality_tuning/bulk_plan_tuning_multistop_ship_logic.htm">multi-stop shipment building</a>, there are several things that can be done to improve the performance including changing some settings for <a href="../../planning/power_data/planning/logic_configuration_multistop.htm">multi-stop logic configuration parameters</a>.Â </p>
+    <h3>Setup Distance and Time Parameters</h3>
+    <p>Using maximum distance and time between pickup and drop-off stops could significantly improve the run time.Â The following <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#multistop_max_distance">multi-stop logic configuration parameters</a> will help in reducing the overall run times (performance is better for smaller values of these parameters).</p>
+    <ul>
+      <li>MULTISTOP MAX DISTANCE BETWEEN DELIVERIES</li>
+      <li>MULTISTOP MAX DISTANCE BETWEEN PICKUPS</li>
+      <li>MULTISTOP MAX RADIUS FOR DELIVERIES</li>
+      <li>MULTISTOP MAX RADIUS FOR PICKUPS</li>
+      <li>MULTISTOP MAX RADIUS PERCENTAGE FOR DELIVERIES</li>
+      <li>MULTISTOP MAX RADIUS PERCENTAGE FOR PICKUPS</li>
+      <li>MULTISTOP MAX TIME BETWEEN DELIVERIES</li>
+      <li>MULTISTOP MAX TIME BETWEEN PICKUPS</li>
+    </ul>
+    <h3>Avoid Using Computationally Expensive Multi-Stop Options</h3>
+    <ul>
+      <li>Setting the logic configuration parameter <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#cost_saving_check">MULTISTOP COST SAVINGS CHECK TYPE</a> to &quot;4. Calculate cost for all paired shipments,&quot; significantly increases the run time as costing and driving are done for every pair of shipment savings calculations. Instead of using this option, try options 1 or 2, which calculate the costs at the end of the iteration or at the end of the process.</li>
+      <li>When building multi-stop shipments, and selecting the value for the <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#consolidation_algorithm_type">Multistop Consolidation Algorithm Type</a> parameter, avoid using expensive algorithms such as &quot;Complete Enumeration&quot; which cannot scale well to large order sets. Instead, use &quot;Column Generation&quot; if solution quality is important.</li>
+      <li>For the generation of stop sequences, avoid using the Complete Enumeration algorithm:Â 2-Opt or 3-Opt algorithms generally produce great sequences.</li>
+      <li>Avoid setting <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#perform_thorough_sequence_checks">MULTISTOP PERFORM THOROUGH SEQUENCE CHECK</a> to &quot;TRUE&quot;.</li>
+      <li>Use &quot;Estimate&quot; for <a href="../../planning/power_data/planning/logic_configuration_multistop.htm#rate_distance_id">MULTISTOP RATE DISTANCE ID</a>. Using an external rate distance will perform expensive calls to an external engine and thus slow down the multi-stop process.</li>
+    </ul>
+    <h3>Set Up Leg Consolidation Groups</h3>
+    <p>Setting up many leg consolidation groups will create multiple small multi-stop runs rather than one huge run. For example, running 10 multi-stops with 100 order releases each executes a lot faster than running one large multi-stop with 1000 order releases.</p>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="../bulk_plan_performance_and_tuning.htm">Bulk Plan Performance and Tuning Overview</a></p>
+  <p class="LinkList"><a href="bulk_plan_performance_tuning.htm">Bulk Plan Performance Tuning</a></p>
+  <p class="LinkList"><a href="../solution_quality_tuning/bulk_plan_tuning_direct_shipment_building.htm">Bulk Plan Tuning Direct Shipment Building</a></p>
+  <p class="LinkList"><a href="../solution_quality_tuning/bulk_plan_tuning_multistop_ship_logic.htm">Bulk Plan Tuning Multi-stop Shipment Logic</a></p>
+  <p class="LinkList"><a href="../../assets/docs/bulk_plan_performance_and_tuning_guide.pdf">Bulk Plan Performance and Tuning PDF</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "31.3.6.0_2"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>
