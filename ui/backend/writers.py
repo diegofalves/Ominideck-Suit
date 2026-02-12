@@ -9,6 +9,9 @@ from ui.backend.domain_stats import object_domain_map, table_domain_map
 BASE_DIR = Path(__file__).resolve().parents[2]
 PROJECT_PATH = BASE_DIR / "domain/projeto_migracao/projeto_migracao.json"
 DOMAIN_TABLE_STATS_PATH = BASE_DIR / "metadata" / "otm" / "domain_table_statistics.json"
+TABLE_DESCRIPTIONS_PT_BR_PATH = (
+    BASE_DIR / "metadata" / "otm" / "table_descriptions_pt_br.json"
+)
 
 GROUP_ZERO_ID = "SEM_GRUPO"
 LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
@@ -44,6 +47,10 @@ FROM_CLAUSE_TERMINATORS = {
     "INTERSECT",
     "MODEL",
 }
+AUTO_OBJECT_FALLBACK_DESCRIPTION = (
+    "Objeto adicionado automaticamente para garantir cobertura canônica "
+    "das tabelas presentes em domain_table_statistics.json."
+)
 
 
 def _as_object_list(value):
@@ -83,6 +90,43 @@ def _normalize_table_list(raw_values: Any) -> List[str]:
         normalized.append(table_name)
         seen.add(table_name)
     return normalized
+
+
+def _load_table_descriptions_pt_br() -> Dict[str, str]:
+    descriptions: Dict[str, str] = {}
+    try:
+        payload = json.loads(TABLE_DESCRIPTIONS_PT_BR_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return descriptions
+
+    raw_tables = payload.get("tables")
+    if not isinstance(raw_tables, dict):
+        return descriptions
+
+    for table_name, entry in raw_tables.items():
+        normalized_table_name = _normalize_name(table_name)
+        if not normalized_table_name:
+            continue
+
+        description = ""
+        if isinstance(entry, dict):
+            description = str(entry.get("description_pt_br") or "").strip()
+        elif isinstance(entry, str):
+            description = entry.strip()
+
+        descriptions[normalized_table_name] = description
+
+    return descriptions
+
+
+def _resolve_table_description_pt_br(table_name: str) -> str:
+    normalized_table_name = _normalize_name(table_name)
+    if not normalized_table_name:
+        return AUTO_OBJECT_FALLBACK_DESCRIPTION
+
+    descriptions = _load_table_descriptions_pt_br()
+    description = str(descriptions.get(normalized_table_name) or "").strip()
+    return description or AUTO_OBJECT_FALLBACK_DESCRIPTION
 
 
 def _slug_token(value: Any, fallback: str) -> str:
@@ -257,10 +301,7 @@ def _build_auto_group_zero_object(table_name: str, sequence: int, domain_name: O
 
     payload: Dict[str, Any] = {
         "name": auto_name,
-        "description": (
-            "Objeto adicionado automaticamente para garantir cobertura canônica "
-            "das tabelas presentes em domain_table_statistics.json."
-        ),
+        "description": _resolve_table_description_pt_br(table_name),
         "object_type": table_name,
         "otm_table": table_name,
         "otm_related_tables": [],

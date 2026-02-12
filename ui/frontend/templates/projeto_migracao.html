@@ -1332,8 +1332,9 @@
               {% set row_number = namespace(value=(obj_index + 1)|string, is_subtable=false) %}
               {% set object_table = (obj.object_type or obj.otm_table or "")|string|upper %}
               {% set object_domain = (obj.domainName or obj.domain or "")|string|upper %}
+              {% set row_meta = namespace(parent_object_index=obj_index, has_subtable_children=false) %}
               {% if object_table %}
-                {% set relation = namespace(found=false, parent_index=0, sub_index=0) %}
+                {% set relation = namespace(found=false, parent_index=0, sub_index=0, parent_object_index=obj_index) %}
                 {% for parent_obj in current_group.data.objects %}
                   {% if not relation.found %}
                     {% set parent_subtables = parent_obj.otm_subtables if parent_obj.otm_subtables is iterable and parent_obj.otm_subtables is not string else [] %}
@@ -1353,6 +1354,7 @@
                         {% set relation.found = true %}
                         {% set relation.parent_index = loop.index %}
                         {% set relation.sub_index = parent_sub_counter.match %}
+                        {% set relation.parent_object_index = loop.index0 %}
                       {% endif %}
                     {% endif %}
                   {% endif %}
@@ -1360,10 +1362,47 @@
                 {% if relation.found %}
                   {% set row_number.value = relation.parent_index ~ "." ~ relation.sub_index %}
                   {% set row_number.is_subtable = true %}
+                  {% set row_meta.parent_object_index = relation.parent_object_index %}
+                {% else %}
+                  {% set parent_subtables = obj.otm_subtables if obj.otm_subtables is iterable and obj.otm_subtables is not string else [] %}
+                  {% if parent_subtables %}
+                    {% for possible_child in current_group.data.objects %}
+                      {% set possible_child_idx = loop.index0 %}
+                      {% if possible_child_idx != obj_index %}
+                        {% set possible_child_table = (possible_child.object_type or possible_child.otm_table or "")|string|upper %}
+                        {% set possible_child_domain = (possible_child.domainName or possible_child.domain or "")|string|upper %}
+                        {% if possible_child_table %}
+                          {% for candidate_subtable in parent_subtables %}
+                            {% set candidate_subtable_name = (candidate_subtable|string|upper) %}
+                            {% if candidate_subtable_name == possible_child_table and (not object_domain or not possible_child_domain or object_domain == possible_child_domain) %}
+                              {% set row_meta.has_subtable_children = true %}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
                 {% endif %}
               {% endif %}
-              <tr class="table-row {% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}">
+              <tr
+                class="table-row {% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}"
+                data-parent-owner-key="parent-{{ row_meta.parent_object_index }}"
+                data-is-subtable="{% if row_number.is_subtable %}1{% else %}0{% endif %}"
+              >
                 <td style="padding: 10px 12px; color: #6c757d; font-weight: 500; {% if row_number.is_subtable %}text-align: left; padding-left: 18px;{% else %}text-align: center;{% endif %}">
+                  {% if not row_number.is_subtable and row_meta.has_subtable_children %}
+                    <button
+                      type="button"
+                      class="subtable-toggle-btn"
+                      data-parent-key="parent-{{ obj_index }}"
+                      data-expanded="false"
+                      style="border: none; background: transparent; color: #374151; font-size: 12px; cursor: pointer; padding: 0 4px 0 0; margin: 0;"
+                      title="Expandir subtabelas"
+                      aria-label="Expandir subtabelas"
+                    >▸</button>
+                  {% elif row_number.is_subtable %}
+                    <span style="display: inline-block; width: 12px;"></span>
+                  {% endif %}
                   {{ row_number.value }}
                 </td>
                 <td style="padding: 10px 12px;">
@@ -2198,6 +2237,80 @@
     const relatedTablesSelector = document.getElementById("related-tables-selector");
     const relatedTablesHiddenInputs = document.getElementById("related-tables-hidden-inputs");
 
+    const initializeSubtableToggles = () => {
+      const toggleButtons = Array.from(
+        document.querySelectorAll(".subtable-toggle-btn[data-parent-key]")
+      );
+      if (!toggleButtons.length) {
+        return;
+      }
+
+      const storagePrefix = activeGroupIdFromPage
+        ? `omni.subtableToggle.${activeGroupIdFromPage}.`
+        : "omni.subtableToggle.";
+
+      const applySubtableVisibility = (toggleButton, isExpanded) => {
+        const parentKey = String(toggleButton.dataset.parentKey || "").trim();
+        if (!parentKey) {
+          return;
+        }
+
+        const subtableRows = Array.from(
+          document.querySelectorAll(
+            `tr[data-parent-owner-key="${parentKey}"][data-is-subtable="1"]`
+          )
+        );
+
+        if (!subtableRows.length) {
+          toggleButton.style.visibility = "hidden";
+          return;
+        }
+
+        toggleButton.dataset.expanded = isExpanded ? "true" : "false";
+        toggleButton.textContent = isExpanded ? "▾" : "▸";
+        toggleButton.title = isExpanded ? "Recolher subtabelas" : "Expandir subtabelas";
+        toggleButton.setAttribute(
+          "aria-label",
+          isExpanded ? "Recolher subtabelas" : "Expandir subtabelas"
+        );
+
+        subtableRows.forEach((row) => {
+          row.style.display = isExpanded ? "" : "none";
+        });
+      };
+
+      toggleButtons.forEach((toggleButton) => {
+        const parentKey = String(toggleButton.dataset.parentKey || "").trim();
+        if (!parentKey) {
+          return;
+        }
+
+        let initialExpanded = false;
+        try {
+          const storedState = window.sessionStorage.getItem(storagePrefix + parentKey);
+          initialExpanded = storedState === "1";
+        } catch (err) {
+          initialExpanded = false;
+        }
+
+        applySubtableVisibility(toggleButton, initialExpanded);
+
+        toggleButton.addEventListener("click", () => {
+          const currentExpanded = toggleButton.dataset.expanded !== "false";
+          const nextExpanded = !currentExpanded;
+          applySubtableVisibility(toggleButton, nextExpanded);
+          try {
+            window.sessionStorage.setItem(
+              storagePrefix + parentKey,
+              nextExpanded ? "1" : "0"
+            );
+          } catch (err) {
+            // Ignora indisponibilidade de storage no browser.
+          }
+        });
+      });
+    };
+
     const normalizeTableName = (value) => String(value || "").trim().toUpperCase();
     const normalizeDomainName = (value) => String(value || "").trim().toUpperCase();
     const domainsOverlap = (domainA, domainB) => !domainA || !domainB || domainA === domainB;
@@ -2618,6 +2731,7 @@
       objectDomainInput.addEventListener("change", syncRelatedTablesFromQuery);
     }
     syncRelatedTablesFromQuery();
+    initializeSubtableToggles();
 
     const updateButton = document.getElementById("update-tables-btn");
     const statusLabel = document.getElementById("update-tables-status");
