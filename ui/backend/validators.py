@@ -114,6 +114,286 @@ def _collect_ignored_tables(groups: List[Dict[str, Any]]) -> Set[str]:
     return ignored
 
 
+def _domains_overlap(domain_a: str, domain_b: str) -> bool:
+    token_a = _normalize_otm_name(domain_a)
+    token_b = _normalize_otm_name(domain_b)
+    return not token_a or not token_b or token_a == token_b
+
+
+def _normalize_subtable_list(values: Any) -> List[str]:
+    normalized: List[str] = []
+    seen: Set[str] = set()
+    if not isinstance(values, list):
+        return normalized
+
+    for value in values:
+        token = _normalize_otm_name(value)
+        if not token or token in seen:
+            continue
+        normalized.append(token)
+        seen.add(token)
+    return normalized
+
+
+def _collect_subtable_constraint_errors(groups: List[Dict[str, Any]]) -> List[str]:
+    errors: List[str] = []
+    owners_by_subtable: Dict[str, List[Dict[str, Any]]] = {}
+    object_rows: List[Dict[str, Any]] = []
+
+    for g_idx, group in enumerate(groups, start=1):
+        if not isinstance(group, dict):
+            continue
+        group_label = str(group.get("label") or group.get("group_id") or f"Grupo {g_idx}")
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for o_idx, obj in enumerate(objects, start=1):
+            if not isinstance(obj, dict):
+                continue
+            if _is_ignored_object(obj):
+                continue
+
+            parent_table = _normalize_otm_name(obj.get("object_type") or obj.get("otm_table"))
+            if not parent_table:
+                continue
+            parent_domain = _normalize_otm_name(obj.get("domainName") or obj.get("domain"))
+            parent_name = str(obj.get("name") or parent_table)
+            parent_subtables = _normalize_subtable_list(obj.get("otm_subtables"))
+
+            row_ref = {
+                "group_index": g_idx,
+                "object_index": o_idx,
+                "group_label": group_label,
+                "name": parent_name,
+                "table": parent_table,
+                "domain": parent_domain,
+                "subtables": parent_subtables,
+            }
+            object_rows.append(row_ref)
+
+            for subtable in parent_subtables:
+                if subtable == parent_table:
+                    errors.append(
+                        f"Grupo {g_idx} / Objeto {o_idx}: tabela {parent_table} não pode ser subtabela de si mesma."
+                    )
+                    continue
+
+                bucket = owners_by_subtable.setdefault(subtable, [])
+                conflict = None
+                for owner in bucket:
+                    same_row = (
+                        owner["group_index"] == g_idx
+                        and owner["object_index"] == o_idx
+                    )
+                    if same_row:
+                        continue
+                    if _domains_overlap(owner["domain"], parent_domain):
+                        conflict = owner
+                        break
+
+                if conflict:
+                    errors.append(
+                        "Conflito de subtabela: "
+                        f"{subtable} já está vinculada a "
+                        f"'{conflict['name']}' ({conflict['group_label']}) "
+                        f"e não pode ser vinculada também a '{parent_name}' ({group_label}). "
+                        "Remova o vínculo anterior antes de redefinir."
+                    )
+                    continue
+
+                bucket.append(
+                    {
+                        "group_index": g_idx,
+                        "object_index": o_idx,
+                        "group_label": group_label,
+                        "name": parent_name,
+                        "table": parent_table,
+                        "domain": parent_domain,
+                    }
+                )
+
+    # Se uma tabela está vinculada como subtabela, o item dessa tabela
+    # não pode atuar como tabela principal com suas próprias subtabelas.
+    for row in object_rows:
+        if not row["subtables"]:
+            continue
+
+        current_table = row["table"]
+        current_domain = row["domain"]
+        owners = owners_by_subtable.get(current_table, [])
+        if not owners:
+            continue
+
+        for owner in owners:
+            same_row = (
+                owner["group_index"] == row["group_index"]
+                and owner["object_index"] == row["object_index"]
+            )
+            if same_row:
+                continue
+            if not _domains_overlap(owner["domain"], current_domain):
+                continue
+
+            errors.append(
+                "Conflito de hierarquia: "
+                f"'{row['name']}' ({row['group_label']}) está definido com subtabelas, "
+                f"mas sua tabela {current_table} já é subtabela de "
+                f"'{owner['name']}' ({owner['group_label']}). "
+                "Remova o vínculo anterior para permitir nova hierarquia."
+            )
+            break
+
+    return errors
+
+
+def validate_subtable_constraints(domain: Dict[str, Any]) -> None:
+    groups = domain.get("groups", [])
+    if not isinstance(groups, list):
+        return
+    errors = _collect_subtable_constraint_errors(groups)
+    if errors:
+        raise DomainValidationError(errors)
+
+
+def validate_subtable_constraints_for_object(
+    domain: Dict[str, Any],
+    target_group_id: str,
+    target_object_index: int,
+) -> None:
+    groups = domain.get("groups", [])
+    if not isinstance(groups, list):
+        return
+
+    target_group_token = _normalize_otm_name(target_group_id)
+    target_idx = int(target_object_index)
+
+    target_obj: Optional[Dict[str, Any]] = None
+    target_group_label = ""
+    target_group_number = 0
+    target_object_number = 0
+    owners_by_subtable: Dict[str, List[Dict[str, Any]]] = {}
+    principal_by_table: Dict[str, List[Dict[str, Any]]] = {}
+
+    for g_idx, group in enumerate(groups, start=1):
+        if not isinstance(group, dict):
+            continue
+        group_token = _normalize_otm_name(group.get("group_id") or group.get("migration_group_id"))
+        group_label = str(group.get("label") or group.get("group_id") or f"Grupo {g_idx}")
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        for o_idx, obj in enumerate(objects, start=1):
+            if not isinstance(obj, dict):
+                continue
+            if _is_ignored_object(obj):
+                continue
+
+            is_target = group_token == target_group_token and (o_idx - 1) == target_idx
+            table_name = _normalize_otm_name(obj.get("object_type") or obj.get("otm_table"))
+            if not table_name:
+                continue
+            domain_name = _normalize_otm_name(obj.get("domainName") or obj.get("domain"))
+            object_name = str(obj.get("name") or table_name)
+            subtables = _normalize_subtable_list(obj.get("otm_subtables"))
+
+            if is_target:
+                target_obj = obj
+                target_group_label = group_label
+                target_group_number = g_idx
+                target_object_number = o_idx
+                continue
+
+            if subtables:
+                principal_by_table.setdefault(table_name, []).append(
+                    {
+                        "group_label": group_label,
+                        "name": object_name,
+                        "table": table_name,
+                        "domain": domain_name,
+                    }
+                )
+
+            for subtable in subtables:
+                if subtable == table_name:
+                    continue
+                owners_by_subtable.setdefault(subtable, []).append(
+                    {
+                        "group_label": group_label,
+                        "name": object_name,
+                        "table": table_name,
+                        "domain": domain_name,
+                    }
+                )
+
+    if target_obj is None:
+        return
+
+    target_table = _normalize_otm_name(target_obj.get("object_type") or target_obj.get("otm_table"))
+    target_domain = _normalize_otm_name(target_obj.get("domainName") or target_obj.get("domain"))
+    target_name = str(target_obj.get("name") or target_table or "Objeto")
+    target_subtables = _normalize_subtable_list(target_obj.get("otm_subtables"))
+    errors: List[str] = []
+
+    for subtable in target_subtables:
+        if subtable == target_table:
+            errors.append(
+                f"Grupo {target_group_number} / Objeto {target_object_number}: "
+                f"tabela {target_table} não pode ser subtabela de si mesma."
+            )
+            continue
+
+        owners = owners_by_subtable.get(subtable, [])
+        owner_conflict = next(
+            (owner for owner in owners if _domains_overlap(owner["domain"], target_domain)),
+            None,
+        )
+        if owner_conflict:
+            errors.append(
+                "Conflito de subtabela: "
+                f"{subtable} já está vinculada a "
+                f"'{owner_conflict['name']}' ({owner_conflict['group_label']}). "
+                "Remova o vínculo anterior antes de redefinir."
+            )
+            continue
+
+        principal_conflicts = principal_by_table.get(subtable, [])
+        principal_conflict = next(
+            (
+                owner
+                for owner in principal_conflicts
+                if _domains_overlap(owner["domain"], target_domain)
+            ),
+            None,
+        )
+        if principal_conflict:
+            errors.append(
+                "Conflito de hierarquia: "
+                f"{subtable} já atua como tabela principal em "
+                f"'{principal_conflict['name']}' ({principal_conflict['group_label']}). "
+                "Remova o vínculo anterior antes de reutilizar como subtabela."
+            )
+
+    if target_subtables and target_table:
+        owner_conflicts = owners_by_subtable.get(target_table, [])
+        owner_conflict = next(
+            (owner for owner in owner_conflicts if _domains_overlap(owner["domain"], target_domain)),
+            None,
+        )
+        if owner_conflict:
+            errors.append(
+                "Conflito de hierarquia: "
+                f"'{target_name}' ({target_group_label}) está definido com subtabelas, "
+                f"mas sua tabela {target_table} já é subtabela de "
+                f"'{owner_conflict['name']}' ({owner_conflict['group_label']}). "
+                "Remova o vínculo anterior para permitir nova hierarquia."
+            )
+
+    if errors:
+        raise DomainValidationError(errors)
+
+
 def validate_project(domain):
     errors = []
 
@@ -215,6 +495,9 @@ def validate_project(domain):
                     errors.append(
                         f"Grupo {g_idx} / Objeto {o_idx}: {schema_error}"
                     )
+
+    # Regras de subtabelas:
+    errors.extend(_collect_subtable_constraint_errors(groups))
 
     # Regra canônica de processo:
     # cada tabela OTM presente no projeto deve estar associada a >= 1 objeto.

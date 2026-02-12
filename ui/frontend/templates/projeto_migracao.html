@@ -947,7 +947,29 @@
       {% set current_object = current_group_ctx.data.objects[edit_object_index] %}
     {% endif %}
   {% else %}
+    {% set current_group_ctx = namespace(data=none) %}
+    {% set edit_object_index = -1 %}
     {% set current_object = none %}
+  {% endif %}
+
+  {% set current_item_is_subtable = namespace(value=false) %}
+  {% if edit_object_index >= 0 and current_object and current_group_ctx.data and current_group_ctx.data.objects %}
+    {% set current_item_table = (current_object.object_type or current_object.otm_table or "")|string|trim|upper %}
+    {% set current_item_domain = (current_object.domainName or current_object.domain or "")|string|trim|upper %}
+    {% if current_item_table %}
+      {% for parent_candidate in current_group_ctx.data.objects %}
+        {% if not current_item_is_subtable.value and loop.index0 != edit_object_index %}
+          {% set parent_candidate_domain = (parent_candidate.domainName or parent_candidate.domain or "")|string|trim|upper %}
+          {% set parent_candidate_subtables = parent_candidate.otm_subtables if parent_candidate.otm_subtables is iterable and parent_candidate.otm_subtables is not string else [] %}
+          {% for parent_candidate_subtable in parent_candidate_subtables %}
+            {% set parent_candidate_subtable_name = (parent_candidate_subtable|string|trim|upper) %}
+            {% if parent_candidate_subtable_name == current_item_table and (not parent_candidate_domain or not current_item_domain or parent_candidate_domain == current_item_domain) %}
+              {% set current_item_is_subtable.value = true %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
   {% endif %}
 
   <!-- ========================= -->
@@ -1233,7 +1255,7 @@
         <table class="group-objects-table" style="border-collapse: collapse; width: 100%; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
           <thead>
             <tr style="background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%); border-bottom: 2px solid #dee2e6;">
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 40px;">#</th>
+              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 72px;">#</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 176px;">Nome Funcional</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 324px;">Descrição Funcional</th>
               <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 170px;">Tabela OTM</th>
@@ -1341,13 +1363,10 @@
                 {% endif %}
               {% endif %}
               <tr class="table-row {% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}">
-                <td style="padding: 10px 12px; text-align: center; color: #6c757d; font-weight: 500;">
+                <td style="padding: 10px 12px; color: #6c757d; font-weight: 500; {% if row_number.is_subtable %}text-align: left; padding-left: 18px;{% else %}text-align: center;{% endif %}">
                   {{ row_number.value }}
                 </td>
                 <td style="padding: 10px 12px;">
-                  {% if row_number.is_subtable %}
-                    <span style="display: inline-block; color: #6b7280; margin-right: 6px;">↳</span>
-                  {% endif %}
                   <strong style="color: #212529;">{{ obj.name or "Sem nome" }}</strong>
                 </td>
                 <td style="padding: 10px 12px; color: #495057;">
@@ -1359,15 +1378,9 @@
                 </td>
                 <td style="padding: 10px 12px; color: #495057;">
                   {% set primary_table = obj.otm_table or obj.object_type or obj.type or "N/A" %}
-                  {% set subtables = obj.otm_subtables if obj.otm_subtables is iterable and obj.otm_subtables is not string else [] %}
                   <span style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: 500; color: #0066cc;">
                     {{ primary_table }}
                   </span>
-                  {% if subtables %}
-                    <div style="margin-top: 4px; font-size: 10px; color: #6b7280; line-height: 1.2;">
-                      Subtabelas: {{ subtables | join(", ") }}
-                    </div>
-                  {% endif %}
                 </td>
                 <td style="padding: 10px 12px; color: #495057;">
                   {% if obj.domainName or obj.domain %}
@@ -1389,67 +1402,87 @@
                 </td>
                 <td style="padding: 10px 14px; text-align: center; color: #495057;">{{ obj.responsible or "-" }}</td>
                 <td style="padding: 10px 12px; text-align: center;">
-                  {% if obj.status and obj.status.documentation %}
-                    <span class="badge-status {% if obj.status.documentation == 'DONE' %}badge-status-done{% elif obj.status.documentation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.documentation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
-                      {% if obj.status.documentation == 'DONE' %}✓
-                      {% elif obj.status.documentation == 'IN_PROGRESS' %}⏳
-                      {% elif obj.status.documentation == 'NOT_STARTED' %}○
-                      {% else %}○{% endif %}
-                    </span>
+                  {% if row_number.is_subtable %}
+                    <span style="font-size: 11px; color: #adb5bd;">&nbsp;</span>
                   {% else %}
-                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% if obj.status and obj.status.documentation %}
+                      <span class="badge-status {% if obj.status.documentation == 'DONE' %}badge-status-done{% elif obj.status.documentation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.documentation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                        {% if obj.status.documentation == 'DONE' %}✓
+                        {% elif obj.status.documentation == 'IN_PROGRESS' %}⏳
+                        {% elif obj.status.documentation == 'NOT_STARTED' %}○
+                        {% else %}○{% endif %}
+                      </span>
+                    {% else %}
+                      <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% endif %}
                   {% endif %}
                 </td>
                 <td style="padding: 10px 12px; text-align: center;">
-                  {% if obj.status and obj.status.migration_project %}
-                    <span class="badge-status {% if obj.status.migration_project == 'DONE' %}badge-status-done{% elif obj.status.migration_project == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.migration_project == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
-                      {% if obj.status.migration_project == 'DONE' %}✓
-                      {% elif obj.status.migration_project == 'IN_PROGRESS' %}⏳
-                      {% elif obj.status.migration_project == 'NOT_STARTED' %}○
-                      {% else %}○{% endif %}
-                    </span>
+                  {% if row_number.is_subtable %}
+                    <span style="font-size: 11px; color: #adb5bd;">&nbsp;</span>
                   {% else %}
-                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% if obj.status and obj.status.migration_project %}
+                      <span class="badge-status {% if obj.status.migration_project == 'DONE' %}badge-status-done{% elif obj.status.migration_project == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.migration_project == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                        {% if obj.status.migration_project == 'DONE' %}✓
+                        {% elif obj.status.migration_project == 'IN_PROGRESS' %}⏳
+                        {% elif obj.status.migration_project == 'NOT_STARTED' %}○
+                        {% else %}○{% endif %}
+                      </span>
+                    {% else %}
+                      <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% endif %}
                   {% endif %}
                 </td>
                 <td style="padding: 10px 12px; text-align: center;">
-                  {% if obj.status and obj.status.export %}
-                    <span class="badge-status {% if obj.status.export == 'DONE' %}badge-status-done{% elif obj.status.export == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.export == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
-                      {% if obj.status.export == 'DONE' %}✓
-                      {% elif obj.status.export == 'IN_PROGRESS' %}⏳
-                      {% elif obj.status.export == 'NOT_STARTED' %}○
-                      {% else %}○{% endif %}
-                    </span>
+                  {% if row_number.is_subtable %}
+                    <span style="font-size: 11px; color: #adb5bd;">&nbsp;</span>
                   {% else %}
-                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% if obj.status and obj.status.export %}
+                      <span class="badge-status {% if obj.status.export == 'DONE' %}badge-status-done{% elif obj.status.export == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.export == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                        {% if obj.status.export == 'DONE' %}✓
+                        {% elif obj.status.export == 'IN_PROGRESS' %}⏳
+                        {% elif obj.status.export == 'NOT_STARTED' %}○
+                        {% else %}○{% endif %}
+                      </span>
+                    {% else %}
+                      <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% endif %}
                   {% endif %}
                 </td>
                 <td style="padding: 10px 12px; text-align: center;">
-                  {% if obj.status and obj.status.deploy %}
-                    <span class="badge-status {% if obj.status.deploy == 'DONE' %}badge-status-done{% elif obj.status.deploy == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.deploy == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
-                      {% if obj.status.deploy == 'DONE' %}✓
-                      {% elif obj.status.deploy == 'IN_PROGRESS' %}⏳
-                      {% elif obj.status.deploy == 'NOT_STARTED' %}○
-                      {% else %}○{% endif %}
-                    </span>
+                  {% if row_number.is_subtable %}
+                    <span style="font-size: 11px; color: #adb5bd;">&nbsp;</span>
                   {% else %}
-                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% if obj.status and obj.status.deploy %}
+                      <span class="badge-status {% if obj.status.deploy == 'DONE' %}badge-status-done{% elif obj.status.deploy == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.deploy == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                        {% if obj.status.deploy == 'DONE' %}✓
+                        {% elif obj.status.deploy == 'IN_PROGRESS' %}⏳
+                        {% elif obj.status.deploy == 'NOT_STARTED' %}○
+                        {% else %}○{% endif %}
+                      </span>
+                    {% else %}
+                      <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% endif %}
                   {% endif %}
                 </td>
                 <td style="padding: 10px 12px; text-align: center;">
-                  {% if obj.status and obj.status.validation %}
-                    <span class="badge-status {% if obj.status.validation == 'DONE' %}badge-status-done{% elif obj.status.validation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.validation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
-                      {% if obj.status.validation == 'DONE' %}✓
-                      {% elif obj.status.validation == 'IN_PROGRESS' %}⏳
-                      {% elif obj.status.validation == 'NOT_STARTED' %}○
-                      {% else %}○{% endif %}
-                    </span>
+                  {% if row_number.is_subtable %}
+                    <span style="font-size: 11px; color: #adb5bd;">&nbsp;</span>
                   {% else %}
-                    <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% if obj.status and obj.status.validation %}
+                      <span class="badge-status {% if obj.status.validation == 'DONE' %}badge-status-done{% elif obj.status.validation == 'IN_PROGRESS' %}badge-status-in-progress{% elif obj.status.validation == 'NOT_STARTED' %}badge-status-not-started{% else %}badge-status-default{% endif %}">
+                        {% if obj.status.validation == 'DONE' %}✓
+                        {% elif obj.status.validation == 'IN_PROGRESS' %}⏳
+                        {% elif obj.status.validation == 'NOT_STARTED' %}○
+                        {% else %}○{% endif %}
+                      </span>
+                    {% else %}
+                      <span style="color: #adb5bd; font-size: 11px;">-</span>
+                    {% endif %}
                   {% endif %}
                 </td>
                 <td class="actions-cell">
-                  <button type="button" class="icon-btn" onclick="submitProjectAction({'action': 'load_object', 'edit_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar item">✏️</button><button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover item">🗑️</button>
+                  <button type="button" class="icon-btn" onclick="submitProjectAction({'action': 'load_object', 'edit_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar item">✏️</button>{% if not row_number.is_subtable %}<button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover item">🗑️</button>{% endif %}
                 </td>
               </tr>
             {% endfor %}
@@ -1533,12 +1566,20 @@
 
         <div>
           <label><strong>Tabela OTM *</strong></label>
+          {% if current_item_is_subtable.value %}
+            <input
+              type="hidden"
+              name="object_type"
+              value="{{ (current_object.object_type or current_object.otm_table) if current_object else '' }}"
+            >
+          {% endif %}
           <select
             name="object_type"
             id="object_type"
             class="form-control object-type-selector"
             required
             style="width: 100%;"
+            {% if current_item_is_subtable.value %}disabled{% endif %}
             {% if current_object and current_object.object_type %}
               data-current-type="{{ current_object.object_type }}"
             {% endif %}
@@ -1555,7 +1596,8 @@
             required
             placeholder="Ex: BAU"
             value="{{ (current_object.domainName or current_object.domain) if current_object else '' }}"
-            style="width: 100%;"
+            style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}"
+            {% if current_item_is_subtable.value %}readonly{% endif %}
           >
           <datalist id="domain-name-list">
             {% for domain in data.domain_stats.domain_names %}
@@ -1590,71 +1632,76 @@
       </div>
 
       <!-- ========================================== -->
-      <!-- STATUS (sempre visível) - GRID LAYOUT     -->
+      <!-- STATUS                                    -->
       <!-- ========================================== -->
       <h4 style="margin-top: 12px;">Status e Configuração</h4>
-      
-      <div class="object-edit-grid-5" style="margin-bottom: 12px;">
-        <div>
-          <label>📝 Documentação</label>
-          <select name="status_documentation">
-            {% for opt_key, opt_label in enums.status.items() %}
-              <option value="{{ opt_key }}" 
-                {% if current_object and current_object.status and current_object.status.documentation == opt_key %}selected{% endif %}>
-                {{ opt_label }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
+      {% if not current_item_is_subtable.value %}
+        <div class="object-edit-grid-5" style="margin-bottom: 12px;">
+          <div>
+            <label>📝 Documentação</label>
+            <select name="status_documentation">
+              {% for opt_key, opt_label in enums.status.items() %}
+                <option value="{{ opt_key }}" 
+                  {% if current_object and current_object.status and current_object.status.documentation == opt_key %}selected{% endif %}>
+                  {{ opt_label }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
 
-        <div>
-          <label>📦 Migration Project</label>
-          <select name="status_migration_project">
-            {% for opt_key, opt_label in enums.status.items() %}
-              <option value="{{ opt_key }}" 
-                {% if current_object and current_object.status and current_object.status.migration_project == opt_key %}selected{% endif %}>
-                {{ opt_label }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
+          <div>
+            <label>📦 Migration Project</label>
+            <select name="status_migration_project">
+              {% for opt_key, opt_label in enums.status.items() %}
+                <option value="{{ opt_key }}" 
+                  {% if current_object and current_object.status and current_object.status.migration_project == opt_key %}selected{% endif %}>
+                  {{ opt_label }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
 
-        <div>
-          <label>💾 Exportação</label>
-          <select name="status_export">
-            {% for opt_key, opt_label in enums.status.items() %}
-              <option value="{{ opt_key }}" 
-                {% if current_object and current_object.status and current_object.status.export == opt_key %}selected{% endif %}>
-                {{ opt_label }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
+          <div>
+            <label>💾 Exportação</label>
+            <select name="status_export">
+              {% for opt_key, opt_label in enums.status.items() %}
+                <option value="{{ opt_key }}" 
+                  {% if current_object and current_object.status and current_object.status.export == opt_key %}selected{% endif %}>
+                  {{ opt_label }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
 
-        <div>
-          <label>🚀 Deploy</label>
-          <select name="status_deploy">
-            {% for opt_key, opt_label in enums.status.items() %}
-              <option value="{{ opt_key }}" 
-                {% if current_object and current_object.status and current_object.status.deploy == opt_key %}selected{% endif %}>
-                {{ opt_label }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
+          <div>
+            <label>🚀 Deploy</label>
+            <select name="status_deploy">
+              {% for opt_key, opt_label in enums.status.items() %}
+                <option value="{{ opt_key }}" 
+                  {% if current_object and current_object.status and current_object.status.deploy == opt_key %}selected{% endif %}>
+                  {{ opt_label }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
 
-        <div>
-          <label>✅ Validação</label>
-          <select name="status_validation">
-            {% for opt_key, opt_label in enums.status.items() %}
-              <option value="{{ opt_key }}" 
-                {% if current_object and current_object.status and current_object.status.validation == opt_key %}selected{% endif %}>
-                {{ opt_label }}
-              </option>
-            {% endfor %}
-          </select>
+          <div>
+            <label>✅ Validação</label>
+            <select name="status_validation">
+              {% for opt_key, opt_label in enums.status.items() %}
+                <option value="{{ opt_key }}" 
+                  {% if current_object and current_object.status and current_object.status.validation == opt_key %}selected{% endif %}>
+                  {{ opt_label }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
         </div>
-      </div>
+      {% else %}
+        <p style="margin: 0 0 12px 0; font-size: 12px; color: #6b7280;">
+          Status herdado da tabela principal. Para alterar, edite o item pai.
+        </p>
+      {% endif %}
 
       <!-- ========================================== -->
       <!-- Informacoes Tecnicas e Metadados         -->
@@ -1687,12 +1734,21 @@
           <p style="font-size: 11px; color: #6b7280; margin: 6px 0 0 0;">
             Marque como subtabela apenas as tabelas relacionadas que devem entrar no cache deste item.
           </p>
+          {% if current_item_is_subtable.value %}
+            <p style="font-size: 11px; color: #6b7280; margin: 4px 0 0 0;">
+              Subtabelas herdam as tabelas relacionadas do item principal.
+            </p>
+          {% endif %}
 
         </div>
 
         <div>
           <label>🚀 Tipo de Deploy</label>
-          <select name="object_deployment_type" style="width: 100%;">
+          <select
+            name="object_deployment_type"
+            style="width: 100%;"
+            {% if current_item_is_subtable.value %}disabled{% endif %}
+          >
             <option value="" {% if not current_object or not current_object.deployment_type %}selected{% endif %}>-- Selecione --</option>
             {% for opt in enums.deployment_type %}
               <option value="{{ opt }}" {% if current_object and current_object.deployment_type == opt %}selected{% endif %}>
@@ -1704,12 +1760,25 @@
 
         <div>
           <label>Responsável</label>
-          <input type="text" name="object_responsible" value="{{ current_object.responsible if current_object else '' }}" style="width: 100%;">
+          <input
+            type="text"
+            name="object_responsible"
+            value="{{ current_object.responsible if current_object else '' }}"
+            style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}"
+            {% if current_item_is_subtable.value %}readonly{% endif %}
+          >
         </div>
 
         <div>
           <label>Migration Project ID</label>
-          <input type="text" name="identifiers[migration_project_id]" placeholder="ID do projeto" value="{{ current_object.identifiers.migration_project_id if current_object and current_object.identifiers else '' }}" style="width: 100%;">
+          <input
+            type="text"
+            name="identifiers[migration_project_id]"
+            placeholder="ID do projeto"
+            value="{{ current_object.identifiers.migration_project_id if current_object and current_object.identifiers else '' }}"
+            style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}"
+            {% if current_item_is_subtable.value %}readonly{% endif %}
+          >
         </div>
       </div>
       <div style="margin-bottom: 12px;">
@@ -1731,31 +1800,31 @@
         <!-- SAVED_QUERY -->
         <div id="identifier_query_name" style="display:none;">
           <label>Query Name</label>
-          <input type="text" name="identifiers[query_name]" placeholder="Nome da query" value="" style="width: 100%;">
+          <input type="text" name="identifiers[query_name]" placeholder="Nome da query" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
         </div>
 
         <!-- AGENT -->
         <div id="identifier_agent_gid" style="display:none;">
           <label>Agent GID</label>
-          <input type="text" name="identifiers[agent_gid]" placeholder="Identificador do agente" value="" style="width: 100%;">
+          <input type="text" name="identifiers[agent_gid]" placeholder="Identificador do agente" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
         </div>
 
         <!-- FINDER_SET -->
         <div id="identifier_finder_set_gid" style="display:none;">
           <label>Finder Set GID</label>
-          <input type="text" name="identifiers[finder_set_gid]" placeholder="Identificador do Finder Set" value="" style="width: 100%;">
+          <input type="text" name="identifiers[finder_set_gid]" placeholder="Identificador do Finder Set" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
         </div>
 
         <!-- RATE -->
         <div id="identifier_rate_offering_gid" style="display:none;">
           <label>Rate Offering GID</label>
-          <input type="text" name="identifiers[rate_offering_gid]" placeholder="Identificador da taxa de oferta" value="" style="width: 100%;">
+          <input type="text" name="identifiers[rate_offering_gid]" placeholder="Identificador da taxa de oferta" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
         </div>
 
         <!-- EVENT_GROUP -->
         <div id="identifier_event_group_gid" style="display:none;">
           <label>Event Group GID</label>
-          <input type="text" name="identifiers[event_group_gid]" placeholder="Identificador do grupo de eventos" value="" style="width: 100%;">
+          <input type="text" name="identifiers[event_group_gid]" placeholder="Identificador do grupo de eventos" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
         </div>
       </div>
 
@@ -1783,6 +1852,7 @@
           rows="12"
           placeholder="Cole aqui a query SQL que extrai os objetos OTM para este item..."
           style="font-family: 'Courier New', monospace; font-size: 12px; background-color: #263238; color: #aed581; padding: 12px; border: 1px solid #37474f; width: 100%; max-width: 100%;"
+          {% if current_item_is_subtable.value %}readonly{% endif %}
         >{{ current_object.object_extraction_query.content if current_object and current_object.object_extraction_query and current_object.object_extraction_query.content is not none else (current_object.saved_query.sql if current_object and current_object.saved_query and current_object.saved_query.sql is not none else '') }}</textarea>
         
         <p style="font-size: 11px; color: #666; margin-top: 8px;">
@@ -1850,9 +1920,15 @@
 
             <!-- Botao Remover (formulario separado) -->
             <div class="action-inline-form" style="display: inline; margin: 0;">
-              <button type="button" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ edit_object_index }}', 'active_group_id': '{{ project.active_group_id if project else '' }}'})" style="background-color: #e53935; color: white; padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; white-space: nowrap;">
-                🗑️ Remover Item
-              </button>
+              {% if not current_item_is_subtable.value %}
+                <button type="button" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ edit_object_index }}', 'active_group_id': '{{ project.active_group_id if project else '' }}'})" style="background-color: #e53935; color: white; padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; white-space: nowrap;">
+                  🗑️ Remover Item
+                </button>
+              {% else %}
+                <span style="display: inline-block; font-size: 11px; color: #856404; white-space: nowrap;">
+                  Remoção: desmarque na tabela principal
+                </span>
+              {% endif %}
             </div>
           </div>
 
@@ -1994,8 +2070,12 @@
     const currentMigrationItemNameFromPage = {{ (current_object.name if current_object else "") | tojson }};
     const currentMigrationItemIdFromPage = {{ (current_object.migration_item_id if current_object and current_object.migration_item_id else "") | tojson }};
     const currentPrimaryTableFromPage = {{ ((current_object.object_type if current_object and current_object.object_type else (current_object.otm_table if current_object else "")) if current_object else "") | tojson }};
+    const currentDomainFromPage = {{ ((current_object.domainName if current_object and current_object.domainName else (current_object.domain if current_object else "")) if current_object else "") | tojson }};
+    const currentEditObjectIndexFromPage = {{ (edit_object_index if edit_object_index is defined and edit_object_index is not none else -1) }};
+    const projectGroupsFromPage = {{ (project.groups if project and project.groups is iterable and project.groups is not string else []) | tojson }};
     const currentRelatedTablesFromPage = {{ (current_object.otm_related_tables if current_object and current_object.otm_related_tables is iterable and current_object.otm_related_tables is not string else []) | tojson }};
     const currentSubtablesFromPage = {{ (current_object.otm_subtables if current_object and current_object.otm_subtables is iterable and current_object.otm_subtables is not string else []) | tojson }};
+    const currentItemIsSubtableFromPage = {{ (current_item_is_subtable.value if current_item_is_subtable is defined else false) | tojson }};
 
     document.addEventListener("DOMContentLoaded", () => {
       const editPanel = document.getElementById("object-edit-panel");
@@ -2007,6 +2087,7 @@
     }
 
       const objectTypeSelect = document.querySelector('select[name="object_type"]');
+      const objectDomainInput = document.querySelector('input[name="object_domain_name"]');
       const otmTableHidden = document.getElementById("object_otm_table");
       const toggleChangeHistoryBtn = document.getElementById("toggle-change-history-btn");
       const changeHistoryContent = document.getElementById("change-history-content");
@@ -2112,6 +2193,81 @@
     const relatedTablesHiddenInputs = document.getElementById("related-tables-hidden-inputs");
 
     const normalizeTableName = (value) => String(value || "").trim().toUpperCase();
+    const normalizeDomainName = (value) => String(value || "").trim().toUpperCase();
+    const domainsOverlap = (domainA, domainB) => !domainA || !domainB || domainA === domainB;
+    const currentGroupToken = normalizeTableName(activeGroupIdFromPage);
+
+    const isSameEditingObject = (groupToken, objectIndex) =>
+      currentEditObjectIndexFromPage >= 0
+      && groupToken === currentGroupToken
+      && Number(objectIndex) === Number(currentEditObjectIndexFromPage);
+
+    const buildSubtableOwnership = () => {
+      const ownershipByTable = new Map();
+      const principalByTable = new Map();
+      const groups = Array.isArray(projectGroupsFromPage) ? projectGroupsFromPage : [];
+
+      groups.forEach((group) => {
+        const groupToken = normalizeTableName(group && (group.group_id || group.migration_group_id));
+        const groupLabel = String((group && (group.label || group.group_id || group.migration_group_id)) || "Grupo");
+        const objects = Array.isArray(group && group.objects) ? group.objects : [];
+
+        objects.forEach((obj, objectIndex) => {
+          if (!obj || typeof obj !== "object") {
+            return;
+          }
+          if (isSameEditingObject(groupToken, objectIndex)) {
+            return;
+          }
+
+          const parentTable = normalizeTableName(obj.object_type || obj.otm_table);
+          if (!parentTable) {
+            return;
+          }
+          const parentDomain = normalizeDomainName(obj.domainName || obj.domain);
+          const parentName = String(obj.name || parentTable);
+          const subtables = Array.isArray(obj.otm_subtables) ? obj.otm_subtables : [];
+          const normalizedSubtables = Array.from(
+            new Set(
+              subtables
+                .map((value) => normalizeTableName(value))
+                .filter((value) => value && value !== parentTable)
+            )
+          );
+
+          if (normalizedSubtables.length) {
+            if (!principalByTable.has(parentTable)) {
+              principalByTable.set(parentTable, []);
+            }
+            principalByTable.get(parentTable).push({
+              domain: parentDomain,
+              groupLabel,
+              parentName,
+              parentTable,
+            });
+          }
+
+          normalizedSubtables.forEach((subtable) => {
+            if (!ownershipByTable.has(subtable)) {
+              ownershipByTable.set(subtable, []);
+            }
+            ownershipByTable.get(subtable).push({
+              domain: parentDomain,
+              groupLabel,
+              parentName,
+              parentTable,
+            });
+          });
+        });
+      });
+
+      return {
+        ownershipByTable,
+        principalByTable,
+      };
+    };
+
+    const subtableOwnership = buildSubtableOwnership();
 
     const normalizeTableIdentifier = (rawIdentifier) => {
       let token = String(rawIdentifier || "").trim();
@@ -2251,12 +2407,14 @@
       return results;
     };
 
-    const renderRelatedTablesSelector = (relatedTables, selectedSubtables, primaryTableName) => {
+    const renderRelatedTablesSelector = (relatedTables, selectedSubtables, primaryTableName, currentDomainName) => {
       if (!relatedTablesSelector || !relatedTablesHiddenInputs) {
         return;
       }
 
+      const isSubtableLocked = Boolean(currentItemIsSubtableFromPage);
       const normalizedPrimary = normalizeTableName(primaryTableName);
+      const normalizedDomain = normalizeDomainName(currentDomainName);
       const normalizedSelected = new Set(
         (selectedSubtables || [])
           .map((table) => normalizeTableName(table))
@@ -2332,6 +2490,20 @@
         checkbox.checked = normalizedSelected.has(tableName);
         checkbox.style.margin = "0";
 
+        const ownershipConflicts = (subtableOwnership.ownershipByTable.get(tableName) || []).filter(
+          (owner) => domainsOverlap(owner.domain, normalizedDomain)
+        );
+        const principalConflicts = (subtableOwnership.principalByTable.get(tableName) || []).filter(
+          (owner) => domainsOverlap(owner.domain, normalizedDomain)
+        );
+        const ownershipConflict = ownershipConflicts.length ? ownershipConflicts[0] : null;
+        const principalConflict = principalConflicts.length ? principalConflicts[0] : null;
+        const isSelected = normalizedSelected.has(tableName);
+        const blockedByOwnership = Boolean(ownershipConflict) && !isSelected;
+        const blockedByPrincipal = Boolean(principalConflict) && !isSelected;
+        const isBlocked = blockedByOwnership || blockedByPrincipal;
+        checkbox.disabled = isSubtableLocked || isBlocked;
+
         const text = document.createElement("span");
         text.textContent = tableName;
         text.style.textAlign = "left";
@@ -2341,6 +2513,22 @@
 
         itemLabel.appendChild(checkbox);
         itemLabel.appendChild(text);
+        if (isSubtableLocked || isBlocked) {
+          itemLabel.style.opacity = "0.65";
+          if (!isSubtableLocked) {
+            const lockNote = document.createElement("small");
+            lockNote.style.display = "block";
+            lockNote.style.marginLeft = "24px";
+            lockNote.style.fontSize = "10px";
+            lockNote.style.color = "#6b7280";
+            if (blockedByOwnership && ownershipConflict) {
+              lockNote.textContent = `Já vinculada a ${ownershipConflict.parentName} (${ownershipConflict.groupLabel}). Remova o vínculo anterior para reutilizar.`;
+            } else if (blockedByPrincipal && principalConflict) {
+              lockNote.textContent = `Esta tabela já atua como principal em ${principalConflict.parentName} (${principalConflict.groupLabel}).`;
+            }
+            itemLabel.appendChild(lockNote);
+          }
+        }
         listWrapper.appendChild(itemLabel);
 
         const hiddenRelated = document.createElement("input");
@@ -2352,6 +2540,10 @@
 
       const refreshSummary = () => {
         const selectedCount = listWrapper.querySelectorAll('input[name="object_otm_subtables"]:checked').length;
+        if (isSubtableLocked) {
+          summary.textContent = `Subtabelas herdadas (${selectedCount}/${normalizedRelated.length})`;
+          return;
+        }
         summary.textContent = `Selecionar subtabelas (${selectedCount}/${normalizedRelated.length})`;
       };
 
@@ -2375,6 +2567,11 @@
         || currentPrimaryTableFromPage
         || ""
       );
+      const currentDomain = normalizeDomainName(
+        (objectDomainInput && objectDomainInput.value)
+        || currentDomainFromPage
+        || ""
+      );
       const sqlQuery = extractionQueryTextarea ? extractionQueryTextarea.value : "";
       const parsedRelatedTables = extractRelatedTablesFromSql(sqlQuery, currentPrimaryTable);
 
@@ -2392,7 +2589,7 @@
         ? selectedFromUi
         : (Array.isArray(currentSubtablesFromPage) ? currentSubtablesFromPage : []);
 
-      renderRelatedTablesSelector(relatedTables, selectedSubtables, currentPrimaryTable);
+      renderRelatedTablesSelector(relatedTables, selectedSubtables, currentPrimaryTable, currentDomain);
     };
 
     if (objectTypeSelect && otmTableHidden) {
@@ -2409,6 +2606,10 @@
     if (extractionQueryTextarea) {
       extractionQueryTextarea.addEventListener("input", syncRelatedTablesFromQuery);
       extractionQueryTextarea.addEventListener("change", syncRelatedTablesFromQuery);
+    }
+    if (objectDomainInput) {
+      objectDomainInput.addEventListener("input", syncRelatedTablesFromQuery);
+      objectDomainInput.addEventListener("change", syncRelatedTablesFromQuery);
     }
     syncRelatedTablesFromQuery();
 

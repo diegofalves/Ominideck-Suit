@@ -8,7 +8,11 @@ from pathlib import Path
 
 from ui.backend.loaders import load_all
 from ui.backend.form_to_domain import form_to_domain
-from ui.backend.validators import validate_project, DomainValidationError
+from ui.backend.validators import (
+    validate_project,
+    validate_subtable_constraints_for_object,
+    DomainValidationError,
+)
 from ui.backend.writers import load_project, save_project
 from ui.backend.schema_repository import SchemaRepository
 
@@ -687,6 +691,24 @@ def projeto_migracao():
             )
             if resolved_source_idx is None:
                 return redirect("/projeto-migracao")
+
+            try:
+                validate_subtable_constraints_for_object(
+                    projected_domain,
+                    active_group_id,
+                    resolved_source_idx,
+                )
+            except DomainValidationError as e:
+                return render_template(
+                    "projeto_migracao.html",
+                    data=data,
+                    schema=data["schema"],
+                    enums=data["enums"],
+                    ui=data["ui"],
+                    groups_catalog=data.get("groups_catalog", {}),
+                    project=projected_domain,
+                    errors=e.args[0],
+                )
 
             updated_object = source_group["objects"][resolved_source_idx]
             is_ignored = _is_truthy(updated_object.get("ignore_table"))

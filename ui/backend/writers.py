@@ -826,31 +826,36 @@ def _inherit_subtable_item_from_primary(
         subtable_obj["otm_table"] = normalized_subtable
 
     primary_domain = _normalize_name(primary_obj.get("domainName") or primary_obj.get("domain"))
-    if primary_domain:
-        subtable_obj["domainName"] = primary_domain
-        subtable_obj["domain"] = primary_domain
+    subtable_obj["domainName"] = primary_domain
+    subtable_obj["domain"] = primary_domain
 
     primary_extraction = _resolve_object_extraction_query(primary_obj)
-    extraction_sql = str(primary_extraction.get("content") or "").strip()
-    if extraction_sql:
-        subtable_obj["object_extraction_query"] = {
-            "language": str(primary_extraction.get("language") or "SQL").strip().upper() or "SQL",
-            "content": extraction_sql,
-        }
+    subtable_obj["object_extraction_query"] = {
+        "language": str(primary_extraction.get("language") or "SQL").strip().upper() or "SQL",
+        "content": str(primary_extraction.get("content") or "").strip(),
+    }
 
     is_auto_generated = _is_truthy(subtable_obj.get("auto_generated"))
     primary_deployment = str(primary_obj.get("deployment_type") or "").strip()
-    if primary_deployment and (
-        is_auto_generated or not str(subtable_obj.get("deployment_type") or "").strip()
-    ):
-        subtable_obj["deployment_type"] = primary_deployment
-        subtable_obj["deployment_type_user_defined"] = True
+    subtable_obj["deployment_type"] = primary_deployment
+    subtable_obj["deployment_type_user_defined"] = bool(primary_deployment)
 
     primary_responsible = str(primary_obj.get("responsible") or "").strip()
-    if primary_responsible and (
-        is_auto_generated or not str(subtable_obj.get("responsible") or "").strip()
-    ):
-        subtable_obj["responsible"] = primary_responsible
+    subtable_obj["responsible"] = primary_responsible
+
+    primary_identifiers = primary_obj.get("identifiers")
+    if isinstance(primary_identifiers, dict):
+        subtable_obj["identifiers"] = json.loads(
+            json.dumps(primary_identifiers, ensure_ascii=False)
+        )
+    else:
+        subtable_obj["identifiers"] = {}
+
+    primary_related_tables = _normalize_table_list(primary_obj.get("otm_related_tables"))
+    subtable_obj["otm_related_tables"] = json.loads(
+        json.dumps(primary_related_tables, ensure_ascii=False)
+    )
+    subtable_obj["otm_subtables"] = []
 
     primary_notes = str(primary_obj.get("notes") or "").strip()
     if primary_notes and (is_auto_generated or not str(subtable_obj.get("notes") or "").strip()):
@@ -858,16 +863,8 @@ def _inherit_subtable_item_from_primary(
 
     primary_status = primary_obj.get("status")
     if isinstance(primary_status, dict):
-        current_status = subtable_obj.get("status")
-        if not isinstance(current_status, dict):
-            current_status = {}
-        if is_auto_generated:
-            subtable_obj["status"] = json.loads(json.dumps(primary_status, ensure_ascii=False))
-        else:
-            for status_key, status_value in primary_status.items():
-                if status_key not in current_status or not str(current_status.get(status_key) or "").strip():
-                    current_status[status_key] = status_value
-            subtable_obj["status"] = current_status
+        # Regra canônica: status de subtabela sempre acompanha o item principal.
+        subtable_obj["status"] = json.loads(json.dumps(primary_status, ensure_ascii=False))
 
     primary_technical = primary_obj.get("technical_content")
     if isinstance(primary_technical, dict):
