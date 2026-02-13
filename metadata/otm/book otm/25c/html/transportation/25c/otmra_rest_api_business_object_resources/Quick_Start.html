@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Quick Start</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2018, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28976-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-03 17:56:41 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="rest-endpoints.html" title="Previous" type="text/html">
+        <link rel="next" href="Resource_Paths.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-03T18:13:18+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+    <meta name="dcterms.isVersionOf" content="OTMRA">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Quick Start","description":"Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="rest-endpoints.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="Resource_Paths.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Quick Start</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            
+            
+            
+            <div id="concept-388-1ED9AC40">
+               
+               <p id="u30227307__concept-100-4DCC655C">You can make many types of HTTP requests using Oracle REST
+            APIs. You can easily make requests to view, create, update, or delete business object
+            resources. You can even request asynchronous processing rather than the default
+            synchronous processing. But let's first send a simple REST HTTP request to find out the
+            structure of an order release object.</p>
+               
+               <div class="infoboxnote" id="u30227307__note_r5n_ckf_vrb">
+                  <p class="notep1">Note:</p>
+                  
+                  <p>The capability also exists to send out REST resource content to external systems,
+                e.g. triggered by an automation agent.</p>
+                  
+               </div>
+               
+               <div class="section" id="u30227307__concept-152-4D314705">
+                  <p class="subhead1" id="u30227307__concept-100-4D2C1D8C"><span class="bold" id="u30227307__concept-100-A73DC901">Step 1: Consider Before
+                    You Start</span></p>
+                  
+                  
+                  <p id="u30227307__concept-116-4D2EAFB1"><span class="bold" id="u30227307__concept-100-9FFF7CE1">Review the basics.</span> If
+                you're new to REST APIs, make sure you understand the basics of <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a> and <a href="https://json.org/" target="_blank">JSON</a>,
+                and scan our list of <a href="Terminology.html">important
+                terms</a>.
+                  </p>
+                  
+                  <p id="u30227307__concept-102-9C6199B8"><span class="bold" id="u30227307__concept-102-9FFF7CE1">Choose a client.</span> REST APIs
+                connect software programs over the HTTP protocol. You need a software client to send
+                the HTTP requests. In our examples, we use <a href="https://curl.haxx.se/" target="_blank">cURL</a>. But cURL isn't the only tool you can use. To help you choose one,
+                see <a href="Work_with_your_REST_API_Client.html">Work with your REST API
+                    Client</a>.
+                  </p>
+                  
+               </div>
+               
+               <div class="section" id="u30227307__concept-102-98E32509">
+                  <p class="subhead1" id="u30227307__concept-104-98E3250A"><span class="bold" id="u30227307__concept-102-A73DC903">Step 2: Get Your Oracle
+                    Transportation and Global Trade Management Cloud Account Info</span></p>
+                  
+                  
+                  <p id="u30227307__concept-104-9C66895F">To make a REST HTTP request, you need to gather a few bits
+                of information, including:</p>
+                  
+                  <ul style="list-style-type: disc;" id="u30227307__concept-118-4D2EAFB2">
+                     
+                     <li id="u30227307__concept-186-9964063C">
+                        
+                        <p id="u30227307__concept-126-BD570720"><span class="bold" id="u30227307__concept-100-9F130575">REST Server URL -</span>
+                        Typically, the URL of your Oracle Cloud service. For example, <code class="codeph" id="u30227307__concept-100-AAE28CC8">https://servername.us2.oraclecloud.com</code>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li id="u30227307__concept-188-9964063E">
+                        
+                        <p id="u30227307__concept-128-BD570720"><span class="bold" id="u30227307__concept-102-9F130575">Authentication
+                            Credentials -</span> An Oracle Cloud service user with permissions to
+                        access the resources you're using. These credentials will depend on the
+                        authorization method selected for the requests. As of version 21A, the REST
+                        API supports SSO, HTTP Authentication (Basic) and the OAuth 2 Client
+                        Credentials flow. 
+                        </p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  <p id="u30227307__concept-106-9C66895F">You can find the REST Server URL, user name, and password
+                in the welcome email sent to your Oracle Cloud service administrator.</p>
+                  
+               </div>
+               
+               <div class="section" id="u30227307__concept-114-98E3250E">
+                  <p class="subhead1" id="u30227307__concept-116-98E3250F"><span class="bold" id="u30227307__concept-104-A73DC903">Step 3: Configure Your
+                    Client </span></p>
+                  
+                  
+                  <p id="u30227307__concept-102-99620E5A">With the information gathered so far, you're ready to
+                configure your client to send a REST HTTP request. </p>
+                  
+                  <ol id="u30227307__concept-104-99620E5C">
+                     
+                     <li id="u30227307__concept-106-99620E62">
+                        
+                        <p id="u30227307__concept-118-98E36BA9"><span class="bold" id="u30227307__concept-108-99620E67">Construct the request
+                            URL.</span> The URL consists of the server name and the resource path:
+                        </p>
+                        <pre class="oac_no_warn" id="u30227307__concept-168-4D34F2A9" dir="ltr">https://&lt;server&gt;/&lt;resource-path&gt;</pre>
+                        <p id="u30227307__concept-114-9C668960">The <span class="bold" id="u30227307__concept-116-9C668960">&lt;server&gt; </span>is
+                        the REST Server URL from Step 2, as in:
+                        </p>
+                        
+                        <div class="p" id="u30227307__concept-122-9C668962">
+                           <pre class="oac_no_warn" id="u30227307__concept-124-9C668962" dir="ltr">https://servername.us2.oraclecloud.com</pre>
+                           </div>
+                        
+                        <p id="u30227307__concept-100-A112A81A">The <span class="bold" id="u30227307__concept-102-A112A883">&lt;resource-path&gt;</span> is the relative path or <span class="italic" id="u30227307__concept-100-A2A60342">endpoint</span> to the REST resource you're
+                        working with. You can pick any endpoint in <a href="rest-endpoints.html" target="_blank">All REST Endpoints</a>. See <a href="Resource_Paths.html">Resource Paths</a> for how to construct the URL for your
+                        target resource. For example, we're interested in the order release
+                        resource:
+                        </p>
+                        
+                        
+                        <div class="p" id="u30227307__concept-130-9C668900">
+                           <pre class="pre codeblock" id="u30227307__concept-104-A3365F6F"><code>/logisticsRestApi/resources/v2/orderReleases</code></pre>
+                           </div>
+                        
+                        <p id="u30227307__concept-104-A112A889">Combine the REST Server URL and, in this example,
+                        the order release REST resource path and your request URL is complete. For
+                        more information, see <a href="URL_Paths_for_REST_Services.html">URL Paths</a>.
+                        </p>
+                        
+                        <div class="p" id="u30227307__concept-108-A112A896">
+                           <pre class="pre codeblock" id="u30227307__concept-106-A3368D17"><code>https://servername.us2.oraclecloud.com/logisticsRestApi/resources/v2/orderReleases</code></pre>
+                           </div>
+                        
+                     </li>
+                     
+                     <li id="u30227307__concept-112-99620E6D">
+                        
+                        <p id="u30227307__concept-120-98E36BA9"><span class="bold" id="u30227307__concept-114-99620E6D">Provide your account
+                            information.</span> Include your user name and password (from Step 4 below)
+                        in the client. For example, if you are using cURL, you can specify your
+                        account information using the <code class="codeph" id="u30227307__concept-116-A1136DDD">-u
+                            cURL</code> command as follows: 
+                        </p>
+                        
+                        <div class="p" id="u30227307__concept-102-A2A60342">
+                           <pre class="pre codeblock" id="u30227307__concept-108-A3368D17"><code>-u &lt;username:password&gt;</code></pre>
+                           </div>
+                        
+                     </li>
+                     
+                     <li id="u30227307__concept-118-99620E70">
+                        
+                        <p id="u30227307__concept-214-98EDD138"><span class="bold" id="u30227307__concept-120-99620E72">Set the media
+                            type.</span> Media type defines the structure of the HTTP payloads
+                        exchanged between the server and the client. For example, if you're using
+                        cURL, you can specify a resource item media type using the <a href="Terminology.html">header</a> -H command.
+                        </p>
+                        
+                        <div class="infoboxnote" id="u30227307__concept-100-DD8CBABC">
+                           <p class="notep1">Note:</p>
+                           
+                           <p>The "Content-Type" header parameter is not required for GET requests as
+                            there is no request body. It will be required for POST &amp; PATCH
+                            requests.</p>
+                           
+                        </div>
+                        
+                        <p id="u30227307__concept-110-A2A6034A">For more on media types, see <a href="Media_Types.html" title="Media types let you choose the format of the data you want to receive, defining the structure of the HTTP payloads exchanged between the server and the client. They allow an API to inform the client how to interpret the data in the payload. The following table lists the supported media types for REST APIs in Oracle Applications Cloud.">Supported Media Types</a>.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  <p id="u30227307__concept-112-A2A6034D">When you're done, the complete cURL command should look
+                like this:</p>
+                  <pre class="pre codeblock" id="u30227307__concept-112-A3368D18"><code>curl -u &lt;username:password&gt; \
+ -X GET https://servername.us2.oraclecloud.com/logisticsRestApi/resources/v2/orderReleases HTTP/1.1</code></pre>
+                  <p id="u30227307__concept-100-A69A208C">If you're not familiar with any of the syntax used in the
+                example, check out <a href="Work_with_your_REST_API_Client.html">Work with your REST API
+                    Client</a>.
+                  </p>
+                  
+                  <p id="u30227307__concept-112-A112F24E">If you're an advanced REST user, but are reading our Quick
+                Start anyway, you might want to <a href="Configure_for_CORS.html">configure Cross-Origin
+                    Resource Sharing (CORS)</a> now. Otherwise, you're ready to move on to Step
+                4.
+                  </p>
+                  
+               </div>
+               
+               <div class="section" id="u30227307__concept-102-94C094BA">
+                  <p class="subhead1" id="u30227307__concept-104-94C094BD"><span class="bold" id="u30227307__concept-106-A73DC905">Step 4: Authenticate and
+                    Authorize</span></p>
+                  
+                  
+                  <p id="u30227307__concept-106-94C094BE">Authentication proves that your credentials are genuine,
+                and authorization allows you to apply your access privileges. </p>
+                  
+                  <p id="u30227307__concept-102-A127D2DF"><span class="bold" id="u30227307__concept-104-A127D2E1">Authentication</span></p>
+                  
+                  <p id="u30227307__concept-102-69903CA1"><span class="italic" id="u30227307__concept-104-69903CA3">Single Sign-On (SSO)</span></p>
+                  
+                  <p id="u30227307__concept-168-5F2E0C5C">The /logisticsRestApi/resources URI is protected by the SSO
+                server. In this case access to the REST API should originate from the browser. This
+                can be accomplished by creating a rich JavaScript application. Calls to the rest API
+                can be made in the user's context when protected by an SSO server. This requires
+                Cross Origin Resource Sharing (CORS) to be set up on the OTM server.</p>
+                  
+                  <p id="u30227307__concept-106-69903CA3"><span class="italic" id="u30227307__concept-108-69903CA4">HTTP Authentication
+                    (Basic)</span></p>
+                  
+                  <p id="u30227307__concept-100-1AC29C4E">The <code class="codeph" id="u30227307__concept-108-218DEDA8">/logisticsRestApi/resources-int</code> URI is not protected by the SSO
+                server. This URI requires the HTTP basic authentication authorization header. It
+                also requires a staged integration user in OTM. The header you create is the Base64
+                encoded user name and password of the staged integration user. Unless otherwise
+                stated, all following examples will use the "resources" path element for consistency
+                but these should obviously be replaced with "resources-int" if using basic
+                authentication. 
+                  </p>
+                  
+                  <p id="u30227307__concept-110-69903CA7"><span class="italic" id="u30227307__concept-112-69903CA9">OAuth 2 Client
+                Credentials</span></p>
+                  
+                  <p id="u30227307__concept-114-69903CAA">Use of OAuth 2 requires configuration of the Oracle
+                Identity Cloud Service (IDCS) to provide the authorization service for this OAuth 2
+                flow. See the <a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=OTMIT" target="_blank">Integration Guide</a> for configuration
+                information.
+                  </p>
+                  
+                  <p id="u30227307__concept-102-1AC29C51">To make sure data access over a network is secure, Oracle
+                Transportation and Global Trade Management REST APIs requires Transport Layer
+                Security (TLS).</p>
+                  
+                  <p id="u30227307__concept-112-9F1474A7">Let's look at our example using Basic authentication over
+                TLS. To authenticate, you must submit the user name and password for your Oracle
+                Cloud account. Typically, the user name and password are encoded in <a href="Terminology.html"> Base64 format</a>, as in:
+                  </p>
+                  
+                  <div class="p" id="u30227307__concept-114-9F1474A9">
+                     <pre class="pre codeblock" id="u30227307__concept-156-9F18A7CD"><code>curl \
+-X GET https://servername.us2.oraclecloud.com/logisticsRestApi/resources/v2/orderReleases HTTP/1.1 \
+-H 'Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ='</code></pre>
+                     </div>
+                  
+                  <p id="u30227307__concept-118-9F1474AF">Alternatively, you can use the <code class="codeph" id="u30227307__concept-102-A39C4BCB">-u cURL</code> option to pass the user name and
+                password for your Oracle Cloud account, as in this example:
+                  </p>
+                  
+                  <div class="p" id="u30227307__concept-120-9F148BF0">
+                     <pre class="pre codeblock" id="u30227307__concept-158-9F18B636"><code>curl -u username:password \
+-X GET https://servername.us2.oraclecloud.com/logisticsRestApi/resources/v2/orderReleases</code></pre>
+                     </div>
+                  
+                  <p id="u30227307__concept-106-A127EECF"><span class="bold" id="u30227307__concept-108-A127EED5">Authorization</span></p>
+                  
+                  <p id="u30227307__concept-618-17CBFB70">Authorization enforces access privileges by service role
+                and there are two roles (Access Control List) for each root resource; update (for
+                POST, PATCH and DELETE) and view (for GET)". To provide access to a resource the
+                corresponding Access Control List must be granted to the particular User or User
+                Role. If, for example, you want a User Role to be able to only View Items you would
+                grant permission to "REST - Item - View". Similarly, if you also wanted the User
+                Role to be able to create and modify Items you would also grant them access to "REST
+                - Item - Update".</p>
+                  
+                  <p id="u30227307__concept-134-9F1506DD">See <a href="Access_Control_List.html">Access Control
+                    Lists</a> for details.
+                  </p>
+                  
+                  <p id="u30227307__concept-624-17CBFB79">For additional details, including how to assign privileges
+                to user and user roles, see the <a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=guide_manage_user" target="_blank">Manage User help</a>.
+                  </p>
+                  
+               </div>
+               
+               <div class="section" id="u30227307__concept-206-923C9C54">
+                  <p class="subhead1" id="u30227307__concept-208-923C9C59"><span class="bold" id="u30227307__concept-108-A73DC906">Step 5: Send an HTTP
+                    Request</span></p>
+                  
+                  
+                  <p id="u30227307__concept-154-216CCBE2">You're almost done. Now that your authentication and
+                authorization are set, you're ready to send a test HTTP request. Continuing with our
+                example, we want to get all the information about the structure of the Order Release
+                object in REST. You can do this using the <code class="codeph" id="u30227307__concept-104-A39C53EE">get</code> request in cURL: 
+                  </p>
+                  <pre class="pre codeblock" id="u30227307__concept-160-216CCBE7"><code>curl -u username:password \
+ -X GET https://servername.us2.oraclecloud.com/logisticsRestApi/resources/v2/orderReleases</code></pre>
+                  <p id="u30227307__concept-162-216CCBE8">If your request for information about the Order Release
+                object is successful, you receive a response with a body similar to the following
+                abbreviated example. If your request fails, and you're using cURL, review the
+                response comments, adjust your request, and then try again. If you're using other
+                REST clients, review the failure <a href="Status_Codes.html" title="When you call any REST resource, the response header returns one of the standard HTTP status codes listed in the following table. These status codes refer to a three-digit number in the response header that indicates the general classification of the response. For example, the codes indicate whether the request was successful (200s), or resulted in a client (400s) or server (500s) error. The 400 and 500 classes of status codes help in troubleshooting bad requests.">Status Codes</a>,
+                and then try again.
+                  </p>
+                  <pre class="pre codeblock" id="u30227307__concept-164-216CCBEA"><code>
+
+{
+    "hasMore": true,
+    "limit": 25,
+    "count": 25,
+    "offset": 0,
+    "items": [
+        {
+            "orderReleaseXid": "ORDER RELEASE 01",
+            "orderReleaseName": "SAMPLE ORDER 01",
+            "isTemplate": false,
+            ..etc..
+         },
+        {
+            "orderReleaseXid": "ORDER RELEASE 02",
+            "orderReleaseName": "SAMPLE ORDER 02",
+            "isTemplate": false,
+            ..etc.. (more attributes)
+         },
+         ..etc.. (more items)
+    ],
+    "links": [
+        {
+            "rel": "next",
+            "href": "https://servername.us2.oracle.com/logisticsRestApi/resources/v2/orderReleases?offset=25"
+        },
+        {
+            "rel": "self",
+            "href": "https://servername.us2.oracle.com/logisticsRestApi/resources/v2/orderReleases"
+        }
+    ]
+
+</code></pre>
+                  <ul style="list-style-type: disc;" id="u30227307__concept-148-9C66E5E5">
+                     
+                     <li id="u30227307__concept-150-9C66E64A">Learn about common processes in the <a href="Use_Cases.html" title="Use cases demonstrate how to get things done with REST APIs, including how to create and update records, and more. Use them to understand quickly how REST APIs can meet your business needs.">Use Cases</a> section.
+                     </li>
+                     
+                     <li id="u30227307__concept-116-69903CAE">Learn about collections of resources in the <a href="Collections.html">Manage Collections</a> section.
+                     </li>
+                     
+                     <li>Learn about outbound resources in the <a href="Outbound-REST.html">Outbound REST</a>
+                    section.
+                     </li>
+                     
+                     <li id="u30227307__concept-168-9C66E655">Join the <a href="https://community.oracle.com/welcome" target="_blank">Oracle Developer Community</a>, where you can share tips
+                    and advice with others.
+                     </li>
+                     
+                  </ul>
+                  
+               </div>
+               
+            </div>
+            
+         </div>
+        </article>
+    </body>
+</html>

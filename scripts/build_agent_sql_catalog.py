@@ -5,6 +5,59 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+# Helper functions to generate governance files for Agent Pack v2
+def write_sql_rules_file(base_dir: Path):
+    rules_path = base_dir / "metadata/otm/agent_sql/governance/sql_rules.md"
+    rules_path.parent.mkdir(parents=True, exist_ok=True)
+    rules_path.write_text(
+        """
+# Oracle OTM SQL Rules (Agent Pack v2)
+
+## Join Style
+- ALWAYS use implicit joins
+- NEVER use explicit JOIN syntax
+
+Correct:
+SELECT a.col1,
+       b.col2
+  FROM table_a a,
+       table_b b
+ WHERE a.id = b.id
+
+Forbidden:
+SELECT * FROM table_a a JOIN table_b b ON a.id = b.id
+
+## Safety Rules
+- SELECT * is forbidden
+- Always prefer bind variables (:domain, :gid, :xid)
+- Always filter by DOMAIN_NAME when applicable
+- Limit exploratory queries with FETCH FIRST 200 ROWS ONLY
+""".strip(), encoding="utf-8")
+
+
+def write_system_prompt_file(base_dir: Path):
+    prompt_path = base_dir / "metadata/otm/agent_sql/governance/agent_behavior.md"
+    prompt_path.parent.mkdir(parents=True, exist_ok=True)
+    prompt_path.write_text(
+        """
+# OTM SQL Agent – GitHub Actions Governance
+
+## Tool Priority
+GitHub Actions are the ONLY source of structural truth.
+Never confirm tables or columns without repository navigation.
+
+## Evidence Gate
+Every structural confirmation must include:
+- Repo
+- Path
+- Branch
+- SHA
+- Real content snippet
+
+If evidence is missing → answer FAIL.
+""".strip(), encoding="utf-8")
+
+
 def load_json(path: Path):
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
@@ -125,6 +178,10 @@ def parse_args():
 
 def main():
     args = parse_args()
+
+    repo_root = Path(".")
+    write_sql_rules_file(repo_root)
+    write_system_prompt_file(repo_root)
     tables_dir = Path(args.tables_dir)
     eligible_path = Path(args.eligible_file)
     stats_path = Path(args.stats_file)
@@ -165,6 +222,7 @@ def main():
             out.write(json.dumps(record, ensure_ascii=False) + "\n")
             generated += 1
 
+    # Governance files for Agent Pack v2 generated automatically
     metadata = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "mode": args.mode,
