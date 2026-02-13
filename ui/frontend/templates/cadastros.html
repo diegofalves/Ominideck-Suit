@@ -373,6 +373,26 @@
               </select>
             </div>
             <div class="field">
+              <label>Consultor responsável</label>
+              <select name="project_consultant_id">
+                <option value="">Selecione</option>
+                {% for consultant in cadastros.consultants %}
+                <option value="{{ consultant.consultant_id }}">{{ consultant.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Consultoria vinculada</label>
+              <select name="project_consultancy_id">
+                <option value="">Selecione</option>
+                {% for consultancy in cadastros.consultancies %}
+                <option value="{{ consultancy.consultancy_id }}">{{ consultancy.service_name }} ({{ consultancy.status }})</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field">
               <label>Status</label>
               <select name="project_status">
                 <option value="DESENHO">Desenho</option>
@@ -447,7 +467,7 @@
             </div>
             <div class="field">
               <label>Cliente</label>
-              <select name="consultancy_client_id" required>
+              <select id="consultancy-client-select" name="consultancy_client_id" required>
                 <option value="">Selecione</option>
                 {% for client in cadastros.clients %}
                 <option value="{{ client.client_id }}">{{ client.name }}</option>
@@ -458,7 +478,7 @@
           <div class="fields">
             <div class="field">
               <label>Projeto</label>
-              <select name="consultancy_project_id" required>
+              <select id="consultancy-project-select" name="consultancy_project_id" required>
                 <option value="">Selecione</option>
                 {% for project in cadastros.projects %}
                 <option value="{{ project.project_id }}">{{ project.code }} - {{ project.name }}</option>
@@ -640,6 +660,13 @@
       const pj = document.getElementById("taxes-pj");
       const clt = document.getElementById("taxes-clt");
       const coop = document.getElementById("taxes-coop");
+      const consultancyProjectSelect = document.getElementById("consultancy-project-select");
+      const consultancyClientSelect = document.getElementById("consultancy-client-select");
+      const projectClientMap = {
+        {% for project in cadastros.projects %}
+        "{{ project.project_id }}": "{{ project.client_id }}",
+        {% endfor %}
+      };
 
       function toggleTaxBlocks() {
         const value = (contractType && contractType.value || "").toUpperCase();
@@ -648,9 +675,23 @@
         coop.style.display = value === "COOPERATIVA" ? "grid" : "none";
       }
 
+      function syncClientFromProject() {
+        if (!consultancyProjectSelect || !consultancyClientSelect) return;
+        const projectId = consultancyProjectSelect.value || "";
+        const mappedClientId = projectClientMap[projectId] || "";
+        if (mappedClientId) {
+          consultancyClientSelect.value = mappedClientId;
+        }
+      }
+
       if (contractType) {
         contractType.addEventListener("change", toggleTaxBlocks);
         toggleTaxBlocks();
+      }
+
+      if (consultancyProjectSelect) {
+        consultancyProjectSelect.addEventListener("change", syncClientFromProject);
+        syncClientFromProject();
       }
     })();
   </script>

@@ -1011,6 +1011,8 @@ def cadastros():
             code = str(request.form.get("project_code") or "").strip().upper()
             name = str(request.form.get("project_name") or "").strip()
             client_id = str(request.form.get("project_client_id") or "").strip()
+            consultant_id = str(request.form.get("project_consultant_id") or "").strip()
+            consultancy_id = str(request.form.get("project_consultancy_id") or "").strip()
             status = str(request.form.get("project_status") or "PLANNING").strip().upper()
             start_date = str(request.form.get("project_start_date") or "").strip()
             end_date = str(request.form.get("project_end_date") or "").strip()
@@ -1031,6 +1033,8 @@ def cadastros():
                         "code": code,
                         "name": name,
                         "client_id": client_id,
+                        "consultant_id": consultant_id,
+                        "consultancy_id": consultancy_id,
                         "status": status or "PLANNING",
                         "start_date": start_date,
                         "end_date": end_date,
