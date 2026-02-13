@@ -1,0 +1,61 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="message-schema.html" title="Previous" type="text/html"><link rel="next" href="message-statuses.html" title="Next" type="text/html"><meta name="description" content="If the servlet receives a Message XML, the integration module does the following:"><meta property="og:description" content="If the servlet receives a Message XML, the integration module does the following:"><meta property="og:title" content="Integration Guide"><meta name="application-name" content="Integration Guide"><meta name="dcterms:title" content="Integration Guide"><meta name="dcterms.title" content="Integration Guide"><meta name="doctitle" content="Integration Guide"><meta name="dcterms.created" content="Wed Jul 16 08:06:54 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMIT"><meta name="dcterms.alternative" content="otmit"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="integration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Processing Overview</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28969-03">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Processing Overview","description":"If the servlet receives a Message XML, the integration module does the following:","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="message-schema.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="message-statuses.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Integration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Processing Overview<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="processing-overview-2"></span><span id="OTMITprocessing-overview-2" data-help-type="cloud-saas-docid"></span><span id="processing_overview_1" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225469">Processing Overview</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">If the servlet receives a Message XML, the integration module does the following:</p>
+        <ol class="ol" id="u30225469__ol_w52_ds5_pjb">
+            <li class="li">Extracts authentication information from the MessageHeader. This information can be
+                in the HTTP header instead.</li>
+            <li class="li">Validates username and password.</li>
+            <li class="li">Stores an entry in the I_message table, and the content in the I_transmission
+                table.</li>
+            <li class="li">Sends a MessageAck back to the sender as the synchronous response.</li>
+            <li class="li">Checks for presence of MessageTypeGid and StylesheetProfileGid. If neither are
+                present, checks for the MessageProfileGid, and uses the StylesheetProfileGids
+                specified in the Message Profile to determine the correct Stylesheet Profile.</li>
+            <li class="li">Using the Stylesheet Profile, the message is parsed to extract designated fields and
+                updates the message table with extracted fields as needed.</li>
+            <li class="li">Using the Message Type specified, the module performs the following:<ol class="ol" type="a" id="u30225469__ol_x52_ds5_pjb">
+                    <li class="li">Notifies Message Center recipients specified on the Message Type</li>
+                    <li class="li">Associates or disassociates devices to drivers, pieces of equipment, and
+                        power units as indicated on the Message Type</li>
+                    <li class="li">Generates a Transmission XML if indicated on the Message Type. The
+                        Transmission XML would then be processed as indicate in the Transmission
+                        Processing section above.</li>
+                </ol></li>
+            <li class="li">Sends a MessageReport with validation and processing errors; Depending on your
+                property settings, Transportation and Global Trade Management Cloud might only send
+                a MessageReport if there are errors.</li>
+        </ol>
+    </div>
+</div></article></body></html>

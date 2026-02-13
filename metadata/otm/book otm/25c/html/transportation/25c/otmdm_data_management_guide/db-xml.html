@@ -1,0 +1,139 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="intended-audience.html" title="Previous" type="text/html"><link rel="next" href="csv.html" title="Next" type="text/html"><meta name="description" content="DB.XML (Database-centric XML) is an XML file format for importing and exporting Oracle Transportation Management data."><meta property="og:description" content="DB.XML (Database-centric XML) is an XML file format for importing and exporting Oracle Transportation Management data."><meta property="og:title" content="Data Management Guide"><meta name="application-name" content="Data Management Guide"><meta name="dcterms:title" content="Data Management Guide"><meta name="dcterms.title" content="Data Management Guide"><meta name="doctitle" content="Data Management Guide"><meta name="dcterms.created" content="Thu Jun 12 11:38:36 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMDM"><meta name="dcterms.alternative" content="otmdm"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="data-management-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Introduction to DB.XML</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28963-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Introduction to DB.XML","description":"DB.XML (Database-centric XML) is an XML file format for importing and exporting Oracle Transportation Management data.","datePublished":"2025-06-12 CST","dateModified":"2025-06-12 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="intended-audience.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="csv.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Data Management Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Introduction to DB.XML<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="db-xml"></span><span id="OTMDMdb-xml" data-help-type="cloud-saas-docid"></span><span id="db_xml" data-help-type="cloud-saas"></span><span id="why_use_dbxml" data-help-type="cloud-saas"></span><span id="how_can_i_use_dbxml" data-help-type="cloud-saas"></span><span id="performance_considerations" data-help-type="cloud-saas"></span><span id="migration_project" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225415">Introduction to DB.XML</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">DB.XML (Database-centric XML) is an XML file format for importing and exporting Oracle
+            Transportation Management data.</p>
+        <p class="p">The DB.XML functionality provides the ability to query/insert/update/delete data directly
+            from/to the Transportation and Global Trade Management Cloud database tables. As such,
+            this functionality should only be used by privileged individuals who understand the
+            responsibilities and capabilities that come with using this functionality. Each import
+            or export request is limited to 100 MB.</p>
+        <div class="infobox-"><span class="notep1">Note:</span> Updates made directly to the Transportation and Global Trade Management Cloud through
+            the DB.XML Import functionality can only ensure data consistency with respect to the
+            standard database constraints, e.g. Primary Key, Foreign Key, and Check constraints.
+            Imports don't flow through the main application logic for updates, and so cannot check
+            that the business context of a particular change makes sense. For example, the status of
+            a particular object (e.g. LOCATION STATUS) can be updated. Import can only check that
+            the status GID is valid but not that the status, possibly in association with other
+            status values, constitutes an appropriate state for the object to be in.</div>
+    </div>
+<div class="topic nested1" lang="en" id="u30225416"><h2 class="title topictitle2"><span id="db-xml"></span><span id="OTMDMdb-xml" data-help-type="cloud-saas-docid"></span>Why do I Want to use DB.XML?</h2>
+      
+      <div class="body">
+        <p class="p">You want to use DB.XML functionality if you have Transportation and Global Trade
+            Management data you need to move in or out of the application. The XML format follows
+            XML standards on portability, structure, correctness, and directly maps XML element
+            names to database table names with the XML element attribute names directly mapping to
+            the database columns. The XML element attribute values are the values for the database
+            column. When compared to the CSV (Comma Separated Values) format, DB.XML doesnât require
+            each individual value to be separated, quoted, or in the same column order. Both DB.XML
+            and CSV support manipulation of parent-child records as a unit, however it is more
+            straightforward with DB.XML. These give DB.XML advantages compared to CSV when inserting
+            or updating any records especially rate information. DB.XML also supports column values
+            that contain line breaks and commas, which cannot be imported from a CSV file.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225417"><h2 class="title topictitle2"><span id="db-xml"></span><span id="OTMDMdb-xml" data-help-type="cloud-saas-docid"></span>How can I use DB.XML?</h2>
+      
+      <div class="body">
+        <p class="p">There are a few ways to perform a DB.XML export or import:</p>
+        <ul class="ul" id="u30225417__ul_pv4_grp_5jb">
+            <li class="li">Transportation and Global Trade Management Cloud User Interface </li>
+            <li class="li">HTTP POST to servlet on Transportation and Global Trade Management Cloud application
+                server (requires authentication)</li>
+            <li class="li">SOAP web service</li>
+        </ul>
+        <p class="p">See the <a class="xref" href="db-xml-export.html#u30225234">DB.XML</a> chapter for details.</p>
+    </div>
+</div><div class="topic nested1" id="u30258163">
+    <h2 class="title topictitle2"><span id="db-xml"></span><span id="OTMDMdb-xml" data-help-type="cloud-saas-docid"></span>DB.XML Format</h2>
+    
+    <div class="body">
+        <p class="p">In the DB XML file, there can be more than one parent element for each business object
+            contained within what is called a <span class="ph uicontrol">Transaction Set</span>. The
+            TRANSACTION_SET element is used to contain these <span class="ph uicontrol">parent</span> elements.
+            The parent element itself may contain one or more child element. DB XML Import and
+            Export can work with complete parent-child table relationships all in one file by using
+            corresponding parent-child elements. The attribute values on each element correspond to
+            column values.</p>
+        <div class="infobox-" id="u30258163__note_pph_jkc_mfc"><span class="notep1">Note:</span> The convention used here is that a table is called the "child"
+            table if it contains a foreign key to another table. The table referenced by the foreign
+            key is called the "parent".</div>
+        <p class="p">These parent elements typically correspond to the primary Transportation and Global Trade
+            Management Cloud data objects â AGENT, LOCATION, etc., and child elements typically
+            correspond to associated child tables. For example, for the LOCATION parent table, the
+            child table could be LOCATION_REFNUM, LOCATION_STATUS, etc.</p>
+        <p class="p">In the case where the transaction set is used for data import, each parent element will,
+            by default, be treated as a distinct transaction, i.e. the parent element and all its
+            child elements are saved to the database as one atomic transaction. If one child element
+            fails, the parent element transaction fails. The failure of one parent element does not
+            directly affect the transactions for other parent elements. Additionally, all parent
+            elements can be treated as one unit of work i.e. if one element fails, ALL elements in
+            the âsetâ will fail. The details on how this is achieved are covered in the <a class="xref" href="db-xml-export.html#u30225234">DB.XML</a> chapter.</p>
+        <p class="p">Oracle Transportation Management ignores element and attribute names that do not
+            correspond to valid database table or column names. This allows you to comment your
+            DB.XML file without affecting what is imported.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225418"><h2 class="title topictitle2"><span id="db-xml"></span><span id="OTMDMdb-xml" data-help-type="cloud-saas-docid"></span>Performance Considerations</h2>
+      
+      <div class="body">
+        <p class="p">The primary use case for DB.XML import and export was for the setup of configuration data
+            needed for implementation of business processes. The amount of data that can be imported
+            and exported will be limited by default to 100 MB (megabytes) in order to protect the
+            server and avoid excessive data retrieval or updates which could affect stability.</p>
+        <p class="p">The limit can not increased.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225426"><h2 class="title topictitle2"><span id="db-xml"></span><span id="OTMDMdb-xml" data-help-type="cloud-saas-docid"></span>Migration Project</h2>
+      
+      <div class="body">
+        <p class="p">The Migration Project feature is a standard way to define and manage one or more datasets
+            for the purpose of migrating data from one Oracle Transportation Management instance to
+            another.</p>
+        <p class="p">Although the Oracle Transportation Management application is fully functional âout of the
+            boxâ, an operational system will typically require some configuration. Best practice
+            would be for such a configuration to be developed and tested in a pre-production
+            environment, accepted by product and business/operational experts and then promoted to
+            the production environment.</p>
+        <p class="p">At a high level, an "Export" migration project is defined on source system. This
+            migration project contains data sets which represent object groups and objects that are
+            to be migrated. There are two ways to import this data set on to the target system. </p>
+        <ul class="ul" id="u30225426__ul_vhf_ktp_5jb">
+            <li class="li">Migration using Zip File</li>
+            <li class="li">Migration using Web Service (Supported only for Oracle Logistics Cloud)</li>
+        </ul>
+        <p class="p">Migration Process will create or update corresponding âImportâ migration project on the
+            target system to list the imported data and the success and failures.</p>
+        <p class="p">For more information on the Migration Project Process see the <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=guide_About_the_Promote_to_Production_P2P_Process" target="_blank" rel="external noopener">About the Promote to Production (P2P) Process
+                help</a>. </p>
+    </div>
+</div></div></article></body></html>

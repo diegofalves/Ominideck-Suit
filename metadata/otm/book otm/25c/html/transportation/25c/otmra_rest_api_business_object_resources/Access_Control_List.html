@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Access Control Lists</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2018, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28976-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-03 17:56:41 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="Reference.html" title="Previous" type="text/html">
+        <link rel="next" href="Resource_Types.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-03T18:12:36+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+    <meta name="dcterms.isVersionOf" content="OTMRA">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Access Control Lists","description":"Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="Reference.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="Resource_Types.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Access Control Lists</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            
+            
+            
+            <div id="reference-104-F069DB69">
+               
+               <div class="section" id="u30226976__reference-114-F069DB76">
+                  
+                  <p id="u30226976__reference-116-F069DB77">You use access control lists to access REST resources. You can
+        add them to your own user roles, as required. To access data, you must also include the user
+        role that you use to access REST services with a data role in Transportation and Global
+        Trade Management Cloud. </p>
+                  
+                  <div class="infoboxnote" id="u30226976__note_zbc_tch_sbc">
+                     <p class="notep1">Note:</p>
+                     
+                     <div class="p">To identify the privileges needed for accessing a resource, including power data, follow
+          these steps:
+                        <ol id="u30226976__ol_bwt_wch_sbc">
+                           
+                           <li>Go to <span class="uicontrol bold">Configuration and Administration &gt; User Management &gt; Access Control
+                List</span>.
+                           </li>
+                           
+                           <li>Enter the end point you want access to in the <span class="uicontrol bold">Access Control Entry
+                Point</span> field. For example, the end point for the Accessorial Codes power
+              data resource is "accessorialCodes". You can find the entry points later in this
+              guide, in the Tasks section. To find the Accessorial Codes example, in this guide go
+              to <span class="uicontrol bold">Tasks &gt; Power Data &gt; Accessorial Codes</span>. The ID appears as
+              part of the Path listed in the records.
+                           </li>
+                           
+                           <li>Use the "Contains" option for the field.</li>
+                           
+                           <li>Click <span class="uicontrol bold">Search</span>.
+                           </li>
+                           
+                        </ol>
+                     </div>
+                     
+                     <p>This will list all the associated Access Control List IDs for that resource. Note that a
+          power data resource can be associated with more than one root resource. Any one of those
+          privileges will be sufficient for access.</p>
+                     
+                  </div>
+                  
+               </div>
+               
+               <div class="section" id="u30226976__reference-100-284CB0F9">
+                  <p class="subhead1" id="u30226976__reference-102-284CB0FA">Access Control Lists for Transportation and Global Trade
+        Management Resources</p>
+                  
+                  
+                  <p id="u30226976__reference-232-28F22FF4">You can use the following privileges to access Transportation
+        and Global Trade Management resources.</p>
+                  
+                  <div class="tblformal" id="u30226976__reference-234-28F22F98">
+                     <table cellpadding="4" cellspacing="0" class="Formal" frame="hsides" border="1" rules="rows">
+                        <thead>
+                           
+                           <tr id="u30226976__reference-1636-6EB69A55" align="left" valign="top">
+                              
+                              <th id="d8362e100" align="left" valign="bottom">Resource </th>
+                              
+                              <th id="d8362e103" align="left" valign="bottom">Task</th>
+                              
+                              <th id="d8362e106" align="left" valign="bottom">Privilege </th>
+                              
+                              <th id="d8362e109" align="left" valign="bottom">Privilege Technical Name</th>
+                              
+                           </tr>
+                           
+                        </thead>
+                        <tbody>
+                           
+                           <tr id="u30226976__reference-106-17C7DEC2" align="left" valign="top">
+                              
+                              
+                              <td id="d8362e120" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-178-17CA297D">appointments</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e126" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-180-17CA297D">Appointments</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e132" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-182-17CA297E">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e138" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-184-17CA2980">REST - Appointment - View</p>
+                                 
+                                 <p id="u30226976__reference-158-17B28B67">REST - Appointment Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-160-17B28B6D">REST - Appointment Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-262-28F23000" align="left" valign="top">
+                              
+                              <td id="d8362e153" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-186-17CA2981">bills</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e159" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-188-17CA2983">Bills</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e165" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-190-17CA2983">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e171" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-192-17CA2985">REST - Bill - View</p>
+                                 
+                                 <p id="u30226976__reference-162-17B28B71">REST - Bill Configuration - View </p>
+                                 
+                                 <p id="u30226976__reference-164-17B28B74">REST - Bill Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-116-17C7DF42" align="left" valign="top">
+                              
+                              <td id="d8362e186" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-194-17CA2986">campaigns</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e192" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-196-17CA2988">Campaigns</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e198" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-198-17CA2988">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e204" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-200-17CA2989">REST - GTM Campaign - View </p>
+                                 
+                                 <p id="u30226976__reference-202-17CA298B">REST - GTM Campaign - Update</p>
+                                 
+                                 <p id="u30226976__reference-166-17B28B77">REST - GTM Campaign Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-168-17B28B7A">REST - GTM Campaign Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-126-17C7DF5E" align="left" valign="top">
+                              
+                              <td id="d8362e222" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-204-17CA298C">consols</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e228" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-206-17CA298E">Consols</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e234" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-208-17CA2990">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e240" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-210-17CA2991">REST - Consol - View</p>
+                                 
+                                 <p id="u30226976__reference-212-17CA2991">REST - Consol - Update</p>
+                                 
+                                 <p id="u30226976__reference-170-17B28BE1">REST - Consol Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-172-17B28BE4">REST - Consol Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-136-17C7DF7A" align="left" valign="top">
+                              
+                              <td id="d8362e258" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-214-17CA2993">contacts</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e264" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-216-17CA2994">Contacts</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e270" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-218-17CA2996">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e276" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-522-17CAF084">REST - Contact - View</p>
+                                 
+                                 <p id="u30226976__reference-524-17CAF08F"> REST - Contact - Update</p>
+                                 
+                                 <p id="u30226976__reference-174-17B28BE7">REST - Contact Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-176-17B28BEA">REST - Contact Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-220-17CA2997" align="left" valign="top">
+                              
+                              <td id="d8362e295" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-224-17CA2A1E">corporations</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e301" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-228-17CA2A30">Corporations</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e307" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-232-17CA29DF">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e313" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-526-17CAF092">REST - Corporation - View</p>
+                                 
+                                 <p id="u30226976__reference-528-17CAF094">REST - Corporation - Update</p>
+                                 
+                                 <p id="u30226976__reference-178-17B28BEE">REST - Corporation Configuration - View</p>
+                                 
+                                 <p id="u30226976__REST-CorporationConfiguration-Updat-17B19FC4">REST - Corporation
+                  Configuration - Update</p>
+                                 
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-146-17C7DF32" align="left" valign="top">
+                              
+                              <td id="d8362e333" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-236-17CA29F2">customsDeclarations</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e339" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-238-17CA29F4">Customs Declarations</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e345" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-240-17CA29F7">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e351" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-530-17CAF096">REST - GTM Shipment - View</p>
+                                 
+                                 <p id="u30226976__reference-532-17CAF097">REST - GTM Shipment - Update</p>
+                                 
+                                 <p id="u30226976__REST-GTMShipmentConfiguration-View-17B19C7B">REST - GTM Shipment
+                  Configuration - View</p>
+                                 
+                                 <p id="u30226976__REST-GTMShipmentConfiguration-Updat-17B19DBF">REST - GTM Shipment
+                  Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-156-17C7DFB1" align="left" valign="top">
+                              
+                              <td id="d8362e369" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-242-17CA29F7">damageClaims</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e375" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-244-17CA29F8">Damage Claims</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e381" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-246-17CA29FA">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e387" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-534-17CAF099">REST - Claim - View</p>
+                                 
+                                 <p id="u30226976__reference-536-17CAF09A">REST - Claim - Update</p>
+                                 
+                                 <p id="u30226976__reference-180-17B28BF1">REST - Claim Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-182-17B28BF4">REST - Claim Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-184-17B28BF7" align="left" valign="top">
+                              
+                              <td id="d8362e405" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-188-17B28BC8">documents</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e411" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-192-17B28C48">Documents</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e417" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-196-17B28C64">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e423" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-200-17B28C82">REST - Document - View</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-166-17C7DFCD" align="left" valign="top">
+                              
+                              <td id="d8362e432" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-248-17CA29FB">drivers</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e438" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-250-17CA29FD">Drivers</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e444" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-252-17CA29FD">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e450" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-538-17CAF09D">REST - Driver - View</p>
+                                 
+                                 <p id="u30226976__reference-540-17CAF09F">REST - Driver - Update</p>
+                                 
+                                 <p id="u30226976__reference-100-16218D05">REST - Driver Configuration - View </p>
+                                 
+                                 <p id="u30226976__reference-102-16218D07">REST - Driver Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-272-28F23027" align="left" valign="top">
+                              
+                              <td id="d8362e468" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-254-17CA2A62">equipmentGroups</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e474" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-256-17CA2A64">Equipment Groups</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e480" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-258-17CA2A66">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e486" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-542-17CAF0A0">REST - Equipment - View</p>
+                                 
+                                 <p id="u30226976__reference-544-17CAF0A2">REST - Equipment - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-282-28F2304B" align="left" valign="top">
+                              
+                              <td id="d8362e499" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-260-17CA2A67">equipmentTypes</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e505" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-262-17CA2A67">Equipment Types</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e511" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-264-17CA2A69">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e517" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-546-17CAF040">REST - Equipment - View</p>
+                                 
+                                 <p id="u30226976__reference-548-17CAF043">REST - Equipment - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-292-28F2306F" align="left" valign="top">
+                              
+                              <td id="d8362e529" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-266-17CA2A6A">equipments</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e535" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-268-17CA2A6C">Equipments</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e541" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-270-17CA2A6D">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e547" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-550-17CAF044">REST - Equipment - View</p>
+                                 
+                                 <p id="u30226976__reference-552-17CAF046">REST - Equipment - Update</p>
+                                 
+                                 <p id="u30226976__reference-202-17B28C21">REST - Equipment Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-204-17B28C24">REST - Equipment Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-256-A7E48D15" align="left" valign="top">
+                              
+                              <td id="d8362e565" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-260-A7E48D36">exchangeRates</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e571" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-264-A7E48CE4">Exchange Rates</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e577" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-268-A7E48D59">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e583" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-272-A7E48D6C">REST Exchange Rate - View</p>
+                                 
+                                 <p id="u30226976__reference-274-A7E48D6E">REST Exchange Rate - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-302-28F23095" align="left" valign="top">
+                              
+                              <td id="d8362e595" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-272-17CA2A6F">invoices</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e601" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-274-17CA2A6F">Invoices</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e607" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-276-17CA2A71">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e613" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-554-17CAF047">REST - Invoice - View</p>
+                                 
+                                 <p id="u30226976__reference-206-17B28C27">REST - Invoice Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-208-17B28C2A">REST - Invoice Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-312-28F230B9" align="left" valign="top">
+                              
+                              <td id="d8362e628" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-278-17CA2A72">items</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e634" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-280-17CA2A74">Items</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e640" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-282-17CA2A74">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e646" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-556-17CAF049">REST - Item- View</p>
+                                 
+                                 <p id="u30226976__reference-558-17CAF04C">REST - Item - Update</p>
+                                 
+                                 <p id="u30226976__reference-210-17B28C2F">REST - Item Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-212-17B28C31">REST - Item Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-322-28F230DD" align="left" valign="top">
+                              
+                              <td id="d8362e664" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-284-17CA2A75">itineraries</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e670" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-286-17CA2A77">Itineraries</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e676" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-288-17CA2A78">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e682" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-560-17CAF04E">REST - Itinerary - View</p>
+                                 
+                                 <p id="u30226976__reference-562-17CAF04F">REST - Itinerary - Update</p>
+                                 
+                                 <p id="u30226976__reference-214-17B28C35">REST - Itinerary Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-216-17B28C39">REST - Itinerary Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-290-17CA2A7A" align="left" valign="top">
+                              
+                              <td id="d8362e701" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-294-17CA2A35">locations</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e707" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-298-17CA2A46">Locations</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e713" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-302-17CA2A58">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e719" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-564-17CAF051">REST - Location - View</p>
+                                 
+                                 <p id="u30226976__reference-566-17CAF054">REST - Location - Update</p>
+                                 
+                                 <p id="u30226976__reference-218-17B28C3C">REST - Location Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-220-17B28C40">REST - Location Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-306-17CA2ACB" align="left" valign="top">
+                              
+                              <td id="d8362e737" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-310-17CA2AEA">orderBases</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e743" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-314-17CA2AFA">Order Bases</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e749" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-318-17CA2AA6">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e755" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-568-17CAF059">REST - Order - View</p>
+                                 
+                                 <p id="u30226976__reference-150-DA66D58F">REST - Order - Update</p>
+                                 
+                                 <p id="u30226976__reference-222-17B28C43">REST - Order Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-224-17B28CAC">REST - Order Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-322-17CA2AB5" align="left" valign="top">
+                              
+                              <td id="d8362e773" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-326-17CA2B35">orderMovements</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e779" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-330-17CA2B47">Order Movements</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e785" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-334-17CA2B56">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e791" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-570-17CAF05D">REST - Order - View</p>
+                                 
+                                 <p id="u30226976__reference-226-17B28CAF">REST - Order Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-228-17B28CB4">REST - Order Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-338-17CA2B03" align="left" valign="top">
+                              
+                              <td id="d8362e806" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-342-17CA2B23">orderReleaseLines</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e812" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-346-17CA2B98">Order Release Lines</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e818" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-350-17CA2BA7">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e824" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-572-17CAF05F">REST - Order - View</p>
+                                 
+                                 <p id="u30226976__reference-230-17B28CB7">REST - Order Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-232-17B28CBC">REST - Order Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-354-17CA2BB9" align="left" valign="top">
+                              
+                              <td id="d8362e839" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-358-17CA2B71">orderReleases</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e845" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-362-17CA2B82">Order Releases</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e851" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-366-17CA2BF9">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e857" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-574-17CAF060">REST - Order - View</p>
+                                 
+                                 <p id="u30226976__reference-152-DA66D592">REST - Order - Update</p>
+                                 
+                                 <p id="u30226976__reference-234-17B28CBF">REST - Order Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-236-17B28CC4">REST - Order Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-370-17CA2C0B" align="left" valign="top">
+                              
+                              <td id="d8362e875" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-374-17CA2BC7">packagedItems</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e881" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-378-17CA2BD9">Packaged Items</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e887" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-382-17CA2BEB">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e893" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-576-17CAF062">REST - Item- View</p>
+                                 
+                                 <p id="u30226976__reference-578-17CAF064">REST - Item - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-332-28F23102" align="left" valign="top">
+                              
+                              <td id="d8362e906" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-386-17CA2C60">powerUnits</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e912" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-388-17CA2C63">Power Units</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e918" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-390-17CA2C65">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e924" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-580-17CAF065">REST - Equipment - View</p>
+                                 
+                                 <p id="u30226976__reference-582-17CAF067">REST - Equipment - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-342-28F2318A" align="left" valign="top">
+                              
+                              <td id="d8362e936" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-392-17CA2C66">quotes</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e942" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-394-17CA2C68">Quotes</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e948" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-396-17CA2C69">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e954" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-584-17CAF068">REST - Quote - View</p>
+                                 
+                                 <p id="u30226976__reference-586-17CAF06B">REST - Quote - Update</p>
+                                 
+                                 <p id="u30226976__reference-238-17B28CC7">REST - Quote Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-240-17B28CCD">REST - Quote Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-242-17B28CD0" align="left" valign="top">
+                              
+                              <td id="d8362e972" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-246-17B28CA3">rateOfferings</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e978" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-250-17B28D33">Rate Offerings</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e984" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-254-17B28CFA">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e990" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-258-17B28D88">REST - Rate Offering - View </p>
+                                 
+                                 <p id="u30226976__reference-260-17B28D9A">REST - Rate Offering Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-262-17B28D9D">REST - Rate Offering Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-264-17B28DA0" align="left" valign="top">
+                              
+                              <td id="d8362e1005" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-268-17B28D6F">rateRecords</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1011" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-272-17B28DFF">Rate Records</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1017" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-276-17B28DC9">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1023" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-280-17B28E5B">REST - Rate Record - View</p>
+                                 
+                                 <p id="u30226976__reference-282-17B28E6E">REST - Rate Record Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-284-17B28E71">REST - Rate Record Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-352-28F2314A" align="left" valign="top">
+                              
+                              <td id="d8362e1038" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-398-17CA2C6B">sellShipments</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1044" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-400-17CA2C6C">Sell Shipments</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1050" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-402-17CA2C6E">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1056" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-588-17CAF06D">REST - Shipment - View</p>
+                                 
+                                 <p id="u30226976__reference-590-17CAF0D2">REST - Shipment - Update</p>
+                                 
+                                 <p id="u30226976__reference-286-17B28E74">REST - Shipment Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-288-17B28E15">REST - Shipment Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-404-17CA2C6F" align="left" valign="top">
+                              
+                              <td id="d8362e1074" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-408-17CA2C28">serviceProviders</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1080" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-412-17CA2C3C">Service Providers</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1086" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-416-17CA2C50">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1092" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-592-17CAF0D4">REST - ServiceProvider - View</p>
+                                 
+                                 <p id="u30226976__reference-594-17CAF0D6">REST - ServiceProvider - Update</p>
+                                 
+                                 <p id="u30226976__reference-290-17B28E18">REST - ServiceProvider Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-292-17B28E1D">REST - ServiceProvider Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-420-17CA2CC9" align="left" valign="top">
+                              
+                              <td id="d8362e1111" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-424-17CA2CE5">shipments</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1117" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-428-17CA2C95">Shipments</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1123" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-432-17CA2CA9">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1129" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-596-17CAF0D9">REST - Shipment - View</p>
+                                 
+                                 <p id="u30226976__reference-598-17CAF0DA">REST - Shipment - Update</p>
+                                 
+                                 <p id="u30226976__reference-294-17B28E20">REST - Shipment Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-296-17B28E25">REST - Shipment Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-276-A7E4A647" align="left" valign="top">
+                              
+                              <td id="d8362e1147" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-280-A7E4A6C4">sShipUnits</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1153" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-290-A7E4B850">Shipment Ship Units</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1159" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-292-A7E4B851">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1165" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-294-A7E4B853">REST - Shipment - View </p>
+                                 
+                                 <p id="u30226976__reference-288-A7E4A6E9">REST - Shipment - Update</p>
+                                 
+                                 <p id="u30226976__reference-298-17B28E28">REST - Shipment Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-300-17B28E2D">REST - Shipment Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr align="left" valign="top">
+                              
+                              <td align="left" valign="top" id="d8362e1183" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>tenders</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1189" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>Tenders</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1195" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>View and Update</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1201" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>REST - Tender - View</p>
+                                 
+                                 <p>REST - Tender - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-436-17CA2D22" align="left" valign="top">
+                              
+                              <td id="d8362e1213" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-440-17CA2D3E">tradeLicenses</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1219" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-444-17CA2D52">Trade Licenses</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1225" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-448-17CA2D01">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1231" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-600-17CAF0DC">REST - GTM License - View</p>
+                                 
+                                 <p id="u30226976__reference-602-17CAF0DD">REST - GTM License - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-452-17CA2D15" align="left" valign="top">
+                              
+                              <td id="d8362e1243" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-456-17CA2D95">tradeParties</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1249" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-460-17CA2DAA">Trade Parties</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1255" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-464-17CA2D58">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1261" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-604-17CAF0DF">REST - Contact - View</p>
+                                 
+                                 <p id="u30226976__reference-606-17CAF0E1">REST - Contact - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-362-28F2316E" align="left" valign="top">
+                              
+                              <td id="d8362e1273" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-468-17CA2D6D">tradeTransactions</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1279" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-470-17CA2D73">Trade Transactions</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1285" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-472-17CA2D74">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1291" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-608-17CAF0E2">REST - GTM Transaction - View</p>
+                                 
+                                 <p id="u30226976__reference-610-17CAF0E4">REST - GTM Transaction - Update</p>
+                                 
+                                 <p id="u30226976__reference-302-17B28E31">REST - GTM Transaction Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-304-17B28E37">REST - GTM Transaction Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-296-A7E4DF58" align="left" valign="top">
+                              
+                              <td id="d8362e1310" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-300-A7E4DFD4">trackingEvents</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1316" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-304-A7E4DFE2">Tracking Events</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1322" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-308-A7E4DFEE">View and Update</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1328" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-312-A7E4DFFB">REST - Tracking Event - View</p>
+                                 
+                                 <p id="u30226976__reference-314-A7E4DFFC">REST - Tracking Event - Update</p>
+                                 
+                                 <p id="u30226976__reference-306-17B28E9F">REST - Tracking Event Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-308-17B28EA5">REST - Tracking Event Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr align="left" valign="top">
+                              
+                              <td align="left" valign="top" id="d8362e1346" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>transmissions</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1352" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>Transmission</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1358" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>View and Update</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1364" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>REST - Tracking Event - View</p>
+                                 
+                                 <p>REST - Tracking Event - Update</p>
+                                 
+                                 <p>REST - Tracking Event Configuration - View</p>
+                                 
+                                 <p>REST - Tracking Event Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr align="left" valign="top">
+                              
+                              <td align="left" valign="top" id="d8362e1382" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>transmissionStatus</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1388" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>Transmission</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1394" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>View</p>
+                                 
+                              </td>
+                              
+                              <td align="left" valign="top" id="d8362e1400" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p>Common Interface Layer</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-316-A7E4DFFF" align="left" valign="top">
+                              
+                              <td id="d8362e1409" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-320-A7E4DFB1">transmissionReports</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1415" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-324-A7E4DFBF">Transmission Reports</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1421" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-328-A7E4E030">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1427" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-332-A7E4E03E">REST - Transmission - View</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-474-17CA2D74" align="left" valign="top">
+                              
+                              <td id="d8362e1436" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-478-17CA2DF5">vouchers</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1442" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-482-17CA2E09">Vouchers</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1448" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-486-17CA2DB9">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1454" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-612-17CAF0E7">REST - Invoice - View</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-490-17CA2DCD" align="left" valign="top">
+                              
+                              <td id="d8362e1463" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-494-17CA2E4E">voyages</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1469" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-498-17CA2E62">Voyages</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1475" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-502-17CA2E78">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1481" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-614-17CAF0E8">REST - Voyage - View</p>
+                                 
+                                 <p id="u30226976__reference-310-17B28EA8">REST - Voyage Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-312-17B28EAD">REST - Voyage Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr id="u30226976__reference-506-17CA2E28" align="left" valign="top">
+                              
+                              <td id="d8362e1497" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-510-17CA2E47">workInvoices</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1503" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-514-17CA2EC0">Work Invoices</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1509" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-518-17CA2ED6">View</p>
+                                 
+                              </td>
+                              
+                              <td id="d8362e1515" align="left" valign="top" headers="d8362e100 d8362e103 d8362e106 d8362e109 ">
+                                 
+                                 <p id="u30226976__reference-616-17CAF0EA">REST - Work Invoice - View</p>
+                                 
+                                 <p id="u30226976__reference-314-17B28EB1">REST - Work Invoice Configuration - View</p>
+                                 
+                                 <p id="u30226976__reference-316-17B28EB4">REST - Work Invoice Configuration - Update</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                        </tbody>
+                     </table>
+                  </div>
+                  
+               </div>
+               
+            </div>
+            
+         </div>
+        </article>
+    </body>
+</html>

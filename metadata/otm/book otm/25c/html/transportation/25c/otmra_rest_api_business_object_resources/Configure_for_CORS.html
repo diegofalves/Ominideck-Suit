@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Configure for CORS</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2018, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28976-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-03 17:56:41 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="Collections.html" title="Previous" type="text/html">
+        <link rel="next" href="JSON_PATCH.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-03T18:12:40+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+    <meta name="dcterms.isVersionOf" content="OTMRA">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Configure for CORS","description":"Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="Collections.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="JSON_PATCH.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Configure for CORS</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            
+            
+            <div id="concept-170-98E4F506">
+               
+               <p id="ConfigureForCORS-98E4F4C5__concept-104-261BA22F">Depending on the REST API client you're
+using, you may or may not need to configure for Cross-Origin Resource
+Sharing (CORS). You only need to configure for CORS if you're using
+a REST API client developed in a browser-based programming language,
+such as JavaScript. Such REST API clients can complete requests or
+access REST APIs only within the context of a web page in a browser.</p>
+               
+               <div class="section" id="ConfigureForCORS-98E4F4C5__concept-100-B304DB96">
+                  <p class="subhead1" id="ConfigureForCORS-98E4F4C5__concept-102-B304DBFF">Why Use CORS?</p>
+                  <p id="ConfigureForCORS-98E4F4C5__concept-106-AAE3537E">Simply put, CORS
+is a set of rules that defines the way a server and a browser talk
+to each other and whether or not it's safe to do so across different
+domains. As a specification, CORS provides a standard way to implement
+cross-domain requests that can be used in all browsers. </p>
+                  <p id="ConfigureForCORS-98E4F4C5__concept-104-AEEA7538">All browsers enforce the <a href="https://www.w3.org/Security/wiki/Same_Origin_Policy" target="_blank">same-origin
+					policy</a>. This policy permits scripts contained in one web page to access
+				data in another, but only if both web pages originate from the same domain. As a
+				result, REST API clients developed in browser-based programming languages that run
+				in one domain cannot retrieve resources from another domain. 
+                  </p>
+               </div>
+               
+               <div class="section" id="ConfigureForCORS-98E4F4C5__concept-112-AAE35396">
+                  <p class="subhead1" id="ConfigureForCORS-98E4F4C5__ServerSetting-218FFA26">Server Setting</p>In order to enable CORS, server requires the
+following property to be set to the domain that will accept these
+requests. 
+                  <ul style="list-style-type: disc;" id="ConfigureForCORS-98E4F4C5__concept-110-218FE01B">
+                     
+                     <li id="ConfigureForCORS-98E4F4C5__concept-112-218FE01E"><span class="bold" id="ConfigureForCORS-98E4F4C5__concept-114-218FE021">glog.webserver.cors.origins</span>: This property defines the valid origin domains of clients that
+are accepted by the server. If there are multiple valid origin domains,
+please use "<code class="codeph" id="ConfigureForCORS-98E4F4C5__concept-116-218FE023">,</code>" to separate
+them. For example, <code class="codeph" id="ConfigureForCORS-98E4F4C5__concept-118-218FE026">"glog.webserver.cors.origins
+= http://localhost:port,https://localhost:port"</code>.
+                     </li>
+                     
+                  </ul>
+               </div>
+               
+               <div class="section" id="ConfigureForCORS-98E4F4C5__ClientSetting-21900D41">
+                  <p class="subhead1" id="ConfigureForCORS-98E4F4C5__ClientSetting-21900ED7">Client Setting</p>In order to distinguish CORS requests from
+normal REST requests, the client should contain the following headers. 
+                  <ul style="list-style-type: disc;" id="ConfigureForCORS-98E4F4C5__concept-120-218FE029">
+                     
+                     <li id="ConfigureForCORS-98E4F4C5__concept-122-218FE02C"><span class="bold" id="ConfigureForCORS-98E4F4C5__concept-124-218FE02F">CORS</span>: Server executes CORS actions only when it detects the header "cors"
+in the request and the value of this header is true.
+                     </li>
+                     
+                     <li id="ConfigureForCORS-98E4F4C5__concept-126-218FE031"><span class="bold" id="ConfigureForCORS-98E4F4C5__concept-128-218FE034">withCredentials</span>: Server requires and accepts cookie, so "withCredentials" should
+be set to true in the CORS request.
+                     </li>
+                     
+                     <li id="ConfigureForCORS-98E4F4C5__concept-130-218FE037"><span class="bold" id="ConfigureForCORS-98E4F4C5__concept-132-218FE038">Authorization (For non-SSO server)</span>:
+					Non-SSO server requires basic HTTP authentication. User name and password should
+					be encoded as the value of "Authorization" as one of the request headers. 
+                     </li>
+                     
+                  </ul>
+                  <div class="p" id="ConfigureForCORS-98E4F4C5__concept-134-218FE09E">JS Example at client side:<pre class="pre codeblock" id="ConfigureForCORS-98E4F4C5__concept-136-218FE0A6"><code>var url = "http://host:port/logisticsRestApi/resources/v2/locations/GUEST.4444";
+var method = "GET";
+var xhr = createCORSRequest(method, url);
+xhr.send();
+
+function createCORSRequest(method, url){
+	var xhr = new XMLHttpRequest();
+	
+	if("withCredentials" in xhr){
+		xhr.open(method, url, true);
+		xhr.withCredentials = true;
+		xhr.setRequestHeader("Authorization", "Basic **********");
+		xhr.setRequestHeader("cors","true");
+		xhr.onreadystatechange = function(){
+			if(xhr.responseText !==null &amp;&amp; xhr.responseText!== ""){
+				document.getElementById("d1").innerHTML = xhr.responseText;
+			}
+		};
+		
+	// for IE 9 and older, which does not support "withCredentials", and thus could not send request with cookie
+	}else if(typeof XDomainRequest != "undefined"){
+		xhr = new XDomainRequest();
+		xhr.open(method, url, true);
+		xhr.setRequestHeader("Authorization", "Basic **********");
+		xhr.setRequestHeader("cors","true");
+		xhr.onreadystatechange = function(){
+			if(xhr.responseText !==null &amp;&amp; xhr.responseText!== ""){
+				document.getElementById("d1").innerHTML = xhr.responseText;
+			}
+		};
+	}else{
+		xhr = null;
+	}
+	
+	return xhr;
+}
+</code></pre></div>
+               </div>
+               
+            </div>
+            
+         </div>
+        </article>
+    </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="best-practices.html" title="Previous" type="text/html"><link rel="next" href="db-xml-import.html" title="Next" type="text/html"><meta name="description" content="The DB XML Export process produces a transaction set which can be viewed in the UI or saved as an external XML file."><meta property="og:description" content="The DB XML Export process produces a transaction set which can be viewed in the UI or saved as an external XML file."><meta property="og:title" content="Data Management Guide"><meta name="application-name" content="Data Management Guide"><meta name="dcterms:title" content="Data Management Guide"><meta name="dcterms.title" content="Data Management Guide"><meta name="doctitle" content="Data Management Guide"><meta name="dcterms.created" content="Thu Jun 12 11:38:37 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMDM"><meta name="dcterms.alternative" content="otmdm"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="data-management-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>DB.XML Export</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28963-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"DB.XML Export","description":"The DB XML Export process produces a transaction set which can be viewed in the UI or saved as an external XML file.","datePublished":"2025-06-12 CST","dateModified":"2025-06-12 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="best-practices.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="db-xml-import.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Data Management Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">DB.XML Export<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="db-xml-export"></span><span id="OTMDMdb-xml-export" data-help-type="cloud-saas-docid"></span><span id="db_xml_export" data-help-type="cloud-saas"></span><span id="object_set_name" data-help-type="cloud-saas"></span><span id="specify_sql_query" data-help-type="cloud-saas"></span><span id="migration_entity" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225234">DB.XML Export</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">The DB XML Export process produces a <span class="ph uicontrol">transaction set</span> which can be
+            viewed in the UI or saved as an external XML file.</p>
+        <p class="p">There are a number of ways to specify the data to be exported:</p>
+        <ul class="ul" id="u30225234__ul_nsx_zp5_5jb">
+            <li class="li">Specifying a SQL Query</li>
+            <li class="li">Migration entity</li>
+        </ul>
+        <p class="p">For all methods described below there is an option to specify whether the so-called âfoot
+            printâ columns are included in the export. The foot print columns are the INSERT_DATE,
+            INSERT_USER, UPDATE_DATE, and UPDATE_USER. The values for these columns would be updated
+            for any subsequently imported data by way of INSERT/UPDATE triggers and so their
+            presence in exported data is largely informational.</p>
+        <p class="p">By default, LOB data (BLOB and CLOB) is exported as a âbase 64â encoded string attribute
+            value. Working with the CLOB data, for example, would require decoding the string to
+            obtain the original character text, editing the text and then encoding again to a âbase
+            64â string.</p>
+        <p class="p">To make this process easier, and as a way to avoid exceeding any XML attribute length
+            limit, it is possible to export LOB data as separate elements. For example, if
+                <code class="ph codeph">parent_col2</code> is a CLOB column and <code class="ph codeph">parent_col3</code> is a
+            BLOB column:</p>
+        <pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xml2sql Version=â20Bâ&gt;
+   &lt;TRANSACTION_SET useLOBElement="true"&gt;
+      &lt;"parent table name" parent_col1="value_1" parent_col2="CLOBID#1" parent_col3="BLOBID#1" ..etc..&gt;
+         &lt;"child table name" child_col1="value_1" ..etc..&gt;
+            ...etc...
+         &lt;/"child table name"&gt;
+         &lt;CLOB ID="CLOBID#1"&gt;
+            &lt;![CDATA[
+               ...Both xml and non-xml text appears here...
+            ]]&gt;
+         &lt;/CLOB&gt;
+         &lt;BLOB ID="BLOBID#1"&gt;
+            ...base 64 encoded binary value appears here...
+         &lt;/BLOB&gt;
+      &lt;/"parent table name"&gt;
+   &lt;/TRANSACTION_SET&gt;
+ &lt;/xml2sql&gt;
+</code></pre>
+        <p class="p">The attribute value for the LOB column will then contain a unique ID for the element
+            containing the CLOB or BLOB content. Note that BLOB content must always be a âbase 64â
+            encoded string. The âuseLOBElementâ is generated on export and required on import for
+            DB.XML files that contain the above format.</p>
+    </div>
+<div class="topic nested1" lang="en" id="u30225236"><h2 class="title topictitle2"><span id="db-xml-export"></span><span id="OTMDMdb-xml-export" data-help-type="cloud-saas-docid"></span>Using an Object Set Name</h2>
+      
+      <div class="body">
+        <p class="p">The <span class="ph uicontrol">Object Set Name</span> is a named list of Object Names (described
+            above). This allows a logical grouping of data to be exported in one file. The base
+            install will provide the following pre-configured queries:</p>
+        <table class="customlayout" style="table-layout: auto; width: 95%" summary="A table that lists object set names and associated object names."><p class="titleintable">Object Set Names</p><colgroup><col><col></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry colsep-1 rowsep-1" id="u30225236__table_vkv_sr5_5jb__entry__1">Object Set Name</th>
+                        <th class="entry colsep-1 rowsep-1" id="u30225236__table_vkv_sr5_5jb__entry__2">Associated Object Names</th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225236__table_vkv_sr5_5jb__entry__1">DomainReferenceData</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225236__table_vkv_sr5_5jb__entry__2">STATUS_TYPE, WORKFLOW_TOPIC_INFO, NOTIFY_SUBJECT_CONTACT,
+                            PLANNING_PARAMETER, BN_RULE, NOTIFY_SUBJECT_STYLESHEET</td>
+                    </tr>
+                </tbody></table>
+        <p class="p">New customer-defined object set names and object lists can be added by setting the
+            associated properties. For example, the above set is defined by the property:</p>
+        <pre class="pre codeblock"><code>glog.integration.dbxml.objectset.DomainReferenceData=STATUS_TYPE,WORKFLOW_TOPIC_INFO,NOTIFY_SUBJECT_CONTACT,PLANNING_PARAMETER,BN_RULE,NOTIFY_SUBJECT_STYLESHEET</code></pre>
+        <p class="p">The use of a "where clause" is mandatory for the export by Object Set.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225237"><h2 class="title topictitle2"><span id="db-xml-export"></span><span id="OTMDMdb-xml-export" data-help-type="cloud-saas-docid"></span>Specifying a SQL Query</h2>
+      
+      <div class="body">
+        <p class="p">The complete SQL query can also be specified directly. When this approach is used there
+            must be an additional "Root Name" parameter given. This is used as the name of the top
+            level parent element name for each record retrieved by the query.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225238"><h2 class="title topictitle2"><span id="db-xml-export"></span><span id="OTMDMdb-xml-export" data-help-type="cloud-saas-docid"></span>Migration Entity</h2>
+      
+      <div class="body">
+        <p class="p">The Migration Entity names are a list of all the application objects available in
+            Transportation and Global Trade Management Cloud. They are designed to support the
+            export of a top level object, e.g. Location and all its child objects, e.g.
+            LocationStatus, LocationRefnum, etc. However, the list also contains the respective
+            child entity names to support fine grained export.</p>
+        <p class="p">The specific entities are retrieved based on a comma separated list of unique object
+            primary keys for the entity name selected. For example, if Location were the selected
+            entity the Object ID would be a comma separated list of Location Primary Key
+            strings.</p>
+    </div>
+</div></div></article></body></html>

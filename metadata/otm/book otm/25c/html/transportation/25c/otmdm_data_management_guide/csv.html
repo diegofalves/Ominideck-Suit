@@ -1,0 +1,142 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="db-xml.html" title="Previous" type="text/html"><link rel="next" href="export-via-json-through-rest-api.html" title="Next" type="text/html"><meta name="description" content="OTM supports the ability to import and export data in the CSV format in and out of the database."><meta property="og:description" content="OTM supports the ability to import and export data in the CSV format in and out of the database."><meta property="og:title" content="Data Management Guide"><meta name="application-name" content="Data Management Guide"><meta name="dcterms:title" content="Data Management Guide"><meta name="dcterms.title" content="Data Management Guide"><meta name="doctitle" content="Data Management Guide"><meta name="dcterms.created" content="Thu Jun 12 11:38:38 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMDM"><meta name="dcterms.alternative" content="otmdm"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="data-management-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Introduction to CSV</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28963-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Introduction to CSV","description":"OTM supports the ability to import and export data in the CSV format in and out of the database.","datePublished":"2025-06-12 CST","dateModified":"2025-06-12 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="db-xml.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="export-via-json-through-rest-api.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Data Management Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Introduction to CSV<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="csv"></span><span id="OTMDMcsv" data-help-type="cloud-saas-docid"></span><span id="csv" data-help-type="cloud-saas"></span><span id="sample_csv_file" data-help-type="cloud-saas"></span><span id="multitable_csv_files" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225419">Introduction to CSV</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">OTM supports the ability to import and export data in the CSV format in and out of the
+            database.</p>
+        <p class="p">CSVUtil also exports data as a script of insert statements. This document describes how
+            to use OTMâs CSV capabilities and shows some sample CSV files.</p>
+        <p class="p">CSV files are compact and enable you to export/import large amounts of data into Oracle
+            Transportation Management. For example, you can use CSVs when importing rates into
+            Oracle Transportation Management.</p>
+        <div class="infobox-"><span class="notep1">Note:</span> Updates made directly to the Transportation and Global Trade Management Cloud database
+            by CSV import can only ensure data consistency with respect to the standard database
+            constraints, e.g. Primary Key, Foreign Key, and Check constraints. Imports do not flow
+            through the main application logic for updates, and so cannot check that the business
+            context of a particular change makes sense. For example, the status of a particular
+            object (e.g. LOCATION STATUS) can be updated. Import can only check that the status GID
+            is valid but not that the status, possibly in association with other status values,
+            constitutes an appropriate state for the object to be in.</div>
+        <div class="infobox-"><span class="notep1">Note:</span> CSVUtil is deliberately non-transactional, and therefore may return inconsistent data
+            if modifications to exported tables are made concurrently to the CSVUtil
+            operation.</div>
+        <div class="infobox-"><span class="notep1">Note:</span> CSV files cannot contain column values that contain line breaks (such as a multi-line
+            XML document). Unless the database table uses the CLOB type for the column, you cannot
+            import or export such columns in CSV format (use DB.XML format instead). If the column
+            is of type CLOB, additional files for the CLOB column of each record can be read or
+            written, but only when using CSVUtil in ZIP file mode through the web interface. See
+            below for further details.</div>
+    </div>
+<div class="topic nested1" id="u30258165">
+    <h2 class="title topictitle2"><span id="csv"></span><span id="OTMDMcsv" data-help-type="cloud-saas-docid"></span>How Can I Use CSV? </h2>
+    
+    <div class="body">
+        <div class="p">There are a few ways to use CSVUtil:<ul class="ul" id="u30258165__ul_oy2_csp_5jb">
+                <li class="li">Via the Oracle Transportation Management web interface</li>
+                <li class="li">Via integration transmissions</li>
+            </ul></div>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225420"><h2 class="title topictitle2"><span id="csv"></span><span id="OTMDMcsv" data-help-type="cloud-saas-docid"></span>A Sample CSV File</h2>
+      
+      <div class="body">
+        <p class="p">Below are the contents of a sample CSV file:</p>
+        <pre class="pre codeblock"><code>ICON 
+ICON_GID,ICON_XID,DESCRIPTION,PATH,DOMAIN_NAME,INSERT_USER,INSERT_DATE,UPDATE_USER,UPDATE_DATE 
+EXEC SQL ALTER SESSION SET NLS_DATE_FORMAT = 'YYYYMMDDHH24MISS' 
+"BATCH_GRID","BATCH_GRID","Reports Batch Grid","/images/icons/reports/batch_grid.jpg","PUBLIC","DBA.ADMIN","20040310091645","DBA.ADMIN","20040630100834"
+</code></pre>
+        <p class="p">Line 1 must be the name of the table.</p>
+        <p class="p">Line 2 must be a comma-separated list of column names. Only the columns being loaded must
+            be specified. Note that CSVUtil is case-sensitive with regards to column names; all
+            column names must be in upper case if using standard database, or in mixed ("camel")
+            case without underscores if using appserver mode (see chapter 6 for more details). Note
+            also that if updating or deleting existing records, all columns in the primary key of
+            the specified table must be included so the records to be updated or deleted can be
+            precisely identified; CSVUtil does not permit "wildcard" updates or deletes using
+            partial primary keys.</p>
+        <p class="p">After line 2 may be one or more optional EXEC SQL lines, such as the one shown above, to
+            set the date format.</p>
+        <p class="p">Subsequent lines include the data. The number of columns of data must correspond to the
+            number of columns specified on line 2. The ordering of the data columns must also
+            correspond to line 2.</p>
+        <p class="p">Character data may be surrounded with double-quotes, as shown above. If you need to
+            include a double-quote character, use â&amp;quot;â instead. The tools described here to
+            export CSV files automatically convert double-quote characters into â&amp;quot;â.</p>
+        <p class="p">Numeric data should not be surrounded with double-quotes.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225421"><h2 class="title topictitle2"><span id="csv"></span><span id="OTMDMcsv" data-help-type="cloud-saas-docid"></span>Multi-table CSV Files</h2>
+      
+      <div class="body">
+        <p class="p">The output produced by the xcsvw* commands is in multi-table CSV format. The various CSV
+            import commands recognize this format also:</p>
+        <ul class="ul" id="u30225421__ul_zhk_psp_5jb">
+            <li class="li">The first record in a multi-format file must be "$HEADER".</li>
+            <li class="li">The header section contains table names and the names of the columns used in that
+                table.</li>
+            <li class="li">After the header section comes the body, identified by the $BODY keyword.</li>
+            <li class="li">Each data record in the $BODY must be preceded by its table name on the prior
+                line.</li>
+        </ul>
+        <p class="p">Here is an example:</p>
+        <pre class="pre codeblock"><code>$HEADER
+LOCATION_ROLE_PROFILE
+LOCATION_GID,LOCATION_ROLE_GID,CALENDAR_GID,FIXED_STOP_TIME, etc...
+LOCATION_STATUS
+LOCATION_GID,STATUS_TYPE_GID,STATUS_VALUE_GID,DOMAIN_NAME,INSERT_USER,INSERT_DATE,UPDATE_USER,UPDATE_DATE
+LOCATION_CORPORATION
+LOCATION_GID,CORPORATION_GID,DOMAIN_NAME,INSERT_DATE,UPDATE_DATE,INSERT_USER,UPDATE_USER
+LOCATION_ADDRESS
+LOCATION_GID,LINE_SEQUENCE,ADDRESS_LINE,DOMAIN_NAME,INSERT_USER,INSERT_DATE,UPDATE_USER,UPDATE_DATE
+LOCATION_REFNUM
+LOCATION_GID,LOCATION_REFNUM_QUAL_GID,LOCATION_REFNUM_VALUE,DOMAIN_NAME,INSERT_DATE, etc...
+LOCATION
+LOCATION_GID,LOCATION_XID,LOCATION_NAME,ADDRESS_LINE1,ADDRESS_LINE2,CITY,etc.
+EXEC SQL ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS..'
+$BODY
+LOCATION
+"GUEST.00621918","00621918","00621918",,,,,"TN",,"USA",,,,,"America/New_York",,,,,,,,"N","N","COMMERCIAL",,,"GUEST","S",0,...etc
+LOCATION_ADDRESS
+"GUEST.00621918",1,,"GUEST","DBA.ADMIN",2001-10-07 17:53:53.0,,
+LOCATION_ADDRESS
+"GUEST.00621918",2,,"GUEST","DBA.ADMIN",2001-10-07 17:53:53.0,,
+LOCATION_CORPORATION
+"GUEST.00621918","GUEST.CUST NO","GUEST",2001-10-15 10:50:49.0,,"DBA.ADMIN",
+LOCATION_REFNUM
+"GUEST.00621918","GLOG","GUEST.00621918","GUEST",2001-10-25 17:13:48.0,2001-10-19 18:23:17.0,"DBA.ADMIN","DBA.GLOGOWNER"
+LOCATION_ROLE_PROFILE
+"GUEST.00621918","SHIPFROM/SHIPTO",,0,0,"GUEST","S",0,"S",0,"N",,,,,,,,,,2001-10-25 14:12:38.0,2002-08-28 19:13:05.0,"DBA.ADMIN", etc.
+LOCATION_STATUS
+"GUEST.00621918","GUEST.CREDIT LEVEL","GUEST.CREDIT LEVEL_UNKNOWN","GUEST","DBA.GLOGOWNER",2001-10-17 09:38:05.0,,
+</code></pre>
+    </div>
+</div></div></article></body></html>
