@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+    <meta name="template" content="../../assets/masterpages/shipment_management.htt">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="date" content="12 17, 2001 2:18:40 PM">
+    <meta name="topic-status" content="Complete">
+    <meta name="topic-priority" content="0">
+    <meta name="topic-time-estimate" content="0">
+    <meta name="topic-comment" content>
+    <meta name="topic-id" content="Planning\itinerary_manager\itinerary_parameters.htm">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="generator" content="Adobe RoboHelp 2022">
+    <title>Handling Rates in Network Routing</title>
+    <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+    <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+    <meta name="rh-index-keywords" content="network routing:handling rates">
+  <meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:11+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Handling Rates in Network Routing","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Shipment Management</p>
+  </div>
+  <div>
+    <noscript> If you have any questions or comments about this topic or the online help, please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact us.</a> </noscript>
+    <h1><span data-field="title" data-format="default">Handling Rates in Network Routing</span></h1>
+    <div role="main">
+      <p>This section describes how costs are used in <a href="network_routing.htm">network routing</a> and different settings that can be used to control them.Â Having information about how much it costs to go through each path in the network will help you make the correct routing decisions for a transportation network.</p>
+      <h2><a id="How_Network_Routing_Handles_Rates"></a>How Network Routing Handles Rates</h2>
+      <p>In order to make routing decisions for orders, network routing needs to determine how much it costs to travel along different legs of the network. Network routing uses OTM rates in order to create abstracted cost data for each leg, in order to increase performance and simplify cost computations. This abstracted cost data is used only to determine how an order is to be routed, while the true detailed rating data is used when building the actual OTM shipment.</p>
+      <p>The abstracted cost data can be seen in the <a href="network_routing_flow.htm#xml_files">network XML file</a>: NrNetwork.xml files. Some knowledge about how it is derived may be useful for setting up network routing.</p>
+      <p>Network routing abstracted cost data treats rates as falling into one of two types of costs:</p>
+      <ul>
+        <li><span class="Bold">Equipment-based Costs</span>: These are computed for each piece of the equipment defined for a leg, and for each service provider that has rates for that leg. The equipment-based cost uses a flat per-equipment cost (e.g., it costs $313.57 to go on a IO-BIG piece of equipment (capacity 45,000 lbs) from Indianapolis to Cuyahoga Falls, (see the <a href="network_routing_example.htm">Network Routing example</a>). The equipment-based cost represents a consolidation opportunity to network routing, because the cost will be the same whether the equipment is 10% utilized or 100% utilized.</li>
+        <li><span class="Bold">Quantity-based Costs</span>: These are computed based upon the Logistics Guide Template. The quantity-based cost uses a per-unit-quantity cost (e.g., for a set of orders weighing between 500 lb and 1000 lb, the cost is $133.85 + $0.1285 per lb over 500 lb).</li>
+      </ul>
+      <h2><a id="Quantity_Based_Costs"></a>Quantity Based Costs</h2>
+      <p>While the equipment-based costs are computed based on the equipment groups defined for the individual legs, the quantity-based costs are based upon quantity breaks defined by mode in the <a href="../rate_manager/logistics_guide_template.htm">Logistics Guide Template</a>. This is set up by using the <a href="../power_data/planning/logic_configuration_network_routing.htm">network routing logic configuration parameter</a> ROUTING LOGISTICS GUIDE TEMPLATE GID. This points to a logistics guide template that you have defined.</p>
+      <p>On the logistics guide template, set the &quot;Template Type&quot; to PLANNING. It defines different weight/volume breaks by mode. For example, you could define the following weight breaks:</p>
+      <ul>
+        <li>0 lb to 500 lb</li>
+        <li>500 lb to 1000 lb</li>
+        <li>1000 lb to 2000 lb</li>
+        <li>2000 lb to 4000 lb</li>
+        <li>4000 lb to 8000 lb.</li>
+      </ul>
+      <p>When network routing is considering how much it costs to route an order through a leg that has LTL rates, it will estimate costs based on these weight breaks.</p>
+      <p>It is important to note that these weight breaks are needed just to distinguish how much it costs to route something along this leg relative to some other leg. The precise rated cost generally is not needed to distinguish the relative costs and make routing decisions. The more weight breaks that are set up, the longer the run-time required for deriving all of the quantity-based costs.</p>
+      <p>The following properties specify values of the flexible commodity qualifier GID and flexible commodity qualifier code to be used during network creation. Note that the values of these properties are populated to the ship units and ship unit lines that are used during network creation.</p>
+      <ul>
+        <li><a href="../../properties/glog/business.property.htm#networkrouting.flexCommodityCodeForRatingNetwork">glog.business.networkrouting.flexCommodityCodeForRatingNetwork</a></li>
+        <li><a href="../../properties/glog/business.property.htm#networkrouting.flexCommodityQualGidForRatingNetwork">glog.business.networkrouting.flexCommodityQualGidForRatingNetwork</a></li>
+      </ul>
+      <h2><a id="Supported_Rate_Types"></a>Supported Rate Types</h2>
+      <p>The following rate types are supported by network routing:</p>
+      <ul>
+        <li>TL</li>
+        <li>LTL</li>
+        <li>Intermodal</li>
+        <li>Vessel</li>
+        <li>Rail</li>
+      </ul>
+      <p>However, rates that have certain order-specific requirements, such as dimensions, are currently not recognized by network routing. These may be modeled using the Expected Cost Leg Options below.</p>
+      <h2><a id="Ground_Schedule_Shipments"></a>Ground Schedule Shipments</h2>
+      <p>For each leg that has ground schedules, network routing will consider leg options for each ground schedule shipment that is available on that leg.</p>
+      <p>The nominal cost for each ground schedule leg option is zero. However, network routing will use its own internal cost penalty to prefer earlier ground schedule shipments, and to prefer partially utilized ground schedule shipments over empty ground schedule shipments. This penalty can be set using the <a href="../../properties/glog/optimization_properties.htm#networkrouting.emptyEquipmentGSPenalty">glog.optimization.networkrouting.emptyEquipmentGSPenalty</a> property.</p>
+      <h2><a name="expected_cost" id="expected_cost"></a>Expected Cost Leg Options</h2>
+      <p>Besides the abstracted costs that network routing uses for each leg, you can set up a user-defined cost for each leg.</p>
+      <p>On legs, there is a checkbox &quot;Calculate Contracted Rate&quot; which indicates whether an actual rate is to be used on the leg, or whether the &quot;Estimated Cost&quot; is to be used instead.</p>
+      <p>In network routing, if the &quot;Calculate Contracted Rate&quot; checkbox is not selected, then OTM uses the &quot;Estimated Cost&quot; as the abstracted cost for the leg. However, if the &quot;Calculate Contracted Rate&quot; checkbox is selected, you can choose to have network routing use the &quot;Estimated Cost&quot; as an abstracted cost in addition to any rated cost on the leg.</p>
+      <p>For this case (when the &quot;Calculate Contracted Rate&quot; checkbox is not selected), you can control this with the Network Routing Logic Configuration parameter <a href="../power_data/planning/logic_configuration_network_routing.htm#expected_cost">EXPECTED COST LEG OPTIONS</a>.</p>
+      <h2><a id="Network_Routing_Cache"></a>Network Routing Cache</h2>
+      <p>As described above, network routing uses abstracted costs based on equipment and/or quantity breaks. These costs are not specific to the orders being planned. Therefore, the abstracted network costs will not change with different order sets, unless the leg data or the rate data has changed.</p>
+      <p>In order to take advantage of this to improve performance, the network costs are cached in the NetworkLegRateCache. This cache is similar to other OTM data caches. For example, it will improve run-time after the cache has been filled.</p>
+      <p>To increase/decrease cache size, use utility servlet glog.webserver.cache.CacheDiagServlet and look for cache name &quot;NetworkLegRateCache&quot;. To disable it, set capacity to 0.</p>
+    </div>
+    <h2>Related Topics</h2>
+    <p class="LinkList"><a href="network_routing.htm">Network Routing</a></p>
+    <p class="LinkList"><a href="network_routing_flow.htm">Network Routing Flow</a></p>
+    <p class="LinkList"><a href="network_routing_example.htm">Network Routing Example</a></p>
+    <p class="LinkList"><a href="modelling_routing_networks.htm">Modelling Routing Networks</a></p>
+    <p class="LinkList"><a href="routing_networks_in_multileg_itineraries.htm">Routing Networks in Multi-Leg Itineraries</a></p>
+    <p class="LinkList"><a href="network_routing_and_order_movements.htm">Network Routing and Order Movements</a></p>
+    <p class="LinkList"><a href="routing_networks_in_multileg_itineraries.htm">Routing Networks in Multi-leg itineraries</a></p>
+    <p class="LinkList"><a href="../power_data/planning/logic_configuration_network_routing.htm">Logic Configuration - Network Routing</a></p>
+    <p class="LinkList"><a href="network_detail_manager.htm">Network Detail Manager</a></p>
+    <p class="LinkList"><a href="network_manager.htm">Network Manager</a></p>
+    <p class="LinkList"><a href="network_leg_manager.htm">Network Leg Manager</a></p>
+    <script type="text/javascript" language="JavaScript1.2"> //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]></script>
+  
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "1"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>
