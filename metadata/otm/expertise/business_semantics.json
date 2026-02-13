@@ -1,0 +1,50 @@
+[
+  {
+    "entity": "SHIPMENT_STATUS",
+    "real_meaning": "Snapshot status history",
+    "important_columns": ["STATUS_TYPE_GID", "STATUS_VALUE_GID"],
+    "consulting_notes": "Never join without filtering STATUS_TYPE_GID"
+  },
+  {
+    "entity": "SHIPMENT_COST",
+    "real_meaning": "Cost breakdown for each shipment",
+    "important_columns": ["COST_TYPE_GID", "COST_AMOUNT"],
+    "consulting_notes": "Always filter by COST_TYPE_GID"
+  },
+  {
+    "entity": "ORDER_MOVEMENT",
+    "real_meaning": "Tracks movement of order releases",
+    "important_columns": ["ORDER_RELEASE_GID", "MOVEMENT_SEQ_NUM"],
+    "consulting_notes": "Movement sequence is critical for joins"
+  },
+  {
+    "entity": "RATE_GEO_COST",
+    "real_meaning": "Cost details for rate geo",
+    "important_columns": ["RATE_GEO_GID", "COST_TYPE_GID"],
+    "consulting_notes": "Always filter by RATE_GEO_GID"
+  },
+  {
+    "entity": "LOCATION",
+    "real_meaning": "Physical or logical place",
+    "important_columns": ["REGION_GID", "ADDRESS_GID"],
+    "consulting_notes": "Region and address mapping are key"
+  },
+  {
+    "entity": "DOMAIN_NAME",
+    "real_meaning": "Partitioning key for multi-tenant data",
+    "important_columns": ["DOMAIN_NAME"],
+    "consulting_notes": "Always filter by DOMAIN_NAME in queries"
+  },
+  {
+    "entity": "AGENT",
+    "real_meaning": "Automation trigger for OTM events",
+    "important_columns": ["AGENT_TYPE_GID", "DOMAIN_NAME"],
+    "consulting_notes": "Agent type and domain must be validated"
+  },
+  {
+    "entity": "STATUS",
+    "real_meaning": "Generic status tracking",
+    "important_columns": ["STATUS_TYPE_GID", "STATUS_VALUE_GID"],
+    "consulting_notes": "Always filter by STATUS_TYPE_GID"
+  }
+]

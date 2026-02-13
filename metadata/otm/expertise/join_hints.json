@@ -1,0 +1,103 @@
+[
+  {
+    "from_table": "SHIPMENT",
+    "to_table": "ORDER_RELEASE",
+    "preferred_join_path": [
+      "SHIPMENT.SHIPMENT_GID = ORDER_MOVEMENT.SHIPMENT_GID",
+      "ORDER_MOVEMENT.ORDER_RELEASE_GID = ORDER_RELEASE.ORDER_RELEASE_GID"
+    ],
+    "avoid_direct_join": true,
+    "why": "Direct join causes duplication in multi-movement shipments",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "SHIPMENT",
+    "to_table": "SHIPMENT_STATUS",
+    "preferred_join_path": [
+      "SHIPMENT.SHIPMENT_GID = SHIPMENT_STATUS.SHIPMENT_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Always filter STATUS_TYPE_GID to avoid invalid results",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "SHIPMENT",
+    "to_table": "SHIPMENT_STOP",
+    "preferred_join_path": [
+      "SHIPMENT.SHIPMENT_GID = SHIPMENT_STOP.SHIPMENT_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Direct join is safe, but always check stop sequence",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "SHIPMENT",
+    "to_table": "SHIPMENT_COST",
+    "preferred_join_path": [
+      "SHIPMENT.SHIPMENT_GID = SHIPMENT_COST.SHIPMENT_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Direct join is safe, but cost type must be considered",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "ORDER_RELEASE",
+    "to_table": "ORDER_RELEASE_LINE",
+    "preferred_join_path": [
+      "ORDER_RELEASE.ORDER_RELEASE_GID = ORDER_RELEASE_LINE.ORDER_RELEASE_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Direct join is standard, but always check line sequence",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "ORDER_RELEASE",
+    "to_table": "ORDER_MOVEMENT",
+    "preferred_join_path": [
+      "ORDER_RELEASE.ORDER_RELEASE_GID = ORDER_MOVEMENT.ORDER_RELEASE_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Direct join is safe, but movement sequence must be considered",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "RATE_GEO",
+    "to_table": "RATE_GEO_COST",
+    "preferred_join_path": [
+      "RATE_GEO.RATE_GEO_GID = RATE_GEO_COST.RATE_GEO_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Direct join is standard",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "LOCATION",
+    "to_table": "REGION",
+    "preferred_join_path": [
+      "LOCATION.REGION_GID = REGION.REGION_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Direct join is standard",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "LOCATION",
+    "to_table": "ADDRESS",
+    "preferred_join_path": [
+      "LOCATION.ADDRESS_GID = ADDRESS.ADDRESS_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Direct join is standard",
+    "confidence": "consulting_best_practice"
+  },
+  {
+    "from_table": "SHIPMENT",
+    "to_table": "INVOICE",
+    "preferred_join_path": [
+      "SHIPMENT.SHIPMENT_GID = INVOICE.SHIPMENT_GID"
+    ],
+    "avoid_direct_join": false,
+    "why": "Direct join is standard, but always check invoice type",
+    "confidence": "consulting_best_practice"
+  }
+]
