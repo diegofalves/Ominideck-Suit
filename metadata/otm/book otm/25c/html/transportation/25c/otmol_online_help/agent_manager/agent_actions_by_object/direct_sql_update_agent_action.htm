@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="agent_manager\agent_actions_by_object\document_agent_actions.htm">
+  <meta name="template" content="../../assets/masterpages/business process automation.htt">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Direct SQL Update Utility Agent Action</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="agent actions:utility,agent actions:direct sql update,utility:agent actions,direct SQL update:agent actions">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:06+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Direct SQL Update Utility Agent Action","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Business Process Automation</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Direct SQL Update Utility Agent Action</span></h1>
+  <div role="main">
+    <p>This page is accessed via <span class="Bold">Business Process Automation &gt; Agents and Milestones &gt; Automation Agent</span>.</p>
+    <p>This agent action executes a SQL DML statement or stored procedure directly against Oracle Transportation Management or related tables. Direct SQL Update supports insert, update, delete and merge statements. For the automatic update of caches, it is recommended that you use DML Returning. This mechanism asks the system to return a list of impacted records. Then the system broadcasts out any needed cache updates based on this list.</p>
+    <p>Merge does not support DML Returning. If you are using merge, you will need to use another option (e.g. SQL Select) to specify what records were modified.</p>
+    <p>Update supports DML Returning, but only if the update statement does not use sub-selects to update columns.</p>
+    <p class="Note"><span class="Bold">Note</span><span class="Bold">:</span> Only child elements of the parent object for which the agent runs can be modified. For example, shipment events are not considered children of shipments.</p>
+    <h2><a name="sql_state_example" id="sql_state_example"></a>A SQL statement example</h2>
+    <p><span class="Code">update shipment set servprov_gid =<br>
+        (select sa.servprov_gid<br>
+        from ie_shipmentstatus iess, servprov_alias sa<br>
+        where sa.alias = iess.servprov_alias_value and<br>
+        sa.servprov_alias_qual_gid = iess.servprov_alias_qual_gid and iess.i_transaction_no = $i_transation_no)<br>
+        where shipment _gid = $shipment_gid</span></p>
+    <h2><a name="pl_sql_example" id="pl_sql_example"></a>A PL/SQL example</h2>
+    <p><span class="Code">call shipment_event.update_servprov($shipment_gid, $i_transaction_no)</span></p>
+    <p class="Note"><span class="Bold">Note</span>: The PL/SQL procedures that you enter should not include beginning and ending brackets { } that traditionally begin and end PL/SQL procedures.</p>
+    <p>If entering a DML statement, enter the statement in the SQL Statement field and select a Statement Type of &quot;Plain SQL Statement&quot;. The statement should match one of the following three forms:</p>
+    <ul>
+      <li><span class="Code">insert into &lt;table&gt; ...</span></li>
+      <li><span class="Code">update &lt;table&gt; ...</span></li>
+      <li><span class="Code">delete from &lt;table&gt; ...</span></li>
+    </ul>
+    <p>If entering a stored procedure, enter the procedure call in the SQL Statement field and select a Statement Type of &quot;Stored Procedure&quot;. The statement should be of the form:</p>
+    <ul>
+      <li><span class="Code">call package.proc(...)</span></li>
+    </ul>
+    <p>A SQL Description can be associated with each distinct SQL statement to allow an agent user to understand the purpose of the call.</p>
+    <h2><a name="impact_caches" id="impact_caches"></a>Impact of Direct SQL Update on Oracle Transportation Management Caches</h2>
+    <p>If you are inserting, updating or deleting records from a published table in the Oracle Transportation Management schema, your changes need to be reflected in Oracle Transportation Management business caches. Otherwise, data used by planning, execution and other subsystems may not reflect the data changed in the Direct SQL Update action. Most Oracle Transportation Management tables are not cached and changes made by this action are independent of Oracle Transportation Management. But the use of caches within Oracle Transportation Management varies from release to release and must be accounted for when directly modifying data.</p>
+    <h3><a name="cache_dml" id="cache_dml"></a>Caching and DML Statements</h3>
+    <p>For DML statements entered as a Plain SQL Statement, Oracle Transportation Management first parses the table name to determine if any business caches could be impacted. If not, the SQL statement is simply executed and control is returned to the agent. If caches are impacted, Oracle Transportation Management determines which records are impacted by the SQL and synchronizes any associated business caches with the database. This synchronization is broadcast to all application servers in a clustered environment to ensure distributed caches are also kept up-to-date.</p>
+    <p>Several <span class="Bold">Refresh Cache</span> options are available to determine cache records to synchronize:</p>
+    <ol>
+      <li><span class="Bold">DML Returning:</span> This is an Oracle JDBC feature that provides Oracle Transportation Management with a list of all records impacted by the SQL execution. This is the default synchronization method and should be used with all plain SQL statements if possible. DML returning is not supported by all SQL statement nor by all JDBC drivers and database versions. In particular, DML returning is not supported by insert statements with subselects. You must select another Refresh Option for these statements.</li>
+      <li><span class="Bold">Statement Parsing:</span> This is an Oracle Transportation Management feature that parses simple SQL statements to determine records impacted by the SQL. This option should only be used when DML Returning is unavailable or its performance overhead is unacceptable. Statement parsing supports the following statement forms:
+        <p><span class="Code">update table where col =<br>
+            update table where col = and col =<br>
+            update table where col = and col = (select col from...)<br>
+            update table where col = and col in (select col from...)<br>
+            insert into table (...) values (...)<br>
+            insert into table (...) select from<br>
+            delete from table where col =<br>
+            delete from table where col = and col =<br>
+            delete from table where col = (select col from...)<br>
+            delete from table where col in (select col from...)</span><span class="Code"></span></p>
+        <p class="Note"><span class="Bold">Note:Â </span>the primary key column(s) must be fully specified in each form. The parser determines impacted records by extracting or evaluating primary key columns.</p>
+        <p class="Note"><span class="Bold">Note</span>: For forms 1, 2, 5, 6 and 7 no SQL execution is needed. The impacted record can be determined purely by parsing the statement. This may be more efficient than DML Returning.</p>
+        <p class="Note"><span class="Bold">Note</span>: Any update using Statement Parsing should be thoroughly tested, including a monitoring of the exception log. If the parser fails, cache synchronization is delegated to Object Tree.</p>
+      </li>
+      <li><span class="Bold">Select SQL</span>: To avoid the limitations of Statement Parsing, you can explicitly inform Oracle Transportation Management which records are impacted by the SQL but specifying an associated select statement in the Select SQL For Cache Refresh field. This statement is of the form:
+        <p><span class="Code">select column, ... from table where ...</span></p>
+        <p>Oracle Transportation Management executes the select statement and builds up a list of impacted records from the result set.</p>
+        <p class="Note"><span class="Bold">Note</span>: The table specification in the Select SQL must match the table in the SQL Statement.</p>
+        <p class="Note"><span class="Bold">Note</span>: Oracle Transportation Management replaces any column list in the Select SQL with a list of primary key columns.</p>
+      </li>
+      <li><span class="Bold">Object Tree</span>: If DML Returning and Statement Parsing are unavailable or cannot determine records from the SQL Statement, Oracle Transportation Management defaults to looking at the tree of all business objects associated with the agent. This tree is based on all management screens working on the business object. For example, a SHIPMENT agent works on an Oracle Transportation Management Shipment. Maps governing records associated with the shipment drive various shipment management screens throughout the system. Such records include shipment reference numbers, remarks, involved parties, stops, ship units, etc. The Object Tree option collects all records associated to the shipment and synchronize caches impacted by any of the records. In general, Object Tree analysis should be avoided. It is kept primarily for backward compatibility.
+        <p class="Note"><span class="Bold">Note</span>: Object Tree adds significant overhead to the DIRECT SQL UPDATE process. It forces all descendant records of an agent&#39;s business object to be queried from the database.</p>
+        <p class="Note"><span class="Bold">Note</span>: Object Tree may not properly synchronize all impacted caches. If a SHIPMENT agent, for example, modifies order information, the order records are not considered part of the shipment tree. Their caches, if any, will not be synchronized.</p>
+      </li>
+    </ol>
+    <h3><a name="cache_stored_proc" id="cache_stored_proc"></a>Caching and Stored Procedures</h3>
+    <p>For stored procedures, Oracle Transportation Management cannot assess the impact to cached records. It is the agent writer&#39;s responsibility to inform Oracle Transportation Management of any records inserted, updated or deleted by the stored procedure - if these records are in the published set of Oracle Transportation Management tables.</p>
+    <p>Several Refresh Cache options are available to inform Oracle Transportation Management which cache records to synchronize:</p>
+    <ol>
+      <li><span class="Bold">Select SQL</span>: You can explicitly inform Oracle Transportation Management which records are impacted by the SQL by specifying an associated select statement in the Select SQL For Cache Refresh field.</li>
+      <li>This statement is of the form:
+        <p><span class="Code">select column, ... from table where ...</span></p>
+        <p>Oracle Transportation Management executes the select statement and builds up a list of impacted records from the result set.</p>
+        <p class="Note"><span class="Bold">Note</span>:<br>
+          Oracle Transportation Management uses the table specification in the Select SQL to determine if any associated cache exists.<br>
+          <br>
+          Oracle Transportation Management replaces any column list in the Select SQL with a list of primary key columns.<br>
+          <br>
+          The stored procedure cannot modify records from different tables as Select SQL can only inform Oracle Transportation Management of the impacts on one of them.
+        </p>
+      </li>
+      <li><span class="Bold">Object Tree</span>: If the stored procedure impacts multiple tables, you can specify the Object Tree option for synchronization. This looks at the tree of all business objects associated with the agent. See the above discussion of Object Tree for DML statements for more information.</li>
+      <li><span class="Bold">None</span>: If the stored procedure does not update records in Oracle Transportation Management tables, you can suppress any cache analysis by specifying None as a Refresh Cache option. Note that, by default, this option is only available for stored procedures. It can be enabled for DML statements for backward compatibility, but allows for the possibility of caches that are not synchronized.</li>
+    </ol>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="../business_actions.htm">Agent Actions</a></p>
+  <p class="LinkList"><a href="utility_agent_actions.htm">Utility Agent Actions</a></p>
+  <p class="LinkList"><a href="../../properties/glog/sql.property.htm">glog.sql Properties</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "1"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

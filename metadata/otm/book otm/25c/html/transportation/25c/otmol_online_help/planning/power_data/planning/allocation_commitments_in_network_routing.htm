@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../../.." src="../../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../../assets/css/redwood.css" type="text/css">
+  <meta name="template" content="../../../assets/masterpages/shipment_management.htt">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-status" content="Complete">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="Planning\power_data\planning\special_service_group.htm">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Allocation Commitments in Network Routing</title>
+  <link rel="StyleSheet" href="../../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="use cases:allocation commitments in network routing,allocation commitments:in network routing">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content>
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:13+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Allocation Commitments in Network Routing","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Shipment Management</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Allocation Commitments in Network Routing</span></h1>
+  <div role="main">
+    <p>OTM planning can consider service provider percentage allocation commitments when making routing selections for orders. This is enabled via the network routing logic configuration parameter <a href="logic_configuration_network_routing.htm#use_carrier">USE CARRIER COMMITMENTS IN ROUTE SELECTION</a>. The parameter <a href="logic_configuration_network_routing.htm#carrier_commitment_penalty_for_route_selection">CARRIER COMMITMENT PENALTY FOR ROUTE SELECTION</a> can be used to set a penalty.</p>
+    <p class="Note"><span class="Bold">Note</span>: Only allocations on primary legs are considered in network routing. The parameter <a href="list_of_planning_parameters.htm#apply_allocation_group">APPLY ALLOCATION GROUP ON PRIMARY LEG ONLY</a> does not affect this.</p>
+    <p>In a multi-leg transportation network, different carriers may be associated with different intermediate locations. The selection of a certain carrier may determine which intermediate locations are used; conversely, the selection of intermediate points may limit the choice of carrier.</p>
+    <p>An example is the selection of port pairs in a land-ocean-land scenario. Different ocean service providers may sail out of or into different ports. For example, one service provider (carrier A) might only sail out of Port of Long Beach while another service provider (carrier B) might only sail out of the nearby Port of Los Angeles. An order will be routed into one port or the other depending on which service provider is to be used.</p>
+    <p>Often, order routing decisions are based upon cost, so the rates of carriers A and B are used to determine whether to route through Long Beach or through Los Angeles. However, you may have a contract with the service providers whereby a certain percentage (e.g., 60%) of shipments from the Long Beach / Los Angeles area are to go to carrier A and a certain percentage (e.g., 40%) to carrier B. In this case, if OTM is making routing decisions purely based on cost, it will not fulfill the allocation commitments. OTM can make the routing decision between Long Beach and Los Angeles based upon the relevant allocation percentages. In this case, OTM should route the orders so that 60% of the shipments are on carrier A out of Long Beach, and 40% of the shipments are on carrier B out of Los Angeles.</p>
+    <h2>Transportation Network Scenario</h2>
+    <p>There are two possible routes:</p>
+    <ul>
+      <li>Source -&gt; Baltimore Cross-dock -&gt; Baltimore Port -&gt; Â (Carrier A) Le Havre Port -&gt; Le Havre Cross-dock -&gt; Paris</li>
+      <li>Source -&gt; Baltimore Cross-dock -&gt; Baltimore Port -&gt; Carrier B) Brest Port -&gt; Brest Cross-dock -&gt; Paris</li>
+    </ul>
+    <p>Carrier commitments:</p>
+    <ul>
+      <li>Carrier A - 60% - offers shipments on 20ft containers (FEU = 0.5)</li>
+      <li>Carrier B - 40% - offers shipments on 40ft containers (FEU = 1) - making this cheaper overall.</li>
+    </ul>
+    <p>Orders are bulk planned using a parameter set with Network Routing turned on. Each order fills one 20ft container; two orders can fit in a 40ft container.</p>
+    <h3>Use Case 1 - No Commitment Constraints</h3>
+    <p>OTM bulk plans several orders through this network. All of the orders are planned through the cheaper route; through Brest.</p>
+    <h3>Use Case 2 - Commitment Constraints by Shipment</h3>
+    <p>Allocation commitment constraints are set up on the <span class="Bold">US port - French ports</span> lane:</p>
+    <ul>
+      <li>Carrier A: 60%</li>
+      <li>Carrier B: 40%</li>
+    </ul>
+    <p>These commitments are <span class="Bold">by shipment</span>.</p>
+    <p>Without the commitment constraints, all orders would be planned on Carrier B through the Brest port. With these commitments, however, OTM should plan 60% of the ocean shipments on Carrier A through Le Havre. For example, if 14 orders are being planned, the correct result would include 6 shipments (6 orders) on Carrier A to the Le Havre port, and 4 shipments (8 orders) on Carrier B to the Brest port (and the corresponding drayage and delivery shipments).</p>
+    <p>The commitment constraints should be satisfied cumulatively over the commitment allocation period. That is, OTM should try to assign service providers so as to meet the commitment allocation constraints within the current period (day, week, month, etc), rather than just for the given bulk plan. So, in the previous example, if there were already 6 shipments (6 orders) on Carrier A to Le Havre, and none on Carrier B to Brest, a bulk plan of 8 orders should result in 4 shipments (8 orders) on Carrier B to Brest, in order to balance the overall allocation to 60%/40%.</p>
+    <h3>Use Case 3 - Commitment Constraints by FEU</h3>
+    <p>In this use case, as before, allocation commitment constraints are set up on the <span class="Bold">US port - French ports</span> lane:</p>
+    <ul>
+      <li>Carrier A: 60%</li>
+      <li>Carrier B: 40%</li>
+    </ul>
+    <p>However, these commitments are <span class="Bold">by FEU</span> rather than shipment.</p>
+    <p>With these commitments, however, OTM should plan 60% of the ocean-going FEUs on Carrier A through Le Havre, and 40% on Carrier B through Brest. For example, when 10 orders are planned, 6 orders (6 shipments = 3 FEU) should go on Carrier A to Le Havre, and 4 orders (2 shipments = 2 FEU) should go on Carrier B to Brest.</p>
+    <h3>Use Case 4 - Commitment Constraints with Single Shipment</h3>
+    <p>Again the allocation commitment constraints are set up on the <span class="Bold">US port - French ports</span> lane:</p>
+    <ul>
+      <li>Carrier A: 50%</li>
+      <li>Carrier B: 50%</li>
+    </ul>
+    <p>These commitments are <span class="Bold">by shipment</span>.</p>
+    <p>In this use case, there are two small orders that can fit into the same 20ft container. When these two orders are planned together, OTM should plan both through the cheaper path, on Carrier B through Brest.</p>
+    <p>They should be planned together even though to do so gives Carrier B 100% of the shipments (i.e., one out of one) and Carrier A 0%. The orders could have been routed separately, one on Carrier A and one on Carrier B, so that each carrier has its allocation commitment satisfied at 50%, but to do so would make no sense from a business point of view.</p>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="../../capacity_manager/capacity_usage_manager.htm">Capacity Usage</a></p>
+  <p class="LinkList"><a href="../../capacity_manager/capacity_commitment_planned_allocations.htm">Commitment Allocation</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../../.."
+    gCommonRootRelPath = "../../.."
+    gTopicId = "1"
+  
+//]]></script>
+
+
+  <script src="../../../template/scripts/topicpage.js"></script>
+  <script src="../../../whxdata/layoutconfig.js"></script>
+  <script src="../../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>
