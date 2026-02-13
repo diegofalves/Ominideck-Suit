@@ -1027,11 +1027,37 @@ def cadastros():
             service_name = str(request.form.get("consultancy_service_name") or "").strip()
             hourly_rate = str(request.form.get("consultancy_hourly_rate") or "").strip()
             status = str(request.form.get("consultancy_status") or "PLANNED").strip().upper()
+            contract_type = str(request.form.get("consultancy_contract_type") or "").strip().upper()
+            taxes_payload: Dict[str, str] = {}
+
+            if contract_type == "PJ":
+                taxes_payload = {
+                    "tax_regime": str(request.form.get("consultancy_pj_tax_regime") or "").strip(),
+                    "iss_rate": str(request.form.get("consultancy_pj_iss_rate") or "").strip(),
+                    "service_tax_rate": str(request.form.get("consultancy_pj_service_tax_rate") or "").strip(),
+                    "management_fee_rate": str(request.form.get("consultancy_pj_management_fee_rate") or "").strip(),
+                }
+            elif contract_type == "CLT":
+                taxes_payload = {
+                    "inss_rate": str(request.form.get("consultancy_clt_inss_rate") or "").strip(),
+                    "fgts_rate": str(request.form.get("consultancy_clt_fgts_rate") or "").strip(),
+                    "benefits_rate": str(request.form.get("consultancy_clt_benefits_rate") or "").strip(),
+                    "thirteenth_salary_rate": str(request.form.get("consultancy_clt_thirteenth_salary_rate") or "").strip(),
+                }
+            elif contract_type == "COOPERATIVA":
+                taxes_payload = {
+                    "cooperative_fee_rate": str(request.form.get("consultancy_coop_fee_rate") or "").strip(),
+                    "admin_fee_rate": str(request.form.get("consultancy_coop_admin_rate") or "").strip(),
+                    "inss_rate": str(request.form.get("consultancy_coop_inss_rate") or "").strip(),
+                    "taxes_rate": str(request.form.get("consultancy_coop_taxes_rate") or "").strip(),
+                }
 
             if not consultant_id or not client_id or not project_id:
                 error_message = "Selecione consultor, cliente e projeto para cadastrar a consultoria."
             elif not service_name:
                 error_message = "Informe o tipo de consultoria/serviço."
+            elif contract_type not in {"PJ", "CLT", "COOPERATIVA"}:
+                error_message = "Selecione o tipo de contratação."
             else:
                 payload["consultancies"].append(
                     {
@@ -1042,6 +1068,8 @@ def cadastros():
                         "service_name": service_name,
                         "hourly_rate": hourly_rate,
                         "status": status or "PLANNED",
+                        "contract_type": contract_type,
+                        "taxes": taxes_payload,
                     }
                 )
                 _save_cadastros(payload)

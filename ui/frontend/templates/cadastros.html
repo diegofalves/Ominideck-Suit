@@ -290,9 +290,17 @@
             <div class="field">
               <label>Status</label>
               <select name="project_status">
-                <option value="PLANNING">Planejamento</option>
-                <option value="IN_PROGRESS">Em andamento</option>
-                <option value="DONE">Concluído</option>
+                <option value="DESENHO">Desenho</option>
+                <option value="PLANEJAMENTO">Planejamento</option>
+                <option value="CONSTRUCAO">Construção</option>
+                <option value="TESTE_UNITARIO">Teste Unitário</option>
+                <option value="SIT">Teste Integrado (SIT)</option>
+                <option value="UAT">UAT</option>
+                <option value="CUTOVER">CutOver</option>
+                <option value="GO_LIVE">Go Live</option>
+                <option value="HYPERCARE">Hypercare</option>
+                <option value="AMS">AMS</option>
+                <option value="CONCLUIDO">Concluído</option>
               </select>
             </div>
           </div>
@@ -383,6 +391,75 @@
               <input name="consultancy_hourly_rate" type="number" min="0" step="0.01" placeholder="Ex: 250">
             </div>
             <div class="field">
+              <label>Tipo de contratação</label>
+              <select id="consultancy-contract-type" name="consultancy_contract_type" required>
+                <option value="">Selecione</option>
+                <option value="PJ">PJ</option>
+                <option value="CLT">CLT</option>
+                <option value="COOPERATIVA">Cooperativa</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="taxes-pj" class="fields" style="display: none;">
+            <div class="field">
+              <label>Regime tributário (PJ)</label>
+              <input name="consultancy_pj_tax_regime" placeholder="Ex: Simples Nacional">
+            </div>
+            <div class="field">
+              <label>Alíquota ISS (%)</label>
+              <input name="consultancy_pj_iss_rate" type="number" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>Impostos sobre serviço (%)</label>
+              <input name="consultancy_pj_service_tax_rate" type="number" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>Taxa administrativa (%)</label>
+              <input name="consultancy_pj_management_fee_rate" type="number" min="0" step="0.01">
+            </div>
+          </div>
+
+          <div id="taxes-clt" class="fields" style="display: none;">
+            <div class="field">
+              <label>INSS (%)</label>
+              <input name="consultancy_clt_inss_rate" type="number" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>FGTS (%)</label>
+              <input name="consultancy_clt_fgts_rate" type="number" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>Encargos/benefícios (%)</label>
+              <input name="consultancy_clt_benefits_rate" type="number" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>13º/férias provisionado (%)</label>
+              <input name="consultancy_clt_thirteenth_salary_rate" type="number" min="0" step="0.01">
+            </div>
+          </div>
+
+          <div id="taxes-coop" class="fields" style="display: none;">
+            <div class="field">
+              <label>Taxa cooperativa (%)</label>
+              <input name="consultancy_coop_fee_rate" type="number" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>Taxa administrativa (%)</label>
+              <input name="consultancy_coop_admin_rate" type="number" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>INSS (%)</label>
+              <input name="consultancy_coop_inss_rate" type="number" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>Impostos (%)</label>
+              <input name="consultancy_coop_taxes_rate" type="number" min="0" step="0.01">
+            </div>
+          </div>
+
+          <div class="fields">
+            <div class="field">
               <label>Status</label>
               <select name="consultancy_status">
                 <option value="PLANNED">Planejada</option>
@@ -451,6 +528,7 @@
             <li>
               <strong>{{ item.service_name }}</strong><br>
               Valor hora: {{ item.hourly_rate if item.hourly_rate else "-" }}<br>
+              Contratação: {{ item.contract_type if item.contract_type else "-" }}<br>
               Status: {{ item.status }}
             </li>
             {% endfor %}
@@ -462,5 +540,26 @@
       </div>
     </section>
   </div>
+
+  <script>
+    (function () {
+      const contractType = document.getElementById("consultancy-contract-type");
+      const pj = document.getElementById("taxes-pj");
+      const clt = document.getElementById("taxes-clt");
+      const coop = document.getElementById("taxes-coop");
+
+      function toggleTaxBlocks() {
+        const value = (contractType && contractType.value || "").toUpperCase();
+        pj.style.display = value === "PJ" ? "grid" : "none";
+        clt.style.display = value === "CLT" ? "grid" : "none";
+        coop.style.display = value === "COOPERATIVA" ? "grid" : "none";
+      }
+
+      if (contractType) {
+        contractType.addEventListener("change", toggleTaxBlocks);
+        toggleTaxBlocks();
+      }
+    })();
+  </script>
 </body>
 </html>
