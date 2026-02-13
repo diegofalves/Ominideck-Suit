@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Export Multiple Tables for a Date Range</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="Use_Cases.html" title="Previous" type="text/html">
+        <link rel="next" href="synchronous-export-of-compressed-content.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Export Multiple Tables for a Date Range","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="Use_Cases.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="synchronous-export-of-compressed-content.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Export Multiple Tables for a Date Range</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            <div>
+               <p>A simple POST message to create an Export Request for two tables containing rows that
+            have been inserted or updated within a given date range.</p>
+               <div class="section" id="u30242802__section_yt3_l3r_rvb">
+                  <p class="subhead1">Use Case Description</p>
+                  
+                  
+                  <div class="p">
+                     
+                     <ul style="list-style-type: disc;" id="u30242802__ul_afh_m3r_rvb">
+                        <li>Export content that has been inserted or updated in the SHIPMENT and
+                        SHIPMENT_REFNUM tables in the month of September 2022 (times are all UTC)
+                        and send to an existing bucket on Oracle Cloud Object Storage.</li>
+                        <li>Identify unique request ID.</li>
+                        <li>Check status for completion.</li>
+                     </ul>
+                     
+                  </div>
+                  <pre class="pre codeblock" id="u30242802__codeblock_edy_n3r_rvb"><code>curl -u username:password -X POST -H "Content-Type: application/json" -H "Prefer: respond-async" -d '
+ {
+    "schema": "PRIMARY",
+    "contentType": "text/plain",
+    "rangeAfter" : {
+        "value": "2022-09-01T00:00:00Z"
+    },
+    "rangeBefore": {
+        "value": "2022-09-30T23:59:59Z"
+    },
+    "targetSystem": {
+       "targetURL": "https://objectstorage.us2.oraclecloud.com/...bucket-details.../o/",
+       "appendName": true,
+       "httpMethod": "PUT"
+    },
+    "tables" : {
+        "items" : [
+            {
+                "tableName": "SHIPMENT",
+                "selectList": "SHIPMENT_GID,SHIPMENT_NAME,PERSPECTIVE,INSERT_DATE,UPDATE_DATE"
+            },
+            {
+                "tableName": "SHIPMENT_REFNUM"
+            }
+        ]
+    }
+}'
+https://servername.us2.oraclecloud.com/logisticsRestApi/data/v1/exportRequests
+</code></pre>
+                  <div class="infoboxnote" id="u30242802__note_z3w_q3r_rvb">
+                     <p class="notep1">Note:</p>
+                     
+                     <ul style="list-style-type: disc;" id="u30242802__ul_djz_q3r_rvb">
+                        <li>Message syntax errors will return an HTTP "400 Bad Request" error message
+                        and, where possible, a detailed explanation of the error.</li>
+                        <li>The "Content-Type" HTTP header identifies the media type of the API request
+                        message and must be "application/json".</li>
+                        <li>The "Prefer" HTTP header identifies that the request should be processed
+                        asynchronously. If not present, and there is only one table in the request
+                        message, the request will be processed synchronously, the HTTP status will
+                        be "200 OK" and the exported content will be the response data. In all other
+                        cases it will be processed asynchronously, the HTTP status will be "202
+                        Accepted" and the response to the request will be an export status
+                        message.</li>
+                        <li>The "contentType" request message property specifies the media type of the
+                        exported content. This property is optional and defaults to
+                        "text/plain".</li>
+                        <li>"rangeAfter" and "rangeBefore" provide the date range used to filter
+                        matching records from all tables in the request message where either the
+                        "INSERT_DATE" or "UPDATE_DATE" is within the range.</li>
+                        <li>"targetSystem" identifies the destination for the exported content. In this
+                        example it is an Oracle Cloud Object Storage Bucket Pre-Authenticated
+                        Request (PAR) URI, which requires the following additional options
+                           <ul style="list-style-type: disc;" id="u30242802__ul_ejz_q3r_rvb">
+                              <li>HTTP METHOD is PUT (default would be POST if not specified) to
+                                create a new file.</li>
+                              <li>"appendName" is true which means the name of each table part must be
+                                appended to the bucket URI to give a unique file name within the
+                                bucket.</li>
+                           </ul>
+                        </li>
+                        <li>Only the list of columns in the "selectList" property will be exported for
+                        the SHIPMENT table whereas ALL columns will be exported for the
+                        SHIPMENT_REFNUM table.</li>
+                        <li>There is no control specified for content size so the system defaults will
+                        be used to determine maximum exported volume and number of parts used. This
+                        use case will assume that the volume of exported data is within these system
+                        limits and that one "part" will be exported for each table. See <a href="content-management.html">Content Management</a> for a full description of all options
+                        to control the exported data.
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <p>An example export status response will be as follows:</p>
+                  <pre class="pre codeblock" id="u30242802__codeblock_bpl_bjr_rvb"><code>{
+    "progress": "pending",
+    "completed": false,
+    "result": {
+        "body": {
+            "requestID": 303,
+            "submitDate": "2022-11-29T15:03:11Z",
+            "tables": {
+                "items": [
+                    {
+                        "itemID": 1,
+                        "itemName": "SHIPMENT",
+                        "progress": "pending",
+                        "offset": 0,
+                        "parts": {
+                            "count": 0,
+                            "items": []
+                        }
+                    },
+                    {
+                        "itemID": 2,
+                        "itemName": "SHIPMENT_REFNUM",
+                        "progress": "pending",
+                        "offset": 0,
+                        "parts": {
+                            "count": 0,
+                            "items": []
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://servername.us2.oraclecloud.com /logisticsRestApi/data/v1/exportStatuses/303"
+        }
+    ]
+}
+</code></pre>
+                  <div class="infoboxnote" id="u30242802__note_lnn_cjr_rvb">
+                     <p class="notep1">Note:</p>
+                     
+                     <ul style="list-style-type: disc;" id="u30242802__ul_zhb_djr_rvb">
+                        <li>The request, and each item within it, is initially in the "pending"
+                        state.</li>
+                        <li>The part count for each item is initially "0" but will be updated as each
+                        item is processed and content is sent to the external system.</li>
+                        <li>The "self" link contains the URI to poll for status.</li>
+                     </ul>
+                     
+                  </div>
+                  
+               </div>
+               <div class="section" id="u30242802__section_xtq_cny_rvb">
+                  <p class="subhead1">Identify Request ID</p>
+                  
+                  
+                  <p>Each export request is allocated a unique request ID sequence number on
+                submission.</p>
+                  
+                  <p>The ID allocated to a request, which in this example is "303," is made available in
+                two places within the status response to the request:</p>
+                  
+                  <ul style="list-style-type: disc;" id="u30242802__ul_dcr_dny_rvb">
+                     <li>"requestID" property of the <span class="italic">result.body</span> object within the status
+                     </li>
+                     <li>The "self" link URI. The request ID is the terminal path element in this
+                    URI.</li>
+                  </ul>
+                  
+               </div>
+               <div class="section" id="u30242802__section_fbl_fjr_rvb">
+                  <p class="subhead1">Poll Export Status</p>
+                  
+                  
+                  <div class="p">The following command can be used to issue a GET request to see the status of the
+                request:<pre class="pre codeblock" id="u30242802__codeblock_n1w_gjr_rvb"><code>curl -u username:password -H "Accept:application/json"
+https://servername/logisticsRestApi/data/v1/exportStatuses/303
+</code></pre></div>
+                  
+                  <p>The response payload would be as follows if the request was completed
+                successfully:</p>
+                  <pre class="pre codeblock" id="u30242802__codeblock_n3w_3jr_rvb"><code>{
+   "progress": "succeeded",
+   "startTime": {
+       "value": "2022-11-29T15:21:58Z"
+   },
+   "completed": true,
+   "endTime": {
+       "value": "2022-11-29T15:22:19Z"
+   },
+   "result": {
+      "body": {
+          "requestID": 303,
+          "submitDate": "2022-11-29T15:21:56Z",
+          "tables": {
+              "items": [
+                  {
+                      "itemID": 1,
+                      "itemName": "SHIPMENT",
+                      "startTime": "2022-11-29T15:21:58Z",
+                      "endTime": "2022-11-29T15:22:17Z",
+                      "progress": "succeeded",
+                      "totalResults": 92,
+                      "offset": 0,
+                      "totalRecordCount": 92,
+                      "parts": {
+                          "count": 1,
+                          "items": [
+                              {
+                                  "partName": "DATA_303_SHIPMENT_1_1.csv",
+                                  "recordCount": 92,
+                                  "checksum": "c9179dae8947cb56abaed4f6c2ea09b3"
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "itemID": 2,
+                      "itemName": "SHIPMENT_REFNUM",
+                      "startTime": "2022-11-29T15:22:18Z",
+                      "endTime": "2022-11-29T15:22:19Z",
+                      "progress": "succeeded",
+                      "totalResults": 7,
+                      "offset": 0,
+                      "totalRecordCount": 7,
+                      "parts": {
+                          "count": 1,
+                          "items": [
+                              {
+                                  "partName": "DATA_303_SHIPMENT_REFNUM_2_1.csv",
+                                  "recordCount": 7,
+                                  "checksum": "43558be67a958164af19bead3c908420"
+                              }
+                          ]
+                      }
+                  }
+              ]
+          }
+      }
+  },
+  "links": [..etc..]
+}
+</code></pre>
+                  <div class="infoboxnote" id="u30242802__note_cxb_kjr_rvb">
+                     <p class="notep1">Note:</p>
+                     
+                     <ul style="list-style-type: disc;" id="u30242802__ul_fc2_kjr_rvb">
+                        <li>The "startTime" at the request level identifies the time when the request
+                        items were added to the internal work queue.</li>
+                        <li>The "endTime" at the request level identifies the time when the last request
+                        item completed and notified the request.</li>
+                        <li>Each item contains a "startTime" and "endTime" that measures the time taken
+                        for all parts to be exported.</li>
+                        <li>Each item also contains properties to identify how much content was exported
+                        and information for the number of parts needed to export the complete
+                            content:
+                           <ul style="list-style-type: disc;" id="u30242802__ul_mmt_ljr_rvb">
+                              <li>"totalResults" is a count of the total records in the table which
+                                matched the filter criteria.</li>
+                              <li>"totalRecordCount" is the total number of rows for all parts
+                                exported</li>
+                              <li>"recordCount" is the number of rows contained within the part
+                                item.</li>
+                              <li>"checksum" is a hash of the content to verify the file received at
+                                the external system. By default the hash algorithm is MD5. </li>
+                           </ul>
+                        </li>
+                        <li>The Oracle Cloud Object Storage bucket referenced will contain two files on
+                        completion. The file names are:
+                           <ul style="list-style-type: disc;" id="u30242802__ul_nmt_ljr_rvb">
+                              <li>DATA_303_SHIPMENT_1_1.csv</li>
+                              <li>DATA_303_SHIPMENT_REFNUM_2_1.csv</li>
+                           </ul>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+               </div>
+            </div>
+         </div>
+        </article>
+    </body>
+</html>

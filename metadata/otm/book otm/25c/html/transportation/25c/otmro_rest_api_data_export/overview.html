@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Overview</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="rest-endpoints.html" title="Previous" type="text/html">
+        <link rel="next" href="Quick_Start.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Overview","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="rest-endpoints.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="Quick_Start.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Overview</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            <div>
+               <div class="p">The Data Export API has been designed as a tool to support the export of potentially
+            large volumes of transactional data from the OTM/GTM databases to an external data
+            store. It is capable of the following features:
+                  <ul style="list-style-type: disc;" id="u30253676__ul_mmy_myq_rvb">
+                     <li>Manage exports for multiple tables in one request.</li>
+                     <li> List primary keys of objects deleted within a date range.</li>
+                     <li>Content compression, e.g. GZIP or ZIP.</li>
+                     <li>Request cancellation.</li>
+                     <li>Supports generic external web server and object storage targets e.g. Oracle
+                    Cloud Object Storage.</li>
+                  </ul>
+               </div>
+               <p>It is primarily aimed at the scheduled export of "static" data e.g. on a weekly or
+            monthly basis. "Static" in this sense means unlikely to be updated or, at worst, not
+            while the export request is running. Due to the volumes being considered it isn't
+            possible to take a "snapshot" of the database contents at a specific second or
+            millisecond in time and then export that. All export requests will be running in real
+            time. Therefore, consideration must be given to the data being exported and to the
+            likelihood of modification during the export process.</p>
+               <p>It is NOT:</p>
+               <ul style="list-style-type: disc;" id="u30253676__ul_ysp_pyq_rvb">
+                  <li>A full database replication tool; i.e. it doesn't address the requirements fulfilled
+                by tools like Oracle GoldenGate.</li>
+                  <li>A replacement for current data import/export tools i.e. DBXML and CSV. Although this
+                new tool will replace some use cases of these tools, specifically for export of high
+                volumes of data, there are still use cases when these existing tools make sense;
+                e.g. when a subsequent import of the data is possible.</li>
+                  <li>A fully integrated UI Management tool.</li>
+               </ul>
+               <p>The tool currently has limited transformation capabilities (limited to the control of
+            date/time formats) and so the target external data store must be capable of interpreting
+            the exported content based on the known schema version for that data.</p>
+               <p>The tool provides access to most tables, and most columns within each table, for the
+            following schemas:</p>
+               <div class="tblformal" id="u30253676__table_pr4_vb1_tvb">
+                  <table cellpadding="4" cellspacing="0" class="Formal" frame="hsides" border="1" rules="rows">
+                     <thead>
+                        <tr align="left" valign="top">
+                           <th align="left" valign="bottom" width="80%" id="d452e69">External Schema Name (Use as "schema" Message Property) </th>
+                           <th align="left" valign="bottom" width="80%" id="d452e71">Corresponding Content</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr align="left" valign="top">
+                           <td align="left" valign="top" width="80%" id="d452e75" headers="d452e69 ">PRIMARY</td>
+                           <td align="left" valign="top" width="80%" headers="d452e75 d452e71 ">Transactional data: orders, shipments, trade transactions
+                            etc.</td>
+                        </tr>
+                        <tr align="left" valign="top">
+                           <td align="left" valign="top" width="80%" id="d452e80" headers="d452e69 ">ARCHIVE</td>
+                           <td align="left" valign="top" width="80%" headers="d452e80 d452e71 ">Archived transactional data</td>
+                        </tr>
+                        <tr align="left" valign="top">
+                           <td align="left" valign="top" width="80%" id="d452e85" headers="d452e69 ">REPORTS</td>
+                           <td align="left" valign="top" width="80%" headers="d452e85 d452e71 ">Operational Reports content</td>
+                        </tr>
+                        <tr align="left" valign="top">
+                           <td align="left" valign="top" width="80%" id="d452e90" headers="d452e69 ">ANALYTICS</td>
+                           <td align="left" valign="top" width="80%" headers="d452e90 d452e71 ">Transformed Historical data</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <p>The transport of large volumes of data must necessarily be broken down into manageable
+            chunks or "parts" and will normally execute as a background, asynchronous process.
+            Synchronous export is supported but with strict volume limits to ensure there is no
+            performance overhead. See <a href="using-part-limits.html">Using Part Limits</a>. The current status of
+            each request is also available via the API and must be used to determine that the
+            request is complete i.e. there is currently no automatic notification of completion.
+               </p>
+               <p>In addition to exporting current content from most of the database tables, it is also
+            possible to retrieve the primary keys of top-level business objects which have been
+            deleted within a particular time window. This is designed to be used to ensure that
+            external content is kept as up to date as possible.</p>
+               <p>The content will be sent to the target system specified in the request and this can be
+            one of the following types:</p>
+               <ul style="list-style-type: disc;" id="u30253676__ul_w14_gqt_2xb">
+                  <li>A target URL e.g., a pre-authenticated URL for Oracle Object Storage.</li>
+                  <li>An External System GID for a pre-configured record in OTM. This would be used in
+                cases where some additional external authorization credentials must be
+                configured.</li>
+               </ul>
+               <p>Review the <a href="Use_Cases.html" title="Use cases demonstrate how to get things done with REST APIs, including how to create export requests, retrieve statuses, and more. Use them to understand quickly how REST APIs can meet your business needs.">Use Cases</a> for examples on the many API capabilities or the
+                <a href="Quick_Start.html">Quick Start</a> section to get going with a simple example.
+               </p>
+               <p>Also review Content Management for a full description of the capabilities for controlling
+            "part" size.</p>
+            </div>
+         </div>
+        </article>
+    </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Content Management</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="Configure_for_CORS.html" title="Previous" type="text/html">
+        <link rel="next" href="using-request-offset.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Content Management","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="Configure_for_CORS.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="using-request-offset.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Content Management</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            <div>
+               <p>There are several important areas that need to be considered when deciding to use the
+            Data Export REST API:</p>
+               <ul style="list-style-type: disc;" id="topic_pbq_rnr_rvb__ul_t2n_snr_rvb">
+                  <li>Additional load on operational servers.</li>
+                  <li>Volume of data to be exported.</li>
+                  <li>Capacity of external repository, for both storage and network resources.</li>
+               </ul>
+               <div class="section" id="topic_pbq_rnr_rvb__section_pb5_tnr_rvb">
+                  <p class="subhead1">Server Load</p>
+                  
+                  
+                  <p>Of primary importance is the stability of the server running the export request
+                (reminder: one export request can contain multiple request items where each item
+                exports data from one table). As the export requests will be running in real time,
+                they will need to share the processing resources of the operational server. Priority
+                is given to all other operational processes. Therefore, the number of simultaneous
+                export request items running at any one time is limited by the system and is not
+                user configurable. Several export requests can be submitted simultaneously but the
+                internal workload of the server will be managed so that no more than the fixed
+                number of long running database queries, current value is 3, will be running at any
+                one time.</p>
+                  
+               </div>
+               <div class="section" id="topic_pbq_rnr_rvb__section_kdp_vnr_rvb">
+                  <p class="subhead1">Data Volumes</p>
+                  
+                  
+                  <p>A common use case for the API is expected to be the incremental export of recently
+                completed data: orders, shipments, invoices etc. The data volumes for these loads
+                are expected to be large and, furthermore, the initial export of the historical data
+                will be even larger. Therefore, the export request process is designed to handle
+                tens of millions of rows of data. Obviously, the query, transmission, and storage of
+                this information in one session would be extremely complex and require very
+                specialized tools.</p>
+                  
+                  <p>The Data Export API supports such large exports by limiting the following:</p>
+                  
+                  <ul style="list-style-type: disc;" id="topic_pbq_rnr_rvb__ul_lmg_xnr_rvb">
+                     <li>The total number of rows for any one table.</li>
+                     <li>The total number of rows for any one exported file.</li>
+                     <li>The maximum size (in GB) of any one exported file.</li>
+                     <li>The maximum length of time transmitting the contents of any one file. </li>
+                  </ul>
+                  
+                  <p>Each completed export request item will show the total number of rows matching the
+                query criteria. If this value exceeds the system limit, then a new request should be
+                submitted for the remainder (and so on until the complete results are exported). See
+                    <a href="using-request-offset.html">Using Request Offset</a> for details.
+                  </p>
+                  
+                  <p>If any of the other limits are exceeded, then the export will continue but will now
+                produce multiple "parts". See <a href="using-part-limits.html">Using Part Limits</a> for details. To
+                support multiple parts, the full "part name" for each part will contain the part
+                number for that part within its "parent" item number.
+                  </p>
+                  
+                  <p>The standard format for part names is:</p>
+                  
+                  <p><code class="codeph">DATA_&lt;request id&gt;_&lt;table name&gt;_&lt;request item number&gt;_&lt;part
+                    number&gt;.csv[.gz | .zip]</code></p>
+                  
+                  <p>The appropriate "gz" or "zip" suffix is added if content compression is used.</p>
+                  
+                  <p>For example, if any request item would exceed the row limit then a new request
+                (specifying the request "offset" property) would create files with a new request ID. </p>
+                  
+                  <ul style="list-style-type: disc;" id="topic_pbq_rnr_rvb__ul_zpw_b4r_rvb">
+                     <li>DATA_12345_SHIPMENT_1_1.csv</li>
+                     <li>DATA_12345_SHIPMENT_1_2.csv</li>
+                     <li>DATA_12345_SHIPMENT_REFNUM_2_1.csv</li>
+                  </ul>
+                  
+               </div>
+            </div>
+         </div>
+        </article>
+    </body>
+</html>

@@ -1,0 +1,3832 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>REST API for Fusion Cloud Transportation and Global Trade Management Data Export - Get Export Status</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+
+        	
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="api-export-statuses.html" title="Previous" type="text/html">
+        <link rel="next" href="op-exportstatuses-get.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"REST API for Fusion Cloud Transportation and Global Trade Management Data Export - Get Export Status","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="api-export-statuses.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="op-exportstatuses-get.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+
+            
+            <header id="top">
+
+                <ol class="breadcrumb">
+                    <li><a href="index.html">REST API for Fusion Cloud Transportation and Global Trade Management Data Export</a></li>
+                    <li>Tasks</li>
+                    
+                    <li class="active">
+                        
+                        <a href="api-export-statuses.html">Export Statuses</a>
+                        
+                    </li>
+                    
+                </ol>
+                
+                <p class="draftsubtitle"></p>
+                
+
+                <div>
+                	<div class="dropdown btn-group pull-right" style="clear: right;">
+                		<button id="dLabel" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jump to <span class="caret"></span>
+                		</button>
+      					<ul class="dropdown-menu" aria-labelledby="dLabel">
+          					<li><a href="#request" data-toggle="ignore">Request</a></li>
+          					<li><a href="#response" data-toggle="ignore">Response</a></li>
+          					
+          					
+      					</ul>
+    				</div>
+                    
+                        <h2>Get Export Status</h2>
+                    
+     			</div>
+
+                <div>
+                    <div class="label label-get text-uppercase">get</div>
+                    <p><strong>/exportStatuses/{requestID}</strong></p>
+                </div>
+            </header>
+            <section>
+
+                <div class="description"></div>
+
+                <h3 id="request">Request</h3>
+                
+
+                  
+
+                
+                <div class="h5">Path Parameters</div>
+                <div class="schema-container">
+                <ul class="schema-properties">
+                
+                    <li><a role="button" data-toggle="collapse" href="#request-path-param-0" aria-expanded="false" aria-controls="request-path-param-0">
+                    requestID(required):  string
+                    </a>
+                    <div class="collapse" id="request-path-param-0">
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Export Request ID</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    </li>
+                
+                </ul>
+
+                
+                </div>
+                
+
+
+
+                
+
+                
+
+                
+
+                  
+
+                
+                  <p>There's no request body for this operation.</p>
+                
+
+                
+
+                 <a style="float: right" href="#top">Back to Top</a>
+
+                <h3 id="response">Response</h3>
+
+				
+                
+                
+                <div class="h5">Supported Media Types</div>
+                <ul class="media-types">
+                    
+                    <li>application/json</li>
+                    
+                </ul>
+                
+                
+                
+
+
+
+                
+                    <div class="response">
+                        <h4 class="response-code ">200 Response</h4>
+                        <div class="response-body">
+                            <div>Export Status Response.</div>
+                            
+
+                            
+                                <div class="entity">
+                                <div class="h5 hidden-print">Body (<span class="schema-path"></span>)</div>
+                                <div class="schema-container">
+                                
+                                <div id="200-components-schemas-exportStatuses" class="swagger-schema">
+    <div class="panel-heading">Root Schema : exportStatuses</div>
+    
+    	
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Extended standard status message with additional Data Replication status data.</div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="h5">Match All</div>
+    
+        
+            <div>Extended standard status message with additional Data Replication status data.</div>
+        
+    
+        
+            <div>Extended standard status message with additional Data Replication status data.</div>
+        
+    
+    <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+    <ul class="schema-properties">
+        
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-oraStatuses-allof-0" aria-expanded="false" aria-controls="200-components-schemas-oraStatuses-allof-0">
+                
+                object 
+                
+                
+            </a> <a href="#200-components-schemas-oraStatuses" role="button" class="btn btn-default btn-sm btn-xsm">oraStatuses</a>
+                
+            <div class="collapse schema-summary" id="200-components-schemas-oraStatuses-allof-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatuses-allOf-1-allof-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatuses-allOf-1-allof-1">
+                
+                object 
+                
+                
+            </a> <a href="#200-components-schemas-exportStatuses-allOf-1" role="button" class="btn btn-default btn-sm btn-xsm">exportStatuses-allOf[1]</a>
+                
+            <div class="collapse schema-summary" id="200-components-schemas-exportStatuses-allOf-1-allof-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        
+    </ul>
+    <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Extended standard status message with additional Data Replication status data.&quot;,
+    &quot;allOf&quot;:[
+        {
+            &quot;$ref&quot;:&quot;#/components/schemas/oraStatuses&quot;
+        },
+        {
+            &quot;type&quot;:&quot;object&quot;,
+            &quot;properties&quot;:{
+                &quot;result&quot;:{
+                    &quot;description&quot;:&quot;Specifies the full request status.&quot;,
+                    &quot;type&quot;:&quot;object&quot;,
+                    &quot;properties&quot;:{
+                        &quot;body&quot;:{
+                            &quot;type&quot;:&quot;object&quot;,
+                            &quot;properties&quot;:{
+                                &quot;requestID&quot;:{
+                                    &quot;description&quot;:&quot;Export Request ID&quot;,
+                                    &quot;type&quot;:&quot;string&quot;
+                                },
+                                &quot;submitDate&quot;:{
+                                    &quot;description&quot;:&quot;Date/Time at which the request was submitted.&quot;,
+                                    &quot;allOf&quot;:[
+                                        {
+                                            &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+                                        }
+                                    ]
+                                },
+                                &quot;externalRef&quot;:{
+                                    &quot;description&quot;:&quot;External reference passed in request message. Can be used to correlate the request.&quot;,
+                                    &quot;type&quot;:&quot;string&quot;
+                                },
+                                &quot;tables&quot;:{
+                                    &quot;properties&quot;:{
+                                        &quot;items&quot;:{
+                                            &quot;type&quot;:&quot;array&quot;,
+                                            &quot;items&quot;:{
+                                                &quot;$ref&quot;:&quot;#/components/schemas/exportStatusItemType&quot;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}</code></pre>
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-oraStatuses" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : oraStatuses</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-oraStatuses-properties-completed-properties-completed-1" aria-expanded="false" aria-controls="200-components-schemas-oraStatuses-properties-completed-properties-completed-1">
+                    
+                    completed: boolean
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-oraStatuses-properties-completed-properties-completed-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Indicates the completion status of the message.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-oraStatuses-properties-context-properties-context-1" aria-expanded="false" aria-controls="200-components-schemas-oraStatuses-properties-context-properties-context-1">
+                    
+                    context: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-oraStatuses-properties-context-properties-context-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Context information specific to the type of request.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-oraStatuses-properties-endTime-properties-endTime-1" aria-expanded="false" aria-controls="200-components-schemas-oraStatuses-properties-endTime-properties-endTime-1">
+                    
+                    endTime: 
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-oraStatuses-properties-endTime" role="button" class="btn btn-default btn-sm btn-xsm">
+                    endTime
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-oraStatuses-properties-endTime-properties-endTime-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="description">Time at which the transaction ended.</div>
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-oraStatuses-properties-links-properties-links-1" aria-expanded="false" aria-controls="200-components-schemas-oraStatuses-properties-links-properties-links-1">
+                    
+                    links: array
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-oraStatuses-properties-links" role="button" class="btn btn-default btn-sm btn-xsm">
+                    links
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-oraStatuses-properties-links-properties-links-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-progressType-properties-progress-2" aria-expanded="false" aria-controls="200-components-schemas-progressType-properties-progress-2">
+                    
+                    progress: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-progressType-properties-progress-2">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Allowed Values: <code>[
+    &quot;processing&quot;,
+    &quot;pending&quot;,
+    &quot;failed&quot;,
+    &quot;interrupted&quot;,
+    &quot;succeeded&quot;,
+    &quot;cancelling&quot;,
+    &quot;cancelled&quot;,
+    &quot;unknown&quot;
+]</code></div>
+
+
+
+
+
+<div>Indicates the completion status.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-oraStatuses-properties-startTime-properties-startTime-1" aria-expanded="false" aria-controls="200-components-schemas-oraStatuses-properties-startTime-properties-startTime-1">
+                    
+                    startTime: 
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-oraStatuses-properties-startTime" role="button" class="btn btn-default btn-sm btn-xsm">
+                    startTime
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-oraStatuses-properties-startTime-properties-startTime-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="description">Time at which the transaction starts.</div>
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;properties&quot;:{
+        &quot;progress&quot;:{
+            &quot;$ref&quot;:&quot;#/components/schemas/progressType&quot;
+        },
+        &quot;startTime&quot;:{
+            &quot;description&quot;:&quot;Time at which the transaction starts.&quot;,
+            &quot;allOf&quot;:[
+                {
+                    &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+                }
+            ]
+        },
+        &quot;completed&quot;:{
+            &quot;description&quot;:&quot;Indicates the completion status of the message.&quot;,
+            &quot;type&quot;:&quot;boolean&quot;
+        },
+        &quot;endTime&quot;:{
+            &quot;description&quot;:&quot;Time at which the transaction ended.&quot;,
+            &quot;allOf&quot;:[
+                {
+                    &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+                }
+            ]
+        },
+        &quot;context&quot;:{
+            &quot;description&quot;:&quot;Context information specific to the type of request.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;links&quot;:{
+            &quot;type&quot;:&quot;array&quot;,
+            &quot;items&quot;:{
+                &quot;$ref&quot;:&quot;#/components/schemas/links&quot;
+            }
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatuses-allOf-1" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : exportStatuses-allOf[1]</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-result-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-result-1">
+                    
+                    result: object
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-exportStatuses-allOf-1-properties-result" role="button" class="btn btn-default btn-sm btn-xsm">
+                    result
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-result-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="description">Specifies the full request status.</div>
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;type&quot;:&quot;object&quot;,
+    &quot;properties&quot;:{
+        &quot;result&quot;:{
+            &quot;description&quot;:&quot;Specifies the full request status.&quot;,
+            &quot;type&quot;:&quot;object&quot;,
+            &quot;properties&quot;:{
+                &quot;body&quot;:{
+                    &quot;type&quot;:&quot;object&quot;,
+                    &quot;properties&quot;:{
+                        &quot;requestID&quot;:{
+                            &quot;description&quot;:&quot;Export Request ID&quot;,
+                            &quot;type&quot;:&quot;string&quot;
+                        },
+                        &quot;submitDate&quot;:{
+                            &quot;description&quot;:&quot;Date/Time at which the request was submitted.&quot;,
+                            &quot;allOf&quot;:[
+                                {
+                                    &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+                                }
+                            ]
+                        },
+                        &quot;externalRef&quot;:{
+                            &quot;description&quot;:&quot;External reference passed in request message. Can be used to correlate the request.&quot;,
+                            &quot;type&quot;:&quot;string&quot;
+                        },
+                        &quot;tables&quot;:{
+                            &quot;properties&quot;:{
+                                &quot;items&quot;:{
+                                    &quot;type&quot;:&quot;array&quot;,
+                                    &quot;items&quot;:{
+                                        &quot;$ref&quot;:&quot;#/components/schemas/exportStatusItemType&quot;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-oraStatuses-properties-endTime" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : endTime</div>
+    
+    	
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Time at which the transaction ended.</div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="h5">Match All</div>
+    
+        
+            <div>Time at which the transaction ended.</div>
+        
+    
+    <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+    <ul class="schema-properties">
+        
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-dateTimeType-allof-0" aria-expanded="false" aria-controls="200-components-schemas-dateTimeType-allof-0">
+                
+                object 
+                
+                
+            </a> <a href="#200-components-schemas-dateTimeType" role="button" class="btn btn-default btn-sm btn-xsm">dateTimeType</a>
+                
+            <div class="collapse schema-summary" id="200-components-schemas-dateTimeType-allof-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        
+    </ul>
+    <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Time at which the transaction ended.&quot;,
+    &quot;allOf&quot;:[
+        {
+            &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+        }
+    ]
+}</code></pre>
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-oraStatuses-properties-links" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : links</div>
+    
+    	
+    	<div class="schema-type">Type: <code>array</code></div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-links-items-0" aria-expanded="false" aria-controls="200-components-schemas-links-items-0">
+            Array of: 
+                object </a> <a href="#200-components-schemas-links" role="button" class="btn btn-default btn-sm btn-xsm">links</a>
+            
+            <div class="collapse schema-summary" id="200-components-schemas-links-items-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;type&quot;:&quot;array&quot;,
+    &quot;items&quot;:{
+        &quot;$ref&quot;:&quot;#/components/schemas/links&quot;
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-oraStatuses-properties-startTime" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : startTime</div>
+    
+    	
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Time at which the transaction starts.</div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="h5">Match All</div>
+    
+        
+            <div>Time at which the transaction starts.</div>
+        
+    
+    <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+    <ul class="schema-properties">
+        
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-dateTimeType-allof-0" aria-expanded="false" aria-controls="200-components-schemas-dateTimeType-allof-0">
+                
+                object 
+                
+                
+            </a> <a href="#200-components-schemas-dateTimeType" role="button" class="btn btn-default btn-sm btn-xsm">dateTimeType</a>
+                
+            <div class="collapse schema-summary" id="200-components-schemas-dateTimeType-allof-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        
+    </ul>
+    <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Time at which the transaction starts.&quot;,
+    &quot;allOf&quot;:[
+        {
+            &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+        }
+    ]
+}</code></pre>
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-dateTimeType" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : dateTimeType</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-dateTimeType-properties-timezone-properties-timezone-1" aria-expanded="false" aria-controls="200-components-schemas-dateTimeType-properties-timezone-properties-timezone-1">
+                    
+                    timezone: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-dateTimeType-properties-timezone-properties-timezone-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Timezone in Olson database format</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-dateTimeType-properties-value-properties-value-1" aria-expanded="false" aria-controls="200-components-schemas-dateTimeType-properties-value-properties-value-1">
+                    
+                    value: string
+                    
+                    
+                     (date-time) 
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-dateTimeType-properties-value-properties-value-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Date in ISO 8601 format</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;properties&quot;:{
+        &quot;value&quot;:{
+            &quot;description&quot;:&quot;Date in ISO 8601 format&quot;,
+            &quot;type&quot;:&quot;string&quot;,
+            &quot;format&quot;:&quot;date-time&quot;
+        },
+        &quot;timezone&quot;:{
+            &quot;description&quot;:&quot;Timezone in Olson database format&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-links" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : links</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-links-properties-href-properties-href-1" aria-expanded="false" aria-controls="200-components-schemas-links-properties-href-properties-href-1">
+                    
+                    href: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-links-properties-href-properties-href-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-links-properties-rel-properties-rel-1" aria-expanded="false" aria-controls="200-components-schemas-links-properties-rel-properties-rel-1">
+                    
+                    rel: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-links-properties-rel-properties-rel-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;properties&quot;:{
+        &quot;rel&quot;:{
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;href&quot;:{
+            &quot;type&quot;:&quot;string&quot;
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatuses-allOf-1-properties-result" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : result</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Specifies the full request status.</div>
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-body-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-body-1">
+                    
+                    body: object
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body" role="button" class="btn btn-default btn-sm btn-xsm">
+                    body
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-body-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Specifies the full request status.&quot;,
+    &quot;type&quot;:&quot;object&quot;,
+    &quot;properties&quot;:{
+        &quot;body&quot;:{
+            &quot;type&quot;:&quot;object&quot;,
+            &quot;properties&quot;:{
+                &quot;requestID&quot;:{
+                    &quot;description&quot;:&quot;Export Request ID&quot;,
+                    &quot;type&quot;:&quot;string&quot;
+                },
+                &quot;submitDate&quot;:{
+                    &quot;description&quot;:&quot;Date/Time at which the request was submitted.&quot;,
+                    &quot;allOf&quot;:[
+                        {
+                            &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+                        }
+                    ]
+                },
+                &quot;externalRef&quot;:{
+                    &quot;description&quot;:&quot;External reference passed in request message. Can be used to correlate the request.&quot;,
+                    &quot;type&quot;:&quot;string&quot;
+                },
+                &quot;tables&quot;:{
+                    &quot;properties&quot;:{
+                        &quot;items&quot;:{
+                            &quot;type&quot;:&quot;array&quot;,
+                            &quot;items&quot;:{
+                                &quot;$ref&quot;:&quot;#/components/schemas/exportStatusItemType&quot;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : body</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-externalRef-properties-externalRef-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-externalRef-properties-externalRef-1">
+                    
+                    externalRef: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-externalRef-properties-externalRef-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>External reference passed in request message. Can be used to correlate the request.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-requestID-properties-requestID-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-requestID-properties-requestID-1">
+                    
+                    requestID: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-requestID-properties-requestID-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Export Request ID</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-submitDate-properties-submitDate-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-submitDate-properties-submitDate-1">
+                    
+                    submitDate: 
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-submitDate" role="button" class="btn btn-default btn-sm btn-xsm">
+                    submitDate
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-submitDate-properties-submitDate-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="description">Date/Time at which the request was submitted.</div>
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables-properties-tables-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables-properties-tables-1">
+                    
+                    tables: 
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables" role="button" class="btn btn-default btn-sm btn-xsm">
+                    tables
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables-properties-tables-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;type&quot;:&quot;object&quot;,
+    &quot;properties&quot;:{
+        &quot;requestID&quot;:{
+            &quot;description&quot;:&quot;Export Request ID&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;submitDate&quot;:{
+            &quot;description&quot;:&quot;Date/Time at which the request was submitted.&quot;,
+            &quot;allOf&quot;:[
+                {
+                    &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+                }
+            ]
+        },
+        &quot;externalRef&quot;:{
+            &quot;description&quot;:&quot;External reference passed in request message. Can be used to correlate the request.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;tables&quot;:{
+            &quot;properties&quot;:{
+                &quot;items&quot;:{
+                    &quot;type&quot;:&quot;array&quot;,
+                    &quot;items&quot;:{
+                        &quot;$ref&quot;:&quot;#/components/schemas/exportStatusItemType&quot;
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-submitDate" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : submitDate</div>
+    
+    	
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Date/Time at which the request was submitted.</div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="h5">Match All</div>
+    
+        
+            <div>Date/Time at which the request was submitted.</div>
+        
+    
+    <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+    <ul class="schema-properties">
+        
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-dateTimeType-allof-0" aria-expanded="false" aria-controls="200-components-schemas-dateTimeType-allof-0">
+                
+                object 
+                
+                
+            </a> <a href="#200-components-schemas-dateTimeType" role="button" class="btn btn-default btn-sm btn-xsm">dateTimeType</a>
+                
+            <div class="collapse schema-summary" id="200-components-schemas-dateTimeType-allof-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        
+    </ul>
+    <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Date/Time at which the request was submitted.&quot;,
+    &quot;allOf&quot;:[
+        {
+            &quot;$ref&quot;:&quot;#/components/schemas/dateTimeType&quot;
+        }
+    ]
+}</code></pre>
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : tables</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables-properties-items-properties-items-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables-properties-items-properties-items-1">
+                    
+                    items: array
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables-properties-items" role="button" class="btn btn-default btn-sm btn-xsm">
+                    items
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables-properties-items-properties-items-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;properties&quot;:{
+        &quot;items&quot;:{
+            &quot;type&quot;:&quot;array&quot;,
+            &quot;items&quot;:{
+                &quot;$ref&quot;:&quot;#/components/schemas/exportStatusItemType&quot;
+            }
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatuses-allOf-1-properties-result-properties-body-properties-tables-properties-items" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : items</div>
+    
+    	
+    	<div class="schema-type">Type: <code>array</code></div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-items-0" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-items-0">
+            Array of: 
+                object </a> <a href="#200-components-schemas-exportStatusItemType" role="button" class="btn btn-default btn-sm btn-xsm">exportStatusItemType</a>
+            
+            <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-items-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="description">Specifies the status of an individual request item.</div>
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;type&quot;:&quot;array&quot;,
+    &quot;items&quot;:{
+        &quot;$ref&quot;:&quot;#/components/schemas/exportStatusItemType&quot;
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatusItemType" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : exportStatusItemType</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Specifies the status of an individual request item.</div>
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-externalRef-properties-externalRef-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-externalRef-properties-externalRef-1">
+                    
+                    externalRef: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-externalRef-properties-externalRef-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>External reference passed in request item. Can be used to correlate the request item.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-itemID-properties-itemID-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-itemID-properties-itemID-1">
+                    
+                    itemID: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-itemID-properties-itemID-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>The unique request item ID within this request.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-itemName-properties-itemName-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-itemName-properties-itemName-1">
+                    
+                    itemName: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-itemName-properties-itemName-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Name of table providing the content for this item.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-offset-properties-offset-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-offset-properties-offset-1">
+                    
+                    offset: integer
+                    
+                    
+                     (int32) 
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-offset-properties-offset-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Specifies the offset within a result set from which to start replicating content. Defaults to 0.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-parts-properties-parts-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-parts-properties-parts-1">
+                    
+                    parts: 
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-exportStatusItemType-properties-parts" role="button" class="btn btn-default btn-sm btn-xsm">
+                    parts
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-parts-properties-parts-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="description">Information for each part within the item.</div>
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-partSize-properties-partSize-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-partSize-properties-partSize-1">
+                    
+                    partSize: integer
+                    
+                    
+                     (int32) 
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-partSize-properties-partSize-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Specifies any limit applied to the number of records to be included within any part for this item.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-progressType-properties-progress-3" aria-expanded="false" aria-controls="200-components-schemas-progressType-properties-progress-3">
+                    
+                    progress: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-progressType-properties-progress-3">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Allowed Values: <code>[
+    &quot;processing&quot;,
+    &quot;pending&quot;,
+    &quot;failed&quot;,
+    &quot;interrupted&quot;,
+    &quot;succeeded&quot;,
+    &quot;cancelling&quot;,
+    &quot;cancelled&quot;,
+    &quot;unknown&quot;
+]</code></div>
+
+
+
+
+
+<div>Indicates the completion status.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-totalRecordCount-properties-totalRecordCount-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-totalRecordCount-properties-totalRecordCount-1">
+                    
+                    totalRecordCount: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-totalRecordCount-properties-totalRecordCount-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>The total number of records in all parts for this item..</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-totalResults-properties-totalResults-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-totalResults-properties-totalResults-1">
+                    
+                    totalResults: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-totalResults-properties-totalResults-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>The total number of records matching the filter criteria for this item.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Specifies the status of an individual request item.&quot;,
+    &quot;properties&quot;:{
+        &quot;itemID&quot;:{
+            &quot;description&quot;:&quot;The unique request item ID within this request.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;itemName&quot;:{
+            &quot;description&quot;:&quot;Name of table providing the content for this item.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;externalRef&quot;:{
+            &quot;description&quot;:&quot;External reference passed in request item. Can be used to correlate the request item.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;progress&quot;:{
+            &quot;$ref&quot;:&quot;#/components/schemas/progressType&quot;
+        },
+        &quot;totalResults&quot;:{
+            &quot;description&quot;:&quot;The total number of records matching the filter criteria for this item.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;offset&quot;:{
+            &quot;description&quot;:&quot;Specifies the offset within a result set from which to start replicating content. Defaults to 0.&quot;,
+            &quot;type&quot;:&quot;integer&quot;,
+            &quot;format&quot;:&quot;int32&quot;
+        },
+        &quot;partSize&quot;:{
+            &quot;description&quot;:&quot;Specifies any limit applied to the number of records to be included within any part for this item.&quot;,
+            &quot;type&quot;:&quot;integer&quot;,
+            &quot;format&quot;:&quot;int32&quot;
+        },
+        &quot;totalRecordCount&quot;:{
+            &quot;description&quot;:&quot;The total number of records in all parts for this item..&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;parts&quot;:{
+            &quot;description&quot;:&quot;Information for each part within the item.&quot;,
+            &quot;properties&quot;:{
+                &quot;count&quot;:{
+                    &quot;description&quot;:&quot;Total number of parts produced (so far if still in progress) for the item.&quot;,
+                    &quot;type&quot;:&quot;integer&quot;,
+                    &quot;format&quot;:&quot;int32&quot;
+                },
+                &quot;items&quot;:{
+                    &quot;type&quot;:&quot;array&quot;,
+                    &quot;items&quot;:{
+                        &quot;$ref&quot;:&quot;#/components/schemas/partType&quot;
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatusItemType-properties-parts" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : parts</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Information for each part within the item.</div>
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-parts-properties-count-properties-count-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-parts-properties-count-properties-count-1">
+                    
+                    count: integer
+                    
+                    
+                     (int32) 
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-parts-properties-count-properties-count-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Total number of parts produced (so far if still in progress) for the item.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-exportStatusItemType-properties-parts-properties-items-properties-items-1" aria-expanded="false" aria-controls="200-components-schemas-exportStatusItemType-properties-parts-properties-items-properties-items-1">
+                    
+                    items: array
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-exportStatusItemType-properties-parts-properties-items" role="button" class="btn btn-default btn-sm btn-xsm">
+                    items
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-exportStatusItemType-properties-parts-properties-items-properties-items-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Information for each part within the item.&quot;,
+    &quot;properties&quot;:{
+        &quot;count&quot;:{
+            &quot;description&quot;:&quot;Total number of parts produced (so far if still in progress) for the item.&quot;,
+            &quot;type&quot;:&quot;integer&quot;,
+            &quot;format&quot;:&quot;int32&quot;
+        },
+        &quot;items&quot;:{
+            &quot;type&quot;:&quot;array&quot;,
+            &quot;items&quot;:{
+                &quot;$ref&quot;:&quot;#/components/schemas/partType&quot;
+            }
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-exportStatusItemType-properties-parts-properties-items" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : items</div>
+    
+    	
+    	<div class="schema-type">Type: <code>array</code></div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-partType-items-0" aria-expanded="false" aria-controls="200-components-schemas-partType-items-0">
+            Array of: 
+                object </a> <a href="#200-components-schemas-partType" role="button" class="btn btn-default btn-sm btn-xsm">partType</a>
+            
+            <div class="collapse schema-summary" id="200-components-schemas-partType-items-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="description">Details for each part exported.</div>
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;type&quot;:&quot;array&quot;,
+    &quot;items&quot;:{
+        &quot;$ref&quot;:&quot;#/components/schemas/partType&quot;
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-partType" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : partType</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Details for each part exported.</div>
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-partType-properties-checksum-properties-checksum-1" aria-expanded="false" aria-controls="200-components-schemas-partType-properties-checksum-properties-checksum-1">
+                    
+                    checksum: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-partType-properties-checksum-properties-checksum-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>A hash of the file contents using the algorithm specified in the request. Defaults to MD5.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-partType-properties-errorStatus-properties-errorStatus-1" aria-expanded="false" aria-controls="200-components-schemas-partType-properties-errorStatus-properties-errorStatus-1">
+                    
+                    errorStatus: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-partType-properties-errorStatus-properties-errorStatus-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Error status from the external system if the transport of the exported file fails.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-partType-properties-partName-properties-partName-1" aria-expanded="false" aria-controls="200-components-schemas-partType-properties-partName-properties-partName-1">
+                    
+                    partName: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-partType-properties-partName-properties-partName-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>The unique file name for the part. See online API documentation for naming standard.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-partType-properties-recordCount-properties-recordCount-1" aria-expanded="false" aria-controls="200-components-schemas-partType-properties-recordCount-properties-recordCount-1">
+                    
+                    recordCount: integer
+                    
+                    
+                     (int32) 
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-partType-properties-recordCount-properties-recordCount-1">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Total number of data rows contained in the part.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Details for each part exported.&quot;,
+    &quot;properties&quot;:{
+        &quot;partName&quot;:{
+            &quot;description&quot;:&quot;The unique file name for the part. See online API documentation for naming standard.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;recordCount&quot;:{
+            &quot;description&quot;:&quot;Total number of data rows contained in the part.&quot;,
+            &quot;type&quot;:&quot;integer&quot;,
+            &quot;format&quot;:&quot;int32&quot;
+        },
+        &quot;checksum&quot;:{
+            &quot;description&quot;:&quot;A hash of the file contents using the algorithm specified in the request. Defaults to MD5.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;errorStatus&quot;:{
+            &quot;description&quot;:&quot;Error status from the external system if the transport of the exported file fails.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                </div>
+                                </div>
+                            
+
+                            
+
+                            
+                        </div>
+                    </div>
+                
+                    <div class="response">
+                        <h4 class="response-code ">404 Response</h4>
+                        <div class="response-body">
+                            <div>Export Status Response not found.</div>
+                            
+
+                            
+
+                            
+
+                            
+                        </div>
+                    </div>
+                
+
+				
+
+				 <a style="float: right" href="#top">Back to Top</a>
+
+                
+
+            </section>
+
+            
+        </article>
+    </body>
+</html>

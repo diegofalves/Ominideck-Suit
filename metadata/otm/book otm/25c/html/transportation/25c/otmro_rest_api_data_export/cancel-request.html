@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cancel Request</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="synchronous-export-of-compressed-content.html" title="Previous" type="text/html">
+        <link rel="next" href="export-table-using-saved-query.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Cancel Request","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="synchronous-export-of-compressed-content.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="export-table-using-saved-query.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Cancel Request</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            <div>
+               <p>Cancel a single running export request.</p>
+               <div class="section" id="u30257839__section_wvy_yjr_rvb">
+                  <p class="subhead1">Use Case Description</p>
+                  
+                  
+                  <div class="p">
+                     
+                     <ul style="list-style-type: disc;" id="u30257839__ul_qvq_zjr_rvb">
+                        <li>Identify request ID for request which has been submitted in error or should
+                        not be allowed to complete.</li>
+                        <li>Submit cancel action.</li>
+                        <li>Monitor status.</li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <p>Export requests are, by definition, long running tasks. As such they are integrated
+                with the Long Running Tasks (LRT) infrastructure and progress can be viewed or
+                canceled via the LRT management UI. See <a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=guide_Long_Running_Tasks" target="_blank">Long Running Tasks help</a> for more
+                details.
+                  </p>
+                  
+                  <p>In addition to the LRT UI action, there is a REST API custom action available to
+                cancel a running request. The action has no message body but still requires the use
+                of the HTTP POST method. For this use case, assume that we have discovered that
+                request ID 12345 has been submitted with incorrect filter criteria and so will
+                produce incorrect data. It can be canceled with the following cURL command:</p>
+                  <pre class="pre codeblock" id="u30257839__codeblock_c1w_ckr_rvb"><code>curl -u username:password -X POST "https://servername.us2.oraclecloud.com/logisticsRestApi/data/v1/custom-actions/cancel/exportRequests/12345"</code></pre>
+                  <p>If the request is still running, this action will respond with an HTTP status of "200
+                OK" and temporarily mark the current progress of the request as "canceling".</p>
+                  
+                  <p>If the request has already completed, then the response will be an HTTP status of
+                "400 Bad Request" with an error message saying that the given request was in an
+                invalid state for a cancellation request.</p>
+                  
+                  <p>An HTTP status of "404 Not Found" is returned if the request ID is not valid.</p>
+                  
+               </div>
+               <div class="section" id="u30257839__section_qsg_3kr_rvb">
+                  <p class="subhead1">Check Status</p>
+                  
+                  
+                  <div class="p">
+                     <pre class="pre codeblock" id="u30257839__codeblock_wph_jkr_rvb"><code> curl -u username:password "https://servername.us2.oraclecloud.com/logisticsRestApi/data/v1/exportStatuses/12345"
+
+{
+   "progress": "cancelling",
+   "startTime": {
+       "value": "2022-11-29T15:21:58Z"
+   },
+   "completed": false,
+   "result": {
+      "body": {
+          "requestID": 12345,
+          "submitDate": "2022-11-29T15:21:56Z",
+          "tables": {
+              "items": [
+                  {
+                      "itemID": 1,
+                      "itemName": "SHIPMENT",
+                      "startTime": "2022-11-29T15:21:58Z",
+                      "endTime": "2022-11-29T15:22:17Z",
+                      "progress": "succeeded",
+                      "totalResults": 92,
+                      "offset": 0,
+                      "totalRecordCount": 92,
+                      "parts": {
+                          "count": 1,
+                          "items": [
+                              {
+                                  "partName": "DATA_12345_SHIPMENT_1_1.csv",
+                                  "recordCount": 92,
+                                  "checksum": "c9179dae8947cb56abaed4f6c2ea09b3"
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "itemID": 2,
+                      "itemName": "SHIPMENT_REFNUM",
+                      "progress": "pending",
+                      "parts": {
+                          "count": 0,
+                          "items": []
+                      }
+                  }
+              ]
+          }
+      }
+  },
+  "links": [..etc..]
+}
+</code></pre>
+                     </div>
+                  
+                  <p>Any running request items will stop as soon as possible when this state is detected
+                and mark their progress as "canceled". Those that were already completed before
+                cancellation was requested will remain in "succeeded" or "failed" state. At some
+                time later, another status request should show: </p>
+                  <pre class="pre codeblock" id="u30257839__codeblock_aqd_mkr_rvb"><code>curl -u username:password "https://servername.us2.oraclecloud.com/logisticsRestApi/data/v1/exportStatuses/12345"
+
+{
+   "progress": "cancelled",
+   "startTime": {
+       "value": "2022-11-29T15:21:58Z"
+   },
+   "completed": true,
+   "result": {
+      "body": {
+          "requestID": 12345,
+          "submitDate": "2022-11-29T15:21:56Z",
+          "tables": {
+              "items": [
+                  {
+                      "itemID": 1,
+                      "itemName": "SHIPMENT",
+                      "startTime": "2022-11-29T15:21:58Z",
+                      "endTime": "2022-11-29T15:22:17Z",
+                      "progress": "succeeded",
+                      "totalResults": 92,
+                      "offset": 0,
+                      "totalRecordCount": 92,
+                      "parts": {
+                          "count": 1,
+                          "items": [
+                              {
+                                  "partName": "DATA_12345_SHIPMENT_1_1.csv",
+                                  "recordCount": 92,
+                                  "checksum": "c9179dae8947cb56abaed4f6c2ea09b3"
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "itemID": 2,
+                      "itemName": "SHIPMENT_REFNUM",
+                      "progress": "cancelled",
+                      "parts": {
+                          "count": 0,
+                          "items": []
+                      }
+                  }
+              ]
+          }
+      }
+  },
+  "links": [..etc..]
+}
+</code></pre>
+                  </div>
+            </div>
+         </div>
+        </article>
+    </body>
+</html>

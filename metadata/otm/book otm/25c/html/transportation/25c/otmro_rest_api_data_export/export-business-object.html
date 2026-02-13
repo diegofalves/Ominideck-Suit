@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Export Business Object</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="export-content-and-deleted-pks.html" title="Previous" type="text/html">
+        <link rel="next" href="asynchronous-export-of-compressed-content.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Export Business Object","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="export-content-and-deleted-pks.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="asynchronous-export-of-compressed-content.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Export Business Object</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            <div>
+               <p>A simple POST message to create an Export Request for Buy Shipment business object,
+            containing rows that have been inserted or updated within a given date range.</p>
+               <div class="section" id="topic_nfg_s5m_lyb__section_fvj_v5m_lyb">
+                  <p class="subhead1">Use Case Description</p>
+                  
+                  
+                  <ul style="list-style-type: disc;" id="topic_nfg_s5m_lyb__ul_jkp_w5m_lyb">
+                     <li>Export content that has been inserted or updated in the SHIPMENT and ALL CHILD
+                    tables (that are available as child resources (and further descendants) of the
+                    shipments root resource) in the month of September 2022 (times are all UTC) and
+                    send to an existing bucket on Oracle Cloud Object Storage.</li>
+                     <li>Identify unique request ID.</li>
+                     <li>Check status for completion.</li>
+                  </ul>
+                  <pre class="pre codeblock" id="topic_nfg_s5m_lyb__codeblock_bwf_z5m_lyb"><code>curl -u username:password -X POST -H "Content-Type: application/json" -H "Prefer: respond-async" -d '
+ {
+    "schema": "PRIMARY",
+    "contentType": "text/plain",
+    "rangeAfter" : {
+        "value": "2022-09-01T00:00:00Z"
+    },
+    "rangeBefore": {
+        "value": "2022-09-30T23:59:59Z"
+    },
+    "targetSystem": {
+       "targetURL": "https://objectstorage.us2.oraclecloud.com/...bucket-details.../o/",
+       "appendName": true,
+       "httpMethod": "PUT"
+    },
+    "objects" : {
+        "items" : [
+            {
+                 "resourceName": "shipments"
+                            },
+https://servername.us2.oraclecloud.com/logisticsRestApi/data/v1/exportRequests
+</code></pre>
+                  <div class="infoboxnote" id="topic_nfg_s5m_lyb__note_yy2_1vm_lyb">
+                     <p class="notep1">Note:</p>
+                     
+                     <div class="p">
+                        
+                        <ul style="list-style-type: disc;" id="topic_nfg_s5m_lyb__ul_gmz_dvm_lyb">
+                           <li>Fetching list of columns using the "selectList" property isn't supported
+                            for business objects.</li>
+                           <li>Specifying the contentType of text/plain (or allowing to default) will
+                            export the content as table oriented CSV.</li>
+                           <li>Specifying the contentType of application/json will export the content
+                            as business object oriented JSON(single file) identical to that used by
+                            the REST API for Business Object Resources. Specifically this is a
+                            collection of resources and so the contentType of
+                            application/vnd.oracle.resource+json;type=collection is also accepted as
+                            input.</li>
+                        </ul>
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  <div class="p">The Oracle Cloud Object Storage bucket referenced will contain several files as per
+                the number of child tables of Shipment resource on completion. The file names would
+                look like:
+                     <ul style="list-style-type: disc;" id="topic_nfg_s5m_lyb__ul_imz_dvm_lyb">
+                        <li>DATA_103002_shipments_1_1_SHIPMENT_1.csv</li>
+                        <li>DATA_103002_shipments_1_1_ALLOCATION_OB_LINE_D_1.csv</li>
+                     </ul>
+                  </div>
+                  
+                  <p>The response payload would be as follows if the request was completed
+                successfully:</p>
+                  <pre class="pre codeblock" id="topic_nfg_s5m_lyb__codeblock_vbn_mvm_lyb"><code>	{
+    "progress": "succeeded",
+    "startTime": {
+        "value": "2023-08-09T05:33:32Z"
+    },
+    "completed": true,
+    "endTime": {
+        "value": "2023-08-09T05:34:39Z"
+    },
+    "context": "105001",
+    "result": {
+        "body": {
+            "requestID": 105001,
+            "submitDate": "2023-08-09T05:33:31Z",
+            "objects": {
+                "items": [
+                    {
+                        "itemID": 1,
+                        "itemName": "shipments",
+                        "startTime": "2023-08-09T05:33:33Z",
+                        "endTime": "2023-08-09T05:34:39Z",
+                        "progress": "succeeded",
+                        "totalResults": 385,
+                        "offset": 0,
+                        "totalRecordCount": 134055,
+                        "parts": {
+                            "count": 29,
+                            "items": [
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_1.csv",
+                                    "recordCount": 385,
+                                    "checksum": "85841e6993ef736a17f332f29542d463"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_REFNUM_1.csv",
+                                    "recordCount": 803,
+                                    "checksum": "429dc23b0c4d230035b94dcabce28135"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_REQDOC_1.csv",
+                                    "recordCount": 814,
+                                    "checksum": "977541134ced80590ee646a940daa3fd"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_REQDOC_TEXT_1.csv",
+                                    "recordCount": 816,
+                                    "checksum": "66cb000aae95609b5eb9fd664b93a87d"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_REQDOC_SUBSCRIBER_1.csv",
+                                    "recordCount": 827,
+                                    "checksum": "0730992d01e8b2b6390485f1b81801c4"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_REQDOC_REVIEWER_1.csv",
+                                    "recordCount": 840,
+                                    "checksum": "e2c9031d3b74f51bff3068b8c70e64f6"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_STOP_1.csv",
+                                    "recordCount": 1619,
+                                    "checksum": "a58c357eb72e3b104538cb63c540d90a"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_STOP_DEBRIEF_1.csv",
+                                    "recordCount": 1631,
+                                    "checksum": "96d26f3d689b52df3e920773d354571e"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_STOP_INV_PARTY_1.csv",
+                                    "recordCount": 1646,
+                                    "checksum": "171c6cfbc1c8f89c1804ec70b4dd3423"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_STOP_D_1.csv",
+                                    "recordCount": 2428,
+                                    "checksum": "b50b320586aa0d34595d1125e522519d"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_S_SHIP_UNIT_1.csv",
+                                    "recordCount": 2801,
+                                    "checksum": "911df35a063f40fa4dad746e6aedb313"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_S_SHIP_UNIT_LINE_1.csv",
+                                    "recordCount": 3175,
+                                    "checksum": "5e52ba3ce44b11c29d24b2ce0f31ffa1"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_S_EQUIPMENT_S_SHIP_UNIT_JOIN_1.csv",
+                                    "recordCount": 3548,
+                                    "checksum": "d02191e21371218edaed6388777290ef"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_STOP_SU_INV_PARTY_1.csv",
+                                    "recordCount": 3552,
+                                    "checksum": "d46b23a78538a096bfb21f247aa374fd"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_DOCUMENT_1.csv",
+                                    "recordCount": 3555,
+                                    "checksum": "4677dc61a1bf8912ed7db8d11dfa2863"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_TENDER_COLLABORATION_1.csv",
+                                    "recordCount": 3579,
+                                    "checksum": "f22e7a2b3c2eb8abdca1a2dda1549d54"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_COST_1.csv",
+                                    "recordCount": 4300,
+                                    "checksum": "c49fc44f6b9d40fa4c3e09fe36f1c0ee"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_COST_DETAIL_1.csv",
+                                    "recordCount": 4942,
+                                    "checksum": "2cac290ffb2d4f76874f01f60e074d1b"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_COST_REF_1.csv",
+                                    "recordCount": 5099,
+                                    "checksum": "83d21463b6cd025e0997a4637e8ef6ea"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_ACCESSORIAL_1.csv",
+                                    "recordCount": 5166,
+                                    "checksum": "c1c0bfe79e2e87de3ea10306c5b4f89e"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_S_EQUIPMENT_JOIN_1.csv",
+                                    "recordCount": 6779,
+                                    "checksum": "a74708c5f2934927bd752284e1a81454"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_INVOLVED_PARTY_1.csv",
+                                    "recordCount": 7200,
+                                    "checksum": "82e76d60c253007b6f2a440bbf2a1a4e"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_TEXT_1.csv",
+                                    "recordCount": 7201,
+                                    "checksum": "2916c8beac2aa094fcae5b49bcb1fb88"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_SPECIAL_SERVICE_1.csv",
+                                    "recordCount": 7613,
+                                    "checksum": "985282447612718bf387e8cc522e1bf9"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_ALLOCATION_BASE_1.csv",
+                                    "recordCount": 7752,
+                                    "checksum": "442ba13f2ffc14fdd1c7f0c2187ec47e"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_ALLOCATION_ORDER_RELEASE_D_1.csv",
+                                    "recordCount": 8262,
+                                    "checksum": "d13a531ad06c87063ee90e5358b46bd8"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_ALLOCATION_OR_LINE_D_1.csv",
+                                    "recordCount": 9096,
+                                    "checksum": "4c8d021878658cc444f39361f378df77"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_ALLOCATION_OB_LINE_D_1.csv",
+                                    "recordCount": 9116,
+                                    "checksum": "7ed0c294aeca0159590eb1fe4397085e"
+                                },
+                                {
+                                    "partName": "DATA_105001_shipments_1_1_SHIPMENT_STATUS_1.csv",
+                                    "recordCount": 19510,
+                                    "checksum": "deae4dccf6b1377cc285809214b2cc07"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://otmgtm-24a-mainqa-node1.otmgtm.us-phoenix-1.ocs.oc-test.com:443/logisticsRestApi/data-int/v1/exportStatuses/105001"
+        }
+    ]
+}	
+</code></pre>
+                  </div>
+            </div>
+         </div>
+        </article>
+    </body>
+</html>

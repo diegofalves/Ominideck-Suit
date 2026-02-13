@@ -1,0 +1,289 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="integrating-with-other-systems.html" title="Previous" type="text/html"><link rel="next" href="outbound-integration-and-notification.html" title="Next" type="text/html"><meta name="description" content="Sending data to Oracle Transportation and Global Trade Management is supported using one of the following methods:"><meta property="og:description" content="Sending data to Oracle Transportation and Global Trade Management is supported using one of the following methods:"><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:10 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Inbound Integration</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Inbound Integration","description":"Sending data to Oracle Transportation and Global Trade Management is supported using one of the following methods:","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="integrating-with-other-systems.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="outbound-integration-and-notification.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Inbound Integration<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span><span id="inbound_integration" data-help-type="cloud-saas"></span><span id="httppost" data-help-type="cloud-saas"></span><span id="web_services" data-help-type="cloud-saas"></span><span id="integration_user_role" data-help-type="cloud-saas"></span><span id="inbound_integration_and_ssl_certificates" data-help-type="cloud-saas"></span><span id="integration_data_queues" data-help-type="cloud-saas"></span><span id="xsl_stylesheets_for_inbound_integration" data-help-type="cloud-saas"></span><span id="rest_api" data-help-type="cloud-saas"></span><span id="Three_legged_oauth_flow" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225368">Inbound Integration</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">Sending data to Oracle Transportation and Global Trade Management is supported using one
+            of the following methods:</p>
+        <ul class="ul" id="u30225368__ul_w1n_qd3_tsb">
+            <li class="li">HTTP POST</li>
+            <li class="li">REST JSON (See REST API section)</li>
+            <li class="li">SOAP Web Services.</li>
+        </ul>
+    </div>
+<div class="topic nested1" lang="en" id="u30225369"><h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>HTTPPOST</h2>
+      
+      <div class="body">
+        <p class="p">HTTPPOST integration is achieved by posting XML documents to the following URL:
+                <code class="ph codeph">https://otmgtm-[identity_domain].otmgtm.[data_center].ocs.oraclecloud.com</code></p>
+        <p class="p">The <code class="ph codeph">[identity_domain]</code> value should be replaced with the values that were
+            specified during provisioning. For example: See the <span class="ph uicontrol">Input Provided During
+                Provisioning</span> and <span class="ph uicontrol">Resulting URLs</span> sections.</p>
+        <p class="p">Refer to the <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=OTMIT" target="_blank" rel="external noopener">Integration Guide</a> for a description on the
+            supported servlet endpoints and their corresponding use cases.</p>
+        <section class="section" id="u30225369__section_djp_jc3_tsb"><h3 class="title sectiontitle">Input Provided During Provisioning</h3>
+            
+            <div class="p">
+                <ul class="ul" id="u30225369__ul_uqc_wcw_vjb">
+                    <li class="li"><span class="ph uicontrol">Identity Domain</span>: companyname</li>
+                    <li class="li"><span class="ph uicontrol">Data Center</span>: us-phoenix-1</li>
+                </ul>
+            </div>
+        </section>
+        <section class="section" id="u30225369__section_rgv_kc3_tsb"><h3 class="title sectiontitle">Resulting URLs</h3>
+            
+            <ul class="ul" id="u30225369__ul_pmx_mc3_tsb">
+                <li class="li"><span class="ph uicontrol">Production</span>:
+                        <code class="ph codeph">https://otmgtm-companyname.otmgtm.us-phoenix-1.ocs.oraclecloud.com</code></li>
+                <li class="li"><span class="ph uicontrol">Test</span>:
+                        <code class="ph codeph">https://otmgtm-test-companyname.otmgtm.us-phoenix-1.ocs.oraclecloud.com</code></li>
+            </ul>
+        </section>
+        <p class="p">If a specific port number is required by the upstream posting system, the port that
+            should be used is 443. For proper security, the downstream system should require a
+            username/password for user authentication. When the username and password fields are
+            specified on an External System, they are automatically added to the Transmission Header
+            in the generated XML document.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225372"><h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>SOAP Web Services</h2>
+      
+      <div class="body">
+        <p class="p">You can also send data to Oracle Transportation and Global Trade Management via a SOAP
+            web service call.</p>
+        <p class="p">The web service call can be generated using the WSDL URL. The following URL is for the
+            TransmissionService:</p>
+        <ul class="ul" id="u30225372__ul_xjt_mgw_vjb">
+            <li class="li"><code class="ph codeph">https://otmgtm-[identity_domain].otmgtm.[data_center].ocs.oraclecloud.com/GC3Services/TransmissionService/call?wsdl</code></li>
+        </ul>
+        <p class="p">The [identity_domain] value should be replaced with the values that were specified during
+            provisioning.</p>
+        <section class="section" id="u30225372__section_oyq_gf3_tsb"><h3 class="title sectiontitle">Input Provided During Provisioning</h3>
+            
+            <ul class="ul" id="u30225372__ul_yjt_mgw_vjb">
+                <li class="li"><span class="ph uicontrol">Identity Domain</span>: companyname</li>
+                <li class="li"><span class="ph uicontrol">Data Center Name</span>: us-phoenix-1</li>
+            </ul>
+        </section>
+        <section class="section" id="u30225372__section_vwy_hf3_tsb"><h3 class="title sectiontitle">Resulting URLs:</h3>
+            
+            <ul class="ul" id="u30225372__ul_pmx_mc3_tsb">
+                <li class="li"><span class="ph uicontrol">Production</span>:
+                        <code class="ph codeph">https://otmgtm-companyname.otmgtm.us-phoenix-1.ocs.oraclecloud.com/GC3Services/TransmissionService/call?wsdl</code></li>
+                <li class="li"><span class="ph uicontrol">Test</span>:
+                        <code class="ph codeph">https://otmgtm-test-companyname.otmgtm.us-phoenix-1.ocs.oraclecloud.com/GC3Services/TransmissionService/call?wsdl</code></li>
+            </ul>
+        </section>
+        <p class="p">Alternatively, the WSDL file and corresponding XSD schema files can be retrieved via
+                <span class="ph uicontrol">Process Automation &gt; Integration &gt; Integration Manager &gt; Retrieve WSDLs</span>. The
+            WSDL should be saved to a file and subsequently imported into the source system.</p>
+        <p class="p">Transportation and Global Trade Management enforces Web Service Security policies on all
+            inbound and outbound Web Services. The Web Service Security Specification is an OASIS
+            standard for defining security related information as part of a SOAP message. See <a class="xref" href="http://www.oasis-open.org/" target="_blank" rel="external noopener">http://www.oasis-open.org/</a>. Transportation and Global Trade Management only
+            supports the WS-Security User name Token Profile.</p>
+        <section class="section" id="u30225372__section_i12_tc3_tsb"><h3 class="title sectiontitle">Inbound</h3>
+            
+            <p class="p">For Inbound integration, the user name and password must be specified in the SOAP
+                Header of the XML document. Please see the example below:</p>
+            <pre class="pre codeblock" id="u30225372__codeblock_om2_5c3_tsb"><code> &lt;SOAP-ENV:Header&gt;
+ &lt;Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"&gt;
+ &lt;UsernameToken&gt;
+ &lt;Username&gt;XYZ.OTMUSER&lt;/Username&gt;
+ &lt;Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText"&gt;password&lt;/Password&gt;
+ &lt;/UsernameToken&gt;
+ &lt;/Security&gt;
+ &lt;/SOAP-ENV:Header&gt;</code></pre>
+        </section>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225374"><h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>Integration User Role</h2>
+      
+      <div class="body">
+        <p class="p">To send data to Oracle Transportation and Global Trade Management, it's necessary for the
+            remote system to authenticate with valid user credentials. In addition this user must
+            have the correct Access Control List entry points. To facilitate this, Oracle
+            Transportation and Global Trade Management provides by default the following options for
+            inbound integration users:</p>
+        <ul class="ul" id="u30225374__ul_pk4_rhw_vjb">
+            <li class="li">"INTEGRATION" user role for your inbound integration users. Assign this user role to
+                your user.</li>
+            <li class="li">"INTEGRATION" ACL for your inbound integration users. Assign this parent ACL to your
+                customer-defined user role or your user.</li>
+            <li class="li">"External Integration" ACL for your inbound integration users. Assign this child ACL
+                to your customer-defined user role or your user.</li>
+        </ul>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225375"><h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>Inbound Integration and SSL Certificates</h2>
+      
+      <div class="body">
+        <p class="p">All inbound integration requires that the transport be protected using HTTPS.
+            Communications over HTTPS are encrypted using SSL. These SSL communications are
+            initiated using SSL Certificates. The SSL Certificates must be from a trusted signing
+            authority (no self-signed certificates). It is possible that the list of trusted signing
+            authorities on the system doesn't contain the signing authority used for the Oracle
+            Transportation and Global Trade Management Cloud certificates. In that case it might be
+            necessary to download and install the Certificate in the source system.</p>
+        <p class="p">The following instructions explain how to obtain the Root and Intermediate Certificate
+            for an Oracle Transportation and Global Trade Management instance. Both the Root and
+            Intermediate Certificates must be imported to prevent issues when the Certificate
+            expires each year. You should install the root and intermediate certificate only, NOT
+            the complete certificate chain. The instructions below assume the use of the Firefox web
+            browser, but the steps will be similar with other browsers.</p>
+        <div class="p">Follow these instructions to retrieve the SSL certificate:<ol class="ol" id="u30225375__ol_gql_4ms_qnb">
+                <li class="li">Open the Firefox browser and sign into your instance. You must ensure you're
+                    logged in successfully to the Oracle Transportation and Global Trade Management
+                    application otherwise you'll be downloading the Identity Cloud Service
+                    certificates.</li>
+                <li class="li">After confirming you're successfully logged into Oracle Transportation and
+                    Global Trade Management, click the <span class="ph uicontrol">padlock</span> (lock symbol)
+                    next to the URL. </li>
+                <li class="li">Click the arrow next to <span class="ph uicontrol">Connection Secure</span> to show
+                    connection details, then click the <span class="ph uicontrol">More Information</span>
+                    option at the bottom of the window.</li>
+                <li class="li"> Under the <span class="ph uicontrol">Security</span> tab, click the <span class="ph uicontrol">View
+                        Certificate</span> button.</li>
+                <li class="li"> There will be 3 tabs, one for the <span class="ph uicontrol">Site Certificate</span>, the
+                        <span class="ph uicontrol">Intermediate Certificate</span>, and <span class="ph uicontrol">Root
+                        Certificate</span>. You must export both the Root and Intermediate
+                    certificates and import them into your keystore to recognize the OTM
+                    certificate. It isn't necessary to install the site certificate. If you install
+                    the site certificate you'll need to update this at every yearly certificate
+                    renewal.</li>
+                <li class="li">Select the intermediate certificate "DigiCert Global CA G2" and then click the
+                    "Download PEM (CERT)" link. This should prompt you to save the file. You must
+                    remember the location where you saved the files.</li>
+                <li class="li"> Repeat the above step 6 for the root certificate "DigiCert Global Root
+                    G2".</li>
+                <li class="li"> Import both the root and intermediate certificates into the sending system
+                    keystore to recognize the OTM certificate by application using the
+                    keystore.</li>
+                <li class="li">To confirm installation check your local copy of "keystores" on the source
+                    system making the calls to make sure that the intermediate and root certs are
+                    present.</li>
+            </ol></div>
+        <div class="p">For more details on this topic, see the following KB article:<ul class="ul" id="u30225375__ul_jcv_x2s_bwb">
+            <li class="li"><a class="xref" href="https://support.oracle.com/support/?documentId=KB75360" target="_blank" rel="external noopener">KB75360: How to Retrieve Security Certificates for Inbound
+                        Integration using Firefox</a></li>
+            </ul></div>
+        <div class="infobox-" id="u30225375__note_jy5_4bp_trb"><span class="notep1">Note:</span> For Inbound Integration which uses the Oracle E-Business Suite â
+            GTM ITM Adapter, see the following KB article for details on how to handle SSL
+            Certificates: <a class="xref" href="https://support.oracle.com/support/?documentId=KB153851" target="_blank" rel="external noopener">KB153851: How to Retrieve and Change Security
+                Certificates for Inbound Integration to GTM from EBS ITM</a>. To avoid an
+            interruption of service when the Certificate is renewed, you'll need to open a Service
+            Request to obtain the latest SSL Certificate from Oracle a month before the current
+            Certificate will expire.</div>
+    </div>
+</div><div class="topic nested1" id="u30241818">
+    <h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>IP Allow List for Inbound Integration</h2>
+    
+    <div class="body">
+        <p class="p">Follow these steps to obtain the Public IP Address for Inbound Integration to Oracle
+            Transportation and Global Trade Management.</p>
+        <ol class="ol" id="u30241818__ol_zsn_yyd_gvb">
+            <li class="li">Sign in to the My Services Cloud Portal.</li>
+            <li class="li">Click the âTransportation Managementâ link.</li>
+            <li class="li">Scroll down to the âService Environmentsâ section.</li>
+            <li class="li">Copy the âService Environment URLâ for each environment by right-clicking on the URL
+                and select âCopy Link Addressâ.</li>
+            <li class="li">Run <code class="ph codeph">nslookup</code> using only the Host from the URL. For
+                example.<pre class="pre codeblock" id="u30241818__codeblock_l31_2zd_gvb"><code>nslookup otmgtm-test-myotminstance.otmgtm.us-ashburn-1.ocs.oraclecloud.com
+Server:         10.1.1.1
+Address:        10.1.1.1#53
+
+Non-authoritative answer:
+otmgtm-test-myotminstance.otmgtm.us-ashburn-1.ocs.oraclecloud.com      canonical name = 1586234534085.otmgtm.us-ashburn-1.ocs.oraclecloud.com.
+Name:   1586234534085.otmgtm.us-ashburn-1.ocs.oraclecloud.com
+Address: 199.999.99.99
+</code></pre>In this example, the Public IP Address for Inbound Integration is
+                199.999.99.99.</li>
+        </ol>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225376"><h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>Integration Data Queues</h2>
+      
+      <div class="body">
+        <p class="p">It is important to note that in the Cloud service all Inbound integration uses the
+            Integration Data Queue feature. This feature persists all inbound Transmissions into a
+            database table. A polling process on the application server queries the corresponding
+            table and processes Transmissions in batches. The Cloud Service is configured by default
+            to have 4 polling threads with a batch size of 8, that poll every 2 seconds. This allows
+            for a maximum throughput of 57,600 Transmissions per hour. You can change these settings
+            using the Data Queue manager, available on the menu at <span class="ph uicontrol">Business Process
+                Automation &gt; Integration &gt; Data Queues</span>. The "INTEGRATION IN" Data
+            Queue controls the processing of Inbound Integration. </p>
+        <p class="p">The Integration Data Queue feature prevents the application server from being overwhelmed
+            by a peak in integration volume. Customers can increase the inbound integration
+            throughput by adjusting this configuration. However, the risk is that unnecessarily
+            increasing the throughput could negatively affect the performance of other parts of the
+            system. For more details on this topic, please see the <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=OTMIT" target="_blank" rel="external noopener">Integration Guide</a>. It is important to note
+            though that the configuration of the Integration Data Queue feature is limited.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225378"><h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>XSL Stylesheets for Inbound Integration</h2>
+      
+      <div class="body">
+        <p class="p">Oracle Transportation and Global Trade Management service supports the ability to
+            transform XML Documents during Inbound Transmission Processing. This capability is
+            supported using the TransformerServlet. Use the following steps to load your
+            customer-defined XSL files for Inbound Integration.</p>
+        <ol class="ol" id="u30225378__ol_fcf_m4x_vjb">
+            <li class="li">Create Stylesheet Content: Create a Stylesheet Content record and upload the
+                corresponding XSL file. This page is located at <span class="ph uicontrol">Business Process
+                    Automation &gt; Power Data &gt; Event Management &gt; Stylesheet
+                    Content</span>. </li>
+            <li class="li">Set the stylesheet_name attribute in your XML file to the Stylesheet Content GID:
+                    <code class="ph codeph">&lt;?gc3-int-translate
+                    stylesheet_name="db:GUEST.MYSTYLESHEETCONTENTGID"?&gt;</code></li>
+        </ol>
+        <div class="infobox-"><span class="notep1">Note:</span> For more detail on this topic, please refer to the "Transform Inbound XML with XSL"
+            section in the <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=OTMIT" target="_blank" rel="external noopener">Transportation and Global Trade Management
+                Integration Guide</a>.</div>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225379"><h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>REST API</h2>
+      
+      <div class="body">
+        <p class="p">Transportation and Global Trade Management provides multiple public REST APIs that can be
+            used to access data stored in Transportation and Global Trade Management and construct
+            integrations to other systems. You can make many types of HTTP requests using Oracle
+            REST APIs. You can easily make requests to view, create, update, or delete records.</p>
+        <p class="p">Where possible a REST API should be used in preference to the Transmission XML via SOAP
+            or HTTP. REST supports synchronous and asynchronous messaging for almost all resources
+            which is an expansion of the Transmission XML capabilities. However, REST does not yet
+            support all the capabilities available using Transmission XML and these capabilities
+            will be added over the next few updates to the REST API. In cases where the feature is
+            not yet available the Transmission XML message must be used.</p>
+        <p class="p">For detailed instructions on how to use REST APIs, see the <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=OTMRA" target="_blank" rel="external noopener">REST API for Transportation and Global Trade
+                Management guide</a>.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225380"><h2 class="title topictitle2"><span id="inbound-integration"></span><span id="OTMCAinbound-integration" data-help-type="cloud-saas-docid"></span>OAuth Client Credentials Flow</h2>
+      
+      <div class="body">
+        <p class="p">The inbound HTTP POST and REST interfaces also support authentication and authorization
+            using OAuth in addition to HTTP Basic Authentication. See the <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=OTMIT" target="_blank" rel="external noopener">Integration Guide</a> for configuration details.</p>
+    </div>
+</div></div></article></body></html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Export Content and Deleted PKs</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="export-table-using-saved-query.html" title="Previous" type="text/html">
+        <link rel="next" href="export-business-object.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Export Content and Deleted PKs","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="export-table-using-saved-query.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="export-business-object.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Export Content and Deleted PKs</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            <div>
+               <p>A common use case might be to export content from many tables (for example, all tables
+            related to Buy Shipments) that have been modified within a given date range. It might
+            also be important to export the list of shipments that have been deleted within the same
+            range. The following example shows an example of an export request message to achieve
+            this (although for brevity, not all child tables for the SHIPMENT are shown).</p>
+               <p>Table content is exported according to the information specified in the "tables"
+            structure.</p>
+               <p>Deleted PKs are exported according to the information specified in the "deletes"
+            structure.</p>
+               <div class="p">Use Case Description: 
+                  <ul style="list-style-type: disc;" id="topic_aqr_11y_3wb__ul_xfk_51y_3wb">
+                     <li>Specify date range at the header level to be available to both request
+                    items</li>
+                     <li>Add a request item for SHIPMENT content</li>
+                     <li>Add a request item for deleted SHIPMENT PKs.</li>
+                  </ul>
+               </div>
+               <div class="p">
+                  <pre class="pre codeblock" id="topic_aqr_11y_3wb__codeblock_ers_y1y_3wb"><code>curl -u username:password -X POST -H "Content-Type: application/json" -d '
+ {
+    "schema": "PRIMARY",
+    "contentType": "text/plain,
+    "rangeAfter" : {
+        "value": "2022-09-01T00:00:00Z"
+    },
+    "rangeBefore": {
+        "value": "2022-09-30T23:59:59Z"
+    },
+    "targetSystem": {
+        "targetURL": "https://objectstorage.us2.oraclecloud.com/...bucket-details.../o/",
+        "appendName": true,
+        "httpMethod": "PUT"
+    },
+    "tables" : {
+        "items" : [
+            {
+                "tableName": "SHIPMENT"
+            }
+        ]
+    }
+    "deletes" : {
+        "items" : [
+            {
+                "tableName": "SHIPMENT"
+            }
+        ]
+    }
+}'
+https://servername.us2.oraclecloud.com/logisticsRestApi/data/v1/exportRequests
+</code></pre>
+                  </div>
+               <div class="p">
+                  
+                  <div class="infoboxnote" id="topic_aqr_11y_3wb__note_qr2_bby_3wb">
+                     <p class="notep1">Note:</p>
+                     
+                     <ul style="list-style-type: disc;" id="topic_aqr_11y_3wb__ul_yfk_51y_3wb">
+                        <li>The export status will report the same information for both types of
+                        items.</li>
+                        <li>The parts for deleted PKs will also be CSV format files but will only
+                        contain the primary key columns.</li>
+                        <li>The part names for deleted PKs will begin with "DELETE_".</li>
+                        <li>Part size control is identical for "tables" and "deletes" parts.</li>
+                        <li>Deleted PKs can't be exported for a business object.</li>
+                        <li>&bullet; Deleted PKs aren't captured for transactional tables.</li>
+                     </ul>
+                     
+                  </div>
+                  
+               </div>
+            </div>
+         </div>
+        </article>
+    </body>
+</html>

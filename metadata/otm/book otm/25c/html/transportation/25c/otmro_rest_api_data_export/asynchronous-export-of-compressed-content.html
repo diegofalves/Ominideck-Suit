@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Asynchronous Export of Compressed Content</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="export-business-object.html" title="Previous" type="text/html">
+        <link rel="next" href="Learn_More.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Asynchronous Export of Compressed Content","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="export-business-object.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="Learn_More.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Asynchronous Export of Compressed Content</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            <div>
+               <p>A simple POST message to immediately export content for entire business object and save
+            as multiple GZIP files or a single GZIP file based on the Content-Type.</p>
+               <div class="section" id="topic_vbk_cwm_lyb__section_esg_2wm_lyb">
+                  <p class="subhead1">Use Case Description</p>
+                  
+                  
+                  <ul style="list-style-type: disc;" id="topic_vbk_cwm_lyb__ul_mw3_fwm_lyb">
+                     <li>Export content that has been inserted or updated in the SHIPMENT table for the
+                    month of September 2022 and save as a GZIP file.</li>
+                     <li>Save as a GZIP file.</li>
+                     <li>Uncompress the GZIP file.</li>
+                     <li>You can use the uncompressed data as you wish, including potentially loading it
+                    into an archive system or another instance.</li>
+                  </ul>
+                  <pre class="pre codeblock" id="topic_vbk_cwm_lyb__codeblock_l2r_gwm_lyb"><code>curl -u username:password -X POST -H "Content-Type: application/json" -d '
+ {
+    "schema": "PRIMARY",
+    "contentType": "text/plain",
+    "contentCompression": "GZIP",
+    "rangeAfter" : {
+        "value": "2022-09-01T00:00:00Z"
+    },
+    "rangeBefore": {
+        "value": "2022-09-30T23:59:59Z"
+    },
+  "targetSystem" : {
+        "targetURL" : "https://objectstorage.us-ashburn-1.oraclecloud.com/p/oJpOXb5vLm7uessZIkB2XykY5iHBy0Bog4AYvls2FIB0aup3xgS2hUiGtAb7LNK6/n/oracleotmgtmdev/b/OTMQA/o/",
+        "httpMethod": "PUT",
+        "appendName": true
+},
+    " objects" : {
+        "items" : [
+            {
+                  "resourceName": "shipments"            
+}
+        ]
+    }
+}'
+https://servername.us2.oraclecloud.com/logisticsRestApi/data/v1/exportRequests -o shipment_data.gz
+</code></pre>
+                  </div>
+               <div class="infoboxnote" id="topic_vbk_cwm_lyb__note_tb2_vjr_rvb">
+                  <p class="notep1">Note:</p>
+                  
+                  <p>The Oracle Cloud Object Storage bucket referenced will contain one file on
+                completion. The file name is DATA_303_shipments_1_1_1.json.gz. That file is a
+                compressed GZIP file and you must uncompress it using a supported tool to use the
+                contents.</p>
+                  
+                  <p>Specifying the contentType of text/plain (or allowing to default) will export the
+                content as multiple gz files one for each table export.</p>
+                  
+               </div>
+            </div>
+         </div>
+        </article>
+    </body>
+</html>

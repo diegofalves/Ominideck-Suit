@@ -1,0 +1,84 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="diagnostic-tools.html" title="Previous" type="text/html"><link rel="next" href="thread-tuning.html" title="Next" type="text/html"><meta name="description" content="In order to maintain stability of the application, timeouts have been configured. It is important to be aware of these timeouts."><meta property="og:description" content="In order to maintain stability of the application, timeouts have been configured. It is important to be aware of these timeouts."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:08 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Timeouts</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Timeouts","description":"In order to maintain stability of the application, timeouts have been configured. It is important to be aware of these timeouts.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="diagnostic-tools.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="thread-tuning.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Timeouts<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="timeouts"></span><span id="OTMCAtimeouts" data-help-type="cloud-saas-docid"></span><span id="timeouts" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225168">Timeouts</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">In order to maintain stability of the application, timeouts have been configured. It is
+            important to be aware of these timeouts.</p>
+        <section class="section" id="u30225168__section_kw3_rmv_qxb"><h2 class="title sectiontitle">Oracle Cloud SSO Server</h2>
+            
+            <ul class="ul" id="u30225168__ul_nqs_smv_qxb">
+                <li class="li">Session Timeout: 8 hours</li>
+            </ul>
+            <div class="infobox-" id="u30225168__note_h4z_smv_qxb"><span class="notep1">Note:</span> 
+                <p class="p">This setting can be changed in the IDCS web console. When the timeout period is
+                    reached, the user will be forced to login to the SSO again.</p>
+            </div>
+        </section>
+        <section class="section" id="u30225168__section_npg_nry_rxb"><h2 class="title sectiontitle">WebLogic Session Timeout</h2>
+            
+            <ul class="ul" id="u30225168__ul_opg_nry_rxb">
+                <li class="li">Idle Timeout: 8 hours</li>
+            </ul>
+            <div class="infobox-" id="u30225168__note_ppg_nry_rxb"><span class="notep1">Note:</span> 
+                <p class="p">This setting cannot be changed. If the Oracle Cloud SSO Server timeout is less
+                    than this value, the user will timeout according to the Oracle Cloud SSO
+                    timeout.</p>
+            </div>
+        </section>
+        <section class="section" id="u30225168__section_yh4_5vc_rxb"><h2 class="title sectiontitle">Web Server Requests</h2>
+            
+            <p class="p">Web server request timeout is 5 minutes, and if a request is not able to be completed
+                in 5 minutes an error is given.</p>
+        </section>
+        <section class="section" id="u30225168__section_ynd_jjv_qxb"><h2 class="title sectiontitle">SQL Timeouts</h2>
+            
+            <div class="infobox-" id="u30225168__note_krq_l1m_sxb"><span class="notep1">Note:</span> 
+                <p class="p">Changing these timeouts may destabilize your environment. In the future, the
+                    ability to change these timeouts will be restricted.</p>
+            </div>
+            <p class="p">The following timeouts may currently be modified by setting the
+                glog.sql.query.timeout properties.</p>
+            <ul class="ul" id="u30225168__ul_tsj_ljv_qxb">
+                <li class="li">UI Query: 5 minutes</li>
+                <li class="li">Agent Query: 5 minutes</li>
+                <li class="li">Data Replication Query: 5 minutes</li>
+                <li class="li">All other Queries: 10 minutes</li>
+            </ul>
+            <div class="p">The following timeouts may currently be modified by changing the
+                glog.sql.update.timeout properties.<ul class="ul" id="u30225168__ul_xth_4kv_qxb">
+                    <li class="li">Direct SQL updates: 10 minutes</li>
+                    <li class="li">All others SQL: 10 minutes</li>
+                </ul></div>
+        </section>
+    </div>
+</div></article></body></html>

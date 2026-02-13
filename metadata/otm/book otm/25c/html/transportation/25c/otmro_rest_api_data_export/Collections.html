@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Manage Collections</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2022, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28977-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+			
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-02 20:59:55 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="Learn_More.html" title="Previous" type="text/html">
+        <link rel="next" href="Configure_for_CORS.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-02T21:02:41+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Data Export">
+    <meta name="dcterms.isVersionOf" content="OTMRO">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Manage Collections","description":"Fusion Cloud Transportation and Global Trade Management data export REST APIs which can be used to take table-centric data and export it to external systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="Learn_More.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="Configure_for_CORS.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+            <h2>Manage Collections</h2>
+		<p class="draftsubtitle"></p>
+            <div class="dita-content">
+            
+            
+            
+            <div id="concept-124-261C68F8">
+               
+               <p id="u30227312__concept-126-261C68FD">A collection resource represents a list of items. The only root
+      collection resource currently used in the Data Export API is for the collection of export
+      statuses. The full query and filter support for collections is not yet available for this API. </p>
+               
+               <p>However, there is some support for simple "paging" through the list of statuses for export
+      requests in the database. This is achieved by using the "limit" and "offset" query
+      parameters.</p>
+               
+               <div class="section" id="u30227312__concept-132-261C9244">
+                  <p class="subhead1" id="u30227312__concept-134-261C9245">Paginating </p>
+                  
+                  
+                  <p id="u30227312__concept-248-6EA2D267">Most resource collections need some kind of pagination. Without
+        it, a simple search could return millions of records, putting excessive workload on the
+        server for potentially no reason. So, instead of receiving all the records of a collection
+        resource, you can limit the number of records that are displayed on a page in the REST
+        client response. To do so, set the following query parameters in the request URI:</p>
+                  
+                  <ul style="list-style-type: disc;" id="u30227312__concept-250-6EA2D267">
+                     
+                     <li id="u30227312__concept-252-6EA2D269">
+                        
+                        <p id="u30227312__concept-118-BD70C80C"><code class="codeph" id="u30227312__Limit-6EA293D6">limit</code>: to specify the
+            paging size. There is a maximum value of 1000 which is a system limit and cannot be
+            configured.
+                        </p>
+                        
+                     </li>
+                     
+                     <li id="u30227312__concept-270-6EA3875E">
+                        
+                        <p id="u30227312__concept-120-BD70C80D"><code class="codeph" id="u30227312__Offset-6EA293D6">offset</code>: to specify the
+            starting point from which the resources are returned.
+                        </p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  <p id="u30227312__task-116-9BFE9D60"><span class="bold" id="u30227312__task-118-9BFE9D62">Example Response Body</span></p>
+                  <pre class="pre codeblock" id="u30227312__concept-100-54EA5B3F"><code>{
+  "count": 25,
+  "items": [
+   .
+   .
+   .
+  ]
+}
+</code></pre>
+                  <p>When you specify the <code class="codeph">limit</code> and <code class="codeph">offset</code> parameters, the
+        paginated result is ordered by request ID. If you create new export requests between paging
+        requests, the records displayed in each page may vary.
+                  </p>
+                  
+                  <div class="tblformal" id="u30227312__concept-144-261CD47F">
+                     <table cellpadding="4" cellspacing="0" class="Formal" title summary="Lists examples for paginated response." frame="hsides" border="1" rules="rows">
+                        <thead>
+                           
+                           <tr id="u30227312__concept-158-261D0546" align="left" valign="top">
+                              
+                              <th id="d2435e119" align="left" valign="bottom" width="20%">
+                Example Requests
+              </th>
+                              
+                              <th id="d2435e125" align="left" valign="bottom" width="20%">
+                Records Returned
+              </th>
+                              
+                           </tr>
+                           
+                        </thead>
+                        <tbody>
+                           
+                           <tr id="u30227312__concept-170-261D1B56" align="left" valign="top">
+                              
+                              <td id="d2435e137" align="left" valign="top" width="20%" headers="d2435e119 "><code class="codeph" id="u30227312__concept-218-DD9A0475">GET
+                  /exportStatuses?offset=10&amp;limit=20</code></td>
+                              
+                              <td id="u30227312__concept-174-261D1B5E" align="left" valign="top" width="20%" headers="d2435e137 d2435e125 ">11 through 30</td>
+                              
+                           </tr>
+                           
+                           <tr id="u30227312__concept-176-261D1B61" align="left" valign="top">
+                              
+                              <td id="d2435e147" align="left" valign="top" width="20%" headers="d2435e119 "><code class="codeph" id="u30227312__GETlocationsqlocationNameLIKEZHRX10-DE98FCCC">GET
+                  /exportStatuses?limit=10</code></td>
+                              
+                              <td id="u30227312__Through10-DE98F9FA" align="left" valign="top" width="20%" headers="d2435e147 d2435e125 ">1 through 10</td>
+                              
+                           </tr>
+                           
+                           <tr id="u30227312__concept-182-261D2CF7" align="left" valign="top">
+                              
+                              <td id="d2435e157" align="left" valign="top" width="20%" headers="d2435e119 "><code class="codeph" id="u30227312__concept-106-7576875F">GET /
+                  exportStatuses?offset=25</code></td>
+                              
+                              <td id="u30227312__concept-186-261D2CFD" align="left" valign="top" width="20%" headers="d2435e157 d2435e125 ">26 through 50</td>
+                              
+                           </tr>
+                           
+                        </tbody>
+                     </table>
+                  </div>
+                  
+                  <p>If not specified, the "limit" parameter defaults to the system default which is
+        configurable. The initial value is 25 but can be changed by setting the following property
+        to a different value:</p>
+                  
+                  <p id="u30227312__concept-112-174188E5"><code class="codeph" id="u30227312__concept-114-1741895C">glog.fusion.cil.restapi.config.limit=50</code></p>
+                  
+                  <p id="u30227312__concept-116-1741896B">This would return up to 50 matching items if no 'limit' parameter
+        is used. It is also possible to set a maximum value for the limit parameter that any client
+        can use. There is also a system wide maximum value that cannot be exceeded and is not
+        configurable. If a query exceeds this value it is not possible to access the skipped records
+        without narrowing the search criteria.</p>
+                  
+                  <p id="u30227312__concept-118-17418979">The maximum value for the limit query parameter is controlled by
+        the following example property:</p>
+                  
+                  <p id="u30227312__concept-120-17418989"><code class="codeph" id="u30227312__concept-122-17418997">glog.fusion.cil.restapi.config.max_limit=500</code>
+                     
+                  </p>
+                  
+                  <p id="u30227312__concept-124-17418940">Therefore, if a client specified "limit=600" in their request,
+        the lower value of 500 would be used. The hard system limit is currently set at 1000.</p>
+                  
+               </div>
+               
+               <div class="section" id="u30227312__concept-136-261C9247">
+                  <p class="subhead1" id="u30227312__concept-138-261C924A">Sorting</p>The sorting of export statuses is currently forced to be by request
+      ID.
+               </div>
+               
+            </div>
+            
+         </div>
+        </article>
+    </body>
+</html>
