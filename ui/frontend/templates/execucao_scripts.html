@@ -260,6 +260,7 @@
         1) Atualizar Estatísticas OTM.
         2) Atualizar Cache de Itens.
         3) Validar Tabelas Elegíveis.
+        4) Gerar Catálogo SQL Agent.
         Use Traduções e Help Index quando precisar de conteúdo atualizado para consulta.
       </p>
     </section>
@@ -373,6 +374,29 @@
         <div class="use"><strong>Quando usar:</strong> antes de publicar ajustes no catálogo de elegibilidade ou antes de execução de migração.</div>
         <button onclick="runAction('/api/scripts/validate-eligible-tables', {}, 'Validar Tabelas Elegíveis')">Executar agora</button>
       </article>
+
+      <article class="card">
+        <span class="tag">CHATGPT AGENT</span>
+        <h2>Gerar Catálogo SQL Agent</h2>
+        <p class="desc">Converte os schemas OTM em JSONL otimizado para consultas via ChatGPT Agent conectado ao GitHub.</p>
+        <div class="use"><strong>Quando usar:</strong> após atualização de tabelas/estatísticas ou antes de publicar material de suporte SQL.</div>
+
+        <div class="fields">
+          <div class="field">
+            <label for="agent-mode">Escopo do catálogo</label>
+            <select id="agent-mode">
+              <option value="eligible">Somente tabelas elegíveis</option>
+              <option value="all">Todas as tabelas</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="agent-output">Arquivo de saída (opcional)</label>
+            <input id="agent-output" placeholder="Ex: metadata/otm/agent_sql/catalog/schema_catalog_custom.jsonl">
+          </div>
+        </div>
+
+        <button onclick="runAgentCatalog()">Executar agora</button>
+      </article>
     </section>
 
     <section class="result">
@@ -435,6 +459,13 @@
         incremental: document.getElementById("help-inc").checked,
         build_index_only: document.getElementById("help-index-only").checked
       }, "Atualizar Help Index");
+    }
+
+    function runAgentCatalog() {
+      runAction("/api/scripts/build-agent-sql-catalog", {
+        mode: document.getElementById("agent-mode").value,
+        output_file: document.getElementById("agent-output").value
+      }, "Gerar Catálogo SQL Agent");
     }
   </script>
 </body>

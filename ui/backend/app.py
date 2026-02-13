@@ -916,6 +916,34 @@ def api_scripts_validate_eligible_tables():
     return jsonify(response_body), status_code
 
 
+@app.route("/api/scripts/build-agent-sql-catalog", methods=["POST"])
+def api_scripts_build_agent_sql_catalog():
+    payload = request.get_json(silent=True) or {}
+    if not isinstance(payload, dict):
+        payload = {}
+
+    mode = str(payload.get("mode") or "eligible").strip().lower()
+    if mode not in {"eligible", "all"}:
+        mode = "eligible"
+
+    output_file = str(payload.get("output_file") or "").strip()
+    if not output_file:
+        if mode == "all":
+            output_file = "metadata/otm/agent_sql/catalog/schema_catalog_all_tables.jsonl"
+        else:
+            output_file = "metadata/otm/agent_sql/catalog/schema_catalog_eligible_tables.jsonl"
+
+    args: List[str] = ["--mode", mode, "--output", output_file]
+    status_code, response_body, stderr = _run_script(
+        "scripts/build_agent_sql_catalog.py",
+        args=args,
+        timeout=1800,
+    )
+    if stderr:
+        response_body["stderr"] = stderr[-2000:]
+    return jsonify(response_body), status_code
+
+
 # ===== MAIN ROUTES =====
 
 @app.route("/", methods=["GET"])
