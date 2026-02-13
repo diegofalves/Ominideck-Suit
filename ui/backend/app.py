@@ -942,6 +942,12 @@ def cadastros():
             email = str(request.form.get("consultant_email") or "").strip()
             role = str(request.form.get("consultant_role") or "").strip()
             status = str(request.form.get("consultant_status") or "ACTIVE").strip().upper()
+            phone = str(request.form.get("consultant_phone") or "").strip()
+            seniority = str(request.form.get("consultant_seniority") or "").strip()
+            specialty = str(request.form.get("consultant_specialty") or "").strip()
+            city_state = str(request.form.get("consultant_city_state") or "").strip()
+            document = str(request.form.get("consultant_document") or "").strip()
+            availability_pct = str(request.form.get("consultant_availability_pct") or "").strip()
 
             if not name:
                 error_message = "Informe o nome do consultor."
@@ -952,6 +958,12 @@ def cadastros():
                         "name": name,
                         "email": email,
                         "role": role,
+                        "phone": phone,
+                        "seniority": seniority,
+                        "specialty": specialty,
+                        "city_state": city_state,
+                        "document": document,
+                        "availability_pct": availability_pct,
                         "status": status or "ACTIVE",
                     }
                 )
@@ -963,6 +975,14 @@ def cadastros():
             segment = str(request.form.get("client_segment") or "").strip()
             contact_name = str(request.form.get("client_contact_name") or "").strip()
             contact_email = str(request.form.get("client_contact_email") or "").strip()
+            legal_name = str(request.form.get("client_legal_name") or "").strip()
+            cnpj = str(request.form.get("client_cnpj") or "").strip()
+            size = str(request.form.get("client_size") or "").strip()
+            country = str(request.form.get("client_country") or "").strip()
+            state = str(request.form.get("client_state") or "").strip()
+            city = str(request.form.get("client_city") or "").strip()
+            billing_email = str(request.form.get("client_billing_email") or "").strip()
+            account_manager = str(request.form.get("client_account_manager") or "").strip()
 
             if not name:
                 error_message = "Informe o nome do cliente."
@@ -971,9 +991,17 @@ def cadastros():
                     {
                         "client_id": _new_id("CLIENT"),
                         "name": name,
+                        "legal_name": legal_name,
+                        "cnpj": cnpj,
                         "segment": segment,
+                        "size": size,
+                        "country": country,
+                        "state": state,
+                        "city": city,
                         "contact_name": contact_name,
                         "contact_email": contact_email,
+                        "billing_email": billing_email,
+                        "account_manager": account_manager,
                     }
                 )
                 _save_cadastros(payload)

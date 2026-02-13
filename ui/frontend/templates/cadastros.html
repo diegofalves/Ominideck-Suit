@@ -81,6 +81,11 @@
       color: var(--ink);
     }
 
+    .card-consultant { order: 1; }
+    .card-consultancy { order: 2; }
+    .card-client { order: 3; }
+    .card-project { order: 4; }
+
     .kicker {
       font-size: 0.75rem;
       color: #2f4f80;
@@ -198,7 +203,7 @@
     {% endif %}
 
     <section class="grid">
-      <article class="card">
+      <article class="card card-consultant">
         <div class="kicker">CADASTRO 01</div>
         <h2>Cadastrar Consultor</h2>
         <p>Registre o consultor que atuará nos projetos e consultorias.</p>
@@ -220,6 +225,42 @@
               <input name="consultant_role" placeholder="Ex: Especialista OTM">
             </div>
             <div class="field">
+              <label>Telefone</label>
+              <input name="consultant_phone" placeholder="Ex: +55 11 99999-9999">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Senioridade</label>
+              <select name="consultant_seniority">
+                <option value="">Selecione</option>
+                <option value="JUNIOR">Júnior</option>
+                <option value="PLENO">Pleno</option>
+                <option value="SENIOR">Sênior</option>
+                <option value="SPECIALIST">Especialista</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Especialidade</label>
+              <input name="consultant_specialty" placeholder="Ex: OTM Integration, OTM Master Data">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Cidade/UF</label>
+              <input name="consultant_city_state" placeholder="Ex: São Paulo/SP">
+            </div>
+            <div class="field">
+              <label>Documento</label>
+              <input name="consultant_document" placeholder="CPF/CNPJ">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Disponibilidade (%)</label>
+              <input name="consultant_availability_pct" type="number" min="0" max="100" step="1" placeholder="Ex: 100">
+            </div>
+            <div class="field">
               <label>Status</label>
               <select name="consultant_status">
                 <option value="ACTIVE">Ativo</option>
@@ -231,8 +272,8 @@
         </form>
       </article>
 
-      <article class="card">
-        <div class="kicker">CADASTRO 02</div>
+      <article class="card card-client">
+        <div class="kicker">CADASTRO 03</div>
         <h2>Cadastrar Cliente</h2>
         <p>Registre clientes atendidos para vincular projetos e consultorias.</p>
         <form method="POST">
@@ -243,8 +284,42 @@
               <input name="client_name" required>
             </div>
             <div class="field">
+              <label>Razão social</label>
+              <input name="client_legal_name">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>CNPJ</label>
+              <input name="client_cnpj">
+            </div>
+            <div class="field">
               <label>Segmento</label>
               <input name="client_segment" placeholder="Ex: Alimentos">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Porte</label>
+              <select name="client_size">
+                <option value="">Selecione</option>
+                <option value="SMB">Pequeno/Médio</option>
+                <option value="ENTERPRISE">Enterprise</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Country</label>
+              <input name="client_country" placeholder="Ex: Brasil">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Estado</label>
+              <input name="client_state" placeholder="Ex: SP">
+            </div>
+            <div class="field">
+              <label>Cidade</label>
+              <input name="client_city" placeholder="Ex: São Paulo">
             </div>
           </div>
           <div class="fields">
@@ -257,12 +332,22 @@
               <input name="client_contact_email" type="email">
             </div>
           </div>
+          <div class="fields">
+            <div class="field">
+              <label>E-mail financeiro</label>
+              <input name="client_billing_email" type="email">
+            </div>
+            <div class="field">
+              <label>Gestor da conta</label>
+              <input name="client_account_manager" placeholder="Responsável interno/externo">
+            </div>
+          </div>
           <button type="submit">Cadastrar cliente</button>
         </form>
       </article>
 
-      <article class="card">
-        <div class="kicker">CADASTRO 03</div>
+      <article class="card card-project">
+        <div class="kicker">CADASTRO 04</div>
         <h2>Cadastrar Projeto</h2>
         <p>Crie projetos vinculados a clientes para organizar entregas e evolução.</p>
         <form method="POST">
@@ -344,8 +429,8 @@
         </form>
       </article>
 
-      <article class="card">
-        <div class="kicker">CADASTRO 04</div>
+      <article class="card card-consultancy">
+        <div class="kicker">CADASTRO 02</div>
         <h2>Cadastrar Consultoria</h2>
         <p>Associe consultor, cliente e projeto ao serviço prestado.</p>
         <form method="POST">
@@ -481,7 +566,11 @@
           {% if cadastros.consultants %}
           <ul>
             {% for item in cadastros.consultants %}
-            <li><strong>{{ item.name }}</strong><br>{{ item.role or "Sem função" }}</li>
+            <li>
+              <strong>{{ item.name }}</strong><br>
+              {{ item.role or "Sem função" }} · {{ item.seniority or "-" }}<br>
+              {{ item.specialty or "-" }}
+            </li>
             {% endfor %}
           </ul>
           {% else %}
@@ -494,7 +583,11 @@
           {% if cadastros.clients %}
           <ul>
             {% for item in cadastros.clients %}
-            <li><strong>{{ item.name }}</strong><br>{{ item.segment or "Sem segmento" }}</li>
+            <li>
+              <strong>{{ item.name }}</strong><br>
+              {{ item.segment or "Sem segmento" }} · {{ item.size or "-" }}<br>
+              {{ item.city or "-" }}/{{ item.state or "-" }}
+            </li>
             {% endfor %}
           </ul>
           {% else %}
