@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="version" content="2022.3.0">
+  <link rel="StyleSheet" href="../../template/styles/topic.min.css" type="text/css">
+  <link rel="StyleSheet" data-skin="true" type="text/css" href="../../template/bluelagoon_-_redwood/layout.css">
+  <link rel="StyleSheet" data-skin="true" href="../../template/bluelagoon_-_redwood/userstyles.css" type="text/css">
+  
+  <script data-relpath="../.." src="../../template/scripts/csh-redirect.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <meta name="template" content="../../assets/masterpages/operational planning.htt">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="topic-priority" content="0">
+  <meta name="topic-time-estimate" content="0">
+  <meta name="topic-comment" content>
+  <meta name="topic-id" content="Bulk Rating Actions">
+  <meta name="topic-check-list" content="First Draft">
+  <meta name="topic-status" content="Complete">
+  <meta http-equiv="Content-Language" content="en-US">
+  <meta name="generator" content="Adobe RoboHelp 2022">
+  <title>Bulk Plan Cost Based Routing</title>
+  <link rel="StyleSheet" href="../../assets/css/redwood.css" type="text/css">
+  <script type="text/javascript" language="JavaScript1.2" src="../../assets/js/feedback.js"></script>
+  <meta name="rh-index-keywords" content="bulk plan:routing method,bulk plan:cost based routing">
+<meta name="rh-version" content="2022.6.34"><meta name="description" content><meta name="brsnext" value="bulk_plan_manager/bulk_plan_algorithm/network_based_routing.htm"><meta name="brsprev" value="bulk_plan_manager/bulk_plan_algorithm/bulk_plan_algorithm.htm">
+  
+  
+  
+  
+  <style>
+  </style>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/redwood.css">
+<meta name="rh-version" content="2022.6.34">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.created" content="2025-07-16T17:04:07+00:00">
+    <meta name="dcterms.title" content="Online Help for Transportation and Global Trade Management">
+    <meta name="dcterms.category" content="cloud">
+    <meta name="dcterms.isVersionOf" content="OTMOL">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.identifier" content="G28971-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Bulk Plan Cost Based Routing","description":"","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+
+<body class="rh-BODY-wrapper">
+  <div class="cookie-widget-holder" id="cookie-status-widget-holder"></div>
+  <div class="RH-LAYOUT-HEADER-skip-content-container" id="skip-to-content"></div>
+  <header class="RH-LAYOUT-HEADER-container" role="banner">
+    <div class="RH-LAYOUT-HEADER-logo-box  ">
+      <div class="RH-LAYOUT-HEADER-logo" id="logo-holder"></div>
+      <div class="RH-LAYOUT-HEADER-title" id="topic-title-holder"></div>
+    </div>
+    <div class="RH-LAYOUT-HEADERMENU-container" id="header-menu"></div>
+    <div class="search-placeholder-class" id="search-with-help"></div>
+  </header>
+  <main role="main" class="RH-LAYOUT-BODY-container">
+    <div class="RH-LAYOUT-SEARCHRESULTS" id="rh-searchresults"></div>
+    <div class="RH-LAYOUT-LEFTPANEL-container" id="rh-leftpanel"></div>
+    <div class="rh-layout-BODY-main" id="rh-layout-main">
+      <div class="RH-LAYOUT-TOOLBAR-toolbar-box" id="rh-toolbar"></div>
+      <div class="rh-layout-BODY-body">
+        <div class="RH-LAYOUT-CENTERPANEL-container">
+          <div class="rh-layout-selectdetails" id="rh-selectdetails"></div>
+          <div class="RH-LAYOUT-CENTERPANEL-topic-box" id="rh-topic">
+  <div>
+    <p class="Header">Operational Planning</p>
+  </div>
+  <div><noscript>
+    If you have any questions or comments about this topic or the online help,
+    please <a href="mailto:otm-doc_us@oracle.com?subject=Documentation feedback:OTM Help">contact
+      us.</a>
+  </noscript>
+  <h1><span data-field="title" data-format="default">Bulk Plan Cost Based Routing</span></h1>
+  <div role="main">
+    <p>To turn on cost-based routing, set the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#orderrouting">ORDER ROUTING METHOD</a> to Cost-based Routing.</p>
+    <p>Each order release bundle is evaluated against all applicable <a href="../data_setup/itineraries_and_bulk_plan.htm">itineraries</a> and the route based on the cheapest itinerary is determined. For a pool-crossdock itinerary, multi-stop consolidation is checked. If it is not a pool-crossdock itinerary, multi-leg consolidation is checked. Once the route is established, the different <a href="../data_setup/itinerary_legs_and_bulk_planning.htm">leg</a> components of the bundles are built into shipments and then consolidated with other order bundles. The figure below shows the logic flow at a high level.</p>
+    <p><img alt="Bulk Plan Cost-Based Routing begins by bundling orders, finding itineraries and selecting the best one. Then depending on if it is a multi-stop itinerary the order is consolidated wither for multi-stop or multi-leg. Then the trailer is buit, route executed, and capacity optimized. Shipments are then committed." src="../../assets/images/bulk_plan_logic_cost_based_routing.svg"></p>
+    <h2><a name="order_bundling" id="order_bundling"></a>Order Bundling</h2>
+    <p>The first step in the process is to bundle the order releases/order movements. Order bundling combines orders that have the same source, same destination, overlapping time windows, and several other matching criteria. Order bundling is described in greater detail in <a href="../solution_quality_tuning/bulk_plan_tuning_order_bundling_logic.htm">Bulk Plan Tuning Order Bundling Logic</a>.</p>
+    <h2><a name="itinerary_matching" id="itinerary_matching"></a>Itinerary Matching</h2>
+    <p>Once the order releases/order movements are bundled, they are matched against itineraries. An order bundle can match to more than one itinerary. Once the order bundles are matched to itineraries, the itineraries are ranked and the order bundles matched to each itinerary are processed in the order of ranking. The itineraries are ranked according to the following criteria:</p>
+    <ul>
+      <li><a href="../data_setup/itineraries_and_bulk_plan.htm">Multi-stop</a> or <a href="../../field_definitions/multi_stop_itinerary.htm">consolidation itineraries</a> are considered before multi-leg itineraries. A single-leg itinerary with the consolidation option turned off is considered to be a multi-leg itinerary.</li>
+      <li>The number of orders or total weight of orders matched. For each itinerary, if the parameter <a href="../../planning/power_data/planning/list_of_planning_parameters.htm#choose_itinerary">CHOOSE ITINERARY BY NUM OF ORDERS</a> is set to TRUE, the total number of order releases that matched is used to rank the itineraries. If the parameter is set to FALSE then the total weight of orders is used in ranking the itineraries.</li>
+    </ul>
+    <h3>Multi-stop Consolidation</h3>
+    <p>For pool-crossdock itineraries, the bulk plan logic selects all the order bundles that match to the pool-crossdock itinerary and have not yet been planned. Direct shipments are built first for each order bundle.Â These order bundles are then built into shipments going through pools, cross-docks and/or multi-stops.</p>
+    <p>The following parameters control the building of shipments through pools and cross-docks. These parameters are used mainly for fine tuning the routing decisions through a network of pools and cross-docks that are setup on itinerary and itinerary legs.</p>
+    <ul>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#prefer_xdock">PREFER XDOCK SHIPMENTS THAN DIRECT SHIPMENTS</a>: Use this parameter to possibly route orders through cross-docks rather than direct.</li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#optimize_pool">OPTIMIZE POOL BY NUM OF ORDERS</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#build_direct_ship_option">BUILD DIRECT SHIPMENT OPTION FOR BULK PLAN</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#plan_thru_pool_before_xdock">PLAN THRU POOL BEFORE XDOCK</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#perform_pool_swaping">PERFORM POOL SWAPPING</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#min_inbound_unload_xdock">MIN INBOUND UNLOAD TIME AT XDOCK</a>Â Â Â </li>
+      <li><a href="../../planning/power_data/planning/logic_configuration_multistop.htm#multistopfavor">MULTISTOP FAVOR SAME DOWNSTREAM SHIPMENT</a> (logic configuration parameter for MULTISTOP)</li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#ms_pool_linehaul_ship_direct">MULTISTOP POOL LINEHAUL SHIPMENT WITH DIRECT</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#ms_pool_linehaul_direct_allatonce">MULTISTOP POOL LINEHAUL WITH DIRECT ALL AT ONCE</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#ms_xdock_inbound_shipment_with_direct">MULTISTOP XDOCK INBOUND SHIPMENT WITH DIRECT</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#ms_xdock_inbnd_after_outbound">MULTISTOP XDOCK INBOUND AFTER OUTBOUND COMPLETE</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#segment_ms_shipmt_by_pools">SEGMENT MULTISTOP SHIPMENTS BY POOLS</a></li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#perf_poolbased_selection">PERFORM COST BASED POOL/ XDOCK SELECTION</a>: The cost based pool and cross-dock selection algorithm performs a cost based optimization of pools and cross-docks using a logistics guide. Note use the <a href="network_based_routing.htm">network routing</a> instead of this option.</li>
+      <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#use_dynamic_pool_selection">USE DYNAMIC POOL SELECTION</a>: If the USE DYNAMIC POOL SELECTION parameter is set to true, the dynamic pooling algorithm is used with the following parameters available for further tuning of the dynamic pooling algorithm.</li>
+      <li>
+        <ul>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_direct">DYNPOL DIRECT ENCOURAGEMENT FACTOR</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_direct_prorate">DYNPOL DIRECT PRORATING FACTOR</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_distance_mode">DYNPOL DISTANCE MODE</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_max_capac_vol">DYNPOL MAX CAPACITY VOLUME</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_max_capac_wt">DYNPOL MAX CAPACITY WEIGHT</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_max_pool_capac_vol">DYNPOL MAX POOL CAPACITY VOLUME</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_max_pool_capac_wt">DYNPOL MAX POOL CAPACITY WEIGHT</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_ms_linehauls_to_pool">DYNPOL MULTISTOP LINEHAULS TO POOL</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_perform_multipool_opt">DYNPOL PERFORM MULTIPOOL OPTIMIZATION</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_pool_prorate_factor">DYNPOL POOL PRORATING FACTOR</a></li>
+          <li><a href="../../planning/power_data/planning/list_of_planning_parameters.htm#dynpol_skip_ms_direct_step">DYNPOL SKIP MULTISTOPS DIRECT STEP</a></li>
+        </ul>
+      </li>
+    </ul>
+    <p>There are several tuning parameters that control how the multi-stop shipments are formed. They are described in <a href="../solution_quality_tuning/bulk_plan_tuning_multistop_ship_logic.htm">Bulk Plan Tuning Multi-stop Shipment Logic</a> in greater detail.</p>
+    <h3>Multi-leg Consolidation</h3>
+    <p>Multi-leg consolidation involves:</p>
+    <ul>
+      <li><a href="../solution_quality_tuning/bulk_plan_tuning_direct_shipment_building.htm">Building direct shipments</a> for all <a href="../solution_quality_tuning/bulk_plan_tuning_order_bundling_logic.htm">orders bundles</a> matched on various itineraries</li>
+      <li>Consolidating shipments on different legs of the itinerary</li>
+      <li><a href="../solution_quality_tuning/bulk_plan_tuning_multistop_ship_logic.htm">Building multi-stop shipments</a> on the first and last legs of the itineraries</li>
+    </ul>
+    <h2><a name="limitations" id="limitations"></a>Limitations</h2>
+    <p>While cost based routing allows you to model several routing scenarios, there are certain limitations of using this approach. The limitations are:</p>
+    <ul>
+      <li>On each itinerary, you can specify only one cross-dock. This means that in the networks that contain more than one cross-dock, you must model multiple cross-docks using separate itineraries. However, modeling this way has the limitation that the cost comparison across cross-docks cannot be made.</li>
+      <li>You can specify several consolidation pools and deconsolidation pools on an itinerary leg. However, an order release cannot be routed through more than one consolidation pool, deconsolidation pool. The order releases can be routed through a cross-dock and then to one of the available deconsolidation pools. However, they cannot be routed to a consolidation pool followed by a cross-dock or deconsolidation pool.</li>
+      <li>The dynamic pooling algorithm works only with deconsolidation pools. It cannot be used with consolidation pools.</li>
+    </ul>
+  </div>
+  <h2>Related Topics</h2>
+  <p class="LinkList"><a href="../bulk_plan_performance_and_tuning.htm">Bulk Plan Performance and Tuning Overview</a></p>
+  <p class="LinkList"><a href="../solution_quality_tuning/bulk_plan_solution_quality_tuning.htm">Bulk Plan Solution Quality Tuning</a></p>
+  <p class="LinkList"><a href="../../asset_mgt/resource/work_assignment.htm">Work Assignment</a></p>
+  <p class="LinkList"><a href="../../assets/docs/bulk_plan_performance_and_tuning_guide.pdf">Bulk Plan Performance and Tuning PDF</a></p>
+  <script type="text/javascript" language="JavaScript1.2">
+    //<![CDATA[
+    if (typeof(InitEffects) != 'function') InitEffects = new Function();
+    InitEffects('P1');
+    //]]>
+  </script>
+
+</div>
+  <div>
+    <hr align="center">
+    <p class="Footer"><img align="right" alt="Was this page helpful? Click to send feedback." height="49" src="../../assets/images/feedback.png" style="font-family: &quot;Oracle Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: medium;" usemap="#imagemap" width="322"><map data-img-height="49" data-img-width="322" name="imagemap"><area alt="How can we improve this page?" coords="222, 1, 265, 43" href="javascript:sendDownFeedback()" shape="rect" title="How can we improve this page?"><area alt="What did you like about this page?" coords="273, 4, 317, 45" href="javascript:sendUpFeedback()" shape="rect" title="What did you like about this page?"><area alt="Comments" coords="41, 3, 218, 45" href="javascript:sendFeedback()" shape="rect" title="Comments"></map></p>
+  </div>
+
+</div>
+          <div class="RH-LAYOUT-BRS-container" id="rh-brs"></div>
+        </div>
+        <div class="RH-LAYOUT-RIGHTPANEL-container" id="rh-rightpanel"></div>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="RH-LAYOUT-FOOTER-container" id="rh-footer">
+  <table border="0" cellpadding="1" cellspacing="1" class="table-unstyled">
+    <tbody>
+      <tr>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Other Documentation Resources</p>
+          <p class="Footer"><a href="https://docs.oracle.com/pls/topic/lookup?ctx=otm-latest&amp;id=otm-gs" target="_blank" title="Transportation and Global Trade Management Library">Help Center &amp; Guides</a>Â â¢ <a href="https://support.oracle.com/support/?documentId=KB153929" target="_blank" title="My Oracle Support">Extra Documents</a>Â â¢Â <a href="https://support.oracle.com/support/?documentId=KA171" target="_blank" title="Information Center">Information Center</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer"><a href="../../general/cpyr.htm">CopyrightÂ Â© 2001, <span data-field="date" data-format="YYYY">2025</span>, Oracle and/or its affiliates.</a></p>
+        </td>
+        <td style="background-color:#312D2A">
+          <p class="Footer">Contact Oracle</p>
+          <p class="Footer"><a href="https://support.oracle.com" target="_blank">Contact Support</a> â¢ <a class="footer" href="javascript:sendFeedback()" target="_blank" title="Report an issue in the help or guides">Contact Documentation</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</footer>
+  <script type="text/javascript">//<![CDATA[
+
+    gRootRelPath = "../.."
+    gCommonRootRelPath = "../.."
+    gTopicId = "31.3.3.0_2"
+  
+//]]></script>
+
+
+  <script src="../../template/scripts/topicpage.js"></script>
+  <script src="../../whxdata/layoutconfig.js"></script>
+  <script src="../../whxdata/brsdata.js"></script>
+
+  
+    
+      
+          
+
+            
+              
+                <link rel="StyleSheet" href="../../template/bluelagoon_-_redwood/custom.css" type="text/css">
+                
+                  
+
+
+</body></html>

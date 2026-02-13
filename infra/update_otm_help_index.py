@@ -852,6 +852,14 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Remove versoes antigas locais em metadata/otm/book otm (desativado por padrao).",
     )
+    parser.add_argument(
+        "--reset-html",
+        action="store_true",
+        help=(
+            "Limpa a pasta html da versao atual antes da varredura. "
+            "Use somente quando quiser descartar cache local explicitamente."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -927,8 +935,10 @@ def main() -> None:
     os.makedirs(meta_dir, exist_ok=True)
 
     # build-index-only deve apenas recalcular indices: nunca apagar HTML local.
+    # Por seguranca, o HTML local nao e removido por padrao no modo full.
+    # A limpeza total so acontece com --reset-html explicitamente.
     if not args.build_index_only:
-        if not args.incremental:
+        if args.reset_html:
             if os.path.isdir(html_dir):
                 shutil.rmtree(html_dir, ignore_errors=True)
             os.makedirs(html_dir, exist_ok=True)
@@ -948,6 +958,10 @@ def main() -> None:
         print(f"Versoes removidas da pasta book: {', '.join(sorted(removed_versions))}")
     if args.incremental:
         print("Modo incremental: ativo (download apenas de HTML novo).")
+    elif args.reset_html:
+        print("Modo full com limpeza explicita: --reset-html ativo.")
+    else:
+        print("Modo full seguro: cache HTML existente sera preservado.")
 
     if args.dry_run:
         manifest_path = _write_version_manifest(
