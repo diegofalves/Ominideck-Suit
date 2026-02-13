@@ -1,1 +1,237 @@
-{"table": {"schema": "glogowner","name": "shipment_reqdoc_text","description": "Text template for a shipment required document"},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_GID","description": "The shipment GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_DEF_GID","description": "The required document type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEXT_TEMPLATE_GID","description": "The text template ID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_GID","description": "If the text is associated with a ship unit or ship unit line, this holds the ship unit ID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_LINE_NO","description": "If the text is associated with a ship unit line, this holds the ship unit line number.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPMENT_GID"},{"sequence": 2,"columnName": "DOCUMENT_DEF_GID"},{"sequence": 3,"columnName": "TEXT_TEMPLATE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SRDT_SHIPMENT_REQDOC","cascadeDelete": false,"parentTableName": "SHIPMENT_REQDOC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"},{"sequence": 2,"parentColumnName": "DOCUMENT_DEF_GID","columnName": "DOCUMENT_DEF_GID"}]},{"foreignKeyName": "FK_SRDT_TEXT_TEMPLATE_GID","cascadeDelete": false,"parentTableName": "TEXT_TEMPLATE","columnRelation": [{"sequence": 1,"parentColumnName": "TEXT_TEMPLATE_GID","columnName": "TEXT_TEMPLATE_GID"}]},{"foreignKeyName": "FK_SRDT_S_SHIP_UNIT_GID","cascadeDelete": false,"parentTableName": "S_SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"}]},{"foreignKeyName": "FK_SRDT_S_SHIP_UNIT_LINE","cascadeDelete": false,"parentTableName": "S_SHIP_UNIT_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"},{"sequence": 2,"parentColumnName": "S_SHIP_UNIT_LINE_NO","columnName": "S_SHIP_UNIT_LINE_NO"}]}],"childTables": [],"indices": [{"indexName": "IX_S_SHIP_UNIT_GID","columnNames": [{"sequence": 1,"name": "S_SHIP_UNIT_GID"}]},{"indexName": "IX_S_SHIP_UNIT_LINE_NO","columnNames": [{"sequence": 1,"name": "S_SHIP_UNIT_GID"},{"sequence": 2,"name": "S_SHIP_UNIT_LINE_NO"}]},{"indexName": "IX_SHIPMENT_GID_DOC_DEF","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"},{"sequence": 2,"name": "DOCUMENT_DEF_GID"}]},{"indexName": "IX_TEXT_TEMPLATE_GID","columnNames": [{"sequence": 1,"name": "TEXT_TEMPLATE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "shipment_reqdoc_text",
+    "description": "Text template for a shipment required document"
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The shipment GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_DEF_GID",
+      "description": "The required document type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEXT_TEMPLATE_GID",
+      "description": "The text template ID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_GID",
+      "description": "If the text is associated with a ship unit or ship unit line, this holds the ship unit ID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_LINE_NO",
+      "description": "If the text is associated with a ship unit line, this holds the ship unit line number.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "DOCUMENT_DEF_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "TEXT_TEMPLATE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SRDT_SHIPMENT_REQDOC",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_REQDOC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "DOCUMENT_DEF_GID",
+          "columnName": "DOCUMENT_DEF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SRDT_TEXT_TEMPLATE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TEXT_TEMPLATE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TEXT_TEMPLATE_GID",
+          "columnName": "TEXT_TEMPLATE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SRDT_S_SHIP_UNIT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "S_SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SRDT_S_SHIP_UNIT_LINE",
+      "cascadeDelete": false,
+      "parentTableName": "S_SHIP_UNIT_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "S_SHIP_UNIT_LINE_NO",
+          "columnName": "S_SHIP_UNIT_LINE_NO"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_S_SHIP_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_S_SHIP_UNIT_LINE_NO",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_SHIP_UNIT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "S_SHIP_UNIT_LINE_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SHIPMENT_GID_DOC_DEF",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "DOCUMENT_DEF_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_TEXT_TEMPLATE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TEXT_TEMPLATE_GID"
+        }
+      ]
+    }
+  ]
+}

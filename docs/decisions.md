@@ -11,3 +11,7 @@ manualmente.
 
 PDF rendering será feito exclusivamente via Playwright (Chromium).
 WeasyPrint está oficialmente descartado no OmniDeck por fragilidade em ambientes ARM/macOS.
+
+## Referências Operacionais
+
+- Runbook de extrações OTM: `docs/otm_extraction_runbook.md`

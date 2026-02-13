@@ -1,1 +1,200 @@
-{"table": {"schema": "glogowner","name": "workflow_info","description": ""},"columns": [{"name": "WORKFLOW_INFO_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WORKFLOW_INFO_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "JAVA_CLASS","description": "","dataType": "VARCHAR2","size": 255,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRIGGER_INFO_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_INFO_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "WORKFLOW_INFO_GID"}],"foreignKeys": [{"foreignKeyName": "FK_WORKFLOW_INFO_TRIGGER","cascadeDelete": false,"parentTableName": "WORKFLOW_TRIGGER_INFO","columnRelation": [{"sequence": 1,"parentColumnName": "TRIGGER_INFO_GID","columnName": "TRIGGER_INFO_GID"}]},{"foreignKeyName": "FK_WORKFLOW_INFO_TOPIC","cascadeDelete": false,"parentTableName": "WORKFLOW_TOPIC_INFO","columnRelation": [{"sequence": 1,"parentColumnName": "TOPIC_INFO_GID","columnName": "TOPIC_INFO_GID"}]},{"foreignKeyName": "FK_WI_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["WORKFLOW_ACTION_INFO","WORKFLOW_PARAM"],"indices": [{"indexName": "IX_WORKFLOW_INFO_XID","columnNames": [{"sequence": 1,"name": "WORKFLOW_INFO_XID"}]},{"indexName": "IX_WORK_INFO_DOMAIN_INSERT","columnNames": [{"sequence": 1,"name": "DOMAIN_NAME"},{"sequence": 2,"name": "INSERT_DATE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "workflow_info",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "WORKFLOW_INFO_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WORKFLOW_INFO_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "JAVA_CLASS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRIGGER_INFO_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_INFO_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "WORKFLOW_INFO_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_WORKFLOW_INFO_TRIGGER",
+      "cascadeDelete": false,
+      "parentTableName": "WORKFLOW_TRIGGER_INFO",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRIGGER_INFO_GID",
+          "columnName": "TRIGGER_INFO_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_WORKFLOW_INFO_TOPIC",
+      "cascadeDelete": false,
+      "parentTableName": "WORKFLOW_TOPIC_INFO",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TOPIC_INFO_GID",
+          "columnName": "TOPIC_INFO_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_WI_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "WORKFLOW_ACTION_INFO",
+    "WORKFLOW_PARAM"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_WORKFLOW_INFO_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "WORKFLOW_INFO_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_WORK_INFO_DOMAIN_INSERT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DOMAIN_NAME"
+        },
+        {
+          "sequence": 2,
+          "name": "INSERT_DATE"
+        }
+      ]
+    }
+  ]
+}

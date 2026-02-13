@@ -1,1 +1,214 @@
-{"table": {"schema": "glogowner","name": "rate_quality","description": "A table that is used to factor in the quality of the carrier's services, in determining the best carrier for the job.  A carrier that is cheapest may not be best if they don't tend to deliver shipment on time."},"columns": [{"name": "RATE_QUALITY_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_QUALITY_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_QUALITY_NAME","description": "","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ADJUSTMENT_PERCENT","description": "","dataType": "NUMBER","precision": 5,"scale": 2,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "ADJUSTMENT_FLAT","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "ADJUSTMENT_FLAT_BASE","description": "ADJUSTMENT_FLAT in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ADJUSTMENT_FLAT_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_QUALITY_GID"}],"foreignKeys": [{"foreignKeyName": "FK_RQ_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "CURRENCY_GID"}]},{"foreignKeyName": "FK_RQ_ADJUSTMENT_FLAT_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "ADJUSTMENT_FLAT_GID"}]}],"childTables": ["RATE_GEO","RATE_OFFERING"],"indices": [{"indexName": "IX_RATE_QUALITY_XID","columnNames": [{"sequence": 1,"name": "RATE_QUALITY_XID"}]},{"indexName": "IX_RQ_ADJUSTMENT_FLAT_GID","columnNames": [{"sequence": 1,"name": "ADJUSTMENT_FLAT_GID"}]},{"indexName": "IX_RQ_CURRENCY_GID","columnNames": [{"sequence": 1,"name": "CURRENCY_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "rate_quality",
+    "description": "A table that is used to factor in the quality of the carrier's services, in determining the best carrier for the job.  A carrier that is cheapest may not be best if they don't tend to deliver shipment on time."
+  },
+  "columns": [
+    {
+      "name": "RATE_QUALITY_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_QUALITY_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_QUALITY_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ADJUSTMENT_PERCENT",
+      "description": "",
+      "dataType": "NUMBER",
+      "precision": 5,
+      "scale": 2,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "ADJUSTMENT_FLAT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "ADJUSTMENT_FLAT_BASE",
+      "description": "ADJUSTMENT_FLAT in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ADJUSTMENT_FLAT_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_QUALITY_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RQ_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RQ_ADJUSTMENT_FLAT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "ADJUSTMENT_FLAT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "RATE_GEO",
+    "RATE_OFFERING"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_RATE_QUALITY_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_QUALITY_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RQ_ADJUSTMENT_FLAT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ADJUSTMENT_FLAT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RQ_CURRENCY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CURRENCY_GID"
+        }
+      ]
+    }
+  ]
+}

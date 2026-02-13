@@ -1,1 +1,204 @@
-{"table": {"schema": "glogowner","name": "work_queue","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WORK_QUEUE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WORK_QUEUE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_TYPE","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVED_QUERY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ASSIGNMENT_DURATION","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ASSIGNMENT_DURATION_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ASSIGNMENT_DURATION_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FILTER_LIMIT","description": "This field specifies a filter limit to control the number of records to be assigned per user, for WorkQueues in Workbench designer.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "50"},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "WORK_QUEUE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_WQ_SAVED_QUERY_GID","cascadeDelete": false,"parentTableName": "SAVED_QUERY","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_QUERY_GID","columnName": "SAVED_QUERY_GID"}]},{"foreignKeyName": "FK_WQ_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["WORK_QUEUE_ASSIGNMENT"],"indices": [{"indexName": "IX_SAVED_QUERY_GID","columnNames": [{"sequence": 1,"name": "SAVED_QUERY_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "work_queue",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WORK_QUEUE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WORK_QUEUE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVED_QUERY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ASSIGNMENT_DURATION",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ASSIGNMENT_DURATION_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ASSIGNMENT_DURATION_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FILTER_LIMIT",
+      "description": "This field specifies a filter limit to control the number of records to be assigned per user, for WorkQueues in Workbench designer.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "50"
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "WORK_QUEUE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_WQ_SAVED_QUERY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_QUERY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_QUERY_GID",
+          "columnName": "SAVED_QUERY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_WQ_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "WORK_QUEUE_ASSIGNMENT"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_SAVED_QUERY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SAVED_QUERY_GID"
+        }
+      ]
+    }
+  ]
+}

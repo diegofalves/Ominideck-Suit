@@ -1,1 +1,264 @@
-{"table": {"schema": "glogowner","name": "logfile_action","description": "The action log details."},"columns": [{"name": "LOGFILE_GID","description": "The corresponding action log file.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTION_STATE","description": "The state of the action log: RUNNING = the action is running and logging is being collected; FAILED = the action failed and logging has completed; COMPLETED = the action succeeded and logging is complete.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'RUNNING','FAILED','COMPLETED','TRUNCATED'","conditionalConstraint": "","defaultValue": "'RUNNING'"},{"name": "APP_MACHINE_GID","description": "The machine holding the physical action log file.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROCESS_ID","description": "The log ID captured by this action log. Note that log IDs are only unique in a two day timeframe.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTION_GID","description": "The user action that triggered this action log.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DQT_DML","description": "The type of DML that triggered this action log.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'I','U','D'","conditionalConstraint": "","defaultValue": "'I'"},{"name": "DATA_QUERY_TYPE_GID","description": "The data query type creation, modification or deletion that triggered this action log.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_ALIAS_GID","description": "The process control action that triggered this action log.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_CLASS_NAME","description": "The Java class of the process control action that triggered this action log.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROFILE_GID","description": "The log profile selected when this action log was triggered.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HAS_METRICS","description": "Y, if metrics are being collected for the action run.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "LOGFILE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_ALAD_LOGFILE_GID","cascadeDelete": true,"parentTableName": "LOGFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOGFILE_GID","columnName": "LOGFILE_GID"}]},{"foreignKeyName": "FK_ALAD_APP_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "APP_MACHINE_GID"}]},{"foreignKeyName": "FK_ALAD_ACTION_GID","cascadeDelete": false,"parentTableName": "ACTION","columnRelation": [{"sequence": 1,"parentColumnName": "ACTION_GID","columnName": "ACTION_GID"}]},{"foreignKeyName": "FK_ALAD_DATA_QUERY_TYPE_GID","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_ALAD_TOPIC_ALIAS_GID","cascadeDelete": false,"parentTableName": "TOPIC_ALIAS","columnRelation": [{"sequence": 1,"parentColumnName": "TOPIC_ALIAS_GID","columnName": "TOPIC_ALIAS_GID"}]},{"foreignKeyName": "FK_ALAD_LOG_PROFILE_GID","cascadeDelete": false,"parentTableName": "LOG_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOG_PROFILE_GID","columnName": "LOG_PROFILE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "logfile_action",
+    "description": "The action log details."
+  },
+  "columns": [
+    {
+      "name": "LOGFILE_GID",
+      "description": "The corresponding action log file.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTION_STATE",
+      "description": "The state of the action log: RUNNING = the action is running and logging is being collected; FAILED = the action failed and logging has completed; COMPLETED = the action succeeded and logging is complete.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'RUNNING','FAILED','COMPLETED','TRUNCATED'",
+      "conditionalConstraint": "",
+      "defaultValue": "'RUNNING'"
+    },
+    {
+      "name": "APP_MACHINE_GID",
+      "description": "The machine holding the physical action log file.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROCESS_ID",
+      "description": "The log ID captured by this action log. Note that log IDs are only unique in a two day timeframe.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTION_GID",
+      "description": "The user action that triggered this action log.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DQT_DML",
+      "description": "The type of DML that triggered this action log.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'I','U','D'",
+      "conditionalConstraint": "",
+      "defaultValue": "'I'"
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "The data query type creation, modification or deletion that triggered this action log.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_ALIAS_GID",
+      "description": "The process control action that triggered this action log.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_CLASS_NAME",
+      "description": "The Java class of the process control action that triggered this action log.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROFILE_GID",
+      "description": "The log profile selected when this action log was triggered.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HAS_METRICS",
+      "description": "Y, if metrics are being collected for the action run.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LOGFILE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ALAD_LOGFILE_GID",
+      "cascadeDelete": true,
+      "parentTableName": "LOGFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGFILE_GID",
+          "columnName": "LOGFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ALAD_APP_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "APP_MACHINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ALAD_ACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACTION_GID",
+          "columnName": "ACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ALAD_DATA_QUERY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ALAD_TOPIC_ALIAS_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TOPIC_ALIAS",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TOPIC_ALIAS_GID",
+          "columnName": "TOPIC_ALIAS_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ALAD_LOG_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOG_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOG_PROFILE_GID",
+          "columnName": "LOG_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

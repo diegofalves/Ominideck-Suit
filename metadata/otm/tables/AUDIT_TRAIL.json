@@ -1,1 +1,487 @@
-{"table": {"schema": "glogowner","name": "audit_trail","description": "Table used to store Audit data"},"columns": [{"name": "AUDIT_TRAIL_GID","description": "Unique identifier of Audit_Trail table.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUDIT_TRAIL_XID","description": "DB Sequence.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NOTIFY_SUBJECT_GID","description": "Workflow Notify Subject.  E.g. ORDER - CREATED","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NOTIFY_FUNCTION_GID","description": "Workflow Notify Function. E.g. ORDER_EVENT.Object GID for which the lifetime event was generated","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GL_USER_GID","description": "User who made change to the data.  Do not make GL_USER_GID a Fk.  We need to keep the record in the audit table when the user is no longer a valid glog user","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUDIT_TIME","description": "Local server time when the audit is recorded","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_ACTION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_ACTION_PARAMETERS","description": "","dataType": "VARCHAR2","size": 500,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BS_QUICK_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BS_RESPONSIBLE_PARTY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BS_STATUS_GROUP_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BS_STATUS_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BS_REASON_GROUP_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BS_REASON_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BS_REASON_COMMENT","description": "","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSACTIONAL_EVENT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUDIT_OBJECT_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REASON_REQUIRED_TYPE","description": "","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'PROMPT','PARTY','STATUS','REASON'","conditionalConstraint": "","defaultValue": "'PROMPT'"},{"name": "REASON_SOURCE","description": "","dataType": "VARCHAR2","size": 255,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MARKED_FOR_PURGE","description": "A boolean field.  When it is set to 'Y', this row and its child data will be purged.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AUDIT_TRAIL_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AT_NOTIFY_SUBJECT_GID","cascadeDelete": false,"parentTableName": "NOTIFY_SUBJECT","columnRelation": [{"sequence": 1,"parentColumnName": "NOTIFY_SUBJECT_GID","columnName": "NOTIFY_SUBJECT_GID"}]},{"foreignKeyName": "FK_AT_NOTIFY_FUNCTION_GID","cascadeDelete": false,"parentTableName": "NOTIFY_FUNCTION","columnRelation": [{"sequence": 1,"parentColumnName": "NOTIFY_FUNCTION_GID","columnName": "NOTIFY_FUNCTION_GID"}]},{"foreignKeyName": "FK_AT_APP_ACTION_GID","cascadeDelete": false,"parentTableName": "APP_ACTION","columnRelation": [{"sequence": 1,"parentColumnName": "APP_ACTION_GID","columnName": "APP_ACTION_GID"}]},{"foreignKeyName": "FK_AT_BS_QUICK_CODE_GID","cascadeDelete": false,"parentTableName": "BS_QUICK_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_QUICK_CODE_GID","columnName": "BS_QUICK_CODE_GID"}]},{"foreignKeyName": "FK_AT_BS_RESPONSIBLE_PARTY_GI","cascadeDelete": false,"parentTableName": "BS_RESPONSIBLE_PARTY","columnRelation": [{"sequence": 1,"parentColumnName": "BS_RESPONSIBLE_PARTY_GID","columnName": "BS_RESPONSIBLE_PARTY_GID"}]},{"foreignKeyName": "FK_AT_BS_STATUS_GROUP_GID","cascadeDelete": false,"parentTableName": "BS_STATUS_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "BS_STATUS_GROUP_GID","columnName": "BS_STATUS_GROUP_GID"}]},{"foreignKeyName": "FK_AT_BS_STATUS_CODE_GID","cascadeDelete": false,"parentTableName": "BS_STATUS_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_STATUS_CODE_GID","columnName": "BS_STATUS_CODE_GID"}]},{"foreignKeyName": "FK_AT_BS_REASON_GROUP_GID","cascadeDelete": false,"parentTableName": "BS_REASON_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "BS_REASON_GROUP_GID","columnName": "BS_REASON_GROUP_GID"}]},{"foreignKeyName": "FK_AT_BS_REASON_CODE_GID","cascadeDelete": false,"parentTableName": "BS_REASON_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_REASON_CODE_GID","columnName": "BS_REASON_CODE_GID"}]},{"foreignKeyName": "FK_AT_TRANSACTIONAL_EVENT_GID","cascadeDelete": false,"parentTableName": "TRANSACTIONAL_EVENT","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSACTIONAL_EVENT_GID","columnName": "TRANSACTIONAL_EVENT_GID"}]},{"foreignKeyName": "FK_AT_AUDIT_OBJECT_TYPE_GID","cascadeDelete": false,"parentTableName": "AUDIT_OBJECT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "AUDIT_OBJECT_TYPE_GID","columnName": "AUDIT_OBJECT_TYPE_GID"}]}],"childTables": ["AUDIT_DATA_INFO","GTM_AUDIT_TRAIL"],"indices": [{"indexName": "IX_AT_AUDIT_OBJECT_TYPE_OBJECT","columnNames": [{"sequence": 1,"name": "AUDIT_OBJECT_TYPE_GID"},{"sequence": 2,"name": "OBJECT_GID"}]},{"indexName": "IX_AT_GL_USER_GID","columnNames": [{"sequence": 1,"name": "GL_USER_GID"}]},{"indexName": "IX_AT_NOTIFY_SUBJECT_GID","columnNames": [{"sequence": 1,"name": "NOTIFY_SUBJECT_GID"}]},{"indexName": "IX_AT_TRANSACTIONAL_EVENT_GID","columnNames": [{"sequence": 1,"name": "TRANSACTIONAL_EVENT_GID"}]},{"indexName": "IX_AUDIT_TRAIL_XID","columnNames": [{"sequence": 1,"name": "AUDIT_TRAIL_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "audit_trail",
+    "description": "Table used to store Audit data"
+  },
+  "columns": [
+    {
+      "name": "AUDIT_TRAIL_GID",
+      "description": "Unique identifier of Audit_Trail table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUDIT_TRAIL_XID",
+      "description": "DB Sequence.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NOTIFY_SUBJECT_GID",
+      "description": "Workflow Notify Subject.  E.g. ORDER - CREATED",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NOTIFY_FUNCTION_GID",
+      "description": "Workflow Notify Function. E.g. ORDER_EVENT.Object GID for which the lifetime event was generated",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GL_USER_GID",
+      "description": "User who made change to the data.  Do not make GL_USER_GID a Fk.  We need to keep the record in the audit table when the user is no longer a valid glog user",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUDIT_TIME",
+      "description": "Local server time when the audit is recorded",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_ACTION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_ACTION_PARAMETERS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 500,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BS_QUICK_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BS_RESPONSIBLE_PARTY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BS_STATUS_GROUP_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BS_STATUS_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BS_REASON_GROUP_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BS_REASON_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BS_REASON_COMMENT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSACTIONAL_EVENT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUDIT_OBJECT_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REASON_REQUIRED_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'PROMPT','PARTY','STATUS','REASON'",
+      "conditionalConstraint": "",
+      "defaultValue": "'PROMPT'"
+    },
+    {
+      "name": "REASON_SOURCE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MARKED_FOR_PURGE",
+      "description": "A boolean field.  When it is set to 'Y', this row and its child data will be purged.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AUDIT_TRAIL_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AT_NOTIFY_SUBJECT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "NOTIFY_SUBJECT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "NOTIFY_SUBJECT_GID",
+          "columnName": "NOTIFY_SUBJECT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_NOTIFY_FUNCTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "NOTIFY_FUNCTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "NOTIFY_FUNCTION_GID",
+          "columnName": "NOTIFY_FUNCTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_APP_ACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_ACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_ACTION_GID",
+          "columnName": "APP_ACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_BS_QUICK_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_QUICK_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_QUICK_CODE_GID",
+          "columnName": "BS_QUICK_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_BS_RESPONSIBLE_PARTY_GI",
+      "cascadeDelete": false,
+      "parentTableName": "BS_RESPONSIBLE_PARTY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_RESPONSIBLE_PARTY_GID",
+          "columnName": "BS_RESPONSIBLE_PARTY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_BS_STATUS_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_STATUS_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_STATUS_GROUP_GID",
+          "columnName": "BS_STATUS_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_BS_STATUS_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_STATUS_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_STATUS_CODE_GID",
+          "columnName": "BS_STATUS_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_BS_REASON_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_REASON_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_REASON_GROUP_GID",
+          "columnName": "BS_REASON_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_BS_REASON_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_REASON_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_REASON_CODE_GID",
+          "columnName": "BS_REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_TRANSACTIONAL_EVENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSACTIONAL_EVENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSACTIONAL_EVENT_GID",
+          "columnName": "TRANSACTIONAL_EVENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AT_AUDIT_OBJECT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AUDIT_OBJECT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUDIT_OBJECT_TYPE_GID",
+          "columnName": "AUDIT_OBJECT_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AUDIT_DATA_INFO",
+    "GTM_AUDIT_TRAIL"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_AT_AUDIT_OBJECT_TYPE_OBJECT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "AUDIT_OBJECT_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "OBJECT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_AT_GL_USER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GL_USER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_AT_NOTIFY_SUBJECT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "NOTIFY_SUBJECT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_AT_TRANSACTIONAL_EVENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRANSACTIONAL_EVENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_AUDIT_TRAIL_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "AUDIT_TRAIL_XID"
+        }
+      ]
+    }
+  ]
+}

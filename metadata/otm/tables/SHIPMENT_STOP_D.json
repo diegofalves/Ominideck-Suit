@@ -1,1 +1,251 @@
-{"table": {"schema": "glogowner","name": "shipment_stop_d","description": "Table contains shipment detail information?"},"columns": [{"name": "SHIPMENT_GID","description": "The shipment GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_NUM","description": "The stop number within the shipment. Stop number = 1 is the pickup stop, and the max (stop number) for a shipment is the delivery stop.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_GID","description": "A GID to define the shipment ship unit.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY","description": "The activity performed at the stop. For example: pickup, delivery, etc.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'P','D','O'","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME","description": "The time spent performing the activity at the shipment stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "ACTIVITY_TIME_UOM_CODE","description": "The activity time unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "ACTIVITY_TIME_BASE","description": "The activity time in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "IS_PERMANENT","description": "A Y/N indicator to define the stop as permanent. Any subsequent actions and modifications to the shipment will retain this record.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "INSERT_USER","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "The user ID of the data insert user.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "Date and time of data insert.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "The user ID of the data update user.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Date and time of the most recent data update.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "SHIP_UNIT_DWELL_TIME","description": "The ship unit dwell time at the stop location as entered.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_DWELL_TIME_BASE","description": "The ship unit dwell time at the stop location in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_DWELL_TIME_UOM_CODE","description": "The ship unit dwell time unit of measure.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPMENT_GID"},{"sequence": 2,"columnName": "STOP_NUM"},{"sequence": 3,"columnName": "S_SHIP_UNIT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_STD_SGID_STNUM","cascadeDelete": false,"parentTableName": "SHIPMENT_STOP","columnRelation": [{"sequence": 2,"parentColumnName": "STOP_NUM","columnName": "STOP_NUM"},{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"}]},{"foreignKeyName": "FK_STD_SSU_GID","cascadeDelete": false,"parentTableName": "S_SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"}]}],"childTables": ["SHIPMENT_STOP_SU_INV_PARTY"],"indices": [{"indexName": "SPMT_STPD_SPMTGID","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"},{"sequence": 2,"name": "STOP_NUM"}]},{"indexName": "SSD_SHIP_UNIT_GID","columnNames": [{"sequence": 1,"name": "S_SHIP_UNIT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "shipment_stop_d",
+    "description": "Table contains shipment detail information?"
+  },
+  "columns": [
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The shipment GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_NUM",
+      "description": "The stop number within the shipment. Stop number = 1 is the pickup stop, and the max (stop number) for a shipment is the delivery stop.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_GID",
+      "description": "A GID to define the shipment ship unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY",
+      "description": "The activity performed at the stop. For example: pickup, delivery, etc.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'P','D','O'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME",
+      "description": "The time spent performing the activity at the shipment stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "ACTIVITY_TIME_UOM_CODE",
+      "description": "The activity time unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "ACTIVITY_TIME_BASE",
+      "description": "The activity time in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "IS_PERMANENT",
+      "description": "A Y/N indicator to define the stop as permanent. Any subsequent actions and modifications to the shipment will retain this record.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "The user ID of the data insert user.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "Date and time of data insert.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "The user ID of the data update user.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "SHIP_UNIT_DWELL_TIME",
+      "description": "The ship unit dwell time at the stop location as entered.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_DWELL_TIME_BASE",
+      "description": "The ship unit dwell time at the stop location in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_DWELL_TIME_UOM_CODE",
+      "description": "The ship unit dwell time unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STOP_NUM"
+    },
+    {
+      "sequence": 3,
+      "columnName": "S_SHIP_UNIT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_STD_SGID_STNUM",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_STOP",
+      "columnRelation": [
+        {
+          "sequence": 2,
+          "parentColumnName": "STOP_NUM",
+          "columnName": "STOP_NUM"
+        },
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_STD_SSU_GID",
+      "cascadeDelete": false,
+      "parentTableName": "S_SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "SHIPMENT_STOP_SU_INV_PARTY"
+  ],
+  "indices": [
+    {
+      "indexName": "SPMT_STPD_SPMTGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STOP_NUM"
+        }
+      ]
+    },
+    {
+      "indexName": "SSD_SHIP_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_SHIP_UNIT_GID"
+        }
+      ]
+    }
+  ]
+}

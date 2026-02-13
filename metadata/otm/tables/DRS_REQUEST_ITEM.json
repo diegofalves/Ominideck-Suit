@@ -1,1 +1,282 @@
-{"table": {"schema": "glogowner","name": "drs_request_item","description": ""},"columns": [{"name": "REQUEST_ID","description": "A unique request ID from the data replication service sequence.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ITEM_NO","description": "A unique item number within a particular request.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARENT_ITEM_NO","description": "The parent item number within the request where nested tables are used.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXT_REF_ID","description": "An external reference for correlation purposes.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCHEMA","description": "Schema owning table for item.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PRIMARY'"},{"name": "ITEM_TYPE","description": "Item relates to a single table name.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'TABLE'"},{"name": "ITEM_NAME","description": "Table name if the item_type = TABLE.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SELECT_LIST","description": "A comma-separated list of column names to limit selected data.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARGET_NO","description": "A reference to the corresponding external destination details in the drs_request_item_target table","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATE","description": "The current status of request item.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'NEW','PROCESSING','SUCCEEDED','FAILED','CANCEL_REQUESTED','CANCELLED','INTERRUPTED'","conditionalConstraint": "","defaultValue": "'NEW'"},{"name": "START_TIME","description": "The date/time the request item was started.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_TIME","description": "The date/time once all parts are transported.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PART_LIMIT","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTUAL_PART_COUNT","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OFFSET","description": "Used when paging through matching records.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_RESULTS","description": "The total number of records matching the given criteria. May be larger than actual returned count.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_RECORD_COUNT","description": "Total count of records in all parts for this item","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "The partition key for the purge process.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ERROR_ID","description": "Contains the error details if the data export fails.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SELECT_LIST_CLOB","description": "A comma-separated list of column names to limit selected data.","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "REQUEST_ID"},{"sequence": 2,"columnName": "ITEM_NO"}],"foreignKeys": [],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "drs_request_item",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "REQUEST_ID",
+      "description": "A unique request ID from the data replication service sequence.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ITEM_NO",
+      "description": "A unique item number within a particular request.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARENT_ITEM_NO",
+      "description": "The parent item number within the request where nested tables are used.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXT_REF_ID",
+      "description": "An external reference for correlation purposes.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCHEMA",
+      "description": "Schema owning table for item.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PRIMARY'"
+    },
+    {
+      "name": "ITEM_TYPE",
+      "description": "Item relates to a single table name.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'TABLE'"
+    },
+    {
+      "name": "ITEM_NAME",
+      "description": "Table name if the item_type = TABLE.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SELECT_LIST",
+      "description": "A comma-separated list of column names to limit selected data.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARGET_NO",
+      "description": "A reference to the corresponding external destination details in the drs_request_item_target table",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATE",
+      "description": "The current status of request item.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'NEW','PROCESSING','SUCCEEDED','FAILED','CANCEL_REQUESTED','CANCELLED','INTERRUPTED'",
+      "conditionalConstraint": "",
+      "defaultValue": "'NEW'"
+    },
+    {
+      "name": "START_TIME",
+      "description": "The date/time the request item was started.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_TIME",
+      "description": "The date/time once all parts are transported.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PART_LIMIT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTUAL_PART_COUNT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OFFSET",
+      "description": "Used when paging through matching records.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_RESULTS",
+      "description": "The total number of records matching the given criteria. May be larger than actual returned count.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_RECORD_COUNT",
+      "description": "Total count of records in all parts for this item",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "The partition key for the purge process.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ERROR_ID",
+      "description": "Contains the error details if the data export fails.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SELECT_LIST_CLOB",
+      "description": "A comma-separated list of column names to limit selected data.",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "REQUEST_ID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "ITEM_NO"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [],
+  "indices": []
+}

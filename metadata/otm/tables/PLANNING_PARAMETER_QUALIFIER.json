@@ -1,1 +1,237 @@
-{"table": {"schema": "glogowner","name": "planning_parameter_qualifier","description": ""},"columns": [{"name": "PLANNING_PARAM_QUAL_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLANNING_PARAM_QUAL_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLANNING_PARAM_QUAL_DESC","description": "","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_TYPE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'S','B','I','N','D','G','U','C','P','F','L'","conditionalConstraint": "","defaultValue": "'S'"},{"name": "TYPE","description": "","dataType": "VARCHAR2","size": 255,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GID_QUERY_CLASS","description": "","dataType": "VARCHAR2","size": 200,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAMETER_GROUP_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'GENERAL'"},{"name": "VALID_VALUE_TYPE_GID","description": "This column refers to the VALID_VALUE_TYPE table where the valid values for the each Planning parameter are managed","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PLANNING_PARAM_QUAL_GID"}],"foreignKeys": [{"foreignKeyName": "FK_PPQ_PARAMETER_GROUP_GID","cascadeDelete": false,"parentTableName": "PARAMETER_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "PARAMETER_GROUP_GID","columnName": "PARAMETER_GROUP_GID"}]},{"foreignKeyName": "FK_PPQ_VALID_VALUE_TYPE_GID","cascadeDelete": false,"parentTableName": "VALID_VALUE_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "VALID_VALUE_TYPE_GID","columnName": "VALID_VALUE_TYPE_GID"}]},{"foreignKeyName": "FK_PPQ_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["PLANNING_PARAMETER"],"indices": [{"indexName": "IX_PLANNING_PARAM_QUAL_XID","columnNames": [{"sequence": 1,"name": "PLANNING_PARAM_QUAL_XID"}]},{"indexName": "IX_PPQ_PARAMETER_GROUP_GID","columnNames": [{"sequence": 1,"name": "PARAMETER_GROUP_GID"}]},{"indexName": "IX_PPQ_VALID_VALUE_TYPE_GID","columnNames": [{"sequence": 1,"name": "VALID_VALUE_TYPE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "planning_parameter_qualifier",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "PLANNING_PARAM_QUAL_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLANNING_PARAM_QUAL_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLANNING_PARAM_QUAL_DESC",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'S','B','I','N','D','G','U','C','P','F','L'",
+      "conditionalConstraint": "",
+      "defaultValue": "'S'"
+    },
+    {
+      "name": "TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GID_QUERY_CLASS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 200,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAMETER_GROUP_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'GENERAL'"
+    },
+    {
+      "name": "VALID_VALUE_TYPE_GID",
+      "description": "This column refers to the VALID_VALUE_TYPE table where the valid values for the each Planning parameter are managed",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PLANNING_PARAM_QUAL_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_PPQ_PARAMETER_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "PARAMETER_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PARAMETER_GROUP_GID",
+          "columnName": "PARAMETER_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PPQ_VALID_VALUE_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "VALID_VALUE_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VALID_VALUE_TYPE_GID",
+          "columnName": "VALID_VALUE_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PPQ_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "PLANNING_PARAMETER"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_PLANNING_PARAM_QUAL_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PLANNING_PARAM_QUAL_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_PPQ_PARAMETER_GROUP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PARAMETER_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_PPQ_VALID_VALUE_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "VALID_VALUE_TYPE_GID"
+        }
+      ]
+    }
+  ]
+}

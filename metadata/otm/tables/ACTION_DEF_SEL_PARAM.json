@@ -1,1 +1,167 @@
-{"table": {"schema": "glogowner","name": "action_def_sel_param","description": "Contains input parameters for multiple object selections."},"columns": [{"name": "ACTION_DEF_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAM_TYPE","description": "Query table specifies type of input.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MULTIPLE_INPUTS","description": "Indicates if multiple values are allowed.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "MAIN_PARAM","description": "Indicates if this parameter is the main business object for the action.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ACTION_DEF_GID"},{"sequence": 2,"columnName": "PARAM_TYPE"}],"foreignKeys": [{"foreignKeyName": "FK_ADSP_ACTION_DEF_GID","cascadeDelete": false,"parentTableName": "ACTION_DEF","columnRelation": [{"sequence": 1,"parentColumnName": "ACTION_DEF_GID","columnName": "ACTION_DEF_GID"}]},{"foreignKeyName": "FK_ADSP_QUERY_TABLE_GID","cascadeDelete": false,"parentTableName": "QUERY_TABLE","columnRelation": [{"sequence": 1,"parentColumnName": "QUERY_TABLE_GID","columnName": "PARAM_TYPE"}]},{"foreignKeyName": "FK_ADSP_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "action_def_sel_param",
+    "description": "Contains input parameters for multiple object selections."
+  },
+  "columns": [
+    {
+      "name": "ACTION_DEF_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAM_TYPE",
+      "description": "Query table specifies type of input.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MULTIPLE_INPUTS",
+      "description": "Indicates if multiple values are allowed.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "MAIN_PARAM",
+      "description": "Indicates if this parameter is the main business object for the action.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ACTION_DEF_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PARAM_TYPE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ADSP_ACTION_DEF_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACTION_DEF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACTION_DEF_GID",
+          "columnName": "ACTION_DEF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ADSP_QUERY_TABLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "QUERY_TABLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "QUERY_TABLE_GID",
+          "columnName": "PARAM_TYPE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ADSP_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

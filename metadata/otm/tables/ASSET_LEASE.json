@@ -1,1 +1,321 @@
-{"table": {"schema": "glogowner","name": "asset_lease","description": ""},"columns": [{"name": "ASSET_LEASE_GID","description": "Lease Unique ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ASSET_LEASE_XID","description": "Lease ID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ASSET_LEASE_TYPE","description": "The Type of Lease for the assets. O = Owned, P = Private, A = All.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'O','P','A'","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "Date from which the lease is effective.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "Date at which the lease expires.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OWNER_NAME","description": "Owner Name of the leased assets.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LESSOR","description": "Company who grants lease.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LESSEE_GID","description": "Company to whom the lease is granted to.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEASE_CHARGE_PER_DAY","description": "Lease Charge Per Day","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEASE_CHARGE_PER_DAY_CURR_GID","description": "Lease Charge Currency","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEASE_CHARGE_PER_DAY_BASE","description": "Lease Charge Base Amount","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UM_CHARGE","description": "UMLER Mileage Charge","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UM_CHARGE_CURR_GID","description": "UMLER Mileage Charge Currency","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UM_CHARGE_BASE","description": "UMLER Mileage Charge Base Amount","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UM_CHARGE_UNIT","description": "UMLER Mileage Charge Unit (example, 2)","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UM_CHARGE_UNIT_BASE","description": "UMLER Mileage Charge Unit in Base UOM","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UM_CHARGE_UNIT_UOM_CODE","description": "UMLER Mileage Charge Unit (example, Mile)","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Lease Description","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OWNERSHIP_CODE","description": "Owner of the leased assets.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ASSET_LEASE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AL_SCAC_GID_LESSOR","cascadeDelete": false,"parentTableName": "SCAC","columnRelation": [{"sequence": 1,"parentColumnName": "SCAC_GID","columnName": "LESSOR"}]},{"foreignKeyName": "FK_AL_SCAC_GID_LESSEE","cascadeDelete": false,"parentTableName": "SCAC","columnRelation": [{"sequence": 1,"parentColumnName": "SCAC_GID","columnName": "LESSEE_GID"}]},{"foreignKeyName": "FK_AL_LEASE_CHARGE_PD_CURR_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "LEASE_CHARGE_PER_DAY_CURR_GID"}]},{"foreignKeyName": "FK_AL_UM_CHARGE_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "UM_CHARGE_CURR_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "asset_lease",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "ASSET_LEASE_GID",
+      "description": "Lease Unique ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ASSET_LEASE_XID",
+      "description": "Lease ID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ASSET_LEASE_TYPE",
+      "description": "The Type of Lease for the assets. O = Owned, P = Private, A = All.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'O','P','A'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "Date from which the lease is effective.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "Date at which the lease expires.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OWNER_NAME",
+      "description": "Owner Name of the leased assets.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LESSOR",
+      "description": "Company who grants lease.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LESSEE_GID",
+      "description": "Company to whom the lease is granted to.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEASE_CHARGE_PER_DAY",
+      "description": "Lease Charge Per Day",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEASE_CHARGE_PER_DAY_CURR_GID",
+      "description": "Lease Charge Currency",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEASE_CHARGE_PER_DAY_BASE",
+      "description": "Lease Charge Base Amount",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UM_CHARGE",
+      "description": "UMLER Mileage Charge",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UM_CHARGE_CURR_GID",
+      "description": "UMLER Mileage Charge Currency",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UM_CHARGE_BASE",
+      "description": "UMLER Mileage Charge Base Amount",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UM_CHARGE_UNIT",
+      "description": "UMLER Mileage Charge Unit (example, 2)",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UM_CHARGE_UNIT_BASE",
+      "description": "UMLER Mileage Charge Unit in Base UOM",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UM_CHARGE_UNIT_UOM_CODE",
+      "description": "UMLER Mileage Charge Unit (example, Mile)",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Lease Description",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OWNERSHIP_CODE",
+      "description": "Owner of the leased assets.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ASSET_LEASE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AL_SCAC_GID_LESSOR",
+      "cascadeDelete": false,
+      "parentTableName": "SCAC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SCAC_GID",
+          "columnName": "LESSOR"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AL_SCAC_GID_LESSEE",
+      "cascadeDelete": false,
+      "parentTableName": "SCAC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SCAC_GID",
+          "columnName": "LESSEE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AL_LEASE_CHARGE_PD_CURR_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "LEASE_CHARGE_PER_DAY_CURR_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AL_UM_CHARGE_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "UM_CHARGE_CURR_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

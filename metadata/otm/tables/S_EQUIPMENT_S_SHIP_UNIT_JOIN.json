@@ -1,1 +1,217 @@
-{"table": {"schema": "glogowner","name": "s_equipment_s_ship_unit_join","description": ""},"columns": [{"name": "S_EQUIPMENT_GID","description": "The GID for the shipment equipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_GID","description": "The GID for the shipment ship unit.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMPARTMENT_NUM","description": "The number associated with the compartment in a multi-compartment equipment. (View Only)","dataType": "NUMBER","size": 8,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOADING_SEQUENCE","description": "The sequence that the shipment ship unit is loaded into the equipment. (View Only)","dataType": "NUMBER","size": 8,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOADING_PATTERN_GID","description": "The loading pattern used to place ship unit into equipment if load configuration algorithm used is pattern based. (View Only)","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_STACKING_LAYERS","description": "The number associated with the layer stacked for ship unit. (View Only)","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": true,"constraintValues": "","conditionalConstraint": "NUM_STACKING_LAYERS >=0","defaultValue": "0"},{"name": "NUM_LOADING_ROWS","description": "The number associated with the row the ship unit is placed in. (View Only)","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": true,"constraintValues": "","conditionalConstraint": "NUM_LOADING_ROWS >=0","defaultValue": "0"},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "S_EQUIPMENT_GID"},{"sequence": 2,"columnName": "S_SHIP_UNIT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SEQUIPSSHIPUNITJOIN_SEQUIP","cascadeDelete": false,"parentTableName": "S_EQUIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "S_EQUIPMENT_GID","columnName": "S_EQUIPMENT_GID"}]},{"foreignKeyName": "FK_SEQUIPSSUNITJOIN_SSHIPUNIT","cascadeDelete": false,"parentTableName": "S_SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"}]},{"foreignKeyName": "FK_SESSU_LOADING_PATTERN_GID","cascadeDelete": false,"parentTableName": "LOADING_PATTERN","columnRelation": [{"sequence": 1,"parentColumnName": "LOADING_PATTERN_GID","columnName": "LOADING_PATTERN_GID"}]}],"childTables": [],"indices": [{"indexName": "IND_SESSUJ_S_EQUIPMENT_GID","columnNames": [{"sequence": 1,"name": "S_EQUIPMENT_GID"}]},{"indexName": "IND_SESSUJ_S_SHIP_UNIT_GID","columnNames": [{"sequence": 1,"name": "S_SHIP_UNIT_GID"}]},{"indexName": "IX_SESSU_LOADING_PATTERN_GID","columnNames": [{"sequence": 1,"name": "LOADING_PATTERN_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "s_equipment_s_ship_unit_join",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "S_EQUIPMENT_GID",
+      "description": "The GID for the shipment equipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_GID",
+      "description": "The GID for the shipment ship unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMPARTMENT_NUM",
+      "description": "The number associated with the compartment in a multi-compartment equipment. (View Only)",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOADING_SEQUENCE",
+      "description": "The sequence that the shipment ship unit is loaded into the equipment. (View Only)",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOADING_PATTERN_GID",
+      "description": "The loading pattern used to place ship unit into equipment if load configuration algorithm used is pattern based. (View Only)",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_STACKING_LAYERS",
+      "description": "The number associated with the layer stacked for ship unit. (View Only)",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "NUM_STACKING_LAYERS >=0",
+      "defaultValue": "0"
+    },
+    {
+      "name": "NUM_LOADING_ROWS",
+      "description": "The number associated with the row the ship unit is placed in. (View Only)",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "NUM_LOADING_ROWS >=0",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "S_EQUIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "S_SHIP_UNIT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SEQUIPSSHIPUNITJOIN_SEQUIP",
+      "cascadeDelete": false,
+      "parentTableName": "S_EQUIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_EQUIPMENT_GID",
+          "columnName": "S_EQUIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SEQUIPSSUNITJOIN_SSHIPUNIT",
+      "cascadeDelete": false,
+      "parentTableName": "S_SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SESSU_LOADING_PATTERN_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOADING_PATTERN",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOADING_PATTERN_GID",
+          "columnName": "LOADING_PATTERN_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IND_SESSUJ_S_EQUIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_EQUIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IND_SESSUJ_S_SHIP_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SESSU_LOADING_PATTERN_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOADING_PATTERN_GID"
+        }
+      ]
+    }
+  ]
+}

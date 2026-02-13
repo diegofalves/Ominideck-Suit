@@ -1,1 +1,228 @@
-{"table": {"schema": "glogowner","name": "ml_scenario_learning_result","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_GID","description": "The GID of the machine learning project.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCENARIO_GID","description": "The GID of the machine learning scenario.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODEL_TYPE","description": "The type of the machine learning model for the scenario. 'A' denotes active model and 'B' denotes beta model.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'A', 'B'","conditionalConstraint": "","defaultValue": ""},{"name": "MODEL_ID","description": "The model ID used by the machine learning scenario.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEARNING_REQUEST_ID","description": "The learning request ID used by the machine learning scenario.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEARNING_REQUEST_STATUS","description": "The status of the learning request used by the machine learning scenario.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEARNING_RESULT_DETAIL","description": "The details of the learning results stored in json format.","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEARNING_RESULT_GID","description": "The GID of the learning result for the machine learning scenario.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEARNING_RESULT_XID","description": "The XID of the learning result for the machine learning scenario.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCURACY","description": "Denotes the accuracy of the training model.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONFIDENCE_INTERVAL_HIGH","description": "Denotes the higher range value of the confidence interval which is used to quantify the uncertainites in estimating the accuracy of the model.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONFIDENCE_INTERVAL_LOW","description": "Denotes the lower range value of the confidence interval which is used to quantify the uncertainites in estimating the model accuracy.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECTIVE_MODEL_TYPE","description": "The Objective Model Type value for the machine learning Project Objective. P = Shipment based ETA, E = Event based ETA, OR = Order Route Prediction and PC = Product Classification","dataType": "VARCHAR2","size": 10,"isNull": true,"isConstraint": true,"constraintValues": "'P','E', 'OR','PC'","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LEARNING_RESULT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_MSLR_ML_SCENARIO","cascadeDelete": false,"parentTableName": "ML_SCENARIO","columnRelation": [{"sequence": 1,"parentColumnName": "SCENARIO_GID","columnName": "SCENARIO_GID"},{"sequence": 2,"parentColumnName": "PROJECT_GID","columnName": "PROJECT_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ml_scenario_learning_result",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_GID",
+      "description": "The GID of the machine learning project.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCENARIO_GID",
+      "description": "The GID of the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODEL_TYPE",
+      "description": "The type of the machine learning model for the scenario. 'A' denotes active model and 'B' denotes beta model.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'A', 'B'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODEL_ID",
+      "description": "The model ID used by the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEARNING_REQUEST_ID",
+      "description": "The learning request ID used by the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEARNING_REQUEST_STATUS",
+      "description": "The status of the learning request used by the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEARNING_RESULT_DETAIL",
+      "description": "The details of the learning results stored in json format.",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEARNING_RESULT_GID",
+      "description": "The GID of the learning result for the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEARNING_RESULT_XID",
+      "description": "The XID of the learning result for the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCURACY",
+      "description": "Denotes the accuracy of the training model.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONFIDENCE_INTERVAL_HIGH",
+      "description": "Denotes the higher range value of the confidence interval which is used to quantify the uncertainites in estimating the accuracy of the model.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONFIDENCE_INTERVAL_LOW",
+      "description": "Denotes the lower range value of the confidence interval which is used to quantify the uncertainites in estimating the model accuracy.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECTIVE_MODEL_TYPE",
+      "description": "The Objective Model Type value for the machine learning Project Objective. P = Shipment based ETA, E = Event based ETA, OR = Order Route Prediction and PC = Product Classification",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'P','E', 'OR','PC'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LEARNING_RESULT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_MSLR_ML_SCENARIO",
+      "cascadeDelete": false,
+      "parentTableName": "ML_SCENARIO",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SCENARIO_GID",
+          "columnName": "SCENARIO_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "PROJECT_GID",
+          "columnName": "PROJECT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

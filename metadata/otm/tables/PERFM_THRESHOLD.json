@@ -1,1 +1,221 @@
-{"table": {"schema": "glogowner","name": "perfm_threshold","description": "Metric Threshold Alert"},"columns": [{"name": "PERFM_THRESHOLD_GID","description": "Metric Threshold Alert ID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERFM_THRESHOLD_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERF_METRIC_TYPE_GID","description": "Metric Type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERF_METRIC_SUBCOMPONENT","description": "Metric Subcomponent.","dataType": "VARCHAR2","size": 1000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERFM_THRESH_CURRENT_GID","description": "If not null, the Current Metric Alert Threshold for the alert.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERFM_THRESH_CUMULATIVE_GID","description": "If not null, the Cumulative Metric Alert Threshold for the alert.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERFM_THRESH_NOTIFY_GID","description": "The notification profile for the alert. If null, the alert will only be logged.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "If 'Y', the alert is active.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_RESERVED","description": "If ''Y'', the record is reserved for use with OTM staged thresholds. It cannot be edited or removed by a user.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PERFM_THRESHOLD_GID"}],"foreignKeys": [{"foreignKeyName": "FK_PRFT_PERF_METRIC_TYPE_GID","cascadeDelete": false,"parentTableName": "PERF_METRIC_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "PERF_METRIC_TYPE_GID","columnName": "PERF_METRIC_TYPE_GID"}]},{"foreignKeyName": "FK_PRFT_PERFM_THRESH_CURRENT","cascadeDelete": false,"parentTableName": "PERFM_THRESH_CURRENT","columnRelation": [{"sequence": 1,"parentColumnName": "PERFM_THRESH_CURRENT_GID","columnName": "PERFM_THRESH_CURRENT_GID"}]},{"foreignKeyName": "FK_PRFT_PERFM_THRESH_CUMUL_GI","cascadeDelete": false,"parentTableName": "PERFM_THRESH_CUMULATIVE","columnRelation": [{"sequence": 1,"parentColumnName": "PERFM_THRESH_CUMUL_GID","columnName": "PERFM_THRESH_CUMULATIVE_GID"}]},{"foreignKeyName": "FK_PRFT_PERFM_THRESH_NOTIFY_G","cascadeDelete": false,"parentTableName": "PERFM_THRESH_NOTIFY","columnRelation": [{"sequence": 1,"parentColumnName": "PERFM_THRESH_NOTIFY_GID","columnName": "PERFM_THRESH_NOTIFY_GID"}]}],"childTables": ["PERFM_THRESH_RESULT_EVENT"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "perfm_threshold",
+    "description": "Metric Threshold Alert"
+  },
+  "columns": [
+    {
+      "name": "PERFM_THRESHOLD_GID",
+      "description": "Metric Threshold Alert ID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERFM_THRESHOLD_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERF_METRIC_TYPE_GID",
+      "description": "Metric Type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERF_METRIC_SUBCOMPONENT",
+      "description": "Metric Subcomponent.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERFM_THRESH_CURRENT_GID",
+      "description": "If not null, the Current Metric Alert Threshold for the alert.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERFM_THRESH_CUMULATIVE_GID",
+      "description": "If not null, the Cumulative Metric Alert Threshold for the alert.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERFM_THRESH_NOTIFY_GID",
+      "description": "The notification profile for the alert. If null, the alert will only be logged.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "If 'Y', the alert is active.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_RESERVED",
+      "description": "If ''Y'', the record is reserved for use with OTM staged thresholds. It cannot be edited or removed by a user.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PERFM_THRESHOLD_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_PRFT_PERF_METRIC_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "PERF_METRIC_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PERF_METRIC_TYPE_GID",
+          "columnName": "PERF_METRIC_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PRFT_PERFM_THRESH_CURRENT",
+      "cascadeDelete": false,
+      "parentTableName": "PERFM_THRESH_CURRENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PERFM_THRESH_CURRENT_GID",
+          "columnName": "PERFM_THRESH_CURRENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PRFT_PERFM_THRESH_CUMUL_GI",
+      "cascadeDelete": false,
+      "parentTableName": "PERFM_THRESH_CUMULATIVE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PERFM_THRESH_CUMUL_GID",
+          "columnName": "PERFM_THRESH_CUMULATIVE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PRFT_PERFM_THRESH_NOTIFY_G",
+      "cascadeDelete": false,
+      "parentTableName": "PERFM_THRESH_NOTIFY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PERFM_THRESH_NOTIFY_GID",
+          "columnName": "PERFM_THRESH_NOTIFY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "PERFM_THRESH_RESULT_EVENT"
+  ],
+  "indices": []
+}

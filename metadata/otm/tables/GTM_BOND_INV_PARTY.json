@@ -1,1 +1,160 @@
-{"table": {"schema": "glogowner","name": "gtm_bond_inv_party","description": "This table stores party involved for any bond."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_BOND_GID","description": "This is the bond identifier Gid for Gtm system.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_QUAL_GID","description": "This is the qualifier for involved party on bond.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_CONTACT_GID","description": "This is the contact identifier for involved party on bond.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOWED_USE_OF_BOND","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "GTM_BOND_GID"},{"sequence": 2,"columnName": "INVOLVED_PARTY_QUAL_GID"},{"sequence": 3,"columnName": "INVOLVED_PARTY_CONTACT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GBIP_GTM_BOND_GID","cascadeDelete": true,"parentTableName": "GTM_BOND","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_BOND_GID","columnName": "GTM_BOND_GID"}]},{"foreignKeyName": "FK_GBIP_INV_PARTY_QUAL_G","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "INVOLVED_PARTY_QUAL_GID"}]},{"foreignKeyName": "FK_GBIP_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "INVOLVED_PARTY_CONTACT_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_bond_inv_party",
+    "description": "This table stores party involved for any bond."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_BOND_GID",
+      "description": "This is the bond identifier Gid for Gtm system.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_QUAL_GID",
+      "description": "This is the qualifier for involved party on bond.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_CONTACT_GID",
+      "description": "This is the contact identifier for involved party on bond.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOWED_USE_OF_BOND",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_BOND_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "INVOLVED_PARTY_QUAL_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "INVOLVED_PARTY_CONTACT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GBIP_GTM_BOND_GID",
+      "cascadeDelete": true,
+      "parentTableName": "GTM_BOND",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_BOND_GID",
+          "columnName": "GTM_BOND_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GBIP_INV_PARTY_QUAL_G",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "INVOLVED_PARTY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GBIP_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "INVOLVED_PARTY_CONTACT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

@@ -1,1 +1,164 @@
-{"table": {"schema": "glogowner","name": "ai_guardrail","description": "Guardrails for AI prompts and chat requests."},"columns": [{"name": "AI_GUARDRAIL_GID","description": "AI Guardrail GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AI_GUARDRAIL_XID","description": "AI Guardrail XID.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROMPT_FRAGMENT","description": "Prompt fragment that defines the guardrail within a prompt macro. This is also appended to each chat request.","dataType": "VARCHAR2","size": 2000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSLATION_GID","description": "Translation label for the guardrail type.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROW_PROTECT","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'R','H'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AI_GUARDRAIL_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AIG_TRANSLATION_GID","cascadeDelete": false,"parentTableName": "TRANSLATION","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSLATION_GID","columnName": "TRANSLATION_GID"}]},{"foreignKeyName": "FK_AIG_OTM_RELEASE_GID","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "ORM_RELEASE"}]}],"childTables": ["AI_USE_CASE_AUDIENCE"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ai_guardrail",
+    "description": "Guardrails for AI prompts and chat requests."
+  },
+  "columns": [
+    {
+      "name": "AI_GUARDRAIL_GID",
+      "description": "AI Guardrail GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AI_GUARDRAIL_XID",
+      "description": "AI Guardrail XID.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROMPT_FRAGMENT",
+      "description": "Prompt fragment that defines the guardrail within a prompt macro. This is also appended to each chat request.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSLATION_GID",
+      "description": "Translation label for the guardrail type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROW_PROTECT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'R','H'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AI_GUARDRAIL_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AIG_TRANSLATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSLATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSLATION_GID",
+          "columnName": "TRANSLATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AIG_OTM_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "ORM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AI_USE_CASE_AUDIENCE"
+  ],
+  "indices": []
+}

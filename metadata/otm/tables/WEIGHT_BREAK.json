@@ -1,1 +1,169 @@
-{"table": {"schema": "glogowner","name": "weight_break","description": "The weight break table holds the discounts a carrier may give to a customer who is shipping large quantities.  Each weight break is then associated with a profile in the WEIGHT_BREAK_PROFILE table. Ex: Of a Weight Profile:  ABC Carriers. Ex of  a weight break:   100-200 lbs.  $2.00 /lb                                    201-300 lbs.  $1.75 /lb"},"columns": [{"name": "WEIGHT_BREAK_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BREAK_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BREAK_PROFILE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BREAK_MAX","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BREAK_MAX_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "WEIGHT_BREAK_MAX_BASE","description": "WEIGHT_BREAK_MAX in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "WEIGHT_BREAK_GID"}],"foreignKeys": [{"foreignKeyName": "FK_WB_WBPG","cascadeDelete": false,"parentTableName": "WEIGHT_BREAK_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "WEIGHT_BREAK_PROFILE_GID","columnName": "WEIGHT_BREAK_PROFILE_GID"}]}],"childTables": ["RATE_GEO_COST_WEIGHT_BREAK"],"indices": [{"indexName": "IX_WEIGHT_BREAK_XID","columnNames": [{"sequence": 1,"name": "WEIGHT_BREAK_XID"}]},{"indexName": "WB_WBPG","columnNames": [{"sequence": 1,"name": "WEIGHT_BREAK_PROFILE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "weight_break",
+    "description": "The weight break table holds the discounts a carrier may give to a customer who is shipping large quantities.  Each weight break is then associated with a profile in the WEIGHT_BREAK_PROFILE table. Ex: Of a Weight Profile:  ABC Carriers. Ex of  a weight break:   100-200 lbs.  $2.00 /lb                                    201-300 lbs.  $1.75 /lb"
+  },
+  "columns": [
+    {
+      "name": "WEIGHT_BREAK_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BREAK_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BREAK_PROFILE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BREAK_MAX",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BREAK_MAX_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "WEIGHT_BREAK_MAX_BASE",
+      "description": "WEIGHT_BREAK_MAX in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "WEIGHT_BREAK_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_WB_WBPG",
+      "cascadeDelete": false,
+      "parentTableName": "WEIGHT_BREAK_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "WEIGHT_BREAK_PROFILE_GID",
+          "columnName": "WEIGHT_BREAK_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "RATE_GEO_COST_WEIGHT_BREAK"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_WEIGHT_BREAK_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "WEIGHT_BREAK_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "WB_WBPG",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "WEIGHT_BREAK_PROFILE_GID"
+        }
+      ]
+    }
+  ]
+}

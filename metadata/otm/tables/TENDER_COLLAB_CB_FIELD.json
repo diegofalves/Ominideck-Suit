@@ -1,1 +1,304 @@
-{"table": {"schema": "glogowner","name": "tender_collab_cb_field","description": ""},"columns": [{"name": "I_TRANSACTION_NO","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONDITIONAL_BOOKING_FIELD_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLANNER_VALUE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_VALUE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UOM_CODE","description": "","dataType": "VARCHAR2","size": 55,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_PLANNER_APPROVED","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "CONDITIONAL_BOOKING_PROF_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_LONG_NAME","description": "","dataType": "VARCHAR2","size": 255,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_ALIAS","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_QUALIFIER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_QUALIFIER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_STAGE_QUALIFIER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_NUMBER","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "-1"}],"primaryKey": [{"sequence": 1,"columnName": "I_TRANSACTION_NO"},{"sequence": 2,"columnName": "CONDITIONAL_BOOKING_FIELD_GID"},{"sequence": 3,"columnName": "STOP_NUMBER"}],"foreignKeys": [{"foreignKeyName": "FK_TCCF_CONDITIONAL_BOOKING_F","cascadeDelete": false,"parentTableName": "CONDITIONAL_BOOKING_FIELD","columnRelation": [{"sequence": 1,"parentColumnName": "CONDITIONAL_BOOKING_FIELD_GID","columnName": "CONDITIONAL_BOOKING_FIELD_GID"}]},{"foreignKeyName": "FK_TCCF_CONDITIONAL_BOOKING_PR","cascadeDelete": false,"parentTableName": "CONDITIONAL_BOOKING_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "CONDITIONAL_BOOKING_PROF_GID","columnName": "CONDITIONAL_BOOKING_PROF_GID"}]},{"foreignKeyName": "FK_TCCF_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"}]},{"foreignKeyName": "FK_TCCF_LOCATION_QUALIFIER_GI","cascadeDelete": false,"parentTableName": "LOCATION_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_QUALIFIER_GID","columnName": "LOCATION_QUALIFIER_GID"}]},{"foreignKeyName": "FK_TCCF_TIME_QUALIFIER_GID","cascadeDelete": false,"parentTableName": "TIME_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "TIME_QUALIFIER_GID","columnName": "TIME_QUALIFIER_GID"}]},{"foreignKeyName": "FK_TCCF_TRANSPORT_STAGE_QUALI","cascadeDelete": false,"parentTableName": "TRANSPORT_STAGE_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSPORT_STAGE_QUALIFIER_GID","columnName": "TRANSPORT_STAGE_QUALIFIER_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "tender_collab_cb_field",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "I_TRANSACTION_NO",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONDITIONAL_BOOKING_FIELD_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLANNER_VALUE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_VALUE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 55,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_PLANNER_APPROVED",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONDITIONAL_BOOKING_PROF_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_LONG_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_ALIAS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_QUALIFIER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_QUALIFIER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_STAGE_QUALIFIER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_NUMBER",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "-1"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "I_TRANSACTION_NO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "CONDITIONAL_BOOKING_FIELD_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "STOP_NUMBER"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_TCCF_CONDITIONAL_BOOKING_F",
+      "cascadeDelete": false,
+      "parentTableName": "CONDITIONAL_BOOKING_FIELD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONDITIONAL_BOOKING_FIELD_GID",
+          "columnName": "CONDITIONAL_BOOKING_FIELD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCCF_CONDITIONAL_BOOKING_PR",
+      "cascadeDelete": false,
+      "parentTableName": "CONDITIONAL_BOOKING_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONDITIONAL_BOOKING_PROF_GID",
+          "columnName": "CONDITIONAL_BOOKING_PROF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCCF_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCCF_LOCATION_QUALIFIER_GI",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_QUALIFIER_GID",
+          "columnName": "LOCATION_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCCF_TIME_QUALIFIER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TIME_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TIME_QUALIFIER_GID",
+          "columnName": "TIME_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCCF_TRANSPORT_STAGE_QUALI",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSPORT_STAGE_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSPORT_STAGE_QUALIFIER_GID",
+          "columnName": "TRANSPORT_STAGE_QUALIFIER_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

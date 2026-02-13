@@ -1,1 +1,406 @@
-{"table": {"schema": "glogowner","name": "gtm_license_line_usage","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NO","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_LICENSE_LINE_GID","description": "License Line Gid","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BALANCE_TYPE","description": "Possible values are 'Reservation', 'Assignment'. It indicates if License Reservation or Assignment needs to be performed.","dataType": "VARCHAR2","size": 2,"isNull": false,"isConstraint": true,"constraintValues": "'A','R'","conditionalConstraint": "","defaultValue": "'A'"},{"name": "D_DOCUMENT_ID","description": "This holds the Transaction ID the license is reserved or assigned to","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "D_DOCUMENT_LINE_ID","description": "This holds the Transaction Line ID","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_DOCUMENT_ID","description": "This holds the Transaction ID or License ID (Parent ID)","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_DOCUMENT_LINE_ID","description": "This holds the Transaction Line ID (Parent Line ID)","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "QUANTITY_VALUE","description": "Quantity","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "QUANTITY_VALUE_UOM_CODE","description": "This field holds the 'Unit of Measure' for Quantity.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE","description": "Currency Value","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE_BASE","description": "Base Currency for value.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REASON_CODE_GID","description": "Reason Code","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMMENTS","description": "Comments","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXCHANGE_RATE_GID","description": "Exchange Rate","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXCHANGE_RATE_DATE","description": "Exchange Rate Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BAL_QUANTITY","description": "Quantity assigned or reserved of the request object","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BAL_QUANTITY_UOM_CODE","description": "This field holds the 'Unit of Measure' for balance quatity.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BAL_VALUE","description": "Value assigned or reserved of the request object","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BAL_VALUE_CURRENCY_GID","description": "This field holds the type of currency for the Balance Value. eg Rupees or AED.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BAL_VALUE_BASE","description": "Base currency for balance value.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE_CURR_GID","description": "This field holds the type of currency for the quantiyt Value. eg Rupees or AED.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "D_DOCUMENT_TYPE","description": "Possible value is Transaction Line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_DOCUMENT_TYPE","description": "Possible value is Transaction Line (Parent Document Type). Supply Document indicates how the demand be it license reservation or assignment request was fulfilled.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ASSIGNED_DATE","description": "This field represents the assigned date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_GID","description": "This field represents the user.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRECEDING_LL_USAGE_SEQUENCE_NO","description": "This column contains the sequence number of the preceding license line usage.In a preceding transaction line case,the current license line usage derives its value or quantity from the balance value or quantity of the preceding license line usage.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSACTION_DATE","description": "Transaction date is set on performing license assignment based on the date qualifier configured on license code option.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SEQUENCE_NO"}],"foreignKeys": [{"foreignKeyName": "FK_GLLU_REASON_CODE_GID","cascadeDelete": false,"parentTableName": "BS_REASON_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_REASON_CODE_GID","columnName": "REASON_CODE_GID"}]},{"foreignKeyName": "FK_GLLU_EXCHANGE_RATE_GID","cascadeDelete": false,"parentTableName": "EXCHANGE_RATE","columnRelation": [{"sequence": 1,"parentColumnName": "EXCHANGE_RATE_GID","columnName": "EXCHANGE_RATE_GID"}]},{"foreignKeyName": "FK_GLLU_BAL_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "BAL_VALUE_CURRENCY_GID"}]},{"foreignKeyName": "FK_GLLU_CURR_VAL_CURR_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "CURRENCY_VALUE_CURR_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_license_line_usage",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NO",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_LICENSE_LINE_GID",
+      "description": "License Line Gid",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BALANCE_TYPE",
+      "description": "Possible values are 'Reservation', 'Assignment'. It indicates if License Reservation or Assignment needs to be performed.",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'A','R'",
+      "conditionalConstraint": "",
+      "defaultValue": "'A'"
+    },
+    {
+      "name": "D_DOCUMENT_ID",
+      "description": "This holds the Transaction ID the license is reserved or assigned to",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "D_DOCUMENT_LINE_ID",
+      "description": "This holds the Transaction Line ID",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_DOCUMENT_ID",
+      "description": "This holds the Transaction ID or License ID (Parent ID)",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_DOCUMENT_LINE_ID",
+      "description": "This holds the Transaction Line ID (Parent Line ID)",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUANTITY_VALUE",
+      "description": "Quantity",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUANTITY_VALUE_UOM_CODE",
+      "description": "This field holds the 'Unit of Measure' for Quantity.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE",
+      "description": "Currency Value",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE_BASE",
+      "description": "Base Currency for value.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REASON_CODE_GID",
+      "description": "Reason Code",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMMENTS",
+      "description": "Comments",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXCHANGE_RATE_GID",
+      "description": "Exchange Rate",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXCHANGE_RATE_DATE",
+      "description": "Exchange Rate Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BAL_QUANTITY",
+      "description": "Quantity assigned or reserved of the request object",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BAL_QUANTITY_UOM_CODE",
+      "description": "This field holds the 'Unit of Measure' for balance quatity.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BAL_VALUE",
+      "description": "Value assigned or reserved of the request object",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BAL_VALUE_CURRENCY_GID",
+      "description": "This field holds the type of currency for the Balance Value. eg Rupees or AED.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BAL_VALUE_BASE",
+      "description": "Base currency for balance value.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE_CURR_GID",
+      "description": "This field holds the type of currency for the quantiyt Value. eg Rupees or AED.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "D_DOCUMENT_TYPE",
+      "description": "Possible value is Transaction Line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_DOCUMENT_TYPE",
+      "description": "Possible value is Transaction Line (Parent Document Type). Supply Document indicates how the demand be it license reservation or assignment request was fulfilled.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ASSIGNED_DATE",
+      "description": "This field represents the assigned date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_GID",
+      "description": "This field represents the user.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRECEDING_LL_USAGE_SEQUENCE_NO",
+      "description": "This column contains the sequence number of the preceding license line usage.In a preceding transaction line case,the current license line usage derives its value or quantity from the balance value or quantity of the preceding license line usage.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSACTION_DATE",
+      "description": "Transaction date is set on performing license assignment based on the date qualifier configured on license code option.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SEQUENCE_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GLLU_REASON_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_REASON_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_REASON_CODE_GID",
+          "columnName": "REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GLLU_EXCHANGE_RATE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EXCHANGE_RATE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXCHANGE_RATE_GID",
+          "columnName": "EXCHANGE_RATE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GLLU_BAL_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "BAL_VALUE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GLLU_CURR_VAL_CURR_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "CURRENCY_VALUE_CURR_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

@@ -1,1 +1,311 @@
-{"table": {"schema": "glogowner","name": "agent_action","description": ""},"columns": [{"name": "AGENT_ACTION_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AGENT_ACTION_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTION_TOPIC_CLASS","description": "","dataType": "VARCHAR2","size": 255,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_QUERY_TYPE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_ACTION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FOR_RELATED_OBJECTS","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "HELP_DESCRIPTION","description": "Non-editable help for the action that is delivered as part of GC3.","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMPATIBLE_AGENT_EVENT_CLASS","description": "The event class with which the the action is compatible.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_PRE_PERSISTENCE_COMPATIBLE","description": "Indicates whether the action is compatible with pre-persistence lifetime events.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_POST_PERSISTENCE_COMPATIBLE","description": "Indicates whether the action is compatible with post-persistence lifetime  events.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "IS_POST_REMOVAL_COMPATIBLE","description": "Indicates whether the action is compatible with post removal lifetime events.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_LONG_RUNNING_TASK","description": "If Y, this agent action is a long running task and should be monitored in the LONG_RUNNING_TASK table.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "LRT_INTERRUPTABILITY","description": "Interruptability support: NONE = task cannot be interrupted; INTERRUPTIBLE = task can be interrupted, likely ending in a failure state; RESUBMITTABLE: task can be resubmitted into it's origin queue for handling by another machine","dataType": "VARCHAR2","size": 40,"isNull": true,"isConstraint": true,"constraintValues": "'NONE','INTERRUPTIBLE','RESUBMITTABLE'","conditionalConstraint": "","defaultValue": "'NONE'"},{"name": "LRT_INTERRUPT_ON_SQL","description": "If 'Y', a task interruption will force the next SQL statement to fail.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'N','Y'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "OPT_FEATURE_GID","description": "Optional Feature associated with the agent action. If not null and the feature is disabled, agents running the action will log a warning to the log and skip it.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AGENT_ACTION_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AA_DATA_QUERY_TYPE_GID","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_AA_APP_ACTION_GID","cascadeDelete": false,"parentTableName": "APP_ACTION","columnRelation": [{"sequence": 1,"parentColumnName": "APP_ACTION_GID","columnName": "APP_ACTION_GID"}]},{"foreignKeyName": "FK_AGNTA_OPT_FEATURE_GID","cascadeDelete": false,"parentTableName": "OPT_FEATURE","columnRelation": [{"sequence": 1,"parentColumnName": "OPT_FEATURE_GID","columnName": "OPT_FEATURE_GID"}]},{"foreignKeyName": "FK_AGNTA_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["AGENT_ACTION_DETAILS","AGENT_ACTION_STATS","AGENT_EVENTS_INVALID_ACTION","FEATURE_AGENT_ACTION","LONG_RUNNING_TASK"],"indices": [{"indexName": "IX_AGENT_ACTION_XID","columnNames": [{"sequence": 1,"name": "AGENT_ACTION_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "agent_action",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "AGENT_ACTION_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AGENT_ACTION_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTION_TOPIC_CLASS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_ACTION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FOR_RELATED_OBJECTS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "HELP_DESCRIPTION",
+      "description": "Non-editable help for the action that is delivered as part of GC3.",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMPATIBLE_AGENT_EVENT_CLASS",
+      "description": "The event class with which the the action is compatible.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_PRE_PERSISTENCE_COMPATIBLE",
+      "description": "Indicates whether the action is compatible with pre-persistence lifetime events.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_POST_PERSISTENCE_COMPATIBLE",
+      "description": "Indicates whether the action is compatible with post-persistence lifetime  events.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "IS_POST_REMOVAL_COMPATIBLE",
+      "description": "Indicates whether the action is compatible with post removal lifetime events.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_LONG_RUNNING_TASK",
+      "description": "If Y, this agent action is a long running task and should be monitored in the LONG_RUNNING_TASK table.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "LRT_INTERRUPTABILITY",
+      "description": "Interruptability support: NONE = task cannot be interrupted; INTERRUPTIBLE = task can be interrupted, likely ending in a failure state; RESUBMITTABLE: task can be resubmitted into it's origin queue for handling by another machine",
+      "dataType": "VARCHAR2",
+      "size": 40,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'NONE','INTERRUPTIBLE','RESUBMITTABLE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'NONE'"
+    },
+    {
+      "name": "LRT_INTERRUPT_ON_SQL",
+      "description": "If 'Y', a task interruption will force the next SQL statement to fail.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'N','Y'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "OPT_FEATURE_GID",
+      "description": "Optional Feature associated with the agent action. If not null and the feature is disabled, agents running the action will log a warning to the log and skip it.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AGENT_ACTION_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AA_DATA_QUERY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AA_APP_ACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_ACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_ACTION_GID",
+          "columnName": "APP_ACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AGNTA_OPT_FEATURE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OPT_FEATURE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OPT_FEATURE_GID",
+          "columnName": "OPT_FEATURE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AGNTA_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AGENT_ACTION_DETAILS",
+    "AGENT_ACTION_STATS",
+    "AGENT_EVENTS_INVALID_ACTION",
+    "FEATURE_AGENT_ACTION",
+    "LONG_RUNNING_TASK"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_AGENT_ACTION_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "AGENT_ACTION_XID"
+        }
+      ]
+    }
+  ]
+}

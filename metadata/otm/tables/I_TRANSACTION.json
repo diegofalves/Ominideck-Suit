@@ -1,1 +1,313 @@
-{"table": {"schema": "glogowner","name": "i_transaction","description": "The I_TRANSACTION table store all XML transactions which are received by GLog, or sent out of GLog. The I_TRANSACTION table is a child of the I_LOG_TRANSMISSION table. This table contains the one record per transaction in the XML transmissions. See table I_TRANSMISSION for the XML transmission details. Each transaction within the transmission are broken out and stored as individual records."},"columns": [{"name": "I_TRANSACTION_NO","description": "This is a foreign key from the I_LOG table. The I_TRANSACTION_NO column specifies the transaction to which this log message pertains.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_TRANSMISSION_NO","description": "This is a foreign key to the I_TRANSMISSION table. The I_TRANSMISSION_NO column uniquely identifies the transmission.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSACTION_CODE","description": "TRANSACTION_CODE provides a code for the type of transaction that was transmitted. Transaction codes include: D I IU U Unknown","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'INSERT'"},{"name": "WRITTEN_BY","description": "WRITTEN_BY contains the domain name that logged the transmission.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS","description": "STATUS indicates the status of the transaction. Status types include: FRESH New PROCESSED","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'FRESH'"},{"name": "ELEMENT_NAME","description": "ELEMENT_NAME contains the name of the transaction element. These can include: ActualShipment AllocationBase Billing Invoice Item Location Rate Release RemoteQuery ShipmentStatus TenderOffer TenderResponse TransOrder Voucher Xlane","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_GROUP","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_SEQUENCE_ID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SENDER_TRANSACTION_ID","description": "Specifies the Transaction Number that the sender assigned to the transaction.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REFERENCE_TRANSACTION_ID","description": "Specifies an alternative Transaction Number that may be assigned by the recipient for the transaction.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_STATUS","description": "Specifies the external status for the Transaction.  The external status represents the result of processing at the external system.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSACTION_TYPE","description": "Specifies the type of information stored in the Transmission record.  For example, a record may be stored when an XML is staged via OAQ to support searching via Integration Saved Queries.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_QUERY_TYPE_GID","description": "Data query type of OBJECT_GID, if populated.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIRST_ATTEMPT_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_ATTEMPT_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "XML_BLOB","description": "The XML_BLOB column specifies the entire XML text of the transmission.","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "I_TRANSACTION_NO"}],"foreignKeys": [{"foreignKeyName": "FK_ITRAN_DATA_QUERY_TYPE_GID","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]}],"childTables": [],"indices": [{"indexName": "ITRANSACTION_ITRANSMISSION","columnNames": [{"sequence": 1,"name": "I_TRANSMISSION_NO"}]},{"indexName": "IX_ITRAN_DATA_QUERY_TYPE_GID","columnNames": [{"sequence": 1,"name": "DATA_QUERY_TYPE_GID"}]},{"indexName": "IX_I_TRANSACTION_OBJECT_GID","columnNames": [{"sequence": 1,"name": "OBJECT_GID"}]},{"indexName": "IX_I_TRANSA_SEND_REF_TRANS_ID","columnNames": [{"sequence": 1,"name": "SENDER_TRANSACTION_ID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "i_transaction",
+    "description": "The I_TRANSACTION table store all XML transactions which are received by GLog, or sent out of GLog. The I_TRANSACTION table is a child of the I_LOG_TRANSMISSION table. This table contains the one record per transaction in the XML transmissions. See table I_TRANSMISSION for the XML transmission details. Each transaction within the transmission are broken out and stored as individual records."
+  },
+  "columns": [
+    {
+      "name": "I_TRANSACTION_NO",
+      "description": "This is a foreign key from the I_LOG table. The I_TRANSACTION_NO column specifies the transaction to which this log message pertains.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_TRANSMISSION_NO",
+      "description": "This is a foreign key to the I_TRANSMISSION table. The I_TRANSMISSION_NO column uniquely identifies the transmission.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSACTION_CODE",
+      "description": "TRANSACTION_CODE provides a code for the type of transaction that was transmitted. Transaction codes include: D I IU U Unknown",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'INSERT'"
+    },
+    {
+      "name": "WRITTEN_BY",
+      "description": "WRITTEN_BY contains the domain name that logged the transmission.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS",
+      "description": "STATUS indicates the status of the transaction. Status types include: FRESH New PROCESSED",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'FRESH'"
+    },
+    {
+      "name": "ELEMENT_NAME",
+      "description": "ELEMENT_NAME contains the name of the transaction element. These can include: ActualShipment AllocationBase Billing Invoice Item Location Rate Release RemoteQuery ShipmentStatus TenderOffer TenderResponse TransOrder Voucher Xlane",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_GROUP",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_SEQUENCE_ID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SENDER_TRANSACTION_ID",
+      "description": "Specifies the Transaction Number that the sender assigned to the transaction.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REFERENCE_TRANSACTION_ID",
+      "description": "Specifies an alternative Transaction Number that may be assigned by the recipient for the transaction.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_STATUS",
+      "description": "Specifies the external status for the Transaction.  The external status represents the result of processing at the external system.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSACTION_TYPE",
+      "description": "Specifies the type of information stored in the Transmission record.  For example, a record may be stored when an XML is staged via OAQ to support searching via Integration Saved Queries.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "Data query type of OBJECT_GID, if populated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIRST_ATTEMPT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_ATTEMPT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "XML_BLOB",
+      "description": "The XML_BLOB column specifies the entire XML text of the transmission.",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "I_TRANSACTION_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ITRAN_DATA_QUERY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "ITRANSACTION_ITRANSMISSION",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_TRANSMISSION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ITRAN_DATA_QUERY_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_I_TRANSACTION_OBJECT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "OBJECT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_I_TRANSA_SEND_REF_TRANS_ID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SENDER_TRANSACTION_ID"
+        }
+      ]
+    }
+  ]
+}

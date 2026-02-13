@@ -1,1 +1,61 @@
-{"table": {"schema": "glogowner","name": "ebr_table","description": "This table associates table name used by application to underlying base table name."},"columns": [{"name": "TABLE_NAME","description": "This column represents table name used by application.  This table is actually Editioning view on the database.  Application always uses this name to interact with database.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BASE_TABLE_NAME","description": "This column represents base table name associated with Editioning view.  Application should not interact with base table name.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MODIFIED","description": "This flag represents that underlying base table has been modified and it requires update of the corresponding Editioning view.  Migration keeps track of modified tables using this flag.  This flag should be reset for all tables to N before starting of the migration or installation of the OTM, GTM, and FTI schemas.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "TABLE_NAME"}],"foreignKeys": [],"childTables": [],"indices": [{"indexName": "UK_EBRT_BASE_TABLE","columnNames": [{"sequence": 1,"name": "BASE_TABLE_NAME"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ebr_table",
+    "description": "This table associates table name used by application to underlying base table name."
+  },
+  "columns": [
+    {
+      "name": "TABLE_NAME",
+      "description": "This column represents table name used by application.  This table is actually Editioning view on the database.  Application always uses this name to interact with database.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BASE_TABLE_NAME",
+      "description": "This column represents base table name associated with Editioning view.  Application should not interact with base table name.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MODIFIED",
+      "description": "This flag represents that underlying base table has been modified and it requires update of the corresponding Editioning view.  Migration keeps track of modified tables using this flag.  This flag should be reset for all tables to N before starting of the migration or installation of the OTM, GTM, and FTI schemas.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "TABLE_NAME"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_EBRT_BASE_TABLE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "BASE_TABLE_NAME"
+        }
+      ]
+    }
+  ]
+}

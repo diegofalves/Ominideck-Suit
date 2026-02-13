@@ -1,1 +1,197 @@
-{"table": {"schema": "glogowner","name": "accessorial_code","description": "This is the master table that holds various accessories required for transportation, pickup and delivery. An accessory differs from a special service in that the customer has to pay for using the accessories. An example of an accessory is a refrigerator unit in a truck, that is used to transport ice creams. The accessories defined can be linked at the item level or at the location level in GC3. The logic in GC3 checks to see if an accessory is required and thus, schedules and calculates the cost accordingly."},"columns": [{"name": "ACCESSORIAL_CODE_GID","description": "ACCESSORIAL_CODE_GID contains the unique identifier for the accessorial code used for the itinerary.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_XID","description": "ACCESSORIAL_CODE_XID contains the unique external identifier for the accessorial code used for the itinerary.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_DESC","description": "ACCESSORIAL_DESC contains a description of the accessorial on an itinerary.","dataType": "VARCHAR2","size": 120,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPLY_GLOBALLY","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FLOW_THRU","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_VAT_EXEMPT","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCING_FACTOR","description": "This column would specify the sequence number for the given accessorial code and it would be used for sequencing the rating of the accessorial while rating.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ACCESSORIAL_CODE_GID"}],"foreignKeys": [],"childTables": ["ACCESSORIAL_CODE_PROFILE_D","ACCESSORIAL_COST","ACCESSORIAL_DEFAULT","ALLOCATION_OB_LINE_D","ALLOCATION_ORDER_RELEASE_D","ALLOCATION_OR_LINE_D","ALLOCATION_RULE_DETAIL","BILL_TO_PARTY_ASSIGNMENT_D","ESG_ACTIVITY","ESG_ACTIVITY_DETAIL","ESG_ACTIVITY_RULE","INVOICE_LINEITEM","INVOICE_SUMMARY_DETAIL","ITEM_ACCESSORIAL","KEWILL_CHARGE_TOKEN_SET","KWLL_CHG_TKN_ACCCODE_JOIN","LINE_APPROVE_TOLERANCE_DETAIL","LOCATION_ACCESSORIAL","NFRC_RULE","OB_ACCESSORIAL","OB_SU_ACCESSORIAL","ORDER_RELEASE_ACCESSORIAL","ORDER_RELEASE_LINE_ACCESSORIAL","PKG_ITEM_ACCESSORIAL","P_LANE_ACCESSORIAL_DURATION","QUOTE_COST_OPTION_SHIP_COST","RATE_FACTOR_RULE","RATE_GEO_ACCESSORIAL","RATE_GEO_COST","RATE_OFFERING_ACCESSORIAL","RATE_SERVICE_ACCESSORIAL_TIME","RG_SPECIAL_SERVICE_ACCESSORIAL","RO_SPECIAL_SERVICE_ACCESSORIAL","SHIPMENT_ACCESSORIAL","SHIPMENT_COST","SHIPMENT_INF_COST_D","SHIP_UNIT_SPEC_ACC","S_SHIP_UNIT_ACCESSORIAL","S_SUL_ACCESSORIAL"],"indices": [{"indexName": "IX_ACCESSORIAL_CODE_XID","columnNames": [{"sequence": 1,"name": "ACCESSORIAL_CODE_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "accessorial_code",
+    "description": "This is the master table that holds various accessories required for transportation, pickup and delivery. An accessory differs from a special service in that the customer has to pay for using the accessories. An example of an accessory is a refrigerator unit in a truck, that is used to transport ice creams. The accessories defined can be linked at the item level or at the location level in GC3. The logic in GC3 checks to see if an accessory is required and thus, schedules and calculates the cost accordingly."
+  },
+  "columns": [
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "ACCESSORIAL_CODE_GID contains the unique identifier for the accessorial code used for the itinerary.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_XID",
+      "description": "ACCESSORIAL_CODE_XID contains the unique external identifier for the accessorial code used for the itinerary.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_DESC",
+      "description": "ACCESSORIAL_DESC contains a description of the accessorial on an itinerary.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPLY_GLOBALLY",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FLOW_THRU",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_VAT_EXEMPT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCING_FACTOR",
+      "description": "This column would specify the sequence number for the given accessorial code and it would be used for sequencing the rating of the accessorial while rating.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ACCESSORIAL_CODE_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [
+    "ACCESSORIAL_CODE_PROFILE_D",
+    "ACCESSORIAL_COST",
+    "ACCESSORIAL_DEFAULT",
+    "ALLOCATION_OB_LINE_D",
+    "ALLOCATION_ORDER_RELEASE_D",
+    "ALLOCATION_OR_LINE_D",
+    "ALLOCATION_RULE_DETAIL",
+    "BILL_TO_PARTY_ASSIGNMENT_D",
+    "ESG_ACTIVITY",
+    "ESG_ACTIVITY_DETAIL",
+    "ESG_ACTIVITY_RULE",
+    "INVOICE_LINEITEM",
+    "INVOICE_SUMMARY_DETAIL",
+    "ITEM_ACCESSORIAL",
+    "KEWILL_CHARGE_TOKEN_SET",
+    "KWLL_CHG_TKN_ACCCODE_JOIN",
+    "LINE_APPROVE_TOLERANCE_DETAIL",
+    "LOCATION_ACCESSORIAL",
+    "NFRC_RULE",
+    "OB_ACCESSORIAL",
+    "OB_SU_ACCESSORIAL",
+    "ORDER_RELEASE_ACCESSORIAL",
+    "ORDER_RELEASE_LINE_ACCESSORIAL",
+    "PKG_ITEM_ACCESSORIAL",
+    "P_LANE_ACCESSORIAL_DURATION",
+    "QUOTE_COST_OPTION_SHIP_COST",
+    "RATE_FACTOR_RULE",
+    "RATE_GEO_ACCESSORIAL",
+    "RATE_GEO_COST",
+    "RATE_OFFERING_ACCESSORIAL",
+    "RATE_SERVICE_ACCESSORIAL_TIME",
+    "RG_SPECIAL_SERVICE_ACCESSORIAL",
+    "RO_SPECIAL_SERVICE_ACCESSORIAL",
+    "SHIPMENT_ACCESSORIAL",
+    "SHIPMENT_COST",
+    "SHIPMENT_INF_COST_D",
+    "SHIP_UNIT_SPEC_ACC",
+    "S_SHIP_UNIT_ACCESSORIAL",
+    "S_SUL_ACCESSORIAL"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_ACCESSORIAL_CODE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACCESSORIAL_CODE_XID"
+        }
+      ]
+    }
+  ]
+}

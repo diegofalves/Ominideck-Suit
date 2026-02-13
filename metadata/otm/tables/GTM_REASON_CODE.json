@@ -1,1 +1,156 @@
-{"table": {"schema": "glogowner","name": "gtm_reason_code","description": "Stores Reason Code and Reason Description which can be used to indicate the cause of error, success, review requirement or similar use cases, which can convey information regarding the outcome of any process to the user."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_REASON_CODE_GID","description": "Reason Code GID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_REASON_CODE_XID","description": "Reason Code XID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Description explaining the reason","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_REASON_TYPE_GID","description": "Reason Type GID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSLATION_GID","description": "","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_REASON_CODE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GRSNC_GTM_REASON_TYPE_GID","cascadeDelete": false,"parentTableName": "GTM_REASON_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_REASON_TYPE_GID","columnName": "GTM_REASON_TYPE_GID"}]},{"foreignKeyName": "FK_GRSNC_TRANSLATION_GID","cascadeDelete": false,"parentTableName": "TRANSLATION","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSLATION_GID","columnName": "TRANSLATION_GID"}]}],"childTables": ["GTM_TIP_INV_MOVEMENT","GTM_TRANS_LINE_QF","ITEM_QF","QF_PREFERENCE_CRITERIA_CODE"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_reason_code",
+    "description": "Stores Reason Code and Reason Description which can be used to indicate the cause of error, success, review requirement or similar use cases, which can convey information regarding the outcome of any process to the user."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_REASON_CODE_GID",
+      "description": "Reason Code GID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_REASON_CODE_XID",
+      "description": "Reason Code XID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Description explaining the reason",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_REASON_TYPE_GID",
+      "description": "Reason Type GID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSLATION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_REASON_CODE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GRSNC_GTM_REASON_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_REASON_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_REASON_TYPE_GID",
+          "columnName": "GTM_REASON_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GRSNC_TRANSLATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSLATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSLATION_GID",
+          "columnName": "TRANSLATION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "GTM_TIP_INV_MOVEMENT",
+    "GTM_TRANS_LINE_QF",
+    "ITEM_QF",
+    "QF_PREFERENCE_CRITERIA_CODE"
+  ],
+  "indices": []
+}

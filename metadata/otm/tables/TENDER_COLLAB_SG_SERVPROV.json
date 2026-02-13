@@ -1,1 +1,281 @@
-{"table": {"schema": "glogowner","name": "tender_collab_sg_servprov","description": "This table contains the information for various service providers to whom the ship group tender collaboration record was sent."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "The service provider who received the ship group tender.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSACTION_TIME","description": "The date of the ship group tender collaboration either tender sent, accept, withdrawal, etc .","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCEPTANCE_CODE","description": "Tender acceptance status for a ship group. Values are A (Tender Accepted), D (Tender Declined)","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'A','D'","conditionalConstraint": "","defaultValue": ""},{"name": "RESPONSE_COM_METHOD_GID","description": "The communication method used for the collaboration.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLINE_REASON_CODE_GID","description": "if declined the reason for ship group tender decline.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISPATCH_LOCATION_GID","description": "The id of the contact of the service provider.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PICKUP_TIME","description": "Original value is from ship group, if servprov changes pickup time, it is stored in this column.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TENDER_COM_METHOD_GID","description": "Record the communication method used in tender notification.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESPONSE_TIME","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_GROUP_TENDER_GID","description": "A unique identifier to identify the ship group tender.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESPONDING_GL_USER_GID","description": "The gluser responding in the collaboration","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIP_GROUP_TENDER_GID"},{"sequence": 2,"columnName": "SERVPROV_GID"}],"foreignKeys": [{"foreignKeyName": "FK_TCSP_SERVPROV_GID","cascadeDelete": false,"parentTableName": "SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"}]},{"foreignKeyName": "FK_TCSP_RESP_COM_METHOD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "RESPONSE_COM_METHOD_GID"}]},{"foreignKeyName": "FK_TCSP_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DISPATCH_LOCATION_GID"}]},{"foreignKeyName": "FK_TCSP_TEND_COM_METHOD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "TENDER_COM_METHOD_GID"}]},{"foreignKeyName": "FK_TCSP_SHIP_GRP_TENDER_GID","cascadeDelete": true,"parentTableName": "TENDER_COLLAB_SG","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_GROUP_TENDER_GID","columnName": "SHIP_GROUP_TENDER_GID"}]}],"childTables": ["SERVPROV_TENDER_SG_EQUIPMENT","SERVPROV_TENDER_SG_REFNUM","SERVPROV_TENDER_SG_REMARK"],"indices": [{"indexName": "IX_DISPATCH_LOCATION_GID","columnNames": [{"sequence": 1,"name": "DISPATCH_LOCATION_GID"},{"sequence": 2,"name": "SERVPROV_GID"}]},{"indexName": "IX_SERVPROV_GID","columnNames": [{"sequence": 1,"name": "SERVPROV_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "tender_collab_sg_servprov",
+    "description": "This table contains the information for various service providers to whom the ship group tender collaboration record was sent."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "The service provider who received the ship group tender.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSACTION_TIME",
+      "description": "The date of the ship group tender collaboration either tender sent, accept, withdrawal, etc .",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCEPTANCE_CODE",
+      "description": "Tender acceptance status for a ship group. Values are A (Tender Accepted), D (Tender Declined)",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'A','D'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESPONSE_COM_METHOD_GID",
+      "description": "The communication method used for the collaboration.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLINE_REASON_CODE_GID",
+      "description": "if declined the reason for ship group tender decline.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISPATCH_LOCATION_GID",
+      "description": "The id of the contact of the service provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PICKUP_TIME",
+      "description": "Original value is from ship group, if servprov changes pickup time, it is stored in this column.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TENDER_COM_METHOD_GID",
+      "description": "Record the communication method used in tender notification.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESPONSE_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_GROUP_TENDER_GID",
+      "description": "A unique identifier to identify the ship group tender.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESPONDING_GL_USER_GID",
+      "description": "The gluser responding in the collaboration",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIP_GROUP_TENDER_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SERVPROV_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_TCSP_SERVPROV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCSP_RESP_COM_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "RESPONSE_COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCSP_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DISPATCH_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCSP_TEND_COM_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "TENDER_COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TCSP_SHIP_GRP_TENDER_GID",
+      "cascadeDelete": true,
+      "parentTableName": "TENDER_COLLAB_SG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_GROUP_TENDER_GID",
+          "columnName": "SHIP_GROUP_TENDER_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "SERVPROV_TENDER_SG_EQUIPMENT",
+    "SERVPROV_TENDER_SG_REFNUM",
+    "SERVPROV_TENDER_SG_REMARK"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_DISPATCH_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DISPATCH_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SERVPROV_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SERVPROV_GID"
+        }
+      ]
+    }
+  ]
+}

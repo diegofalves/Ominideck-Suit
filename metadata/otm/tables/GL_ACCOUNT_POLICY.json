@@ -1,1 +1,204 @@
-{"table": {"schema": "glogowner","name": "gl_account_policy","description": "Holds configurable parameters for GC3 account policies.  This includes when GC3 user'spasswords should expire, whether to maintain a login history for a user, etc.  The policy is then associated to a user account  within the GL_USER table."},"columns": [{"name": "GL_ACCOUNT_POLICY_GID","description": "The unique global identifier for the account policy.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GL_ACCOUNT_POLICY_XID","description": "The external identifier for the account policy.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PW_EXPIRATION_DURATION","description": "Identifies a length of time (in days) before a new password will expire.  A null value indicates the password never expires.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PW_EXPIRATION_WARNING_PERIOD","description": "Identifies the length of time(in days) prior to a user'spassword expiration in which the user should receive password expiration messages.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_PW_FOR_HISTORY","description": "The number of passwords which should be kept within the history for each user.  The user will not be able to set his password to any password that is kept within the history.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PW_CHANGE_AFTER_RESET","description": "Determines whether or not a password preset by the system or reset by an account ADMIN user via the User Manager screen will expire upon the first user login.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "MAX_ATTEMPTS_ACCOUNT_LOCKOUT","description": "The maximum number of login attempts allowed before an account is locked out.  If the number is zero, then there is no lockout.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCKOUT_DURATION","description": "How long to lock out an account after exceeding allowed login attempts.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCKOUT_DURATION_UOM_CODE","description": "The unit of measure for the lockout duration.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCKOUT_DURATION_BASE","description": "The lockout duration in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_DAYS_ACCOUNT_DORMANCY","description": "Allowed inactive duration (in days)  before an account is disabled.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "KEEP_LOGIN_HISTORY","description": "Whether or not to maintain a login history for the users.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GL_ACCOUNT_POLICY_GID"}],"foreignKeys": [],"childTables": ["GL_ACCOUNT_PW_RULE","GL_USER"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gl_account_policy",
+    "description": "Holds configurable parameters for GC3 account policies.  This includes when GC3 user'spasswords should expire, whether to maintain a login history for a user, etc.  The policy is then associated to a user account  within the GL_USER table."
+  },
+  "columns": [
+    {
+      "name": "GL_ACCOUNT_POLICY_GID",
+      "description": "The unique global identifier for the account policy.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GL_ACCOUNT_POLICY_XID",
+      "description": "The external identifier for the account policy.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PW_EXPIRATION_DURATION",
+      "description": "Identifies a length of time (in days) before a new password will expire.  A null value indicates the password never expires.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PW_EXPIRATION_WARNING_PERIOD",
+      "description": "Identifies the length of time(in days) prior to a user'spassword expiration in which the user should receive password expiration messages.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_PW_FOR_HISTORY",
+      "description": "The number of passwords which should be kept within the history for each user.  The user will not be able to set his password to any password that is kept within the history.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PW_CHANGE_AFTER_RESET",
+      "description": "Determines whether or not a password preset by the system or reset by an account ADMIN user via the User Manager screen will expire upon the first user login.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "MAX_ATTEMPTS_ACCOUNT_LOCKOUT",
+      "description": "The maximum number of login attempts allowed before an account is locked out.  If the number is zero, then there is no lockout.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCKOUT_DURATION",
+      "description": "How long to lock out an account after exceeding allowed login attempts.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCKOUT_DURATION_UOM_CODE",
+      "description": "The unit of measure for the lockout duration.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCKOUT_DURATION_BASE",
+      "description": "The lockout duration in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_DAYS_ACCOUNT_DORMANCY",
+      "description": "Allowed inactive duration (in days)  before an account is disabled.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "KEEP_LOGIN_HISTORY",
+      "description": "Whether or not to maintain a login history for the users.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GL_ACCOUNT_POLICY_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [
+    "GL_ACCOUNT_PW_RULE",
+    "GL_USER"
+  ],
+  "indices": []
+}

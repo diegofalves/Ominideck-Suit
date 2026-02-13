@@ -1,1 +1,558 @@
-{"table": {"schema": "glogowner","name": "logistics_guide_detail","description": ""},"columns": [{"name": "LOGISTICS_GUIDE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LG_DETAIL_SEQ_NO","description": "","dataType": "NUMBER","size": 9,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_ADDRESS_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_ADDRESS_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_TEMPLATE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ITINERARY_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_GEO_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_COST","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_COST_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_COST_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_OFFERING_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSIT_TIME","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSIT_TIME_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSIT_TIME_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_WEIGHT","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_WEIGHT_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_WEIGHT_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_PER","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_PER_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_PER_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MULTI_MODE","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ITINERARY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROUTE_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LOGISTICS_GUIDE_GID"},{"sequence": 2,"columnName": "LG_DETAIL_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_LGD_LOGISTICS_GUIDE_GID","cascadeDelete": false,"parentTableName": "LOGISTICS_GUIDE","columnRelation": [{"sequence": 1,"parentColumnName": "LOGISTICS_GUIDE_GID","columnName": "LOGISTICS_GUIDE_GID"}]},{"foreignKeyName": "FK_LGD_SOURCE_ADDRESS_GID","cascadeDelete": false,"parentTableName": "LG_ADDRESS","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SOURCE_ADDRESS_GID"}]},{"foreignKeyName": "FK_LGD_DEST_ADDRESS_GID","cascadeDelete": false,"parentTableName": "LG_ADDRESS","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DEST_ADDRESS_GID"}]},{"foreignKeyName": "FK_LGD_ORDER_TEMPLATE_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_TEMPLATE_GID"}]},{"foreignKeyName": "FK_LGD_ITINERARY_PROFILE_GID","cascadeDelete": false,"parentTableName": "ITINERARY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "ITINERARY_PROFILE_GID","columnName": "ITINERARY_PROFILE_GID"}]},{"foreignKeyName": "FK_LGD_SERVPROV_GID","cascadeDelete": false,"parentTableName": "SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"}]},{"foreignKeyName": "FK_LGD_RATE_GEO_GID","cascadeDelete": false,"parentTableName": "RATE_GEO","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_GEO_GID","columnName": "RATE_GEO_GID"}]},{"foreignKeyName": "FK_LGD_RATE_OFFERING_GID2","cascadeDelete": false,"parentTableName": "RATE_OFFERING","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_OFFERING_GID","columnName": "RATE_OFFERING_GID"}]},{"foreignKeyName": "FK_LGD_TRANSPORT_MODE_GID","cascadeDelete": false,"parentTableName": "TRANSPORT_MODE","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSPORT_MODE_GID","columnName": "TRANSPORT_MODE_GID"}]},{"foreignKeyName": "FK_LGD_EQUIPMENT_GROUP_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_GID","columnName": "EQUIPMENT_GROUP_GID"}]},{"foreignKeyName": "FK_LGD_EQUIPMENT_GROUP_PROFIL","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_LGD_ITINERARY_GID","cascadeDelete": false,"parentTableName": "ITINERARY","columnRelation": [{"sequence": 1,"parentColumnName": "ITINERARY_GID","columnName": "ITINERARY_GID"}]},{"foreignKeyName": "FK_LGD_ROUTE_CODE_GID","cascadeDelete": false,"parentTableName": "ROUTE_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ROUTE_CODE_GID","columnName": "ROUTE_CODE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_LOGGUIDE_ORD_TEMP_GID","columnNames": [{"sequence": 1,"name": "ORDER_TEMPLATE_GID"}]},{"indexName": "IX_LOGGUIDE_RATE_GEO_GID","columnNames": [{"sequence": 1,"name": "RATE_GEO_GID"}]},{"indexName": "IX_LOGGUIDE_RATE_OFF_GID","columnNames": [{"sequence": 1,"name": "RATE_OFFERING_GID"}]},{"indexName": "IX_LOGGUIDE_SERVPROV_GID","columnNames": [{"sequence": 1,"name": "SERVPROV_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "logistics_guide_detail",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "LOGISTICS_GUIDE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LG_DETAIL_SEQ_NO",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 9,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_ADDRESS_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_ADDRESS_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_TEMPLATE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ITINERARY_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_GEO_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_COST",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_COST_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_COST_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_OFFERING_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSIT_TIME",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSIT_TIME_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSIT_TIME_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_WEIGHT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_WEIGHT_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_WEIGHT_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_PER",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_PER_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_PER_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MULTI_MODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ITINERARY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUTE_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LOGISTICS_GUIDE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "LG_DETAIL_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LGD_LOGISTICS_GUIDE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOGISTICS_GUIDE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGISTICS_GUIDE_GID",
+          "columnName": "LOGISTICS_GUIDE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_SOURCE_ADDRESS_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LG_ADDRESS",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SOURCE_ADDRESS_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_DEST_ADDRESS_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LG_ADDRESS",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DEST_ADDRESS_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_ORDER_TEMPLATE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_TEMPLATE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_ITINERARY_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITINERARY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITINERARY_PROFILE_GID",
+          "columnName": "ITINERARY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_SERVPROV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_RATE_GEO_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_GEO",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_GEO_GID",
+          "columnName": "RATE_GEO_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_RATE_OFFERING_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_OFFERING",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_OFFERING_GID",
+          "columnName": "RATE_OFFERING_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_TRANSPORT_MODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSPORT_MODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSPORT_MODE_GID",
+          "columnName": "TRANSPORT_MODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_EQUIPMENT_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_GID",
+          "columnName": "EQUIPMENT_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_EQUIPMENT_GROUP_PROFIL",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_ITINERARY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITINERARY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITINERARY_GID",
+          "columnName": "ITINERARY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGD_ROUTE_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ROUTE_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ROUTE_CODE_GID",
+          "columnName": "ROUTE_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_LOGGUIDE_ORD_TEMP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_TEMPLATE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_LOGGUIDE_RATE_GEO_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_GEO_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_LOGGUIDE_RATE_OFF_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_OFFERING_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_LOGGUIDE_SERVPROV_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SERVPROV_GID"
+        }
+      ]
+    }
+  ]
+}

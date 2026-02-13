@@ -1,1 +1,213 @@
-{"table": {"schema": "glogowner","name": "ob_involved_party","description": "This table contains the link to the involved parties (shippers, service providers, consignee etc.). This is used to establish the communication with the parties during the order delivery. The Workflow set of tables determine when and what to communicate."},"columns": [{"name": "ORDER_BASE_GID","description": "The GID for the order base.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_QUAL_GID","description": "The involved party qualifier GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_CONTACT_GID","description": "The involved party contact for the qualifier listed on the order base.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COM_METHOD_GID","description": "The communication method for the involved party listed on the order base.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'BY CONTACT'"},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ORDER_BASE_GID"},{"sequence": 2,"columnName": "INVOLVED_PARTY_QUAL_GID"},{"sequence": 3,"columnName": "INVOLVED_PARTY_CONTACT_GID"},{"sequence": 4,"columnName": "COM_METHOD_GID"}],"foreignKeys": [{"foreignKeyName": "FK_OBIP_ORDER_BASE","cascadeDelete": false,"parentTableName": "OB_ORDER_BASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_BASE_GID","columnName": "ORDER_BASE_GID"}]},{"foreignKeyName": "FK_OBIP_IPQGID","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "INVOLVED_PARTY_QUAL_GID"}]},{"foreignKeyName": "FK_OBIP_CONTGID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "INVOLVED_PARTY_CONTACT_GID"}]},{"foreignKeyName": "FK_OBIP_COMTDGID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "COM_METHOD_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_OBIP_COMTDGID","columnNames": [{"sequence": 1,"name": "COM_METHOD_GID"}]},{"indexName": "IX_OBIP_IPQGID","columnNames": [{"sequence": 1,"name": "INVOLVED_PARTY_QUAL_GID"}]},{"indexName": "OBIP_INVPRYCONTGID","columnNames": [{"sequence": 1,"name": "INVOLVED_PARTY_CONTACT_GID"}]},{"indexName": "OBIP_OBGID","columnNames": [{"sequence": 1,"name": "ORDER_BASE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ob_involved_party",
+    "description": "This table contains the link to the involved parties (shippers, service providers, consignee etc.). This is used to establish the communication with the parties during the order delivery. The Workflow set of tables determine when and what to communicate."
+  },
+  "columns": [
+    {
+      "name": "ORDER_BASE_GID",
+      "description": "The GID for the order base.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_QUAL_GID",
+      "description": "The involved party qualifier GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_CONTACT_GID",
+      "description": "The involved party contact for the qualifier listed on the order base.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COM_METHOD_GID",
+      "description": "The communication method for the involved party listed on the order base.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'BY CONTACT'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ORDER_BASE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "INVOLVED_PARTY_QUAL_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "INVOLVED_PARTY_CONTACT_GID"
+    },
+    {
+      "sequence": 4,
+      "columnName": "COM_METHOD_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OBIP_ORDER_BASE",
+      "cascadeDelete": false,
+      "parentTableName": "OB_ORDER_BASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_BASE_GID",
+          "columnName": "ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBIP_IPQGID",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "INVOLVED_PARTY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBIP_CONTGID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "INVOLVED_PARTY_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBIP_COMTDGID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "COM_METHOD_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_OBIP_COMTDGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OBIP_IPQGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INVOLVED_PARTY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "OBIP_INVPRYCONTGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INVOLVED_PARTY_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "OBIP_OBGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_BASE_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,200 @@
-{"table": {"schema": "glogowner","name": "equip_group_avg_ta_duration","description": ""},"columns": [{"name": "EQUIP_GROUP_AVG_TA_DUR_SEQ","description": "Unique Sequence Number. This will be handled with a default sequence.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "X_LANE_GID","description": "Geographic information of which the average turnaround time is associated.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_PROFILE_GID","description": "Equipment Group Profile of which the average turnaround time is associated.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_PROFILE_GID","description": "Flex Commodity Profile of which the average turnaround time is associated.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_TA_DURATION","description": "Average Turnaround Duration (example, 20)","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_TA_DURATION_UOM_CODE","description": "Average Turnaround Duration Unit (example, Days)","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_TA_DURATION_BASE","description": "Average Turnaround Duration Base","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "EQUIP_GROUP_AVG_TA_DUR_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_EGATD_X_LANE_GID","cascadeDelete": false,"parentTableName": "X_LANE","columnRelation": [{"sequence": 1,"parentColumnName": "X_LANE_GID","columnName": "X_LANE_GID"}]},{"foreignKeyName": "FK_EGATD_EQUIPMENT_GROUP_PROF","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_EGATD_FLEX_COMMODITY_PROFI","cascadeDelete": false,"parentTableName": "FLEX_COMMODITY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "FLEX_COMMODITY_PROFILE_GID","columnName": "FLEX_COMMODITY_PROFILE_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_LANE_EQUIPMENT_COMMODITY","columnNames": [{"sequence": 1,"name": "X_LANE_GID"},{"sequence": 2,"name": "EQUIPMENT_GROUP_PROFILE_GID"},{"sequence": 3,"name": "FLEX_COMMODITY_PROFILE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "equip_group_avg_ta_duration",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "EQUIP_GROUP_AVG_TA_DUR_SEQ",
+      "description": "Unique Sequence Number. This will be handled with a default sequence.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "X_LANE_GID",
+      "description": "Geographic information of which the average turnaround time is associated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_PROFILE_GID",
+      "description": "Equipment Group Profile of which the average turnaround time is associated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_PROFILE_GID",
+      "description": "Flex Commodity Profile of which the average turnaround time is associated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_TA_DURATION",
+      "description": "Average Turnaround Duration (example, 20)",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_TA_DURATION_UOM_CODE",
+      "description": "Average Turnaround Duration Unit (example, Days)",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_TA_DURATION_BASE",
+      "description": "Average Turnaround Duration Base",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "EQUIP_GROUP_AVG_TA_DUR_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EGATD_X_LANE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "X_LANE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "X_LANE_GID",
+          "columnName": "X_LANE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EGATD_EQUIPMENT_GROUP_PROF",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EGATD_FLEX_COMMODITY_PROFI",
+      "cascadeDelete": false,
+      "parentTableName": "FLEX_COMMODITY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FLEX_COMMODITY_PROFILE_GID",
+          "columnName": "FLEX_COMMODITY_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_LANE_EQUIPMENT_COMMODITY",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "X_LANE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "EQUIPMENT_GROUP_PROFILE_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "FLEX_COMMODITY_PROFILE_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniDeck | Central de Cadastros</title>
+  <style>
+    :root {
+      --bg: #081425;
+      --panel: #f6f9ff;
+      --line: #d9e3f4;
+      --ink: #10213e;
+      --muted: #5c7191;
+      --brand: #0f67ff;
+      --brand-2: #0047c2;
+      --ok-bg: #d9f7e8;
+      --ok-text: #0f5a3a;
+      --err-bg: #ffe2e2;
+      --err-text: #8a1f1f;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background:
+        radial-gradient(900px 320px at 0% -10%, #0f67ff3d 0%, transparent 50%),
+        var(--bg);
+      color: #e8f2ff;
+      padding: 22px;
+    }
+
+    .wrap { max-width: 1320px; margin: 0 auto; }
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .head h1 { font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: 4px; }
+    .head p { color: #c2d8f8; font-size: 0.92rem; }
+
+    .nav { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav a {
+      text-decoration: none;
+      color: #d8e8ff;
+      border: 1px solid #ffffff30;
+      background: #ffffff12;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .alert {
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .alert.ok { background: var(--ok-bg); color: var(--ok-text); }
+    .alert.err { background: var(--err-bg); color: var(--err-text); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--ink);
+    }
+
+    .kicker {
+      font-size: 0.75rem;
+      color: #2f4f80;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .card h2 { font-size: 1.02rem; margin-bottom: 6px; }
+    .card p { color: var(--muted); font-size: 0.88rem; margin-bottom: 9px; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .field { margin-bottom: 8px; }
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.78rem;
+      color: #35517b;
+      font-weight: 700;
+    }
+    input, select {
+      width: 100%;
+      border: 1px solid #c6d6ee;
+      border-radius: 10px;
+      padding: 8px 9px;
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(145deg, var(--brand), var(--brand-2));
+      cursor: pointer;
+    }
+
+    .lists {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--ink);
+    }
+    .lists h2 { font-size: 1rem; margin-bottom: 9px; }
+    .list-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .list-box {
+      background: #ffffff;
+      border: 1px solid #dce6f5;
+      border-radius: 12px;
+      padding: 10px;
+      min-height: 130px;
+    }
+    .list-box h3 {
+      font-size: 0.86rem;
+      color: #2c4a77;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .list-box ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .list-box li {
+      font-size: 0.82rem;
+      color: #223d63;
+      border-bottom: 1px solid #ecf1f8;
+      padding-bottom: 6px;
+    }
+    .empty { color: #7187a9; font-size: 0.8rem; }
+
+    @media (max-width: 1080px) {
+      .grid { grid-template-columns: 1fr; }
+      .list-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 760px) {
+      .fields { grid-template-columns: 1fr; }
+      .list-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="head">
+      <div>
+        <h1>Central de Cadastros</h1>
+        <p>Cadastre entidades base da operação: consultores, clientes, projetos e consultorias.</p>
+      </div>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/dashboard-migracao">Dashboard de Migração</a>
+      </nav>
+    </header>
+
+    {% if success_message %}
+    <div class="alert ok">{{ success_message }}</div>
+    {% endif %}
+    {% if error_message %}
+    <div class="alert err">{{ error_message }}</div>
+    {% endif %}
+
+    <section class="grid">
+      <article class="card">
+        <div class="kicker">CADASTRO 01</div>
+        <h2>Cadastrar Consultor</h2>
+        <p>Registre o consultor que atuará nos projetos e consultorias.</p>
+        <form method="POST">
+          <input type="hidden" name="entity" value="consultant">
+          <div class="fields">
+            <div class="field">
+              <label>Nome</label>
+              <input name="consultant_name" required>
+            </div>
+            <div class="field">
+              <label>E-mail</label>
+              <input name="consultant_email" type="email">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Papel/Função</label>
+              <input name="consultant_role" placeholder="Ex: Especialista OTM">
+            </div>
+            <div class="field">
+              <label>Status</label>
+              <select name="consultant_status">
+                <option value="ACTIVE">Ativo</option>
+                <option value="INACTIVE">Inativo</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit">Cadastrar consultor</button>
+        </form>
+      </article>
+
+      <article class="card">
+        <div class="kicker">CADASTRO 02</div>
+        <h2>Cadastrar Cliente</h2>
+        <p>Registre clientes atendidos para vincular projetos e consultorias.</p>
+        <form method="POST">
+          <input type="hidden" name="entity" value="client">
+          <div class="fields">
+            <div class="field">
+              <label>Nome do cliente</label>
+              <input name="client_name" required>
+            </div>
+            <div class="field">
+              <label>Segmento</label>
+              <input name="client_segment" placeholder="Ex: Alimentos">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Nome do contato</label>
+              <input name="client_contact_name">
+            </div>
+            <div class="field">
+              <label>E-mail do contato</label>
+              <input name="client_contact_email" type="email">
+            </div>
+          </div>
+          <button type="submit">Cadastrar cliente</button>
+        </form>
+      </article>
+
+      <article class="card">
+        <div class="kicker">CADASTRO 03</div>
+        <h2>Cadastrar Projeto</h2>
+        <p>Crie projetos vinculados a clientes para organizar entregas e evolução.</p>
+        <form method="POST">
+          <input type="hidden" name="entity" value="project">
+          <div class="fields">
+            <div class="field">
+              <label>Código do projeto</label>
+              <input name="project_code" required>
+            </div>
+            <div class="field">
+              <label>Nome do projeto</label>
+              <input name="project_name" required>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Cliente</label>
+              <select name="project_client_id" required>
+                <option value="">Selecione</option>
+                {% for client in cadastros.clients %}
+                <option value="{{ client.client_id }}">{{ client.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label>Status</label>
+              <select name="project_status">
+                <option value="PLANNING">Planejamento</option>
+                <option value="IN_PROGRESS">Em andamento</option>
+                <option value="DONE">Concluído</option>
+              </select>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Data inicial</label>
+              <input name="project_start_date" type="date">
+            </div>
+            <div class="field">
+              <label>Data final</label>
+              <input name="project_end_date" type="date">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Link ambiente DEV</label>
+              <input name="project_env_dev_url" type="url" placeholder="https://...">
+            </div>
+            <div class="field">
+              <label>Link ambiente TEST</label>
+              <input name="project_env_test_url" type="url" placeholder="https://...">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Link ambiente PROD</label>
+              <input name="project_env_prod_url" type="url" placeholder="https://...">
+            </div>
+            <div class="field">
+              <label>Usuário de integração</label>
+              <input name="project_integration_user" placeholder="Ex: INT_BAUDUCCO">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Senha do usuário de integração</label>
+              <input name="project_integration_password" type="password" placeholder="••••••••">
+            </div>
+          </div>
+          <button type="submit">Cadastrar projeto</button>
+        </form>
+      </article>
+
+      <article class="card">
+        <div class="kicker">CADASTRO 04</div>
+        <h2>Cadastrar Consultoria</h2>
+        <p>Associe consultor, cliente e projeto ao serviço prestado.</p>
+        <form method="POST">
+          <input type="hidden" name="entity" value="consultancy">
+          <div class="fields">
+            <div class="field">
+              <label>Consultor</label>
+              <select name="consultancy_consultant_id" required>
+                <option value="">Selecione</option>
+                {% for consultant in cadastros.consultants %}
+                <option value="{{ consultant.consultant_id }}">{{ consultant.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label>Cliente</label>
+              <select name="consultancy_client_id" required>
+                <option value="">Selecione</option>
+                {% for client in cadastros.clients %}
+                <option value="{{ client.client_id }}">{{ client.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Projeto</label>
+              <select name="consultancy_project_id" required>
+                <option value="">Selecione</option>
+                {% for project in cadastros.projects %}
+                <option value="{{ project.project_id }}">{{ project.code }} - {{ project.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label>Tipo de serviço</label>
+              <input name="consultancy_service_name" required placeholder="Ex: Migração OTM">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Valor hora</label>
+              <input name="consultancy_hourly_rate" type="number" min="0" step="0.01" placeholder="Ex: 250">
+            </div>
+            <div class="field">
+              <label>Status</label>
+              <select name="consultancy_status">
+                <option value="PLANNED">Planejada</option>
+                <option value="IN_PROGRESS">Em andamento</option>
+                <option value="DONE">Concluída</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit">Cadastrar consultoria</button>
+        </form>
+      </article>
+    </section>
+
+    <section class="lists">
+      <h2>Resumo dos Cadastros</h2>
+      <div class="list-grid">
+        <article class="list-box">
+          <h3>Consultores</h3>
+          {% if cadastros.consultants %}
+          <ul>
+            {% for item in cadastros.consultants %}
+            <li><strong>{{ item.name }}</strong><br>{{ item.role or "Sem função" }}</li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p class="empty">Nenhum consultor cadastrado.</p>
+          {% endif %}
+        </article>
+
+        <article class="list-box">
+          <h3>Clientes</h3>
+          {% if cadastros.clients %}
+          <ul>
+            {% for item in cadastros.clients %}
+            <li><strong>{{ item.name }}</strong><br>{{ item.segment or "Sem segmento" }}</li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p class="empty">Nenhum cliente cadastrado.</p>
+          {% endif %}
+        </article>
+
+        <article class="list-box">
+          <h3>Projetos</h3>
+          {% if cadastros.projects %}
+          <ul>
+            {% for item in cadastros.projects %}
+            <li>
+              <strong>{{ item.code }}</strong> - {{ item.name }}<br>
+              DEV: {{ item.get('environments', {}).get('dev_url', '-') or '-' }}<br>
+              TEST: {{ item.get('environments', {}).get('test_url', '-') or '-' }}<br>
+              PROD: {{ item.get('environments', {}).get('prod_url', '-') or '-' }}
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p class="empty">Nenhum projeto cadastrado.</p>
+          {% endif %}
+        </article>
+
+        <article class="list-box">
+          <h3>Consultorias</h3>
+          {% if cadastros.consultancies %}
+          <ul>
+            {% for item in cadastros.consultancies %}
+            <li>
+              <strong>{{ item.service_name }}</strong><br>
+              Valor hora: {{ item.hourly_rate if item.hourly_rate else "-" }}<br>
+              Status: {{ item.status }}
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p class="empty">Nenhuma consultoria cadastrada.</p>
+          {% endif %}
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

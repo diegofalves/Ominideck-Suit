@@ -1,1 +1,150 @@
-{"table": {"schema": "glogowner","name": "payment_method_code","description": "This table defines the various methods by which the payment can be made on an order. For example: CC = Collect,  CD = Collect on Delivery,  MX = Mixed,  NC = Service Freight no Charge,  PP = Prepaid,  TP = Third Party"},"columns": [{"name": "PAYMENT_METHOD_CODE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYMENT_METHOD_CODE_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYMENT_METHOD_CODE_DESC","description": "","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYMENT_METHOD_CODE_TYPE","description": "Distinguish if this code is Commercial or Standard, or Both.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','C','S'","conditionalConstraint": "","defaultValue": "'B'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PAYMENT_METHOD_CODE_GID"}],"foreignKeys": [],"childTables": ["ACCESSORIAL_COST","COMMERCIAL_INVOICE","CUSTOMER_ACCOUNT_NUMBER","GTM_TRANSACTION_VALUE","GTM_TRANS_LINE_VALUE","INVOICE","INVOICE_LINEITEM","INVOICE_SUMMARY_DETAIL","LEG","LINE_APPROVE_TOLERANCE_DETAIL","NFRC_RULE","OB_ORDER_BASE","ORDER_RELEASE","ORDER_ROUTING_RULE","ORDER_ROUTING_RULE_D","PAYMENT_METHOD_PROFILE_D","QUOTE_COST_OPTION_SHIP_COST","RATE_GEO","RATE_GEO_COST","SECONDARY_CHARGE_RULE","SHIPMENT","SHIPMENT_COST","SHIPPING_AGENT_CONTACT","TEXT_TEMPLATE_PROFILE"],"indices": [{"indexName": "IX_PAYMENT_METHOD_CODE_XID","columnNames": [{"sequence": 1,"name": "PAYMENT_METHOD_CODE_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "payment_method_code",
+    "description": "This table defines the various methods by which the payment can be made on an order. For example: CC = Collect,  CD = Collect on Delivery,  MX = Mixed,  NC = Service Freight no Charge,  PP = Prepaid,  TP = Third Party"
+  },
+  "columns": [
+    {
+      "name": "PAYMENT_METHOD_CODE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYMENT_METHOD_CODE_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYMENT_METHOD_CODE_DESC",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYMENT_METHOD_CODE_TYPE",
+      "description": "Distinguish if this code is Commercial or Standard, or Both.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','C','S'",
+      "conditionalConstraint": "",
+      "defaultValue": "'B'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PAYMENT_METHOD_CODE_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [
+    "ACCESSORIAL_COST",
+    "COMMERCIAL_INVOICE",
+    "CUSTOMER_ACCOUNT_NUMBER",
+    "GTM_TRANSACTION_VALUE",
+    "GTM_TRANS_LINE_VALUE",
+    "INVOICE",
+    "INVOICE_LINEITEM",
+    "INVOICE_SUMMARY_DETAIL",
+    "LEG",
+    "LINE_APPROVE_TOLERANCE_DETAIL",
+    "NFRC_RULE",
+    "OB_ORDER_BASE",
+    "ORDER_RELEASE",
+    "ORDER_ROUTING_RULE",
+    "ORDER_ROUTING_RULE_D",
+    "PAYMENT_METHOD_PROFILE_D",
+    "QUOTE_COST_OPTION_SHIP_COST",
+    "RATE_GEO",
+    "RATE_GEO_COST",
+    "SECONDARY_CHARGE_RULE",
+    "SHIPMENT",
+    "SHIPMENT_COST",
+    "SHIPPING_AGENT_CONTACT",
+    "TEXT_TEMPLATE_PROFILE"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_PAYMENT_METHOD_CODE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PAYMENT_METHOD_CODE_XID"
+        }
+      ]
+    }
+  ]
+}

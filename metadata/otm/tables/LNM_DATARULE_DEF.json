@@ -1,1 +1,162 @@
-{"table": {"schema": "glogowner","name": "lnm_datarule_def","description": "Used to create the Data Rule Definitions for Logistics Network Modeling. Pre-defined rule type for data manipulation when creating a project or scenario. There are two types of pre-defined rules: columns and Java. Columns rule modifies data specified by the update_table and list of column_name specified in the LNM_DATARULE_PARAM. A Java rule uses a Java plugin of type LNM_DATARULE_DEF to update data."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATARULE_DEFINITION_GID","description": "The global identifier for lnm_data_rule_def.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATARULE_DEFINITION_XID","description": "The xid column for the lnm_data_rule_def.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RULE_TYPE","description": "Type of rule. Allowed values are COLUMNS and JAVA.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'COLUMNS','JAVA'","conditionalConstraint": "","defaultValue": "'COLUMNS'"},{"name": "TABLE_NAME","description": "Name of impacted table.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "JAVA_PLUGIN_GID","description": "Java plugin implementing the data rule interface. It must be of type LNM_DATARULE_DEF.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RULE_GROUP","description": "Usability grouping for data rule.","dataType": "VARCHAR2","size": 200,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INCLUDE_ALL_COLUMNS","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "DATARULE_DEFINITION_GID"}],"foreignKeys": [],"childTables": ["LNM_DATARULE_INSTANCE","LNM_DATARULE_PARAM"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "lnm_datarule_def",
+    "description": "Used to create the Data Rule Definitions for Logistics Network Modeling. Pre-defined rule type for data manipulation when creating a project or scenario. There are two types of pre-defined rules: columns and Java. Columns rule modifies data specified by the update_table and list of column_name specified in the LNM_DATARULE_PARAM. A Java rule uses a Java plugin of type LNM_DATARULE_DEF to update data."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATARULE_DEFINITION_GID",
+      "description": "The global identifier for lnm_data_rule_def.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATARULE_DEFINITION_XID",
+      "description": "The xid column for the lnm_data_rule_def.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RULE_TYPE",
+      "description": "Type of rule. Allowed values are COLUMNS and JAVA.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'COLUMNS','JAVA'",
+      "conditionalConstraint": "",
+      "defaultValue": "'COLUMNS'"
+    },
+    {
+      "name": "TABLE_NAME",
+      "description": "Name of impacted table.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "JAVA_PLUGIN_GID",
+      "description": "Java plugin implementing the data rule interface. It must be of type LNM_DATARULE_DEF.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RULE_GROUP",
+      "description": "Usability grouping for data rule.",
+      "dataType": "VARCHAR2",
+      "size": 200,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INCLUDE_ALL_COLUMNS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DATARULE_DEFINITION_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [
+    "LNM_DATARULE_INSTANCE",
+    "LNM_DATARULE_PARAM"
+  ],
+  "indices": []
+}

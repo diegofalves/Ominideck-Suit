@@ -1,1 +1,194 @@
-{"table": {"schema": "glogowner","name": "logic_parameter","description": "Parameter values (instances) for logic configuration"},"columns": [{"name": "LOGIC_CONFIG_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOGIC_PARAM_QUAL_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOGIC_SCENARIO_GID","description": "Specifies the scenario where the parameter applies to. e.g., DIRECT/LINEHAUL/CROSSDOCK scenario in MULTISTOP config.  Use DEFAULT if there is no other scenario.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAM_VALUE","description": "","dataType": "VARCHAR2","size": 255,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAM_UOM_CODE","description": "The UOM code such as LB, FT etc, depending on uom_type of the parameter qualifier.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LOGIC_CONFIG_GID"},{"sequence": 2,"columnName": "LOGIC_PARAM_QUAL_GID"},{"sequence": 3,"columnName": "LOGIC_SCENARIO_GID"}],"foreignKeys": [{"foreignKeyName": "FK_LOGP_LOGIC_CONFIG_GID","cascadeDelete": false,"parentTableName": "LOGIC_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "LOGIC_CONFIG_GID","columnName": "LOGIC_CONFIG_GID"}]},{"foreignKeyName": "FK_LOGP_LOGIC_PARAM_QUAL_GID","cascadeDelete": false,"parentTableName": "LOGIC_PARAMETER_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "LOGIC_PARAM_QUAL_GID","columnName": "LOGIC_PARAM_QUAL_GID"}]},{"foreignKeyName": "FK_LOGP_LOGIC_SCENARIO_GID","cascadeDelete": false,"parentTableName": "LOGIC_SCENARIO","columnRelation": [{"sequence": 1,"parentColumnName": "LOGIC_SCENARIO_GID","columnName": "LOGIC_SCENARIO_GID"}]},{"foreignKeyName": "FK_LOGP_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "logic_parameter",
+    "description": "Parameter values (instances) for logic configuration"
+  },
+  "columns": [
+    {
+      "name": "LOGIC_CONFIG_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOGIC_PARAM_QUAL_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOGIC_SCENARIO_GID",
+      "description": "Specifies the scenario where the parameter applies to. e.g., DIRECT/LINEHAUL/CROSSDOCK scenario in MULTISTOP config.  Use DEFAULT if there is no other scenario.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAM_VALUE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAM_UOM_CODE",
+      "description": "The UOM code such as LB, FT etc, depending on uom_type of the parameter qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LOGIC_CONFIG_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "LOGIC_PARAM_QUAL_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "LOGIC_SCENARIO_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LOGP_LOGIC_CONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOGIC_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGIC_CONFIG_GID",
+          "columnName": "LOGIC_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LOGP_LOGIC_PARAM_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOGIC_PARAMETER_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGIC_PARAM_QUAL_GID",
+          "columnName": "LOGIC_PARAM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LOGP_LOGIC_SCENARIO_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOGIC_SCENARIO",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGIC_SCENARIO_GID",
+          "columnName": "LOGIC_SCENARIO_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LOGP_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

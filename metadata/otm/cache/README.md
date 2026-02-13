@@ -2,6 +2,9 @@
 
 This directory stores local cache files generated from OTM extraction queries.
 
+Canonical extraction runbook:
+- `docs/otm_extraction_runbook.md`
+
 Rules:
 - One JSON file per `MIGRATION_ITEM`.
 - Extraction query comes from `object_extraction_query.content`.

@@ -1,1 +1,393 @@
-{"table": {"schema": "glogowner","name": "monitor_tolerance_rule","description": ""},"columns": [{"name": "TOLERANCE_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOLERANCE_RULE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOLERANCE_RULE_NAME","description": "","dataType": "VARCHAR2","size": 120,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEFT_OPERAND_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RIGHT_OPERAND_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMPARISON_OPERATOR_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "R_OPER_LOWER_OFFSET","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "R_OPER_LOWER_OFFSET_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "R_OPER_LOWER_OFFSET_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "R_OPER_UPPER_OFFSET","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "R_OPER_UPPER_OFFSET_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "R_OPER_UPPER_OFFSET_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVED_CONDITION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_QUERY_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOLERANCE_RULE_TYPE","description": "","dataType": "VARCHAR2","size": 120,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEFT_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RIGHT_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RULE_RELATIONSHIP","description": "","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "TOLERANCE_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_MTR_LEFT_OPERAND_GID","cascadeDelete": false,"parentTableName": "MONITOR_OPERAND_D","columnRelation": [{"sequence": 1,"parentColumnName": "MONITOR_OPERAND_GID","columnName": "LEFT_OPERAND_GID"},{"sequence": 2,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_MTR_RIGHT_OPERAND_GID","cascadeDelete": false,"parentTableName": "MONITOR_OPERAND_D","columnRelation": [{"sequence": 1,"parentColumnName": "MONITOR_OPERAND_GID","columnName": "RIGHT_OPERAND_GID"},{"sequence": 2,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_MTR_COMPARISON_OPERATOR_GID","cascadeDelete": false,"parentTableName": "MONITOR_OPERATOR","columnRelation": [{"sequence": 1,"parentColumnName": "MONITOR_OPERATOR_GID","columnName": "COMPARISON_OPERATOR_GID"}]},{"foreignKeyName": "FK_MTR_LEFT_RULE_GID","cascadeDelete": false,"parentTableName": "MONITOR_TOLERANCE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "TOLERANCE_RULE_GID","columnName": "LEFT_RULE_GID"}]},{"foreignKeyName": "FK_MTR_RIGHT_RULE_GID","cascadeDelete": false,"parentTableName": "MONITOR_TOLERANCE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "TOLERANCE_RULE_GID","columnName": "RIGHT_RULE_GID"}]}],"childTables": ["MONITOR_AGENT","MONITOR_TOLERANCE_RULE"],"indices": [{"indexName": "IX_MTR_COMPARISON_OPERATOR_GID","columnNames": [{"sequence": 1,"name": "COMPARISON_OPERATOR_GID"}]},{"indexName": "IX_MTR_LEFT_OPERAND_GID","columnNames": [{"sequence": 1,"name": "LEFT_OPERAND_GID"},{"sequence": 2,"name": "DATA_QUERY_TYPE_GID"}]},{"indexName": "IX_MTR_LEFT_RULE_GID","columnNames": [{"sequence": 1,"name": "LEFT_RULE_GID"}]},{"indexName": "IX_MTR_RIGHT_OPERAND_GID","columnNames": [{"sequence": 1,"name": "RIGHT_OPERAND_GID"},{"sequence": 2,"name": "DATA_QUERY_TYPE_GID"}]},{"indexName": "IX_MTR_RIGHT_RULE_GID","columnNames": [{"sequence": 1,"name": "RIGHT_RULE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "monitor_tolerance_rule",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "TOLERANCE_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOLERANCE_RULE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOLERANCE_RULE_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEFT_OPERAND_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RIGHT_OPERAND_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMPARISON_OPERATOR_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "R_OPER_LOWER_OFFSET",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "R_OPER_LOWER_OFFSET_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "R_OPER_LOWER_OFFSET_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "R_OPER_UPPER_OFFSET",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "R_OPER_UPPER_OFFSET_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "R_OPER_UPPER_OFFSET_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVED_CONDITION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOLERANCE_RULE_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEFT_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RIGHT_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RULE_RELATIONSHIP",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "TOLERANCE_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_MTR_LEFT_OPERAND_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MONITOR_OPERAND_D",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MONITOR_OPERAND_GID",
+          "columnName": "LEFT_OPERAND_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MTR_RIGHT_OPERAND_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MONITOR_OPERAND_D",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MONITOR_OPERAND_GID",
+          "columnName": "RIGHT_OPERAND_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MTR_COMPARISON_OPERATOR_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MONITOR_OPERATOR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MONITOR_OPERATOR_GID",
+          "columnName": "COMPARISON_OPERATOR_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MTR_LEFT_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MONITOR_TOLERANCE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TOLERANCE_RULE_GID",
+          "columnName": "LEFT_RULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MTR_RIGHT_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MONITOR_TOLERANCE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TOLERANCE_RULE_GID",
+          "columnName": "RIGHT_RULE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "MONITOR_AGENT",
+    "MONITOR_TOLERANCE_RULE"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_MTR_COMPARISON_OPERATOR_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "COMPARISON_OPERATOR_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MTR_LEFT_OPERAND_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LEFT_OPERAND_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MTR_LEFT_RULE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LEFT_RULE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MTR_RIGHT_OPERAND_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RIGHT_OPERAND_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MTR_RIGHT_RULE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RIGHT_RULE_GID"
+        }
+      ]
+    }
+  ]
+}

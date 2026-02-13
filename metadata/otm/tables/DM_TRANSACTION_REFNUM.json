@@ -1,1 +1,136 @@
-{"table": {"schema": "glogowner","name": "dm_transaction_refnum","description": "Can be used to store qualified reference information about an demurrage transaction. The qualifier/description of the information is stored in the table DM_TRANSACTION_REFNUM_QUAL. Example of a reference qualifier would be BILL OF LADING."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DM_TRANSACTION_SEQ_NO","description": "DM_TRANSACTION_SEQ_NO contains the unique identifier for the demurrage transaction.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DM_TRANSACTION_REFNUM_QUAL_GID","description": "DM_TRANSACTION_REFNUM_QUAL_GID contains the unique identifier for the reference number (ORDERNUMBER, RESERVATIONNUMBER etc).","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DM_TRANSACTION_REFNUM_VALUE","description": "Optional demurrage transaction refnum value","dataType": "VARCHAR2","size": 240,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DM_TRANSACTION_SEQ_NO"},{"sequence": 2,"columnName": "DM_TRANSACTION_REFNUM_QUAL_GID"},{"sequence": 3,"columnName": "DM_TRANSACTION_REFNUM_VALUE"}],"foreignKeys": [{"foreignKeyName": "FK_DMTRM_DM_TRANSACTION_SEQ_N","cascadeDelete": false,"parentTableName": "DM_TRANSACTION","columnRelation": [{"sequence": 1,"parentColumnName": "DM_TRANSACTION_SEQ_NO","columnName": "DM_TRANSACTION_SEQ_NO"}]},{"foreignKeyName": "FK_DMTRM_DM_TRANSACTION_REFNU","cascadeDelete": false,"parentTableName": "DM_TRANSACTION_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "DM_TRANSACTION_REFNUM_QUAL_GID","columnName": "DM_TRANSACTION_REFNUM_QUAL_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "dm_transaction_refnum",
+    "description": "Can be used to store qualified reference information about an demurrage transaction. The qualifier/description of the information is stored in the table DM_TRANSACTION_REFNUM_QUAL. Example of a reference qualifier would be BILL OF LADING."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DM_TRANSACTION_SEQ_NO",
+      "description": "DM_TRANSACTION_SEQ_NO contains the unique identifier for the demurrage transaction.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DM_TRANSACTION_REFNUM_QUAL_GID",
+      "description": "DM_TRANSACTION_REFNUM_QUAL_GID contains the unique identifier for the reference number (ORDERNUMBER, RESERVATIONNUMBER etc).",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DM_TRANSACTION_REFNUM_VALUE",
+      "description": "Optional demurrage transaction refnum value",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DM_TRANSACTION_SEQ_NO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "DM_TRANSACTION_REFNUM_QUAL_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "DM_TRANSACTION_REFNUM_VALUE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DMTRM_DM_TRANSACTION_SEQ_N",
+      "cascadeDelete": false,
+      "parentTableName": "DM_TRANSACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DM_TRANSACTION_SEQ_NO",
+          "columnName": "DM_TRANSACTION_SEQ_NO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DMTRM_DM_TRANSACTION_REFNU",
+      "cascadeDelete": false,
+      "parentTableName": "DM_TRANSACTION_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DM_TRANSACTION_REFNUM_QUAL_GID",
+          "columnName": "DM_TRANSACTION_REFNUM_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

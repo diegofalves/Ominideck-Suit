@@ -1,1 +1,264 @@
-{"table": {"schema": "glogowner","name": "ship_unit_line_piece","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_LINE_NO","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PIECE_NUMBER","description": "A unique number given to a piece of ship unit line having the same SHIP_UNIT_GID and SHIP_UNIT_LINE_NO with multiple counts.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOADING_SEQUENCE","description": "The loading sequence of the ship unit line piece.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STACKING_LAYER","description": "Represents stacking layers of the unit. If there are multiple units underneath the currently placed unit, this number represents the maximum number of layers underneath the currently placed unit added by 1.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIENTATION_GID","description": "Orientation of the ship unit line piece.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "X_COORDINATE","description": "The x-coordinate of the unit using container's front lower left corner as the origin.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "X_COORDINATE_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "X_COORDINATE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Y_COORDINATE","description": "The y-coordinate of the unit using container's front lower left corner as the origin.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Y_COORDINATE_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Y_COORDINATE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Z_COORDINATE","description": "The z-coordinate of the unit using container's front lower left corner as the origin.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Z_COORDINATE_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Z_COORDINATE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIP_UNIT_GID"},{"sequence": 2,"columnName": "SHIP_UNIT_LINE_NO"},{"sequence": 3,"columnName": "PIECE_NUMBER"}],"foreignKeys": [{"foreignKeyName": "FK_SULP_SHIP_UNIT_LINE","cascadeDelete": false,"parentTableName": "SHIP_UNIT_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_GID","columnName": "SHIP_UNIT_GID"},{"sequence": 2,"parentColumnName": "SHIP_UNIT_LINE_NO","columnName": "SHIP_UNIT_LINE_NO"}]},{"foreignKeyName": "FK_SULP_ORIENTATION_GID","cascadeDelete": false,"parentTableName": "ORIENTATION","columnRelation": [{"sequence": 1,"parentColumnName": "ORIENTATION_GID","columnName": "ORIENTATION_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ship_unit_line_piece",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_LINE_NO",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PIECE_NUMBER",
+      "description": "A unique number given to a piece of ship unit line having the same SHIP_UNIT_GID and SHIP_UNIT_LINE_NO with multiple counts.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOADING_SEQUENCE",
+      "description": "The loading sequence of the ship unit line piece.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STACKING_LAYER",
+      "description": "Represents stacking layers of the unit. If there are multiple units underneath the currently placed unit, this number represents the maximum number of layers underneath the currently placed unit added by 1.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIENTATION_GID",
+      "description": "Orientation of the ship unit line piece.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "X_COORDINATE",
+      "description": "The x-coordinate of the unit using container's front lower left corner as the origin.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "X_COORDINATE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "X_COORDINATE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Y_COORDINATE",
+      "description": "The y-coordinate of the unit using container's front lower left corner as the origin.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Y_COORDINATE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Y_COORDINATE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Z_COORDINATE",
+      "description": "The z-coordinate of the unit using container's front lower left corner as the origin.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Z_COORDINATE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Z_COORDINATE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIP_UNIT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SHIP_UNIT_LINE_NO"
+    },
+    {
+      "sequence": 3,
+      "columnName": "PIECE_NUMBER"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SULP_SHIP_UNIT_LINE",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_GID",
+          "columnName": "SHIP_UNIT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "SHIP_UNIT_LINE_NO",
+          "columnName": "SHIP_UNIT_LINE_NO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SULP_ORIENTATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORIENTATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORIENTATION_GID",
+          "columnName": "ORIENTATION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

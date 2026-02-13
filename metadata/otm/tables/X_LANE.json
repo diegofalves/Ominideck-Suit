@@ -1,1 +1,676 @@
-{"table": {"schema": "glogowner","name": "x_lane","description": "This table defines the lanes between any two points. The two points can be: - predefined locations (from the Location table),   - predefined regions (from the Region and Region Detail tables), - Hierarchical locations (from Geo_hierarchy table), or - a combination of any part of the address that includes City,   Province, Postal Code, Country or Zone(s). The zones can be any user defined entries including SPLC (Standard Point Location Codes)"},"columns": [{"name": "X_LANE_GID","description": "A unique identifier to define the X lanes in the GC3. The gid contains the domain portion. The X-Lane is the user interface in GC3 to define all the lanes.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "X_LANE_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_LOCATION_GID","description": "A unique identifier to define the locations withing GC3. The gid contains the domain portion.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_CITY","description": "The city of the source portion of the location.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_PROVINCE_CODE","description": "The state code for teh source portion of the X-Lane.","dataType": "VARCHAR2","size": 6,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_POSTAL_CODE","description": "The zip code of the source location portion of the X-Lane.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_COUNTRY_CODE3_GID","description": "A pointer to the three digit country code for teh source portion of the X-Lane.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_ZONE4","description": "The Zones for the source location portion of the X-Lane.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_ZONE1","description": "The Zones for the source location portion of the X-Lane.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_ZONE2","description": "The Zones for the source location portion of the X-Lane.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_ZONE3","description": "The Zones for the source location portion of the X-Lane.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_GEO_HIERARCHY_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_LOCATION_GID","description": "A unique identifier to define the locations withing GC3. The gid contains the domain portion.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_CITY","description": "The city of the destination portion of the location.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_PROVINCE_CODE","description": "The state code for the destination portion of the X-Lane.","dataType": "VARCHAR2","size": 6,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_POSTAL_CODE","description": "The zip code of the destination location portion of the X-Lane.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_COUNTRY_CODE3_GID","description": "A pointer to the three digit country code for the destination portion of the X-Lane.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_ZONE4","description": "The Zones for the destination location portion of the X-Lane.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_ZONE1","description": "The Zones for the destination location portion of the X-Lane.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_ZONE2","description": "The Zones for the destination location portion of the X-Lane.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_ZONE3","description": "The Zones for the destination location portion of the X-Lane.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_GEO_HIERARCHY_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_REGION_GID","description": "A unique identifier to define the region code for the source portion of the X-Lane. This is a way to define the X-Lane from a region to another region (or any combination)","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_REGION_GID","description": "A unique identifier to define the region code for the destination portion of the X-Lane. This is a way to define the X-Lane from a region to another region (or any combination)","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONSTRAINT_SET_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLANNING_PARAMETER_SET_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_RAIL_SPLC_GID","description": "The Rail Splc for the source location portion of the X-Lane.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_RAIL_SPLC_GID","description": "The Rail Splc for the destination location portion of the X-Lane.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_RAIL_STATION_CODE_GID","description": "The Rail Station Code for the source location portion of the X-Lane.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_RAIL_STATION_CODE_GID","description": "The Rail Station Code for the destination location portion of the X-Lane.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "P_RULE_SET_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "X_LANE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_XL_S_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SOURCE_LOCATION_GID"}]},{"foreignKeyName": "FK_XL_S_COUNTRY_CODE3_GID","cascadeDelete": false,"parentTableName": "COUNTRY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_CODE3_GID","columnName": "SOURCE_COUNTRY_CODE3_GID"}]},{"foreignKeyName": "FK_XL_S_GEO_HIERARCHY_GID","cascadeDelete": false,"parentTableName": "GEO_HIERARCHY","columnRelation": [{"sequence": 1,"parentColumnName": "GEO_HIERARCHY_GID","columnName": "SOURCE_GEO_HIERARCHY_GID"}]},{"foreignKeyName": "FK_XL_D_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DEST_LOCATION_GID"}]},{"foreignKeyName": "FK_XL_D_COUNTRY_CODE3_GID","cascadeDelete": false,"parentTableName": "COUNTRY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_CODE3_GID","columnName": "DEST_COUNTRY_CODE3_GID"}]},{"foreignKeyName": "FK_XL_D_GEO_HIERARCHY_GID","cascadeDelete": false,"parentTableName": "GEO_HIERARCHY","columnRelation": [{"sequence": 1,"parentColumnName": "GEO_HIERARCHY_GID","columnName": "DEST_GEO_HIERARCHY_GID"}]},{"foreignKeyName": "FK_XL_S_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "SOURCE_REGION_GID"}]},{"foreignKeyName": "FK_XL_D_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "DEST_REGION_GID"}]},{"foreignKeyName": "FK_XL_CONSTRAINT_SET_GID","cascadeDelete": false,"parentTableName": "CONSTRAINT_SET","columnRelation": [{"sequence": 1,"parentColumnName": "CONSTRAINT_SET_GID","columnName": "CONSTRAINT_SET_GID"}]},{"foreignKeyName": "FK_XL_PLANNING_PARAMETER_SET","cascadeDelete": false,"parentTableName": "PLANNING_PARAMETER_SET","columnRelation": [{"sequence": 1,"parentColumnName": "PLANNING_PARAMETER_SET_GID","columnName": "PLANNING_PARAMETER_SET_GID"}]},{"foreignKeyName": "FK_XL_SOURCE_RAIL_SPLC_GID","cascadeDelete": false,"parentTableName": "SPLC","columnRelation": [{"sequence": 1,"parentColumnName": "SPLC_GID","columnName": "SOURCE_RAIL_SPLC_GID"}]},{"foreignKeyName": "FK_XL_DEST_RAIL_SPLC_GID","cascadeDelete": false,"parentTableName": "SPLC","columnRelation": [{"sequence": 1,"parentColumnName": "SPLC_GID","columnName": "DEST_RAIL_SPLC_GID"}]},{"foreignKeyName": "FK_XL_SOURCE_RAIL_STATION_COD","cascadeDelete": false,"parentTableName": "STATION_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "STATION_CODE_GID","columnName": "SOURCE_RAIL_STATION_CODE_GID"}]},{"foreignKeyName": "FK_XL_DEST_RAIL_STATION_CODE","cascadeDelete": false,"parentTableName": "STATION_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "STATION_CODE_GID","columnName": "DEST_RAIL_STATION_CODE_GID"}]},{"foreignKeyName": "FK_XL_P_RULE_SET_GID","cascadeDelete": false,"parentTableName": "P_RULE_SET","columnRelation": [{"sequence": 1,"parentColumnName": "P_RULE_SET_GID","columnName": "P_RULE_SET_GID"}]}],"childTables": ["AUTO_SEC_RES_PROFILE_LANE_JOIN","CAPACITY_COMMITMENT","CAPACITY_COMMITMENT_ALLOC","CAPACITY_LIMIT","CAPACITY_USAGE","CM_RULE","DEPOT_PROFILE_D","DISTANCE_LOOKUP","EQUIP_GROUP_AVG_TA_DURATION","IM_MILEAGE","ITINERARY","LANE","LANE_ATTRIBUTE","LANE_CALENDAR","LANE_REMARK","LANE_SUMMARY_STAT","LANE_TENDER_INFO","ORDER_ROUTING_RULE_D","ORDER_SCHEDULE","P_BID","P_LANE_ACCESSORIAL_DURATION","P_LANE_ATTRIBUTES","P_LANE_BUSINESSUNIT","P_LANE_CUSTOMER","P_SHIPMENT","P_SHIPMENT_ARB_LANE","RATE_GEO","RATE_PREFERENCE","RATE_SERVICE_ACCESSORIAL_TIME","RATE_ZONE_PROFILE_D","RO_LANE_SPECIAL_SERVICE","RUSH_HOUR","SECONDARY_CHARGE_RULE","SERVICE_TIME","SHIP_GROUP_RULE","UNITIZATION_RULE"],"indices": [{"indexName": "IND_XLANE_DLOCATION_GID","columnNames": [{"sequence": 1,"name": "DEST_LOCATION_GID"}]},{"indexName": "IND_XLANE_DREGION_GID","columnNames": [{"sequence": 1,"name": "DEST_REGION_GID"}]},{"indexName": "IND_XLANE_SLOCATION_GID","columnNames": [{"sequence": 1,"name": "SOURCE_LOCATION_GID"}]},{"indexName": "IND_XLANE_SREGION_GID","columnNames": [{"sequence": 1,"name": "SOURCE_REGION_GID"}]},{"indexName": "IX_X_LANE_XID","columnNames": [{"sequence": 1,"name": "X_LANE_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "x_lane",
+    "description": "This table defines the lanes between any two points. The two points can be: - predefined locations (from the Location table),   - predefined regions (from the Region and Region Detail tables), - Hierarchical locations (from Geo_hierarchy table), or - a combination of any part of the address that includes City,   Province, Postal Code, Country or Zone(s). The zones can be any user defined entries including SPLC (Standard Point Location Codes)"
+  },
+  "columns": [
+    {
+      "name": "X_LANE_GID",
+      "description": "A unique identifier to define the X lanes in the GC3. The gid contains the domain portion. The X-Lane is the user interface in GC3 to define all the lanes.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "X_LANE_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_LOCATION_GID",
+      "description": "A unique identifier to define the locations withing GC3. The gid contains the domain portion.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_CITY",
+      "description": "The city of the source portion of the location.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_PROVINCE_CODE",
+      "description": "The state code for teh source portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 6,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_POSTAL_CODE",
+      "description": "The zip code of the source location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_COUNTRY_CODE3_GID",
+      "description": "A pointer to the three digit country code for teh source portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_ZONE4",
+      "description": "The Zones for the source location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_ZONE1",
+      "description": "The Zones for the source location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_ZONE2",
+      "description": "The Zones for the source location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_ZONE3",
+      "description": "The Zones for the source location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_GEO_HIERARCHY_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_LOCATION_GID",
+      "description": "A unique identifier to define the locations withing GC3. The gid contains the domain portion.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_CITY",
+      "description": "The city of the destination portion of the location.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_PROVINCE_CODE",
+      "description": "The state code for the destination portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 6,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_POSTAL_CODE",
+      "description": "The zip code of the destination location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_COUNTRY_CODE3_GID",
+      "description": "A pointer to the three digit country code for the destination portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_ZONE4",
+      "description": "The Zones for the destination location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_ZONE1",
+      "description": "The Zones for the destination location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_ZONE2",
+      "description": "The Zones for the destination location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_ZONE3",
+      "description": "The Zones for the destination location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_GEO_HIERARCHY_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_REGION_GID",
+      "description": "A unique identifier to define the region code for the source portion of the X-Lane. This is a way to define the X-Lane from a region to another region (or any combination)",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_REGION_GID",
+      "description": "A unique identifier to define the region code for the destination portion of the X-Lane. This is a way to define the X-Lane from a region to another region (or any combination)",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONSTRAINT_SET_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLANNING_PARAMETER_SET_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_RAIL_SPLC_GID",
+      "description": "The Rail Splc for the source location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_RAIL_SPLC_GID",
+      "description": "The Rail Splc for the destination location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_RAIL_STATION_CODE_GID",
+      "description": "The Rail Station Code for the source location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_RAIL_STATION_CODE_GID",
+      "description": "The Rail Station Code for the destination location portion of the X-Lane.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "P_RULE_SET_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "X_LANE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_XL_S_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SOURCE_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_S_COUNTRY_CODE3_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_CODE3_GID",
+          "columnName": "SOURCE_COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_S_GEO_HIERARCHY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GEO_HIERARCHY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GEO_HIERARCHY_GID",
+          "columnName": "SOURCE_GEO_HIERARCHY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_D_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DEST_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_D_COUNTRY_CODE3_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_CODE3_GID",
+          "columnName": "DEST_COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_D_GEO_HIERARCHY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GEO_HIERARCHY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GEO_HIERARCHY_GID",
+          "columnName": "DEST_GEO_HIERARCHY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_S_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "SOURCE_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_D_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "DEST_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_CONSTRAINT_SET_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONSTRAINT_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONSTRAINT_SET_GID",
+          "columnName": "CONSTRAINT_SET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_PLANNING_PARAMETER_SET",
+      "cascadeDelete": false,
+      "parentTableName": "PLANNING_PARAMETER_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PLANNING_PARAMETER_SET_GID",
+          "columnName": "PLANNING_PARAMETER_SET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_SOURCE_RAIL_SPLC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SPLC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SPLC_GID",
+          "columnName": "SOURCE_RAIL_SPLC_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_DEST_RAIL_SPLC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SPLC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SPLC_GID",
+          "columnName": "DEST_RAIL_SPLC_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_SOURCE_RAIL_STATION_COD",
+      "cascadeDelete": false,
+      "parentTableName": "STATION_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STATION_CODE_GID",
+          "columnName": "SOURCE_RAIL_STATION_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_DEST_RAIL_STATION_CODE",
+      "cascadeDelete": false,
+      "parentTableName": "STATION_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STATION_CODE_GID",
+          "columnName": "DEST_RAIL_STATION_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_XL_P_RULE_SET_GID",
+      "cascadeDelete": false,
+      "parentTableName": "P_RULE_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "P_RULE_SET_GID",
+          "columnName": "P_RULE_SET_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AUTO_SEC_RES_PROFILE_LANE_JOIN",
+    "CAPACITY_COMMITMENT",
+    "CAPACITY_COMMITMENT_ALLOC",
+    "CAPACITY_LIMIT",
+    "CAPACITY_USAGE",
+    "CM_RULE",
+    "DEPOT_PROFILE_D",
+    "DISTANCE_LOOKUP",
+    "EQUIP_GROUP_AVG_TA_DURATION",
+    "IM_MILEAGE",
+    "ITINERARY",
+    "LANE",
+    "LANE_ATTRIBUTE",
+    "LANE_CALENDAR",
+    "LANE_REMARK",
+    "LANE_SUMMARY_STAT",
+    "LANE_TENDER_INFO",
+    "ORDER_ROUTING_RULE_D",
+    "ORDER_SCHEDULE",
+    "P_BID",
+    "P_LANE_ACCESSORIAL_DURATION",
+    "P_LANE_ATTRIBUTES",
+    "P_LANE_BUSINESSUNIT",
+    "P_LANE_CUSTOMER",
+    "P_SHIPMENT",
+    "P_SHIPMENT_ARB_LANE",
+    "RATE_GEO",
+    "RATE_PREFERENCE",
+    "RATE_SERVICE_ACCESSORIAL_TIME",
+    "RATE_ZONE_PROFILE_D",
+    "RO_LANE_SPECIAL_SERVICE",
+    "RUSH_HOUR",
+    "SECONDARY_CHARGE_RULE",
+    "SERVICE_TIME",
+    "SHIP_GROUP_RULE",
+    "UNITIZATION_RULE"
+  ],
+  "indices": [
+    {
+      "indexName": "IND_XLANE_DLOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DEST_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IND_XLANE_DREGION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DEST_REGION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IND_XLANE_SLOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IND_XLANE_SREGION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_REGION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_X_LANE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "X_LANE_XID"
+        }
+      ]
+    }
+  ]
+}

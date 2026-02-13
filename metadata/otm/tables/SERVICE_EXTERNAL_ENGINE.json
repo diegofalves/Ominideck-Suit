@@ -1,1 +1,229 @@
-{"table": {"schema": "glogowner","name": "service_external_engine","description": "The SERVICE_EXTERNAL_ENGINE table holds data relevant to third party external engines, including which GC3 class handles that engine.  Each entry in the SERVICE_EXTERNAL_ENGINE table refers to an external engine along with (via the SERVICE_EXTERNAL_ENGINE_PARM table) a set of parameters to be passed to that engine in order to calculate service time.  ."},"columns": [{"name": "SERVICE_EXTERNAL_ENGINE_GID","description": "The global identifier for a SERVICE_EXTERNAL_ENGINE.  A SERVICE_EXTERNAL_ENGINE refers to a third-party product that calculates service times.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVICE_EXTERNAL_ENGINE_XID","description": "The external identifier for a SERVICE_EXTERNAL_ENGINE.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVICE_EXTERNAL_ENGINE_DESC","description": "A description of the service_external_engine.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "JAVA_CLASS","description": "Name of java class that implements the external engine.","dataType": "VARCHAR2","size": 120,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_TOLERANCE","description": "If engine is time sensitive, how close must two start times be to be considered 'close enough'?  NULL if engine is not time sensitive.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_TOLERANCE_UOM_CODE","description": "Unit of measure for TIME_TOLERANCE column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_TOLERANCE_BASE","description": "TIME_TOLERANCE in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_ENGINE_TYPE","description": "type of external engine.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CACHE_CONTROL_TYPE","description": "O=Complete Cache Off.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'O'","conditionalConstraint": "","defaultValue": ""},{"name": "CONNECTION_TYPE","description": "to use java or webservices","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'J','W'","conditionalConstraint": "","defaultValue": "'J'"},{"name": "EXTERNAL_SYSTEM_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SERVICE_EXTERNAL_ENGINE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SEE_EXTERNAL_SYSTEM_GID","cascadeDelete": false,"parentTableName": "EXTERNAL_SYSTEM","columnRelation": [{"sequence": 1,"parentColumnName": "EXTERNAL_SYSTEM_GID","columnName": "EXTERNAL_SYSTEM_GID"}]},{"foreignKeyName": "FK_SEE_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["RATE_SERVICE","SERVICE_EXTERNAL_ENGINE_PARM"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "service_external_engine",
+    "description": "The SERVICE_EXTERNAL_ENGINE table holds data relevant to third party external engines, including which GC3 class handles that engine.  Each entry in the SERVICE_EXTERNAL_ENGINE table refers to an external engine along with (via the SERVICE_EXTERNAL_ENGINE_PARM table) a set of parameters to be passed to that engine in order to calculate service time.  ."
+  },
+  "columns": [
+    {
+      "name": "SERVICE_EXTERNAL_ENGINE_GID",
+      "description": "The global identifier for a SERVICE_EXTERNAL_ENGINE.  A SERVICE_EXTERNAL_ENGINE refers to a third-party product that calculates service times.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVICE_EXTERNAL_ENGINE_XID",
+      "description": "The external identifier for a SERVICE_EXTERNAL_ENGINE.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVICE_EXTERNAL_ENGINE_DESC",
+      "description": "A description of the service_external_engine.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "JAVA_CLASS",
+      "description": "Name of java class that implements the external engine.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_TOLERANCE",
+      "description": "If engine is time sensitive, how close must two start times be to be considered 'close enough'?  NULL if engine is not time sensitive.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_TOLERANCE_UOM_CODE",
+      "description": "Unit of measure for TIME_TOLERANCE column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_TOLERANCE_BASE",
+      "description": "TIME_TOLERANCE in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_ENGINE_TYPE",
+      "description": "type of external engine.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CACHE_CONTROL_TYPE",
+      "description": "O=Complete Cache Off.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'O'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONNECTION_TYPE",
+      "description": "to use java or webservices",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'J','W'",
+      "conditionalConstraint": "",
+      "defaultValue": "'J'"
+    },
+    {
+      "name": "EXTERNAL_SYSTEM_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SERVICE_EXTERNAL_ENGINE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SEE_EXTERNAL_SYSTEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EXTERNAL_SYSTEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXTERNAL_SYSTEM_GID",
+          "columnName": "EXTERNAL_SYSTEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SEE_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "RATE_SERVICE",
+    "SERVICE_EXTERNAL_ENGINE_PARM"
+  ],
+  "indices": []
+}

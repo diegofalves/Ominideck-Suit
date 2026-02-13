@@ -1,1 +1,334 @@
-{"table": {"schema": "glogowner","name": "charter_voyage_stowage","description": ""},"columns": [{"name": "CHARTER_VOYAGE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOWAGE_MODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_TERMINAL_LOCATION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_TERMINAL_LOCATION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERMINAL_START_TIME","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERMINAL_START_TIME_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERMINAL_START_TIME_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERM_CLS_TM","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERM_CLS_TM_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERM_CLS_TM_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MT_AVL_TM","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MT_AVL_TM_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MT_AVL_TM_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BOOKING_REFERENCE_NO","description": "","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERM_CLS_TM_NONSTUFF","description": "when stowage mode is unitization, this the the terminal closing time for the goods that are to be stuffed at the port of loading","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERM_CLS_TM_NONSTUFF_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TERM_CLS_TM_NONSTUFF_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MT_AVL_TM_DESTUFF","description": "when stowage mode is unitization, this the material available time for the goods that are to be stuffed at the port of discharge","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MT_AVL_TM_DESTUFF_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MT_AVL_TM_DESTUFF_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CHARTER_VOYAGE_GID"},{"sequence": 2,"columnName": "STOWAGE_MODE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_CVS_CHARTER_VOYAGE_GID","cascadeDelete": false,"parentTableName": "CHARTER_VOYAGE","columnRelation": [{"sequence": 1,"parentColumnName": "CHARTER_VOYAGE_GID","columnName": "CHARTER_VOYAGE_GID"}]},{"foreignKeyName": "FK_CVS_STOWAGE_MODE_GID","cascadeDelete": false,"parentTableName": "STOWAGE_MODE","columnRelation": [{"sequence": 1,"parentColumnName": "STOWAGE_MODE_GID","columnName": "STOWAGE_MODE_GID"}]},{"foreignKeyName": "FK_CVS_TERMINAL_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SRC_TERMINAL_LOCATION_GID"}]},{"foreignKeyName": "FK_CVS_DEST_TERMINAL_LOCATION","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DEST_TERMINAL_LOCATION_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "charter_voyage_stowage",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "CHARTER_VOYAGE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOWAGE_MODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_TERMINAL_LOCATION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_TERMINAL_LOCATION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERMINAL_START_TIME",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERMINAL_START_TIME_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERMINAL_START_TIME_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERM_CLS_TM",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERM_CLS_TM_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERM_CLS_TM_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MT_AVL_TM",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MT_AVL_TM_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MT_AVL_TM_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BOOKING_REFERENCE_NO",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERM_CLS_TM_NONSTUFF",
+      "description": "when stowage mode is unitization, this the the terminal closing time for the goods that are to be stuffed at the port of loading",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERM_CLS_TM_NONSTUFF_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TERM_CLS_TM_NONSTUFF_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MT_AVL_TM_DESTUFF",
+      "description": "when stowage mode is unitization, this the material available time for the goods that are to be stuffed at the port of discharge",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MT_AVL_TM_DESTUFF_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MT_AVL_TM_DESTUFF_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CHARTER_VOYAGE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STOWAGE_MODE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CVS_CHARTER_VOYAGE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CHARTER_VOYAGE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CHARTER_VOYAGE_GID",
+          "columnName": "CHARTER_VOYAGE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CVS_STOWAGE_MODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "STOWAGE_MODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STOWAGE_MODE_GID",
+          "columnName": "STOWAGE_MODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CVS_TERMINAL_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SRC_TERMINAL_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CVS_DEST_TERMINAL_LOCATION",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DEST_TERMINAL_LOCATION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

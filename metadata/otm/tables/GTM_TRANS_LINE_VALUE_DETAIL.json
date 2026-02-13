@@ -1,1 +1,153 @@
-{"table": {"schema": "glogowner","name": "gtm_trans_line_value_detail","description": "To give the values to the attributes of the value qualifier on a transaction line"},"columns": [{"name": "GTM_TRANSACTION_LINE_GID","description": "Transaction Line ID","dataType": "VARCHAR2","size": 201,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_VALUE_QUALIFIER_GID","description": "value qualifier ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_VALUE_ATTRIBUTE_QUAL_GID","description": "An attribute related to the value qualifier ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_VALUE","description": "Value given to the value qualifier attribute","dataType": "VARCHAR2","size": 240,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TRANSACTION_LINE_GID"},{"sequence": 2,"columnName": "GTM_VALUE_QUALIFIER_GID"},{"sequence": 3,"columnName": "GTM_VALUE_ATTRIBUTE_QUAL_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GTLVQ_GTM_TRANS_LINE_VALUE","cascadeDelete": false,"parentTableName": "GTM_TRANS_LINE_VALUE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TRANSACTION_LINE_GID","columnName": "GTM_TRANSACTION_LINE_GID"},{"sequence": 2,"parentColumnName": "GTM_VALUE_QUALIFIER_GID","columnName": "GTM_VALUE_QUALIFIER_GID"}]},{"foreignKeyName": "FK_GTLVQ_GTM_VALUE_ATTRIBUTE","cascadeDelete": false,"parentTableName": "GTM_VALUE_ATTRIBUTE_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_VALUE_ATTRIBUTE_QUAL_GID","columnName": "GTM_VALUE_ATTRIBUTE_QUAL_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_trans_line_value_detail",
+    "description": "To give the values to the attributes of the value qualifier on a transaction line"
+  },
+  "columns": [
+    {
+      "name": "GTM_TRANSACTION_LINE_GID",
+      "description": "Transaction Line ID",
+      "dataType": "VARCHAR2",
+      "size": 201,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_VALUE_QUALIFIER_GID",
+      "description": "value qualifier ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_VALUE_ATTRIBUTE_QUAL_GID",
+      "description": "An attribute related to the value qualifier ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_VALUE",
+      "description": "Value given to the value qualifier attribute",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TRANSACTION_LINE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_VALUE_QUALIFIER_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "GTM_VALUE_ATTRIBUTE_QUAL_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTLVQ_GTM_TRANS_LINE_VALUE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TRANS_LINE_VALUE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TRANSACTION_LINE_GID",
+          "columnName": "GTM_TRANSACTION_LINE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "GTM_VALUE_QUALIFIER_GID",
+          "columnName": "GTM_VALUE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTLVQ_GTM_VALUE_ATTRIBUTE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_VALUE_ATTRIBUTE_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_VALUE_ATTRIBUTE_QUAL_GID",
+          "columnName": "GTM_VALUE_ATTRIBUTE_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

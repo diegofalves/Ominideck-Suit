@@ -1,5 +1,9 @@
 # Arquitetura do OmniDeck
 
+## Referências Operacionais
+
+- Runbook de extrações OTM: `docs/otm_extraction_runbook.md`
+
 ## Visão Geral
 
 O OmniDeck é construído seguindo princípios de **Domain-Driven Design (DDD)**.

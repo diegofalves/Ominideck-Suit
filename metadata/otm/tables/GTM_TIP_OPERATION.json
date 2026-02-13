@@ -1,1 +1,230 @@
-{"table": {"schema": "glogowner","name": "gtm_tip_operation","description": "Trade Incentive Program Operation"},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TIP_OPERATION_GID","description": "Trade Incentive Program Operation GID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TIP_OPERATION_XID","description": "Trade Incentive Program Operation XID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TIP_OPERATION_SET_GID","description": "Trade Incentive Program Operation Set GID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OPERATION_NAME","description": "Operation Name","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OPERATION_TYPE","description": "Operation Type - Claim/No claim","dataType": "VARCHAR2","size": 16,"isNull": false,"isConstraint": true,"constraintValues": "'CLAIM','NOCLAIM'","conditionalConstraint": "","defaultValue": "'NOCLAIM'"},{"name": "OBJECT_TYPE","description": "Object Type - Declaration/Trade Transaction","dataType": "VARCHAR2","size": 16,"isNull": false,"isConstraint": true,"constraintValues": "'GTM_SHIPMENT','GTM_TRANSACTION'","conditionalConstraint": "","defaultValue": "'GTM_SHIPMENT'"},{"name": "OBJECT_TEMPLATE_GID","description": "Transaction/Declaration Template GID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATE_OF_OPERATION","description": "Date of Operation - Date of Action/Date of Entry","dataType": "VARCHAR2","size": 16,"isNull": false,"isConstraint": true,"constraintValues": "'ACTION_DATE','ENTRY_DATE'","conditionalConstraint": "","defaultValue": "'ACTION_DATE'"},{"name": "TRANSACTION_DATA_CONFIG_GID","description": "Transaction Data Configuration GID","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARATION_DATA_CONFIG_GID","description": "Declaration Data Configuration GID","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TIP_OPERATION_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GTIPOPRN_GTM_TIP_OPERATION","cascadeDelete": false,"parentTableName": "GTM_TIP_OPERATION_SET","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TIP_OPERATION_SET_GID","columnName": "GTM_TIP_OPERATION_SET_GID"}]},{"foreignKeyName": "FK_GTIPOPRN_GTM_TRANSACTION_G","cascadeDelete": false,"parentTableName": "GTM_TRANSACTION","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TRANSACTION_GID","columnName": "OBJECT_TEMPLATE_GID"}]},{"foreignKeyName": "FK_GTIPOPRN_TRANS_DTCONFIG_GID","cascadeDelete": false,"parentTableName": "GTM_DT_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_DT_CONFIG_GID","columnName": "TRANSACTION_DATA_CONFIG_GID"}]},{"foreignKeyName": "FK_GTIPOPRN_DECL_DTCONFIG_GID","cascadeDelete": false,"parentTableName": "GTM_DT_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_DT_CONFIG_GID","columnName": "DECLARATION_DATA_CONFIG_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_tip_operation",
+    "description": "Trade Incentive Program Operation"
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TIP_OPERATION_GID",
+      "description": "Trade Incentive Program Operation GID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TIP_OPERATION_XID",
+      "description": "Trade Incentive Program Operation XID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TIP_OPERATION_SET_GID",
+      "description": "Trade Incentive Program Operation Set GID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OPERATION_NAME",
+      "description": "Operation Name",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OPERATION_TYPE",
+      "description": "Operation Type - Claim/No claim",
+      "dataType": "VARCHAR2",
+      "size": 16,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'CLAIM','NOCLAIM'",
+      "conditionalConstraint": "",
+      "defaultValue": "'NOCLAIM'"
+    },
+    {
+      "name": "OBJECT_TYPE",
+      "description": "Object Type - Declaration/Trade Transaction",
+      "dataType": "VARCHAR2",
+      "size": 16,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'GTM_SHIPMENT','GTM_TRANSACTION'",
+      "conditionalConstraint": "",
+      "defaultValue": "'GTM_SHIPMENT'"
+    },
+    {
+      "name": "OBJECT_TEMPLATE_GID",
+      "description": "Transaction/Declaration Template GID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATE_OF_OPERATION",
+      "description": "Date of Operation - Date of Action/Date of Entry",
+      "dataType": "VARCHAR2",
+      "size": 16,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'ACTION_DATE','ENTRY_DATE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'ACTION_DATE'"
+    },
+    {
+      "name": "TRANSACTION_DATA_CONFIG_GID",
+      "description": "Transaction Data Configuration GID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARATION_DATA_CONFIG_GID",
+      "description": "Declaration Data Configuration GID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TIP_OPERATION_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTIPOPRN_GTM_TIP_OPERATION",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TIP_OPERATION_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TIP_OPERATION_SET_GID",
+          "columnName": "GTM_TIP_OPERATION_SET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTIPOPRN_GTM_TRANSACTION_G",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TRANSACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TRANSACTION_GID",
+          "columnName": "OBJECT_TEMPLATE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTIPOPRN_TRANS_DTCONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DT_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_DT_CONFIG_GID",
+          "columnName": "TRANSACTION_DATA_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTIPOPRN_DECL_DTCONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DT_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_DT_CONFIG_GID",
+          "columnName": "DECLARATION_DATA_CONFIG_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

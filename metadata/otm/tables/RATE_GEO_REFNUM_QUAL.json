@@ -1,1 +1,141 @@
-{"table": {"schema": "glogowner","name": "rate_geo_refnum_qual","description": "Available qualifiers for rate geo reference numbers"},"columns": [{"name": "RATE_GEO_REFNUM_QUAL_GID","description": "Qualifier that may be used for a rate geo refnum","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_GEO_REFNUM_QUAL_XID","description": "XID for qualifier that may be used for a rate geo refnum","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_GEO_REFNUM_QUAL_DESC","description": "Description of this rate geo refnum qualifier","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEFAULT_REFNUM_BN_TYPE_GID","description": "Business number generator bn type if this is to be created by the BNG","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_FLAG","description": "Specifies if the refnum qualifier can exist on the business object multiple times, or is restricted to occur only once and whether the value is allowed to be updated. If the value is MANY, then the object can have multiple values for the same qualifier. If the value is either UPDATE_OK or UPDATE_NOT_OK, then the rule is in effect, meaning only one value is allowed for a given qualifier. In the case of UPDATE_NOT_OK, the value may not be modified.","dataType": "VARCHAR2","size": 13,"isNull": true,"isConstraint": true,"constraintValues": "'UPDATE_OK','UPDATE_NOT_OK','MANY'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_GEO_REFNUM_QUAL_GID"}],"foreignKeys": [{"foreignKeyName": "FK_RGRQ_DEFAULT_REFNUM_BN_TYP","cascadeDelete": false,"parentTableName": "BN_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "BN_TYPE_GID","columnName": "DEFAULT_REFNUM_BN_TYPE_GID"}]}],"childTables": ["RATE_GEO_REFNUM"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "rate_geo_refnum_qual",
+    "description": "Available qualifiers for rate geo reference numbers"
+  },
+  "columns": [
+    {
+      "name": "RATE_GEO_REFNUM_QUAL_GID",
+      "description": "Qualifier that may be used for a rate geo refnum",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_GEO_REFNUM_QUAL_XID",
+      "description": "XID for qualifier that may be used for a rate geo refnum",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_GEO_REFNUM_QUAL_DESC",
+      "description": "Description of this rate geo refnum qualifier",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEFAULT_REFNUM_BN_TYPE_GID",
+      "description": "Business number generator bn type if this is to be created by the BNG",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_FLAG",
+      "description": "Specifies if the refnum qualifier can exist on the business object multiple times, or is restricted to occur only once and whether the value is allowed to be updated. If the value is MANY, then the object can have multiple values for the same qualifier. If the value is either UPDATE_OK or UPDATE_NOT_OK, then the rule is in effect, meaning only one value is allowed for a given qualifier. In the case of UPDATE_NOT_OK, the value may not be modified.",
+      "dataType": "VARCHAR2",
+      "size": 13,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'UPDATE_OK','UPDATE_NOT_OK','MANY'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_GEO_REFNUM_QUAL_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RGRQ_DEFAULT_REFNUM_BN_TYP",
+      "cascadeDelete": false,
+      "parentTableName": "BN_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BN_TYPE_GID",
+          "columnName": "DEFAULT_REFNUM_BN_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "RATE_GEO_REFNUM"
+  ],
+  "indices": []
+}

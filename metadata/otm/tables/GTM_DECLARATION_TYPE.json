@@ -1,1 +1,228 @@
-{"table": {"schema": "glogowner","name": "gtm_declaration_type","description": "This table is for creating/maintaining different order type names like ASN, an OTM Shipment or Delivery."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DECLARATION_TYPE_GID","description": "This field represents unique declaration type ID accross all domains.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DECLARATION_TYPE_XID","description": "This field represents unique declaration type ID in a particular domain.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DECLARATION_TYPE_NAME","description": "Name for a declaration type.","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "This field describes the declaration type.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_REGIME_GID","description": "This field describes the regime of the declaration type.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CODE","description": "This field represents the code provided by goverments or regimes for any type of declaration.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REQ_BS_STATUS_GRP_PF_GID","description": "This field represents request status group profile. Which is a foreign key to BS_STATUS_GROUP_PROFILE table.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESP_BS_STATUS_GRP_PF_GID","description": "This field represents response status group profile. Which is a foreign key to BS_STATUS_GROUP_PROFILE table.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOGIC_CONFIG_GID","description": "This field represents logic configuration used. Which is a foreign key to LOGIC_CONFIG table.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_DECLARATION_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GDT_GTM_REGIME_GID","cascadeDelete": false,"parentTableName": "GTM_REGIME","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_REGIME_GID","columnName": "GTM_REGIME_GID"}]},{"foreignKeyName": "FK_GDT_REQ_STATS_GRP_PROF","cascadeDelete": false,"parentTableName": "BS_STATUS_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_STATUS_GROUP_PROFILE_GID","columnName": "REQ_BS_STATUS_GRP_PF_GID"}]},{"foreignKeyName": "FK_GDT_RES_STATS_GRP_PROF","cascadeDelete": false,"parentTableName": "BS_STATUS_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_STATUS_GROUP_PROFILE_GID","columnName": "RESP_BS_STATUS_GRP_PF_GID"}]},{"foreignKeyName": "FK_GDT_LOGIC_CONFIG_GID","cascadeDelete": false,"parentTableName": "LOGIC_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "LOGIC_CONFIG_GID","columnName": "LOGIC_CONFIG_GID"}]}],"childTables": ["GTM_COMPLIANCE_RULE","GTM_DECL_TYPE_PROFILE_D","GTM_DECL_TYPE_VALUE_QUAL_MAP","GTM_ENTRY_EXIT_PROFILE","GTM_TIP_INVENTORY","GTM_TIP_INV_MOVEMENT","GTM_TIP_ZONE_STATUS_CONSTR","GTM_TRANSACTION"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_declaration_type",
+    "description": "This table is for creating/maintaining different order type names like ASN, an OTM Shipment or Delivery."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DECLARATION_TYPE_GID",
+      "description": "This field represents unique declaration type ID accross all domains.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DECLARATION_TYPE_XID",
+      "description": "This field represents unique declaration type ID in a particular domain.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DECLARATION_TYPE_NAME",
+      "description": "Name for a declaration type.",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "This field describes the declaration type.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_REGIME_GID",
+      "description": "This field describes the regime of the declaration type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CODE",
+      "description": "This field represents the code provided by goverments or regimes for any type of declaration.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REQ_BS_STATUS_GRP_PF_GID",
+      "description": "This field represents request status group profile. Which is a foreign key to BS_STATUS_GROUP_PROFILE table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESP_BS_STATUS_GRP_PF_GID",
+      "description": "This field represents response status group profile. Which is a foreign key to BS_STATUS_GROUP_PROFILE table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOGIC_CONFIG_GID",
+      "description": "This field represents logic configuration used. Which is a foreign key to LOGIC_CONFIG table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_DECLARATION_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GDT_GTM_REGIME_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_REGIME",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_REGIME_GID",
+          "columnName": "GTM_REGIME_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDT_REQ_STATS_GRP_PROF",
+      "cascadeDelete": false,
+      "parentTableName": "BS_STATUS_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_STATUS_GROUP_PROFILE_GID",
+          "columnName": "REQ_BS_STATUS_GRP_PF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDT_RES_STATS_GRP_PROF",
+      "cascadeDelete": false,
+      "parentTableName": "BS_STATUS_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_STATUS_GROUP_PROFILE_GID",
+          "columnName": "RESP_BS_STATUS_GRP_PF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDT_LOGIC_CONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOGIC_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGIC_CONFIG_GID",
+          "columnName": "LOGIC_CONFIG_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "GTM_COMPLIANCE_RULE",
+    "GTM_DECL_TYPE_PROFILE_D",
+    "GTM_DECL_TYPE_VALUE_QUAL_MAP",
+    "GTM_ENTRY_EXIT_PROFILE",
+    "GTM_TIP_INVENTORY",
+    "GTM_TIP_INV_MOVEMENT",
+    "GTM_TIP_ZONE_STATUS_CONSTR",
+    "GTM_TRANSACTION"
+  ],
+  "indices": []
+}

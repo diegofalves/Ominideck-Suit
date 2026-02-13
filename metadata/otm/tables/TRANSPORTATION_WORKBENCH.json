@@ -1,1 +1,304 @@
-{"table": {"schema": "glogowner","name": "transportation_workbench","description": ""},"columns": [{"name": "LAYOUT_GID","description": "The Layout GID provided by the user. This needs to be unique. What this means is that two users cannot share the same layout gid.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAYOUT_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GL_USER_GID","description": "gl_user_gid is deprecated as of 6.4.3","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAYOUT_NUMBER","description": "This corersponds to the internal layout being used for a layout id for a user.  gl_user_gid and layout_number form a unique constraint","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOGIC_CONFIG_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAYOUT_SEQ_NUM","description": "A unique sequence number to identify the layout.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAYOUT_XML","description": "","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GENERATE_MDS","description": "Whether to re-generate related MDS customization documents from layout XML. Typically populated by migration project, checked and reset by Workbench Designer at runtime.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": ""},{"name": "AUTO_REFRESH","description": "Whether Workbench should auto refresh data for all components in the layout.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "AUTO_REFRESH_INTERVAL","description": "Specify the frequency of auto refresh.  For performance purpose, the interval should be at least 5 minutes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUTO_REFRESH_INTERVAL_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUTO_REFRESH_INTERVAL_UOM_CODE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAYOUT_FORMAT","description": "An optional layout format (skin) predefined by Workbench","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAYOUT_JSON","description": "Layout definition in JSON format","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_LEGACY","description": "Whether the layout is in legacy format (Using LAYOUT_XML for ADF Workbench) or not","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "OTM_RELEASE","description": "Release ID - full release string","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LAYOUT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_TWB_GL_USER_GID","cascadeDelete": false,"parentTableName": "GL_USER","columnRelation": [{"sequence": 1,"parentColumnName": "GL_USER_GID","columnName": "GL_USER_GID"}]},{"foreignKeyName": "FK_TWB_LOGIC_CONFIG_GID","cascadeDelete": false,"parentTableName": "LOGIC_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "LOGIC_CONFIG_GID","columnName": "LOGIC_CONFIG_GID"}]},{"foreignKeyName": "FK_TWB_OTM_RELEASE_GID","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["BUSINESS_MONITOR_D","TRANSPORTATION_WORKBENCH_JSON","TRANSPORTATION_WORKBENCH_XML","WORKBENCH_ACCESS"],"indices": [{"indexName": "UK_LAYOUT_SEQ_NUM","columnNames": [{"sequence": 1,"name": "LAYOUT_SEQ_NUM"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "transportation_workbench",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "LAYOUT_GID",
+      "description": "The Layout GID provided by the user. This needs to be unique. What this means is that two users cannot share the same layout gid.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAYOUT_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GL_USER_GID",
+      "description": "gl_user_gid is deprecated as of 6.4.3",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAYOUT_NUMBER",
+      "description": "This corersponds to the internal layout being used for a layout id for a user.  gl_user_gid and layout_number form a unique constraint",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOGIC_CONFIG_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAYOUT_SEQ_NUM",
+      "description": "A unique sequence number to identify the layout.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAYOUT_XML",
+      "description": "",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GENERATE_MDS",
+      "description": "Whether to re-generate related MDS customization documents from layout XML. Typically populated by migration project, checked and reset by Workbench Designer at runtime.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUTO_REFRESH",
+      "description": "Whether Workbench should auto refresh data for all components in the layout.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "AUTO_REFRESH_INTERVAL",
+      "description": "Specify the frequency of auto refresh.  For performance purpose, the interval should be at least 5 minutes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUTO_REFRESH_INTERVAL_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUTO_REFRESH_INTERVAL_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAYOUT_FORMAT",
+      "description": "An optional layout format (skin) predefined by Workbench",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAYOUT_JSON",
+      "description": "Layout definition in JSON format",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_LEGACY",
+      "description": "Whether the layout is in legacy format (Using LAYOUT_XML for ADF Workbench) or not",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "Release ID - full release string",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LAYOUT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_TWB_GL_USER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GL_USER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GL_USER_GID",
+          "columnName": "GL_USER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TWB_LOGIC_CONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOGIC_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGIC_CONFIG_GID",
+          "columnName": "LOGIC_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TWB_OTM_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "BUSINESS_MONITOR_D",
+    "TRANSPORTATION_WORKBENCH_JSON",
+    "TRANSPORTATION_WORKBENCH_XML",
+    "WORKBENCH_ACCESS"
+  ],
+  "indices": [
+    {
+      "indexName": "UK_LAYOUT_SEQ_NUM",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LAYOUT_SEQ_NUM"
+        }
+      ]
+    }
+  ]
+}

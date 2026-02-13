@@ -1,1 +1,216 @@
-{"table": {"schema": "glogowner","name": "gtm_comp_rule_value","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_VALUE_QUALIFIER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_COMPLIANCE_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_PROD_CLASS_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OPERATOR","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_AGGREGATE","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "GTM_COMP_RULE_VALUE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_COMP_RULE_VALUE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_COMP_RULE_VALUE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GCRV_GTM_VALUE_QUALIFIER","cascadeDelete": false,"parentTableName": "GTM_VALUE_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_VALUE_QUALIFIER_GID","columnName": "GTM_VALUE_QUALIFIER_GID"}]},{"foreignKeyName": "FK_GCRV_GTM_COMPLIANCE_RULE_G","cascadeDelete": false,"parentTableName": "GTM_COMPLIANCE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_COMPLIANCE_RULE_GID","columnName": "GTM_COMPLIANCE_RULE_GID"}]},{"foreignKeyName": "FK_GCRV_GTM_PROD_CLASS_TYPE_G","cascadeDelete": false,"parentTableName": "GTM_PROD_CLASS_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_PROD_CLASS_TYPE_GID","columnName": "GTM_PROD_CLASS_TYPE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_comp_rule_value",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_VALUE_QUALIFIER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_COMPLIANCE_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_PROD_CLASS_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OPERATOR",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_AGGREGATE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "GTM_COMP_RULE_VALUE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_COMP_RULE_VALUE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_COMP_RULE_VALUE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GCRV_GTM_VALUE_QUALIFIER",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_VALUE_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_VALUE_QUALIFIER_GID",
+          "columnName": "GTM_VALUE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GCRV_GTM_COMPLIANCE_RULE_G",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_COMPLIANCE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_COMPLIANCE_RULE_GID",
+          "columnName": "GTM_COMPLIANCE_RULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GCRV_GTM_PROD_CLASS_TYPE_G",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_PROD_CLASS_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_PROD_CLASS_TYPE_GID",
+          "columnName": "GTM_PROD_CLASS_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

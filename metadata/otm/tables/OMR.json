@@ -1,1 +1,260 @@
-{"table": {"schema": "glogowner","name": "omr","description": ""},"columns": [{"name": "OMR_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OMR_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OMR_NAME","description": "Name for this set of data","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OMR_TYPE","description": "","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'DEMAND','SUPPLY'","conditionalConstraint": "","defaultValue": "'SUPPLY'"},{"name": "PROCESS_TIME","description": "Indicates the time at which the information contained is current","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_INTERVAL_TYPE","description": "'W': WINDOW; 'F': FLOW","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'W','F'","conditionalConstraint": "","defaultValue": "'W'"},{"name": "OMR_DESC","description": "","dataType": "VARCHAR2","size": 255,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OB_ORDER_BASE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_TYPE","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'ORDER_RELEASE','ORDER_BASE'","conditionalConstraint": "","defaultValue": "'ORDER_RELEASE'"},{"name": "ORIGINAL_OMR_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OMR_GID"}],"foreignKeys": [{"foreignKeyName": "FK_O_ORDER_RELEASE_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_GID"}]},{"foreignKeyName": "FK_OMR_OB_ORDER_BASE_GID","cascadeDelete": false,"parentTableName": "OB_ORDER_BASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_BASE_GID","columnName": "OB_ORDER_BASE_GID"}]},{"foreignKeyName": "FK_OMR_ORIGINAL_OMR_GID","cascadeDelete": false,"parentTableName": "OMR","columnRelation": [{"sequence": 1,"parentColumnName": "OMR_GID","columnName": "ORIGINAL_OMR_GID"}]}],"childTables": ["OMR","OMR_D","OMR_STATUS"],"indices": [{"indexName": "IX_OMR_OB_ORDER_BASE_GID","columnNames": [{"sequence": 1,"name": "OB_ORDER_BASE_GID"}]},{"indexName": "IX_OMR_ORDER_RELEASE_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"}]},{"indexName": "IX_OMR_ORIGINAL_OMR_GID","columnNames": [{"sequence": 1,"name": "ORIGINAL_OMR_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "omr",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "OMR_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OMR_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OMR_NAME",
+      "description": "Name for this set of data",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OMR_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'DEMAND','SUPPLY'",
+      "conditionalConstraint": "",
+      "defaultValue": "'SUPPLY'"
+    },
+    {
+      "name": "PROCESS_TIME",
+      "description": "Indicates the time at which the information contained is current",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_INTERVAL_TYPE",
+      "description": "'W': WINDOW; 'F': FLOW",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'W','F'",
+      "conditionalConstraint": "",
+      "defaultValue": "'W'"
+    },
+    {
+      "name": "OMR_DESC",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OB_ORDER_BASE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'ORDER_RELEASE','ORDER_BASE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'ORDER_RELEASE'"
+    },
+    {
+      "name": "ORIGINAL_OMR_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OMR_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_O_ORDER_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OMR_OB_ORDER_BASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OB_ORDER_BASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_BASE_GID",
+          "columnName": "OB_ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OMR_ORIGINAL_OMR_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OMR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OMR_GID",
+          "columnName": "ORIGINAL_OMR_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "OMR",
+    "OMR_D",
+    "OMR_STATUS"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_OMR_OB_ORDER_BASE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "OB_ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OMR_ORDER_RELEASE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OMR_ORIGINAL_OMR_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORIGINAL_OMR_GID"
+        }
+      ]
+    }
+  ]
+}

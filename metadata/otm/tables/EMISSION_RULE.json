@@ -1,1 +1,353 @@
-{"table": {"schema": "glogowner","name": "emission_rule","description": "This table is used for storing the emission rule which have different emission factors with different additional attributes in the remarks. One of the emission factor which matches the emis_rule_constraint_set_gid is picked to calculate the emissions."},"columns": [{"name": "EMISSION_RULE_GID","description": "The globally unique ID of an emission rule.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EMISSION_RULE_XID","description": "The unique ID of an emission rule specific to a domain.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EMISSION_RULE_NAME","description": "The name of the emission rule.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Description of the emission rule.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "This flag determines whether the emission rule is active or not.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "EFFECTIVE_DATE","description": "The effective date of the emission rule.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "The expiration date of the emission rule.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_PROFILE_GID","description": "Mode profile for which the emission rule is defined.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FROM_REGION_GID","description": "The region from which the shipment is started.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TO_REGION_GID","description": "The region from which the shipment is reached.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIORITY","description": "The lower the priority, the higher the preference for the given emission rule.  So 1 is the highest priority.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EMIS_RULE_CONSTRAINT_SET_GID","description": "Constraint set which used to pick the emission factor based on the additional attributes","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACT_FORMULA_EXPRES_GID","description": "Formula Expression for calculating the emission at emission activity level.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACT_D_FORMULA_EXPRES_GID","description": "Formula Expression for calculating the emission at emission activity detail level.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "EMISSION_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_EMR_MODE_PROFILE_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "MODE_PROFILE_GID"}]},{"foreignKeyName": "FK_EMR_FROM_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "FROM_REGION_GID"}]},{"foreignKeyName": "FK_EMR_TO_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "TO_REGION_GID"}]},{"foreignKeyName": "FK_EMR_GTM_CONSTRAINT_SET_GID","cascadeDelete": false,"parentTableName": "GTM_CONSTRAINT_SET","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CONSTRAINT_SET_GID","columnName": "EMIS_RULE_CONSTRAINT_SET_GID"}]},{"foreignKeyName": "FK_EMR_A_GTM_FRLA_EXPR","cascadeDelete": false,"parentTableName": "GTM_FORMULA_EXPRESSION","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_FORMULA_EXPRESSION_GID","columnName": "ACT_FORMULA_EXPRES_GID"}]},{"foreignKeyName": "FK_EMR_AD_GTM_FRLA_EXPR","cascadeDelete": false,"parentTableName": "GTM_FORMULA_EXPRESSION","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_FORMULA_EXPRESSION_GID","columnName": "ACT_D_FORMULA_EXPRES_GID"}]}],"childTables": ["EMISSION_FACTOR","ESG_ACTIVITY"],"indices": [{"indexName": "IX_EMR_MODE_PROFILE_GID","columnNames": [{"sequence": 1,"name": "MODE_PROFILE_GID"}]},{"indexName": "IX_EMR_FROM_REGION_GID","columnNames": [{"sequence": 1,"name": "FROM_REGION_GID"}]},{"indexName": "IX_EMR_TO_REGION_GID","columnNames": [{"sequence": 1,"name": "TO_REGION_GID"}]},{"indexName": "IX_EMR_CONS_SET_GID","columnNames": [{"sequence": 1,"name": "EMIS_RULE_CONSTRAINT_SET_GID"}]},{"indexName": "IX_ACT_FORMULA_EXPRES_GID","columnNames": [{"sequence": 1,"name": "ACT_FORMULA_EXPRES_GID"}]},{"indexName": "IX_ACT_D_FORMULA_EXPRES_GID","columnNames": [{"sequence": 1,"name": "ACT_D_FORMULA_EXPRES_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "emission_rule",
+    "description": "This table is used for storing the emission rule which have different emission factors with different additional attributes in the remarks. One of the emission factor which matches the emis_rule_constraint_set_gid is picked to calculate the emissions."
+  },
+  "columns": [
+    {
+      "name": "EMISSION_RULE_GID",
+      "description": "The globally unique ID of an emission rule.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EMISSION_RULE_XID",
+      "description": "The unique ID of an emission rule specific to a domain.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EMISSION_RULE_NAME",
+      "description": "The name of the emission rule.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Description of the emission rule.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "This flag determines whether the emission rule is active or not.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "The effective date of the emission rule.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "The expiration date of the emission rule.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_PROFILE_GID",
+      "description": "Mode profile for which the emission rule is defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FROM_REGION_GID",
+      "description": "The region from which the shipment is started.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TO_REGION_GID",
+      "description": "The region from which the shipment is reached.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIORITY",
+      "description": "The lower the priority, the higher the preference for the given emission rule.  So 1 is the highest priority.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EMIS_RULE_CONSTRAINT_SET_GID",
+      "description": "Constraint set which used to pick the emission factor based on the additional attributes",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACT_FORMULA_EXPRES_GID",
+      "description": "Formula Expression for calculating the emission at emission activity level.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACT_D_FORMULA_EXPRES_GID",
+      "description": "Formula Expression for calculating the emission at emission activity detail level.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "EMISSION_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EMR_MODE_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EMR_FROM_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "FROM_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EMR_TO_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "TO_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EMR_GTM_CONSTRAINT_SET_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_CONSTRAINT_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CONSTRAINT_SET_GID",
+          "columnName": "EMIS_RULE_CONSTRAINT_SET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EMR_A_GTM_FRLA_EXPR",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_FORMULA_EXPRESSION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_FORMULA_EXPRESSION_GID",
+          "columnName": "ACT_FORMULA_EXPRES_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EMR_AD_GTM_FRLA_EXPR",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_FORMULA_EXPRESSION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_FORMULA_EXPRESSION_GID",
+          "columnName": "ACT_D_FORMULA_EXPRES_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "EMISSION_FACTOR",
+    "ESG_ACTIVITY"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_EMR_MODE_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EMR_FROM_REGION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FROM_REGION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EMR_TO_REGION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TO_REGION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EMR_CONS_SET_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EMIS_RULE_CONSTRAINT_SET_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ACT_FORMULA_EXPRES_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACT_FORMULA_EXPRES_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ACT_D_FORMULA_EXPRES_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACT_D_FORMULA_EXPRES_GID"
+        }
+      ]
+    }
+  ]
+}

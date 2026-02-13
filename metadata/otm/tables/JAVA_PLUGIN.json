@@ -1,1 +1,153 @@
-{"table": {"schema": "glogowner","name": "java_plugin","description": ""},"columns": [{"name": "JAVA_PLUGIN_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "JAVA_PLUGIN_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "JAVA_CLASS","description": "","dataType": "VARCHAR2","size": 255,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLUGIN_USE_TYPE","description": "","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'ACTION CHECK','REASON CHECK','TRANSFORMER','DATA QUEUE POLLER','DATA QUEUE EXECUTOR','NOTIFY DATA GENERATOR','NOTIFY MESSAGE TRANSFORMER','CONFIGURATION CAPTURE','PERFORMANCE CAPTURE','AGENT IF','DERIVED DATA OPERATIONS','CONTENT SOURCE','TYPE ASSOCIATION','DEQUEUE SERVICE','PARAM GEN','JCR CONNECTION','JMS DEQUEUE SERVICE','LC2 DATA RULE','LNM DATA RULE'","conditionalConstraint": "","defaultValue": "'ACTION CHECK'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "JAVA_PLUGIN_GID"}],"foreignKeys": [{"foreignKeyName": "FK_JP_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["APP_ACTION","APP_ACTION_CHECK_ACCESS","APP_ACTION_REASON_ACCESS","CMS_PARAM_GENERATOR","CONTENT_SOURCE","DATA_QUEUE_EXECUTOR","DATA_QUEUE_POLLER","DATA_TYPE_ASSOCIATION","DERIVED_DATA_OP_IMPL","DIAG_PERFORMANCE_CAPTURE","DIAG_STATIC_CAPTURE","STYLESHEET_PROFILE","WEB_SVC_OPERATION_PARAM"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "java_plugin",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "JAVA_PLUGIN_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "JAVA_PLUGIN_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "JAVA_CLASS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLUGIN_USE_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'ACTION CHECK','REASON CHECK','TRANSFORMER','DATA QUEUE POLLER','DATA QUEUE EXECUTOR','NOTIFY DATA GENERATOR','NOTIFY MESSAGE TRANSFORMER','CONFIGURATION CAPTURE','PERFORMANCE CAPTURE','AGENT IF','DERIVED DATA OPERATIONS','CONTENT SOURCE','TYPE ASSOCIATION','DEQUEUE SERVICE','PARAM GEN','JCR CONNECTION','JMS DEQUEUE SERVICE','LC2 DATA RULE','LNM DATA RULE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'ACTION CHECK'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "JAVA_PLUGIN_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_JP_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "APP_ACTION",
+    "APP_ACTION_CHECK_ACCESS",
+    "APP_ACTION_REASON_ACCESS",
+    "CMS_PARAM_GENERATOR",
+    "CONTENT_SOURCE",
+    "DATA_QUEUE_EXECUTOR",
+    "DATA_QUEUE_POLLER",
+    "DATA_TYPE_ASSOCIATION",
+    "DERIVED_DATA_OP_IMPL",
+    "DIAG_PERFORMANCE_CAPTURE",
+    "DIAG_STATIC_CAPTURE",
+    "STYLESHEET_PROFILE",
+    "WEB_SVC_OPERATION_PARAM"
+  ],
+  "indices": []
+}

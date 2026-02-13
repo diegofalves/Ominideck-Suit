@@ -1,1 +1,215 @@
-{"table": {"schema": "glogowner","name": "emission_alloc_orl_d","description": "This table stores the allocated emissions at order release line level."},"columns": [{"name": "ALLOC_SEQ_NO","description": "Allocation Sequence for PK.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EMISSION_ALLOC_SEQ_NO","description": "Allocation Detail Sequence for PK.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_LINE_GID","description": "Order release line ID for which emissions are allocated.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_GID","description": "Shipment ID carrying the order release line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESG_ACTIVITY_GID","description": "ESG Activity of the shipment ID whose emissions are allocated.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOCATED_CO2_EQ_EMISSION","description": "Allocated CO2e Emission.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOCATED_CO2_EQ_EMISSION_BASE","description": "Allocated CO2e emission in base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOCATED_CO2_EQ_EMISSION_UOM","description": "Unit of Measure for the allocated CO2e emissions.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ALLOC_SEQ_NO"},{"sequence": 2,"columnName": "EMISSION_ALLOC_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_EAORLD_ALLOC_SEQ_NO","cascadeDelete": false,"parentTableName": "EMISSION_ALLOCATION_BASE","columnRelation": [{"sequence": 1,"parentColumnName": "ALLOC_SEQ_NO","columnName": "ALLOC_SEQ_NO"}]},{"foreignKeyName": "FK_EAORLD_ORDER_RELEASE_LINE","cascadeDelete": false,"parentTableName": "ORDER_RELEASE_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_LINE_GID","columnName": "ORDER_RELEASE_LINE_GID"}]},{"foreignKeyName": "FK_EAORLD_SHIPMENT_GID","cascadeDelete": false,"parentTableName": "SHIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_EAORLD_OR_LINE_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_LINE_GID"}]},{"indexName": "IX_EAORLD_SHIPMENT_GID","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "emission_alloc_orl_d",
+    "description": "This table stores the allocated emissions at order release line level."
+  },
+  "columns": [
+    {
+      "name": "ALLOC_SEQ_NO",
+      "description": "Allocation Sequence for PK.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EMISSION_ALLOC_SEQ_NO",
+      "description": "Allocation Detail Sequence for PK.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_LINE_GID",
+      "description": "Order release line ID for which emissions are allocated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_GID",
+      "description": "Shipment ID carrying the order release line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESG_ACTIVITY_GID",
+      "description": "ESG Activity of the shipment ID whose emissions are allocated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOCATED_CO2_EQ_EMISSION",
+      "description": "Allocated CO2e Emission.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOCATED_CO2_EQ_EMISSION_BASE",
+      "description": "Allocated CO2e emission in base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOCATED_CO2_EQ_EMISSION_UOM",
+      "description": "Unit of Measure for the allocated CO2e emissions.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ALLOC_SEQ_NO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "EMISSION_ALLOC_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EAORLD_ALLOC_SEQ_NO",
+      "cascadeDelete": false,
+      "parentTableName": "EMISSION_ALLOCATION_BASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ALLOC_SEQ_NO",
+          "columnName": "ALLOC_SEQ_NO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EAORLD_ORDER_RELEASE_LINE",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_LINE_GID",
+          "columnName": "ORDER_RELEASE_LINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EAORLD_SHIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_EAORLD_OR_LINE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_LINE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EAORLD_SHIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        }
+      ]
+    }
+  ]
+}

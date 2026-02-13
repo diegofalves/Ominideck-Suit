@@ -1,1 +1,224 @@
-{"table": {"schema": "glogowner","name": "audit_event","description": "An auditable event."},"columns": [{"name": "AUDIT_EVENT_SEQ","description": "A unique ID for Audit Event.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUDIT_EVENT_TYPE_GID","description": "The audit event type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME","description": "The time the audit event occurred.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "A key (from 1-4) based upon the insert_date which helps purge data periodically.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODIFIED_OBJECT","description": "The object modified by the event. The type of object is implied by the audit_event_type_gid. It may be a record GID, a property, some other identifier or left null.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DML","description": "Marks the event as Insert, Update or Delete.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'I','U','D'","conditionalConstraint": "","defaultValue": "'U'"},{"name": "PREVIOUS_VALUE","description": "The previous value of the modified object prior to the event.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_VALUE","description": "The value of the modified object after the event.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REASON","description": "The reason for the event.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BY_SOURCE","description": "The source of the event. This can be OPS or OTM.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": true,"constraintValues": "'OPS','OTM'","conditionalConstraint": "","defaultValue": ""},{"name": "BY_GL_USER_GID","description": "The OTM User GID of the user initiating the event if the source is OTM.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROW_PROTECT","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'R'","conditionalConstraint": "","defaultValue": "'R'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SECURE","description": "If Y, the record cannot be reverted due to secure values.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "AUDIT_EVENT_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_AEV_AUDIT_EVENT_TYPE_GID","cascadeDelete": false,"parentTableName": "AUDIT_EVENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "AUDIT_EVENT_TYPE_GID","columnName": "AUDIT_EVENT_TYPE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "audit_event",
+    "description": "An auditable event."
+  },
+  "columns": [
+    {
+      "name": "AUDIT_EVENT_SEQ",
+      "description": "A unique ID for Audit Event.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUDIT_EVENT_TYPE_GID",
+      "description": "The audit event type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME",
+      "description": "The time the audit event occurred.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "A key (from 1-4) based upon the insert_date which helps purge data periodically.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODIFIED_OBJECT",
+      "description": "The object modified by the event. The type of object is implied by the audit_event_type_gid. It may be a record GID, a property, some other identifier or left null.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DML",
+      "description": "Marks the event as Insert, Update or Delete.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'I','U','D'",
+      "conditionalConstraint": "",
+      "defaultValue": "'U'"
+    },
+    {
+      "name": "PREVIOUS_VALUE",
+      "description": "The previous value of the modified object prior to the event.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_VALUE",
+      "description": "The value of the modified object after the event.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REASON",
+      "description": "The reason for the event.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BY_SOURCE",
+      "description": "The source of the event. This can be OPS or OTM.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'OPS','OTM'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BY_GL_USER_GID",
+      "description": "The OTM User GID of the user initiating the event if the source is OTM.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROW_PROTECT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'R'",
+      "conditionalConstraint": "",
+      "defaultValue": "'R'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SECURE",
+      "description": "If Y, the record cannot be reverted due to secure values.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AUDIT_EVENT_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AEV_AUDIT_EVENT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AUDIT_EVENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUDIT_EVENT_TYPE_GID",
+          "columnName": "AUDIT_EVENT_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

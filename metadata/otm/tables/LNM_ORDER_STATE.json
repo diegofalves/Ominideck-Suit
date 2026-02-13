@@ -1,1 +1,168 @@
-{"table": {"schema": "glogowner","name": "lnm_order_state","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_TYPE","description": "","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'ORDER RELEASE','ORDER MOVEMENT'","conditionalConstraint": "","defaultValue": ""},{"name": "SCENARIO_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BULKPLAN_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BULKPLAN_SPEC_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_ID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_STATUS","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OBJECT_TYPE"},{"sequence": 2,"columnName": "ORDER_ID"},{"sequence": 3,"columnName": "SCENARIO_GID"}],"foreignKeys": [{"foreignKeyName": "FK_LNMOS_LNM_SCENARIO_BULKPLA","cascadeDelete": true,"parentTableName": "LNM_SCENARIO_BULKPLAN","columnRelation": [{"sequence": 1,"parentColumnName": "BULKPLAN_GID","columnName": "BULKPLAN_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_SCENARIO_GID","columnNames": [{"sequence": 1,"name": "SCENARIO_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "lnm_order_state",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'ORDER RELEASE','ORDER MOVEMENT'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCENARIO_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BULKPLAN_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BULKPLAN_SPEC_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_ID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_STATUS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OBJECT_TYPE"
+    },
+    {
+      "sequence": 2,
+      "columnName": "ORDER_ID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "SCENARIO_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LNMOS_LNM_SCENARIO_BULKPLA",
+      "cascadeDelete": true,
+      "parentTableName": "LNM_SCENARIO_BULKPLAN",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BULKPLAN_GID",
+          "columnName": "BULKPLAN_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_SCENARIO_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SCENARIO_GID"
+        }
+      ]
+    }
+  ]
+}

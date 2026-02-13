@@ -1,1 +1,325 @@
-{"table": {"schema": "glogowner","name": "action","description": "This table holds the list of all possible user interface actions that can be run in GC3."},"columns": [{"name": "ACTION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTION_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LABEL_KEY","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISPLAY_IGNORE_CRITERIA","description": "If 'Y', UI will display 'Ignore Criteria' screen.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ACTION_DEF_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_ACTION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MANAGER_LAYOUT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_LONG_RUNNING_TASK","description": "If Y, this action is a long running task and should be monitored in the LONG_RUNNING_TASK table.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "LRT_INTERRUPTABILITY","description": "Interruptability support: NONE = task cannot be interrupted; INTERRUPTIBLE = task can be interrupted, likely ending in a failure state; RESUBMITTABLE: task can be resubmitted into it's origin queue for handling by another machine","dataType": "VARCHAR2","size": 40,"isNull": true,"isConstraint": true,"constraintValues": "'NONE','INTERRUPTIBLE','RESUBMITTABLE'","conditionalConstraint": "","defaultValue": "'NONE'"},{"name": "LRT_INTERRUPT_ON_SQL","description": "If 'Y', a task interruption will force the next SQL statement to fail.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'N','Y'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "LRT_OBJECT_COUNT_THRESHOLD","description": "The action is only tracked as a Long Running Task if IS_LONG_RUNNING_TASK='Y' and the # of objects passed to the UI action exceeds this threshold.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OPT_FEATURE_GID","description": "Optional Feature associated with the action. If not null and the feature is disabled, users trying to run the action will receive a warning the feature is disabled.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESULT_MESSAGE_TEXT","description": "Text of the action results message pop-up when there are no results available.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESULT_AUTOCLOSE_TIMEOUT","description": "Amount of time (in seconds) that the action results message pop-up remains open.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEFAULT_LOG_PROFILE_GID","description": "Default log profile when action logging is enabled.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ACTION_GID"}],"foreignKeys": [{"foreignKeyName": "FK_A_ACTION_DEF_GID","cascadeDelete": false,"parentTableName": "ACTION_DEF","columnRelation": [{"sequence": 1,"parentColumnName": "ACTION_DEF_GID","columnName": "ACTION_DEF_GID"}]},{"foreignKeyName": "FK_A_APP_ACTION_GID","cascadeDelete": false,"parentTableName": "APP_ACTION","columnRelation": [{"sequence": 1,"parentColumnName": "APP_ACTION_GID","columnName": "APP_ACTION_GID"}]},{"foreignKeyName": "FK_A_MANAGER_LAYOUT_GID","cascadeDelete": false,"parentTableName": "MANAGER_LAYOUT","columnRelation": [{"sequence": 1,"parentColumnName": "MANAGER_LAYOUT_GID","columnName": "MANAGER_LAYOUT_GID"}]},{"foreignKeyName": "FK_A_OPT_FEATURE_GID","cascadeDelete": false,"parentTableName": "OPT_FEATURE","columnRelation": [{"sequence": 1,"parentColumnName": "OPT_FEATURE_GID","columnName": "OPT_FEATURE_GID"}]},{"foreignKeyName": "FK_A_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]},{"foreignKeyName": "FK_A_LOG_PROFILE_GID","cascadeDelete": false,"parentTableName": "LOG_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOG_PROFILE_GID","columnName": "DEFAULT_LOG_PROFILE_GID"}]}],"childTables": ["ACTION_ARG","ACTION_DRAG","FEATURE_ACTION","LOGFILE_ACTION","LONG_RUNNING_TASK","MANUAL_AGENT_TRIGGER"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "action",
+    "description": "This table holds the list of all possible user interface actions that can be run in GC3."
+  },
+  "columns": [
+    {
+      "name": "ACTION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTION_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LABEL_KEY",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISPLAY_IGNORE_CRITERIA",
+      "description": "If 'Y', UI will display 'Ignore Criteria' screen.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ACTION_DEF_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_ACTION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MANAGER_LAYOUT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_LONG_RUNNING_TASK",
+      "description": "If Y, this action is a long running task and should be monitored in the LONG_RUNNING_TASK table.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "LRT_INTERRUPTABILITY",
+      "description": "Interruptability support: NONE = task cannot be interrupted; INTERRUPTIBLE = task can be interrupted, likely ending in a failure state; RESUBMITTABLE: task can be resubmitted into it's origin queue for handling by another machine",
+      "dataType": "VARCHAR2",
+      "size": 40,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'NONE','INTERRUPTIBLE','RESUBMITTABLE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'NONE'"
+    },
+    {
+      "name": "LRT_INTERRUPT_ON_SQL",
+      "description": "If 'Y', a task interruption will force the next SQL statement to fail.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'N','Y'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "LRT_OBJECT_COUNT_THRESHOLD",
+      "description": "The action is only tracked as a Long Running Task if IS_LONG_RUNNING_TASK='Y' and the # of objects passed to the UI action exceeds this threshold.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OPT_FEATURE_GID",
+      "description": "Optional Feature associated with the action. If not null and the feature is disabled, users trying to run the action will receive a warning the feature is disabled.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESULT_MESSAGE_TEXT",
+      "description": "Text of the action results message pop-up when there are no results available.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESULT_AUTOCLOSE_TIMEOUT",
+      "description": "Amount of time (in seconds) that the action results message pop-up remains open.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEFAULT_LOG_PROFILE_GID",
+      "description": "Default log profile when action logging is enabled.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ACTION_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_A_ACTION_DEF_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACTION_DEF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACTION_DEF_GID",
+          "columnName": "ACTION_DEF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_A_APP_ACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_ACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_ACTION_GID",
+          "columnName": "APP_ACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_A_MANAGER_LAYOUT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MANAGER_LAYOUT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MANAGER_LAYOUT_GID",
+          "columnName": "MANAGER_LAYOUT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_A_OPT_FEATURE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OPT_FEATURE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OPT_FEATURE_GID",
+          "columnName": "OPT_FEATURE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_A_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_A_LOG_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOG_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOG_PROFILE_GID",
+          "columnName": "DEFAULT_LOG_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ACTION_ARG",
+    "ACTION_DRAG",
+    "FEATURE_ACTION",
+    "LOGFILE_ACTION",
+    "LONG_RUNNING_TASK",
+    "MANUAL_AGENT_TRIGGER"
+  ],
+  "indices": []
+}

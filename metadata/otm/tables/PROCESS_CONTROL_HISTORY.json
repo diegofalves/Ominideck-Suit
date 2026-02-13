@@ -1,1 +1,222 @@
-{"table": {"schema": "glogowner","name": "process_control_history","description": "Contains an entry for each iteration of a workflow run that was kicked off from a process control request.  If a process is run only once, then there is one record in the process_control_request table and the PROCESS_CONTROL_HISTORY table.  However, if a process is set up to run 5 cycles, then the instructions would show up once in the PROCESS_CONTROL_REQUEST table, but 5 records would exist in the PROCESS_CONTROL_HISTORY table."},"columns": [{"name": "PROCESS_CONTROL_HISTORY_ID","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_CONTROL_REQUEST_ID","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_TIME","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "SYSDATE"},{"name": "LOG_PROCESS_ID","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_CLASS_NAME","description": "Added for identifying History of a Process Control Request for Report.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_PARAMETERS","description": "Added for identifying History of a Process Request.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_SERVER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_MACHINE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_ROLE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PROCESS_CONTROL_HISTORY_ID"}],"foreignKeys": [{"foreignKeyName": "FK_PC_APP_SERVER_GID","cascadeDelete": false,"parentTableName": "APP_SERVER","columnRelation": [{"sequence": 1,"parentColumnName": "APP_SERVER_GID","columnName": "APP_SERVER_GID"}]},{"foreignKeyName": "FK_PC_APP_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "APP_MACHINE_GID"}]}],"childTables": [],"indices": [{"indexName": "IND_PCH_REQUESTID","columnNames": [{"sequence": 1,"name": "PROCESS_CONTROL_REQUEST_ID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "process_control_history",
+    "description": "Contains an entry for each iteration of a workflow run that was kicked off from a process control request.  If a process is run only once, then there is one record in the process_control_request table and the PROCESS_CONTROL_HISTORY table.  However, if a process is set up to run 5 cycles, then the instructions would show up once in the PROCESS_CONTROL_REQUEST table, but 5 records would exist in the PROCESS_CONTROL_HISTORY table."
+  },
+  "columns": [
+    {
+      "name": "PROCESS_CONTROL_HISTORY_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_CONTROL_REQUEST_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "SYSDATE"
+    },
+    {
+      "name": "LOG_PROCESS_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_CLASS_NAME",
+      "description": "Added for identifying History of a Process Control Request for Report.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_PARAMETERS",
+      "description": "Added for identifying History of a Process Request.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_SERVER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_MACHINE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_ROLE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PROCESS_CONTROL_HISTORY_ID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_PC_APP_SERVER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_SERVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_SERVER_GID",
+          "columnName": "APP_SERVER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PC_APP_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "APP_MACHINE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IND_PCH_REQUESTID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PROCESS_CONTROL_REQUEST_ID"
+        }
+      ]
+    }
+  ]
+}

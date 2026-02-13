@@ -1,1 +1,199 @@
-{"table": {"schema": "glogowner","name": "postal_code_validate","description": ""},"columns": [{"name": "POSTAL_CODE_VALIDATE_GID","description": "Unique identifier for the record","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "POSTAL_CODE_VALIDATE_XID","description": "External identifier for the record","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_CODE","description": "Country code","dataType": "VARCHAR2","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CITY","description": "City.  This can be the correct city name, or can be a typo (corrected city would then be looked up through the UP_CORRECT field).","dataType": "VARCHAR2","size": 70,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROVINCE_CODE","description": "","dataType": "VARCHAR2","size": 6,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "POSTAL_CODE","description": "Postal Code","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UP_CORRECT","description": "Corrected city in all caps.","dataType": "VARCHAR2","size": 70,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DN_CORRECT","description": "Corrected city in mixed case.","dataType": "VARCHAR2","size": 70,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "POSTAL_CODE_VALIDATE_GID"}],"foreignKeys": [],"childTables": [],"indices": [{"indexName": "IX_POSTAL_CODE_CCP","columnNames": [{"sequence": 1,"name": "COUNTRY_CODE"},{"sequence": 2,"name": "CITY"},{"sequence": 3,"name": "POSTAL_CODE"}]},{"indexName": "IX_POSTAL_CODE_CITY","columnNames": [{"sequence": 1,"name": "CITY"}]},{"indexName": "IX_POSTAL_CODE_UPPER_CORRECT","columnNames": [{"sequence": 1,"name": "COUNTRY_CODE"},{"sequence": 2,"name": "UP_CORRECT"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "postal_code_validate",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "POSTAL_CODE_VALIDATE_GID",
+      "description": "Unique identifier for the record",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "POSTAL_CODE_VALIDATE_XID",
+      "description": "External identifier for the record",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_CODE",
+      "description": "Country code",
+      "dataType": "VARCHAR2",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CITY",
+      "description": "City.  This can be the correct city name, or can be a typo (corrected city would then be looked up through the UP_CORRECT field).",
+      "dataType": "VARCHAR2",
+      "size": 70,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROVINCE_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 6,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "POSTAL_CODE",
+      "description": "Postal Code",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UP_CORRECT",
+      "description": "Corrected city in all caps.",
+      "dataType": "VARCHAR2",
+      "size": 70,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DN_CORRECT",
+      "description": "Corrected city in mixed case.",
+      "dataType": "VARCHAR2",
+      "size": 70,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "POSTAL_CODE_VALIDATE_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_POSTAL_CODE_CCP",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "COUNTRY_CODE"
+        },
+        {
+          "sequence": 2,
+          "name": "CITY"
+        },
+        {
+          "sequence": 3,
+          "name": "POSTAL_CODE"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_POSTAL_CODE_CITY",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CITY"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_POSTAL_CODE_UPPER_CORRECT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "COUNTRY_CODE"
+        },
+        {
+          "sequence": 2,
+          "name": "UP_CORRECT"
+        }
+      ]
+    }
+  ]
+}

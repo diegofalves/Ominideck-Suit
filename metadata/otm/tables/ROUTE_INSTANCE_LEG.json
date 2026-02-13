@@ -1,1 +1,665 @@
-{"table": {"schema": "glogowner","name": "route_instance_leg","description": ""},"columns": [{"name": "ROUTE_INSTANCE_LEG_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROUTE_INSTANCE_LEG_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROUTE_INSTANCE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEG_NUM","description": "Number must be unique, in sequence with no gap.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_REGION_GID","description": "Copied over from Route Template Leg.  Region must have a representative location.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DIST_THRESHOLD","description": "Distance threshold from representative location of start region.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DIST_THRESHOLD_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DIST_THRESHOLD_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_REGION_GID","description": "Copied over from Route Template Leg.  Region must have a representative location.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DIST_THRESHOLD","description": "Distance threshold from representative location of end region.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DIST_THRESHOLD_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DIST_THRESHOLD_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EARLY_DEPARTURE_TIME","description": "Based on timezone for representative location from Start Region.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LATE_DEPARTURE_TIME","description": "Based on timezone for representative location from Start Region.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EARLY_ARRIVAL_TIME","description": "Based on timezone for representative location from End Region.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LATE_ARRIVAL_TIME","description": "Based on timezone for representative location from End Region.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIP_GROUP_PROFILE_GID","description": "This field overrides EQUIPMENT_GROUP_PROFILE_GID on Instance Header level (ROUTE_INSTANCE table)","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MATCH_SHIP_TO_LEG","description": "","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'ALWAYS','WHEN AVAILABLE','NEVER'","conditionalConstraint": "","defaultValue": "'ALWAYS'"},{"name": "MIN_TIME_TO_NEXT_LEG","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_TIME_TO_NEXT_LEG_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_TIME_TO_NEXT_LEG_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_TIME_TO_NEXT_LEG","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_TIME_TO_NEXT_LEG_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_TIME_TO_NEXT_LEG_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_PHASED_PLN_THRSH","description": "Time Phased Planning Threshold.  Copied over from Route Template Leg.  If the difference between the system time and the Instance Leg's early pickup time is within this threshold, and if there is no shipment that falls within the regions of the Instance Leg, planning engine will look for shipments that are outside the region but within the distance theshold.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_PHASED_PLN_THRSH_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_PHASED_PLN_THRSH_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ASSIGNMENT_TYPE","description": "Indicate how well this shipment is assigned to the Route Instance Leg from a geographical point of view.  'MOST SPECIFIC': within the regions on Leg;  'WITHIN THRESHOLD': outside the regions, but within thresholds;  'NON STANDARD': outside the regions and outside the thresholds.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": true,"constraintValues": "'MOST SPECIFIC','WITHIN THRESHOLD','NON STANDARD'","conditionalConstraint": "","defaultValue": ""},{"name": "ASSIGNMENT_SOURCE","description": "'SYSTEM': assignment of shipment to leg was made by Bulk Plan or Build Shipment Direct;  'MANUAL': assignment of shipment to leg was made via manual action.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": true,"constraintValues": "'SYSTEM','MANUAL'","conditionalConstraint": "","defaultValue": ""},{"name": "IS_DEVIATED_LEG","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "FEASIBILITY_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WARN_FOR_MISSING_LEG","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "USER_DEFINED1_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED2_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED3_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED4_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED5_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_PROFILE_GID","description": "Copied over from Route Template Leg.  If this field is not null, only a shipment/order in the domain that is contained in this profile can be matched to this Leg.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INDICATOR","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ROUTE_INSTANCE_LEG_GID"}],"foreignKeys": [{"foreignKeyName": "FK_RIL_ROUTE_INSTANCE_GID","cascadeDelete": false,"parentTableName": "ROUTE_INSTANCE","columnRelation": [{"sequence": 1,"parentColumnName": "ROUTE_INSTANCE_GID","columnName": "ROUTE_INSTANCE_GID"}]},{"foreignKeyName": "FK_RIL_START_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "START_REGION_GID"}]},{"foreignKeyName": "FK_RIL_END_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "END_REGION_GID"}]},{"foreignKeyName": "FK_RIL_EQUIP_GROUP_PROFILE_GI","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIP_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_RIL_FEASIBILITY_CODE_GID","cascadeDelete": false,"parentTableName": "FEASIBILITY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "FEASIBILITY_CODE_GID","columnName": "FEASIBILITY_CODE_GID"}]},{"foreignKeyName": "FK_RIL_USER_DEFINED1_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED1_ICON_GID"}]},{"foreignKeyName": "FK_RIL_USER_DEFINED2_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED2_ICON_GID"}]},{"foreignKeyName": "FK_RIL_USER_DEFINED3_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED3_ICON_GID"}]},{"foreignKeyName": "FK_RIL_USER_DEFINED4_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED4_ICON_GID"}]},{"foreignKeyName": "FK_RIL_USER_DEFINED5_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED5_ICON_GID"}]},{"foreignKeyName": "FK_RIL_DOMAIN_PROFILE_GID","cascadeDelete": false,"parentTableName": "DOMAIN_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "DOMAIN_PROFILE_GID","columnName": "DOMAIN_PROFILE_GID"}]},{"foreignKeyName": "FK_RIL_SHIPMENT_GID","cascadeDelete": false,"parentTableName": "SHIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"}]}],"childTables": ["ROUTE_INSTANCE_LEG_INV_PARTY","ROUTE_INSTANCE_LEG_REFNUM","ROUTE_INSTANCE_LEG_REMARK","ROUTE_INSTANCE_LEG_STATUS"],"indices": [{"indexName": "IX_ROUTIL_RT_INTS_GID","columnNames": [{"sequence": 1,"name": "ROUTE_INSTANCE_GID"}]},{"indexName": "IX_ROUTIL_SHIPMENT_GID","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "route_instance_leg",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "ROUTE_INSTANCE_LEG_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUTE_INSTANCE_LEG_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUTE_INSTANCE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEG_NUM",
+      "description": "Number must be unique, in sequence with no gap.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_REGION_GID",
+      "description": "Copied over from Route Template Leg.  Region must have a representative location.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DIST_THRESHOLD",
+      "description": "Distance threshold from representative location of start region.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DIST_THRESHOLD_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DIST_THRESHOLD_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_REGION_GID",
+      "description": "Copied over from Route Template Leg.  Region must have a representative location.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DIST_THRESHOLD",
+      "description": "Distance threshold from representative location of end region.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DIST_THRESHOLD_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DIST_THRESHOLD_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EARLY_DEPARTURE_TIME",
+      "description": "Based on timezone for representative location from Start Region.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LATE_DEPARTURE_TIME",
+      "description": "Based on timezone for representative location from Start Region.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EARLY_ARRIVAL_TIME",
+      "description": "Based on timezone for representative location from End Region.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LATE_ARRIVAL_TIME",
+      "description": "Based on timezone for representative location from End Region.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIP_GROUP_PROFILE_GID",
+      "description": "This field overrides EQUIPMENT_GROUP_PROFILE_GID on Instance Header level (ROUTE_INSTANCE table)",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MATCH_SHIP_TO_LEG",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'ALWAYS','WHEN AVAILABLE','NEVER'",
+      "conditionalConstraint": "",
+      "defaultValue": "'ALWAYS'"
+    },
+    {
+      "name": "MIN_TIME_TO_NEXT_LEG",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_TIME_TO_NEXT_LEG_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_TIME_TO_NEXT_LEG_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_TIME_TO_NEXT_LEG",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_TIME_TO_NEXT_LEG_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_TIME_TO_NEXT_LEG_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_PHASED_PLN_THRSH",
+      "description": "Time Phased Planning Threshold.  Copied over from Route Template Leg.  If the difference between the system time and the Instance Leg's early pickup time is within this threshold, and if there is no shipment that falls within the regions of the Instance Leg, planning engine will look for shipments that are outside the region but within the distance theshold.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_PHASED_PLN_THRSH_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_PHASED_PLN_THRSH_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ASSIGNMENT_TYPE",
+      "description": "Indicate how well this shipment is assigned to the Route Instance Leg from a geographical point of view.  'MOST SPECIFIC': within the regions on Leg;  'WITHIN THRESHOLD': outside the regions, but within thresholds;  'NON STANDARD': outside the regions and outside the thresholds.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'MOST SPECIFIC','WITHIN THRESHOLD','NON STANDARD'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ASSIGNMENT_SOURCE",
+      "description": "'SYSTEM': assignment of shipment to leg was made by Bulk Plan or Build Shipment Direct;  'MANUAL': assignment of shipment to leg was made via manual action.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'SYSTEM','MANUAL'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_DEVIATED_LEG",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "FEASIBILITY_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WARN_FOR_MISSING_LEG",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "USER_DEFINED1_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED2_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED3_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED4_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED5_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_PROFILE_GID",
+      "description": "Copied over from Route Template Leg.  If this field is not null, only a shipment/order in the domain that is contained in this profile can be matched to this Leg.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INDICATOR",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ROUTE_INSTANCE_LEG_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RIL_ROUTE_INSTANCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ROUTE_INSTANCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ROUTE_INSTANCE_GID",
+          "columnName": "ROUTE_INSTANCE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_START_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "START_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_END_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "END_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_EQUIP_GROUP_PROFILE_GI",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIP_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_FEASIBILITY_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "FEASIBILITY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FEASIBILITY_CODE_GID",
+          "columnName": "FEASIBILITY_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_USER_DEFINED1_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED1_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_USER_DEFINED2_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED2_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_USER_DEFINED3_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED3_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_USER_DEFINED4_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED4_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_USER_DEFINED5_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED5_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_DOMAIN_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DOMAIN_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DOMAIN_PROFILE_GID",
+          "columnName": "DOMAIN_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RIL_SHIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ROUTE_INSTANCE_LEG_INV_PARTY",
+    "ROUTE_INSTANCE_LEG_REFNUM",
+    "ROUTE_INSTANCE_LEG_REMARK",
+    "ROUTE_INSTANCE_LEG_STATUS"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_ROUTIL_RT_INTS_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ROUTE_INSTANCE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ROUTIL_SHIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        }
+      ]
+    }
+  ]
+}

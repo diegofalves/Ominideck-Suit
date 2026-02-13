@@ -1,1 +1,273 @@
-{"table": {"schema": "glogowner","name": "cutoff_recovery_time_d","description": "Defination of Cutoff Recovery Time details. The records can specify cutoff or recovery, and can indicate a day-time or an offset (not both)."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_SERVICE_GID","description": "Rate service.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "Service provider.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "Location.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOYAGE_SERVICE_TYPE_GID","description": "Voyage Service Type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OFFSET_TIME","description": "Duration the delivery must arrive before service provider departs from origin or duration the delivery must wait after service provider arrives at destination.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OFFSET_TIME_UOM_CODE","description": "Unit of measure for offset_time.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OFFSET_TIME_BASE","description": "Comparison value.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAY_OF_WEEK","description": "Day of week.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HOUR_ADJUSTMENT","description": "Hour adjustment from midnight.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MINUTE_ADJUSTMENT","description": "Minute Adjustment.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_CUTOFF","description": "Indicates the record is defined for cutoff or recovery time. When 'Y', it's for cutoff time; when 'N', it's for recovery time.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "IS_OFFSET","description": "When 'Y', cutoff/recovery time is defined as offset; when 'N', cutoff/recovery time is defined as day-time.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "CUTOFF_TYPE","description": "Cutoff type.   It can have one of the following values:     CY: 'Container Yard' - CY cutoff is the gate house time to arrive at the ocean carriers facility.      SI 'Shipping Instruction' - SI cutoff is the required time for shippers information to be provided to the forwarder.      CFS: 'Container Freight Station' - CFS Cutoff is the required time to be at a 3rd party location for container packing.","dataType": "VARCHAR2","size": 8,"isNull": false,"isConstraint": true,"constraintValues": "'CFS', 'CY', 'SI'","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_SERVICE_GID"},{"sequence": 2,"columnName": "SERVPROV_GID"},{"sequence": 3,"columnName": "LOCATION_GID"},{"sequence": 4,"columnName": "VOYAGE_SERVICE_TYPE_GID"},{"sequence": 5,"columnName": "DOMAIN_NAME"},{"sequence": 6,"columnName": "CUTOFF_TYPE"},{"sequence": 7,"columnName": "IS_CUTOFF"}],"foreignKeys": [{"foreignKeyName": "FK_CRTD_CUTOFF_RECOVERY_TIME","cascadeDelete": false,"parentTableName": "CUTOFF_RECOVERY_TIME","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_SERVICE_GID","columnName": "RATE_SERVICE_GID"},{"sequence": 2,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"},{"sequence": 3,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"},{"sequence": 4,"parentColumnName": "DOMAIN_NAME","columnName": "DOMAIN_NAME"}]},{"foreignKeyName": "FK_CRTD_VOYAGE_SERVICE_TYPE_G","cascadeDelete": false,"parentTableName": "VOYAGE_SERVICE_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "VOYAGE_SERVICE_TYPE_GID","columnName": "VOYAGE_SERVICE_TYPE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "cutoff_recovery_time_d",
+    "description": "Defination of Cutoff Recovery Time details. The records can specify cutoff or recovery, and can indicate a day-time or an offset (not both)."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_SERVICE_GID",
+      "description": "Rate service.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "Service provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "Location.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOYAGE_SERVICE_TYPE_GID",
+      "description": "Voyage Service Type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OFFSET_TIME",
+      "description": "Duration the delivery must arrive before service provider departs from origin or duration the delivery must wait after service provider arrives at destination.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OFFSET_TIME_UOM_CODE",
+      "description": "Unit of measure for offset_time.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OFFSET_TIME_BASE",
+      "description": "Comparison value.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAY_OF_WEEK",
+      "description": "Day of week.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HOUR_ADJUSTMENT",
+      "description": "Hour adjustment from midnight.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MINUTE_ADJUSTMENT",
+      "description": "Minute Adjustment.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_CUTOFF",
+      "description": "Indicates the record is defined for cutoff or recovery time. When 'Y', it's for cutoff time; when 'N', it's for recovery time.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "IS_OFFSET",
+      "description": "When 'Y', cutoff/recovery time is defined as offset; when 'N', cutoff/recovery time is defined as day-time.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "CUTOFF_TYPE",
+      "description": "Cutoff type.   It can have one of the following values:     CY: 'Container Yard' - CY cutoff is the gate house time to arrive at the ocean carriers facility.      SI 'Shipping Instruction' - SI cutoff is the required time for shippers information to be provided to the forwarder.      CFS: 'Container Freight Station' - CFS Cutoff is the required time to be at a 3rd party location for container packing.",
+      "dataType": "VARCHAR2",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'CFS', 'CY', 'SI'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_SERVICE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SERVPROV_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "LOCATION_GID"
+    },
+    {
+      "sequence": 4,
+      "columnName": "VOYAGE_SERVICE_TYPE_GID"
+    },
+    {
+      "sequence": 5,
+      "columnName": "DOMAIN_NAME"
+    },
+    {
+      "sequence": 6,
+      "columnName": "CUTOFF_TYPE"
+    },
+    {
+      "sequence": 7,
+      "columnName": "IS_CUTOFF"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CRTD_CUTOFF_RECOVERY_TIME",
+      "cascadeDelete": false,
+      "parentTableName": "CUTOFF_RECOVERY_TIME",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_SERVICE_GID",
+          "columnName": "RATE_SERVICE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        },
+        {
+          "sequence": 3,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        },
+        {
+          "sequence": 4,
+          "parentColumnName": "DOMAIN_NAME",
+          "columnName": "DOMAIN_NAME"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CRTD_VOYAGE_SERVICE_TYPE_G",
+      "cascadeDelete": false,
+      "parentTableName": "VOYAGE_SERVICE_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VOYAGE_SERVICE_TYPE_GID",
+          "columnName": "VOYAGE_SERVICE_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

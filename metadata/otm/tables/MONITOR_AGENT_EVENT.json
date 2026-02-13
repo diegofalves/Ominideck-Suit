@@ -1,1 +1,354 @@
-{"table": {"schema": "glogowner","name": "monitor_agent_event","description": "The MONITOR_AGENT_EVENT is a link for each agent to the list of events which were of interest to the agent and evaluated its saves queries to true."},"columns": [{"name": "MONITOR_AGENT_EVENT_SEQNO","description": "The primary key for uniqueness.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITOR_AGENT_GID","description": "A foreign key reference to the Monitor_Agent to which the event was of interest and evaluated its saved queries to true.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_TRANSACTION_NO","description": "The foreign key reference into the ie_shipment_status table for events which are xml based.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AGENT_EVENT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EVENT_GROUP_GID","description": "The foreign key reference into the agent_event_group table.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EVENT_OCCUR_DATE","description": "The date and time the event occurred.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EVENT_RECEIVED_DATE","description": "The date and time the event was received.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AGENT_ACTION_STATUS","description": "","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AGENT_ACTION_STATUS_DESC","description": "","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITOR_PROFILE_EXCEPTION_DESC","description": "","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITORED_OBJECT","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXCEPTION_MONITOR_AGENT_GID","description": "The milestone that got an error because of the profiling exception milestone.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRIG_EXPT_MONITOR_AGENT_GID","description": "The milestone which caused the profiling exception determined by the exception milestone","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXCEPTION_AGENT_EVENT_GID","description": "This is the GID of the exception event that was detected. (e.g. MONITORED SHIPMENT - MISSING This is the GID of the exception event that was detected. (e.g. MONITORED SHIPMENT - MISSING SEQUENCE MILESTONE)","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_CURRENT_EXCEPTION","description": "Indicates that the agent event in case of an exception event is currently valid. This value is reset to 'N' every time an agent that produced the exception event is profiled. If the exception still persists another event record is inserted with a value of 'Y'.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "PREDECESSOR_MONITOR_AGENT_GID","description": "GID of the predecessor milestone used to determine this exception.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SUCCESSOR_MONITOR_AGENT_GID","description": "GID of the successor milestone used to determine this exception.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_CODE_GID","description": "Status code for this event","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REASON_CODE_GID","description": "Reason code for this event","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "MONITOR_AGENT_EVENT_SEQNO"},{"sequence": 2,"columnName": "MONITOR_AGENT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_MONAGENTEVENT_MONAGENT","cascadeDelete": true,"parentTableName": "MONITOR_AGENT","columnRelation": [{"sequence": 1,"parentColumnName": "MONITOR_AGENT_GID","columnName": "MONITOR_AGENT_GID"}]},{"foreignKeyName": "FK_MAE_STATUS_CODE_GID","cascadeDelete": false,"parentTableName": "BS_STATUS_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_STATUS_CODE_GID","columnName": "STATUS_CODE_GID"}]},{"foreignKeyName": "FK_MAE_REASON_CODE_GID","cascadeDelete": false,"parentTableName": "BS_REASON_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_REASON_CODE_GID","columnName": "REASON_CODE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_MAE_EXCEPTION_MONITOR_AGENT","columnNames": [{"sequence": 1,"name": "EXCEPTION_MONITOR_AGENT_GID"}]},{"indexName": "IX_MAE_MONITOR_AGENT_GID","columnNames": [{"sequence": 1,"name": "MONITOR_AGENT_GID"}]},{"indexName": "IX_MAE_REASON_CODE_GID","columnNames": [{"sequence": 1,"name": "REASON_CODE_GID"}]},{"indexName": "IX_MAE_STATUS_CODE_GID","columnNames": [{"sequence": 1,"name": "STATUS_CODE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "monitor_agent_event",
+    "description": "The MONITOR_AGENT_EVENT is a link for each agent to the list of events which were of interest to the agent and evaluated its saves queries to true."
+  },
+  "columns": [
+    {
+      "name": "MONITOR_AGENT_EVENT_SEQNO",
+      "description": "The primary key for uniqueness.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITOR_AGENT_GID",
+      "description": "A foreign key reference to the Monitor_Agent to which the event was of interest and evaluated its saved queries to true.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_TRANSACTION_NO",
+      "description": "The foreign key reference into the ie_shipment_status table for events which are xml based.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AGENT_EVENT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EVENT_GROUP_GID",
+      "description": "The foreign key reference into the agent_event_group table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EVENT_OCCUR_DATE",
+      "description": "The date and time the event occurred.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EVENT_RECEIVED_DATE",
+      "description": "The date and time the event was received.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AGENT_ACTION_STATUS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AGENT_ACTION_STATUS_DESC",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITOR_PROFILE_EXCEPTION_DESC",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITORED_OBJECT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXCEPTION_MONITOR_AGENT_GID",
+      "description": "The milestone that got an error because of the profiling exception milestone.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRIG_EXPT_MONITOR_AGENT_GID",
+      "description": "The milestone which caused the profiling exception determined by the exception milestone",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXCEPTION_AGENT_EVENT_GID",
+      "description": "This is the GID of the exception event that was detected. (e.g. MONITORED SHIPMENT - MISSING This is the GID of the exception event that was detected. (e.g. MONITORED SHIPMENT - MISSING SEQUENCE MILESTONE)",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_CURRENT_EXCEPTION",
+      "description": "Indicates that the agent event in case of an exception event is currently valid. This value is reset to 'N' every time an agent that produced the exception event is profiled. If the exception still persists another event record is inserted with a value of 'Y'.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "PREDECESSOR_MONITOR_AGENT_GID",
+      "description": "GID of the predecessor milestone used to determine this exception.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SUCCESSOR_MONITOR_AGENT_GID",
+      "description": "GID of the successor milestone used to determine this exception.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_CODE_GID",
+      "description": "Status code for this event",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REASON_CODE_GID",
+      "description": "Reason code for this event",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "MONITOR_AGENT_EVENT_SEQNO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "MONITOR_AGENT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_MONAGENTEVENT_MONAGENT",
+      "cascadeDelete": true,
+      "parentTableName": "MONITOR_AGENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MONITOR_AGENT_GID",
+          "columnName": "MONITOR_AGENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MAE_STATUS_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_STATUS_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_STATUS_CODE_GID",
+          "columnName": "STATUS_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MAE_REASON_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_REASON_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_REASON_CODE_GID",
+          "columnName": "REASON_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_MAE_EXCEPTION_MONITOR_AGENT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXCEPTION_MONITOR_AGENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MAE_MONITOR_AGENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MONITOR_AGENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MAE_REASON_CODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MAE_STATUS_CODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_CODE_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,1601 @@
-{"table": {"schema": "glogowner","name": "ship_unit","description": "This table stores the unit level information at the order release level. It is a parallel table to S_SHIP_UNIT table (at the Shipment level)."},"columns": [{"name": "SHIP_UNIT_GID","description": "The GID for the ship unit associated to an order release.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_XID","description": "The XID for the ship unit associated to a order release.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SPLITABLE","description": "A Y/N flag to identify if the ship unit can be split when creating an order.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "TRANSPORT_HANDLING_UNIT_GID","description": "The transport handling unit identifier defined for the ship unit. Examples are a box and a pallet.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_LENGTH","description": "The length of each order release ship unit. If this row represents 20 of the same ship units, the total length is 20 x unit length.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_LENGTH_UOM_CODE","description": "The unit of measure for the unit length column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_LENGTH_BASE","description": "The unit length in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WIDTH","description": "The width of each order release ship unit. Each row may represent the ship unit count number of same ship units. If this field is null or is 0, the weight of this order release ship unit is computed as the total of container weight from its ship unit specification and the weight of its shipment ship unit lines.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WIDTH_UOM_CODE","description": "The unit of measure for the unit width.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WIDTH_BASE","description": "The unit width in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_HEIGHT","description": "The height of each order release ship unit. If this row represents the 20 same ship units, the total height is 20 x unit height.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_HEIGHT_UOM_CODE","description": "The unit of measure for unit height column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_HEIGHT_BASE","description": "The unit height in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WEIGHT","description": "The weight of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WEIGHT_UOM_CODE","description": "The unit of measure for the unit weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WEIGHT_BASE","description": "The unit weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_VOLUME","description": "The volume of each order release ship unit. Each row may represent the ship unit count number of same ship units. If this field is null or is 0, the volume of this shipment ship unit is computed as the total of container volume from its ship unit specification and the volume of its shipment ship unit lines.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_VOLUME_UOM_CODE","description": "The unit of measure for the unit volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_VOLUME_BASE","description": "The unit volume in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_CODE","description": "The user defined commodity code for the item. E.g.. the HTS, NMFC, SITC, STCC codes for the item.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_QUAL_GID","description": "A unique identifier to define the type of the code. E.g.. HTS, SITC, STCC, NMFC etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SYSTEM_GENERATED","description": "A Y/N indicator to define if the record is generated by the system for the order base or copied (may be from XML).","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ORDER_RELEASE_GID","description": "The order release associated to this ship unit.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OR_EQUIPMENT_SEQ","description": "Associates equipment of the order release to this particular ship unit.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_COUNT","description": "Ship units that have the same dimension/weight and contents are represented as one row in the SHIP_UNIT table. The ship unit count is the number of these ship units.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "OB_SHIP_UNIT_GID","description": "The order base ship unit associated with the order release ship unit if it was created from an order base and the releasing logic.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_WEIGHT","description": "The net weight of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_WEIGHT_UOM_CODE","description": "The unit of measure for the unit net weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_WEIGHT_BASE","description": "The unit net weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_VOLUME","description": "The net volume of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_VOLUME_UOM_CODE","description": "The unit of measure for the unit net volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_VOLUME_BASE","description": "The unit net volume in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDARY_UNIT_WEIGHT","description": "An additional value for the secondary gross weight of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDARY_UNIT_WEIGHT_UOM_CODE","description": "Unit of measure for secondary weight column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDARY_UNIT_WEIGHT_BASE","description": "The secondary weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDARY_UNIT_VOLUME","description": "An additional value for the secondary gross volume of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDARY_UNIT_VOLUME_UOM_CODE","description": "Unit of measure for the secondary volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDARY_UNIT_VOLUME_BASE","description": "The secondary volume in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDRY_UNIT_NET_WT","description": "An additional value for the secondary net weight of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDRY_UNIT_NET_WT_UOM_CODE","description": "Unit of measure for secondary net weight column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDRY_UNIT_NET_WT_BASE","description": "The secondary net weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDRY_UNIT_NET_VOL","description": "An additional value for the secondary net volume of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDRY_UNIT_NET_VOL_UOM_CODE","description": "Unit of measure for the net secondary volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDRY_UNIT_NET_VOL_BASE","description": "The secondary net volume in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CORE_DIAMETER","description": "For cylindrical objects, this defines the diameter of the core","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CORE_DIAMETER_UOM_CODE","description": "The unit of measure for the diameter of the core","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CORE_DIAMETER_BASE","description": "The diameter of the core in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_DIAMETER","description": "The unit diameter of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_DIAMETER_UOM_CODE","description": "Unit of measure for the unit diameter.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_DIAMETER_BASE","description": "The unit diameter in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG_1","description": "A flexible field to contain informational data that has been copied from the order to the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG_2","description": "A flexible field to contain informational data that has been copied from the order to the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG_3","description": "A flexible field to contain informational data that has been copied from the order to the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG_4","description": "A flexible field to contain informational data that has been copied from the order to the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OB_SU_RELEASE_INSTR_SEQ","description": "The release instruction associated to the order base if the order release was created from an order base through the releasing logic.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_COUNT_SPLITTABLE","description": "A Y/N indicator for whether the ship unit can be split on the count boundaries when planning during container optimization.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "PICKUP_OR_STOP_GID","description": "This ship unit is going to be picked up at this stop. If this field is empty, this ship unit is picked up at the order's source location.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DROPOFF_OR_STOP_GID","description": "This ship unit is going to be dropped off at this stop. If this field is empty, this ship unit is dropped off at the order's destination location.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_WEIGHT","description": "The total gross weight of the order release ship unit (transport handling unit + lines).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_WEIGHT_BASE","description": "The total gross weight unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_WEIGHT_UOM_CODE","description": "The total gross weight in the base unit of measure.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_VOLUME","description": "The total gross volume of the order release ship unit (transport handling unit + lines).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_VOLUME_BASE","description": "The total gross volume unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_VOLUME_UOM_CODE","description": "The total gross volume in the base unit of measure.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOAD_CONFIG_SETUP_GID","description": "A load configurator set up identifier to be used by the load configuration engine as the input rules for how the ship unit was built.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ALLOW_REPACK","description": "A Y/N field, if this flag is set to false, when planning order movement that contains this shipment ship unit or combine shipments that contains this shipment ship unit, the shipment ship unit building process will not repack this s ship unit.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ATTRIBUTE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_EXCLUSIVE_USE","description": "Used to specify if the ship unit is EXCLUSIVE USE. Ship unit is not mixed with anything even if they belong to the same MIXING family if its marked as EXCLUSIVE USE.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "PRIORITY","description": "This column defines the priority associated with a ship unit.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": true,"constraintValues": "","conditionalConstraint": "PRIORITY BETWEEN 1 AND 999","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIP_UNIT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SU_SUPGID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "TRANSPORT_HANDLING_UNIT_GID"}]},{"foreignKeyName": "FK_SU_FCQ_GID","cascadeDelete": false,"parentTableName": "FLEX_COMMODITY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "FLEX_COMMODITY_QUAL_GID","columnName": "FLEX_COMMODITY_QUAL_GID"}]},{"foreignKeyName": "FK_SU_OR_EQUIPMENT_GID","cascadeDelete": false,"parentTableName": "OR_EQUIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_GID"},{"sequence": 2,"parentColumnName": "OR_EQUIPMENT_SEQ","columnName": "OR_EQUIPMENT_SEQ"}]},{"foreignKeyName": "FK_SU_ORDER_RELEASE_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_GID"}]},{"foreignKeyName": "FK_SU_OB_SHIP_UNIT_GID","cascadeDelete": false,"parentTableName": "OB_SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "OB_SHIP_UNIT_GID","columnName": "OB_SHIP_UNIT_GID"}]},{"foreignKeyName": "FK_SU_PICKUP_OR_STOP_GID","cascadeDelete": false,"parentTableName": "OR_STOP","columnRelation": [{"sequence": 1,"parentColumnName": "OR_STOP_GID","columnName": "PICKUP_OR_STOP_GID"}]},{"foreignKeyName": "FK_SU_DROPOFF_OR_STOP_GID","cascadeDelete": false,"parentTableName": "OR_STOP","columnRelation": [{"sequence": 1,"parentColumnName": "OR_STOP_GID","columnName": "DROPOFF_OR_STOP_GID"}]},{"foreignKeyName": "FK_SU_LOAD_CONFIG_SETUP_GID","cascadeDelete": false,"parentTableName": "LOAD_CONFIG_SETUP","columnRelation": [{"sequence": 1,"parentColumnName": "LOAD_CONFIG_SETUP_GID","columnName": "LOAD_CONFIG_SETUP_GID"}]}],"childTables": ["OMR_D","SHIPMENT_STOP_DEBRIEF","SHIP_UNIT_CHILD","SHIP_UNIT_EQUIP_REF_UNIT_JOIN","SHIP_UNIT_LINE","SHIP_UNIT_LOADING_SPLIT","SHIP_UNIT_REFNUM","SHIP_UNIT_REMARK","SHIP_UNIT_SEAL","SHIP_UNIT_SPECIAL_SERVICE","SHIP_UNIT_TEXT","S_SHIP_UNIT"],"indices": [{"indexName": "IX_SHIP_UNIT_XID","columnNames": [{"sequence": 1,"name": "SHIP_UNIT_XID"}]},{"indexName": "IX_SU_DROPOFF_OR_STOP_GID","columnNames": [{"sequence": 1,"name": "DROPOFF_OR_STOP_GID"}]},{"indexName": "IX_SU_FCQ_GID","columnNames": [{"sequence": 1,"name": "FLEX_COMMODITY_QUAL_GID"}]},{"indexName": "IX_SU_OB_SHIP_UNIT_GID","columnNames": [{"sequence": 1,"name": "OB_SHIP_UNIT_GID"}]},{"indexName": "IX_SU_OR_EQUIPMENT_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"},{"sequence": 2,"name": "OR_EQUIPMENT_SEQ"}]},{"indexName": "IX_SU_PICKUP_OR_STOP_GID","columnNames": [{"sequence": 1,"name": "PICKUP_OR_STOP_GID"}]},{"indexName": "IX_SU_THU_GID","columnNames": [{"sequence": 1,"name": "TRANSPORT_HANDLING_UNIT_GID"}]},{"indexName": "SU_ORGID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ship_unit",
+    "description": "This table stores the unit level information at the order release level. It is a parallel table to S_SHIP_UNIT table (at the Shipment level)."
+  },
+  "columns": [
+    {
+      "name": "SHIP_UNIT_GID",
+      "description": "The GID for the ship unit associated to an order release.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_XID",
+      "description": "The XID for the ship unit associated to a order release.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SPLITABLE",
+      "description": "A Y/N flag to identify if the ship unit can be split when creating an order.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_GID",
+      "description": "The transport handling unit identifier defined for the ship unit. Examples are a box and a pallet.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_LENGTH",
+      "description": "The length of each order release ship unit. If this row represents 20 of the same ship units, the total length is 20 x unit length.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_LENGTH_UOM_CODE",
+      "description": "The unit of measure for the unit length column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_LENGTH_BASE",
+      "description": "The unit length in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WIDTH",
+      "description": "The width of each order release ship unit. Each row may represent the ship unit count number of same ship units. If this field is null or is 0, the weight of this order release ship unit is computed as the total of container weight from its ship unit specification and the weight of its shipment ship unit lines.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WIDTH_UOM_CODE",
+      "description": "The unit of measure for the unit width.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WIDTH_BASE",
+      "description": "The unit width in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_HEIGHT",
+      "description": "The height of each order release ship unit. If this row represents the 20 same ship units, the total height is 20 x unit height.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_HEIGHT_UOM_CODE",
+      "description": "The unit of measure for unit height column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_HEIGHT_BASE",
+      "description": "The unit height in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WEIGHT",
+      "description": "The weight of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WEIGHT_UOM_CODE",
+      "description": "The unit of measure for the unit weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WEIGHT_BASE",
+      "description": "The unit weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_VOLUME",
+      "description": "The volume of each order release ship unit. Each row may represent the ship unit count number of same ship units. If this field is null or is 0, the volume of this shipment ship unit is computed as the total of container volume from its ship unit specification and the volume of its shipment ship unit lines.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_VOLUME_UOM_CODE",
+      "description": "The unit of measure for the unit volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_VOLUME_BASE",
+      "description": "The unit volume in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_CODE",
+      "description": "The user defined commodity code for the item. E.g.. the HTS, NMFC, SITC, STCC codes for the item.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_QUAL_GID",
+      "description": "A unique identifier to define the type of the code. E.g.. HTS, SITC, STCC, NMFC etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SYSTEM_GENERATED",
+      "description": "A Y/N indicator to define if the record is generated by the system for the order base or copied (may be from XML).",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ORDER_RELEASE_GID",
+      "description": "The order release associated to this ship unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OR_EQUIPMENT_SEQ",
+      "description": "Associates equipment of the order release to this particular ship unit.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_COUNT",
+      "description": "Ship units that have the same dimension/weight and contents are represented as one row in the SHIP_UNIT table. The ship unit count is the number of these ship units.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "OB_SHIP_UNIT_GID",
+      "description": "The order base ship unit associated with the order release ship unit if it was created from an order base and the releasing logic.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_WEIGHT",
+      "description": "The net weight of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_WEIGHT_UOM_CODE",
+      "description": "The unit of measure for the unit net weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_WEIGHT_BASE",
+      "description": "The unit net weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_VOLUME",
+      "description": "The net volume of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_VOLUME_UOM_CODE",
+      "description": "The unit of measure for the unit net volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_VOLUME_BASE",
+      "description": "The unit net volume in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDARY_UNIT_WEIGHT",
+      "description": "An additional value for the secondary gross weight of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDARY_UNIT_WEIGHT_UOM_CODE",
+      "description": "Unit of measure for secondary weight column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDARY_UNIT_WEIGHT_BASE",
+      "description": "The secondary weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDARY_UNIT_VOLUME",
+      "description": "An additional value for the secondary gross volume of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDARY_UNIT_VOLUME_UOM_CODE",
+      "description": "Unit of measure for the secondary volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDARY_UNIT_VOLUME_BASE",
+      "description": "The secondary volume in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDRY_UNIT_NET_WT",
+      "description": "An additional value for the secondary net weight of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDRY_UNIT_NET_WT_UOM_CODE",
+      "description": "Unit of measure for secondary net weight column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDRY_UNIT_NET_WT_BASE",
+      "description": "The secondary net weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDRY_UNIT_NET_VOL",
+      "description": "An additional value for the secondary net volume of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDRY_UNIT_NET_VOL_UOM_CODE",
+      "description": "Unit of measure for the net secondary volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDRY_UNIT_NET_VOL_BASE",
+      "description": "The secondary net volume in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CORE_DIAMETER",
+      "description": "For cylindrical objects, this defines the diameter of the core",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CORE_DIAMETER_UOM_CODE",
+      "description": "The unit of measure for the diameter of the core",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CORE_DIAMETER_BASE",
+      "description": "The diameter of the core in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_DIAMETER",
+      "description": "The unit diameter of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_DIAMETER_UOM_CODE",
+      "description": "Unit of measure for the unit diameter.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_DIAMETER_BASE",
+      "description": "The unit diameter in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG_1",
+      "description": "A flexible field to contain informational data that has been copied from the order to the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG_2",
+      "description": "A flexible field to contain informational data that has been copied from the order to the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG_3",
+      "description": "A flexible field to contain informational data that has been copied from the order to the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG_4",
+      "description": "A flexible field to contain informational data that has been copied from the order to the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OB_SU_RELEASE_INSTR_SEQ",
+      "description": "The release instruction associated to the order base if the order release was created from an order base through the releasing logic.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_COUNT_SPLITTABLE",
+      "description": "A Y/N indicator for whether the ship unit can be split on the count boundaries when planning during container optimization.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "PICKUP_OR_STOP_GID",
+      "description": "This ship unit is going to be picked up at this stop. If this field is empty, this ship unit is picked up at the order's source location.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DROPOFF_OR_STOP_GID",
+      "description": "This ship unit is going to be dropped off at this stop. If this field is empty, this ship unit is dropped off at the order's destination location.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_WEIGHT",
+      "description": "The total gross weight of the order release ship unit (transport handling unit + lines).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_WEIGHT_BASE",
+      "description": "The total gross weight unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_WEIGHT_UOM_CODE",
+      "description": "The total gross weight in the base unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_VOLUME",
+      "description": "The total gross volume of the order release ship unit (transport handling unit + lines).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_VOLUME_BASE",
+      "description": "The total gross volume unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_VOLUME_UOM_CODE",
+      "description": "The total gross volume in the base unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOAD_CONFIG_SETUP_GID",
+      "description": "A load configurator set up identifier to be used by the load configuration engine as the input rules for how the ship unit was built.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ALLOW_REPACK",
+      "description": "A Y/N field, if this flag is set to false, when planning order movement that contains this shipment ship unit or combine shipments that contains this shipment ship unit, the shipment ship unit building process will not repack this s ship unit.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ATTRIBUTE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_EXCLUSIVE_USE",
+      "description": "Used to specify if the ship unit is EXCLUSIVE USE. Ship unit is not mixed with anything even if they belong to the same MIXING family if its marked as EXCLUSIVE USE.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "PRIORITY",
+      "description": "This column defines the priority associated with a ship unit.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "PRIORITY BETWEEN 1 AND 999",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data type date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIP_UNIT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SU_SUPGID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SU_FCQ_GID",
+      "cascadeDelete": false,
+      "parentTableName": "FLEX_COMMODITY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FLEX_COMMODITY_QUAL_GID",
+          "columnName": "FLEX_COMMODITY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SU_OR_EQUIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OR_EQUIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "OR_EQUIPMENT_SEQ",
+          "columnName": "OR_EQUIPMENT_SEQ"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SU_ORDER_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SU_OB_SHIP_UNIT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OB_SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OB_SHIP_UNIT_GID",
+          "columnName": "OB_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SU_PICKUP_OR_STOP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OR_STOP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OR_STOP_GID",
+          "columnName": "PICKUP_OR_STOP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SU_DROPOFF_OR_STOP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OR_STOP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OR_STOP_GID",
+          "columnName": "DROPOFF_OR_STOP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SU_LOAD_CONFIG_SETUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOAD_CONFIG_SETUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOAD_CONFIG_SETUP_GID",
+          "columnName": "LOAD_CONFIG_SETUP_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "OMR_D",
+    "SHIPMENT_STOP_DEBRIEF",
+    "SHIP_UNIT_CHILD",
+    "SHIP_UNIT_EQUIP_REF_UNIT_JOIN",
+    "SHIP_UNIT_LINE",
+    "SHIP_UNIT_LOADING_SPLIT",
+    "SHIP_UNIT_REFNUM",
+    "SHIP_UNIT_REMARK",
+    "SHIP_UNIT_SEAL",
+    "SHIP_UNIT_SPECIAL_SERVICE",
+    "SHIP_UNIT_TEXT",
+    "S_SHIP_UNIT"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_SHIP_UNIT_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIP_UNIT_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SU_DROPOFF_OR_STOP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DROPOFF_OR_STOP_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SU_FCQ_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FLEX_COMMODITY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SU_OB_SHIP_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "OB_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SU_OR_EQUIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "OR_EQUIPMENT_SEQ"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SU_PICKUP_OR_STOP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PICKUP_OR_STOP_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SU_THU_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "SU_ORGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        }
+      ]
+    }
+  ]
+}

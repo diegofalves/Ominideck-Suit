@@ -1,1 +1,491 @@
-{"table": {"schema": "glogowner","name": "gl_user","description": "This table stores the GC3 users and their passwords. It also links to the USERS table to provide the U_NAME to get to Web Logic."},"columns": [{"name": "GL_USER_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GL_USER_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GL_PASSWORD","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_LOGIN_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GL_ACCOUNT_POLICY_GID","description": "The account policy the user is associated with (defines rules for passwords, etc.)","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PW_EXPIRATION_DATE","description": "The date the current password will expire.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCOUNT_LOCKOUT_TIME","description": "Determines the time that the account was locked out, due to invalid password attempts.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USERNAME","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEFAULT_USER_ROLE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'DEFAULT'"},{"name": "IS_EXTERNAL","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DEFAULT_AA_REPORT","description": "","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BI_ROLE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_USE_PROFILE_GID","description": "Profile defining document upload and view for this user. Overrides use profile for the domain.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_RESERVED","description": "If Y, the user is reserved by OTM: it cannot be deleted and it's user role is unmutable.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "FORCE_PASSWORD_RESET","description": "If Y, the user must reset his password on the next login","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "AUTO_APPROVE_RULE_PROFILE_GID","description": "Added to Link the user to a profile that establishes approval amounts by Transportation Mode","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNSUCCESSFUL_LOGIN_ATTEMPTS","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SALT","description": "This is a base 64 encoded randomly generated ID unique to each user for each new password.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HASH_ALG","description": "This is metadata used to identify the digest algorithm used to produce the encrypted password.","dataType": "VARCHAR2","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ITERATION_COUNT","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "User effective date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "user expiration date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_OBIEE","description": "If 'Y', the user maps to an OBIEE LDAP user. Creation and removal of this user, along with any password modifications, should be delegated to OBIEE.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "FIRST_NAME","description": "The given name of the user.","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_NAME","description": "The surname of the user.","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EMAIL_ADDRESS","description": "The email address of the user.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FEDERATED","description": "If Y, the user is considered a federated user.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_SYNC","description": "If Y, the user should be synchronized.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "LAST_KNOWN_SYNC_DATE","description": "The last known synchronization date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GL_USER_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GU_GL_ACCOUNT_POLICY_GID","cascadeDelete": false,"parentTableName": "GL_ACCOUNT_POLICY","columnRelation": [{"sequence": 1,"parentColumnName": "GL_ACCOUNT_POLICY_GID","columnName": "GL_ACCOUNT_POLICY_GID"}]},{"foreignKeyName": "FK_GU_DEFAULT_USER_ROLE_GID","cascadeDelete": false,"parentTableName": "USER_ROLE","columnRelation": [{"sequence": 1,"parentColumnName": "USER_ROLE_GID","columnName": "DEFAULT_USER_ROLE_GID"}]},{"foreignKeyName": "FK_GU_BI_ROLE_GID","cascadeDelete": false,"parentTableName": "BI_ROLE","columnRelation": [{"sequence": 1,"parentColumnName": "BI_ROLE_GID","columnName": "BI_ROLE_GID"}]},{"foreignKeyName": "FK_GLUSR_DOCUMENT_USE_PROFILE","cascadeDelete": false,"parentTableName": "DOCUMENT_USE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "DOCUMENT_USE_PROFILE_GID","columnName": "DOCUMENT_USE_PROFILE_GID"}]},{"foreignKeyName": "FK_GU_AUTO_APRV_RL_PRFL_GID","cascadeDelete": false,"parentTableName": "AUTO_APPROVE_RULE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "AUTO_APPROVE_RULE_PROFILE_GID","columnName": "AUTO_APPROVE_RULE_PROFILE_GID"}]}],"childTables": ["ACCOUNT_USER_ASSOCIATION","AI_AGENT_OTM_USER","AI_USER_GRANT","AI_USER_ROLE_GRANT","BULK_PLAN","CONTACT","DATA_SOURCE","EXPLANATION","FLEET_BULK_PLAN","GL_PASSWORD_HISTORY","GL_USER_ACR_ROLE","GL_USER_AUTH","GL_USER_BI_APP","GL_USER_BI_ROLE","GL_USER_SHP_AGNT_CONTACT_JOIN","LONG_RUNNING_TASK","MESSAGE_TYPE","PROBLEM","PROBLEM_NOTE","REPORT_LOG","TRANSPORTATION_WORKBENCH","USER_ACCESS","USER_APPDATA","USER_ASSOCIATION","USER_FAVORITE_TABLE","USER_ROLE_GRANT","WORK_ASSIGNMENT_BULK_PLAN","WORK_QUEUE_ASSIGNMENT"],"indices": [{"indexName": "UK_GL_USER","columnNames": [{"sequence": 1,"name": "USERNAME"}]},{"indexName": "IX_GL_USER_XID","columnNames": [{"sequence": 1,"name": "GL_USER_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gl_user",
+    "description": "This table stores the GC3 users and their passwords. It also links to the USERS table to provide the U_NAME to get to Web Logic."
+  },
+  "columns": [
+    {
+      "name": "GL_USER_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GL_USER_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GL_PASSWORD",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_LOGIN_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GL_ACCOUNT_POLICY_GID",
+      "description": "The account policy the user is associated with (defines rules for passwords, etc.)",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PW_EXPIRATION_DATE",
+      "description": "The date the current password will expire.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCOUNT_LOCKOUT_TIME",
+      "description": "Determines the time that the account was locked out, due to invalid password attempts.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USERNAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEFAULT_USER_ROLE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'DEFAULT'"
+    },
+    {
+      "name": "IS_EXTERNAL",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DEFAULT_AA_REPORT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BI_ROLE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_USE_PROFILE_GID",
+      "description": "Profile defining document upload and view for this user. Overrides use profile for the domain.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_RESERVED",
+      "description": "If Y, the user is reserved by OTM: it cannot be deleted and it's user role is unmutable.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "FORCE_PASSWORD_RESET",
+      "description": "If Y, the user must reset his password on the next login",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "AUTO_APPROVE_RULE_PROFILE_GID",
+      "description": "Added to Link the user to a profile that establishes approval amounts by Transportation Mode",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNSUCCESSFUL_LOGIN_ATTEMPTS",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SALT",
+      "description": "This is a base 64 encoded randomly generated ID unique to each user for each new password.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HASH_ALG",
+      "description": "This is metadata used to identify the digest algorithm used to produce the encrypted password.",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ITERATION_COUNT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "User effective date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "user expiration date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_OBIEE",
+      "description": "If 'Y', the user maps to an OBIEE LDAP user. Creation and removal of this user, along with any password modifications, should be delegated to OBIEE.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "FIRST_NAME",
+      "description": "The given name of the user.",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_NAME",
+      "description": "The surname of the user.",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EMAIL_ADDRESS",
+      "description": "The email address of the user.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FEDERATED",
+      "description": "If Y, the user is considered a federated user.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_SYNC",
+      "description": "If Y, the user should be synchronized.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "LAST_KNOWN_SYNC_DATE",
+      "description": "The last known synchronization date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GL_USER_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GU_GL_ACCOUNT_POLICY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GL_ACCOUNT_POLICY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GL_ACCOUNT_POLICY_GID",
+          "columnName": "GL_ACCOUNT_POLICY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GU_DEFAULT_USER_ROLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "USER_ROLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "USER_ROLE_GID",
+          "columnName": "DEFAULT_USER_ROLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GU_BI_ROLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BI_ROLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BI_ROLE_GID",
+          "columnName": "BI_ROLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GLUSR_DOCUMENT_USE_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "DOCUMENT_USE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DOCUMENT_USE_PROFILE_GID",
+          "columnName": "DOCUMENT_USE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GU_AUTO_APRV_RL_PRFL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AUTO_APPROVE_RULE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUTO_APPROVE_RULE_PROFILE_GID",
+          "columnName": "AUTO_APPROVE_RULE_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ACCOUNT_USER_ASSOCIATION",
+    "AI_AGENT_OTM_USER",
+    "AI_USER_GRANT",
+    "AI_USER_ROLE_GRANT",
+    "BULK_PLAN",
+    "CONTACT",
+    "DATA_SOURCE",
+    "EXPLANATION",
+    "FLEET_BULK_PLAN",
+    "GL_PASSWORD_HISTORY",
+    "GL_USER_ACR_ROLE",
+    "GL_USER_AUTH",
+    "GL_USER_BI_APP",
+    "GL_USER_BI_ROLE",
+    "GL_USER_SHP_AGNT_CONTACT_JOIN",
+    "LONG_RUNNING_TASK",
+    "MESSAGE_TYPE",
+    "PROBLEM",
+    "PROBLEM_NOTE",
+    "REPORT_LOG",
+    "TRANSPORTATION_WORKBENCH",
+    "USER_ACCESS",
+    "USER_APPDATA",
+    "USER_ASSOCIATION",
+    "USER_FAVORITE_TABLE",
+    "USER_ROLE_GRANT",
+    "WORK_ASSIGNMENT_BULK_PLAN",
+    "WORK_QUEUE_ASSIGNMENT"
+  ],
+  "indices": [
+    {
+      "indexName": "UK_GL_USER",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "USERNAME"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_GL_USER_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GL_USER_XID"
+        }
+      ]
+    }
+  ]
+}

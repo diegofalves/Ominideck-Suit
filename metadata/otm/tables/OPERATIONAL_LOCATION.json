@@ -1,1 +1,130 @@
-{"table": {"schema": "glogowner","name": "operational_location","description": "Sub locations, such as terminals at a port"},"columns": [{"name": "OPERATIONAL_LOCATION_GID","description": "Sub location belonging to a main location. Sub location may only belong to one location.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAIN_LOCATION_GID","description": "Main location to which the operational location belongs.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OPERATIONAL_LOCATION_GID"}],"foreignKeys": [{"foreignKeyName": "FK_OPLOC_OPERATIONAL_LOCATION","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "OPERATIONAL_LOCATION_GID"}]},{"foreignKeyName": "FK_OPLOC_MAIN_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "MAIN_LOCATION_GID"}]}],"childTables": ["OPERATIONAL_LOCATION_D"],"indices": [{"indexName": "IX_OPLOC_MAIN_LOCATION_GID","columnNames": [{"sequence": 1,"name": "MAIN_LOCATION_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "operational_location",
+    "description": "Sub locations, such as terminals at a port"
+  },
+  "columns": [
+    {
+      "name": "OPERATIONAL_LOCATION_GID",
+      "description": "Sub location belonging to a main location. Sub location may only belong to one location.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAIN_LOCATION_GID",
+      "description": "Main location to which the operational location belongs.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OPERATIONAL_LOCATION_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OPLOC_OPERATIONAL_LOCATION",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "OPERATIONAL_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OPLOC_MAIN_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "MAIN_LOCATION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "OPERATIONAL_LOCATION_D"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_OPLOC_MAIN_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MAIN_LOCATION_GID"
+        }
+      ]
+    }
+  ]
+}

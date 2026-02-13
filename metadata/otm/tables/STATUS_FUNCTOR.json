@@ -1,1 +1,225 @@
-{"table": {"schema": "glogowner","name": "status_functor","description": ""},"columns": [{"name": "OBJECT_TYPE","description": "","dataType": "VARCHAR2","size": 80,"isNull": false,"isConstraint": true,"constraintValues": "'ORDER_MOVEMENT','QUOTE','ROUTE_TEMPLATE','CONTACT','SHIP_REQDOC','S_SHIP_UNIT','E_SHIPMENT','SHIPMENT','GTM_LICENSE','ROUTE_INSTANCE','DRIVER','TENDER_COLLABORATION','CONTAINER_GROUP','CLAIM','EQUIPMENT','GTM_TRANSACTION_LINE','GTM_TRANSACTION','GTM_CAMPAIGN_LINE','DOCUMENT','SCHEDULE','JOB','CONSOL','OB_SHIP_UNIT','E_RELEASE','S_EQUIPMENT','WORK_INVOICE','ITEM_QF_REQDOC','OB_LINE','POWER_UNIT','INVOICE','ROUTE_INSTANCE_LEG','GTM_CA_LINE_REQDOC','GTM_ITEM','GTM_REGISTRATION','S_SHIP_UNIT_LINE','GTM_TRANS_REQDOC','OMR','GTM_CAMPAIGN','ORDER_BASE','GTM_PARTY','VOUCHER','DOCUMENT_PARTY','DM_TRANSACTION','ORDER_RELEASE','SHIP_GROUP','GTM_SHIPMENT_REQDOC','TENDER_COLLAB_SG'","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_FUNCTION","description": "","dataType": "VARCHAR2","size": 255,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FUNCTOR_CLASS","description": "","dataType": "VARCHAR2","size": 255,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVED_CONDITION_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVED_CONDITION_ADDITIVE","description": "Identify if saved condition check and functor check are cumulative.  'Y' means cumulative, 'N' means saved condition overrides status functor.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "SAVED_CONDITION_CAUSE_GID","description": "Optional; specifies the translation ID of the error message to be returned if the saved condition causes the status functor to fail","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OBJECT_TYPE"},{"sequence": 2,"columnName": "STATUS_FUNCTION"},{"sequence": 3,"columnName": "DOMAIN_NAME"}],"foreignKeys": [{"foreignKeyName": "FK_SF_SAVED_CONDITION_GID","cascadeDelete": false,"parentTableName": "SAVED_CONDITION","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_CONDITION_GID","columnName": "SAVED_CONDITION_GID"}]},{"foreignKeyName": "FK_SF_SAVED_CONDITION_CAUSE_G","cascadeDelete": false,"parentTableName": "TRANSLATION","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSLATION_GID","columnName": "SAVED_CONDITION_CAUSE_GID"}]},{"foreignKeyName": "FK_SF_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": [],"indices": [{"indexName": "IX_SF_SAVED_CONDITION_CAUSE_G","columnNames": [{"sequence": 1,"name": "SAVED_CONDITION_CAUSE_GID"}]},{"indexName": "IX_SF_SAVED_CONDITION_GID","columnNames": [{"sequence": 1,"name": "SAVED_CONDITION_GID"}]},{"indexName": "IX_STATFUNC_DOMAIN_INSERT","columnNames": [{"sequence": 1,"name": "DOMAIN_NAME"},{"sequence": 2,"name": "INSERT_DATE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "status_functor",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "OBJECT_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 80,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'ORDER_MOVEMENT','QUOTE','ROUTE_TEMPLATE','CONTACT','SHIP_REQDOC','S_SHIP_UNIT','E_SHIPMENT','SHIPMENT','GTM_LICENSE','ROUTE_INSTANCE','DRIVER','TENDER_COLLABORATION','CONTAINER_GROUP','CLAIM','EQUIPMENT','GTM_TRANSACTION_LINE','GTM_TRANSACTION','GTM_CAMPAIGN_LINE','DOCUMENT','SCHEDULE','JOB','CONSOL','OB_SHIP_UNIT','E_RELEASE','S_EQUIPMENT','WORK_INVOICE','ITEM_QF_REQDOC','OB_LINE','POWER_UNIT','INVOICE','ROUTE_INSTANCE_LEG','GTM_CA_LINE_REQDOC','GTM_ITEM','GTM_REGISTRATION','S_SHIP_UNIT_LINE','GTM_TRANS_REQDOC','OMR','GTM_CAMPAIGN','ORDER_BASE','GTM_PARTY','VOUCHER','DOCUMENT_PARTY','DM_TRANSACTION','ORDER_RELEASE','SHIP_GROUP','GTM_SHIPMENT_REQDOC','TENDER_COLLAB_SG'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_FUNCTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FUNCTOR_CLASS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVED_CONDITION_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVED_CONDITION_ADDITIVE",
+      "description": "Identify if saved condition check and functor check are cumulative.  'Y' means cumulative, 'N' means saved condition overrides status functor.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "SAVED_CONDITION_CAUSE_GID",
+      "description": "Optional; specifies the translation ID of the error message to be returned if the saved condition causes the status functor to fail",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OBJECT_TYPE"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STATUS_FUNCTION"
+    },
+    {
+      "sequence": 3,
+      "columnName": "DOMAIN_NAME"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SF_SAVED_CONDITION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_CONDITION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_CONDITION_GID",
+          "columnName": "SAVED_CONDITION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SF_SAVED_CONDITION_CAUSE_G",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSLATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSLATION_GID",
+          "columnName": "SAVED_CONDITION_CAUSE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SF_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_SF_SAVED_CONDITION_CAUSE_G",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SAVED_CONDITION_CAUSE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SF_SAVED_CONDITION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SAVED_CONDITION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_STATFUNC_DOMAIN_INSERT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DOMAIN_NAME"
+        },
+        {
+          "sequence": 2,
+          "name": "INSERT_DATE"
+        }
+      ]
+    }
+  ]
+}

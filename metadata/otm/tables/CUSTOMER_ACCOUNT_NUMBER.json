@@ -1,1 +1,231 @@
-{"table": {"schema": "glogowner","name": "customer_account_number","description": ""},"columns": [{"name": "CUSTOMER_ACCOUNT_NUMBER_ID","description": "Auto-generated numeric ID","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_LOCATION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_QUAL_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_CONTACT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYMENT_METHOD_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_LOCATION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCOUNT_NUMBER","description": "Account number assigned to the combination of identifiers specified in this record.","dataType": "VARCHAR2","size": 100,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CUSTOMER_ACCOUNT_NUMBER_ID"}],"foreignKeys": [{"foreignKeyName": "FK_CSTAN_SOURCE_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SOURCE_LOCATION_GID"}]},{"foreignKeyName": "FK_CSTAN_INVOLVED_PARTY_QUAL_G","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "INVOLVED_PARTY_QUAL_GID"}]},{"foreignKeyName": "FK_CSTAN_INVOLVED_PARTY_CONTA","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "INVOLVED_PARTY_CONTACT_GID"}]},{"foreignKeyName": "FK_CSTAN_PAYMENT_METHOD_CODE_G","cascadeDelete": false,"parentTableName": "PAYMENT_METHOD_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "PAYMENT_METHOD_CODE_GID","columnName": "PAYMENT_METHOD_CODE_GID"}]},{"foreignKeyName": "FK_CSTAN_DEST_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DEST_LOCATION_GID"}]},{"foreignKeyName": "FK_CSTAN_SERVPROV_GID","cascadeDelete": false,"parentTableName": "SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "customer_account_number",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "CUSTOMER_ACCOUNT_NUMBER_ID",
+      "description": "Auto-generated numeric ID",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_LOCATION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_QUAL_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_CONTACT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYMENT_METHOD_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_LOCATION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCOUNT_NUMBER",
+      "description": "Account number assigned to the combination of identifiers specified in this record.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CUSTOMER_ACCOUNT_NUMBER_ID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CSTAN_SOURCE_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SOURCE_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CSTAN_INVOLVED_PARTY_QUAL_G",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "INVOLVED_PARTY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CSTAN_INVOLVED_PARTY_CONTA",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "INVOLVED_PARTY_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CSTAN_PAYMENT_METHOD_CODE_G",
+      "cascadeDelete": false,
+      "parentTableName": "PAYMENT_METHOD_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PAYMENT_METHOD_CODE_GID",
+          "columnName": "PAYMENT_METHOD_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CSTAN_DEST_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DEST_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CSTAN_SERVPROV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

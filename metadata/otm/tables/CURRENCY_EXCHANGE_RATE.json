@@ -1,1 +1,243 @@
-{"table": {"schema": "glogowner","name": "currency_exchange_rate","description": "This table is used for the currency conversion in GC3. It stores the conversion rates for every country with effective dates. It is used along with the Currency table to calculate the currency conversion rates."},"columns": [{"name": "CURRENCY_EXCHANGE_RATE_ID","description": "The XID of the exchange rate.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXCHANGE_RATE_GID","description": "The GID of the exchange rate.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "The effective date on which the currency exchange rate is applicable.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FROM_CURRENCY_GID","description": "The GID for the currency to be calculated into a different currency.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TO_CURRENCY_GID","description": "The GID for the currency into which the original currency was calculated.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRIANGULATION_CURRENCY_GID","description": "Use the Triangulation Currency field if you want to convert to an intermediate currency before the currency in the To Currency field. For example, you may want to convert from Pesetas to Euros before finally converting the rate to Yen.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAXIMUM_PRECISION","description": "'Specifies different precision limits than the main exchange rate data. Enter the maximum precision and number of fractional digits in the Max Precision and Fractional Digits fields.","dataType": "NUMBER","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FRACTIONAL_DIGITS","description": "Specifies different precision limits than the main Exchange Rate data. Enter the maximum precision and number of fractional digits in the Max Precision and Fractional Digits fields.","dataType": "NUMBER","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXCHANGE_RATE","description": "Contains the actual exchange rate.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CURRENCY_EXCHANGE_RATE_ID"}],"foreignKeys": [{"foreignKeyName": "FK_CER_EXCHANGE_RATE_GID","cascadeDelete": false,"parentTableName": "EXCHANGE_RATE_BY_DATE","columnRelation": [{"sequence": 1,"parentColumnName": "EXCHANGE_RATE_GID","columnName": "EXCHANGE_RATE_GID"},{"sequence": 2,"parentColumnName": "EFFECTIVE_DATE","columnName": "EFFECTIVE_DATE"}]},{"foreignKeyName": "FK_CER_FROM_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "FROM_CURRENCY_GID"}]},{"foreignKeyName": "FK_CER_TO_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "TO_CURRENCY_GID"}]},{"foreignKeyName": "FK_CER_TRICURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "TRIANGULATION_CURRENCY_GID"}]}],"childTables": [],"indices": [{"indexName": "UX1_CURRENCY_EXCHANGE_RATE","columnNames": [{"sequence": 1,"name": "EXCHANGE_RATE_GID"},{"sequence": 2,"name": "EFFECTIVE_DATE"},{"sequence": 3,"name": "FROM_CURRENCY_GID"},{"sequence": 4,"name": "TO_CURRENCY_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "currency_exchange_rate",
+    "description": "This table is used for the currency conversion in GC3. It stores the conversion rates for every country with effective dates. It is used along with the Currency table to calculate the currency conversion rates."
+  },
+  "columns": [
+    {
+      "name": "CURRENCY_EXCHANGE_RATE_ID",
+      "description": "The XID of the exchange rate.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXCHANGE_RATE_GID",
+      "description": "The GID of the exchange rate.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "The effective date on which the currency exchange rate is applicable.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FROM_CURRENCY_GID",
+      "description": "The GID for the currency to be calculated into a different currency.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TO_CURRENCY_GID",
+      "description": "The GID for the currency into which the original currency was calculated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRIANGULATION_CURRENCY_GID",
+      "description": "Use the Triangulation Currency field if you want to convert to an intermediate currency before the currency in the To Currency field. For example, you may want to convert from Pesetas to Euros before finally converting the rate to Yen.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAXIMUM_PRECISION",
+      "description": "'Specifies different precision limits than the main exchange rate data. Enter the maximum precision and number of fractional digits in the Max Precision and Fractional Digits fields.",
+      "dataType": "NUMBER",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FRACTIONAL_DIGITS",
+      "description": "Specifies different precision limits than the main Exchange Rate data. Enter the maximum precision and number of fractional digits in the Max Precision and Fractional Digits fields.",
+      "dataType": "NUMBER",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXCHANGE_RATE",
+      "description": "Contains the actual exchange rate.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CURRENCY_EXCHANGE_RATE_ID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CER_EXCHANGE_RATE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EXCHANGE_RATE_BY_DATE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXCHANGE_RATE_GID",
+          "columnName": "EXCHANGE_RATE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "EFFECTIVE_DATE",
+          "columnName": "EFFECTIVE_DATE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CER_FROM_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "FROM_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CER_TO_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "TO_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CER_TRICURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "TRIANGULATION_CURRENCY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UX1_CURRENCY_EXCHANGE_RATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXCHANGE_RATE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "EFFECTIVE_DATE"
+        },
+        {
+          "sequence": 3,
+          "name": "FROM_CURRENCY_GID"
+        },
+        {
+          "sequence": 4,
+          "name": "TO_CURRENCY_GID"
+        }
+      ]
+    }
+  ]
+}

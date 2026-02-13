@@ -1,1 +1,1843 @@
-{"table": {"schema": "glogowner","name": "ie_shipmentstatus","description": "The IE series of tables is a method to store the EDI information from a Blob into a more relational format. However these may change in ver 3.0."},"columns": [{"name": "I_TRANSACTION_NO","description": "The transaction identifier for the shipment data of the tracking event.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_ALIAS_QUAL_GID","description": "The service provider alias qualifier identifier for the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_ALIAS_VALUE","description": "The service provider alias value for the qualifier defined.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "A description for the tracking event captured.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_LEVEL","description": "A status level associated with the tracking event.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VESSEL_CODE_QUALIFIER","description": "The vessel code qualifier identifier defined to itemize vessel codes.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VESSEL_CODE","description": "The vessel code associated with the qualifier defined.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_CODE3_GID","description": "The 3 digit country code that the vessel is registered in.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VESSEL_GID","description": "The vessel GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_OR_SAIL_DATE","description": "The ship sail date for the vessel used in the tracking event.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISCHARGE_OR_COMPLETION_DATE","description": "The discharge or completion date for the vessel used in the tracking event.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIGHT_OR_VOYAGE_NUM","description": "The flight number if the tracking event is for a air mode or the voyage number if for ocean mode.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_VALUE","description": "A total weight value associated with the shipment tracking event.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_VALUE_UOM_CODE","description": "The total weight unit of measure code.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_VALUE_BASE","description": "The total weight in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_VALUE","description": "A total volume value associated with the shipment tracking event.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_VALUE_UOM_CODE","description": "The total volume unit of measure code.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_VALUE_BASE","description": "The total volume in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OB_REFNUM_QUAL_GID","description": "The order base reference qualifier for the order level data of the tracking event. Define by order base, order release, or order release line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OB_REFNUM_VALUE","description": "The order base reference level value for the defined qualifier.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_CODE_GID","description": "The status code GID associated with the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_ZONE_GID","description": "The time zone GID for the tracking event date.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EVENTDATE","description": "The tracking event date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_REASON_CODE_GID","description": "The status reason code that is mapped to the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SS_CONTACT_FUNCTION_CODE","description": "The contact function code for the individual entering the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SS_CONTACT_NAME","description": "The contact name for the individual entering the tracking event.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRAIN_JCT_BO_CODE","description": "Shipment tracking event data for rail shipments. The train junction box code for the CLM message.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "The monthly range partition to manage purging status messages.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESPONSIBLE_PARTY_GID","description": "The responsible party that is defined for the type of status for the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RAIL_ROAD_REPORTING_SCAC","description": "The SCAC for the rail road service provider that is providing the shipment status message or CLM.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_CAR_LOADED","description": "The CLM field to indicate whether the rail car is loaded or empty.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_DESTINATION_CITY","description": "Shipment tracking event data for rail shipments. Defines the rail car destination city.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_DESTINATION_STATE","description": "Shipment tracking event data for rail shipments. Defines the rail car destination state.","dataType": "VARCHAR2","size": 6,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_DESTINATION_SPLC_CODE","description": "Shipment tracking event data for rail shipments. Defines the rail car destination state.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_DESTINATION_ETA_DATE","description": "Shipment tracking event data for rail shipments. Defines the estimated time of arrival to the car destination node.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIG_TRANSACTION_NO","description": "If this event is to adjust a previous tracking event, this field specifies the original transaction identifier.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEMPERATURE","description": "The temperature associated with the shipment tracking event.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEMPERATURE_BASE","description": "The temperature value in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEMPERATURE_UOM_CODE","description": "The temperature unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EVENT_RECEIVED_DATE","description": "The time stamp for when the tracking event was received.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVER_GID","description": "The driver GID associated with the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EVENT_END_DATE","description": "The event end date associated with the tracking event.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "POWER_UNIT_GID","description": "The power unit GID associated with the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_GID","description": "The shipment GID associated with the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVER_REFNUM_QUAL_GID","description": "The reference number qualifier for the driver that can be used to associate to a tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVER_REFNUM_VALUE","description": "The driver reference number value for the reference number qualifier defined.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PU_REFNUM_QUAL_GID","description": "The reference number qualifier for the power unit that can be used to associate to a tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PU_REFNUM_VALUE","description": "The power unit reference number value for the reference number qualifier defined.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELATED_TRANSACTION_NO","description": "If this event is related to another tracking event this field specifies the related transaction number.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_EVENT_REFERENCE","description": "The reference number of the event used by the external system sending the event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_DATA_SOURCE","description": "The identifying code for the external system data source.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_WORKED","description": "The time worked for the tracking event for recording purposes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_WORKED_UOM_CODE","description": "The time worked unit of measure code.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_WORKED_BASE","description": "The time worked in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_DRIVEN","description": "The time driven for the tracking event for recording purposes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_DRIVEN_UOM_CODE","description": "The time driven unit of measure code.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_DRIVEN_BASE","description": "The time driven in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVER_CAL_EVENT_GID","description": "This is a GID for the driver calendar event being recorded with the tracking event, such as vacation time.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MARKED_FOR_PURGE","description": "A Boolean field. When it is set to 'Y', this row and its child data will be purged.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_BASE_GID","description": "The order base identifier for the order level data of the tracking event.  Define by order base, order release, or order release line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_GID","description": "The order release identifier for the order level data of the tracking event. Define by order base, order release, or order release line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OR_REFNUM_QUAL_GID","description": "The order release reference qualifier for the order level data of the tracking event. Define by order base, order release, or order release line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OR_REFNUM_VALUE","description": "The order release reference number value for the defined qualifier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRACKING_NUMBER","description": "The specific tracking number for the shipment provided by the service provider and is matched to a reference qualifier called tracking number.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_DESTINATION_LOCATION_GID","description": "Shipment tracking event data for rail shipments. Defines the rail car destination location GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_DESTINATION_COUNTRY","description": "Shipment tracking event data for rail shipments. Defines the rail car destination country.","dataType": "VARCHAR2","size": 15,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ERPC","description": "Shipment tracking event data for rail shipments. ERPC is a system for abbreviating rail location names.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FILING_RESPONSE_TYPE","description": "The filing response type for Automated Export System (AES) via integration as tracking events.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_GROUP_GID","description": "The shipment group GID associated with the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_GROUP_TYPE_GID","description": "The shipment group type (such as import, export, cargo manifest) for the shipment group associated with the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_LINE_GID","description": "The order release line for the order level data of the tracking event. Define by order base, order release, or order release line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORL_REFNUM_VALUE","description": "The order release line reference number value for the defined qualifier.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OR_LINE_REFNUM_QUAL_GID","description": "The order release line reference qualifier for the order level data of the tracking event. Define by order base, order release, or order release line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INDICATOR","description": "A indicator that can be set to flag tracking event status.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_REPAIR_HOURS","description": "Shipment tracking event data for rail shipments. Defines the rail car repair hours.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_INTERCHANGE_ETI_DATE","description": "Shipment tracking event data for rail shipments. Defines the rail car interchange date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEXT_JUNCTION_SPLC","description": "Shipment tracking event data for rail shipments. This field specifies the interchange junction code. ETA for this junction will be Interchange ETI Date.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AHEAD_LATE_TIME","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AHEAD_LATE_TIME_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AHEAD_LATE_TIME_UOM_CODE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AHEAD_OR_LATE","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "This field describes the location at which the event occurs.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_INITIAL","description": "The column defines the equipment initial for the equipment for which the event occurs.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_NUMBER","description": "The column defines the equipment number for the equipment for which the event occurs.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_DEST_TIME_ZONE_GID","description": "The time zone GID for the car destination Estimated Time of Arrival date.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAR_INTERCHANGE_TIME_ZONE_GID","description": "The time zone GID for the car interchange Estimated Time of Interchange date.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_STATUS_TYPE","description": "Used for the ease of identification of the type of event. For example, this can be used to specify if the tracking is for matching with shipment, shipment group, order, etc.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "I_TRANSACTION_NO"}],"foreignKeys": [{"foreignKeyName": "FK_IE_SS_SAQ_GID","cascadeDelete": false,"parentTableName": "SERVPROV_ALIAS_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_ALIAS_QUAL_GID","columnName": "SERVPROV_ALIAS_QUAL_GID"}]},{"foreignKeyName": "FK_IE_SS_CNTYCODEGID","cascadeDelete": false,"parentTableName": "COUNTRY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_CODE3_GID","columnName": "COUNTRY_CODE3_GID"}]},{"foreignKeyName": "FK_IS_VESSEL_GID","cascadeDelete": false,"parentTableName": "VESSEL","columnRelation": [{"sequence": 1,"parentColumnName": "VESSEL_GID","columnName": "VESSEL_GID"}]},{"foreignKeyName": "FK_IE_SS_ORQ_GID","cascadeDelete": false,"parentTableName": "OB_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "OB_REFNUM_QUAL_GID","columnName": "OB_REFNUM_QUAL_GID"}]},{"foreignKeyName": "FK_IE_BS_SCGID","cascadeDelete": false,"parentTableName": "BS_STATUS_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_STATUS_CODE_GID","columnName": "STATUS_CODE_GID"}]},{"foreignKeyName": "FK_IE_SS_TZGID","cascadeDelete": false,"parentTableName": "TIME_ZONE","columnRelation": [{"sequence": 1,"parentColumnName": "TIME_ZONE_GID","columnName": "TIME_ZONE_GID"}]},{"foreignKeyName": "FK_IE_SS_SRCGID","cascadeDelete": false,"parentTableName": "BS_REASON_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_REASON_CODE_GID","columnName": "STATUS_REASON_CODE_GID"}]},{"foreignKeyName": "FK_IS_RESPONSIBLE_PARTY_GID","cascadeDelete": false,"parentTableName": "BS_RESPONSIBLE_PARTY","columnRelation": [{"sequence": 1,"parentColumnName": "BS_RESPONSIBLE_PARTY_GID","columnName": "RESPONSIBLE_PARTY_GID"}]},{"foreignKeyName": "FK_IS_DRIVER_REFNUM_QUAL_GID2","cascadeDelete": false,"parentTableName": "DRIVER_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_REFNUM_QUAL_GID","columnName": "DRIVER_REFNUM_QUAL_GID"}]},{"foreignKeyName": "FK_IS_PU_REFNUM_QUAL_GID2","cascadeDelete": false,"parentTableName": "POWER_UNIT_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "PU_REFNUM_QUAL_GID","columnName": "PU_REFNUM_QUAL_GID"}]},{"foreignKeyName": "FK_IS_DRIVER_CAL_EVENT_GID","cascadeDelete": false,"parentTableName": "DRIVER_CALENDAR_EVENT","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_CAL_EVENT_GID","columnName": "DRIVER_CAL_EVENT_GID"}]},{"foreignKeyName": "FK_IS_ORDER_RELEASE_REFNUM_QU","cascadeDelete": false,"parentTableName": "ORDER_RELEASE_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_REFNUM_QUAL_GID","columnName": "OR_REFNUM_QUAL_GID"}]},{"foreignKeyName": "FK_IS_CAR_DEST_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "CAR_DESTINATION_LOCATION_GID"}]},{"foreignKeyName": "FK_IS_SHIP_GROUP_TYPE_GID","cascadeDelete": false,"parentTableName": "SHIP_GROUP_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_GROUP_TYPE_GID","columnName": "SHIP_GROUP_TYPE_GID"}]},{"foreignKeyName": "FK_IS_OR_LINE_REFNUM_QUAL_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE_LINE_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "OR_LINE_REFNUM_QUAL_GID","columnName": "OR_LINE_REFNUM_QUAL_GID"}]},{"foreignKeyName": "FK_IS_SHPSTS_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"}]},{"foreignKeyName": "FK_IE_SS_CARDEST_TZGID","cascadeDelete": false,"parentTableName": "TIME_ZONE","columnRelation": [{"sequence": 1,"parentColumnName": "TIME_ZONE_GID","columnName": "CAR_DEST_TIME_ZONE_GID"}]},{"foreignKeyName": "FK_IE_SS_CARINT_TZGID","cascadeDelete": false,"parentTableName": "TIME_ZONE","columnRelation": [{"sequence": 1,"parentColumnName": "TIME_ZONE_GID","columnName": "CAR_INTERCHANGE_TIME_ZONE_GID"}]}],"childTables": [],"indices": [{"indexName": "IDX_IE_SHPSTUS_CNTYCD","columnNames": [{"sequence": 1,"name": "COUNTRY_CODE3_GID"}]},{"indexName": "IDX_IE_SHPSTUS_ORDREFQUAL","columnNames": [{"sequence": 1,"name": "OB_REFNUM_QUAL_GID"}]},{"indexName": "IDX_IE_SHPSTUS_SERVALQUAL","columnNames": [{"sequence": 1,"name": "SERVPROV_ALIAS_QUAL_GID"}]},{"indexName": "IDX_IE_SHPSTUS_STURSNCD","columnNames": [{"sequence": 1,"name": "STATUS_REASON_CODE_GID"}]},{"indexName": "IDX_IE_SHPSTUS_STUSCD","columnNames": [{"sequence": 1,"name": "STATUS_CODE_GID"}]},{"indexName": "IDX_IE_SHPSTUS_TMZON","columnNames": [{"sequence": 1,"name": "TIME_ZONE_GID"}]},{"indexName": "IX_IS_DRIVER_CAL_EVENT_GID","columnNames": [{"sequence": 1,"name": "DRIVER_CAL_EVENT_GID"}]},{"indexName": "IX_IS_DRIVER_REFNUM_QUAL_GID2","columnNames": [{"sequence": 1,"name": "DRIVER_REFNUM_QUAL_GID"}]},{"indexName": "IX_IS_PU_REFNUM_QUAL_GID2","columnNames": [{"sequence": 1,"name": "PU_REFNUM_QUAL_GID"}]},{"indexName": "IX_IS_RESPONSIBLE_PARTY_GID","columnNames": [{"sequence": 1,"name": "RESPONSIBLE_PARTY_GID"}]},{"indexName": "IX_IS_VESSEL_GID","columnNames": [{"sequence": 1,"name": "VESSEL_GID"}]},{"indexName": "IX_IE_SHPST_DRIVER_GID","columnNames": [{"sequence": 1,"name": "DRIVER_GID"}]},{"indexName": "IX_IE_SHPST_POWER_UNIT_GID","columnNames": [{"sequence": 1,"name": "POWER_UNIT_GID"}]},{"indexName": "IX_IE_SHPSTUS_SHIPMENT_GID","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"}]},{"indexName": "IX_TRACKING_NUMBER","columnNames": [{"sequence": 1,"name": "TRACKING_NUMBER"}]},{"indexName": "IX_IESHPST_LOCATION_GID","columnNames": [{"sequence": 1,"name": "LOCATION_GID"}]},{"indexName": "IX_IESHPST_EQUIP_INITIAL","columnNames": [{"sequence": 1,"name": "EQUIPMENT_INITIAL"}]},{"indexName": "IX_IESHPST_EQUIP_NUMBER","columnNames": [{"sequence": 1,"name": "EQUIPMENT_NUMBER"}]},{"indexName": "IDX_IE_SHPSTUS_ORD_REL_SC","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"},{"sequence": 2,"name": "STATUS_CODE_GID"}]},{"indexName": "IX_IE_SHPST_INSERT_DATE","columnNames": [{"sequence": 1,"name": "INSERT_DATE"}]},{"indexName": "IX_IE_SHPST_SHIP_STC_TRAN_NO","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"},{"sequence": 2,"name": "STATUS_CODE_GID"},{"sequence": 3,"name": "I_TRANSACTION_NO"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ie_shipmentstatus",
+    "description": "The IE series of tables is a method to store the EDI information from a Blob into a more relational format. However these may change in ver 3.0."
+  },
+  "columns": [
+    {
+      "name": "I_TRANSACTION_NO",
+      "description": "The transaction identifier for the shipment data of the tracking event.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_ALIAS_QUAL_GID",
+      "description": "The service provider alias qualifier identifier for the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_ALIAS_VALUE",
+      "description": "The service provider alias value for the qualifier defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "A description for the tracking event captured.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_LEVEL",
+      "description": "A status level associated with the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VESSEL_CODE_QUALIFIER",
+      "description": "The vessel code qualifier identifier defined to itemize vessel codes.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VESSEL_CODE",
+      "description": "The vessel code associated with the qualifier defined.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_CODE3_GID",
+      "description": "The 3 digit country code that the vessel is registered in.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VESSEL_GID",
+      "description": "The vessel GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_OR_SAIL_DATE",
+      "description": "The ship sail date for the vessel used in the tracking event.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISCHARGE_OR_COMPLETION_DATE",
+      "description": "The discharge or completion date for the vessel used in the tracking event.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIGHT_OR_VOYAGE_NUM",
+      "description": "The flight number if the tracking event is for a air mode or the voyage number if for ocean mode.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_VALUE",
+      "description": "A total weight value associated with the shipment tracking event.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_VALUE_UOM_CODE",
+      "description": "The total weight unit of measure code.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_VALUE_BASE",
+      "description": "The total weight in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_VALUE",
+      "description": "A total volume value associated with the shipment tracking event.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_VALUE_UOM_CODE",
+      "description": "The total volume unit of measure code.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_VALUE_BASE",
+      "description": "The total volume in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OB_REFNUM_QUAL_GID",
+      "description": "The order base reference qualifier for the order level data of the tracking event. Define by order base, order release, or order release line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OB_REFNUM_VALUE",
+      "description": "The order base reference level value for the defined qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_CODE_GID",
+      "description": "The status code GID associated with the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_ZONE_GID",
+      "description": "The time zone GID for the tracking event date.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EVENTDATE",
+      "description": "The tracking event date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_REASON_CODE_GID",
+      "description": "The status reason code that is mapped to the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SS_CONTACT_FUNCTION_CODE",
+      "description": "The contact function code for the individual entering the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SS_CONTACT_NAME",
+      "description": "The contact name for the individual entering the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRAIN_JCT_BO_CODE",
+      "description": "Shipment tracking event data for rail shipments. The train junction box code for the CLM message.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "The monthly range partition to manage purging status messages.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESPONSIBLE_PARTY_GID",
+      "description": "The responsible party that is defined for the type of status for the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RAIL_ROAD_REPORTING_SCAC",
+      "description": "The SCAC for the rail road service provider that is providing the shipment status message or CLM.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_CAR_LOADED",
+      "description": "The CLM field to indicate whether the rail car is loaded or empty.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_DESTINATION_CITY",
+      "description": "Shipment tracking event data for rail shipments. Defines the rail car destination city.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_DESTINATION_STATE",
+      "description": "Shipment tracking event data for rail shipments. Defines the rail car destination state.",
+      "dataType": "VARCHAR2",
+      "size": 6,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_DESTINATION_SPLC_CODE",
+      "description": "Shipment tracking event data for rail shipments. Defines the rail car destination state.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_DESTINATION_ETA_DATE",
+      "description": "Shipment tracking event data for rail shipments. Defines the estimated time of arrival to the car destination node.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIG_TRANSACTION_NO",
+      "description": "If this event is to adjust a previous tracking event, this field specifies the original transaction identifier.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEMPERATURE",
+      "description": "The temperature associated with the shipment tracking event.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEMPERATURE_BASE",
+      "description": "The temperature value in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEMPERATURE_UOM_CODE",
+      "description": "The temperature unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EVENT_RECEIVED_DATE",
+      "description": "The time stamp for when the tracking event was received.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVER_GID",
+      "description": "The driver GID associated with the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EVENT_END_DATE",
+      "description": "The event end date associated with the tracking event.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "POWER_UNIT_GID",
+      "description": "The power unit GID associated with the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The shipment GID associated with the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVER_REFNUM_QUAL_GID",
+      "description": "The reference number qualifier for the driver that can be used to associate to a tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVER_REFNUM_VALUE",
+      "description": "The driver reference number value for the reference number qualifier defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PU_REFNUM_QUAL_GID",
+      "description": "The reference number qualifier for the power unit that can be used to associate to a tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PU_REFNUM_VALUE",
+      "description": "The power unit reference number value for the reference number qualifier defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELATED_TRANSACTION_NO",
+      "description": "If this event is related to another tracking event this field specifies the related transaction number.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_EVENT_REFERENCE",
+      "description": "The reference number of the event used by the external system sending the event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_DATA_SOURCE",
+      "description": "The identifying code for the external system data source.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_WORKED",
+      "description": "The time worked for the tracking event for recording purposes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_WORKED_UOM_CODE",
+      "description": "The time worked unit of measure code.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_WORKED_BASE",
+      "description": "The time worked in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_DRIVEN",
+      "description": "The time driven for the tracking event for recording purposes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_DRIVEN_UOM_CODE",
+      "description": "The time driven unit of measure code.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_DRIVEN_BASE",
+      "description": "The time driven in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVER_CAL_EVENT_GID",
+      "description": "This is a GID for the driver calendar event being recorded with the tracking event, such as vacation time.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MARKED_FOR_PURGE",
+      "description": "A Boolean field. When it is set to 'Y', this row and its child data will be purged.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_BASE_GID",
+      "description": "The order base identifier for the order level data of the tracking event.  Define by order base, order release, or order release line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_GID",
+      "description": "The order release identifier for the order level data of the tracking event. Define by order base, order release, or order release line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OR_REFNUM_QUAL_GID",
+      "description": "The order release reference qualifier for the order level data of the tracking event. Define by order base, order release, or order release line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OR_REFNUM_VALUE",
+      "description": "The order release reference number value for the defined qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRACKING_NUMBER",
+      "description": "The specific tracking number for the shipment provided by the service provider and is matched to a reference qualifier called tracking number.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_DESTINATION_LOCATION_GID",
+      "description": "Shipment tracking event data for rail shipments. Defines the rail car destination location GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_DESTINATION_COUNTRY",
+      "description": "Shipment tracking event data for rail shipments. Defines the rail car destination country.",
+      "dataType": "VARCHAR2",
+      "size": 15,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ERPC",
+      "description": "Shipment tracking event data for rail shipments. ERPC is a system for abbreviating rail location names.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FILING_RESPONSE_TYPE",
+      "description": "The filing response type for Automated Export System (AES) via integration as tracking events.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_GROUP_GID",
+      "description": "The shipment group GID associated with the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_GROUP_TYPE_GID",
+      "description": "The shipment group type (such as import, export, cargo manifest) for the shipment group associated with the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_LINE_GID",
+      "description": "The order release line for the order level data of the tracking event. Define by order base, order release, or order release line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORL_REFNUM_VALUE",
+      "description": "The order release line reference number value for the defined qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OR_LINE_REFNUM_QUAL_GID",
+      "description": "The order release line reference qualifier for the order level data of the tracking event. Define by order base, order release, or order release line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INDICATOR",
+      "description": "A indicator that can be set to flag tracking event status.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_REPAIR_HOURS",
+      "description": "Shipment tracking event data for rail shipments. Defines the rail car repair hours.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_INTERCHANGE_ETI_DATE",
+      "description": "Shipment tracking event data for rail shipments. Defines the rail car interchange date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEXT_JUNCTION_SPLC",
+      "description": "Shipment tracking event data for rail shipments. This field specifies the interchange junction code. ETA for this junction will be Interchange ETI Date.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AHEAD_LATE_TIME",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AHEAD_LATE_TIME_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AHEAD_LATE_TIME_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AHEAD_OR_LATE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "This field describes the location at which the event occurs.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_INITIAL",
+      "description": "The column defines the equipment initial for the equipment for which the event occurs.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_NUMBER",
+      "description": "The column defines the equipment number for the equipment for which the event occurs.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_DEST_TIME_ZONE_GID",
+      "description": "The time zone GID for the car destination Estimated Time of Arrival date.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAR_INTERCHANGE_TIME_ZONE_GID",
+      "description": "The time zone GID for the car interchange Estimated Time of Interchange date.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_STATUS_TYPE",
+      "description": "Used for the ease of identification of the type of event. For example, this can be used to specify if the tracking is for matching with shipment, shipment group, order, etc.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "I_TRANSACTION_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_IE_SS_SAQ_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV_ALIAS_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_ALIAS_QUAL_GID",
+          "columnName": "SERVPROV_ALIAS_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IE_SS_CNTYCODEGID",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_CODE3_GID",
+          "columnName": "COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_VESSEL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "VESSEL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VESSEL_GID",
+          "columnName": "VESSEL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IE_SS_ORQ_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OB_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OB_REFNUM_QUAL_GID",
+          "columnName": "OB_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IE_BS_SCGID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_STATUS_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_STATUS_CODE_GID",
+          "columnName": "STATUS_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IE_SS_TZGID",
+      "cascadeDelete": false,
+      "parentTableName": "TIME_ZONE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TIME_ZONE_GID",
+          "columnName": "TIME_ZONE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IE_SS_SRCGID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_REASON_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_REASON_CODE_GID",
+          "columnName": "STATUS_REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_RESPONSIBLE_PARTY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_RESPONSIBLE_PARTY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_RESPONSIBLE_PARTY_GID",
+          "columnName": "RESPONSIBLE_PARTY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_DRIVER_REFNUM_QUAL_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_REFNUM_QUAL_GID",
+          "columnName": "DRIVER_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_PU_REFNUM_QUAL_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "POWER_UNIT_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PU_REFNUM_QUAL_GID",
+          "columnName": "PU_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_DRIVER_CAL_EVENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER_CALENDAR_EVENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_CAL_EVENT_GID",
+          "columnName": "DRIVER_CAL_EVENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_ORDER_RELEASE_REFNUM_QU",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_REFNUM_QUAL_GID",
+          "columnName": "OR_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_CAR_DEST_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "CAR_DESTINATION_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_SHIP_GROUP_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_GROUP_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_GROUP_TYPE_GID",
+          "columnName": "SHIP_GROUP_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_OR_LINE_REFNUM_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE_LINE_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OR_LINE_REFNUM_QUAL_GID",
+          "columnName": "OR_LINE_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IS_SHPSTS_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IE_SS_CARDEST_TZGID",
+      "cascadeDelete": false,
+      "parentTableName": "TIME_ZONE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TIME_ZONE_GID",
+          "columnName": "CAR_DEST_TIME_ZONE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IE_SS_CARINT_TZGID",
+      "cascadeDelete": false,
+      "parentTableName": "TIME_ZONE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TIME_ZONE_GID",
+          "columnName": "CAR_INTERCHANGE_TIME_ZONE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IDX_IE_SHPSTUS_CNTYCD",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IDX_IE_SHPSTUS_ORDREFQUAL",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "OB_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IDX_IE_SHPSTUS_SERVALQUAL",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SERVPROV_ALIAS_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IDX_IE_SHPSTUS_STURSNCD",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IDX_IE_SHPSTUS_STUSCD",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IDX_IE_SHPSTUS_TMZON",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TIME_ZONE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IS_DRIVER_CAL_EVENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DRIVER_CAL_EVENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IS_DRIVER_REFNUM_QUAL_GID2",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DRIVER_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IS_PU_REFNUM_QUAL_GID2",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PU_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IS_RESPONSIBLE_PARTY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RESPONSIBLE_PARTY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IS_VESSEL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "VESSEL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IE_SHPST_DRIVER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DRIVER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IE_SHPST_POWER_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "POWER_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IE_SHPSTUS_SHIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_TRACKING_NUMBER",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRACKING_NUMBER"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IESHPST_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IESHPST_EQUIP_INITIAL",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EQUIPMENT_INITIAL"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IESHPST_EQUIP_NUMBER",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EQUIPMENT_NUMBER"
+        }
+      ]
+    },
+    {
+      "indexName": "IDX_IE_SHPSTUS_ORD_REL_SC",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STATUS_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IE_SHPST_INSERT_DATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INSERT_DATE"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IE_SHPST_SHIP_STC_TRAN_NO",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STATUS_CODE_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "I_TRANSACTION_NO"
+        }
+      ]
+    }
+  ]
+}

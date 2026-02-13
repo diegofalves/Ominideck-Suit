@@ -1,1 +1,164 @@
-{"table": {"schema": "glogowner","name": "acr_entry_point","description": "List of code entry points controllable by access control roles. These entry points are determined by OTM components and include servlets, actions, queries, topics, mbeans and topics."},"columns": [{"name": "ACR_ENTRY_POINT_GID","description": "OTM Entry Point GID","dataType": "VARCHAR2","size": 451,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACR_ENTRY_POINT_XID","description": "OTM Entry Point XID","dataType": "VARCHAR2","size": 400,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACR_ENTRY_POINT_TAG","description": "A mapping into OTM, defining the component access - generally a Java class name with an optional parameter","dataType": "VARCHAR2","size": 400,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACR_ENTRY_POINT_TYPE","description": "Type of OTM component","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'Servlet','Action','Query','Topic','Bean','Method','MBean','MMethod','Log','Metric','Other'","conditionalConstraint": "","defaultValue": ""},{"name": "ACR_ENTRY_POINT_PARENT","description": "For beans and managed beans, entry point to inherit access from","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACR_ENTRY_POINT_VERSION","description": "Version information to identify old, invalid records.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROW_PROTECT","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'R','H'","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ACR_ENTRY_POINT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AEP_ACR_ENTRY_POINT_PARENT","cascadeDelete": false,"parentTableName": "ACR_ENTRY_POINT","columnRelation": [{"sequence": 1,"parentColumnName": "ACR_ENTRY_POINT_GID","columnName": "ACR_ENTRY_POINT_PARENT"}]}],"childTables": ["ACR_ENTRY_POINT","ACR_ROLE_ENTRY_POINT"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "acr_entry_point",
+    "description": "List of code entry points controllable by access control roles. These entry points are determined by OTM components and include servlets, actions, queries, topics, mbeans and topics."
+  },
+  "columns": [
+    {
+      "name": "ACR_ENTRY_POINT_GID",
+      "description": "OTM Entry Point GID",
+      "dataType": "VARCHAR2",
+      "size": 451,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACR_ENTRY_POINT_XID",
+      "description": "OTM Entry Point XID",
+      "dataType": "VARCHAR2",
+      "size": 400,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACR_ENTRY_POINT_TAG",
+      "description": "A mapping into OTM, defining the component access - generally a Java class name with an optional parameter",
+      "dataType": "VARCHAR2",
+      "size": 400,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACR_ENTRY_POINT_TYPE",
+      "description": "Type of OTM component",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Servlet','Action','Query','Topic','Bean','Method','MBean','MMethod','Log','Metric','Other'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACR_ENTRY_POINT_PARENT",
+      "description": "For beans and managed beans, entry point to inherit access from",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACR_ENTRY_POINT_VERSION",
+      "description": "Version information to identify old, invalid records.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROW_PROTECT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'R','H'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ACR_ENTRY_POINT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AEP_ACR_ENTRY_POINT_PARENT",
+      "cascadeDelete": false,
+      "parentTableName": "ACR_ENTRY_POINT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACR_ENTRY_POINT_GID",
+          "columnName": "ACR_ENTRY_POINT_PARENT"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ACR_ENTRY_POINT",
+    "ACR_ROLE_ENTRY_POINT"
+  ],
+  "indices": []
+}

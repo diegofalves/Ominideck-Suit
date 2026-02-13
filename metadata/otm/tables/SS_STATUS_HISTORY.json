@@ -1,1 +1,321 @@
-{"table": {"schema": "glogowner","name": "ss_status_history","description": "This table is used to store the status of the shipment. The status is received via an external transmission. This table stores the event that triggered the status. The events can be: Arrived, Delivered, Delayed, Cargo Problems, Departed, Delivery Problem, Est_Arrival, etc."},"columns": [{"name": "SHIPMENT_GID","description": "The shipment identifier for the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_TRANSACTION_NO","description": "The transaction identifier for the shipment data of the tracking event.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "The service provider associated with generating the tracking event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REPORTING_GLUSER","description": "The reporting application user if the tracking event was entered via the system's tracking event UI.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REPORTING_METHOD","description": "The reporting method that links into the communication methods defined for OTM.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_STOP_NUM","description": "The shipment stop number for a stop based event.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EVENT_LOCATION_GID","description": "The location identifier of an location based event. This will be null for non-location based events.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_HIDDEN","description": "A Y/N indicator to display the status history.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "PARTITION_KEY","description": "The monthly range partition to manage purging status messages.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPMENT_GID"},{"sequence": 2,"columnName": "I_TRANSACTION_NO"}],"foreignKeys": [{"foreignKeyName": "FK_SS_STAT_HIS_SHP_GID","cascadeDelete": false,"parentTableName": "SHIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"}]},{"foreignKeyName": "FK_SSSH_SERVPROV","cascadeDelete": false,"parentTableName": "SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"}]},{"foreignKeyName": "FK_SSSH_REPORT_METHOD","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "REPORTING_METHOD"}]},{"foreignKeyName": "FK_SSH_EVENT_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "EVENT_LOCATION_GID"}]}],"childTables": ["SS_EQUIPMENT_STATUS_HISTORY","SS_STATUS_HISTORY_EVENT_GROUP"],"indices": [{"indexName": "IND_SSTUSHIS_GID","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"}]},{"indexName": "IX_SSH_EVENT_LOCATION_GID","columnNames": [{"sequence": 1,"name": "EVENT_LOCATION_GID"}]},{"indexName": "IX_SSH_I_TRANSNO_GID","columnNames": [{"sequence": 1,"name": "I_TRANSACTION_NO"}]},{"indexName": "IX_SSSH_REPORT_METHOD","columnNames": [{"sequence": 1,"name": "REPORTING_METHOD"}]},{"indexName": "IX_SSSH_SERVPROV","columnNames": [{"sequence": 1,"name": "SERVPROV_GID"}]},{"indexName": "IX_SSSH_GID_ELOCATION_DOMAIN","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"},{"sequence": 2,"name": "EVENT_LOCATION_GID"},{"sequence": 3,"name": "DOMAIN_NAME"}]},{"indexName": "IX_SSSH_GID_I_TRAN_DOMAIN","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"},{"sequence": 2,"name": "I_TRANSACTION_NO"},{"sequence": 3,"name": "DOMAIN_NAME"}]},{"indexName": "IX_SSSH_GID_STOP_DOMAIN","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"},{"sequence": 2,"name": "SHIPMENT_STOP_NUM"},{"sequence": 3,"name": "DOMAIN_NAME"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ss_status_history",
+    "description": "This table is used to store the status of the shipment. The status is received via an external transmission. This table stores the event that triggered the status. The events can be: Arrived, Delivered, Delayed, Cargo Problems, Departed, Delivery Problem, Est_Arrival, etc."
+  },
+  "columns": [
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The shipment identifier for the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_TRANSACTION_NO",
+      "description": "The transaction identifier for the shipment data of the tracking event.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "The service provider associated with generating the tracking event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REPORTING_GLUSER",
+      "description": "The reporting application user if the tracking event was entered via the system's tracking event UI.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REPORTING_METHOD",
+      "description": "The reporting method that links into the communication methods defined for OTM.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_STOP_NUM",
+      "description": "The shipment stop number for a stop based event.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EVENT_LOCATION_GID",
+      "description": "The location identifier of an location based event. This will be null for non-location based events.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_HIDDEN",
+      "description": "A Y/N indicator to display the status history.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "The monthly range partition to manage purging status messages.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "I_TRANSACTION_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SS_STAT_HIS_SHP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSSH_SERVPROV",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSSH_REPORT_METHOD",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "REPORTING_METHOD"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSH_EVENT_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "EVENT_LOCATION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "SS_EQUIPMENT_STATUS_HISTORY",
+    "SS_STATUS_HISTORY_EVENT_GROUP"
+  ],
+  "indices": [
+    {
+      "indexName": "IND_SSTUSHIS_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSH_EVENT_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EVENT_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSH_I_TRANSNO_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_TRANSACTION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSSH_REPORT_METHOD",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REPORTING_METHOD"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSSH_SERVPROV",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSSH_GID_ELOCATION_DOMAIN",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "EVENT_LOCATION_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "DOMAIN_NAME"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSSH_GID_I_TRAN_DOMAIN",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "I_TRANSACTION_NO"
+        },
+        {
+          "sequence": 3,
+          "name": "DOMAIN_NAME"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSSH_GID_STOP_DOMAIN",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "SHIPMENT_STOP_NUM"
+        },
+        {
+          "sequence": 3,
+          "name": "DOMAIN_NAME"
+        }
+      ]
+    }
+  ]
+}

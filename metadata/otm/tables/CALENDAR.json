@@ -1,1 +1,202 @@
-{"table": {"schema": "glogowner","name": "calendar","description": "This table is used to create the calendar profile entries for the user company. It specifies the schedules, time periods, holiday events etc. for the entire year for the company. These entries are used by the GC3 engine when scheduling the pickup or delivery of an order."},"columns": [{"name": "CALENDAR_GID","description": "CALENDAR_GID is the unique identifier for a calendar.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CALENDAR_XID","description": "CALENDAR_XID is the unique external identifier for a calendar.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CALENDAR_NAME","description": "CALENDAR_NAME is text that describes the purpose of the calendar. Examples include: office hours, summer calendar, pickup, etc.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DATE","description": "START_DATE contains the effective date of the calendar.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAYS_IN_CYCLE","description": "DAYS_IN_CYLCE specifies the number of days for which this calendar is in effect.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HOLIDAY_PROFILE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NOTES","description": "NOTES contains text that describes additional information about the calendar. Examples include: 'ALL THE TIME,' 'CAL_ANNUAL,' 'OFFICE HOURS - 8AM TO 6PM,' etc.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CALENDAR_GID"}],"foreignKeys": [{"foreignKeyName": "FK_CAL_HOLIDAY_PROFILE_GID","cascadeDelete": false,"parentTableName": "HOLIDAY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "HOLIDAY_PROFILE_GID","columnName": "HOLIDAY_PROFILE_GID"}]}],"childTables": ["ACTIVITY_CALENDAR","ACTIVITY_CALENDAR_OVERRIDE","CALENDAR_PARENT","CONTACT_COM_METHOD","DM_RULE_D","DRIVER_CALENDAR","DRIVER_POWER_UNIT_JOIN","DRIVER_TYPE_CALENDAR","ITINERARY","LANE_CALENDAR","LANE_TENDER_INFO","LOCATION_CAPACITY","LOCATION_RESOURCE","LOCATION_RESOURCE_TYPE","LOCATION_ROLE_PROFILE","LOCATION_ROLE_PROFILE_CAL","LRG_LOCATION_JOIN","RATE_GEO_COST","RATE_SERVICE","REPETITION_SCHEDULE","RESOURCE_SCHEDULE","RUSH_HOUR"],"indices": [{"indexName": "CAL_HOLIDAY_PROFILE_GID","columnNames": [{"sequence": 1,"name": "HOLIDAY_PROFILE_GID"}]},{"indexName": "IX_CALENDAR_XID","columnNames": [{"sequence": 1,"name": "CALENDAR_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "calendar",
+    "description": "This table is used to create the calendar profile entries for the user company. It specifies the schedules, time periods, holiday events etc. for the entire year for the company. These entries are used by the GC3 engine when scheduling the pickup or delivery of an order."
+  },
+  "columns": [
+    {
+      "name": "CALENDAR_GID",
+      "description": "CALENDAR_GID is the unique identifier for a calendar.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CALENDAR_XID",
+      "description": "CALENDAR_XID is the unique external identifier for a calendar.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CALENDAR_NAME",
+      "description": "CALENDAR_NAME is text that describes the purpose of the calendar. Examples include: office hours, summer calendar, pickup, etc.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DATE",
+      "description": "START_DATE contains the effective date of the calendar.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAYS_IN_CYCLE",
+      "description": "DAYS_IN_CYLCE specifies the number of days for which this calendar is in effect.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HOLIDAY_PROFILE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NOTES",
+      "description": "NOTES contains text that describes additional information about the calendar. Examples include: 'ALL THE TIME,' 'CAL_ANNUAL,' 'OFFICE HOURS - 8AM TO 6PM,' etc.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CALENDAR_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CAL_HOLIDAY_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "HOLIDAY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "HOLIDAY_PROFILE_GID",
+          "columnName": "HOLIDAY_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ACTIVITY_CALENDAR",
+    "ACTIVITY_CALENDAR_OVERRIDE",
+    "CALENDAR_PARENT",
+    "CONTACT_COM_METHOD",
+    "DM_RULE_D",
+    "DRIVER_CALENDAR",
+    "DRIVER_POWER_UNIT_JOIN",
+    "DRIVER_TYPE_CALENDAR",
+    "ITINERARY",
+    "LANE_CALENDAR",
+    "LANE_TENDER_INFO",
+    "LOCATION_CAPACITY",
+    "LOCATION_RESOURCE",
+    "LOCATION_RESOURCE_TYPE",
+    "LOCATION_ROLE_PROFILE",
+    "LOCATION_ROLE_PROFILE_CAL",
+    "LRG_LOCATION_JOIN",
+    "RATE_GEO_COST",
+    "RATE_SERVICE",
+    "REPETITION_SCHEDULE",
+    "RESOURCE_SCHEDULE",
+    "RUSH_HOUR"
+  ],
+  "indices": [
+    {
+      "indexName": "CAL_HOLIDAY_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "HOLIDAY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_CALENDAR_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CALENDAR_XID"
+        }
+      ]
+    }
+  ]
+}

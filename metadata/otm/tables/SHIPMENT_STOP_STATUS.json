@@ -1,1 +1,172 @@
-{"table": {"schema": "glogowner","name": "shipment_stop_status","description": ""},"columns": [{"name": "SHIPMENT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_NUM","description": "","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_VALUE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPMENT_GID"},{"sequence": 2,"columnName": "STOP_NUM"},{"sequence": 3,"columnName": "STATUS_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SHPSS_SHIPMENT_STOP","cascadeDelete": false,"parentTableName": "SHIPMENT_STOP","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"},{"sequence": 2,"parentColumnName": "STOP_NUM","columnName": "STOP_NUM"}]},{"foreignKeyName": "FK_SHPSS_STATUS_VALUE","cascadeDelete": false,"parentTableName": "STATUS_VALUE","columnRelation": [{"sequence": 1,"parentColumnName": "STATUS_TYPE_GID","columnName": "STATUS_TYPE_GID"},{"sequence": 2,"parentColumnName": "STATUS_VALUE_GID","columnName": "STATUS_VALUE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_SHPSS_STATUS_VALUE","columnNames": [{"sequence": 1,"name": "STATUS_TYPE_GID"},{"sequence": 2,"name": "STATUS_VALUE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "shipment_stop_status",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "SHIPMENT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_NUM",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_VALUE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STOP_NUM"
+    },
+    {
+      "sequence": 3,
+      "columnName": "STATUS_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SHPSS_SHIPMENT_STOP",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_STOP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "STOP_NUM",
+          "columnName": "STOP_NUM"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHPSS_STATUS_VALUE",
+      "cascadeDelete": false,
+      "parentTableName": "STATUS_VALUE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STATUS_TYPE_GID",
+          "columnName": "STATUS_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "STATUS_VALUE_GID",
+          "columnName": "STATUS_VALUE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_SHPSS_STATUS_VALUE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STATUS_VALUE_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,143 @@
-{"table": {"schema": "glogowner","name": "location_group_compatibility","description": "This is similar to the Location_Compatibity table. Two location groups may not be compatible for a shipment via the same truck as an example. If the locations are grouped and the compatibility information is stored in the Location_Group_Compatibility table, it may reduce the number of entries for individual compatible records in the Location_Compatibility table."},"columns": [{"name": "LOCATION_GROUP_GID1","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GROUP_GID2","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_COMPATIBLE","description": "","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LOCATION_GROUP_GID1"},{"sequence": 2,"columnName": "LOCATION_GROUP_GID2"}],"foreignKeys": [{"foreignKeyName": "FK_LGC_LOCATION_GROUP_GID1","cascadeDelete": false,"parentTableName": "LOCATION_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GROUP_GID","columnName": "LOCATION_GROUP_GID1"}]},{"foreignKeyName": "FK_LGC_LOCATION_GROUP_GID2","cascadeDelete": false,"parentTableName": "LOCATION_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GROUP_GID","columnName": "LOCATION_GROUP_GID2"}]}],"childTables": [],"indices": [{"indexName": "IX_LGC_LOCATION_GROUP_GID2","columnNames": [{"sequence": 1,"name": "LOCATION_GROUP_GID2"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "location_group_compatibility",
+    "description": "This is similar to the Location_Compatibity table. Two location groups may not be compatible for a shipment via the same truck as an example. If the locations are grouped and the compatibility information is stored in the Location_Group_Compatibility table, it may reduce the number of entries for individual compatible records in the Location_Compatibility table."
+  },
+  "columns": [
+    {
+      "name": "LOCATION_GROUP_GID1",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GROUP_GID2",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_COMPATIBLE",
+      "description": "",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LOCATION_GROUP_GID1"
+    },
+    {
+      "sequence": 2,
+      "columnName": "LOCATION_GROUP_GID2"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LGC_LOCATION_GROUP_GID1",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GROUP_GID",
+          "columnName": "LOCATION_GROUP_GID1"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LGC_LOCATION_GROUP_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GROUP_GID",
+          "columnName": "LOCATION_GROUP_GID2"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_LGC_LOCATION_GROUP_GID2",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_GROUP_GID2"
+        }
+      ]
+    }
+  ]
+}

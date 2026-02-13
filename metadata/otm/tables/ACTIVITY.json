@@ -1,1 +1,126 @@
-{"table": {"schema": "glogowner","name": "activity","description": "This table specifies the activity that can occur at a location. It is used in conjunction with the Calendar table to define the date time profile for the activity. Some examples of the activity include: CLOSED DISPATCH LIVELOAD LOAD OFFICEHOURS PICKUP RECEIVE etc."},"columns": [{"name": "ACTIVITY_GID","description": "ACTIVITY_GID contains the type of activity for which a calendar was created. Types include: 'FOO2' ACTIVATE CLOSED DISPATCH FOO LIVELOAD LOAD OFFICEHOURS PICKUP RECEIVE","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_XID","description": "ACTIVITY_XID is the unique identifier of a pre-configured field (that is not updateable by the user) of a list of activities in G-Log. Types include: 'FOO2' ACTIVATE CLOSED DISPATCH FOO LIVELOAD LOAD OFFICEHOURS PICKUP RECEIVE","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_NAME","description": "ACTIVITY_NAME is a pre-configured field (that is not updateable by the user) that stores the list of activities in G-Log. The ACTIVITY_NAME can be: DRIVER DISPATCHING FOO ITINERARY ACTIVATED LIVE TRAILER LOADING LOADING FREIGHT OFFICE HOURS RECEIVING FREIGHT WAREHOUSE CLOSED DOOR WAREHOUSE PICKING","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ACTIVITY_GID"}],"foreignKeys": [],"childTables": ["ACCESSORIAL_COST","ACTIVITY_CALENDAR","ACTIVITY_CALENDAR_OVERRIDE","ACTIVITY_TIME","APPT_SS_ACTIVITY_PROF_D","DM_RULE_D","LOCATION_CAPACITY_D","RATE_GEO_COST","RATE_SERVICE_ACCESSORIAL_TIME","ROUTE_TMPLT_LEG_LOC_INCOMPAT","SHIPMENT_STOP_ACTIVITY"],"indices": [{"indexName": "IX_ACTIVITY_XID","columnNames": [{"sequence": 1,"name": "ACTIVITY_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "activity",
+    "description": "This table specifies the activity that can occur at a location. It is used in conjunction with the Calendar table to define the date time profile for the activity. Some examples of the activity include: CLOSED DISPATCH LIVELOAD LOAD OFFICEHOURS PICKUP RECEIVE etc."
+  },
+  "columns": [
+    {
+      "name": "ACTIVITY_GID",
+      "description": "ACTIVITY_GID contains the type of activity for which a calendar was created. Types include: 'FOO2' ACTIVATE CLOSED DISPATCH FOO LIVELOAD LOAD OFFICEHOURS PICKUP RECEIVE",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_XID",
+      "description": "ACTIVITY_XID is the unique identifier of a pre-configured field (that is not updateable by the user) of a list of activities in G-Log. Types include: 'FOO2' ACTIVATE CLOSED DISPATCH FOO LIVELOAD LOAD OFFICEHOURS PICKUP RECEIVE",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_NAME",
+      "description": "ACTIVITY_NAME is a pre-configured field (that is not updateable by the user) that stores the list of activities in G-Log. The ACTIVITY_NAME can be: DRIVER DISPATCHING FOO ITINERARY ACTIVATED LIVE TRAILER LOADING LOADING FREIGHT OFFICE HOURS RECEIVING FREIGHT WAREHOUSE CLOSED DOOR WAREHOUSE PICKING",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ACTIVITY_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [
+    "ACCESSORIAL_COST",
+    "ACTIVITY_CALENDAR",
+    "ACTIVITY_CALENDAR_OVERRIDE",
+    "ACTIVITY_TIME",
+    "APPT_SS_ACTIVITY_PROF_D",
+    "DM_RULE_D",
+    "LOCATION_CAPACITY_D",
+    "RATE_GEO_COST",
+    "RATE_SERVICE_ACCESSORIAL_TIME",
+    "ROUTE_TMPLT_LEG_LOC_INCOMPAT",
+    "SHIPMENT_STOP_ACTIVITY"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_ACTIVITY_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACTIVITY_XID"
+        }
+      ]
+    }
+  ]
+}

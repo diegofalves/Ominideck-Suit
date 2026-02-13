@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="get-help-Logistics.html" title="Previous" type="text/html"><link rel="next" href="oic-gen-3-migration.html" title="Next" type="text/html"><meta name="description" content="This document describes configuring Transportation and Global Trade Management Cloud to integrate with another product using the Integration Cloud Service (OIC)."><meta property="og:description" content="This document describes configuring Transportation and Global Trade Management Cloud to integrate with another product using the Integration Cloud Service (OIC)."><meta property="og:title" content="Integrating with Oracle Integration Cloud Guide"><meta name="application-name" content="Integrating with Oracle Integration Cloud Guide"><meta name="dcterms:title" content="Integrating with Oracle Integration Cloud Guide"><meta name="dcterms.title" content="Integrating with Oracle Integration Cloud Guide"><meta name="doctitle" content="Integrating with Oracle Integration Cloud Guide"><meta name="dcterms.created" content="Thu Jun 12 12:32:11 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMIC"><meta name="dcterms.alternative" content="otmic"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="integrating-with-oracle-integration-cloud-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Logistics Adapter</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28968-02">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Logistics Adapter","description":"This document describes configuring Transportation and Global Trade Management Cloud to integrate with another product using the Integration Cloud Service (OIC).","datePublished":"2025-06-12 CST","dateModified":"2025-06-12 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="get-help-Logistics.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="oic-gen-3-migration.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Integrating with Oracle Integration Cloud Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Logistics Adapter<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="overview"></span><span id="OTMICoverview" data-help-type="cloud-saas-docid"></span><span id="logistics_adaptor" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225495">Logistics Adapter</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">This document describes configuring Transportation and Global Trade Management Cloud to
+            integrate with another product using the Integration Cloud Service (OIC).</p>
+        <p class="p">The Logistics adapter included with OIC can be used to create an OIC Connection to a
+            specific Transportation and Global Trade Management Cloud instance of version 6.4.2 or
+            later. The OIC Connection can then be used to create an Integration which calls
+            Transportation and Global Trade Management Cloud web services, as well as exposes a web
+            service that Transportation and Global Trade Management Cloud can call. See <a class="xref" href="https://cloud.oracle.com/integration" target="_blank" rel="external noopener"><em class="ph i">Oracle
+                    Integration Cloud</em></a>, for more information.<img class="image" id="u30225495__image_vsc_1gm_mjb" src="images/oic-overview.png" alt="Displays the relationship between Oracle Integration Cloud (OIC) and Transportation and Global Trade Management."></p>
+        <p class="p">Also included in this document is a description of a sample integration between
+            Transportation and Global Trade Management Cloud and Supply Chain Cloud using OIC. The
+            sample integration can be obtained from <a class="xref" href="https://support.oracle.com/support/?documentId=KB131599" target="_blank" rel="external noopener">KB131599: Sample Integration with Transportation and Global Trade
+                Management (OTM/GTM) Using OIC</a>. Transportation and Global Trade Management
+            also includes an FA domain (named for Fusion Applications) which accompanies the sample
+            flow and provides examples of possible data setup and automation.</p>
+    </div>
+</div></article></body></html>

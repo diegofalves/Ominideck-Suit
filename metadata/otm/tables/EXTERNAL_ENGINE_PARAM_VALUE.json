@@ -1,1 +1,207 @@
-{"table": {"schema": "glogowner","name": "external_engine_param_value","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAMETER_NAME","description": "external engine parameter name","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_ENGINE_TYPE","description": "type of external engine.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_TYPE","description": "object type. example EDE","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VALUE","description": "value for the external engine parameter","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSLATION_GID","description": "Translation gid to represent the value to the user such as in a picklist.","dataType": "VARCHAR2","size": 1000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "description about the parameter value.","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PARAMETER_NAME"},{"sequence": 2,"columnName": "EXTERNAL_ENGINE_TYPE"},{"sequence": 3,"columnName": "OBJECT_TYPE"},{"sequence": 4,"columnName": "VALUE"}],"foreignKeys": [{"foreignKeyName": "FK_EEPV_EXTERNAL_ENGINE_PARAM","cascadeDelete": false,"parentTableName": "EXTERNAL_ENGINE_PARAM","columnRelation": [{"sequence": 1,"parentColumnName": "PARAMETER_NAME","columnName": "PARAMETER_NAME"},{"sequence": 2,"parentColumnName": "EXTERNAL_ENGINE_TYPE","columnName": "EXTERNAL_ENGINE_TYPE"},{"sequence": 3,"parentColumnName": "OBJECT_TYPE","columnName": "OBJECT_TYPE"}]},{"foreignKeyName": "FK_EEPV_TRANSLATION_GID","cascadeDelete": false,"parentTableName": "TRANSLATION","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSLATION_GID","columnName": "TRANSLATION_GID"}]},{"foreignKeyName": "FK_EEPV_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "external_engine_param_value",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAMETER_NAME",
+      "description": "external engine parameter name",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_ENGINE_TYPE",
+      "description": "type of external engine.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_TYPE",
+      "description": "object type. example EDE",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VALUE",
+      "description": "value for the external engine parameter",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSLATION_GID",
+      "description": "Translation gid to represent the value to the user such as in a picklist.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "description about the parameter value.",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PARAMETER_NAME"
+    },
+    {
+      "sequence": 2,
+      "columnName": "EXTERNAL_ENGINE_TYPE"
+    },
+    {
+      "sequence": 3,
+      "columnName": "OBJECT_TYPE"
+    },
+    {
+      "sequence": 4,
+      "columnName": "VALUE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EEPV_EXTERNAL_ENGINE_PARAM",
+      "cascadeDelete": false,
+      "parentTableName": "EXTERNAL_ENGINE_PARAM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PARAMETER_NAME",
+          "columnName": "PARAMETER_NAME"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "EXTERNAL_ENGINE_TYPE",
+          "columnName": "EXTERNAL_ENGINE_TYPE"
+        },
+        {
+          "sequence": 3,
+          "parentColumnName": "OBJECT_TYPE",
+          "columnName": "OBJECT_TYPE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EEPV_TRANSLATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSLATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSLATION_GID",
+          "columnName": "TRANSLATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EEPV_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

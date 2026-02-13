@@ -1,1 +1,132 @@
-{"table": {"schema": "glogowner","name": "appt_rule_set_flex_field_d","description": "This table stores the flex fields details for appt rule set."},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPT_RULE_SET_GID","description": "The appointment rule set GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_FIELD_NAME","description": "Flex field name","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_FIELD_VALUE","description": "Flex field value.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_COMPATIBLE","description": "If the flex field details on the shipment contain all the flex field details defined on the appointment rule set, when the Compatible check box is selected for each appointment rule set, then the shipment is compatible. If you do not specify any shipment flex fields on your appointment rule set, the shipment is considered as compatible.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "APPT_RULE_SET_GID"},{"sequence": 2,"columnName": "FLEX_FIELD_NAME"}],"foreignKeys": [{"foreignKeyName": "FK_ARSFF_APPT_RULE_SET_GID","cascadeDelete": false,"parentTableName": "APPT_RULE_SET","columnRelation": [{"sequence": 1,"parentColumnName": "APPT_RULE_SET_GID","columnName": "APPT_RULE_SET_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "appt_rule_set_flex_field_d",
+    "description": "This table stores the flex fields details for appt rule set."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPT_RULE_SET_GID",
+      "description": "The appointment rule set GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_FIELD_NAME",
+      "description": "Flex field name",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_FIELD_VALUE",
+      "description": "Flex field value.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_COMPATIBLE",
+      "description": "If the flex field details on the shipment contain all the flex field details defined on the appointment rule set, when the Compatible check box is selected for each appointment rule set, then the shipment is compatible. If you do not specify any shipment flex fields on your appointment rule set, the shipment is considered as compatible.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "APPT_RULE_SET_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "FLEX_FIELD_NAME"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ARSFF_APPT_RULE_SET_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APPT_RULE_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APPT_RULE_SET_GID",
+          "columnName": "APPT_RULE_SET_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

@@ -1,1 +1,211 @@
-{"table": {"schema": "glogowner","name": "bill_to_party_assignment_d","description": "This is a child table for BILL_TO_PARTY_ASSIGNMENT. It contains accessorial code, cost type, cost identifier and involved party qualifier ID. Involved party qualifier ID will be assigned to the line based on accessorial code, cost type and cost identifier."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_TYPE","description": "Cost type","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_IDENTIFIER","description": "It will be used for differentiating among different costs of the same cost type.","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_GID","description": "Accesorial code","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INV_PARTY_QUAL_GID","description": "The involved party corresponding to this qualifier will be assigned as bill to party on the invoice.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BILL_TO_PARTY_ASSIGN_GID","description": "The GID for bill_to_party_assignment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQ_NO","description": "Sequence number","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "BILL_TO_PARTY_ASSIGN_GID"},{"sequence": 2,"columnName": "SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_BTPD_COST_TYPE_GID","cascadeDelete": false,"parentTableName": "COST_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "COST_TYPE_GID","columnName": "COST_TYPE"}]},{"foreignKeyName": "FK_BTPD_ACCESSORIAL_CODE_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_CODE_GID","columnName": "ACCESSORIAL_CODE_GID"}]},{"foreignKeyName": "FK_BTPD_INV_PARTY_QUAL_GID","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "INV_PARTY_QUAL_GID"}]},{"foreignKeyName": "FK_BTPD_BILL_TO_PARTY_ASSIGN","cascadeDelete": false,"parentTableName": "BILL_TO_PARTY_ASSIGNMENT","columnRelation": [{"sequence": 1,"parentColumnName": "BILL_TO_PARTY_ASSIGNMENT_GID","columnName": "BILL_TO_PARTY_ASSIGN_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_BILL_TO_PARTY_ASSIGN","columnNames": [{"sequence": 1,"name": "BILL_TO_PARTY_ASSIGN_GID"},{"sequence": 2,"name": "COST_TYPE"},{"sequence": 3,"name": "COST_IDENTIFIER"},{"sequence": 4,"name": "ACCESSORIAL_CODE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "bill_to_party_assignment_d",
+    "description": "This is a child table for BILL_TO_PARTY_ASSIGNMENT. It contains accessorial code, cost type, cost identifier and involved party qualifier ID. Involved party qualifier ID will be assigned to the line based on accessorial code, cost type and cost identifier."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_TYPE",
+      "description": "Cost type",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_IDENTIFIER",
+      "description": "It will be used for differentiating among different costs of the same cost type.",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "Accesorial code",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INV_PARTY_QUAL_GID",
+      "description": "The involved party corresponding to this qualifier will be assigned as bill to party on the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BILL_TO_PARTY_ASSIGN_GID",
+      "description": "The GID for bill_to_party_assignment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQ_NO",
+      "description": "Sequence number",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "BILL_TO_PARTY_ASSIGN_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_BTPD_COST_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COST_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COST_TYPE_GID",
+          "columnName": "COST_TYPE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BTPD_ACCESSORIAL_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_CODE_GID",
+          "columnName": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BTPD_INV_PARTY_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "INV_PARTY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BTPD_BILL_TO_PARTY_ASSIGN",
+      "cascadeDelete": false,
+      "parentTableName": "BILL_TO_PARTY_ASSIGNMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BILL_TO_PARTY_ASSIGNMENT_GID",
+          "columnName": "BILL_TO_PARTY_ASSIGN_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_BILL_TO_PARTY_ASSIGN",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "BILL_TO_PARTY_ASSIGN_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "COST_TYPE"
+        },
+        {
+          "sequence": 3,
+          "name": "COST_IDENTIFIER"
+        },
+        {
+          "sequence": 4,
+          "name": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    }
+  ]
+}

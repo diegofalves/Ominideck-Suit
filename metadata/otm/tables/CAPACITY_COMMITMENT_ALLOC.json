@@ -1,1 +1,361 @@
-{"table": {"schema": "glogowner","name": "capacity_commitment_alloc","description": ""},"columns": [{"name": "CAPACITY_COMMITMENT_ALLOC_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAPACITY_COMMITMENT_ALLOC_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "X_LANE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMMITMENT_LANE_OBJECT_TYPE","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'SHIPMENT','ORDER'","conditionalConstraint": "","defaultValue": "'SHIPMENT'"},{"name": "ALLOCATION_TYPE","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'SHIPMENT','MILEAGE','WEIGHT','VOLUME','MONETARY','FEU','TEU','EQUIPMENT_GROUP_PROFILE','ERU'","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_PERIOD_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_RECURRING","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOCATION_GROUP_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_REFERENCE_UNIT_GID","description": "The equipment reference unit GID that is associated with the equipment reference unit utilization of the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_SHIPMENT_WEIGHT","description": "Minimum Shipment Weight","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SHIPMENT_WEIGHT","description": "Maximum Shipment Weight","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_COUNT","description": "Ship Unit Count indicates whether the allocation applies specifically to shipments with single or multiple ship units.  Ignore indicates that the allocation applies to shipments regardless of how many ship units are on the shipment. Single  indicates that the allocation applies only to shipments with only one ship unit (with a count of 1). Multiple indicates that the allocation applied only to shipments with multiple ship units (or a single ship unit with a count of more than 1).","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'IGNORE','SINGLE','MULTIPLE'","conditionalConstraint": "","defaultValue": "'IGNORE'"},{"name": "MIN_SHIPMENT_WEIGHT_UOM_CODE","description": "The unit of measure for the minimum shipment weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_SHIPMENT_WEIGHT_BASE","description": "Minimum shipment weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SHIPMENT_WEIGHT_UOM_CODE","description": "The unit of measure for the maximum shipment weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SHIPMENT_WEIGHT_BASE","description": "Maximum shipment weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_GID","description": "The GID for the equipment group.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CAPACITY_COMMITMENT_ALLOC_GID"}],"foreignKeys": [{"foreignKeyName": "FK_CCA_X_LANE_GID","cascadeDelete": false,"parentTableName": "X_LANE","columnRelation": [{"sequence": 1,"parentColumnName": "X_LANE_GID","columnName": "X_LANE_GID"}]},{"foreignKeyName": "FK_CCA_EQUIPMENT_GROUP_PROFIL","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_CCA_TIME_PERIOD_TYPE_GID","cascadeDelete": false,"parentTableName": "TIME_PERIOD_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "TIME_PERIOD_TYPE_GID","columnName": "TIME_PERIOD_TYPE_GID"}]},{"foreignKeyName": "FK_CCA_ALLOCATION_GROUP_GID","cascadeDelete": false,"parentTableName": "ALLOCATION_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "ALLOCATION_GROUP_GID","columnName": "ALLOCATION_GROUP_GID"}]},{"foreignKeyName": "FK_CCA_EQUIPMENT_REFERENCE_UN","cascadeDelete": false,"parentTableName": "EQUIPMENT_REFERENCE_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_REFERENCE_UNIT_GID","columnName": "EQUIPMENT_REFERENCE_UNIT_GID"}]},{"foreignKeyName": "FK_CCA_EQUIPMENT_GROUP_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_GID","columnName": "EQUIPMENT_GROUP_GID"}]}],"childTables": ["CAPACITY_COMMITMENT_ALLOC_D","COMMIT_ALLOC_USAGE"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "capacity_commitment_alloc",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "CAPACITY_COMMITMENT_ALLOC_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAPACITY_COMMITMENT_ALLOC_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "X_LANE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMMITMENT_LANE_OBJECT_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'SHIPMENT','ORDER'",
+      "conditionalConstraint": "",
+      "defaultValue": "'SHIPMENT'"
+    },
+    {
+      "name": "ALLOCATION_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'SHIPMENT','MILEAGE','WEIGHT','VOLUME','MONETARY','FEU','TEU','EQUIPMENT_GROUP_PROFILE','ERU'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_PERIOD_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_RECURRING",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOCATION_GROUP_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_REFERENCE_UNIT_GID",
+      "description": "The equipment reference unit GID that is associated with the equipment reference unit utilization of the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_SHIPMENT_WEIGHT",
+      "description": "Minimum Shipment Weight",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SHIPMENT_WEIGHT",
+      "description": "Maximum Shipment Weight",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_COUNT",
+      "description": "Ship Unit Count indicates whether the allocation applies specifically to shipments with single or multiple ship units.  Ignore indicates that the allocation applies to shipments regardless of how many ship units are on the shipment. Single  indicates that the allocation applies only to shipments with only one ship unit (with a count of 1). Multiple indicates that the allocation applied only to shipments with multiple ship units (or a single ship unit with a count of more than 1).",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'IGNORE','SINGLE','MULTIPLE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'IGNORE'"
+    },
+    {
+      "name": "MIN_SHIPMENT_WEIGHT_UOM_CODE",
+      "description": "The unit of measure for the minimum shipment weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_SHIPMENT_WEIGHT_BASE",
+      "description": "Minimum shipment weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SHIPMENT_WEIGHT_UOM_CODE",
+      "description": "The unit of measure for the maximum shipment weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SHIPMENT_WEIGHT_BASE",
+      "description": "Maximum shipment weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_GID",
+      "description": "The GID for the equipment group.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CAPACITY_COMMITMENT_ALLOC_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CCA_X_LANE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "X_LANE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "X_LANE_GID",
+          "columnName": "X_LANE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CCA_EQUIPMENT_GROUP_PROFIL",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CCA_TIME_PERIOD_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TIME_PERIOD_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TIME_PERIOD_TYPE_GID",
+          "columnName": "TIME_PERIOD_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CCA_ALLOCATION_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ALLOCATION_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ALLOCATION_GROUP_GID",
+          "columnName": "ALLOCATION_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CCA_EQUIPMENT_REFERENCE_UN",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_REFERENCE_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_REFERENCE_UNIT_GID",
+          "columnName": "EQUIPMENT_REFERENCE_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CCA_EQUIPMENT_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_GID",
+          "columnName": "EQUIPMENT_GROUP_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "CAPACITY_COMMITMENT_ALLOC_D",
+    "COMMIT_ALLOC_USAGE"
+  ],
+  "indices": []
+}

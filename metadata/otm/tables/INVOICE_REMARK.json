@@ -1,1 +1,141 @@
-{"table": {"schema": "glogowner","name": "invoice_remark","description": "Qualified remarks about the invoice (qualifiers in table REMARK_QUAL).  This may have similar information to the INVOICE_NOTE table, except that the remarks are qualified, while notes are freeform. Example:  Qual: Decline reason                  Remark:  Equipment not available."},"columns": [{"name": "INVOICE_GID","description": "The GID for the invoice.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_SEQ_NO","description": "A sequence number for a remark on an invoice.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_QUAL_IDENTIFIER","description": "Remark qualifier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_TEXT","description": "The text for the remark on an invoice.","dataType": "VARCHAR2","size": 4000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "INVOICE_GID"},{"sequence": 2,"columnName": "REMARK_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_INV_RK_INV_GID","cascadeDelete": false,"parentTableName": "INVOICE","columnRelation": [{"sequence": 1,"parentColumnName": "INVOICE_GID","columnName": "INVOICE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_REMARK_QUAL_IDENTIFIER","columnNames": [{"sequence": 1,"name": "REMARK_QUAL_IDENTIFIER"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "invoice_remark",
+    "description": "Qualified remarks about the invoice (qualifiers in table REMARK_QUAL).  This may have similar information to the INVOICE_NOTE table, except that the remarks are qualified, while notes are freeform. Example:  Qual: Decline reason                  Remark:  Equipment not available."
+  },
+  "columns": [
+    {
+      "name": "INVOICE_GID",
+      "description": "The GID for the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_SEQ_NO",
+      "description": "A sequence number for a remark on an invoice.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_QUAL_IDENTIFIER",
+      "description": "Remark qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_TEXT",
+      "description": "The text for the remark on an invoice.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "INVOICE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "REMARK_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_INV_RK_INV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INVOICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOICE_GID",
+          "columnName": "INVOICE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_REMARK_QUAL_IDENTIFIER",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REMARK_QUAL_IDENTIFIER"
+        }
+      ]
+    }
+  ]
+}

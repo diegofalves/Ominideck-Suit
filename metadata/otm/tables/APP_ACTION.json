@@ -1,1 +1,362 @@
-{"table": {"schema": "glogowner","name": "app_action","description": ""},"columns": [{"name": "APP_ACTION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_ACTION_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_ACTION_TYPE","description": "","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'USER','PROCESS','AGENT'","conditionalConstraint": "","defaultValue": "'USER'"},{"name": "ALLOW_SAVED_CONDITION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_PLUGIN_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_CAUSE_MSG_GID","description": "","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_SOLUTION_MSG_GID","description": "","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_POST_CHECK","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_SUPPORT_POST","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_OBJECT_LOCK","description": "If Y, the business object is locked during the action call. The may lock multiple business object for UI/planning actions.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "OBJECT_LOCK_TIMEOUT","description": "Timeout for object lock, if IS_OBJECT_LOCK=Y","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_LOCK_TIMEOUT_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_LOCK_TIMEOUT_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_LOCK_POLLING","description": "If not using JMS notification for cross-machine locks, the polling interval in msecs","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPLICATION_NAME","description": "The name of Application.  E.g. Dock.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_QUERY_TYPE_GID","description": "The unique identifier of data query type.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_POWER_ACTION","description": "An indicator whether this is a power action.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "POWER_ACTION_NAME","description": "The name of power action.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "APP_ACTION_GID"}],"foreignKeys": [{"foreignKeyName": "FK_APA_ALLOW_SAVED_CONDITION_","cascadeDelete": false,"parentTableName": "SAVED_CONDITION","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_CONDITION_GID","columnName": "ALLOW_SAVED_CONDITION_GID"}]},{"foreignKeyName": "FK_APA_ALLOW_PLUGIN_GID","cascadeDelete": false,"parentTableName": "JAVA_PLUGIN","columnRelation": [{"sequence": 1,"parentColumnName": "JAVA_PLUGIN_GID","columnName": "ALLOW_PLUGIN_GID"}]},{"foreignKeyName": "FK_APA_ALLOW_CAUSE_MSG_GID","cascadeDelete": false,"parentTableName": "TRANSLATION","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSLATION_GID","columnName": "ALLOW_CAUSE_MSG_GID"}]},{"foreignKeyName": "FK_APA_ALLOW_SOLUTION_MSG_GID","cascadeDelete": false,"parentTableName": "TRANSLATION","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSLATION_GID","columnName": "ALLOW_SOLUTION_MSG_GID"}]},{"foreignKeyName": "FK_APA_DATA_QUERY_TYPE_GID","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_APA_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["ACTION","AGENT_ACTION","APP_ACTION_CHECK_ACCESS","APP_ACTION_MORG_ACCESS","APP_ACTION_REASON_ACCESS","APP_ACTION_RESP_PARTY_P","APP_POWER_ACTION_ACCESS","AUDIT_TRAIL","DOCUMENT_DEF","REPORT","TOPIC_ALIAS"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "app_action",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "APP_ACTION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_ACTION_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_ACTION_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'USER','PROCESS','AGENT'",
+      "conditionalConstraint": "",
+      "defaultValue": "'USER'"
+    },
+    {
+      "name": "ALLOW_SAVED_CONDITION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_PLUGIN_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_CAUSE_MSG_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_SOLUTION_MSG_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_POST_CHECK",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_SUPPORT_POST",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_OBJECT_LOCK",
+      "description": "If Y, the business object is locked during the action call. The may lock multiple business object for UI/planning actions.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "OBJECT_LOCK_TIMEOUT",
+      "description": "Timeout for object lock, if IS_OBJECT_LOCK=Y",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_LOCK_TIMEOUT_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_LOCK_TIMEOUT_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_LOCK_POLLING",
+      "description": "If not using JMS notification for cross-machine locks, the polling interval in msecs",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPLICATION_NAME",
+      "description": "The name of Application.  E.g. Dock.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "The unique identifier of data query type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_POWER_ACTION",
+      "description": "An indicator whether this is a power action.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "POWER_ACTION_NAME",
+      "description": "The name of power action.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "APP_ACTION_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_APA_ALLOW_SAVED_CONDITION_",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_CONDITION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_CONDITION_GID",
+          "columnName": "ALLOW_SAVED_CONDITION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_APA_ALLOW_PLUGIN_GID",
+      "cascadeDelete": false,
+      "parentTableName": "JAVA_PLUGIN",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "JAVA_PLUGIN_GID",
+          "columnName": "ALLOW_PLUGIN_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_APA_ALLOW_CAUSE_MSG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSLATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSLATION_GID",
+          "columnName": "ALLOW_CAUSE_MSG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_APA_ALLOW_SOLUTION_MSG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSLATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSLATION_GID",
+          "columnName": "ALLOW_SOLUTION_MSG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_APA_DATA_QUERY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_APA_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ACTION",
+    "AGENT_ACTION",
+    "APP_ACTION_CHECK_ACCESS",
+    "APP_ACTION_MORG_ACCESS",
+    "APP_ACTION_REASON_ACCESS",
+    "APP_ACTION_RESP_PARTY_P",
+    "APP_POWER_ACTION_ACCESS",
+    "AUDIT_TRAIL",
+    "DOCUMENT_DEF",
+    "REPORT",
+    "TOPIC_ALIAS"
+  ],
+  "indices": []
+}

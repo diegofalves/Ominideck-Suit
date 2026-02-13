@@ -1,1 +1,245 @@
-{"table": {"schema": "glogowner","name": "driver_assignment","description": "Used to store a drivers next available time and next available location.  When shipment is populated, the next available time and next available location represent the state of the driver upon completion of the shipment."},"columns": [{"name": "DRIVER_ASSIGNMENT_SEQ_NO","description": "Driver assignment sequence number.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVER_GID","description": "The GID for the driver.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_GID","description": "The GID of the shipments assigned to the driver.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEXT_AVAILABLE_LOC_GID","description": "The GID for the next available location (NAL) for the driver.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEXT_AVAILABLE_TIME","description": "The GID for the next available time (NAT) for the driver.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PREV_DRIVER_ASSIGNMENT_SEQ_NUM","description": "Refers to the previous driver assignment record for the driver.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Remarks or comments related to shipment(s) assigned to the driver.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SYSTEM_GENERATED","description": "Check box indicating whether the shipment assigned was system generated.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DRIVER_ASSIGNMENT_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_DASN_DRIVER_GID","cascadeDelete": false,"parentTableName": "DRIVER","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_GID","columnName": "DRIVER_GID"}]},{"foreignKeyName": "FK_DASN_SHIPMENT_GID","cascadeDelete": false,"parentTableName": "SHIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"}]},{"foreignKeyName": "FK_DASN_NEXT_AVAILABLE_LOC_GI","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "NEXT_AVAILABLE_LOC_GID"}]},{"foreignKeyName": "FK_DASN_PREV_DRIVER_ASSIGNMEN","cascadeDelete": false,"parentTableName": "DRIVER_ASSIGNMENT","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_ASSIGNMENT_SEQ_NO","columnName": "PREV_DRIVER_ASSIGNMENT_SEQ_NUM"}]}],"childTables": ["DRIVER_ASSIGNMENT","DRIVER_HOS_RULE_STATE"],"indices": [{"indexName": "IX_DRIVER_ASSGMNT_DRIVER_GID","columnNames": [{"sequence": 1,"name": "DRIVER_GID"}]},{"indexName": "IX_DRVRASGMNT_NXTAVLLOC_GID","columnNames": [{"sequence": 1,"name": "NEXT_AVAILABLE_LOC_GID"}]},{"indexName": "UK_DRIVER_ASSGMNT_SHIPMENT_GID","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"}]},{"indexName": "UK_DRVRASGMNT_PREV_DRVASG_GID","columnNames": [{"sequence": 1,"name": "PREV_DRIVER_ASSIGNMENT_SEQ_NUM"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "driver_assignment",
+    "description": "Used to store a drivers next available time and next available location.  When shipment is populated, the next available time and next available location represent the state of the driver upon completion of the shipment."
+  },
+  "columns": [
+    {
+      "name": "DRIVER_ASSIGNMENT_SEQ_NO",
+      "description": "Driver assignment sequence number.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVER_GID",
+      "description": "The GID for the driver.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The GID of the shipments assigned to the driver.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEXT_AVAILABLE_LOC_GID",
+      "description": "The GID for the next available location (NAL) for the driver.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEXT_AVAILABLE_TIME",
+      "description": "The GID for the next available time (NAT) for the driver.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PREV_DRIVER_ASSIGNMENT_SEQ_NUM",
+      "description": "Refers to the previous driver assignment record for the driver.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Remarks or comments related to shipment(s) assigned to the driver.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SYSTEM_GENERATED",
+      "description": "Check box indicating whether the shipment assigned was system generated.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DRIVER_ASSIGNMENT_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DASN_DRIVER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_GID",
+          "columnName": "DRIVER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DASN_SHIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DASN_NEXT_AVAILABLE_LOC_GI",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "NEXT_AVAILABLE_LOC_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DASN_PREV_DRIVER_ASSIGNMEN",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER_ASSIGNMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_ASSIGNMENT_SEQ_NO",
+          "columnName": "PREV_DRIVER_ASSIGNMENT_SEQ_NUM"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "DRIVER_ASSIGNMENT",
+    "DRIVER_HOS_RULE_STATE"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_DRIVER_ASSGMNT_DRIVER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DRIVER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_DRVRASGMNT_NXTAVLLOC_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "NEXT_AVAILABLE_LOC_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "UK_DRIVER_ASSGMNT_SHIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "UK_DRVRASGMNT_PREV_DRVASG_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PREV_DRIVER_ASSIGNMENT_SEQ_NUM"
+        }
+      ]
+    }
+  ]
+}

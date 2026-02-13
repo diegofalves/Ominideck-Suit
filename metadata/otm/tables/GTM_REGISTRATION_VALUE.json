@@ -1,1 +1,165 @@
-{"table": {"schema": "glogowner","name": "gtm_registration_value","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_REGISTRATION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_VALUE_QUALIFIER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_VALUE_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'USD'"}],"primaryKey": [{"sequence": 1,"columnName": "GTM_REGISTRATION_GID"},{"sequence": 2,"columnName": "GTM_VALUE_QUALIFIER_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GRVAL_GTM_REGISTRATION","cascadeDelete": false,"parentTableName": "GTM_REGISTRATION","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_REGISTRATION_GID","columnName": "GTM_REGISTRATION_GID"}]},{"foreignKeyName": "FK_GRVAL_GTM_VALUE_QUALIFIER","cascadeDelete": false,"parentTableName": "GTM_VALUE_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_VALUE_QUALIFIER_GID","columnName": "GTM_VALUE_QUALIFIER_GID"}]},{"foreignKeyName": "FK_GRVAL_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "CURRENCY_VALUE_CURRENCY_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_registration_value",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_REGISTRATION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_VALUE_QUALIFIER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_VALUE_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'USD'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_REGISTRATION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_VALUE_QUALIFIER_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GRVAL_GTM_REGISTRATION",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_REGISTRATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_REGISTRATION_GID",
+          "columnName": "GTM_REGISTRATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GRVAL_GTM_VALUE_QUALIFIER",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_VALUE_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_VALUE_QUALIFIER_GID",
+          "columnName": "GTM_VALUE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GRVAL_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "CURRENCY_VALUE_CURRENCY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

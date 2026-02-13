@@ -1,1 +1,205 @@
-{"table": {"schema": "glogowner","name": "lnm_scenario_bulkplan","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCENARIO_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BULKPLAN_SPEC_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BULKPLAN_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BULKPLAN_XID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BULKPLAN_STATE","description": "","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'NOT STARTED','STARTED','COMPLETED','FAILED'","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_QUERY_START_TIME","description": "Start time of the order query for the scenario plan","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_QUERY_END_TIME","description": "End time of the order query for the scenario plan.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GROUPBY","description": "Groupby type for the scenario plan - Source loc/Dest loc/priority/bulk plan gid","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GROUPBY_VALUE","description": "Groupby value used for the scenario plan.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_ORDERS_INSERTED","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "BULKPLAN_GID"}],"foreignKeys": [{"foreignKeyName": "FK_LNMSB_SCENARIO_GID","cascadeDelete": true,"parentTableName": "LNM_SCENARIO","columnRelation": [{"sequence": 1,"parentColumnName": "SCENARIO_GID","columnName": "SCENARIO_GID"}]},{"foreignKeyName": "FK_LNMSB_BULKPLAN_SPEC_GID","cascadeDelete": true,"parentTableName": "LNM_BULKPLAN_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "BULKPLAN_SPEC_GID","columnName": "BULKPLAN_SPEC_GID"}]}],"childTables": ["LNM_ORDER_STATE"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "lnm_scenario_bulkplan",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCENARIO_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BULKPLAN_SPEC_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BULKPLAN_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BULKPLAN_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BULKPLAN_STATE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'NOT STARTED','STARTED','COMPLETED','FAILED'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_QUERY_START_TIME",
+      "description": "Start time of the order query for the scenario plan",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_QUERY_END_TIME",
+      "description": "End time of the order query for the scenario plan.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GROUPBY",
+      "description": "Groupby type for the scenario plan - Source loc/Dest loc/priority/bulk plan gid",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GROUPBY_VALUE",
+      "description": "Groupby value used for the scenario plan.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_ORDERS_INSERTED",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "BULKPLAN_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LNMSB_SCENARIO_GID",
+      "cascadeDelete": true,
+      "parentTableName": "LNM_SCENARIO",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SCENARIO_GID",
+          "columnName": "SCENARIO_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LNMSB_BULKPLAN_SPEC_GID",
+      "cascadeDelete": true,
+      "parentTableName": "LNM_BULKPLAN_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BULKPLAN_SPEC_GID",
+          "columnName": "BULKPLAN_SPEC_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "LNM_ORDER_STATE"
+  ],
+  "indices": []
+}

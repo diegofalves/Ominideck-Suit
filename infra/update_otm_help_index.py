@@ -21,9 +21,34 @@ from infra.otm_query_executor import execute_otm_query
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-HELP_ROOT = os.path.join(BASE_DIR, "metadata", "otm", "help otm")
-DOC_BASE_TEMPLATE = "https://docs.oracle.com/en/cloud/saas/transportation/{doc_version}/otmol/"
+BOOK_ROOT = os.path.join(BASE_DIR, "metadata", "otm", "book otm")
+DOC_BASE_TEMPLATE = "https://docs.oracle.com/en/cloud/saas/transportation/{doc_version}/"
 HTML_REF_PATTERN = re.compile(r"""['"]([^'"]+\.(?:htm|html)(?:#[^'"]*)?(?:\?[^'"]*)?)['"]""", re.IGNORECASE)
+BOOK_FOLDER_ALIAS: Dict[str, str] = {
+    "gtmcf": "gtmcf_customs_filing_integration_guide",
+    "gtmei": "gtmei_integrating_with_ebs_guide",
+    "gtmrc": "gtmrc_regulatory_content_system_guide",
+    "otmca": "otmca_administration_guide",
+    "otmcg": "otmcg_getting_started_guide",
+    "otmci": "otmci_cms_integration_guide",
+    "otmda": "otmda_getting_started_guide",
+    "otmdm": "otmdm_data_management_guide",
+    "otmep": "otmep_external_programming_interface_guide",
+    "otmic": "otmic_integrating_with_oic_guide",
+    "otmit": "otmit_integration_guide",
+    "otmli": "otmli_licensing_information_user_manual",
+    "otmol": "otmol_online_help",
+    "otmpt": "otmpt_quarterly_update_preparation_testing_guide",
+    "otmra": "otmra_rest_api_business_object_resources",
+    "otmrd": "otmrd_report_designers_guide",
+    "otmrn": "otmrn_release_notes",
+    "otmro": "otmro_rest_api_data_export",
+    "otmse": "otmse_security_guide",
+    "otmxm": "otmxm_xml_interface_changes_guide",
+    "gtm26a": "gtm26a_readiness",
+    "otm26a": "otm26a_readiness",
+}
+SCRIPT_REF_ATTRS = ("src", "data-src")
 
 
 def _find_by_local_name(node: Dict[str, Any], local_name: str) -> Any:
@@ -134,15 +159,12 @@ def _clean_old_versions(help_root: str, current_version: str) -> List[str]:
     return removed
 
 
-def _canonicalize_doc_url(url: str) -> Optional[str]:
+def _canonicalize_doc_url(url: str, allowed_prefixes: Optional[List[str]] = None) -> Optional[str]:
     parsed = urlparse(url)
     if parsed.scheme not in {"http", "https"}:
         return None
     if "docs.oracle.com" not in parsed.netloc:
         return None
-    if "/otmol/" not in parsed.path:
-        return None
-
     clean = url.split("#")[0].split("?")[0].strip()
     if not clean:
         return None
@@ -151,10 +173,88 @@ def _canonicalize_doc_url(url: str) -> Optional[str]:
     normalized_url = f"{parsed_clean.scheme.lower()}://{parsed_clean.netloc.lower()}{parsed_clean.path}"
     if not normalized_url.endswith((".htm", ".html")):
         return None
+    if allowed_prefixes:
+        normalized_prefixes = [prefix.rstrip("/") + "/" for prefix in allowed_prefixes]
+        if not any(normalized_url.startswith(prefix) for prefix in normalized_prefixes):
+            return None
     return normalized_url
 
 
-def _extract_internal_links(base_url: str, html: str) -> Set[str]:
+def _canonicalize_allowed_url(url: str, allowed_prefixes: Optional[List[str]] = None) -> Optional[str]:
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        return None
+    if "docs.oracle.com" not in parsed.netloc:
+        return None
+
+    clean = url.split("#")[0].split("?")[0].strip()
+    if not clean:
+        return None
+
+    parsed_clean = urlparse(clean)
+    normalized_url = f"{parsed_clean.scheme.lower()}://{parsed_clean.netloc.lower()}{parsed_clean.path}"
+    if allowed_prefixes:
+        normalized_prefixes = [prefix.rstrip("/") + "/" for prefix in allowed_prefixes]
+        if not any(normalized_url.startswith(prefix) for prefix in normalized_prefixes):
+            return None
+    return normalized_url
+
+
+def _discover_books_start_urls(books_url: str, allowed_prefixes: List[str]) -> List[str]:
+    starts: Set[str] = set()
+    starts.add(_canonicalize_doc_url(books_url, allowed_prefixes) or books_url)
+
+    response = requests.get(books_url, timeout=20)
+    if response.status_code != 200:
+        raise RuntimeError(f"Falha ao acessar books.html ({response.status_code}): {books_url}")
+
+    soup = BeautifulSoup(response.text, "html.parser")
+    for a in soup.find_all("a"):
+        href = (a.get("href") or "").strip()
+        if not href:
+            continue
+        full = urljoin(books_url, href)
+        normalized = _canonicalize_doc_url(full, allowed_prefixes)
+        if not normalized:
+            continue
+        starts.add(normalized)
+    return sorted(starts)
+
+
+def _normalize_book_filters(raw_value: str) -> List[str]:
+    tokens = [
+        part.strip().lower()
+        for part in str(raw_value or "").split(",")
+        if part.strip()
+    ]
+    normalized: List[str] = []
+    seen: Set[str] = set()
+    for token in tokens:
+        key = token
+        if key in BOOK_FOLDER_ALIAS.values():
+            for alias_key, folder_name in BOOK_FOLDER_ALIAS.items():
+                if folder_name == key:
+                    key = alias_key
+                    break
+        if key in BOOK_FOLDER_ALIAS and key not in seen:
+            normalized.append(key)
+            seen.add(key)
+    return normalized
+
+
+def _url_matches_book_filter(url: str, filter_keys: List[str]) -> bool:
+    if not filter_keys:
+        return True
+
+    path = urlparse(url).path.lower()
+    for key in filter_keys:
+        folder = BOOK_FOLDER_ALIAS.get(key, key).lower()
+        if f"/{key}/" in path or f"/{folder}/" in path:
+            return True
+    return False
+
+
+def _extract_internal_links(base_url: str, html: str, allowed_prefixes: List[str]) -> Set[str]:
     soup = BeautifulSoup(html, "html.parser")
     links: Set[str] = set()
 
@@ -183,7 +283,17 @@ def _extract_internal_links(base_url: str, html: str) -> Set[str]:
                 href_sources.append(raw)
 
     # Captura refs em scripts (muitos tópicos são montados dinamicamente).
+    script_urls: List[str] = []
     for script in soup.find_all("script"):
+        for attr_name in SCRIPT_REF_ATTRS:
+            script_ref = (script.get(attr_name) or "").strip()
+            if not script_ref:
+                continue
+            script_full = urljoin(base_url, script_ref)
+            normalized_script = _canonicalize_allowed_url(script_full, allowed_prefixes)
+            if normalized_script and normalized_script.endswith(".js"):
+                script_urls.append(normalized_script)
+
         text = script.string or script.get_text() or ""
         if not text:
             continue
@@ -192,6 +302,23 @@ def _extract_internal_links(base_url: str, html: str) -> Set[str]:
             if candidate:
                 href_sources.append(candidate)
 
+    # Alguns livros (ex.: otmol online help) montam o TOC por JS.
+    # Aqui lemos os scripts referenciados para descobrir HTMLs extras.
+    session = requests.Session()
+    session.headers.update({"User-Agent": "OTM-Builder-HelpScanner/2.0"})
+    for script_url in sorted(set(script_urls)):
+        try:
+            script_response = session.get(script_url, timeout=15)
+            if script_response.status_code != 200:
+                continue
+            script_body = script_response.text or ""
+            for match in HTML_REF_PATTERN.findall(script_body):
+                candidate = (match or "").strip()
+                if candidate:
+                    href_sources.append(candidate)
+        except Exception:
+            continue
+
     for href in href_sources:
         if href.startswith("#"):
             continue
@@ -199,7 +326,7 @@ def _extract_internal_links(base_url: str, html: str) -> Set[str]:
         if href_lower.endswith((".pdf", ".png", ".jpg", ".jpeg", ".zip", ".css", ".js")):
             continue
         full_url = urljoin(base_url, href)
-        normalized = _canonicalize_doc_url(full_url)
+        normalized = _canonicalize_doc_url(full_url, allowed_prefixes)
         if normalized:
             links.add(normalized)
     return links
@@ -214,7 +341,7 @@ def _get_page_title(html: str) -> str:
 
 def _relative_path_from_url(url: str) -> str:
     parsed = urlparse(url)
-    marker = "/otmol/"
+    marker = "/en/cloud/saas/"
     path = parsed.path
     idx = path.find(marker)
     if idx >= 0:
@@ -232,6 +359,12 @@ def _normalize_relative_path(relative_path: str) -> str:
     if normalized.startswith(".."):
         raise ValueError(f"Caminho relativo invalido: {relative_path!r}")
     return normalized.replace("\\", "/")
+
+
+def _apply_book_alias_to_local_relative_path(relative_path: str) -> str:
+    parts = [part for part in relative_path.replace("\\", "/").split("/") if part]
+    aliased_parts = [BOOK_FOLDER_ALIAS.get(part.lower(), part) for part in parts]
+    return "/".join(aliased_parts)
 
 
 def _derive_topic_labels(relative_path: str) -> Tuple[str, str]:
@@ -272,7 +405,8 @@ def _load_existing_pages(output_json: str, version_dir: str) -> Dict[str, Dict[s
 
 
 def _write_html_snapshot(version_dir: str, relative_path: str, html: str) -> str:
-    safe_relative = _normalize_relative_path(relative_path)
+    aliased_relative = _apply_book_alias_to_local_relative_path(relative_path)
+    safe_relative = _normalize_relative_path(aliased_relative)
     local_path = os.path.join("html", safe_relative).replace("\\", "/")
     output_path = os.path.join(version_dir, local_path)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -389,12 +523,13 @@ def _crawl_help_docs(
     version_dir: str,
     use_incremental_cache: bool,
     existing_pages_by_url: Dict[str, Dict[str, Any]],
+    allowed_prefixes: List[str],
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     queue: List[str] = []
     queued: Set[str] = set()
 
     for raw_url in start_urls:
-        normalized = _canonicalize_doc_url(str(raw_url).strip())
+        normalized = _canonicalize_doc_url(str(raw_url).strip(), allowed_prefixes)
         if not normalized or normalized in queued:
             continue
         queue.append(normalized)
@@ -449,7 +584,7 @@ def _crawl_help_docs(
                                 }
                             )
 
-                            new_links = _extract_internal_links(url, html)
+                            new_links = _extract_internal_links(url, html, allowed_prefixes)
                             new_links_added = 0
                             for link in new_links:
                                 if link not in visited and link not in queued:
@@ -522,7 +657,7 @@ def _crawl_help_docs(
                     }
                 )
 
-                new_links = _extract_internal_links(url, html)
+                new_links = _extract_internal_links(url, html, allowed_prefixes)
                 new_links_added = 0
                 for link in new_links:
                     if link not in visited and link not in queued:
@@ -633,7 +768,7 @@ def _write_version_manifest(
     removed_versions: List[str],
     start_urls: List[str],
 ) -> str:
-    manifest_path = os.path.join(version_dir, "meta", "help_scan_manifest.json")
+    manifest_path = os.path.join(version_dir, "meta", "book_scan_manifest.json")
     manifest = {
         "generated_at": datetime.now().isoformat(),
         "doc_version": doc_version,
@@ -658,9 +793,9 @@ def _write_version_manifest(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Varre links do Oracle OTM Help com versao dinamica derivada do ambiente "
+            "Varre links do Oracle OTM Books (incluindo Help) com versao dinamica derivada do ambiente "
             "OTM, baixa os HTMLs localmente e salva metadados em "
-            "metadata/otm/help otm/<versao>/meta."
+            "metadata/otm/book otm/<versao>/meta."
         )
     )
     parser.add_argument(
@@ -692,15 +827,37 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help=(
             "Nao faz varredura/download. Apenas recria os indices JSON a partir de "
-            "help_files_list.json ja existente."
+            "book_files_list.json ja existente."
         ),
+    )
+    parser.add_argument(
+        "--book",
+        default="",
+        help=(
+            "Filtra por tipo de livro Oracle (chave curta ou pasta), separado por virgula. "
+            "Ex.: otmrn (release notes), otmca, otmra."
+        ),
+    )
+    parser.add_argument(
+        "--start-url",
+        action="append",
+        default=[],
+        help=(
+            "URL inicial explicita para varredura. Pode ser repetida. "
+            "Quando informada, substitui as seeds do books.html."
+        ),
+    )
+    parser.add_argument(
+        "--prune-old-versions",
+        action="store_true",
+        help="Remove versoes antigas locais em metadata/otm/book otm (desativado por padrao).",
     )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    os.makedirs(HELP_ROOT, exist_ok=True)
+    os.makedirs(BOOK_ROOT, exist_ok=True)
 
     release_row = _query_current_release_row()
     detected_doc_version = _release_row_to_doc_version(release_row)
@@ -709,30 +866,64 @@ def main() -> None:
         raise RuntimeError(f"doc_version invalida: {doc_version!r}")
 
     base_url = DOC_BASE_TEMPLATE.format(doc_version=doc_version)
-    start_urls = [
-        urljoin(base_url, "index.html"),
-        urljoin(base_url, "general/about_doc.htm"),
+    books_url = urljoin(base_url, "books.html")
+    allowed_prefixes = [
+        f"https://docs.oracle.com/en/cloud/saas/transportation/{doc_version}/",
+        f"https://docs.oracle.com/en/cloud/saas/readiness/logistics/{doc_version}/",
     ]
+    manual_start_urls: List[str] = []
+    if args.start_url:
+        for raw in args.start_url:
+            normalized = _canonicalize_doc_url(str(raw).strip(), allowed_prefixes)
+            if normalized:
+                manual_start_urls.append(normalized)
+            else:
+                print(f"[WARN] Ignorando --start-url invalida ou fora do escopo: {raw}")
+        if not manual_start_urls:
+            raise RuntimeError("Nenhuma --start-url valida foi fornecida.")
+
+    start_urls = manual_start_urls or _discover_books_start_urls(books_url, allowed_prefixes)
     normalized_starts: List[str] = []
     seen_start: Set[str] = set()
     for raw_start in start_urls:
-        normalized = _canonicalize_doc_url(raw_start)
+        normalized = _canonicalize_doc_url(raw_start, allowed_prefixes)
         if not normalized or normalized in seen_start:
             continue
         normalized_starts.append(normalized)
         seen_start.add(normalized)
 
-    version_dir = os.path.join(HELP_ROOT, doc_version)
+    selected_books = _normalize_book_filters(args.book)
+    if args.book and not selected_books:
+        supported = ", ".join(sorted(BOOK_FOLDER_ALIAS.keys()))
+        raise RuntimeError(
+            "Filtro --book invalido. Use chaves como: "
+            f"{supported}"
+        )
+
+    if selected_books:
+        normalized_starts = [
+            url for url in normalized_starts
+            if _url_matches_book_filter(url, selected_books)
+        ]
+        if not normalized_starts:
+            selected_label = ", ".join(selected_books)
+            raise RuntimeError(
+                f"Nenhum start URL encontrado para o filtro --book={selected_label}."
+            )
+
+    version_dir = os.path.join(BOOK_ROOT, doc_version)
     meta_dir = os.path.join(version_dir, "meta")
-    output_json = os.path.join(meta_dir, "help_files_list.json")
-    output_csv = os.path.join(meta_dir, "help_files_list.csv")
-    output_topics_json = os.path.join(meta_dir, "help_topics_index.json")
-    output_locator_json = os.path.join(meta_dir, "help_locator_index.json")
-    output_errors_json = os.path.join(meta_dir, "help_download_errors.json")
-    log_file = os.path.join(meta_dir, "help_scan_log.txt")
+    output_json = os.path.join(meta_dir, "book_files_list.json")
+    output_csv = os.path.join(meta_dir, "book_files_list.csv")
+    output_topics_json = os.path.join(meta_dir, "book_topics_index.json")
+    output_locator_json = os.path.join(meta_dir, "book_locator_index.json")
+    output_errors_json = os.path.join(meta_dir, "book_download_errors.json")
+    log_file = os.path.join(meta_dir, "book_scan_log.txt")
     html_dir = os.path.join(version_dir, "html")
 
-    removed_versions = _clean_old_versions(HELP_ROOT, doc_version)
+    removed_versions: List[str] = []
+    if args.prune_old_versions:
+        removed_versions = _clean_old_versions(BOOK_ROOT, doc_version)
     os.makedirs(meta_dir, exist_ok=True)
 
     # build-index-only deve apenas recalcular indices: nunca apagar HTML local.
@@ -744,15 +935,17 @@ def main() -> None:
         else:
             os.makedirs(html_dir, exist_ok=True)
 
-    print("Iniciando varredura do Oracle OTM Help (modo leitura)...")
+    print("Iniciando varredura do Oracle OTM Books/Help (modo leitura)...")
     print(f"Versao detectada no ambiente: {detected_doc_version}")
     print(f"Versao utilizada para docs: {doc_version}")
     print(f"Base URL: {base_url}")
     print("Start URLs:")
     for start in normalized_starts:
         print(f" - {start}")
+    if selected_books:
+        print(f"Filtro de livros ativo: {', '.join(selected_books)}")
     if removed_versions:
-        print(f"Versoes removidas da pasta help: {', '.join(sorted(removed_versions))}")
+        print(f"Versoes removidas da pasta book: {', '.join(sorted(removed_versions))}")
     if args.incremental:
         print("Modo incremental: ativo (download apenas de HTML novo).")
 
@@ -803,6 +996,7 @@ def main() -> None:
         version_dir=version_dir,
         use_incremental_cache=args.incremental,
         existing_pages_by_url=existing_pages_by_url,
+        allowed_prefixes=allowed_prefixes,
     )
     _save_results(
         pages,
@@ -823,7 +1017,7 @@ def main() -> None:
         start_urls=normalized_starts,
     )
 
-    current_version_file = os.path.join(HELP_ROOT, "current_version.json")
+    current_version_file = os.path.join(BOOK_ROOT, "current_version.json")
     with open(current_version_file, "w", encoding="utf-8") as file_current:
         json.dump(
             {

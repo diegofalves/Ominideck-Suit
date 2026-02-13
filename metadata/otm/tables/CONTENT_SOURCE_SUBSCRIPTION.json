@@ -1,1 +1,223 @@
-{"table": {"schema": "glogowner","name": "content_source_subscription","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTENT_SOURCE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SUBSCRIPTION_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SUBSCRIPTION_REFERENCE","description": "This is the reference provided when subscribing to a set of events in an external system.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "LAST_TRANSACTION_ID","description": "","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REQUEST_STYLESHEET_PROFILE_GID","description": "Stylesheet to apply to Request XML to generate vendor content request.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESPONSE_STYLESHT_PROFILE_GID","description": "Stylesheet to apply to the response of the request.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEND_ACK","description": "Specifies if an acknowledgement should be sent to the vendor confirming receipt of content.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ACK_STYLESHEET_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CONTENT_SOURCE_GID"},{"sequence": 2,"columnName": "SUBSCRIPTION_NAME"}],"foreignKeys": [{"foreignKeyName": "FK_CSSS_CONTENT_SOURCE_GID","cascadeDelete": false,"parentTableName": "CONTENT_SOURCE","columnRelation": [{"sequence": 1,"parentColumnName": "CONTENT_SOURCE_GID","columnName": "CONTENT_SOURCE_GID"}]},{"foreignKeyName": "FK_CSS_REQUST_STYLSHT_PRFL_GID","cascadeDelete": false,"parentTableName": "STYLESHEET_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "STYLESHEET_PROFILE_GID","columnName": "REQUEST_STYLESHEET_PROFILE_GID"}]},{"foreignKeyName": "FK_CSS_RSPNS_STYLSHT_PRFL_GID","cascadeDelete": false,"parentTableName": "STYLESHEET_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "STYLESHEET_PROFILE_GID","columnName": "RESPONSE_STYLESHT_PROFILE_GID"}]},{"foreignKeyName": "FK_CSS_ACK_STYLESHT_PRFLE_GID","cascadeDelete": false,"parentTableName": "STYLESHEET_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "STYLESHEET_PROFILE_GID","columnName": "ACK_STYLESHEET_PROFILE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "content_source_subscription",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTENT_SOURCE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SUBSCRIPTION_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SUBSCRIPTION_REFERENCE",
+      "description": "This is the reference provided when subscribing to a set of events in an external system.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "LAST_TRANSACTION_ID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REQUEST_STYLESHEET_PROFILE_GID",
+      "description": "Stylesheet to apply to Request XML to generate vendor content request.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESPONSE_STYLESHT_PROFILE_GID",
+      "description": "Stylesheet to apply to the response of the request.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEND_ACK",
+      "description": "Specifies if an acknowledgement should be sent to the vendor confirming receipt of content.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ACK_STYLESHEET_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CONTENT_SOURCE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SUBSCRIPTION_NAME"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CSSS_CONTENT_SOURCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTENT_SOURCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTENT_SOURCE_GID",
+          "columnName": "CONTENT_SOURCE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CSS_REQUST_STYLSHT_PRFL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "STYLESHEET_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STYLESHEET_PROFILE_GID",
+          "columnName": "REQUEST_STYLESHEET_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CSS_RSPNS_STYLSHT_PRFL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "STYLESHEET_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STYLESHEET_PROFILE_GID",
+          "columnName": "RESPONSE_STYLESHT_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CSS_ACK_STYLESHT_PRFLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "STYLESHEET_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STYLESHEET_PROFILE_GID",
+          "columnName": "ACK_STYLESHEET_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

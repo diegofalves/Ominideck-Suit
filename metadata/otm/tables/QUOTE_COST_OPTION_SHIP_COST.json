@@ -1,1 +1,272 @@
-{"table": {"schema": "glogowner","name": "quote_cost_option_ship_cost","description": "Shipment cost of the cost option for quote"},"columns": [{"name": "QUOTE_GID","description": "The GID for the quote.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_OPTION_SEQUENCE","description": "Option Number: Each possible cost option is assigned an Option Number.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "SHIPMENT_SEQUENCE","description": "Internal sequence number for shipment information provide as part of the quote option.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "COST_SEQUENCE","description": "Cost sequence number for different cost provided for the quote cost option.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "COST_TYPE","description": "Cost type - e.g., Base Cost, Accessorial etc.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','A','D','S','O'","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_GID","description": "The GID for the accessorial cost (if any) on the quote cost option.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST","description": "Cost.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_CURRENCY_GID","description": "The GID for the cost currency.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_BASE","description": "Cost in the base currency.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Description.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_EXPLANATION","description": "Explanation for cost.","dataType": "VARCHAR2","size": 512,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYMENT_METHOD_CODE_GID","description": "Indicates the payment method that applies to this quote shipment cost.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "QUOTE_GID"},{"sequence": 2,"columnName": "COST_OPTION_SEQUENCE"},{"sequence": 3,"columnName": "SHIPMENT_SEQUENCE"},{"sequence": 4,"columnName": "COST_SEQUENCE"}],"foreignKeys": [{"foreignKeyName": "FK_QCSC_QUOTE_COST_OPTION_SHI","cascadeDelete": false,"parentTableName": "QUOTE_COST_OPTION_SHIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "QUOTE_GID","columnName": "QUOTE_GID"},{"sequence": 2,"parentColumnName": "COST_OPTION_SEQUENCE","columnName": "COST_OPTION_SEQUENCE"},{"sequence": 3,"parentColumnName": "SHIPMENT_SEQUENCE","columnName": "SHIPMENT_SEQUENCE"}]},{"foreignKeyName": "FK_QCSC_ACCESSORIAL_CODE_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_CODE_GID","columnName": "ACCESSORIAL_CODE_GID"}]},{"foreignKeyName": "FK_QCSC_COST_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "COST_CURRENCY_GID"}]},{"foreignKeyName": "FK_QCOSC_PAYMENT_METHOD_CODE","cascadeDelete": false,"parentTableName": "PAYMENT_METHOD_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "PAYMENT_METHOD_CODE_GID","columnName": "PAYMENT_METHOD_CODE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "quote_cost_option_ship_cost",
+    "description": "Shipment cost of the cost option for quote"
+  },
+  "columns": [
+    {
+      "name": "QUOTE_GID",
+      "description": "The GID for the quote.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_OPTION_SEQUENCE",
+      "description": "Option Number: Each possible cost option is assigned an Option Number.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "SHIPMENT_SEQUENCE",
+      "description": "Internal sequence number for shipment information provide as part of the quote option.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "COST_SEQUENCE",
+      "description": "Cost sequence number for different cost provided for the quote cost option.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "COST_TYPE",
+      "description": "Cost type - e.g., Base Cost, Accessorial etc.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','A','D','S','O'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "The GID for the accessorial cost (if any) on the quote cost option.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST",
+      "description": "Cost.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_CURRENCY_GID",
+      "description": "The GID for the cost currency.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_BASE",
+      "description": "Cost in the base currency.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Description.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_EXPLANATION",
+      "description": "Explanation for cost.",
+      "dataType": "VARCHAR2",
+      "size": 512,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYMENT_METHOD_CODE_GID",
+      "description": "Indicates the payment method that applies to this quote shipment cost.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "QUOTE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "COST_OPTION_SEQUENCE"
+    },
+    {
+      "sequence": 3,
+      "columnName": "SHIPMENT_SEQUENCE"
+    },
+    {
+      "sequence": 4,
+      "columnName": "COST_SEQUENCE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_QCSC_QUOTE_COST_OPTION_SHI",
+      "cascadeDelete": false,
+      "parentTableName": "QUOTE_COST_OPTION_SHIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "QUOTE_GID",
+          "columnName": "QUOTE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "COST_OPTION_SEQUENCE",
+          "columnName": "COST_OPTION_SEQUENCE"
+        },
+        {
+          "sequence": 3,
+          "parentColumnName": "SHIPMENT_SEQUENCE",
+          "columnName": "SHIPMENT_SEQUENCE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_QCSC_ACCESSORIAL_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_CODE_GID",
+          "columnName": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_QCSC_COST_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "COST_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_QCOSC_PAYMENT_METHOD_CODE",
+      "cascadeDelete": false,
+      "parentTableName": "PAYMENT_METHOD_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PAYMENT_METHOD_CODE_GID",
+          "columnName": "PAYMENT_METHOD_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

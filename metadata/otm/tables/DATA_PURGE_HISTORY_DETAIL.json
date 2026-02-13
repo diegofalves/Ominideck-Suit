@@ -1,1 +1,208 @@
-{"table": {"schema": "glogowner","name": "data_purge_history_detail","description": "Data purge history details"},"columns": [{"name": "DATA_PURGE_SEQNO","description": "Data purge sequence number","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PURGE_DETAIL_SEQNO","description": "Sequence number for each business type","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BUSINESS_OBJECT","description": "Business type, which is the table name of top business table","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARENT_TABLE_NAME","description": "Parent table name for each purge node","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TABLE_NAME","description": "Child table name for each node","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTION_TYPE","description": "DML type, for example, stage, bulk delete and delete by row","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_ROW_COUNT","description": "The row count for the action_type","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ERROR_MESSAGE","description": "Error message","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DURATION","description": "Total elapse  time in second for the action","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DURATION_UOM_CODE","description": "Duration UOM","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DURATION_BASE","description": "Duration base","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Domain Name","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DATA_PURGE_SEQNO"},{"sequence": 2,"columnName": "PURGE_DETAIL_SEQNO"},{"sequence": 3,"columnName": "BUSINESS_OBJECT"}],"foreignKeys": [{"foreignKeyName": "FK_DPHD_DATA_PURGE_SEQNO","cascadeDelete": false,"parentTableName": "DATA_PURGE_HISTORY","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_PURGE_SEQNO","columnName": "DATA_PURGE_SEQNO"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "data_purge_history_detail",
+    "description": "Data purge history details"
+  },
+  "columns": [
+    {
+      "name": "DATA_PURGE_SEQNO",
+      "description": "Data purge sequence number",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PURGE_DETAIL_SEQNO",
+      "description": "Sequence number for each business type",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BUSINESS_OBJECT",
+      "description": "Business type, which is the table name of top business table",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARENT_TABLE_NAME",
+      "description": "Parent table name for each purge node",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TABLE_NAME",
+      "description": "Child table name for each node",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTION_TYPE",
+      "description": "DML type, for example, stage, bulk delete and delete by row",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_ROW_COUNT",
+      "description": "The row count for the action_type",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ERROR_MESSAGE",
+      "description": "Error message",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DURATION",
+      "description": "Total elapse  time in second for the action",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DURATION_UOM_CODE",
+      "description": "Duration UOM",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DURATION_BASE",
+      "description": "Duration base",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Domain Name",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DATA_PURGE_SEQNO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PURGE_DETAIL_SEQNO"
+    },
+    {
+      "sequence": 3,
+      "columnName": "BUSINESS_OBJECT"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DPHD_DATA_PURGE_SEQNO",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_PURGE_HISTORY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_PURGE_SEQNO",
+          "columnName": "DATA_PURGE_SEQNO"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

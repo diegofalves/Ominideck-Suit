@@ -1,1 +1,199 @@
-{"table": {"schema": "glogowner","name": "quote_tr_event_contact","description": ""},"columns": [{"name": "QUOTE_GID","description": "The GID for the quote.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSACTIONAL_EVENT_GID","description": "The GID for the transactional event. Transactional Events provide a simplified mechanism for you to register interest in an event for a specific business object, just for this one transaction.  For example: Michael Smith needs to be notified if the shipment costs change on Shipment 1004. The buyer, Will Mathers, needs to be notified if the dates change on order Release 2293-09. The Finance Manager needs to be notified if the cost changes on Invoice PM955830. A transactional event is a pre-selected, pre-parameterized event or set of events, which defines a phase in the life-cycle of a business object. You register interest in the phase on the business object. For example, buyers may have interest if the dates or quantities change on their purchase orders. However, they do not want to know every time there is a change, only on specific purchase orders. To accomplish this: Define a Transactional Event ID called IMPORTANT DATE OR QUANTITY CHANGES. Select the Type ORDER RELEASE. Use the event, as defined in the Subject field, ORDER - DATES MODIFIED. Leave the Restrictions field blank. If, though, you wanted to limit this to events brought in via integration only, then you would enter INTEGRATION here. You can select multiple restrictions at once if necessary. Save this line, and create another for the Subject ORDER - QUANTITIES MODIFIED. The buyers can then pick IMPORTANT DATE OR QUANTITY CHANGES form a list of Transactional Events on specific purchase orders. Transactional Events are available on the following managers: Order Base and Order Release Invoice and Bill Job Buy Shipment, Sell Shipment, and Shipment Group You can also define Transactional Events in the Contact Manager. This allows you to register a contact for several events, rather than having to add that contact to each specific event.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTACT_GID","description": "The GID for the contact.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COM_METHOD_GID","description": "The GID for the contact.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STYLESHEET_PROFILE_GID","description": "The GID for the stlyesheet to use with the event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "QUOTE_GID"},{"sequence": 2,"columnName": "TRANSACTIONAL_EVENT_GID"},{"sequence": 3,"columnName": "CONTACT_GID"},{"sequence": 4,"columnName": "COM_METHOD_GID"}],"foreignKeys": [{"foreignKeyName": "FK_QTEC_QUOTE_GID","cascadeDelete": false,"parentTableName": "QUOTE","columnRelation": [{"sequence": 1,"parentColumnName": "QUOTE_GID","columnName": "QUOTE_GID"}]},{"foreignKeyName": "FK_QTEC_TRANSACTIONAL_EVENT_G","cascadeDelete": false,"parentTableName": "TRANSACTIONAL_EVENT","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSACTIONAL_EVENT_GID","columnName": "TRANSACTIONAL_EVENT_GID"}]},{"foreignKeyName": "FK_QTEC_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "CONTACT_GID"}]},{"foreignKeyName": "FK_QTEC_COM_METHOD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "COM_METHOD_GID"}]},{"foreignKeyName": "FK_QTEC_STYLESHEET_PROFILE_GI","cascadeDelete": false,"parentTableName": "STYLESHEET_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "STYLESHEET_PROFILE_GID","columnName": "STYLESHEET_PROFILE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "quote_tr_event_contact",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "QUOTE_GID",
+      "description": "The GID for the quote.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSACTIONAL_EVENT_GID",
+      "description": "The GID for the transactional event. Transactional Events provide a simplified mechanism for you to register interest in an event for a specific business object, just for this one transaction.  For example: Michael Smith needs to be notified if the shipment costs change on Shipment 1004. The buyer, Will Mathers, needs to be notified if the dates change on order Release 2293-09. The Finance Manager needs to be notified if the cost changes on Invoice PM955830. A transactional event is a pre-selected, pre-parameterized event or set of events, which defines a phase in the life-cycle of a business object. You register interest in the phase on the business object. For example, buyers may have interest if the dates or quantities change on their purchase orders. However, they do not want to know every time there is a change, only on specific purchase orders. To accomplish this: Define a Transactional Event ID called IMPORTANT DATE OR QUANTITY CHANGES. Select the Type ORDER RELEASE. Use the event, as defined in the Subject field, ORDER - DATES MODIFIED. Leave the Restrictions field blank. If, though, you wanted to limit this to events brought in via integration only, then you would enter INTEGRATION here. You can select multiple restrictions at once if necessary. Save this line, and create another for the Subject ORDER - QUANTITIES MODIFIED. The buyers can then pick IMPORTANT DATE OR QUANTITY CHANGES form a list of Transactional Events on specific purchase orders. Transactional Events are available on the following managers: Order Base and Order Release Invoice and Bill Job Buy Shipment, Sell Shipment, and Shipment Group You can also define Transactional Events in the Contact Manager. This allows you to register a contact for several events, rather than having to add that contact to each specific event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTACT_GID",
+      "description": "The GID for the contact.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COM_METHOD_GID",
+      "description": "The GID for the contact.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STYLESHEET_PROFILE_GID",
+      "description": "The GID for the stlyesheet to use with the event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "QUOTE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "TRANSACTIONAL_EVENT_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "CONTACT_GID"
+    },
+    {
+      "sequence": 4,
+      "columnName": "COM_METHOD_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_QTEC_QUOTE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "QUOTE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "QUOTE_GID",
+          "columnName": "QUOTE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_QTEC_TRANSACTIONAL_EVENT_G",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSACTIONAL_EVENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSACTIONAL_EVENT_GID",
+          "columnName": "TRANSACTIONAL_EVENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_QTEC_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_QTEC_COM_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_QTEC_STYLESHEET_PROFILE_GI",
+      "cascadeDelete": false,
+      "parentTableName": "STYLESHEET_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STYLESHEET_PROFILE_GID",
+          "columnName": "STYLESHEET_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

@@ -1,1 +1,268 @@
-{"table": {"schema": "glogowner","name": "smc_discount","description": ""},"columns": [{"name": "RATE_OFFERING_GID","description": "The GID for the  rate offering related to the SMC discount as table of values.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_DISCOUNT","description": "Percent for minimum cost.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "L5C_DISCOUNT","description": "Percent discount for weights <= 500 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "M5C_DISCOUNT","description": "Percent discount for weight > 500 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "M1M_DISCOUNT","description": "Percent discount for weight > 1000 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "M2M_DISCOUNT","description": "Percent discount for weight > 2000 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "M5M_DISCOUNT","description": "Percent discount for weight > 5000 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "M10M_DISCOUNT","description": "Percent discount for weight > 10,000 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "M20M_DISCOUNT","description": "Percent discount for weight > 20,000 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "M30M_DISCOUNT","description": "Percent discount for weight > 30,000 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "M40M_DISCOUNT","description": "Percent discount for weight > 40,000 lb.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SMC_DISC_SEQ_NUM","description": "An internal sequence number for the different SMC discount entries provided by movement type.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_GEO_GID","description": "The GID for the  rate record related to the SMC discount as table of values.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_ALTERNATION_BREAK","description": "Specifies the weight break where the deficit rating should stop.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MOVEMENT_TYPE","description": "Qualifies the usage of the discounts defined by SMC/Carrier Connect Movement Type. If null, then the discounts provided (by weight break) apply to all Movement Types.  Otherwise - the discounts defined apply to the specified Movement Type - either Direct, Indirect, Partner or Custom.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SMC_DISC_SEQ_NUM"}],"foreignKeys": [{"foreignKeyName": "FK_SMCD_RATE_OFFERING_GID","cascadeDelete": false,"parentTableName": "RATE_OFFERING","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_OFFERING_GID","columnName": "RATE_OFFERING_GID"}]},{"foreignKeyName": "FK_SMCD_RATE_GEO_GID","cascadeDelete": false,"parentTableName": "RATE_GEO","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_GEO_GID","columnName": "RATE_GEO_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_ROG_RGG_MVT","columnNames": [{"sequence": 1,"name": "RATE_OFFERING_GID"},{"sequence": 2,"name": "RATE_GEO_GID"},{"sequence": 3,"name": "MOVEMENT_TYPE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "smc_discount",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "RATE_OFFERING_GID",
+      "description": "The GID for the  rate offering related to the SMC discount as table of values.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_DISCOUNT",
+      "description": "Percent for minimum cost.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "L5C_DISCOUNT",
+      "description": "Percent discount for weights <= 500 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "M5C_DISCOUNT",
+      "description": "Percent discount for weight > 500 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "M1M_DISCOUNT",
+      "description": "Percent discount for weight > 1000 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "M2M_DISCOUNT",
+      "description": "Percent discount for weight > 2000 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "M5M_DISCOUNT",
+      "description": "Percent discount for weight > 5000 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "M10M_DISCOUNT",
+      "description": "Percent discount for weight > 10,000 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "M20M_DISCOUNT",
+      "description": "Percent discount for weight > 20,000 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "M30M_DISCOUNT",
+      "description": "Percent discount for weight > 30,000 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "M40M_DISCOUNT",
+      "description": "Percent discount for weight > 40,000 lb.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SMC_DISC_SEQ_NUM",
+      "description": "An internal sequence number for the different SMC discount entries provided by movement type.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_GEO_GID",
+      "description": "The GID for the  rate record related to the SMC discount as table of values.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_ALTERNATION_BREAK",
+      "description": "Specifies the weight break where the deficit rating should stop.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MOVEMENT_TYPE",
+      "description": "Qualifies the usage of the discounts defined by SMC/Carrier Connect Movement Type. If null, then the discounts provided (by weight break) apply to all Movement Types.  Otherwise - the discounts defined apply to the specified Movement Type - either Direct, Indirect, Partner or Custom.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SMC_DISC_SEQ_NUM"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SMCD_RATE_OFFERING_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_OFFERING",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_OFFERING_GID",
+          "columnName": "RATE_OFFERING_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SMCD_RATE_GEO_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_GEO",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_GEO_GID",
+          "columnName": "RATE_GEO_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_ROG_RGG_MVT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_OFFERING_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "RATE_GEO_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "MOVEMENT_TYPE"
+        }
+      ]
+    }
+  ]
+}

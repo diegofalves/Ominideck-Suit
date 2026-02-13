@@ -1,1 +1,178 @@
-{"table": {"schema": "glogowner","name": "order_movement_status","description": ""},"columns": [{"name": "ORDER_MOVEMENT_GID","description": "The GID for the order movement.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_TYPE_GID","description": "The status type GID defined for the status value. Examples are OM Planning, Fleet Assignment OM.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_VALUE_GID","description": "The status value for the order movement status.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ORDER_MOVEMENT_GID"},{"sequence": 2,"columnName": "STATUS_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_OMS_ORDER_MOVEMENT_GID","cascadeDelete": false,"parentTableName": "ORDER_MOVEMENT","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_MOVEMENT_GID","columnName": "ORDER_MOVEMENT_GID"}]},{"foreignKeyName": "FK_OMS_STATUS_VALUE","cascadeDelete": false,"parentTableName": "STATUS_VALUE","columnRelation": [{"sequence": 1,"parentColumnName": "STATUS_TYPE_GID","columnName": "STATUS_TYPE_GID"},{"sequence": 2,"parentColumnName": "STATUS_VALUE_GID","columnName": "STATUS_VALUE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_OMS_STATUS_VALUE","columnNames": [{"sequence": 1,"name": "STATUS_TYPE_GID"},{"sequence": 2,"name": "STATUS_VALUE_GID"}]},{"indexName": "UK_ORDER_MOVEMENT_STATUS","columnNames": [{"sequence": 1,"name": "ORDER_MOVEMENT_GID"},{"sequence": 2,"name": "STATUS_TYPE_GID"},{"sequence": 3,"name": "STATUS_VALUE_GID"}]},{"indexName": "IX_OMSTA_INSERT_DATE","columnNames": [{"sequence": 1,"name": "INSERT_DATE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "order_movement_status",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "ORDER_MOVEMENT_GID",
+      "description": "The GID for the order movement.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_TYPE_GID",
+      "description": "The status type GID defined for the status value. Examples are OM Planning, Fleet Assignment OM.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_VALUE_GID",
+      "description": "The status value for the order movement status.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ORDER_MOVEMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STATUS_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OMS_ORDER_MOVEMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_MOVEMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_MOVEMENT_GID",
+          "columnName": "ORDER_MOVEMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OMS_STATUS_VALUE",
+      "cascadeDelete": false,
+      "parentTableName": "STATUS_VALUE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STATUS_TYPE_GID",
+          "columnName": "STATUS_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "STATUS_VALUE_GID",
+          "columnName": "STATUS_VALUE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_OMS_STATUS_VALUE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STATUS_VALUE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "UK_ORDER_MOVEMENT_STATUS",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_MOVEMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STATUS_TYPE_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "STATUS_VALUE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OMSTA_INSERT_DATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INSERT_DATE"
+        }
+      ]
+    }
+  ]
+}

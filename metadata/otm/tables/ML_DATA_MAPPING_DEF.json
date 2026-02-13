@@ -1,1 +1,262 @@
-{"table": {"schema": "glogowner","name": "ml_data_mapping_def","description": "This table capture the mapping definition of possible source and target attributes for the data mapping power data. Its used both for UI as well as business process"},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ML_DATA_MAPPING_DEF_GID","description": "The GID for the Machine Learning Data Mapping Definition","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ML_DATA_MAPPING_DEF_XID","description": "The XID for the Machine Learning Data Mapping Definition","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECTIVE_MODEL_TYPE","description": "The Objective Model Type value for the data mapping. For example PC= Product Classification Prediction","dataType": "VARCHAR2","size": 10,"isNull": false,"isConstraint": true,"constraintValues": "'P','PE','OR','PC'","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_TABLE","description": "Source table of the data mapping definition","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_TABLE_TRANSLATION","description": "Used to store the translation key for source table value","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_ATTRIBUTE_TYPE","description": "Holds the valid source attribute types","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'StringAttribute','NumberAttribute','DateAttribute','CurrencyAttribute','Remarks','Refnumbers'","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_ATTRIBUTE_TRANSLATION","description": "Used to store the translation key for source attribute type value","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_INPUT_TRANSLATION","description": "This field stores string that defines the input field name. ex :Remark or Refnum","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_INPUT_TYPE","description": "This field indicates the UI input type for the source input field. The values can be D/P/F. D is used for drop list. P is used for picklist.F is used for Fixed List.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'F','P','D'","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_INPUT_QUERY","description": "This filed indicates the query class name for the source input field. This is required in case the value of the field SOURCE_INPUT_TYPE is P or D","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SRC_INPUT_FIXED_VALUES","description": "Holds the list of fixed values if the SOURCE_INPUT_TYPE is F.","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TGT_ATTRIBUTE_TYPE","description": "Holds the valid target attribute type","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'StringAttribute','NumberAttribute','DateAttribute','CurrencyAttribute'","conditionalConstraint": "","defaultValue": ""},{"name": "TGT_ATTRIBUTE_TRANSLATION","description": "Used to store the translation key for target attribute type value","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TGT_INPUT_TRANSLATION","description": "This field stores string that defines the target input field name.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TGT_INPUT_FIXED_VALUES","description": "Holds the list of fixed values if the TARGET_INPUT_TYPE is F.","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ML_DATA_MAPPING_DEF_GID"}],"foreignKeys": [{"foreignKeyName": "FK_MDMD_OTM_RELEASE_GID","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["ML_DATA_MAPPING_D"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ml_data_mapping_def",
+    "description": "This table capture the mapping definition of possible source and target attributes for the data mapping power data. Its used both for UI as well as business process"
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ML_DATA_MAPPING_DEF_GID",
+      "description": "The GID for the Machine Learning Data Mapping Definition",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ML_DATA_MAPPING_DEF_XID",
+      "description": "The XID for the Machine Learning Data Mapping Definition",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECTIVE_MODEL_TYPE",
+      "description": "The Objective Model Type value for the data mapping. For example PC= Product Classification Prediction",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'P','PE','OR','PC'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_TABLE",
+      "description": "Source table of the data mapping definition",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_TABLE_TRANSLATION",
+      "description": "Used to store the translation key for source table value",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_ATTRIBUTE_TYPE",
+      "description": "Holds the valid source attribute types",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'StringAttribute','NumberAttribute','DateAttribute','CurrencyAttribute','Remarks','Refnumbers'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_ATTRIBUTE_TRANSLATION",
+      "description": "Used to store the translation key for source attribute type value",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_INPUT_TRANSLATION",
+      "description": "This field stores string that defines the input field name. ex :Remark or Refnum",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_INPUT_TYPE",
+      "description": "This field indicates the UI input type for the source input field. The values can be D/P/F. D is used for drop list. P is used for picklist.F is used for Fixed List.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'F','P','D'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_INPUT_QUERY",
+      "description": "This filed indicates the query class name for the source input field. This is required in case the value of the field SOURCE_INPUT_TYPE is P or D",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SRC_INPUT_FIXED_VALUES",
+      "description": "Holds the list of fixed values if the SOURCE_INPUT_TYPE is F.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TGT_ATTRIBUTE_TYPE",
+      "description": "Holds the valid target attribute type",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'StringAttribute','NumberAttribute','DateAttribute','CurrencyAttribute'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TGT_ATTRIBUTE_TRANSLATION",
+      "description": "Used to store the translation key for target attribute type value",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TGT_INPUT_TRANSLATION",
+      "description": "This field stores string that defines the target input field name.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TGT_INPUT_FIXED_VALUES",
+      "description": "Holds the list of fixed values if the TARGET_INPUT_TYPE is F.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ML_DATA_MAPPING_DEF_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_MDMD_OTM_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ML_DATA_MAPPING_D"
+  ],
+  "indices": []
+}

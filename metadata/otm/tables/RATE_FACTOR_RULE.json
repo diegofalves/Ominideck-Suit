@@ -1,1 +1,205 @@
-{"table": {"schema": "glogowner","name": "rate_factor_rule","description": ""},"columns": [{"name": "RATE_FACTOR_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_FACTOR_RULE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_FACTOR_SOURCE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_COST_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_FACTOR_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_RFR_RATE_FACTOR_SOURCE_GID","cascadeDelete": false,"parentTableName": "RATE_FACTOR_SOURCE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_FACTOR_SOURCE_GID","columnName": "RATE_FACTOR_SOURCE_GID"}]},{"foreignKeyName": "FK_RFR_ACCESSORIAL_CODE_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_CODE_GID","columnName": "ACCESSORIAL_CODE_GID"}]},{"foreignKeyName": "FK_RFR_RATE_FACTOR_ACCCOST_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_COST","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_COST_GID","columnName": "ACCESSORIAL_COST_GID"}]}],"childTables": ["RATE_FACTOR_RULE_DETAIL","RATE_FACTOR_RULE_JOIN"],"indices": [{"indexName": "IX_RFR_ACCESSORIAL_CODE_GID","columnNames": [{"sequence": 1,"name": "ACCESSORIAL_CODE_GID"}]},{"indexName": "IX_RFR_RATE_FACTOR_ACCCOST_GID","columnNames": [{"sequence": 1,"name": "ACCESSORIAL_COST_GID"}]},{"indexName": "IX_RFR_RATE_FACTOR_SOURCE_GID","columnNames": [{"sequence": 1,"name": "RATE_FACTOR_SOURCE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "rate_factor_rule",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "RATE_FACTOR_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_FACTOR_RULE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_FACTOR_SOURCE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_COST_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_FACTOR_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RFR_RATE_FACTOR_SOURCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_FACTOR_SOURCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_FACTOR_SOURCE_GID",
+          "columnName": "RATE_FACTOR_SOURCE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RFR_ACCESSORIAL_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_CODE_GID",
+          "columnName": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RFR_RATE_FACTOR_ACCCOST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_COST",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_COST_GID",
+          "columnName": "ACCESSORIAL_COST_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "RATE_FACTOR_RULE_DETAIL",
+    "RATE_FACTOR_RULE_JOIN"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_RFR_ACCESSORIAL_CODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RFR_RATE_FACTOR_ACCCOST_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACCESSORIAL_COST_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RFR_RATE_FACTOR_SOURCE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_FACTOR_SOURCE_GID"
+        }
+      ]
+    }
+  ]
+}

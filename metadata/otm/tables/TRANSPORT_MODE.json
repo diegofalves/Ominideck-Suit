@@ -1,1 +1,282 @@
-{"table": {"schema": "glogowner","name": "transport_mode","description": "This is the master table that stores the various transportation modes that can be used for shipping the goods. Some examples include: Air Train Truck Ship etc."},"columns": [{"name": "TRANSPORT_MODE_GID","description": "A unique identifier to define the transportation modes. (includes the domain name as part of the key)","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_XID","description": "A unique identifier to define the transportation modes. (does not include the domain name as part of the key)","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_NAME","description": "The name/description of the transportation mode.  For example:  Air,  Barge,  Drayage,  Truckload,  Rail etc.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_QUALIFIER","description": "DISTINGUISHES THE TRANSPORTATION MODE AS EITHER A STANDARD TRANSPORT MODE, A HAZARDOUS TRANSPORT MODE OR BOTH.  VALUES: B=BOTH, S=STANDARD TRANSPORT MODE, H=HAZARDOUS TRANSPORT MODE.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','S','H'","conditionalConstraint": "","defaultValue": "'S'"},{"name": "PERFORM_SHIPPING_SPACE_CALC","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "COLOR","description": "","dataType": "VARCHAR2","size": 7,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'#FF0000'"},{"name": "IS_MASTER_CARR_REF_REM_VISIBLE","description": "Identifies whether the master carrier reference remark is displayed on the 'View Related Remarks' screen for this particular transportation mode.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "CONDITIONAL_BOOKING_PROF_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_CONSIDER_COST","description": "Indicate if cost should be considered (therefore rating is invoked) during ship unit building (packing).","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "THU_PROFILE_GID","description": "Specifies all compatible  THUs that can be used during ship unit building (packing).","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_TYPE","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": true,"constraintValues": "'TL','LTL','PARCEL','INTERMODAL','RAIL','AIR','OCEAN','DEFAULT'","conditionalConstraint": "","defaultValue": "'DEFAULT'"},{"name": "X12_FORMAT_CODE","description": "","dataType": "VARCHAR2","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_REPACK","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"}],"primaryKey": [{"sequence": 1,"columnName": "TRANSPORT_MODE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_TM_CONDITIONAL_BOOKING_PROF","cascadeDelete": false,"parentTableName": "CONDITIONAL_BOOKING_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "CONDITIONAL_BOOKING_PROF_GID","columnName": "CONDITIONAL_BOOKING_PROF_GID"}]},{"foreignKeyName": "FK_TM_SHIP_UNIT_SPEC_PROFILE","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_PROFILE_GID","columnName": "THU_PROFILE_GID"}]}],"childTables": ["BULK_PLAN_BY_MODE","BULK_PLAN_PARTITION_BY_MODE","BUYER_TEMPLATE","CAPACITY_OVERRIDE_LINE","CONSOL","ESG_ACTIVITY","GTM_COMPLIANCE_RULE","GTM_TRANSACTION","HAZMAT_ITEM","ITINERARY","LG_QUANTITY_BREAK","LOGISTICS_GUIDE_AGGREGATE_DATA","LOGISTICS_GUIDE_DETAIL","MODE_PROFILE_DETAIL","OB_LEG_CONSTRAINT","OB_ORDER_BASE","ORDER_MOVEMENT","ORDER_RELEASE","ORDER_RELEASE_LEG_CONSTRAINT","ORDER_ROUTING_RULE_D","P_BID","P_SHIPMENT","QUOTE","QUOTE_COST_OPTION_SHIPMENT","RATE_OFFERING","ROUTE_INSTANCE","ROUTE_TEMPLATE","SECONDARY_CHARGE_RULE","SERVPROV_CB_PROFILE","SHIPMENT","TENDER_SERVPROV_BID","TEXT_TEMPLATE_PROFILE"],"indices": [{"indexName": "IX_TRANSPORT_MODE_XID","columnNames": [{"sequence": 1,"name": "TRANSPORT_MODE_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "transport_mode",
+    "description": "This is the master table that stores the various transportation modes that can be used for shipping the goods. Some examples include: Air Train Truck Ship etc."
+  },
+  "columns": [
+    {
+      "name": "TRANSPORT_MODE_GID",
+      "description": "A unique identifier to define the transportation modes. (includes the domain name as part of the key)",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_XID",
+      "description": "A unique identifier to define the transportation modes. (does not include the domain name as part of the key)",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_NAME",
+      "description": "The name/description of the transportation mode.  For example:  Air,  Barge,  Drayage,  Truckload,  Rail etc.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_QUALIFIER",
+      "description": "DISTINGUISHES THE TRANSPORTATION MODE AS EITHER A STANDARD TRANSPORT MODE, A HAZARDOUS TRANSPORT MODE OR BOTH.  VALUES: B=BOTH, S=STANDARD TRANSPORT MODE, H=HAZARDOUS TRANSPORT MODE.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','S','H'",
+      "conditionalConstraint": "",
+      "defaultValue": "'S'"
+    },
+    {
+      "name": "PERFORM_SHIPPING_SPACE_CALC",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "COLOR",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 7,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'#FF0000'"
+    },
+    {
+      "name": "IS_MASTER_CARR_REF_REM_VISIBLE",
+      "description": "Identifies whether the master carrier reference remark is displayed on the 'View Related Remarks' screen for this particular transportation mode.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "CONDITIONAL_BOOKING_PROF_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_CONSIDER_COST",
+      "description": "Indicate if cost should be considered (therefore rating is invoked) during ship unit building (packing).",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "THU_PROFILE_GID",
+      "description": "Specifies all compatible  THUs that can be used during ship unit building (packing).",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'TL','LTL','PARCEL','INTERMODAL','RAIL','AIR','OCEAN','DEFAULT'",
+      "conditionalConstraint": "",
+      "defaultValue": "'DEFAULT'"
+    },
+    {
+      "name": "X12_FORMAT_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_REPACK",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "TRANSPORT_MODE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_TM_CONDITIONAL_BOOKING_PROF",
+      "cascadeDelete": false,
+      "parentTableName": "CONDITIONAL_BOOKING_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONDITIONAL_BOOKING_PROF_GID",
+          "columnName": "CONDITIONAL_BOOKING_PROF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TM_SHIP_UNIT_SPEC_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_PROFILE_GID",
+          "columnName": "THU_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "BULK_PLAN_BY_MODE",
+    "BULK_PLAN_PARTITION_BY_MODE",
+    "BUYER_TEMPLATE",
+    "CAPACITY_OVERRIDE_LINE",
+    "CONSOL",
+    "ESG_ACTIVITY",
+    "GTM_COMPLIANCE_RULE",
+    "GTM_TRANSACTION",
+    "HAZMAT_ITEM",
+    "ITINERARY",
+    "LG_QUANTITY_BREAK",
+    "LOGISTICS_GUIDE_AGGREGATE_DATA",
+    "LOGISTICS_GUIDE_DETAIL",
+    "MODE_PROFILE_DETAIL",
+    "OB_LEG_CONSTRAINT",
+    "OB_ORDER_BASE",
+    "ORDER_MOVEMENT",
+    "ORDER_RELEASE",
+    "ORDER_RELEASE_LEG_CONSTRAINT",
+    "ORDER_ROUTING_RULE_D",
+    "P_BID",
+    "P_SHIPMENT",
+    "QUOTE",
+    "QUOTE_COST_OPTION_SHIPMENT",
+    "RATE_OFFERING",
+    "ROUTE_INSTANCE",
+    "ROUTE_TEMPLATE",
+    "SECONDARY_CHARGE_RULE",
+    "SERVPROV_CB_PROFILE",
+    "SHIPMENT",
+    "TENDER_SERVPROV_BID",
+    "TEXT_TEMPLATE_PROFILE"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_TRANSPORT_MODE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRANSPORT_MODE_XID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,174 @@
-{"table": {"schema": "glogowner","name": "ob_order_base_status","description": "The status of the base order. This table links to the defined status(es) in the Status_Type and Status_Value table."},"columns": [{"name": "ORDER_BASE_GID","description": "The GID for the order base.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_TYPE_GID","description": "The status type GID for the status value on the order base.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_VALUE_GID","description": "The status value for the order base status.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ORDER_BASE_GID"},{"sequence": 2,"columnName": "STATUS_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_OBS_GID","cascadeDelete": false,"parentTableName": "OB_ORDER_BASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_BASE_GID","columnName": "ORDER_BASE_GID"}]},{"foreignKeyName": "FK_OBOBS_STSVGID","cascadeDelete": false,"parentTableName": "STATUS_VALUE","columnRelation": [{"sequence": 1,"parentColumnName": "STATUS_TYPE_GID","columnName": "STATUS_TYPE_GID"},{"sequence": 2,"parentColumnName": "STATUS_VALUE_GID","columnName": "STATUS_VALUE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_OBOBS_STSVALGID","columnNames": [{"sequence": 1,"name": "STATUS_VALUE_GID"},{"sequence": 2,"name": "ORDER_BASE_GID"}]},{"indexName": "IX_OBOBS_STSVGID","columnNames": [{"sequence": 1,"name": "STATUS_TYPE_GID"},{"sequence": 2,"name": "STATUS_VALUE_GID"}]},{"indexName": "OBOBS_OBGID","columnNames": [{"sequence": 1,"name": "ORDER_BASE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ob_order_base_status",
+    "description": "The status of the base order. This table links to the defined status(es) in the Status_Type and Status_Value table."
+  },
+  "columns": [
+    {
+      "name": "ORDER_BASE_GID",
+      "description": "The GID for the order base.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_TYPE_GID",
+      "description": "The status type GID for the status value on the order base.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_VALUE_GID",
+      "description": "The status value for the order base status.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ORDER_BASE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STATUS_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OBS_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OB_ORDER_BASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_BASE_GID",
+          "columnName": "ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBOBS_STSVGID",
+      "cascadeDelete": false,
+      "parentTableName": "STATUS_VALUE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STATUS_TYPE_GID",
+          "columnName": "STATUS_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "STATUS_VALUE_GID",
+          "columnName": "STATUS_VALUE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_OBOBS_STSVALGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_VALUE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OBOBS_STSVGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STATUS_VALUE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "OBOBS_OBGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_BASE_GID"
+        }
+      ]
+    }
+  ]
+}

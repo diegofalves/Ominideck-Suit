@@ -1,1 +1,390 @@
-{"table": {"schema": "glogowner","name": "agent","description": ""},"columns": [{"name": "AGENT_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AGENT_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_QUERY_TYPE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVED_CONDITION_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REENTRANCY_LEVEL","description": "","dataType": "NUMBER","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "IS_ACTIVE","description": "Indicates whether agent is active or not.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "RUN_AS_TYPE","description": "","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'USER ROLE','OBJECT'","conditionalConstraint": "","defaultValue": "'USER ROLE'"},{"name": "RUN_AS_USER_ROLE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUN_AS_OBJECT_QUERY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "THRESHOLD_GID","description": "A threshold defined at agent level.  If the data changes of the lifetime events the agent listens to passed threshold tolerance, the agent will be triggered.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ON_SINGLE_THREAD","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_OBJECT_LOCK","description": "If Y, the business object is locked until the agent completes","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "OBJECT_LOCK_TIMEOUT","description": "Object lock timeout, if IS_OBJECT_LOCK=Y","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_LOCK_TIMEOUT_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_LOCK_TIMEOUT_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_LOCK_POLLING","description": "If not using JMS notification for cross-machine locks, the polling interval in msecs","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_LONG_RUNNING_TASK","description": "If Y, this agent is a long running task and should be monitored in the LONG_RUNNING_TASK table.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "LOG_LEVEL","description": "Level to collect agent logging information in the database. If AGENT, AGENT_LOG records are added to track agent activity. If ACTIONS, both AGENT_LOG and AGENT_ACTION_LOG records are added. Note that this value always overrides the default property-driven behavior. The default is used only if the field is left NULL.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": true,"constraintValues": "'NONE','AGENT','ACTIONS'","conditionalConstraint": "","defaultValue": ""},{"name": "STATS_LEVEL","description": "Level to collect agent statistics in the database. If AGENT, AGENT_STATS records are updated to track agent activity. If ACTIONS, both AGENT_STATS and AGENT_ACTION_STATS records are modified. Note that this value always overrides the default property-driven behavior. The default is used only if the field is left NULL.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": true,"constraintValues": "'NONE','AGENT','ACTIONS'","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AGENT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AAA_DATA_QUERY_TYPE_GID","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_AAA_SAVED_CONDITION_GID","cascadeDelete": false,"parentTableName": "SAVED_CONDITION","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_CONDITION_GID","columnName": "SAVED_CONDITION_GID"}]},{"foreignKeyName": "FK_A_RUN_AS_USER_ROLE_GID","cascadeDelete": false,"parentTableName": "USER_ROLE","columnRelation": [{"sequence": 1,"parentColumnName": "USER_ROLE_GID","columnName": "RUN_AS_USER_ROLE_GID"}]},{"foreignKeyName": "FK_A_RUN_AS_OBJECT_QUERY_GID","cascadeDelete": false,"parentTableName": "SAVED_QUERY","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_QUERY_GID","columnName": "RUN_AS_OBJECT_QUERY_GID"}]},{"foreignKeyName": "FK_AGENT_THRESHOLD_GID","cascadeDelete": false,"parentTableName": "THRESHOLD","columnRelation": [{"sequence": 1,"parentColumnName": "THRESHOLD_GID","columnName": "THRESHOLD_GID"}]},{"foreignKeyName": "FK_AGENT_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["AGENT_ACTION_DETAILS","AGENT_CHANGE_LOG","AGENT_EVENT_DETAILS","AGENT_STATS","LONG_RUNNING_TASK","MANUAL_AGENT_TRIGGER","MONITOR_AGENT"],"indices": [{"indexName": "IX_AGENT_XID","columnNames": [{"sequence": 1,"name": "AGENT_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "agent",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "AGENT_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AGENT_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVED_CONDITION_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REENTRANCY_LEVEL",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "Indicates whether agent is active or not.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "RUN_AS_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'USER ROLE','OBJECT'",
+      "conditionalConstraint": "",
+      "defaultValue": "'USER ROLE'"
+    },
+    {
+      "name": "RUN_AS_USER_ROLE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUN_AS_OBJECT_QUERY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "THRESHOLD_GID",
+      "description": "A threshold defined at agent level.  If the data changes of the lifetime events the agent listens to passed threshold tolerance, the agent will be triggered.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ON_SINGLE_THREAD",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_OBJECT_LOCK",
+      "description": "If Y, the business object is locked until the agent completes",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "OBJECT_LOCK_TIMEOUT",
+      "description": "Object lock timeout, if IS_OBJECT_LOCK=Y",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_LOCK_TIMEOUT_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_LOCK_TIMEOUT_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_LOCK_POLLING",
+      "description": "If not using JMS notification for cross-machine locks, the polling interval in msecs",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_LONG_RUNNING_TASK",
+      "description": "If Y, this agent is a long running task and should be monitored in the LONG_RUNNING_TASK table.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "LOG_LEVEL",
+      "description": "Level to collect agent logging information in the database. If AGENT, AGENT_LOG records are added to track agent activity. If ACTIONS, both AGENT_LOG and AGENT_ACTION_LOG records are added. Note that this value always overrides the default property-driven behavior. The default is used only if the field is left NULL.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'NONE','AGENT','ACTIONS'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATS_LEVEL",
+      "description": "Level to collect agent statistics in the database. If AGENT, AGENT_STATS records are updated to track agent activity. If ACTIONS, both AGENT_STATS and AGENT_ACTION_STATS records are modified. Note that this value always overrides the default property-driven behavior. The default is used only if the field is left NULL.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'NONE','AGENT','ACTIONS'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AGENT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AAA_DATA_QUERY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AAA_SAVED_CONDITION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_CONDITION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_CONDITION_GID",
+          "columnName": "SAVED_CONDITION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_A_RUN_AS_USER_ROLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "USER_ROLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "USER_ROLE_GID",
+          "columnName": "RUN_AS_USER_ROLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_A_RUN_AS_OBJECT_QUERY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_QUERY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_QUERY_GID",
+          "columnName": "RUN_AS_OBJECT_QUERY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AGENT_THRESHOLD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "THRESHOLD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "THRESHOLD_GID",
+          "columnName": "THRESHOLD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AGENT_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AGENT_ACTION_DETAILS",
+    "AGENT_CHANGE_LOG",
+    "AGENT_EVENT_DETAILS",
+    "AGENT_STATS",
+    "LONG_RUNNING_TASK",
+    "MANUAL_AGENT_TRIGGER",
+    "MONITOR_AGENT"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_AGENT_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "AGENT_XID"
+        }
+      ]
+    }
+  ]
+}

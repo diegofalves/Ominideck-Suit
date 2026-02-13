@@ -1,1 +1,176 @@
-{"table": {"schema": "glogowner","name": "gtm_object_condition_detail","description": "To capture condition details like whether it is single/combination/sub-selection condition type and on which object with attribute and parameter details. Example : Simple Condition like 'transcation transport mode in air or ocean'. Here transaction is the object.Transport mode is attribute ands air, ocean are parameter values."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_OBJECT_CONDITION_GID","description": "Gid.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_OBJECT_CONDITION_SEQ","description": "Condition Sequence.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_OBJECT_CONDITION_TYPE","description": "Condition Type (Simple / Combination / Sub-Select)","dataType": "VARCHAR2","size": 2,"isNull": false,"isConstraint": true,"constraintValues": "'S','C','SS'","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_OBJECT_TYPE_GID","description": "Object Type Gid.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_OBJECT_TYPE_ATTRIBUTE_GID","description": "Attribute of Object Type Selected like Transport mode","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_OBJ_CONDITION_PARAMETERS","description": "Condition Parameters ( 'Air', 'OCEAN' are parameters for condition on Transport Mode)","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_OBJECT_CONDITION_GID"},{"sequence": 2,"columnName": "GTM_OBJECT_CONDITION_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_GOCD_GTM_OBJECT_CONDITION","cascadeDelete": false,"parentTableName": "GTM_OBJECT_CONDITION","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_OBJECT_CONDITION_GID","columnName": "GTM_OBJECT_CONDITION_GID"}]},{"foreignKeyName": "FK_GOCD_GTM_OBJECT_TYPE_GID","cascadeDelete": false,"parentTableName": "GTM_OBJECT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_OBJECT_TYPE_GID","columnName": "GTM_OBJECT_TYPE_GID"}]},{"foreignKeyName": "FK_GOCD_GTM_OBJECT_TYPE_ATTRI","cascadeDelete": false,"parentTableName": "GTM_OBJECT_TYPE_ATTRIBUTE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_OBJECT_TYPE_ATTRIBUTE_GID","columnName": "GTM_OBJECT_TYPE_ATTRIBUTE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_object_condition_detail",
+    "description": "To capture condition details like whether it is single/combination/sub-selection condition type and on which object with attribute and parameter details. Example : Simple Condition like 'transcation transport mode in air or ocean'. Here transaction is the object.Transport mode is attribute ands air, ocean are parameter values."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_OBJECT_CONDITION_GID",
+      "description": "Gid.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_OBJECT_CONDITION_SEQ",
+      "description": "Condition Sequence.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_OBJECT_CONDITION_TYPE",
+      "description": "Condition Type (Simple / Combination / Sub-Select)",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'S','C','SS'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_OBJECT_TYPE_GID",
+      "description": "Object Type Gid.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_OBJECT_TYPE_ATTRIBUTE_GID",
+      "description": "Attribute of Object Type Selected like Transport mode",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_OBJ_CONDITION_PARAMETERS",
+      "description": "Condition Parameters ( 'Air', 'OCEAN' are parameters for condition on Transport Mode)",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_OBJECT_CONDITION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_OBJECT_CONDITION_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GOCD_GTM_OBJECT_CONDITION",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_OBJECT_CONDITION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_OBJECT_CONDITION_GID",
+          "columnName": "GTM_OBJECT_CONDITION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GOCD_GTM_OBJECT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_OBJECT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_OBJECT_TYPE_GID",
+          "columnName": "GTM_OBJECT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GOCD_GTM_OBJECT_TYPE_ATTRI",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_OBJECT_TYPE_ATTRIBUTE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_OBJECT_TYPE_ATTRIBUTE_GID",
+          "columnName": "GTM_OBJECT_TYPE_ATTRIBUTE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

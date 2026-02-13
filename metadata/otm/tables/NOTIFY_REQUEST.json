@@ -1,1 +1,522 @@
-{"table": {"schema": "glogowner","name": "notify_request","description": "GC3 notification requests and history."},"columns": [{"name": "Q_EVENT_SEQ","description": "Notify request id; the column name follows naming convention of GC3 Data Queue.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NOTIFY_SUBJECT_GID","description": "GC3 notify subject","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_QUERY_TYPE_GID","description": "GC3 Data Query Typq","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_GID","description": "GC3 business object","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NOTIFY_CONTEXT","description": "Contains information to send a message","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COM_METHOD_GID","description": "Communication method","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COM_ADDRESS","description": "Communication address","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STYLESHEET_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTACT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RETRY_COUNT","description": "Number of retry attempt","dataType": "NUMBER","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DELIVERY_WINDOW_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONSOLIDATION_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ADHOC_BATCH_ID","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_STATE","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'QUEUED','ACTIVE','CANCELED','PROCESSED','FAILED','PENDING'","conditionalConstraint": "","defaultValue": "'QUEUED'"},{"name": "Q_START","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_TIME","description": "Date the request become part of the queue","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_TIME_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_TIME_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_START","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_TIME","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_TIME_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_TIME_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_LOG_PROCESS_ID","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_MACHINE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_RELATED_QUEUE_SEQ","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "P_QUEUE_START_KEY","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "Q_PREEMPTION_PRIORITY","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_APP_SERVER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_RELATED_QUEUE_NAME","description": "","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "Q_EVENT_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_NREQ_NOTIFY_SUBJECT_GID","cascadeDelete": false,"parentTableName": "NOTIFY_SUBJECT","columnRelation": [{"sequence": 1,"parentColumnName": "NOTIFY_SUBJECT_GID","columnName": "NOTIFY_SUBJECT_GID"}]},{"foreignKeyName": "FK_NREQ_DATA_QUERY_TYPE_GID","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_NREQ_COM_METHOD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "COM_METHOD_GID"}]},{"foreignKeyName": "FK_NREQ_STYLESHEET_PROFILE_GID","cascadeDelete": false,"parentTableName": "STYLESHEET_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "STYLESHEET_PROFILE_GID","columnName": "STYLESHEET_PROFILE_GID"}]},{"foreignKeyName": "FK_NREQ_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "CONTACT_GID"}]},{"foreignKeyName": "FK_NREQ_DELIVERY_WINDOW_PROFI","cascadeDelete": false,"parentTableName": "DELIVERY_WINDOW_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "DELIVERY_WINDOW_PROFILE_GID","columnName": "DELIVERY_WINDOW_PROFILE_GID"}]},{"foreignKeyName": "FK_NREQ_CONSOLIDATION_PROFILE_","cascadeDelete": false,"parentTableName": "CONSOLIDATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "CONSOLIDATION_PROFILE_GID","columnName": "CONSOLIDATION_PROFILE_GID"}]},{"foreignKeyName": "FK_NREQ_Q_PROCESS_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "Q_PROCESS_MACHINE_GID"}]},{"foreignKeyName": "FK_NREQ_Q_APP_SERVER_GID","cascadeDelete": false,"parentTableName": "APP_SERVER","columnRelation": [{"sequence": 1,"parentColumnName": "APP_SERVER_GID","columnName": "Q_APP_SERVER_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_NOTIFYREQ_CONTACTGID","columnNames": [{"sequence": 1,"name": "CONTACT_GID"}]},{"indexName": "IX_NOTIFYREQ_FIVECOL","columnNames": [{"sequence": 1,"name": "Q_STATE"},{"sequence": 2,"name": "Q_START"},{"sequence": 3,"name": "COM_ADDRESS"},{"sequence": 4,"name": "COM_METHOD_GID"},{"sequence": 5,"name": "DOMAIN_NAME"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "notify_request",
+    "description": "GC3 notification requests and history."
+  },
+  "columns": [
+    {
+      "name": "Q_EVENT_SEQ",
+      "description": "Notify request id; the column name follows naming convention of GC3 Data Queue.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NOTIFY_SUBJECT_GID",
+      "description": "GC3 notify subject",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "GC3 Data Query Typq",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_GID",
+      "description": "GC3 business object",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NOTIFY_CONTEXT",
+      "description": "Contains information to send a message",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COM_METHOD_GID",
+      "description": "Communication method",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COM_ADDRESS",
+      "description": "Communication address",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STYLESHEET_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTACT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RETRY_COUNT",
+      "description": "Number of retry attempt",
+      "dataType": "NUMBER",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DELIVERY_WINDOW_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONSOLIDATION_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ADHOC_BATCH_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_STATE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'QUEUED','ACTIVE','CANCELED','PROCESSED','FAILED','PENDING'",
+      "conditionalConstraint": "",
+      "defaultValue": "'QUEUED'"
+    },
+    {
+      "name": "Q_START",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_TIME",
+      "description": "Date the request become part of the queue",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_TIME_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_TIME_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_START",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_TIME",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_TIME_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_TIME_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_LOG_PROCESS_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_MACHINE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_RELATED_QUEUE_SEQ",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "P_QUEUE_START_KEY",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "Q_PREEMPTION_PRIORITY",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_APP_SERVER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_RELATED_QUEUE_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "Q_EVENT_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_NREQ_NOTIFY_SUBJECT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "NOTIFY_SUBJECT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "NOTIFY_SUBJECT_GID",
+          "columnName": "NOTIFY_SUBJECT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_NREQ_DATA_QUERY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_NREQ_COM_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_NREQ_STYLESHEET_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "STYLESHEET_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STYLESHEET_PROFILE_GID",
+          "columnName": "STYLESHEET_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_NREQ_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_NREQ_DELIVERY_WINDOW_PROFI",
+      "cascadeDelete": false,
+      "parentTableName": "DELIVERY_WINDOW_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DELIVERY_WINDOW_PROFILE_GID",
+          "columnName": "DELIVERY_WINDOW_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_NREQ_CONSOLIDATION_PROFILE_",
+      "cascadeDelete": false,
+      "parentTableName": "CONSOLIDATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONSOLIDATION_PROFILE_GID",
+          "columnName": "CONSOLIDATION_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_NREQ_Q_PROCESS_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "Q_PROCESS_MACHINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_NREQ_Q_APP_SERVER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_SERVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_SERVER_GID",
+          "columnName": "Q_APP_SERVER_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_NOTIFYREQ_CONTACTGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_NOTIFYREQ_FIVECOL",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "Q_STATE"
+        },
+        {
+          "sequence": 2,
+          "name": "Q_START"
+        },
+        {
+          "sequence": 3,
+          "name": "COM_ADDRESS"
+        },
+        {
+          "sequence": 4,
+          "name": "COM_METHOD_GID"
+        },
+        {
+          "sequence": 5,
+          "name": "DOMAIN_NAME"
+        }
+      ]
+    }
+  ]
+}

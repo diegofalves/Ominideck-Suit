@@ -1,1 +1,140 @@
-{"table": {"schema": "glogowner","name": "auto_assign_rule_criteria","description": "User defined criteria which will be used to determine what information to assign. For example, to determine the shipment involved party, look at the shipment mode, and the service provider."},"columns": [{"name": "AUTO_ASSIGN_RULE_GID","description": "Auto-assign rule id","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUTO_ASSIGN_CRITERIA_GID","description": "Criteria id that will be used by auto assign logic for this rule","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUTO_ASSIGN_TYPE_GID","description": "Single component of the criteria used to choose what to auto-assign","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AUTO_ASSIGN_RULE_GID"},{"sequence": 2,"columnName": "AUTO_ASSIGN_CRITERIA_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AARC_AUTO_ASSIGN_RULE_GID","cascadeDelete": false,"parentTableName": "AUTO_ASSIGN_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "AUTO_ASSIGN_RULE_GID","columnName": "AUTO_ASSIGN_RULE_GID"}]},{"foreignKeyName": "FK_AARC_AUTO_ASSIGN_TYPE_CRIT","cascadeDelete": false,"parentTableName": "AUTO_ASSIGN_TYPE_CRIT_MAP","columnRelation": [{"sequence": 1,"parentColumnName": "AUTO_ASSIGN_TYPE_GID","columnName": "AUTO_ASSIGN_CRITERIA_GID"},{"sequence": 2,"parentColumnName": "AUTO_ASSIGN_CRITERIA_GID","columnName": "AUTO_ASSIGN_TYPE_GID"}]}],"childTables": ["AUTO_ASSIGN_RULE_DEF_D"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "auto_assign_rule_criteria",
+    "description": "User defined criteria which will be used to determine what information to assign. For example, to determine the shipment involved party, look at the shipment mode, and the service provider."
+  },
+  "columns": [
+    {
+      "name": "AUTO_ASSIGN_RULE_GID",
+      "description": "Auto-assign rule id",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUTO_ASSIGN_CRITERIA_GID",
+      "description": "Criteria id that will be used by auto assign logic for this rule",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUTO_ASSIGN_TYPE_GID",
+      "description": "Single component of the criteria used to choose what to auto-assign",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AUTO_ASSIGN_RULE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "AUTO_ASSIGN_CRITERIA_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AARC_AUTO_ASSIGN_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AUTO_ASSIGN_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUTO_ASSIGN_RULE_GID",
+          "columnName": "AUTO_ASSIGN_RULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AARC_AUTO_ASSIGN_TYPE_CRIT",
+      "cascadeDelete": false,
+      "parentTableName": "AUTO_ASSIGN_TYPE_CRIT_MAP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUTO_ASSIGN_TYPE_GID",
+          "columnName": "AUTO_ASSIGN_CRITERIA_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "AUTO_ASSIGN_CRITERIA_GID",
+          "columnName": "AUTO_ASSIGN_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AUTO_ASSIGN_RULE_DEF_D"
+  ],
+  "indices": []
+}

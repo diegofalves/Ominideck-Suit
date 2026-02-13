@@ -1,1 +1,164 @@
-{"table": {"schema": "glogowner","name": "http_header","description": "Custom HTTP header parameter."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HTTP_HEADER_PROFILE_GID","description": "A GID to specify the HTTP header profile.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAMETER_NAME","description": "The name of the custom parameter.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAMETER_VALUE","description": "Holds the value of the custom parameter if IS_WALLET is false.","dataType": "VARCHAR2","size": 250,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAMETER_WALLET_VALUE","description": "Holds the value of the custom parameter if IS_WALLET is true.","dataType": "VARCHAR2","size": 250,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_WALLET","description": "Flag to specify if the value should be held in the wallet.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "PARAMETER_TYPE","description": "Holds values of STATIC, SAVED_QUERY, or PROPERTY. This is used to dynamically extract values from the parameter_value column.","dataType": "VARCHAR2","size": 250,"isNull": false,"isConstraint": true,"constraintValues": "'STATIC','SAVED_QUERY','PROPERTY'","conditionalConstraint": "","defaultValue": "'STATIC'"}],"primaryKey": [{"sequence": 1,"columnName": "HTTP_HEADER_PROFILE_GID"},{"sequence": 2,"columnName": "PARAMETER_NAME"}],"foreignKeys": [{"foreignKeyName": "FK_HH_HTTP_HEADER_PROFILE_GID","cascadeDelete": false,"parentTableName": "HTTP_HEADER_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "HTTP_HEADER_PROFILE_GID","columnName": "HTTP_HEADER_PROFILE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_HH_HDR_PROF_GID","columnNames": [{"sequence": 1,"name": "HTTP_HEADER_PROFILE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "http_header",
+    "description": "Custom HTTP header parameter."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HTTP_HEADER_PROFILE_GID",
+      "description": "A GID to specify the HTTP header profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAMETER_NAME",
+      "description": "The name of the custom parameter.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAMETER_VALUE",
+      "description": "Holds the value of the custom parameter if IS_WALLET is false.",
+      "dataType": "VARCHAR2",
+      "size": 250,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAMETER_WALLET_VALUE",
+      "description": "Holds the value of the custom parameter if IS_WALLET is true.",
+      "dataType": "VARCHAR2",
+      "size": 250,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_WALLET",
+      "description": "Flag to specify if the value should be held in the wallet.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "PARAMETER_TYPE",
+      "description": "Holds values of STATIC, SAVED_QUERY, or PROPERTY. This is used to dynamically extract values from the parameter_value column.",
+      "dataType": "VARCHAR2",
+      "size": 250,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'STATIC','SAVED_QUERY','PROPERTY'",
+      "conditionalConstraint": "",
+      "defaultValue": "'STATIC'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "HTTP_HEADER_PROFILE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PARAMETER_NAME"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_HH_HTTP_HEADER_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "HTTP_HEADER_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "HTTP_HEADER_PROFILE_GID",
+          "columnName": "HTTP_HEADER_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_HH_HDR_PROF_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "HTTP_HEADER_PROFILE_GID"
+        }
+      ]
+    }
+  ]
+}

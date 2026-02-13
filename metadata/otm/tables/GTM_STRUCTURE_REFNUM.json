@@ -1,1 +1,137 @@
-{"table": {"schema": "glogowner","name": "gtm_structure_refnum","description": "GTM_STRUCTURE_REFNUM contains a series of business numbers stored with a trade item structure. These numbers are used to qualify the trade item structure. For example, LOTnumber etc"},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_STRUCTURE_GID","description": "GTM_STRUCTURE_GID contains the unique identifier for the trade item structure.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_STRUCTURE_REFNUM_QUAL_GID","description": "GTM_STRUCTURE_REFNUM_QUAL_GID contains the unique identifier for the trade item structure refnum qualifer. example LOT ID as the qualifier etc","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_STRUCTURE_REFNUM_VALUE","description": "GTM_STRUCTURE_REFNUM_VALUE contains the qualfiier value. for example lot number -1456","dataType": "VARCHAR2","size": 240,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_STRUCTURE_GID"},{"sequence": 2,"columnName": "GTM_STRUCTURE_REFNUM_QUAL_GID"},{"sequence": 3,"columnName": "GTM_STRUCTURE_REFNUM_VALUE"}],"foreignKeys": [{"foreignKeyName": "FK_GSTRREF_GTM_STRUCTURE_GID","cascadeDelete": false,"parentTableName": "GTM_STRUCTURE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_STRUCTURE_GID","columnName": "GTM_STRUCTURE_GID"}]},{"foreignKeyName": "FK_GSTRREF_GTM_STRUCTURE_REFN","cascadeDelete": false,"parentTableName": "GTM_STRUCTURE_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_STRUCTURE_REFNUM_QUAL_GID","columnName": "GTM_STRUCTURE_REFNUM_QUAL_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_structure_refnum",
+    "description": "GTM_STRUCTURE_REFNUM contains a series of business numbers stored with a trade item structure. These numbers are used to qualify the trade item structure. For example, LOTnumber etc"
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_STRUCTURE_GID",
+      "description": "GTM_STRUCTURE_GID contains the unique identifier for the trade item structure.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_STRUCTURE_REFNUM_QUAL_GID",
+      "description": "GTM_STRUCTURE_REFNUM_QUAL_GID contains the unique identifier for the trade item structure refnum qualifer. example LOT ID as the qualifier etc",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_STRUCTURE_REFNUM_VALUE",
+      "description": "GTM_STRUCTURE_REFNUM_VALUE contains the qualfiier value. for example lot number -1456",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_STRUCTURE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_STRUCTURE_REFNUM_QUAL_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "GTM_STRUCTURE_REFNUM_VALUE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GSTRREF_GTM_STRUCTURE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_STRUCTURE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_STRUCTURE_GID",
+          "columnName": "GTM_STRUCTURE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GSTRREF_GTM_STRUCTURE_REFN",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_STRUCTURE_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_STRUCTURE_REFNUM_QUAL_GID",
+          "columnName": "GTM_STRUCTURE_REFNUM_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

@@ -1,1 +1,184 @@
-{"table": {"schema": "glogowner","name": "driver_calendar","description": "This table captures the Driver work profile definition, that includes the Activity calendar and the Home location."},"columns": [{"name": "DRIVER_GID","description": "The driver GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HOME_LOCATION_GID","description": "The home location of the driver defined for this work profile.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_CALENDAR_GID","description": "The activity calendar of the driver defined for this work profile.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "The effective date for this driver work profile.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRY_DATE","description": "The expiry date for this driver work profile.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SHIFT_BASED","description": "Allows you to select whether the work profile for the driver is Shift Based or not. If you set this to Yes, then the work profile is evaluated when you try and get the driver home. The driver will be sent home at the end of each shift, and they will start from their home location for their next assignment.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DRIVER_GID"},{"sequence": 2,"columnName": "HOME_LOCATION_GID"},{"sequence": 3,"columnName": "ACTIVITY_CALENDAR_GID"},{"sequence": 4,"columnName": "EFFECTIVE_DATE"}],"foreignKeys": [{"foreignKeyName": "FK_DCAL_DRIVER_GID","cascadeDelete": false,"parentTableName": "DRIVER","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_GID","columnName": "DRIVER_GID"}]},{"foreignKeyName": "FK_DCAL_HOME_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "HOME_LOCATION_GID"}]},{"foreignKeyName": "FK_DCAL_ACTIVITY_CALENDAR_GID2","cascadeDelete": false,"parentTableName": "CALENDAR","columnRelation": [{"sequence": 1,"parentColumnName": "CALENDAR_GID","columnName": "ACTIVITY_CALENDAR_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "driver_calendar",
+    "description": "This table captures the Driver work profile definition, that includes the Activity calendar and the Home location."
+  },
+  "columns": [
+    {
+      "name": "DRIVER_GID",
+      "description": "The driver GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HOME_LOCATION_GID",
+      "description": "The home location of the driver defined for this work profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_CALENDAR_GID",
+      "description": "The activity calendar of the driver defined for this work profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "The effective date for this driver work profile.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRY_DATE",
+      "description": "The expiry date for this driver work profile.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SHIFT_BASED",
+      "description": "Allows you to select whether the work profile for the driver is Shift Based or not. If you set this to Yes, then the work profile is evaluated when you try and get the driver home. The driver will be sent home at the end of each shift, and they will start from their home location for their next assignment.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DRIVER_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "HOME_LOCATION_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "ACTIVITY_CALENDAR_GID"
+    },
+    {
+      "sequence": 4,
+      "columnName": "EFFECTIVE_DATE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DCAL_DRIVER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_GID",
+          "columnName": "DRIVER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DCAL_HOME_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "HOME_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DCAL_ACTIVITY_CALENDAR_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "CALENDAR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CALENDAR_GID",
+          "columnName": "ACTIVITY_CALENDAR_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

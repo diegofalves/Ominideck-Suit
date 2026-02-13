@@ -1,1 +1,403 @@
-{"table": {"schema": "glogowner","name": "long_running_task","description": "Long Running Task - provides visibility and control to long-running tasks"},"columns": [{"name": "TASK_SEQUENCE","description": "Unique sequence number for the LRT","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_TIME","description": "Time the LRT was submitted. This may reflect the time it was placed in the workflow mediator or queues.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_TIME","description": "The time the LRT completed.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATE","description": "State of the LRT: MEDIATING = in the workflow mediator, QUEUED = in an event queue, RUNNING = in an active process, COMPLETED = fully completed, RESUBMITTED = resubmitted to the Process Control or Data Queue table, INTERRUPTED = interrupted, ABORTED = stopped by a server shutdown. (Note that RUNNING LRTs are automatically changed to ABORTED LRTs on server startup.)","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'NOT STARTED','MEDIATING','QUEUED','RUNNING','INTERRUPTING','INTERRUPTED','RESUBMITTED','ABORTED','COMPLETED'","conditionalConstraint": "","defaultValue": "'NOT STARTED'"},{"name": "IS_RESUBMITTABLE","description": "if Y, the LRT can be resubmitted to its original Process Control or Data Queue. (E.g. Bulk Plan before shipment modifications)","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_INTERRUPTIBLE","description": "if Y, the LRT supports clean interruption (e.g. Bulkplan Termination)","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "APP_MACHINE_GID","description": "The application server running the LRT.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROCESS_ID","description": "The log process ID of the LRT. This may not be unique across server runs, but corresponds to the Logging ID of the LRT during its runtime.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BUSINESS_PROCESS_PID","description": "Business process ID of the LRT. This links to the Open Processes diagnostics as long as the LRT is still running on the server. Note on startup, this process ID is cleared. It can be used as an indicator of current vs. historical tasks.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SUBMITTED_BY_USER_GID","description": "For User actions, the user that initiate the LRT. For Integrations, the user submitted on the transmission. For Process Control tasks and agent actions, the user associated with the workflow.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TASK_SOURCE","description": "Type of LRT","dataType": "VARCHAR2","size": 80,"isNull": true,"isConstraint": true,"constraintValues": "'AGENT','AGENT ACTION','USER ACTION','INTEGRATION','INTEGRATION IN','PROCESS CONTROL','AD HOC'","conditionalConstraint": "","defaultValue": ""},{"name": "ACTION_GID","description": "If TASK_SOURCE='ACTION', the name of the User Action corresponding to the LRT.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AGENT_GID","description": "If TASK_SOURCE='AGENT ACTION', the name of the Agent invoking the LRT.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AGENT_ACTION_GID","description": "If TASK_SOURCE='AGENT ACTION', the name of the Agent Action corresponding to the LRT","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_ALIAS_GID","description": "If TASK_SOURCE='PROCESS CONTROL', the name of the Process corresponding to the LRT.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_TRANSMISSION_NO","description": "If TASK_SOURCE='INTEGRATION', the transmission corresponding to the LRT.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_CONTROL_HISTORY_ID","description": "If TASK_SOURCE='PROCESS CONTROL', the unique Process Control History instance for this task request.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_INTEGRATION_IN_SEQ","description": "If task came from Q_INTEGRATION_IN, a sequence for the queue record","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TASK_DETAIL_NAME","description": "If additional details are available for this task, a displayable name for the details (e.g. Bulk Plan Results).","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TASK_DETAIL_URL","description": "If additional details are available for this task, a URL to the additional details (e.g. the Bulk Plan Results screen).","dataType": "VARCHAR2","size": 2048,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TASK_DETAIL_PK","description": "If additional details are available for this task, and table-driven, a string representation of the detail's primary key","dataType": "VARCHAR2","size": 1024,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ADHOC_DESCRIPTION","description": "Description of Ad-hoc Long Running Task (e.g. ADF operation)","dataType": "VARCHAR2","size": 300,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "TASK_SEQUENCE"}],"foreignKeys": [{"foreignKeyName": "FK_LRTK_APP_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "APP_MACHINE_GID"}]},{"foreignKeyName": "FK_LRTK_GL_USER_GID","cascadeDelete": false,"parentTableName": "GL_USER","columnRelation": [{"sequence": 1,"parentColumnName": "GL_USER_GID","columnName": "SUBMITTED_BY_USER_GID"}]},{"foreignKeyName": "FK_LRTK_ACTION_GID","cascadeDelete": false,"parentTableName": "ACTION","columnRelation": [{"sequence": 1,"parentColumnName": "ACTION_GID","columnName": "ACTION_GID"}]},{"foreignKeyName": "FK_LRTK_AGENT_GID","cascadeDelete": false,"parentTableName": "AGENT","columnRelation": [{"sequence": 1,"parentColumnName": "AGENT_GID","columnName": "AGENT_GID"}]},{"foreignKeyName": "FK_LRTK_AGENT_ACTION_GID","cascadeDelete": false,"parentTableName": "AGENT_ACTION","columnRelation": [{"sequence": 1,"parentColumnName": "AGENT_ACTION_GID","columnName": "AGENT_ACTION_GID"}]},{"foreignKeyName": "FK_LRTK_TOPIC_ALIAS_GID","cascadeDelete": false,"parentTableName": "TOPIC_ALIAS","columnRelation": [{"sequence": 1,"parentColumnName": "TOPIC_ALIAS_GID","columnName": "TOPIC_ALIAS_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_LRT_BY_MACHINE","columnNames": [{"sequence": 1,"name": "APP_MACHINE_GID"},{"sequence": 2,"name": "TASK_SEQUENCE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "long_running_task",
+    "description": "Long Running Task - provides visibility and control to long-running tasks"
+  },
+  "columns": [
+    {
+      "name": "TASK_SEQUENCE",
+      "description": "Unique sequence number for the LRT",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_TIME",
+      "description": "Time the LRT was submitted. This may reflect the time it was placed in the workflow mediator or queues.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_TIME",
+      "description": "The time the LRT completed.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATE",
+      "description": "State of the LRT: MEDIATING = in the workflow mediator, QUEUED = in an event queue, RUNNING = in an active process, COMPLETED = fully completed, RESUBMITTED = resubmitted to the Process Control or Data Queue table, INTERRUPTED = interrupted, ABORTED = stopped by a server shutdown. (Note that RUNNING LRTs are automatically changed to ABORTED LRTs on server startup.)",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'NOT STARTED','MEDIATING','QUEUED','RUNNING','INTERRUPTING','INTERRUPTED','RESUBMITTED','ABORTED','COMPLETED'",
+      "conditionalConstraint": "",
+      "defaultValue": "'NOT STARTED'"
+    },
+    {
+      "name": "IS_RESUBMITTABLE",
+      "description": "if Y, the LRT can be resubmitted to its original Process Control or Data Queue. (E.g. Bulk Plan before shipment modifications)",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_INTERRUPTIBLE",
+      "description": "if Y, the LRT supports clean interruption (e.g. Bulkplan Termination)",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "APP_MACHINE_GID",
+      "description": "The application server running the LRT.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROCESS_ID",
+      "description": "The log process ID of the LRT. This may not be unique across server runs, but corresponds to the Logging ID of the LRT during its runtime.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BUSINESS_PROCESS_PID",
+      "description": "Business process ID of the LRT. This links to the Open Processes diagnostics as long as the LRT is still running on the server. Note on startup, this process ID is cleared. It can be used as an indicator of current vs. historical tasks.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SUBMITTED_BY_USER_GID",
+      "description": "For User actions, the user that initiate the LRT. For Integrations, the user submitted on the transmission. For Process Control tasks and agent actions, the user associated with the workflow.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TASK_SOURCE",
+      "description": "Type of LRT",
+      "dataType": "VARCHAR2",
+      "size": 80,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'AGENT','AGENT ACTION','USER ACTION','INTEGRATION','INTEGRATION IN','PROCESS CONTROL','AD HOC'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTION_GID",
+      "description": "If TASK_SOURCE='ACTION', the name of the User Action corresponding to the LRT.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AGENT_GID",
+      "description": "If TASK_SOURCE='AGENT ACTION', the name of the Agent invoking the LRT.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AGENT_ACTION_GID",
+      "description": "If TASK_SOURCE='AGENT ACTION', the name of the Agent Action corresponding to the LRT",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_ALIAS_GID",
+      "description": "If TASK_SOURCE='PROCESS CONTROL', the name of the Process corresponding to the LRT.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_TRANSMISSION_NO",
+      "description": "If TASK_SOURCE='INTEGRATION', the transmission corresponding to the LRT.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_CONTROL_HISTORY_ID",
+      "description": "If TASK_SOURCE='PROCESS CONTROL', the unique Process Control History instance for this task request.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_INTEGRATION_IN_SEQ",
+      "description": "If task came from Q_INTEGRATION_IN, a sequence for the queue record",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TASK_DETAIL_NAME",
+      "description": "If additional details are available for this task, a displayable name for the details (e.g. Bulk Plan Results).",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TASK_DETAIL_URL",
+      "description": "If additional details are available for this task, a URL to the additional details (e.g. the Bulk Plan Results screen).",
+      "dataType": "VARCHAR2",
+      "size": 2048,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TASK_DETAIL_PK",
+      "description": "If additional details are available for this task, and table-driven, a string representation of the detail's primary key",
+      "dataType": "VARCHAR2",
+      "size": 1024,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ADHOC_DESCRIPTION",
+      "description": "Description of Ad-hoc Long Running Task (e.g. ADF operation)",
+      "dataType": "VARCHAR2",
+      "size": 300,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "TASK_SEQUENCE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LRTK_APP_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "APP_MACHINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRTK_GL_USER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GL_USER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GL_USER_GID",
+          "columnName": "SUBMITTED_BY_USER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRTK_ACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACTION_GID",
+          "columnName": "ACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRTK_AGENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AGENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AGENT_GID",
+          "columnName": "AGENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRTK_AGENT_ACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AGENT_ACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AGENT_ACTION_GID",
+          "columnName": "AGENT_ACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRTK_TOPIC_ALIAS_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TOPIC_ALIAS",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TOPIC_ALIAS_GID",
+          "columnName": "TOPIC_ALIAS_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_LRT_BY_MACHINE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "APP_MACHINE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "TASK_SEQUENCE"
+        }
+      ]
+    }
+  ]
+}

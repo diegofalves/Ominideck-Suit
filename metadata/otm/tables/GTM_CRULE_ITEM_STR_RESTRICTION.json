@@ -1,1 +1,177 @@
-{"table": {"schema": "glogowner","name": "gtm_crule_item_str_restriction","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_CRULE_ITEM_STR_RES_SEQ","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_COMPLIANCE_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATE_QUALIFIER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRADE_DIRECTION","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'E','I'","conditionalConstraint": "","defaultValue": "'E'"},{"name": "GTM_CONSTRAINT_SET_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SKIP_CHILD_LINE_CREATION","description": "Flag to specify whether to create child lines or assign Item Structure ID to the Transaction Line. Options are: 'Y' - Assign Item Structure ID Only; 'N' - Assign Item Structure ID and Create Child Lines.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "GTM_CRULE_ITEM_STR_RES_SEQ"},{"sequence": 2,"columnName": "GTM_COMPLIANCE_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GTM_COMP_RULE","cascadeDelete": false,"parentTableName": "GTM_COMPLIANCE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_COMPLIANCE_RULE_GID","columnName": "GTM_COMPLIANCE_RULE_GID"}]},{"foreignKeyName": "FK_DATE_QUAL_GID","cascadeDelete": false,"parentTableName": "GTM_DATE_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "DATE_QUALIFIER_GID","columnName": "DATE_QUALIFIER_GID"}]},{"foreignKeyName": "FK_GTM_CONSTRAINT_SET","cascadeDelete": false,"parentTableName": "GTM_CONSTRAINT_SET","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CONSTRAINT_SET_GID","columnName": "GTM_CONSTRAINT_SET_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_crule_item_str_restriction",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_CRULE_ITEM_STR_RES_SEQ",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_COMPLIANCE_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATE_QUALIFIER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRADE_DIRECTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'E','I'",
+      "conditionalConstraint": "",
+      "defaultValue": "'E'"
+    },
+    {
+      "name": "GTM_CONSTRAINT_SET_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SKIP_CHILD_LINE_CREATION",
+      "description": "Flag to specify whether to create child lines or assign Item Structure ID to the Transaction Line. Options are: 'Y' - Assign Item Structure ID Only; 'N' - Assign Item Structure ID and Create Child Lines.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_CRULE_ITEM_STR_RES_SEQ"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_COMPLIANCE_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTM_COMP_RULE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_COMPLIANCE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_COMPLIANCE_RULE_GID",
+          "columnName": "GTM_COMPLIANCE_RULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DATE_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DATE_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATE_QUALIFIER_GID",
+          "columnName": "DATE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTM_CONSTRAINT_SET",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_CONSTRAINT_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CONSTRAINT_SET_GID",
+          "columnName": "GTM_CONSTRAINT_SET_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

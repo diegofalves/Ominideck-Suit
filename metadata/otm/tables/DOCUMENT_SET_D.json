@@ -1,1 +1,133 @@
-{"table": {"schema": "glogowner","name": "document_set_d","description": "The table holds the document types of the document set."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_SET_GID","description": "ID of the document set.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_DEF_GID","description": "The document type to find the document of the owner object that will be sent as part of document set. A document type with owner data query type as the document set's owner data query type can be provided.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_MULTIPLE_DOCUMENTS","description": "This column determines whether to send all documents of a document type or only one latest document while sending the Document Set.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "DOCUMENT_SET_GID"},{"sequence": 2,"columnName": "DOCUMENT_DEF_GID"}],"foreignKeys": [{"foreignKeyName": "FK_DSETD_DOCUMENT_SET_GID","cascadeDelete": false,"parentTableName": "DOCUMENT_SET","columnRelation": [{"sequence": 1,"parentColumnName": "DOCUMENT_SET_GID","columnName": "DOCUMENT_SET_GID"}]},{"foreignKeyName": "FK_DSETD_DOCUMENT_DEF_GID","cascadeDelete": false,"parentTableName": "DOCUMENT_DEF","columnRelation": [{"sequence": 1,"parentColumnName": "DOCUMENT_DEF_GID","columnName": "DOCUMENT_DEF_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "document_set_d",
+    "description": "The table holds the document types of the document set."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_SET_GID",
+      "description": "ID of the document set.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_DEF_GID",
+      "description": "The document type to find the document of the owner object that will be sent as part of document set. A document type with owner data query type as the document set's owner data query type can be provided.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_MULTIPLE_DOCUMENTS",
+      "description": "This column determines whether to send all documents of a document type or only one latest document while sending the Document Set.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DOCUMENT_SET_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "DOCUMENT_DEF_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DSETD_DOCUMENT_SET_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DOCUMENT_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DOCUMENT_SET_GID",
+          "columnName": "DOCUMENT_SET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DSETD_DOCUMENT_DEF_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DOCUMENT_DEF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DOCUMENT_DEF_GID",
+          "columnName": "DOCUMENT_DEF_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

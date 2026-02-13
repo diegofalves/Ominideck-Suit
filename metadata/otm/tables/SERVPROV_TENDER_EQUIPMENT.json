@@ -1,1 +1,293 @@
-{"table": {"schema": "glogowner","name": "servprov_tender_equipment","description": "This table is used to store the equipment initial and number provided by servprov during tendering process."},"columns": [{"name": "I_TRANSACTION_NO","description": "used as tender_collaboration id.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "used to identify the service provider who entered the equipment initial and number","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_EQUIPMENT_GID","description": "used to match s_equipment of a shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_INITIAL","description": "service provider's equipment initial","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_NUMBER","description": "service provider's equipment number","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_INITIAL_NUMBER","description": "service provider's equipment initial and number","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESPONSE_I_TRANSACTION_NO","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_STATUS","description": "A for accept, R for reject, N for new.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'A','R','N'","conditionalConstraint": "","defaultValue": "'A'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CHECK_DIGIT","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LICENSE_PLATE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "I_TRANSACTION_NO"},{"sequence": 2,"columnName": "SERVPROV_GID"},{"sequence": 3,"columnName": "SEQUENCE"}],"foreignKeys": [{"foreignKeyName": "FK_STE_TENDER_COLLAB_SERVPROV","cascadeDelete": true,"parentTableName": "TENDER_COLLAB_SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "I_TRANSACTION_NO","columnName": "I_TRANSACTION_NO"},{"sequence": 2,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"}]},{"foreignKeyName": "FK_STE_S_EQUIPMENT_GID","cascadeDelete": false,"parentTableName": "S_EQUIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "S_EQUIPMENT_GID","columnName": "S_EQUIPMENT_GID"}]},{"foreignKeyName": "FK_STE_EQUIPMENT_TYPE_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_TYPE_GID","columnName": "EQUIPMENT_TYPE_GID"}]},{"foreignKeyName": "FK_STE_EQUIPMENT_GROUP_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_GID","columnName": "EQUIPMENT_GROUP_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_STE_S_EQUIPMENT_GID","columnNames": [{"sequence": 1,"name": "S_EQUIPMENT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "servprov_tender_equipment",
+    "description": "This table is used to store the equipment initial and number provided by servprov during tendering process."
+  },
+  "columns": [
+    {
+      "name": "I_TRANSACTION_NO",
+      "description": "used as tender_collaboration id.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "used to identify the service provider who entered the equipment initial and number",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_EQUIPMENT_GID",
+      "description": "used to match s_equipment of a shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_INITIAL",
+      "description": "service provider's equipment initial",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_NUMBER",
+      "description": "service provider's equipment number",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_INITIAL_NUMBER",
+      "description": "service provider's equipment initial and number",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESPONSE_I_TRANSACTION_NO",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_STATUS",
+      "description": "A for accept, R for reject, N for new.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'A','R','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'A'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CHECK_DIGIT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LICENSE_PLATE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "I_TRANSACTION_NO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SERVPROV_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "SEQUENCE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_STE_TENDER_COLLAB_SERVPROV",
+      "cascadeDelete": true,
+      "parentTableName": "TENDER_COLLAB_SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "I_TRANSACTION_NO",
+          "columnName": "I_TRANSACTION_NO"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_STE_S_EQUIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "S_EQUIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_EQUIPMENT_GID",
+          "columnName": "S_EQUIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_STE_EQUIPMENT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_TYPE_GID",
+          "columnName": "EQUIPMENT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_STE_EQUIPMENT_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_GID",
+          "columnName": "EQUIPMENT_GROUP_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_STE_S_EQUIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_EQUIPMENT_GID"
+        }
+      ]
+    }
+  ]
+}

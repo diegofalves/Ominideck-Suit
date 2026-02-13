@@ -1,1 +1,160 @@
-{"table": {"schema": "glogowner","name": "shipment_text","description": "Associates a shipment with a set of fixed text.  A shipment can have more than one set of text, and the text can be shared by more than one shipment."},"columns": [{"name": "SHIPMENT_GID","description": "The shipment for which the fixed text is associated.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEXT_TEMPLATE_GID","description": "The foreign key to the text template table, in order to include fixed text with this shipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_DEF_GID","description": "A document that should hold text.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'ALL'"},{"name": "TEXT_OVERRIDE","description": "Transactional override for the template on the specific document.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPMENT_GID"},{"sequence": 2,"columnName": "TEXT_TEMPLATE_GID"},{"sequence": 3,"columnName": "DOCUMENT_DEF_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SHPTXT_SHIPMENT_GID","cascadeDelete": false,"parentTableName": "SHIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"}]},{"foreignKeyName": "FK_SHPTXT_TEXT_TEMPLATE_GID","cascadeDelete": false,"parentTableName": "TEXT_TEMPLATE","columnRelation": [{"sequence": 1,"parentColumnName": "TEXT_TEMPLATE_GID","columnName": "TEXT_TEMPLATE_GID"}]},{"foreignKeyName": "FK_ST_DOCUMENT_DEF_GID","cascadeDelete": false,"parentTableName": "DOCUMENT_DEF","columnRelation": [{"sequence": 1,"parentColumnName": "DOCUMENT_DEF_GID","columnName": "DOCUMENT_DEF_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "shipment_text",
+    "description": "Associates a shipment with a set of fixed text.  A shipment can have more than one set of text, and the text can be shared by more than one shipment."
+  },
+  "columns": [
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The shipment for which the fixed text is associated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEXT_TEMPLATE_GID",
+      "description": "The foreign key to the text template table, in order to include fixed text with this shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_DEF_GID",
+      "description": "A document that should hold text.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'ALL'"
+    },
+    {
+      "name": "TEXT_OVERRIDE",
+      "description": "Transactional override for the template on the specific document.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "TEXT_TEMPLATE_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "DOCUMENT_DEF_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SHPTXT_SHIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHPTXT_TEXT_TEMPLATE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TEXT_TEMPLATE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TEXT_TEMPLATE_GID",
+          "columnName": "TEXT_TEMPLATE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ST_DOCUMENT_DEF_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DOCUMENT_DEF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DOCUMENT_DEF_GID",
+          "columnName": "DOCUMENT_DEF_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

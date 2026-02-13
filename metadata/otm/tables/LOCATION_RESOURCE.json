@@ -1,1 +1,352 @@
-{"table": {"schema": "glogowner","name": "location_resource","description": "The resource defined for a location resource type."},"columns": [{"name": "LOCATION_RESOURCE_GID","description": "The location resource GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_RESOURCE_XID","description": "The XID of the location resource.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "Location GID of the resource.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RESOURCE_TYPE_GID","description": "Resource Type GID of the resource.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_RESOURCE_NAME","description": "The name of the resource.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "The description of the resource.","dataType": "VARCHAR2","size": 200,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CALENDAR_GID","description": "The calendar GID that will be applied to the resource.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_PROFILE_GID","description": "The flex commodity profile ID that associates to the location resource.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_PROFILE_GID","description": "The equipment group profile ID that associates to the location resource.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_PROFILE_GID","description": "The mode profile ID that associates to the location resource.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_PROFILE_GID","description": "The service provider profile ID that associates to the location resource.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTACT_PROFILE_GID","description": "The contact profile GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_CHECK_OPTION","description": "Flex Commodify check option, such as CHECK ALL, CHECK BY LARGEST WEIGHT and CHECK BY LARGEST VOLUME.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPOINTMENT_ACTIVITY_TYPE","description": "Specify if the trailer that is scheduled for the appointment is attached to the truck by selecting Live from the Appointment Activity Type field. If the trailer is being dropped off, select Drop.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PREFERENCE_LEVEL","description": "Gets the preference level of resource for Appointment scheduling","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "LOCATION_RESOURCE_GROUP_GID","description": "The XID for the location resource group. A location resource group allows you to group location resources such as dock door1, dock door2, and dock door3 into a location resource group such as frozen goods into a group called frozen. Similarly, you can group location resources into a location resource group such as dry goods into a group called dry. While you create a location resource group, you can also assign locations. For each location, you can assign multiple appointment rule sets. These rules sets are applicable to all the resources which are under the location resource group. A location resource group enables you to avoid duplicate configurations for each resource.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LOCATION_RESOURCE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_LRS_LOCATION_GID2","cascadeDelete": false,"parentTableName": "LOCATION_RESOURCE_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"},{"sequence": 2,"parentColumnName": "RESOURCE_TYPE_GID","columnName": "RESOURCE_TYPE_GID"}]},{"foreignKeyName": "FK_LRS_CALENDAR_GID","cascadeDelete": false,"parentTableName": "CALENDAR","columnRelation": [{"sequence": 1,"parentColumnName": "CALENDAR_GID","columnName": "CALENDAR_GID"}]},{"foreignKeyName": "FK_LRS_FLEX_COMMODITY_PROFILE_","cascadeDelete": false,"parentTableName": "FLEX_COMMODITY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "FLEX_COMMODITY_PROFILE_GID","columnName": "FLEX_COMMODITY_PROFILE_GID"}]},{"foreignKeyName": "FK_LRS_EQUIPMENT_GROUP_PROFILE","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_LRS_MODE_PROFILE_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "MODE_PROFILE_GID"}]},{"foreignKeyName": "FK_LRS_SERVPROV_PROFILE_GID","cascadeDelete": false,"parentTableName": "SERVPROV_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_PROFILE_GID","columnName": "SERVPROV_PROFILE_GID"}]},{"foreignKeyName": "FK_LRS_CONTACT_PROFILE_GID","cascadeDelete": false,"parentTableName": "CONTACT_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_PROFILE_GID","columnName": "CONTACT_PROFILE_GID"}]},{"foreignKeyName": "FK_LRS_LOCATION_RESOURCE_GROU","cascadeDelete": false,"parentTableName": "LOCATION_RESOURCE_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_RESOURCE_GROUP_GID","columnName": "LOCATION_RESOURCE_GROUP_GID"}]}],"childTables": ["APPOINTMENT","LOCATION_SERVPROV_PREF_D","LR_APPT_RULE_SET_JOIN"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "location_resource",
+    "description": "The resource defined for a location resource type."
+  },
+  "columns": [
+    {
+      "name": "LOCATION_RESOURCE_GID",
+      "description": "The location resource GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_RESOURCE_XID",
+      "description": "The XID of the location resource.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "Location GID of the resource.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RESOURCE_TYPE_GID",
+      "description": "Resource Type GID of the resource.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_RESOURCE_NAME",
+      "description": "The name of the resource.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "The description of the resource.",
+      "dataType": "VARCHAR2",
+      "size": 200,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CALENDAR_GID",
+      "description": "The calendar GID that will be applied to the resource.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_PROFILE_GID",
+      "description": "The flex commodity profile ID that associates to the location resource.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_PROFILE_GID",
+      "description": "The equipment group profile ID that associates to the location resource.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_PROFILE_GID",
+      "description": "The mode profile ID that associates to the location resource.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_PROFILE_GID",
+      "description": "The service provider profile ID that associates to the location resource.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTACT_PROFILE_GID",
+      "description": "The contact profile GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_CHECK_OPTION",
+      "description": "Flex Commodify check option, such as CHECK ALL, CHECK BY LARGEST WEIGHT and CHECK BY LARGEST VOLUME.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPOINTMENT_ACTIVITY_TYPE",
+      "description": "Specify if the trailer that is scheduled for the appointment is attached to the truck by selecting Live from the Appointment Activity Type field. If the trailer is being dropped off, select Drop.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PREFERENCE_LEVEL",
+      "description": "Gets the preference level of resource for Appointment scheduling",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "LOCATION_RESOURCE_GROUP_GID",
+      "description": "The XID for the location resource group. A location resource group allows you to group location resources such as dock door1, dock door2, and dock door3 into a location resource group such as frozen goods into a group called frozen. Similarly, you can group location resources into a location resource group such as dry goods into a group called dry. While you create a location resource group, you can also assign locations. For each location, you can assign multiple appointment rule sets. These rules sets are applicable to all the resources which are under the location resource group. A location resource group enables you to avoid duplicate configurations for each resource.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LOCATION_RESOURCE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LRS_LOCATION_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_RESOURCE_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "RESOURCE_TYPE_GID",
+          "columnName": "RESOURCE_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRS_CALENDAR_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CALENDAR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CALENDAR_GID",
+          "columnName": "CALENDAR_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRS_FLEX_COMMODITY_PROFILE_",
+      "cascadeDelete": false,
+      "parentTableName": "FLEX_COMMODITY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FLEX_COMMODITY_PROFILE_GID",
+          "columnName": "FLEX_COMMODITY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRS_EQUIPMENT_GROUP_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRS_MODE_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRS_SERVPROV_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_PROFILE_GID",
+          "columnName": "SERVPROV_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRS_CONTACT_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_PROFILE_GID",
+          "columnName": "CONTACT_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRS_LOCATION_RESOURCE_GROU",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_RESOURCE_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_RESOURCE_GROUP_GID",
+          "columnName": "LOCATION_RESOURCE_GROUP_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "APPOINTMENT",
+    "LOCATION_SERVPROV_PREF_D",
+    "LR_APPT_RULE_SET_JOIN"
+  ],
+  "indices": []
+}

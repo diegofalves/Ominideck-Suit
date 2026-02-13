@@ -1,1 +1,172 @@
-{"table": {"schema": "glogowner","name": "flex_commodity_profile","description": "This table is used to resolve the many-to-many relationship between the flex commodity profiles and the qualifiers."},"columns": [{"name": "FLEX_COMMODITY_PROFILE_GID","description": "FLEX_COMMODITY_PROFILE_GID contains the unique identifier for the flex commodity.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_PROFILE_XID","description": "FLEX_COMMODITY_PROFILE_XID contains the unique external identifier for the flex commodity.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_PROFILE_NAME","description": "FLEX_COMMODITY_PROFILE_NAME contains the name of the flex commodity.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_QUAL_GID","description": "FLEX_COMMODITY_QUAL_GID contains the unique identifier for the flex commodity qualifier.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_COMPATIBLE","description": "","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "FLEX_COMMODITY_PROFILE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_FCP_FLEX_QUAL_GID","cascadeDelete": false,"parentTableName": "FLEX_COMMODITY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "FLEX_COMMODITY_QUAL_GID","columnName": "FLEX_COMMODITY_QUAL_GID"}]}],"childTables": ["ACTIVITY_TIME_DEF","APPT_RULE_SET","CONSOL","DM_RULE","EQUIP_GROUP_AVG_TA_DURATION","FLEX_COMMODITY_PROFILE_D","LEG_FLEX_COMMOD_PLIST","LOCATION_CAPACITY_GROUP_D","LOCATION_RESOURCE","LOCATION_ROLE_PROFILE_CAL","RATE_GEO","RATE_OFFERING","SECONDARY_CHARGE_RULE"],"indices": [{"indexName": "IX_FCP_FLEX_QUAL_GID","columnNames": [{"sequence": 1,"name": "FLEX_COMMODITY_QUAL_GID"}]},{"indexName": "IX_FLEX_COMMODITY_PROFILE_XID","columnNames": [{"sequence": 1,"name": "FLEX_COMMODITY_PROFILE_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "flex_commodity_profile",
+    "description": "This table is used to resolve the many-to-many relationship between the flex commodity profiles and the qualifiers."
+  },
+  "columns": [
+    {
+      "name": "FLEX_COMMODITY_PROFILE_GID",
+      "description": "FLEX_COMMODITY_PROFILE_GID contains the unique identifier for the flex commodity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_PROFILE_XID",
+      "description": "FLEX_COMMODITY_PROFILE_XID contains the unique external identifier for the flex commodity.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_PROFILE_NAME",
+      "description": "FLEX_COMMODITY_PROFILE_NAME contains the name of the flex commodity.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_QUAL_GID",
+      "description": "FLEX_COMMODITY_QUAL_GID contains the unique identifier for the flex commodity qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_COMPATIBLE",
+      "description": "",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "FLEX_COMMODITY_PROFILE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_FCP_FLEX_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "FLEX_COMMODITY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FLEX_COMMODITY_QUAL_GID",
+          "columnName": "FLEX_COMMODITY_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ACTIVITY_TIME_DEF",
+    "APPT_RULE_SET",
+    "CONSOL",
+    "DM_RULE",
+    "EQUIP_GROUP_AVG_TA_DURATION",
+    "FLEX_COMMODITY_PROFILE_D",
+    "LEG_FLEX_COMMOD_PLIST",
+    "LOCATION_CAPACITY_GROUP_D",
+    "LOCATION_RESOURCE",
+    "LOCATION_ROLE_PROFILE_CAL",
+    "RATE_GEO",
+    "RATE_OFFERING",
+    "SECONDARY_CHARGE_RULE"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_FCP_FLEX_QUAL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FLEX_COMMODITY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_FLEX_COMMODITY_PROFILE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FLEX_COMMODITY_PROFILE_XID"
+        }
+      ]
+    }
+  ]
+}

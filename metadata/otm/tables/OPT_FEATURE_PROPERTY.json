@@ -1,1 +1,165 @@
-{"table": {"schema": "glogowner","name": "opt_feature_property","description": "A property instruction associated with an Optional Feature."},"columns": [{"name": "OPT_FEATURE_GID","description": "Optional Feature ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROP_SEQUENCE_NUM","description": "Unique sequence number for property instruction within the feature property set.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROPERTY_INSTRUCTION","description": "Type of property instruction","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'SET','REMOVE','INCLUDE'","conditionalConstraint": "","defaultValue": "'SET'"},{"name": "PROPERTY_NAME","description": "If instruction is SET or REMOVE, this represents the property key. If instruction is INCLUDE, this represents the Property Set to include. I.e., feature properties can be staged in a full property set reserved for the feature.","dataType": "VARCHAR2","size": 300,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROPERTY_VALUE","description": "If instruction is SET, this represents the value of the property. If INCLUDE, this should either be blank or set to  'sibling'. Values in a sibling property set will have the same precedence as if they were declared in the including set.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OPT_FEATURE_GID"},{"sequence": 2,"columnName": "PROP_SEQUENCE_NUM"}],"foreignKeys": [{"foreignKeyName": "FK_OPTFP_OPT_FEATURE_GID","cascadeDelete": false,"parentTableName": "OPT_FEATURE","columnRelation": [{"sequence": 1,"parentColumnName": "OPT_FEATURE_GID","columnName": "OPT_FEATURE_GID"}]},{"foreignKeyName": "FK_OPTFP_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "opt_feature_property",
+    "description": "A property instruction associated with an Optional Feature."
+  },
+  "columns": [
+    {
+      "name": "OPT_FEATURE_GID",
+      "description": "Optional Feature ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROP_SEQUENCE_NUM",
+      "description": "Unique sequence number for property instruction within the feature property set.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROPERTY_INSTRUCTION",
+      "description": "Type of property instruction",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'SET','REMOVE','INCLUDE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'SET'"
+    },
+    {
+      "name": "PROPERTY_NAME",
+      "description": "If instruction is SET or REMOVE, this represents the property key. If instruction is INCLUDE, this represents the Property Set to include. I.e., feature properties can be staged in a full property set reserved for the feature.",
+      "dataType": "VARCHAR2",
+      "size": 300,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROPERTY_VALUE",
+      "description": "If instruction is SET, this represents the value of the property. If INCLUDE, this should either be blank or set to  'sibling'. Values in a sibling property set will have the same precedence as if they were declared in the including set.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OPT_FEATURE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PROP_SEQUENCE_NUM"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OPTFP_OPT_FEATURE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OPT_FEATURE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OPT_FEATURE_GID",
+          "columnName": "OPT_FEATURE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OPTFP_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

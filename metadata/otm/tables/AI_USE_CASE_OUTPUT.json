@@ -1,1 +1,178 @@
-{"table": {"schema": "glogowner","name": "ai_use_case_output","description": "AI prompt instructions for a use case and output."},"columns": [{"name": "AI_USE_CASE_GID","description": "AI Use Case GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AI_OUTPUT_GID","description": "AI Output GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_DEFAULT","description": "Y, if this is the default output for the use case.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_RESERVED","description": "If Y, the assignment of the output to the use case is not editable.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROW_PROTECT","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'R','H'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AI_USE_CASE_GID"},{"sequence": 2,"columnName": "AI_OUTPUT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AIUCO_AI_USE_CASE_GID","cascadeDelete": false,"parentTableName": "AI_USE_CASE","columnRelation": [{"sequence": 1,"parentColumnName": "AI_USE_CASE_GID","columnName": "AI_USE_CASE_GID"}]},{"foreignKeyName": "FK_AIUCO_AI_OUTPUT_GID","cascadeDelete": false,"parentTableName": "AI_OUTPUT","columnRelation": [{"sequence": 1,"parentColumnName": "AI_OUTPUT_GID","columnName": "AI_OUTPUT_GID"}]},{"foreignKeyName": "FK_AIUCO_OTM_RELEASE_GID","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ai_use_case_output",
+    "description": "AI prompt instructions for a use case and output."
+  },
+  "columns": [
+    {
+      "name": "AI_USE_CASE_GID",
+      "description": "AI Use Case GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AI_OUTPUT_GID",
+      "description": "AI Output GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_DEFAULT",
+      "description": "Y, if this is the default output for the use case.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_RESERVED",
+      "description": "If Y, the assignment of the output to the use case is not editable.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROW_PROTECT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'R','H'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AI_USE_CASE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "AI_OUTPUT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AIUCO_AI_USE_CASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AI_USE_CASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AI_USE_CASE_GID",
+          "columnName": "AI_USE_CASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AIUCO_AI_OUTPUT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AI_OUTPUT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AI_OUTPUT_GID",
+          "columnName": "AI_OUTPUT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AIUCO_OTM_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

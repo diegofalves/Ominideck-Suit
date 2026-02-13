@@ -1,1 +1,609 @@
-{"table": {"schema": "glogowner","name": "bulk_plan_partition","description": ""},"columns": [{"name": "BULK_PLAN_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SUBMIT_TIME","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_TIME","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_TIME","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_ORDERS_SELECTED","description": "","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_ORDERS_UNASSIGNED","description": "","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_ORDERS_PLANNED","description": "","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_SHIPMENTS_BUILT","description": "","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_ORDERS_PLANNED_FAILED","description": "","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROCESS_ID","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_ORDER_MOVEMENTS_SELECTED","description": "","dataType": "NUMBER","size": 8,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_ORDER_MOVEMENTS_UNASSIGNED","description": "","dataType": "NUMBER","size": 8,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_ORDER_MOVEMENTS_PLANNED","description": "","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_ORDER_MOVEMENTS_FAILED","description": "","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_NUM_STOPS","description": "average # of stops of all shipments in this partition","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_COST","description": "total cost of all shipments built in this partition","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_COST_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_COST_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_WEIGHT","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_WEIGHT_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_WEIGHT_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_VOLUME","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_VOLUME_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_VOLUME_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_DISTANCE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_DISTANCE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_DISTANCE_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATE","description": "Execution state of the bulkplan partition. INTERRUPTED when a user has requested termination but the partition is still running. TERMINATED when the partition completes termination.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'SUBMITTED','RUNNING','COMPLETED','FAILED','INTERRUPTED','TERMINATED'","conditionalConstraint": "","defaultValue": "'SUBMITTED'"},{"name": "SINCE","description": "Time of last state change","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_MACHINE_GID","description": "If scaled, the application machine running the partition","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_SHIPMENT_TIME_SECS","description": "Sum of all shipments times (end-start) in seconds","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_WEIGHT_CAPACITY","description": "Sum of all shipment weight capacities (based on equipment used)","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_WEIGHT_CAPACITY_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_WEIGHT_CAPACITY_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_VOLUME_CAPACITY","description": "Sum of all shipment volume capacities (based on equipment used)","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_VOLUME_CAPACITY_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_VOLUME_CAPACITY_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_ORDERS_THRU_POOL","description": "Number of orders that went through a pool point","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_ORDERS_THRU_XDOCK","description": "Number of orders that went through a crossdock","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_BEST_DIRECT_COST","description": "Total best direct cost of planned orders","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_BEST_DIRECT_COST_CUR","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_BEST_DIRECT_COST_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_WA_CREATED","description": "Number of Work assignments created during the Bulk plan partition process.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "NUM_ORDER_MOVEMENTS_CREATED","description": "Number of order movements created.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "BULK_PLAN_GID"},{"sequence": 2,"columnName": "PARTITION_GID"}],"foreignKeys": [{"foreignKeyName": "FK_BPP_BULK_PLAN_GID","cascadeDelete": false,"parentTableName": "BULK_PLAN","columnRelation": [{"sequence": 1,"parentColumnName": "BULK_PLAN_GID","columnName": "BULK_PLAN_GID"}]},{"foreignKeyName": "FK_BPP_PARTITION_GID2","cascadeDelete": false,"parentTableName": "PLAN_PARTITION","columnRelation": [{"sequence": 1,"parentColumnName": "PLAN_PARTITION_GID","columnName": "PARTITION_GID"}]},{"foreignKeyName": "FK_BPP_TOTAL_COST_CURRENCY_GI","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "TOTAL_COST_CURRENCY_GID"}]},{"foreignKeyName": "FK_BPP_APP_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "APP_MACHINE_GID"}]},{"foreignKeyName": "FK_BPP_TOTAL_BEST_DIRECT_COST","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "TOTAL_BEST_DIRECT_COST_CUR"}]}],"childTables": ["BULK_PLAN_PARTITION_BY_MODE","BULK_PLAN_PARTITION_SERVPROV"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "bulk_plan_partition",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "BULK_PLAN_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SUBMIT_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_ORDERS_SELECTED",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_ORDERS_UNASSIGNED",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_ORDERS_PLANNED",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_SHIPMENTS_BUILT",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_ORDERS_PLANNED_FAILED",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROCESS_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_ORDER_MOVEMENTS_SELECTED",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_ORDER_MOVEMENTS_UNASSIGNED",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_ORDER_MOVEMENTS_PLANNED",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_ORDER_MOVEMENTS_FAILED",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_NUM_STOPS",
+      "description": "average # of stops of all shipments in this partition",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_COST",
+      "description": "total cost of all shipments built in this partition",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_COST_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_COST_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_WEIGHT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_WEIGHT_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_WEIGHT_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_VOLUME",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_VOLUME_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_VOLUME_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_DISTANCE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_DISTANCE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_DISTANCE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATE",
+      "description": "Execution state of the bulkplan partition. INTERRUPTED when a user has requested termination but the partition is still running. TERMINATED when the partition completes termination.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'SUBMITTED','RUNNING','COMPLETED','FAILED','INTERRUPTED','TERMINATED'",
+      "conditionalConstraint": "",
+      "defaultValue": "'SUBMITTED'"
+    },
+    {
+      "name": "SINCE",
+      "description": "Time of last state change",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_MACHINE_GID",
+      "description": "If scaled, the application machine running the partition",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_SHIPMENT_TIME_SECS",
+      "description": "Sum of all shipments times (end-start) in seconds",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_WEIGHT_CAPACITY",
+      "description": "Sum of all shipment weight capacities (based on equipment used)",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_WEIGHT_CAPACITY_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_WEIGHT_CAPACITY_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_VOLUME_CAPACITY",
+      "description": "Sum of all shipment volume capacities (based on equipment used)",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_VOLUME_CAPACITY_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_VOLUME_CAPACITY_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_ORDERS_THRU_POOL",
+      "description": "Number of orders that went through a pool point",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_ORDERS_THRU_XDOCK",
+      "description": "Number of orders that went through a crossdock",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_BEST_DIRECT_COST",
+      "description": "Total best direct cost of planned orders",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_BEST_DIRECT_COST_CUR",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_BEST_DIRECT_COST_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_WA_CREATED",
+      "description": "Number of Work assignments created during the Bulk plan partition process.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "NUM_ORDER_MOVEMENTS_CREATED",
+      "description": "Number of order movements created.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "BULK_PLAN_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PARTITION_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_BPP_BULK_PLAN_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BULK_PLAN",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BULK_PLAN_GID",
+          "columnName": "BULK_PLAN_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BPP_PARTITION_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "PLAN_PARTITION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PLAN_PARTITION_GID",
+          "columnName": "PARTITION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BPP_TOTAL_COST_CURRENCY_GI",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "TOTAL_COST_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BPP_APP_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "APP_MACHINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BPP_TOTAL_BEST_DIRECT_COST",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "TOTAL_BEST_DIRECT_COST_CUR"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "BULK_PLAN_PARTITION_BY_MODE",
+    "BULK_PLAN_PARTITION_SERVPROV"
+  ],
+  "indices": []
+}

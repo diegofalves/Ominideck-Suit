@@ -1,1 +1,233 @@
-{"table": {"schema": "glogowner","name": "lnm_project","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_GID","description": "primary key for this table","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Captures the description of the Logistics Network Modeling Project description.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_NAME","description": "Captures the project_name.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_SAVED_QUERY_GID","description": "Captures the Saved Query Gid which fetches the order releases that are to be used by this project.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLANNING_PARAMETER_SET_GID","description": "Captures the planning parameter set gid that this project uses.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ITINERARY_GID","description": "Captures the Itinerary GID that the project runs with.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ITINERARY_PROFILE_GID","description": "Captures the Itinerary Profile GID that the project runs with.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVED_QUERY_TYPE","description": "","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_TYPE","description": "Type of Modeling Project (Bulk Plan/ Work Assignment)","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'BULK_PLAN','WORK_ASSIGNMENT'","conditionalConstraint": "","defaultValue": "'BULK_PLAN'"}],"primaryKey": [{"sequence": 1,"columnName": "PROJECT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_LNMP_SAVED_QUERY_GID","cascadeDelete": false,"parentTableName": "SAVED_QUERY","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_QUERY_GID","columnName": "ORDER_SAVED_QUERY_GID"}]},{"foreignKeyName": "FK_LNMP_PLANNING_PARAMETER_SE","cascadeDelete": false,"parentTableName": "PLANNING_PARAMETER_SET","columnRelation": [{"sequence": 1,"parentColumnName": "PLANNING_PARAMETER_SET_GID","columnName": "PLANNING_PARAMETER_SET_GID"}]},{"foreignKeyName": "FK_LNMP_ITINERARY_GID","cascadeDelete": false,"parentTableName": "ITINERARY","columnRelation": [{"sequence": 1,"parentColumnName": "ITINERARY_GID","columnName": "ITINERARY_GID"}]},{"foreignKeyName": "FK_LNMP_ITINERARY_PROFILE_GID","cascadeDelete": false,"parentTableName": "ITINERARY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "ITINERARY_PROFILE_GID","columnName": "ITINERARY_PROFILE_GID"}]}],"childTables": ["LNM_PROJECT_RULE","LNM_SCENARIO"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "lnm_project",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_GID",
+      "description": "primary key for this table",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Captures the description of the Logistics Network Modeling Project description.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_NAME",
+      "description": "Captures the project_name.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_SAVED_QUERY_GID",
+      "description": "Captures the Saved Query Gid which fetches the order releases that are to be used by this project.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLANNING_PARAMETER_SET_GID",
+      "description": "Captures the planning parameter set gid that this project uses.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ITINERARY_GID",
+      "description": "Captures the Itinerary GID that the project runs with.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ITINERARY_PROFILE_GID",
+      "description": "Captures the Itinerary Profile GID that the project runs with.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVED_QUERY_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_TYPE",
+      "description": "Type of Modeling Project (Bulk Plan/ Work Assignment)",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'BULK_PLAN','WORK_ASSIGNMENT'",
+      "conditionalConstraint": "",
+      "defaultValue": "'BULK_PLAN'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PROJECT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LNMP_SAVED_QUERY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_QUERY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_QUERY_GID",
+          "columnName": "ORDER_SAVED_QUERY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LNMP_PLANNING_PARAMETER_SE",
+      "cascadeDelete": false,
+      "parentTableName": "PLANNING_PARAMETER_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PLANNING_PARAMETER_SET_GID",
+          "columnName": "PLANNING_PARAMETER_SET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LNMP_ITINERARY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITINERARY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITINERARY_GID",
+          "columnName": "ITINERARY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LNMP_ITINERARY_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITINERARY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITINERARY_PROFILE_GID",
+          "columnName": "ITINERARY_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "LNM_PROJECT_RULE",
+    "LNM_SCENARIO"
+  ],
+  "indices": []
+}

@@ -1,1 +1,154 @@
-{"table": {"schema": "glogowner","name": "lnm_datarule_instance","description": "Data rule instance, with parameter values specified."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATARULE_INSTANCE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATARULE_INSTANCE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATARULE_INSTANCE_DESC","description": "","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATARULE_DEFINITION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RULE_INSTANCE_GROUP","description": "Usability grouping for data rule instance.","dataType": "VARCHAR2","size": 200,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "JAVA_RULE_PARAMETERS","description": "For JAVA rule type, parameters are specified by the API. Rather than store the parameters in LNM_DATA_RULE_INST_PARAM, where we have no FK into LNM_DATA_RULE_PARAMETER, we store all parameters in a Unix-style command line. It takes the form: -paramName1 paramOp1:paramValue1 -paramName2 paramOp2:paramValue2 ...","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DATARULE_INSTANCE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_LDI_DATARULE_DEFINITION_GI","cascadeDelete": false,"parentTableName": "LNM_DATARULE_DEF","columnRelation": [{"sequence": 1,"parentColumnName": "DATARULE_DEFINITION_GID","columnName": "DATARULE_DEFINITION_GID"}]}],"childTables": ["LNM_DATARULE_INS_PRM","LNM_PROJECT_RULE","LNM_SCENARIO_RULE"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "lnm_datarule_instance",
+    "description": "Data rule instance, with parameter values specified."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATARULE_INSTANCE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATARULE_INSTANCE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATARULE_INSTANCE_DESC",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATARULE_DEFINITION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RULE_INSTANCE_GROUP",
+      "description": "Usability grouping for data rule instance.",
+      "dataType": "VARCHAR2",
+      "size": 200,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "JAVA_RULE_PARAMETERS",
+      "description": "For JAVA rule type, parameters are specified by the API. Rather than store the parameters in LNM_DATA_RULE_INST_PARAM, where we have no FK into LNM_DATA_RULE_PARAMETER, we store all parameters in a Unix-style command line. It takes the form: -paramName1 paramOp1:paramValue1 -paramName2 paramOp2:paramValue2 ...",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DATARULE_INSTANCE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LDI_DATARULE_DEFINITION_GI",
+      "cascadeDelete": false,
+      "parentTableName": "LNM_DATARULE_DEF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATARULE_DEFINITION_GID",
+          "columnName": "DATARULE_DEFINITION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "LNM_DATARULE_INS_PRM",
+    "LNM_PROJECT_RULE",
+    "LNM_SCENARIO_RULE"
+  ],
+  "indices": []
+}

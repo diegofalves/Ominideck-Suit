@@ -1,1 +1,389 @@
-{"table": {"schema": "glogowner","name": "q_integration_in","description": ""},"columns": [{"name": "Q_EVENT_SEQ","description": "Queue sequence for the inbound integration.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PREEMPTION_PRIORITY","description": "A sequence used for queue preemption.","dataType": "NUMBER","size": 9,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_START","description": "Time the event was last queued. If the event is scheduled, this will equal the scheduled time. If resubmitted, the resubmit time. Otherwise it matches the insert date.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_STATE","description": "Queue state of the event (QUEUED, ACTIVE, CANCELED, PROCESSED, FAILED)","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'QUEUED','ACTIVE','CANCELED','PROCESSED','FAILED'","conditionalConstraint": "","defaultValue": "'QUEUED'"},{"name": "Q_TIME","description": "Time the event spent in queue","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_TIME_UOM_CODE","description": "Unit of measure for the q_time.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_TIME_BASE","description": "Database base value for the q_time.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_START","description": "Time the event was last dequeued and passed to the executor for processing.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_TIME","description": "Time the event took to execute.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_TIME_UOM_CODE","description": "Unit of measure for the q_process_time.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_TIME_BASE","description": "Database base value for the q_process_time.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_LOG_PROCESS_ID","description": "ID linking the event execution to the system logs.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_PROCESS_MACHINE_GID","description": "The application machine that polled and executed the event","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_APP_SERVER_GID","description": "The application server that polled and executed the event","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_RELATED_QUEUE_SEQ","description": "Sequence of the parent queue event that populated this event.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "P_QUEUE_START_KEY","description": "Index for date-based partitioning.","dataType": "NUMBER","size": 2,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "I_TRANSMISSION_NO","description": "Specifies the transmission number for the event.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_DESCRIPTION","description": "A short description of the topic, displayed on the inbound integration events finder.","dataType": "VARCHAR2","size": 500,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_CLASS_NAME","description": "Workflow topic class of the event.","dataType": "VARCHAR2","size": 255,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_PARAMETERS","description": "Workflow parameters for the event.","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_RELATED_QUEUE_NAME","description": "Queue table name of parent event","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "Q_QUEUE_NAME","description": "Queue name used to enqueue this record","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_LONG_RUNNING_TASK","description": "If Y, this transmission is a long running task and should be monitored in the LONG_RUNNING_TASK table.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "Q_EVENT_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_QII_Q_PROCESS_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "Q_PROCESS_MACHINE_GID"}]},{"foreignKeyName": "FK_QII_Q_APP_SERVER_GID","cascadeDelete": false,"parentTableName": "APP_SERVER","columnRelation": [{"sequence": 1,"parentColumnName": "APP_SERVER_GID","columnName": "Q_APP_SERVER_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_Q_INTIN_PREMPT_PRIORTY","columnNames": [{"sequence": 1,"name": "Q_EVENT_SEQ"},{"sequence": 2,"name": "Q_PREEMPTION_PRIORITY"}]},{"indexName": "IX_Q_INT_IN_I_TRANS_NO","columnNames": [{"sequence": 1,"name": "I_TRANSMISSION_NO"}]},{"indexName": "IX_Q_INT_IN_Q_STATE","columnNames": [{"sequence": 1,"name": "Q_STATE"}]},{"indexName": "IX_Q_PROCESS_MACHINE_GID","columnNames": [{"sequence": 1,"name": "Q_PROCESS_MACHINE_GID"},{"sequence": 2,"name": "Q_STATE"},{"sequence": 3,"name": "Q_EVENT_SEQ"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "q_integration_in",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "Q_EVENT_SEQ",
+      "description": "Queue sequence for the inbound integration.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PREEMPTION_PRIORITY",
+      "description": "A sequence used for queue preemption.",
+      "dataType": "NUMBER",
+      "size": 9,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_START",
+      "description": "Time the event was last queued. If the event is scheduled, this will equal the scheduled time. If resubmitted, the resubmit time. Otherwise it matches the insert date.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_STATE",
+      "description": "Queue state of the event (QUEUED, ACTIVE, CANCELED, PROCESSED, FAILED)",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'QUEUED','ACTIVE','CANCELED','PROCESSED','FAILED'",
+      "conditionalConstraint": "",
+      "defaultValue": "'QUEUED'"
+    },
+    {
+      "name": "Q_TIME",
+      "description": "Time the event spent in queue",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_TIME_UOM_CODE",
+      "description": "Unit of measure for the q_time.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_TIME_BASE",
+      "description": "Database base value for the q_time.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_START",
+      "description": "Time the event was last dequeued and passed to the executor for processing.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_TIME",
+      "description": "Time the event took to execute.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_TIME_UOM_CODE",
+      "description": "Unit of measure for the q_process_time.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_TIME_BASE",
+      "description": "Database base value for the q_process_time.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_LOG_PROCESS_ID",
+      "description": "ID linking the event execution to the system logs.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_PROCESS_MACHINE_GID",
+      "description": "The application machine that polled and executed the event",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_APP_SERVER_GID",
+      "description": "The application server that polled and executed the event",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_RELATED_QUEUE_SEQ",
+      "description": "Sequence of the parent queue event that populated this event.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "P_QUEUE_START_KEY",
+      "description": "Index for date-based partitioning.",
+      "dataType": "NUMBER",
+      "size": 2,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "I_TRANSMISSION_NO",
+      "description": "Specifies the transmission number for the event.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_DESCRIPTION",
+      "description": "A short description of the topic, displayed on the inbound integration events finder.",
+      "dataType": "VARCHAR2",
+      "size": 500,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_CLASS_NAME",
+      "description": "Workflow topic class of the event.",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_PARAMETERS",
+      "description": "Workflow parameters for the event.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_RELATED_QUEUE_NAME",
+      "description": "Queue table name of parent event",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "Q_QUEUE_NAME",
+      "description": "Queue name used to enqueue this record",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_LONG_RUNNING_TASK",
+      "description": "If Y, this transmission is a long running task and should be monitored in the LONG_RUNNING_TASK table.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "Q_EVENT_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_QII_Q_PROCESS_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "Q_PROCESS_MACHINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_QII_Q_APP_SERVER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_SERVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_SERVER_GID",
+          "columnName": "Q_APP_SERVER_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_Q_INTIN_PREMPT_PRIORTY",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "Q_EVENT_SEQ"
+        },
+        {
+          "sequence": 2,
+          "name": "Q_PREEMPTION_PRIORITY"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_Q_INT_IN_I_TRANS_NO",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_TRANSMISSION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_Q_INT_IN_Q_STATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "Q_STATE"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_Q_PROCESS_MACHINE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "Q_PROCESS_MACHINE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "Q_STATE"
+        },
+        {
+          "sequence": 3,
+          "name": "Q_EVENT_SEQ"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,143 @@
-{"table": {"schema": "glogowner","name": "gtm_decl_message_remark","description": "This Table maintains the Remarks for the messages exchanged between the different parties involved in the process of Declaration."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DECL_MESSAGE_GID","description": "GTM Declaration Message GID is part of the primary key and is a foreign key to the primary key of table GTM_DECL_MESSAGE.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_SEQUENCE","description": "It is a part of primary key and is the unique number generated using BNG.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_QUAL_GID","description": "Remark qualifier GID is a foreign key to the primary key of table Remark Qualifier.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_TEXT","description": "Remark Text.","dataType": "VARCHAR2","size": 4000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_DECL_MESSAGE_GID"},{"sequence": 2,"columnName": "REMARK_SEQUENCE"}],"foreignKeys": [{"foreignKeyName": "FK_GDMR_DECL_MESSAGE_GID","cascadeDelete": false,"parentTableName": "GTM_DECL_MESSAGE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_DECL_MESSAGE_GID","columnName": "GTM_DECL_MESSAGE_GID"}]},{"foreignKeyName": "FK_GDMR_REMARK_QUAL_GID","cascadeDelete": false,"parentTableName": "REMARK_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "REMARK_QUAL_GID","columnName": "REMARK_QUAL_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_decl_message_remark",
+    "description": "This Table maintains the Remarks for the messages exchanged between the different parties involved in the process of Declaration."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DECL_MESSAGE_GID",
+      "description": "GTM Declaration Message GID is part of the primary key and is a foreign key to the primary key of table GTM_DECL_MESSAGE.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_SEQUENCE",
+      "description": "It is a part of primary key and is the unique number generated using BNG.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_QUAL_GID",
+      "description": "Remark qualifier GID is a foreign key to the primary key of table Remark Qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_TEXT",
+      "description": "Remark Text.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_DECL_MESSAGE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "REMARK_SEQUENCE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GDMR_DECL_MESSAGE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DECL_MESSAGE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_DECL_MESSAGE_GID",
+          "columnName": "GTM_DECL_MESSAGE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDMR_REMARK_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REMARK_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REMARK_QUAL_GID",
+          "columnName": "REMARK_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

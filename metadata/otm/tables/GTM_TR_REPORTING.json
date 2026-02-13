@@ -1,1 +1,297 @@
-{"table": {"schema": "glogowner","name": "gtm_tr_reporting","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TR_REPORTING_GID","description": "The GID for the reporting results assigned to the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TR_REPORTING_XID","description": "The XID for the reporting results assigned to the GTM trade transaction line.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TRANSACTION_LINE_GID","description": "The GID for the GTM trade transaction.","dataType": "VARCHAR2","size": 201,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_COMPLIANCE_RULE_GROUP_GID","description": "The GID for the compliance rule set group used to assign the reporting results to the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_COMPLIANCE_RULE_GID","description": "The GID for the compliance rule used to assign the reporting results to the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_REGIME_GID","description": "The GID for the regime associated with the reporting results control assigned to the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_CONTROL_TYPE_GID","description": "The GID for the control type assigned in the reporting results of the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_CONTROL_CODE","description": "The control code assigned in the reporting results of the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_EXCEPTION_CONTROL_TYPE_GID","description": "The GID for the exception control type assigned in the reporting results of the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_EXCEPTION_CONTROL_CODE","description": "The exception control code assigned in the reporting results of the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXCEPTION_COMPLIANCE_RULE_GID","description": "The GID for the exception compliance rule used to assign the reporting results to the GTM trade transaction line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TR_REPORTING_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GTREP_GTM_TRANSACTION_LINE","cascadeDelete": false,"parentTableName": "GTM_TRANSACTION_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TRANSACTION_LINE_GID","columnName": "GTM_TRANSACTION_LINE_GID"}]},{"foreignKeyName": "FK_GTREP_GTM_COMP_RULE_GROUP","cascadeDelete": false,"parentTableName": "GTM_COMPLIANCE_RULE_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_COMPLIANCE_RULE_GROUP_GID","columnName": "GTM_COMPLIANCE_RULE_GROUP_GID"}]},{"foreignKeyName": "FK_GTREP_GTM_COMPL_RULE_GID","cascadeDelete": false,"parentTableName": "GTM_COMPLIANCE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_COMPLIANCE_RULE_GID","columnName": "GTM_COMPLIANCE_RULE_GID"}]},{"foreignKeyName": "FK_GTREP_GTM_REGIME_GID","cascadeDelete": false,"parentTableName": "GTM_REGIME","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_REGIME_GID","columnName": "GTM_REGIME_GID"}]},{"foreignKeyName": "FK_GTREP_GTM_CONTROL_CODE","cascadeDelete": false,"parentTableName": "GTM_CONTROL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CONTROL_TYPE_GID","columnName": "GTM_CONTROL_TYPE_GID"},{"sequence": 2,"parentColumnName": "CONTROL_CODE","columnName": "GTM_CONTROL_CODE"}]},{"foreignKeyName": "FK_GTREP_GTM_EXC_CONTROL_CODE","cascadeDelete": false,"parentTableName": "GTM_CONTROL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CONTROL_TYPE_GID","columnName": "GTM_EXCEPTION_CONTROL_TYPE_GID"},{"sequence": 2,"parentColumnName": "CONTROL_CODE","columnName": "GTM_EXCEPTION_CONTROL_CODE"}]},{"foreignKeyName": "FK_GTREP_GTM_COMPLIANCE_RULE","cascadeDelete": false,"parentTableName": "GTM_COMPLIANCE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_COMPLIANCE_RULE_GID","columnName": "EXCEPTION_COMPLIANCE_RULE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_GTR_GTM_TRANS_LINE_GID","columnNames": [{"sequence": 1,"name": "GTM_TRANSACTION_LINE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_tr_reporting",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TR_REPORTING_GID",
+      "description": "The GID for the reporting results assigned to the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TR_REPORTING_XID",
+      "description": "The XID for the reporting results assigned to the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TRANSACTION_LINE_GID",
+      "description": "The GID for the GTM trade transaction.",
+      "dataType": "VARCHAR2",
+      "size": 201,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_COMPLIANCE_RULE_GROUP_GID",
+      "description": "The GID for the compliance rule set group used to assign the reporting results to the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_COMPLIANCE_RULE_GID",
+      "description": "The GID for the compliance rule used to assign the reporting results to the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_REGIME_GID",
+      "description": "The GID for the regime associated with the reporting results control assigned to the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_CONTROL_TYPE_GID",
+      "description": "The GID for the control type assigned in the reporting results of the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_CONTROL_CODE",
+      "description": "The control code assigned in the reporting results of the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_EXCEPTION_CONTROL_TYPE_GID",
+      "description": "The GID for the exception control type assigned in the reporting results of the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_EXCEPTION_CONTROL_CODE",
+      "description": "The exception control code assigned in the reporting results of the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXCEPTION_COMPLIANCE_RULE_GID",
+      "description": "The GID for the exception compliance rule used to assign the reporting results to the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TR_REPORTING_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTREP_GTM_TRANSACTION_LINE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TRANSACTION_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TRANSACTION_LINE_GID",
+          "columnName": "GTM_TRANSACTION_LINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTREP_GTM_COMP_RULE_GROUP",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_COMPLIANCE_RULE_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_COMPLIANCE_RULE_GROUP_GID",
+          "columnName": "GTM_COMPLIANCE_RULE_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTREP_GTM_COMPL_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_COMPLIANCE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_COMPLIANCE_RULE_GID",
+          "columnName": "GTM_COMPLIANCE_RULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTREP_GTM_REGIME_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_REGIME",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_REGIME_GID",
+          "columnName": "GTM_REGIME_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTREP_GTM_CONTROL_CODE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_CONTROL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CONTROL_TYPE_GID",
+          "columnName": "GTM_CONTROL_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "CONTROL_CODE",
+          "columnName": "GTM_CONTROL_CODE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTREP_GTM_EXC_CONTROL_CODE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_CONTROL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CONTROL_TYPE_GID",
+          "columnName": "GTM_EXCEPTION_CONTROL_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "CONTROL_CODE",
+          "columnName": "GTM_EXCEPTION_CONTROL_CODE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTREP_GTM_COMPLIANCE_RULE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_COMPLIANCE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_COMPLIANCE_RULE_GID",
+          "columnName": "EXCEPTION_COMPLIANCE_RULE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_GTR_GTM_TRANS_LINE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_TRANSACTION_LINE_GID"
+        }
+      ]
+    }
+  ]
+}

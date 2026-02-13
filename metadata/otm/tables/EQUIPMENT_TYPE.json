@@ -1,1 +1,619 @@
-{"table": {"schema": "glogowner","name": "equipment_type","description": "This table categorizes the equipments from the Equipment table into various categories. The users in GC3 can define the individual equipments, or types of equipments or both."},"columns": [{"name": "EQUIPMENT_TYPE_GID","description": "The GID for the equipment type. Equipment Types are used to define the characteristics of an equipment group. Using Intermodal Trailers as an example of an equipment group profile, the group in that profile could be 45' or 48' trailers. The equipment type against that group would be either a rollup or swing door trailer.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_TYPE_XID","description": "The XID for the equipment type.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_TYPE_NAME","description": "Text for the name of the equipment type.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_DESC","description": "A textual description of the equipment type.","dataType": "VARCHAR2","size": 60,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_DESC_CODE","description": "The equipment description code is a user-defined code for the equipment type description.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_DESC_CODE_DEF","description": "The equipment description code definition is a definition of the equipment type description code.","dataType": "VARCHAR2","size": 60,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ISO_EQUIPMENT_CODE","description": "This is the official International Standards Organization (ISO) code for the container that may be used with this equipment type (EDI element 24). This code identifies the size and type of container in a four-character format. The first and second characters specify the volume of the container, and the third and fourth characters specify the type. This code may or may not be the same as the equipment description code.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ISO_EQUIPMENT_CODE_DEF","description": "The ISO equipment code definition is an explanation of the ISO equipment code.","dataType": "VARCHAR2","size": 60,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GROSS_WEIGHT","description": "The equipment type's gross weight.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0.00"},{"name": "GROSS_WEIGHT_UOM_CODE","description": "Unit of measure for GROSS_WEIGHT column.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "GROSS_WEIGHT_BASE","description": "The gross weight in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "TARE_WEIGHT","description": "Weight of the empty equipment type.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0.00"},{"name": "TARE_WEIGHT_UOM_CODE","description": "Unit of measure for the tare weight.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "TARE_WEIGHT_BASE","description": "The tare weight in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "NET_WEIGHT","description": "The net or nominal weight is the anticipated weight capacity of the shipment that can be contained within the equipment type.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0.00"},{"name": "NET_WEIGHT_UOM_CODE","description": "The unit of measure related to the net or nominal weight.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "NET_WEIGHT_BASE","description": "The net weight in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "VOLUME","description": "The volume of the equipment type.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0.00"},{"name": "VOLUME_UOM_CODE","description": "Unit of measure for VOLUME column.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "VOLUME_BASE","description": "The volume in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "METRIC3","description": "The Metric field represents an additional level of detail for a shipment on a given equipment type. For example, you can enter information about items being transported without packaging, such as a number of garments not packed into crates or onto pallets but instead placed on hangers. This number must be no greater than eight digits.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "METRIC4","description": "The Metric field represents an additional level of detail for a shipment on a given equipment type. For example, you can enter information about items being transported without packaging, such as a number of garments not packed into crates or onto pallets but instead placed on hangers. This number must be no greater than eight digits.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_LENGTH","description": "The length of the equipment type's interior.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_LENGTH_UOM_CODE","description": "Unit of measure for INTERIOR_LENGTH column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_LENGTH_BASE","description": "The interior length in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_WIDTH","description": "The width of the equipment type's interior.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_WIDTH_UOM_CODE","description": "Unit of measure for INTERIOR_WIDTH column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_WIDTH_BASE","description": "The interior width in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_HEIGHT","description": "The height of the equipment type's interior.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_HEIGHT_UOM_CODE","description": "Unit of measure for INTERIOR_HEIGHT column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INTERIOR_HEIGHT_BASE","description": "The interior height in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_LENGTH","description": "The length of the exterior of the equipment type.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_LENGTH_UOM_CODE","description": "Unit of measure for EXTERIOR_LENGTH column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_LENGTH_BASE","description": "The exterior length in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_WIDTH","description": "The width of the exterior of the equipment type.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_WIDTH_UOM_CODE","description": "Unit of measure for EXTERIOR_WIDTH column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_WIDTH_BASE","description": "The exterior width in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_HEIGHT","description": "The height of the exterior of the equipment type.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_HEIGHT_UOM_CODE","description": "Unit of measure for EXTERIOR_HEIGHT column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERIOR_HEIGHT_BASE","description": "The exterior height in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEMPERATURE_CONTROL","description": "Check box used to enable temperature control functionality to be used for this equipment type.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "TEMPERATURE_CONTROL_GID","description": "A GID to define the temperature controls value for the commodity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG1","description": "Tag fields, like attribute fields, are available to store additional information associated with this piece of equipment.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG2","description": "Tag fields, like attribute fields, are available to store additional information associated with this piece of equipment.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG3","description": "Tag fields, like attribute fields, are available to store additional information associated with this piece of equipment.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG4","description": "Tag fields, like attribute fields, are available to store additional information associated with this piece of equipment.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SUBSTITUTE_EQ_TYPE_PROFILE_GID","description": "Indicates which equipment types can be substituted for this type in fleet equipment planning.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "EQUIPMENT_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_EQP_TY_TEMPCTL_GID","cascadeDelete": false,"parentTableName": "TEMPERATURE_CONTROL","columnRelation": [{"sequence": 1,"parentColumnName": "TEMPERATURE_CONTROL_GID","columnName": "TEMPERATURE_CONTROL_GID"}]},{"foreignKeyName": "FK_EQPTP_SUBSTITUTE_EQ_TYPE_P","cascadeDelete": false,"parentTableName": "EQUIPMENT_TYPE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_TYPE_PROFILE_GID","columnName": "SUBSTITUTE_EQ_TYPE_PROFILE_GID"}]}],"childTables": ["AAR_CAR_EQUIP_TYPE_JOIN","CAPACITY_COMMITMENT","CAPACITY_LIMIT","CAPACITY_USAGE","DM_TRANSACTION","EQUIPMENT","EQUIPMENT_TYPE_JOIN","EQUIPMENT_TYPE_PROFILE_D","EQUIPMENT_TYPE_REMARK","EQUIPMENT_TYPE_SPECIAL_SERVICE","ESG_ACTIVITY","IE_SS_S_EQUIPMENT","ORDER_RELEASE","OR_EQUIPMENT","SERVPROV_TENDER_EQUIPMENT","SERVPROV_TENDER_SG_EQUIPMENT","S_EQUIPMENT"],"indices": [{"indexName": "IX_EQUIPMENT_TYPE_XID","columnNames": [{"sequence": 1,"name": "EQUIPMENT_TYPE_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "equipment_type",
+    "description": "This table categorizes the equipments from the Equipment table into various categories. The users in GC3 can define the individual equipments, or types of equipments or both."
+  },
+  "columns": [
+    {
+      "name": "EQUIPMENT_TYPE_GID",
+      "description": "The GID for the equipment type. Equipment Types are used to define the characteristics of an equipment group. Using Intermodal Trailers as an example of an equipment group profile, the group in that profile could be 45' or 48' trailers. The equipment type against that group would be either a rollup or swing door trailer.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_TYPE_XID",
+      "description": "The XID for the equipment type.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_TYPE_NAME",
+      "description": "Text for the name of the equipment type.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_DESC",
+      "description": "A textual description of the equipment type.",
+      "dataType": "VARCHAR2",
+      "size": 60,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_DESC_CODE",
+      "description": "The equipment description code is a user-defined code for the equipment type description.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_DESC_CODE_DEF",
+      "description": "The equipment description code definition is a definition of the equipment type description code.",
+      "dataType": "VARCHAR2",
+      "size": 60,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ISO_EQUIPMENT_CODE",
+      "description": "This is the official International Standards Organization (ISO) code for the container that may be used with this equipment type (EDI element 24). This code identifies the size and type of container in a four-character format. The first and second characters specify the volume of the container, and the third and fourth characters specify the type. This code may or may not be the same as the equipment description code.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ISO_EQUIPMENT_CODE_DEF",
+      "description": "The ISO equipment code definition is an explanation of the ISO equipment code.",
+      "dataType": "VARCHAR2",
+      "size": 60,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GROSS_WEIGHT",
+      "description": "The equipment type's gross weight.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0.00"
+    },
+    {
+      "name": "GROSS_WEIGHT_UOM_CODE",
+      "description": "Unit of measure for GROSS_WEIGHT column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "GROSS_WEIGHT_BASE",
+      "description": "The gross weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "TARE_WEIGHT",
+      "description": "Weight of the empty equipment type.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0.00"
+    },
+    {
+      "name": "TARE_WEIGHT_UOM_CODE",
+      "description": "Unit of measure for the tare weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "TARE_WEIGHT_BASE",
+      "description": "The tare weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "NET_WEIGHT",
+      "description": "The net or nominal weight is the anticipated weight capacity of the shipment that can be contained within the equipment type.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0.00"
+    },
+    {
+      "name": "NET_WEIGHT_UOM_CODE",
+      "description": "The unit of measure related to the net or nominal weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "NET_WEIGHT_BASE",
+      "description": "The net weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "VOLUME",
+      "description": "The volume of the equipment type.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0.00"
+    },
+    {
+      "name": "VOLUME_UOM_CODE",
+      "description": "Unit of measure for VOLUME column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "VOLUME_BASE",
+      "description": "The volume in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "METRIC3",
+      "description": "The Metric field represents an additional level of detail for a shipment on a given equipment type. For example, you can enter information about items being transported without packaging, such as a number of garments not packed into crates or onto pallets but instead placed on hangers. This number must be no greater than eight digits.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "METRIC4",
+      "description": "The Metric field represents an additional level of detail for a shipment on a given equipment type. For example, you can enter information about items being transported without packaging, such as a number of garments not packed into crates or onto pallets but instead placed on hangers. This number must be no greater than eight digits.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_LENGTH",
+      "description": "The length of the equipment type's interior.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_LENGTH_UOM_CODE",
+      "description": "Unit of measure for INTERIOR_LENGTH column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_LENGTH_BASE",
+      "description": "The interior length in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_WIDTH",
+      "description": "The width of the equipment type's interior.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_WIDTH_UOM_CODE",
+      "description": "Unit of measure for INTERIOR_WIDTH column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_WIDTH_BASE",
+      "description": "The interior width in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_HEIGHT",
+      "description": "The height of the equipment type's interior.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_HEIGHT_UOM_CODE",
+      "description": "Unit of measure for INTERIOR_HEIGHT column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INTERIOR_HEIGHT_BASE",
+      "description": "The interior height in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_LENGTH",
+      "description": "The length of the exterior of the equipment type.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_LENGTH_UOM_CODE",
+      "description": "Unit of measure for EXTERIOR_LENGTH column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_LENGTH_BASE",
+      "description": "The exterior length in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_WIDTH",
+      "description": "The width of the exterior of the equipment type.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_WIDTH_UOM_CODE",
+      "description": "Unit of measure for EXTERIOR_WIDTH column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_WIDTH_BASE",
+      "description": "The exterior width in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_HEIGHT",
+      "description": "The height of the exterior of the equipment type.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_HEIGHT_UOM_CODE",
+      "description": "Unit of measure for EXTERIOR_HEIGHT column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERIOR_HEIGHT_BASE",
+      "description": "The exterior height in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEMPERATURE_CONTROL",
+      "description": "Check box used to enable temperature control functionality to be used for this equipment type.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "TEMPERATURE_CONTROL_GID",
+      "description": "A GID to define the temperature controls value for the commodity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG1",
+      "description": "Tag fields, like attribute fields, are available to store additional information associated with this piece of equipment.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG2",
+      "description": "Tag fields, like attribute fields, are available to store additional information associated with this piece of equipment.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG3",
+      "description": "Tag fields, like attribute fields, are available to store additional information associated with this piece of equipment.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG4",
+      "description": "Tag fields, like attribute fields, are available to store additional information associated with this piece of equipment.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SUBSTITUTE_EQ_TYPE_PROFILE_GID",
+      "description": "Indicates which equipment types can be substituted for this type in fleet equipment planning.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "EQUIPMENT_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EQP_TY_TEMPCTL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TEMPERATURE_CONTROL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TEMPERATURE_CONTROL_GID",
+          "columnName": "TEMPERATURE_CONTROL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EQPTP_SUBSTITUTE_EQ_TYPE_P",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_TYPE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_TYPE_PROFILE_GID",
+          "columnName": "SUBSTITUTE_EQ_TYPE_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AAR_CAR_EQUIP_TYPE_JOIN",
+    "CAPACITY_COMMITMENT",
+    "CAPACITY_LIMIT",
+    "CAPACITY_USAGE",
+    "DM_TRANSACTION",
+    "EQUIPMENT",
+    "EQUIPMENT_TYPE_JOIN",
+    "EQUIPMENT_TYPE_PROFILE_D",
+    "EQUIPMENT_TYPE_REMARK",
+    "EQUIPMENT_TYPE_SPECIAL_SERVICE",
+    "ESG_ACTIVITY",
+    "IE_SS_S_EQUIPMENT",
+    "ORDER_RELEASE",
+    "OR_EQUIPMENT",
+    "SERVPROV_TENDER_EQUIPMENT",
+    "SERVPROV_TENDER_SG_EQUIPMENT",
+    "S_EQUIPMENT"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_EQUIPMENT_TYPE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EQUIPMENT_TYPE_XID"
+        }
+      ]
+    }
+  ]
+}

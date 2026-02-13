@@ -1,1 +1,635 @@
-{"table": {"schema": "glogowner","name": "esg_activity","description": "This table is used for capturing the ESG (Environment, Social and Governance) Activity details for an activity performed in OTM."},"columns": [{"name": "ESG_ACTIVITY_GID","description": "The GID of the ESG Activity.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESG_ACTIVITY_XID","description": "The XID of the ESG Activity.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESG_ACTIVITY_TYPE_GID","description": "The ID of ESG Activity Type","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCOPE_TYPE","description": "Scope of the ESG Activity. Valid Values are '1','2','3'","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'1','2','3'","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Description for the ESG Activity.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_SOURCE","description": "Source from which the ESG Activity details are obtained. Valid Values are 'GENERATED', 'INTEGRATION', 'MANUAL'.","dataType": "VARCHAR2","size": 15,"isNull": false,"isConstraint": true,"constraintValues": "'GENERATED','INTEGRATION','MANUAL'","conditionalConstraint": "","defaultValue": ""},{"name": "POSTED_ON","description": "The date on which the activity is posted.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "POSTING_TYPE","description": "Defines the posting type ESG Activity. Valid Values are 'PLANNED' and 'ACTUAL'.","dataType": "VARCHAR2","size": 15,"isNull": false,"isConstraint": true,"constraintValues": "'PLANNED','ACTUAL'","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_QUERY_TYPE_GID","description": "Data Query Type of the business object for which the ESG Activity is captured.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECT_GID","description": "Business Object ID for which the ESG Activity is captured.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_LOCATION_GID","description": "The Source Location ID for which the ESG Activity is captured.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_LOCATION_GID","description": "The Destination Location ID for which the ESG Activity is captured.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_GID","description": "Mode of the Transport used during the ESG Activity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_TYPE_GID","description": "Equipment Type used for the ESG Activity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_GID","description": "Equipment Group used for the ESG Activity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_HANDLING_UNIT_GID","description": "The Transport Handling Unit ID for the ESG Activity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_HANDLING_UNIT_COUNT","description": "Count of the Transport Handling Unit for the ESG Activity.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE","description": "Distance traveled for the ESG Activity.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_UOM_CODE","description": "Unit of measure for the distance.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_BASE","description": "Distance in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT","description": "Weight of the shipment carried for the ESG Activity.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_UOM_CODE","description": "Unit of measure for weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BASE","description": "Weight in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME","description": "Volume of the shipment carried for the ESG Activity.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_UOM_CODE","description": "Unit of measure for volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_BASE","description": "Volume in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CO2_EMISSION","description": "Amount of Carbon emitted during the activity.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CO2_EMISSION_UOM_CODE","description": "Unit of measure for CO2 emissions.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CO2_EMISSION_BASE","description": "CO2 emissions in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CO2_EQ_EMISSION","description": "Amount of Carbon equivalent gases emitted during the activity.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CO2_EQ_EMISSION_UOM_CODE","description": "Unit of measure for CO2 equivalent emissions.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CO2_EQ_EMISSION_BASE","description": "CO2 equivalent emissions in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_GID","description": "Accessorial Code ID associated with the ESG Activity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NOTE","description": "Note for the ESG Activity.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_ALIAS","description": "Service Provider Alias of the service provider for which the ESG Activity is captured.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESG_ACTIVITY_RULE_GID","description": "The ESG Activity Rule ID used for generating this ESG Activity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EMISSION_RULE_GID","description": "The Emission Rule ID used for calculating the emissions for this ESG Activity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ESG_ACTIVITY_GID"}],"foreignKeys": [{"foreignKeyName": "FK_EA_ESG_ACTIVITY_TYPE_GID","cascadeDelete": false,"parentTableName": "ESG_ACTIVITY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "ESG_ACTIVITY_TYPE_GID","columnName": "ESG_ACTIVITY_TYPE_GID"}]},{"foreignKeyName": "FK_EA_DATA_QUERY_TYPE_GID","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_EA_SOURCE_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SOURCE_LOCATION_GID"}]},{"foreignKeyName": "FK_EA_DEST_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DEST_LOCATION_GID"}]},{"foreignKeyName": "FK_EA_TRANSPORT_MODE_GID","cascadeDelete": false,"parentTableName": "TRANSPORT_MODE","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSPORT_MODE_GID","columnName": "TRANSPORT_MODE_GID"}]},{"foreignKeyName": "FK_EA_EQUIPMENT_TYPE_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_TYPE_GID","columnName": "EQUIPMENT_TYPE_GID"}]},{"foreignKeyName": "FK_EA_EQUIPMENT_GROUP_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_GID","columnName": "EQUIPMENT_GROUP_GID"}]},{"foreignKeyName": "FK_EA_SHIP_UNIT_SPEC_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "TRANSPORT_HANDLING_UNIT_GID"}]},{"foreignKeyName": "FK_EA_ACCESSORIAL_CODE_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_CODE_GID","columnName": "ACCESSORIAL_CODE_GID"}]},{"foreignKeyName": "FK_EA_ESG_ACTIVITY_RULE_GID","cascadeDelete": false,"parentTableName": "ESG_ACTIVITY_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "ESG_ACTIVITY_RULE_GID","columnName": "ESG_ACTIVITY_RULE_GID"}]},{"foreignKeyName": "FK_EA_EMISSION_RULE_GID","cascadeDelete": false,"parentTableName": "EMISSION_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "EMISSION_RULE_GID","columnName": "EMISSION_RULE_GID"}]}],"childTables": ["ESG_ACTIVITY_DETAIL","ESG_ACTIVITY_EMISSION","ESG_ACTIVITY_REMARK"],"indices": [{"indexName": "IX_EA_DATA_QUERY_TYPE_GID","columnNames": [{"sequence": 1,"name": "DATA_QUERY_TYPE_GID"},{"sequence": 2,"name": "OBJECT_GID"}]},{"indexName": "IX_EA_EMISSION_RULE_GID","columnNames": [{"sequence": 1,"name": "EMISSION_RULE_GID"}]},{"indexName": "IX_EA_ESG_ACTIVITY_RULE_GID","columnNames": [{"sequence": 1,"name": "ESG_ACTIVITY_RULE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "esg_activity",
+    "description": "This table is used for capturing the ESG (Environment, Social and Governance) Activity details for an activity performed in OTM."
+  },
+  "columns": [
+    {
+      "name": "ESG_ACTIVITY_GID",
+      "description": "The GID of the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESG_ACTIVITY_XID",
+      "description": "The XID of the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESG_ACTIVITY_TYPE_GID",
+      "description": "The ID of ESG Activity Type",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCOPE_TYPE",
+      "description": "Scope of the ESG Activity. Valid Values are '1','2','3'",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'1','2','3'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Description for the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_SOURCE",
+      "description": "Source from which the ESG Activity details are obtained. Valid Values are 'GENERATED', 'INTEGRATION', 'MANUAL'.",
+      "dataType": "VARCHAR2",
+      "size": 15,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'GENERATED','INTEGRATION','MANUAL'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "POSTED_ON",
+      "description": "The date on which the activity is posted.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "POSTING_TYPE",
+      "description": "Defines the posting type ESG Activity. Valid Values are 'PLANNED' and 'ACTUAL'.",
+      "dataType": "VARCHAR2",
+      "size": 15,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'PLANNED','ACTUAL'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "Data Query Type of the business object for which the ESG Activity is captured.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECT_GID",
+      "description": "Business Object ID for which the ESG Activity is captured.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_LOCATION_GID",
+      "description": "The Source Location ID for which the ESG Activity is captured.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_LOCATION_GID",
+      "description": "The Destination Location ID for which the ESG Activity is captured.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_GID",
+      "description": "Mode of the Transport used during the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_TYPE_GID",
+      "description": "Equipment Type used for the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_GID",
+      "description": "Equipment Group used for the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_GID",
+      "description": "The Transport Handling Unit ID for the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_COUNT",
+      "description": "Count of the Transport Handling Unit for the ESG Activity.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE",
+      "description": "Distance traveled for the ESG Activity.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_UOM_CODE",
+      "description": "Unit of measure for the distance.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_BASE",
+      "description": "Distance in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT",
+      "description": "Weight of the shipment carried for the ESG Activity.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_UOM_CODE",
+      "description": "Unit of measure for weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BASE",
+      "description": "Weight in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME",
+      "description": "Volume of the shipment carried for the ESG Activity.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_UOM_CODE",
+      "description": "Unit of measure for volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_BASE",
+      "description": "Volume in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CO2_EMISSION",
+      "description": "Amount of Carbon emitted during the activity.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CO2_EMISSION_UOM_CODE",
+      "description": "Unit of measure for CO2 emissions.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CO2_EMISSION_BASE",
+      "description": "CO2 emissions in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CO2_EQ_EMISSION",
+      "description": "Amount of Carbon equivalent gases emitted during the activity.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CO2_EQ_EMISSION_UOM_CODE",
+      "description": "Unit of measure for CO2 equivalent emissions.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CO2_EQ_EMISSION_BASE",
+      "description": "CO2 equivalent emissions in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "Accessorial Code ID associated with the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NOTE",
+      "description": "Note for the ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_ALIAS",
+      "description": "Service Provider Alias of the service provider for which the ESG Activity is captured.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESG_ACTIVITY_RULE_GID",
+      "description": "The ESG Activity Rule ID used for generating this ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EMISSION_RULE_GID",
+      "description": "The Emission Rule ID used for calculating the emissions for this ESG Activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ESG_ACTIVITY_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EA_ESG_ACTIVITY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ESG_ACTIVITY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ESG_ACTIVITY_TYPE_GID",
+          "columnName": "ESG_ACTIVITY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_DATA_QUERY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_SOURCE_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SOURCE_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_DEST_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DEST_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_TRANSPORT_MODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSPORT_MODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSPORT_MODE_GID",
+          "columnName": "TRANSPORT_MODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_EQUIPMENT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_TYPE_GID",
+          "columnName": "EQUIPMENT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_EQUIPMENT_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_GID",
+          "columnName": "EQUIPMENT_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_SHIP_UNIT_SPEC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_ACCESSORIAL_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_CODE_GID",
+          "columnName": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_ESG_ACTIVITY_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ESG_ACTIVITY_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ESG_ACTIVITY_RULE_GID",
+          "columnName": "ESG_ACTIVITY_RULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EA_EMISSION_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EMISSION_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EMISSION_RULE_GID",
+          "columnName": "EMISSION_RULE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ESG_ACTIVITY_DETAIL",
+    "ESG_ACTIVITY_EMISSION",
+    "ESG_ACTIVITY_REMARK"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_EA_DATA_QUERY_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DATA_QUERY_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "OBJECT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EA_EMISSION_RULE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EMISSION_RULE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EA_ESG_ACTIVITY_RULE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ESG_ACTIVITY_RULE_GID"
+        }
+      ]
+    }
+  ]
+}

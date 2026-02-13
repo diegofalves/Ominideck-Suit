@@ -1,1 +1,248 @@
-{"table": {"schema": "glogowner","name": "or_stop","description": "This table defines intermediate stops on an order."},"columns": [{"name": "OR_STOP_GID","description": "The GID for the stop associated to the order release for multi-stop orders.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OR_STOP_XID","description": "The XID for the stop associated to the order release for multi-stop orders.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_GID","description": "The order release associated with this stop.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OR_STOP_SEQ","description": "The stop number within the order release. Stop number = 1 is the pickup stop, and the max (stop number) for a shipment is the delivery stop.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "The location GID for the shipment stop.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EARLY_ARRIVAL_TIME","description": "The arrival date and time for the stop, and when IS_APPT is Y, this field is early appointment time.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LATE_ARRIVAL_TIME","description": "The late arrival date and time for the stop, and when IS_APPT is Y, this field is late appointment time.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_APPT","description": "A Y/N field indicating that the times are for appointments, when IS_APPT is Y, EARLY/LATE_ARRIVAL_TIME are appointment times.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_APPT_REQUIRED","description": "A Y/N field to indicate if appointment is required.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_APPT_CONFIRM_REQUIRED","description": "A Y/N field to indicate if appointment confirmation is required.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_APPT_CONFIRMED","description": "A Y/N field to indicate the appointment is confirmed.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "LEG_POSITION","description": "Define where to insert this stop in a multi-stop situation.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'L','F'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OR_STOP_GID"}],"foreignKeys": [{"foreignKeyName": "FK_ORSTP_ORDER_RELEASE_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_GID"}]},{"foreignKeyName": "FK_ORSTP_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"}]}],"childTables": ["OR_STOP_REMARK","OR_STOP_SPECIAL_SERVICE","SHIP_UNIT"],"indices": [{"indexName": "IX_OR_STOP_LOCATION_GID","columnNames": [{"sequence": 1,"name": "LOCATION_GID"}]},{"indexName": "IX_OR_STOP_ORD_REL_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "or_stop",
+    "description": "This table defines intermediate stops on an order."
+  },
+  "columns": [
+    {
+      "name": "OR_STOP_GID",
+      "description": "The GID for the stop associated to the order release for multi-stop orders.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OR_STOP_XID",
+      "description": "The XID for the stop associated to the order release for multi-stop orders.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_GID",
+      "description": "The order release associated with this stop.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OR_STOP_SEQ",
+      "description": "The stop number within the order release. Stop number = 1 is the pickup stop, and the max (stop number) for a shipment is the delivery stop.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "The location GID for the shipment stop.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EARLY_ARRIVAL_TIME",
+      "description": "The arrival date and time for the stop, and when IS_APPT is Y, this field is early appointment time.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LATE_ARRIVAL_TIME",
+      "description": "The late arrival date and time for the stop, and when IS_APPT is Y, this field is late appointment time.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_APPT",
+      "description": "A Y/N field indicating that the times are for appointments, when IS_APPT is Y, EARLY/LATE_ARRIVAL_TIME are appointment times.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_APPT_REQUIRED",
+      "description": "A Y/N field to indicate if appointment is required.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_APPT_CONFIRM_REQUIRED",
+      "description": "A Y/N field to indicate if appointment confirmation is required.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_APPT_CONFIRMED",
+      "description": "A Y/N field to indicate the appointment is confirmed.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "LEG_POSITION",
+      "description": "Define where to insert this stop in a multi-stop situation.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'L','F'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OR_STOP_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ORSTP_ORDER_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ORSTP_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "OR_STOP_REMARK",
+    "OR_STOP_SPECIAL_SERVICE",
+    "SHIP_UNIT"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_OR_STOP_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OR_STOP_ORD_REL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,225 @@
-{"table": {"schema": "glogowner","name": "prop_metadata","description": "A denormalization of property meta-data for use with Finders, Managers and other standard user interface elements. This table is recreated on every restart of the server. Customers can use this table for informational purposes but should not change the contents."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROP_KEY","description": "The key or pattern representing the property meta-data.","dataType": "VARCHAR2","size": 1000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROP_GROUP","description": "The hierarchical menu group (e.g. Workflow/Cleanup) for the property.","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PURPOSE","description": "The top-level property ownership (e.g. Machine Learning) for the property.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FREQUENCY","description": "The frequency of property usage.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": true,"constraintValues": "'COMMON','RARE','INTERNAL'","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "An optional, brief English summary of the property. This is used for tree tooltips and property searches.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": true,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TYPE","description": "The property data type.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'STRING','PATTERN','BOOLEAN','INTEGER','DOUBLE','LIST','GID','FILE','URL','CLASS','OPTIONS'","conditionalConstraint": "","defaultValue": ""},{"name": "TYPE_QUALIFIERS","description": "Additional qualifiers for the property data type, if needed.","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": true,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MULTIPLE","description": "Indicates if the property supports multiple values.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_PASSWORD","description": "Indicates if the property represents a password or other secure information.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_DEPRECATED","description": "Indicates if the property has been deprecated.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DEFAULT_VALUE","description": "The default value to specify in the Property Servlet when a user adds the property.","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": true,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASE_INTRODUCED","description": "The release where the property was first introduced.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": true,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HELP","description": "An online help link for the property.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACR_ROLE","description": "Role for filtering of property display by ACR role.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PROP_KEY"}],"foreignKeys": [],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "prop_metadata",
+    "description": "A denormalization of property meta-data for use with Finders, Managers and other standard user interface elements. This table is recreated on every restart of the server. Customers can use this table for informational purposes but should not change the contents."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROP_KEY",
+      "description": "The key or pattern representing the property meta-data.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROP_GROUP",
+      "description": "The hierarchical menu group (e.g. Workflow/Cleanup) for the property.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PURPOSE",
+      "description": "The top-level property ownership (e.g. Machine Learning) for the property.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FREQUENCY",
+      "description": "The frequency of property usage.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'COMMON','RARE','INTERNAL'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "An optional, brief English summary of the property. This is used for tree tooltips and property searches.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TYPE",
+      "description": "The property data type.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'STRING','PATTERN','BOOLEAN','INTEGER','DOUBLE','LIST','GID','FILE','URL','CLASS','OPTIONS'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TYPE_QUALIFIERS",
+      "description": "Additional qualifiers for the property data type, if needed.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MULTIPLE",
+      "description": "Indicates if the property supports multiple values.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_PASSWORD",
+      "description": "Indicates if the property represents a password or other secure information.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_DEPRECATED",
+      "description": "Indicates if the property has been deprecated.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DEFAULT_VALUE",
+      "description": "The default value to specify in the Property Servlet when a user adds the property.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASE_INTRODUCED",
+      "description": "The release where the property was first introduced.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HELP",
+      "description": "An online help link for the property.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACR_ROLE",
+      "description": "Role for filtering of property display by ACR role.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PROP_KEY"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [],
+  "indices": []
+}

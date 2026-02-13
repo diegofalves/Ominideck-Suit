@@ -1,1 +1,184 @@
-{"table": {"schema": "glogowner","name": "gtm_ca_line_reqdd_review","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_CAMPAIGN_LINE_GID","description": "Campaign Line ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_DEF_GID","description": "Required Document Type","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_GID","description": "Document Instance","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTACT_GID","description": "Reviewer ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATE","description": "Review state","dataType": "VARCHAR2","size": 10,"isNull": false,"isConstraint": true,"constraintValues": "'PENDING','ACCEPTED','DENIED'","conditionalConstraint": "","defaultValue": "'PENDING'"},{"name": "COMMENTS","description": "Comments added by the reviewer","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_CAMPAIGN_LINE_GID"},{"sequence": 2,"columnName": "DOCUMENT_DEF_GID"},{"sequence": 3,"columnName": "DOCUMENT_GID"},{"sequence": 4,"columnName": "CONTACT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GCLRR_GTM_CA_LINE_REQD_DOC","cascadeDelete": true,"parentTableName": "GTM_CA_LINE_REQD_DOC","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CAMPAIGN_LINE_GID","columnName": "GTM_CAMPAIGN_LINE_GID"},{"sequence": 2,"parentColumnName": "DOCUMENT_DEF_GID","columnName": "DOCUMENT_DEF_GID"},{"sequence": 3,"parentColumnName": "DOCUMENT_GID","columnName": "DOCUMENT_GID"}]},{"foreignKeyName": "FK_GCLRR_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "CONTACT_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_ca_line_reqdd_review",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_CAMPAIGN_LINE_GID",
+      "description": "Campaign Line ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_DEF_GID",
+      "description": "Required Document Type",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_GID",
+      "description": "Document Instance",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTACT_GID",
+      "description": "Reviewer ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATE",
+      "description": "Review state",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'PENDING','ACCEPTED','DENIED'",
+      "conditionalConstraint": "",
+      "defaultValue": "'PENDING'"
+    },
+    {
+      "name": "COMMENTS",
+      "description": "Comments added by the reviewer",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_CAMPAIGN_LINE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "DOCUMENT_DEF_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "DOCUMENT_GID"
+    },
+    {
+      "sequence": 4,
+      "columnName": "CONTACT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GCLRR_GTM_CA_LINE_REQD_DOC",
+      "cascadeDelete": true,
+      "parentTableName": "GTM_CA_LINE_REQD_DOC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CAMPAIGN_LINE_GID",
+          "columnName": "GTM_CAMPAIGN_LINE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "DOCUMENT_DEF_GID",
+          "columnName": "DOCUMENT_DEF_GID"
+        },
+        {
+          "sequence": 3,
+          "parentColumnName": "DOCUMENT_GID",
+          "columnName": "DOCUMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GCLRR_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "CONTACT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

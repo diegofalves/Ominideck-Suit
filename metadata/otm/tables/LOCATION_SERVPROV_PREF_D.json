@@ -1,1 +1,216 @@
-{"table": {"schema": "glogowner","name": "location_servprov_pref_d","description": "The table is used to store detailed information of time window preferences for appointment on a location for a service provider."},"columns": [{"name": "LOCATION_SERVPROV_PREF_GID","description": "The location service provider preference GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_SERVPROV_PREF_D_SEQ","description": "Sequence with in a particular location service provider preference GID.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAY_OF_WEEK","description": "The day of week.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BEGIN","description": "The begin time.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PREFERENCE_LEVEL","description": "The preference level.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DURATION","description": "The duration of the time window.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SLOT","description": "The maximum number of slots during this time.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_RESOURCE_GID","description": "Indicates the resource that preference defined on.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_STANDING","description": "Indicates if the defined preference is for standing appointment.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LOCATION_SERVPROV_PREF_D_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_LSPD_LOCATION_SERVPROV_PREF","cascadeDelete": false,"parentTableName": "LOCATION_SERVPROV_PREF","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_SERVPROV_PREF_GID","columnName": "LOCATION_SERVPROV_PREF_GID"}]},{"foreignKeyName": "FK_LSPD_LOCATION_RESOURCE_GID","cascadeDelete": false,"parentTableName": "LOCATION_RESOURCE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_RESOURCE_GID","columnName": "LOCATION_RESOURCE_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_LOCATION_SERVPROV_PREF_D","columnNames": [{"sequence": 1,"name": "LOCATION_SERVPROV_PREF_GID"},{"sequence": 2,"name": "BEGIN"},{"sequence": 3,"name": "DAY_OF_WEEK"},{"sequence": 4,"name": "LOCATION_RESOURCE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "location_servprov_pref_d",
+    "description": "The table is used to store detailed information of time window preferences for appointment on a location for a service provider."
+  },
+  "columns": [
+    {
+      "name": "LOCATION_SERVPROV_PREF_GID",
+      "description": "The location service provider preference GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_SERVPROV_PREF_D_SEQ",
+      "description": "Sequence with in a particular location service provider preference GID.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAY_OF_WEEK",
+      "description": "The day of week.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BEGIN",
+      "description": "The begin time.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PREFERENCE_LEVEL",
+      "description": "The preference level.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DURATION",
+      "description": "The duration of the time window.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SLOT",
+      "description": "The maximum number of slots during this time.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_RESOURCE_GID",
+      "description": "Indicates the resource that preference defined on.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_STANDING",
+      "description": "Indicates if the defined preference is for standing appointment.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LOCATION_SERVPROV_PREF_D_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LSPD_LOCATION_SERVPROV_PREF",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_SERVPROV_PREF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_SERVPROV_PREF_GID",
+          "columnName": "LOCATION_SERVPROV_PREF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LSPD_LOCATION_RESOURCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_RESOURCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_RESOURCE_GID",
+          "columnName": "LOCATION_RESOURCE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_LOCATION_SERVPROV_PREF_D",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_SERVPROV_PREF_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "BEGIN"
+        },
+        {
+          "sequence": 3,
+          "name": "DAY_OF_WEEK"
+        },
+        {
+          "sequence": 4,
+          "name": "LOCATION_RESOURCE_GID"
+        }
+      ]
+    }
+  ]
+}

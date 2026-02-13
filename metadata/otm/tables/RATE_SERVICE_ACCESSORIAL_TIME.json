@@ -1,1 +1,213 @@
-{"table": {"schema": "glogowner","name": "rate_service_accessorial_time","description": "Stores additional add-on time based on accessorial code that extends the shipment service time."},"columns": [{"name": "RATE_SERVICE_GID","description": "Refers to the rate service the accessorial time is based on.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_GID","description": "The accessorial that the extra time is associated with. E.g., if the accessorial time is option building time, then the accessorial_code is the body option code, like 'SUNROOF' or 'CD-PLAYER'.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "X_LANE_GID","description": "Geographic information of where the extra time needed for the accessorial is associated","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_GID","description": "Used in conjunction with the calendar on location or rate service to determine how to extend the service time.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIXD_ACCESSORIAL_TIME","description": "Contractual add-on time on top of service time associated with accessorial_code_gid.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIXD_ACCESSORIAL_TIME_UOM_CODE","description": "The unit of measure for the fixed accessorial time","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIXD_ACCESSORIAL_TIME_BASE","description": "The fixed accessorial time in base units","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_SERVICE_GID"},{"sequence": 2,"columnName": "ACCESSORIAL_CODE_GID"},{"sequence": 3,"columnName": "X_LANE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_RSAT_RATE_SERVICE_GID","cascadeDelete": false,"parentTableName": "RATE_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_SERVICE_GID","columnName": "RATE_SERVICE_GID"}]},{"foreignKeyName": "FK_RSAT_ACCESSORIAL_CODE_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_CODE_GID","columnName": "ACCESSORIAL_CODE_GID"}]},{"foreignKeyName": "FK_RSAT_X_LANE_GID","cascadeDelete": false,"parentTableName": "X_LANE","columnRelation": [{"sequence": 1,"parentColumnName": "X_LANE_GID","columnName": "X_LANE_GID"}]},{"foreignKeyName": "FK_RSAT_ACTIVITY_GID","cascadeDelete": false,"parentTableName": "ACTIVITY","columnRelation": [{"sequence": 1,"parentColumnName": "ACTIVITY_GID","columnName": "ACTIVITY_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_RSAT_ACTIVITY_GID","columnNames": [{"sequence": 1,"name": "ACTIVITY_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "rate_service_accessorial_time",
+    "description": "Stores additional add-on time based on accessorial code that extends the shipment service time."
+  },
+  "columns": [
+    {
+      "name": "RATE_SERVICE_GID",
+      "description": "Refers to the rate service the accessorial time is based on.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "The accessorial that the extra time is associated with. E.g., if the accessorial time is option building time, then the accessorial_code is the body option code, like 'SUNROOF' or 'CD-PLAYER'.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "X_LANE_GID",
+      "description": "Geographic information of where the extra time needed for the accessorial is associated",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_GID",
+      "description": "Used in conjunction with the calendar on location or rate service to determine how to extend the service time.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIXD_ACCESSORIAL_TIME",
+      "description": "Contractual add-on time on top of service time associated with accessorial_code_gid.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIXD_ACCESSORIAL_TIME_UOM_CODE",
+      "description": "The unit of measure for the fixed accessorial time",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIXD_ACCESSORIAL_TIME_BASE",
+      "description": "The fixed accessorial time in base units",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_SERVICE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "ACCESSORIAL_CODE_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "X_LANE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RSAT_RATE_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_SERVICE_GID",
+          "columnName": "RATE_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RSAT_ACCESSORIAL_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_CODE_GID",
+          "columnName": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RSAT_X_LANE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "X_LANE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "X_LANE_GID",
+          "columnName": "X_LANE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RSAT_ACTIVITY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACTIVITY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACTIVITY_GID",
+          "columnName": "ACTIVITY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_RSAT_ACTIVITY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACTIVITY_GID"
+        }
+      ]
+    }
+  ]
+}

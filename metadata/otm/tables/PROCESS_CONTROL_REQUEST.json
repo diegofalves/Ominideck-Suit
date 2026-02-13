@@ -1,1 +1,337 @@
-{"table": {"schema": "glogowner","name": "process_control_request","description": "Contains an entry for each process request.  An entry could indicate a one-time kickoff of a workflow, or could be an ongoing job, with a specified interval. For example, a process could be Print Invoices (topic_alias_gid), which is run every day at 6am (next_process_time).  If the number_of_cycles equals '-1', then the process will resubmit itself indefinitely for another run.  If the TOPIC_ALIAS_GID is null, then GC3 will look at the TOPIC_CLASS_NAME, the java class, to know what workflow to run."},"columns": [{"name": "PROCESS_CONTROL_REQUEST_ID","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_ALIAS_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_CLASS_NAME","description": "","dataType": "VARCHAR2","size": 255,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOPIC_PARAMETERS","description": "","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEXT_PROCESS_TIME","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "SYSDATE"},{"name": "TIME_WINDOW_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_OF_CYCLES","description": "","dataType": "NUMBER","size": 5,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CYCLE_DURATION","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CYCLE_DURATION_BASE","description": "CYCLE_DURATION in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CYCLE_DURATION_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_SERVER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_TRANSIENT","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_RESERVED","description": "If 'Y', the record is staged by OTM and cannot be modified or deleted by a user.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "USER_ROLE_GID","description": "User Role ID","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROFILE_GID","description": "The log profile to use for the scheduled process. This should not be used for recurring processes.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROW_PROTECT","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'H','R'","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PROCESS_CONTROL_REQUEST_ID"}],"foreignKeys": [{"foreignKeyName": "FK_PC_TOPIC_ALIAS","cascadeDelete": false,"parentTableName": "TOPIC_ALIAS","columnRelation": [{"sequence": 1,"parentColumnName": "TOPIC_ALIAS_GID","columnName": "TOPIC_ALIAS_GID"}]},{"foreignKeyName": "FK_PC_TIME_WINDOW","cascadeDelete": false,"parentTableName": "WORKFLOW_TIME_WINDOW","columnRelation": [{"sequence": 1,"parentColumnName": "WORKFLOW_TIME_WINDOW_GID","columnName": "TIME_WINDOW_GID"}]},{"foreignKeyName": "FK_PC_APP_SERVER","cascadeDelete": false,"parentTableName": "APP_SERVER","columnRelation": [{"sequence": 1,"parentColumnName": "APP_SERVER_GID","columnName": "APP_SERVER_GID"}]},{"foreignKeyName": "FK_PCR_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]},{"foreignKeyName": "FK_PCR_USER_ROLE_GID","cascadeDelete": false,"parentTableName": "USER_ROLE","columnRelation": [{"sequence": 1,"parentColumnName": "USER_ROLE_GID","columnName": "USER_ROLE_GID"}]},{"foreignKeyName": "FK_PCR_LOG_PROFILE_GID","cascadeDelete": false,"parentTableName": "LOG_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOG_PROFILE_GID","columnName": "LOG_PROFILE_GID"}]}],"childTables": [],"indices": [{"indexName": "IND_PCR_NEXT_PROCESS_TIME","columnNames": [{"sequence": 1,"name": "NEXT_PROCESS_TIME"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "process_control_request",
+    "description": "Contains an entry for each process request.  An entry could indicate a one-time kickoff of a workflow, or could be an ongoing job, with a specified interval. For example, a process could be Print Invoices (topic_alias_gid), which is run every day at 6am (next_process_time).  If the number_of_cycles equals '-1', then the process will resubmit itself indefinitely for another run.  If the TOPIC_ALIAS_GID is null, then GC3 will look at the TOPIC_CLASS_NAME, the java class, to know what workflow to run."
+  },
+  "columns": [
+    {
+      "name": "PROCESS_CONTROL_REQUEST_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_ALIAS_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_CLASS_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOPIC_PARAMETERS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEXT_PROCESS_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "SYSDATE"
+    },
+    {
+      "name": "TIME_WINDOW_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_OF_CYCLES",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 5,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CYCLE_DURATION",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CYCLE_DURATION_BASE",
+      "description": "CYCLE_DURATION in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CYCLE_DURATION_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_SERVER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_TRANSIENT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_RESERVED",
+      "description": "If 'Y', the record is staged by OTM and cannot be modified or deleted by a user.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "USER_ROLE_GID",
+      "description": "User Role ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROFILE_GID",
+      "description": "The log profile to use for the scheduled process. This should not be used for recurring processes.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROW_PROTECT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'H','R'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PROCESS_CONTROL_REQUEST_ID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_PC_TOPIC_ALIAS",
+      "cascadeDelete": false,
+      "parentTableName": "TOPIC_ALIAS",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TOPIC_ALIAS_GID",
+          "columnName": "TOPIC_ALIAS_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PC_TIME_WINDOW",
+      "cascadeDelete": false,
+      "parentTableName": "WORKFLOW_TIME_WINDOW",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "WORKFLOW_TIME_WINDOW_GID",
+          "columnName": "TIME_WINDOW_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PC_APP_SERVER",
+      "cascadeDelete": false,
+      "parentTableName": "APP_SERVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_SERVER_GID",
+          "columnName": "APP_SERVER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PCR_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PCR_USER_ROLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "USER_ROLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "USER_ROLE_GID",
+          "columnName": "USER_ROLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PCR_LOG_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOG_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOG_PROFILE_GID",
+          "columnName": "LOG_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IND_PCR_NEXT_PROCESS_TIME",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "NEXT_PROCESS_TIME"
+        }
+      ]
+    }
+  ]
+}

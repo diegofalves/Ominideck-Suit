@@ -1,1 +1,212 @@
-{"table": {"schema": "glogowner","name": "lnm_datarule_param","description": "Parameter to a data rule."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATARULE_DEFINITION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAMETER_NAME","description": "Parameter name, unique within the rule.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TYPE","description": "Parameter type. This defines the various field types supported by the UI for parameter entry. Values are identical to those for REPORT_PARAMETER.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'S','B','I','N','D','G','U','C','P','L','F','Q','T','X','Y','Z','R'","conditionalConstraint": "","defaultValue": ""},{"name": "QUERY_TABLE_GID","description": "If the parameter type maps to a data lookup (e.g. a pick list), the query table holding the list GIDs.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COLUMN_NAME","description": "The column that is to be impacted by this data_rule_definition.","dataType": "VARCHAR2","size": 105,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIXED_VALUES","description": "If the parameter type maps to a fixed drop list, a comma-delimited list of translation=value pairs.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MANDATORY","description": "Y, if the parameter is required.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "DEFAULT_VALUE","description": "Default parameter value, if any.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_OPERAND_REQUIRED","description": "Y, if the user can select from multiple operands for this parameter.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "IS_VALUE_REQUIRED","description": "Y, if the user must enter a value for this parameter.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"}],"primaryKey": [{"sequence": 1,"columnName": "DATARULE_DEFINITION_GID"},{"sequence": 2,"columnName": "PARAMETER_NAME"}],"foreignKeys": [{"foreignKeyName": "FK_LDP_DATARULE_DEFINITION_GI","cascadeDelete": false,"parentTableName": "LNM_DATARULE_DEF","columnRelation": [{"sequence": 1,"parentColumnName": "DATARULE_DEFINITION_GID","columnName": "DATARULE_DEFINITION_GID"}]}],"childTables": ["LNM_DATARULE_INS_PRM","LNM_DATARULE_PARAM_OP"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "lnm_datarule_param",
+    "description": "Parameter to a data rule."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATARULE_DEFINITION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAMETER_NAME",
+      "description": "Parameter name, unique within the rule.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TYPE",
+      "description": "Parameter type. This defines the various field types supported by the UI for parameter entry. Values are identical to those for REPORT_PARAMETER.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'S','B','I','N','D','G','U','C','P','L','F','Q','T','X','Y','Z','R'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUERY_TABLE_GID",
+      "description": "If the parameter type maps to a data lookup (e.g. a pick list), the query table holding the list GIDs.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COLUMN_NAME",
+      "description": "The column that is to be impacted by this data_rule_definition.",
+      "dataType": "VARCHAR2",
+      "size": 105,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIXED_VALUES",
+      "description": "If the parameter type maps to a fixed drop list, a comma-delimited list of translation=value pairs.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MANDATORY",
+      "description": "Y, if the parameter is required.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "DEFAULT_VALUE",
+      "description": "Default parameter value, if any.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_OPERAND_REQUIRED",
+      "description": "Y, if the user can select from multiple operands for this parameter.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "IS_VALUE_REQUIRED",
+      "description": "Y, if the user must enter a value for this parameter.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DATARULE_DEFINITION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PARAMETER_NAME"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LDP_DATARULE_DEFINITION_GI",
+      "cascadeDelete": false,
+      "parentTableName": "LNM_DATARULE_DEF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATARULE_DEFINITION_GID",
+          "columnName": "DATARULE_DEFINITION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "LNM_DATARULE_INS_PRM",
+    "LNM_DATARULE_PARAM_OP"
+  ],
+  "indices": []
+}

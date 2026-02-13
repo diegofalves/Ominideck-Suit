@@ -1,1 +1,189 @@
-{"table": {"schema": "glogowner","name": "gtm_tariff_rate","description": "Captures the tariff rate related to a classification code."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TARIFF_CODE_GID","description": "Contains the identifier of the tariff code.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CLASSIFICATION_CODE","description": "Contains the product classification code gid of the related classification code.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ADDVALOREM_RATE","description": "Contains the rate expressed as percentage.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PER_UNIT_CHARGE","description": "Contains the per unit charge value.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UOM_CODE","description": "Contains the  UOM code to use with per unit charge.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_PROD_CLASS_TYPE_GID","description": "Contains the product classification type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PENALTY_CLASSIFICATION_CODE","description": "Classification code for a particular penalty.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TARIFF_CODE_GID"},{"sequence": 2,"columnName": "CLASSIFICATION_CODE"}],"foreignKeys": [{"foreignKeyName": "FK_GTRA_GTM_TARIFF_CODE_GID","cascadeDelete": false,"parentTableName": "GTM_TARIFF_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TARIFF_CODE_GID","columnName": "GTM_TARIFF_CODE_GID"}]},{"foreignKeyName": "FK_GTRA_GTM_PROD_CLASS_TYPE_G","cascadeDelete": false,"parentTableName": "GTM_PROD_CLASS_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_PROD_CLASS_TYPE_GID","columnName": "GTM_PROD_CLASS_TYPE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_TARIFFRATE_CLASSTYPECODE","columnNames": [{"sequence": 1,"name": "GTM_PROD_CLASS_TYPE_GID"},{"sequence": 2,"name": "CLASSIFICATION_CODE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_tariff_rate",
+    "description": "Captures the tariff rate related to a classification code."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TARIFF_CODE_GID",
+      "description": "Contains the identifier of the tariff code.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CLASSIFICATION_CODE",
+      "description": "Contains the product classification code gid of the related classification code.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ADDVALOREM_RATE",
+      "description": "Contains the rate expressed as percentage.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PER_UNIT_CHARGE",
+      "description": "Contains the per unit charge value.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UOM_CODE",
+      "description": "Contains the  UOM code to use with per unit charge.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_PROD_CLASS_TYPE_GID",
+      "description": "Contains the product classification type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PENALTY_CLASSIFICATION_CODE",
+      "description": "Classification code for a particular penalty.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TARIFF_CODE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "CLASSIFICATION_CODE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTRA_GTM_TARIFF_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TARIFF_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TARIFF_CODE_GID",
+          "columnName": "GTM_TARIFF_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTRA_GTM_PROD_CLASS_TYPE_G",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_PROD_CLASS_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_PROD_CLASS_TYPE_GID",
+          "columnName": "GTM_PROD_CLASS_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_TARIFFRATE_CLASSTYPECODE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_PROD_CLASS_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "CLASSIFICATION_CODE"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,166 @@
-{"table": {"schema": "glogowner","name": "invoice_refnum","description": "Can be used to store qualified reference information about an invoice.  The qualifier/description of the information is stored in the table INVOICE_REFNUM_QUAL. Example of a reference qualifier would be BILL OF LADING."},"columns": [{"name": "INVOICE_GID","description": "The GID for the invoice.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOICE_REFNUM_QUAL_GID","description": "The GID for the reference number (PONUMBER, VATNUMBER, CUSTPONUMBER).","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOICE_REFNUM_VALUE","description": "Value of entered for the Reference Number Qualifier.","dataType": "VARCHAR2","size": 240,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ISSUE_DATE","description": "The date the invoice was issued.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "INVOICE_GID"},{"sequence": 2,"columnName": "INVOICE_REFNUM_QUAL_GID"},{"sequence": 3,"columnName": "INVOICE_REFNUM_VALUE"}],"foreignKeys": [{"foreignKeyName": "FK_INV_RF_INV_GID","cascadeDelete": false,"parentTableName": "INVOICE","columnRelation": [{"sequence": 1,"parentColumnName": "INVOICE_GID","columnName": "INVOICE_GID"}]},{"foreignKeyName": "FK_INV_RF_IRQ_GID","cascadeDelete": false,"parentTableName": "INVOICE_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOICE_REFNUM_QUAL_GID","columnName": "INVOICE_REFNUM_QUAL_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_INV_RF_INVOICE_GID","columnNames": [{"sequence": 1,"name": "INVOICE_GID"}]},{"indexName": "IX_INV_RF_IRQ_GID","columnNames": [{"sequence": 1,"name": "INVOICE_REFNUM_QUAL_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "invoice_refnum",
+    "description": "Can be used to store qualified reference information about an invoice.  The qualifier/description of the information is stored in the table INVOICE_REFNUM_QUAL. Example of a reference qualifier would be BILL OF LADING."
+  },
+  "columns": [
+    {
+      "name": "INVOICE_GID",
+      "description": "The GID for the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOICE_REFNUM_QUAL_GID",
+      "description": "The GID for the reference number (PONUMBER, VATNUMBER, CUSTPONUMBER).",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOICE_REFNUM_VALUE",
+      "description": "Value of entered for the Reference Number Qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ISSUE_DATE",
+      "description": "The date the invoice was issued.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "INVOICE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "INVOICE_REFNUM_QUAL_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "INVOICE_REFNUM_VALUE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_INV_RF_INV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INVOICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOICE_GID",
+          "columnName": "INVOICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_INV_RF_IRQ_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INVOICE_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOICE_REFNUM_QUAL_GID",
+          "columnName": "INVOICE_REFNUM_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_INV_RF_INVOICE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INVOICE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_INV_RF_IRQ_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INVOICE_REFNUM_QUAL_GID"
+        }
+      ]
+    }
+  ]
+}

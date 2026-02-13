@@ -1,1 +1,241 @@
-{"table": {"schema": "glogowner","name": "claim_line_item_cost","description": "Stores costs on the claim line items"},"columns": [{"name": "CLAIM_GID","description": "The GID for the claim. Along with LINE_ITEM_SEQ_NO, this points to the claim line item to which this cost is linked.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LINE_ITEM_SEQ_NO","description": "The sequence number of the claim line item to which this cost is tied.","dataType": "NUMBER","size": 9,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_SEQ_NO","description": "The sequence number to keep costs on claim lines unique.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST","description": "The cost amount.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_CURRENCY_GID","description": "The currency for cost amount.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_BASE","description": "The base amount for cost.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CLAIM_COST_TYPE_GID","description": "The cost type such as DAMAGE or SALVAGE.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYEE_CONTACT_GID","description": "The GID for the payee contact.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYOR_CONTACT_GID","description": "The GID for the payer contact.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CLAIM_GID"},{"sequence": 2,"columnName": "LINE_ITEM_SEQ_NO"},{"sequence": 3,"columnName": "COST_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_CLIC_CLAIM_LINE_ITEM","cascadeDelete": false,"parentTableName": "CLAIM_LINE_ITEM","columnRelation": [{"sequence": 2,"parentColumnName": "LINE_ITEM_SEQ_NO","columnName": "LINE_ITEM_SEQ_NO"},{"sequence": 1,"parentColumnName": "CLAIM_GID","columnName": "CLAIM_GID"}]},{"foreignKeyName": "FK_CLIC_COST_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "COST_CURRENCY_GID"}]},{"foreignKeyName": "FK_CLIC_CLAIM_COST_TYPE_GID","cascadeDelete": false,"parentTableName": "CLAIM_COST_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "CLAIM_COST_TYPE_GID","columnName": "CLAIM_COST_TYPE_GID"}]},{"foreignKeyName": "FK_CLIC_PAYEE_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "PAYEE_CONTACT_GID"}]},{"foreignKeyName": "FK_CLIC_PAYOR_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "PAYOR_CONTACT_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "claim_line_item_cost",
+    "description": "Stores costs on the claim line items"
+  },
+  "columns": [
+    {
+      "name": "CLAIM_GID",
+      "description": "The GID for the claim. Along with LINE_ITEM_SEQ_NO, this points to the claim line item to which this cost is linked.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LINE_ITEM_SEQ_NO",
+      "description": "The sequence number of the claim line item to which this cost is tied.",
+      "dataType": "NUMBER",
+      "size": 9,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_SEQ_NO",
+      "description": "The sequence number to keep costs on claim lines unique.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST",
+      "description": "The cost amount.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_CURRENCY_GID",
+      "description": "The currency for cost amount.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_BASE",
+      "description": "The base amount for cost.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CLAIM_COST_TYPE_GID",
+      "description": "The cost type such as DAMAGE or SALVAGE.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYEE_CONTACT_GID",
+      "description": "The GID for the payee contact.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYOR_CONTACT_GID",
+      "description": "The GID for the payer contact.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CLAIM_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "LINE_ITEM_SEQ_NO"
+    },
+    {
+      "sequence": 3,
+      "columnName": "COST_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CLIC_CLAIM_LINE_ITEM",
+      "cascadeDelete": false,
+      "parentTableName": "CLAIM_LINE_ITEM",
+      "columnRelation": [
+        {
+          "sequence": 2,
+          "parentColumnName": "LINE_ITEM_SEQ_NO",
+          "columnName": "LINE_ITEM_SEQ_NO"
+        },
+        {
+          "sequence": 1,
+          "parentColumnName": "CLAIM_GID",
+          "columnName": "CLAIM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLIC_COST_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "COST_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLIC_CLAIM_COST_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CLAIM_COST_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CLAIM_COST_TYPE_GID",
+          "columnName": "CLAIM_COST_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLIC_PAYEE_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "PAYEE_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLIC_PAYOR_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "PAYOR_CONTACT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

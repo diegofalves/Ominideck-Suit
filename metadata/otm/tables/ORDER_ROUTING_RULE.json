@@ -1,1 +1,219 @@
-{"table": {"schema": "glogowner","name": "order_routing_rule","description": ""},"columns": [{"name": "ORDER_ROUTING_RULE_GID","description": "Unique Id of the Order Routing Rule","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_ROUTING_RULE_XID","description": "Unique Id of the Order routing Rule","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RULE_NAME","description": "Name of the Order Routing Rule","dataType": "VARCHAR2","size": 120,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Description of the Order Routing Rule","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RULE_TYPE","description": "Identifies the type of Order Routing Rule","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": true,"constraintValues": "'ENTERPRISE','ORGANIZATION','CUSTOMER','CUSTOMER SITE'","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "Identifies the associated location for 'ORGANIZATION', 'CUSTOMER SITE', and 'CUSTOMER' rule types","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYMENT_METHOD_CODE_GID","description": "Identifies the payment method criteria for this rule","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "Effective date of the order routing rule","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "Expiration date of the order routing rule","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ORDER_ROUTING_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_ORRUL_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"}]},{"foreignKeyName": "FK_ORRUL_PAYMENT_METHOD_CODE_G","cascadeDelete": false,"parentTableName": "PAYMENT_METHOD_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "PAYMENT_METHOD_CODE_GID","columnName": "PAYMENT_METHOD_CODE_GID"}]},{"foreignKeyName": "FK_ORRUL_LOCATION_PROFILE_GID","cascadeDelete": false,"parentTableName": "LOCATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_PROFILE_GID","columnName": "LOCATION_PROFILE_GID"}]}],"childTables": ["ORDER_ROUTING_RULE_D","ROUTING_RULE_REFNUM"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "order_routing_rule",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "ORDER_ROUTING_RULE_GID",
+      "description": "Unique Id of the Order Routing Rule",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_ROUTING_RULE_XID",
+      "description": "Unique Id of the Order routing Rule",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RULE_NAME",
+      "description": "Name of the Order Routing Rule",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Description of the Order Routing Rule",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RULE_TYPE",
+      "description": "Identifies the type of Order Routing Rule",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'ENTERPRISE','ORGANIZATION','CUSTOMER','CUSTOMER SITE'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "Identifies the associated location for 'ORGANIZATION', 'CUSTOMER SITE', and 'CUSTOMER' rule types",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYMENT_METHOD_CODE_GID",
+      "description": "Identifies the payment method criteria for this rule",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "Effective date of the order routing rule",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "Expiration date of the order routing rule",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ORDER_ROUTING_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ORRUL_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ORRUL_PAYMENT_METHOD_CODE_G",
+      "cascadeDelete": false,
+      "parentTableName": "PAYMENT_METHOD_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PAYMENT_METHOD_CODE_GID",
+          "columnName": "PAYMENT_METHOD_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ORRUL_LOCATION_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_PROFILE_GID",
+          "columnName": "LOCATION_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ORDER_ROUTING_RULE_D",
+    "ROUTING_RULE_REFNUM"
+  ],
+  "indices": []
+}

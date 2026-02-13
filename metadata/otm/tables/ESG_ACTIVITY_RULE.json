@@ -1,1 +1,394 @@
-{"table": {"schema": "glogowner","name": "esg_activity_rule","description": "This table is used for storing the rules for creating the emission activity."},"columns": [{"name": "ESG_ACTIVITY_RULE_GID","description": "The globally unique ID of an emission activity rule.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESG_ACTIVITY_RULE_XID","description": "The unique ID of an emission activity rule specific to a domain.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESG_ACTIVITY_TYPE_GID","description": "The emission activity type for which the emission activity rule is defined.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESG_ACTIVITY_RULE_NAME","description": "The name of the emission activity rule.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Description of the emission activity rule.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "This flag determines whether the emission activity rule is active or not.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "EFFECTIVE_DATE","description": "The effective date of the emission activity rule.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "The expiration date of the emission activity rule.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIORITY","description": "The lower the priority, the higher the preference for the given emission activity rule.  So 1 is the highest priority.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_PROFILE_GID","description": "Mode profile for which the emission activity rule is defined.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REGION_GID","description": "Region for which the emission activity rule is defined.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_DISTANCE_GID","description": "Rate distance is used for calculating distance based emissions for emission activity. For example, the distance between the stops of a shipment, using which emissions are calculated by using intensity factor.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DT_CONFIG_GID","description": "Data configuration to copy the data from a business entity, like a shipment, to the emission activity record.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_GID","description": "Accessorial Code that needs to be associated with the emission activity that would be generated based on this rule.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EMISSION_ALLOCATION_RULE_GID","description": "Emission Allocation Rule to be used in allocating emissions for the emission activity generated using this emission activity rule.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ESG_ACTIVITY_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_EARE_ESG_ACTIVITY_TYPE_GID","cascadeDelete": false,"parentTableName": "ESG_ACTIVITY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "ESG_ACTIVITY_TYPE_GID","columnName": "ESG_ACTIVITY_TYPE_GID"}]},{"foreignKeyName": "FK_EARE_MODE_PROFILE_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "MODE_PROFILE_GID"}]},{"foreignKeyName": "FK_EARE_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "REGION_GID"}]},{"foreignKeyName": "FK_EARE_RATE_DISTANCE_GID","cascadeDelete": false,"parentTableName": "RATE_DISTANCE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_DISTANCE_GID","columnName": "RATE_DISTANCE_GID"}]},{"foreignKeyName": "FK_EARE_GTM_DT_CONFIG_GID","cascadeDelete": false,"parentTableName": "GTM_DT_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_DT_CONFIG_GID","columnName": "GTM_DT_CONFIG_GID"}]},{"foreignKeyName": "FK_EARE_ACCESSORIAL_CODE_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_CODE_GID","columnName": "ACCESSORIAL_CODE_GID"}]},{"foreignKeyName": "FK_EARE_EMISSION_ALLOCATION_R","cascadeDelete": false,"parentTableName": "EMISSION_ALLOCATION_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "EMISSION_ALLOCATION_RULE_GID","columnName": "EMISSION_ALLOCATION_RULE_GID"}]}],"childTables": ["ESG_ACTIVITY","ESG_ACT_RULE_REMARK"],"indices": [{"indexName": "IX_ESG_ACTIVITY_RULE_XID","columnNames": [{"sequence": 1,"name": "ESG_ACTIVITY_RULE_XID"}]},{"indexName": "IX_ESG_ACTIVITY_TYPE_GID","columnNames": [{"sequence": 1,"name": "ESG_ACTIVITY_TYPE_GID"}]},{"indexName": "IX_ESG_MODE_PROFILE_GID","columnNames": [{"sequence": 1,"name": "MODE_PROFILE_GID"}]},{"indexName": "IX_ESG_REGION_GID","columnNames": [{"sequence": 1,"name": "REGION_GID"}]},{"indexName": "IX_ESG_RATE_DISTANCE_GID","columnNames": [{"sequence": 1,"name": "RATE_DISTANCE_GID"}]},{"indexName": "IX_ESG_GTM_DT_CONFIG_GID","columnNames": [{"sequence": 1,"name": "GTM_DT_CONFIG_GID"}]},{"indexName": "IX_ESG_ACCESS_CODE_GID","columnNames": [{"sequence": 1,"name": "ACCESSORIAL_CODE_GID"}]},{"indexName": "IX_ESG_EMISS_ALLOC_RULE_GID","columnNames": [{"sequence": 1,"name": "EMISSION_ALLOCATION_RULE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "esg_activity_rule",
+    "description": "This table is used for storing the rules for creating the emission activity."
+  },
+  "columns": [
+    {
+      "name": "ESG_ACTIVITY_RULE_GID",
+      "description": "The globally unique ID of an emission activity rule.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESG_ACTIVITY_RULE_XID",
+      "description": "The unique ID of an emission activity rule specific to a domain.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESG_ACTIVITY_TYPE_GID",
+      "description": "The emission activity type for which the emission activity rule is defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESG_ACTIVITY_RULE_NAME",
+      "description": "The name of the emission activity rule.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Description of the emission activity rule.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "This flag determines whether the emission activity rule is active or not.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "The effective date of the emission activity rule.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "The expiration date of the emission activity rule.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIORITY",
+      "description": "The lower the priority, the higher the preference for the given emission activity rule.  So 1 is the highest priority.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_PROFILE_GID",
+      "description": "Mode profile for which the emission activity rule is defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REGION_GID",
+      "description": "Region for which the emission activity rule is defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_DISTANCE_GID",
+      "description": "Rate distance is used for calculating distance based emissions for emission activity. For example, the distance between the stops of a shipment, using which emissions are calculated by using intensity factor.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DT_CONFIG_GID",
+      "description": "Data configuration to copy the data from a business entity, like a shipment, to the emission activity record.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "Accessorial Code that needs to be associated with the emission activity that would be generated based on this rule.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EMISSION_ALLOCATION_RULE_GID",
+      "description": "Emission Allocation Rule to be used in allocating emissions for the emission activity generated using this emission activity rule.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ESG_ACTIVITY_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EARE_ESG_ACTIVITY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ESG_ACTIVITY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ESG_ACTIVITY_TYPE_GID",
+          "columnName": "ESG_ACTIVITY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EARE_MODE_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EARE_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EARE_RATE_DISTANCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_DISTANCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_DISTANCE_GID",
+          "columnName": "RATE_DISTANCE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EARE_GTM_DT_CONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DT_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_DT_CONFIG_GID",
+          "columnName": "GTM_DT_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EARE_ACCESSORIAL_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_CODE_GID",
+          "columnName": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EARE_EMISSION_ALLOCATION_R",
+      "cascadeDelete": false,
+      "parentTableName": "EMISSION_ALLOCATION_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EMISSION_ALLOCATION_RULE_GID",
+          "columnName": "EMISSION_ALLOCATION_RULE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ESG_ACTIVITY",
+    "ESG_ACT_RULE_REMARK"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_ESG_ACTIVITY_RULE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ESG_ACTIVITY_RULE_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ESG_ACTIVITY_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ESG_ACTIVITY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ESG_MODE_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ESG_REGION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REGION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ESG_RATE_DISTANCE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_DISTANCE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ESG_GTM_DT_CONFIG_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_DT_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ESG_ACCESS_CODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ESG_EMISS_ALLOC_RULE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EMISSION_ALLOCATION_RULE_GID"
+        }
+      ]
+    }
+  ]
+}

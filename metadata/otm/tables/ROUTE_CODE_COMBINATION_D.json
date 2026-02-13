@@ -1,1 +1,165 @@
-{"table": {"schema": "glogowner","name": "route_code_combination_d","description": ""},"columns": [{"name": "ROUTE_CODE_COMBINATION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROUTE_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RAIL_JUNCTION_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ROUTE_CODE_COMBINATION_GID"},{"sequence": 2,"columnName": "SEQUENCE"}],"foreignKeys": [{"foreignKeyName": "FK_RCCD_ROUTE_CODE_COMBO","cascadeDelete": false,"parentTableName": "ROUTE_CODE_COMBINATION","columnRelation": [{"sequence": 1,"parentColumnName": "ROUTE_CODE_COMBINATION_GID","columnName": "ROUTE_CODE_COMBINATION_GID"}]},{"foreignKeyName": "FK_RCCD_ROUTE_CODE","cascadeDelete": false,"parentTableName": "ROUTE_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ROUTE_CODE_GID","columnName": "ROUTE_CODE_GID"}]},{"foreignKeyName": "FK_RCCD_JUNCTION_CODE_GID","cascadeDelete": false,"parentTableName": "JUNCTION_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "JUNCTION_CODE_GID","columnName": "RAIL_JUNCTION_CODE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_RCCD_ROUTE_CODE_GID","columnNames": [{"sequence": 1,"name": "ROUTE_CODE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "route_code_combination_d",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "ROUTE_CODE_COMBINATION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUTE_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RAIL_JUNCTION_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ROUTE_CODE_COMBINATION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SEQUENCE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RCCD_ROUTE_CODE_COMBO",
+      "cascadeDelete": false,
+      "parentTableName": "ROUTE_CODE_COMBINATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ROUTE_CODE_COMBINATION_GID",
+          "columnName": "ROUTE_CODE_COMBINATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RCCD_ROUTE_CODE",
+      "cascadeDelete": false,
+      "parentTableName": "ROUTE_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ROUTE_CODE_GID",
+          "columnName": "ROUTE_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RCCD_JUNCTION_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "JUNCTION_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "JUNCTION_CODE_GID",
+          "columnName": "RAIL_JUNCTION_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_RCCD_ROUTE_CODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ROUTE_CODE_GID"
+        }
+      ]
+    }
+  ]
+}

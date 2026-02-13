@@ -1,1 +1,199 @@
-{"table": {"schema": "glogowner","name": "service_template","description": "This table keeps service template info for buyer."},"columns": [{"name": "BUYER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVICE_TEMPLATE_SEQ","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "SOURCE_LOC_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGED_ITEM_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CUSTOMER_SERVICE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "BUYER_GID"},{"sequence": 2,"columnName": "SERVICE_TEMPLATE_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_STEMP_BUYER_GID","cascadeDelete": false,"parentTableName": "BUYER","columnRelation": [{"sequence": 1,"parentColumnName": "BUYER_GID","columnName": "BUYER_GID"}]},{"foreignKeyName": "FK_STEMP_SOURCE_LOC_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SOURCE_LOC_GID"}]},{"foreignKeyName": "FK_STEMP_PACKAGED_ITEM_GID","cascadeDelete": false,"parentTableName": "PACKAGED_ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "PACKAGED_ITEM_GID","columnName": "PACKAGED_ITEM_GID"}]},{"foreignKeyName": "FK_STEMP_CUSTOMER_SERVICE_GID","cascadeDelete": false,"parentTableName": "CUSTOMER_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "CUSTOMER_SERVICE_GID","columnName": "CUSTOMER_SERVICE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_SERV_TEMP_CUST_SERV_GID","columnNames": [{"sequence": 1,"name": "CUSTOMER_SERVICE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "service_template",
+    "description": "This table keeps service template info for buyer."
+  },
+  "columns": [
+    {
+      "name": "BUYER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVICE_TEMPLATE_SEQ",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "SOURCE_LOC_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGED_ITEM_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CUSTOMER_SERVICE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "BUYER_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SERVICE_TEMPLATE_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_STEMP_BUYER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BUYER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BUYER_GID",
+          "columnName": "BUYER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_STEMP_SOURCE_LOC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SOURCE_LOC_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_STEMP_PACKAGED_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "PACKAGED_ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PACKAGED_ITEM_GID",
+          "columnName": "PACKAGED_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_STEMP_CUSTOMER_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CUSTOMER_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CUSTOMER_SERVICE_GID",
+          "columnName": "CUSTOMER_SERVICE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_SERV_TEMP_CUST_SERV_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CUSTOMER_SERVICE_GID"
+        }
+      ]
+    }
+  ]
+}

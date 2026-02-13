@@ -1,1 +1,206 @@
-{"table": {"schema": "glogowner","name": "perfm_thresh_cumulative","description": "A cumulative metric alert threshold"},"columns": [{"name": "PERFM_THRESH_CUMUL_GID","description": "Cumulative Metric Threshold ID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERFM_THRESH_CUMUL_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HIST_STATISTICS_GID","description": "Historical Statistic to collect recent activity. This will be compared to the comparison statistic (or a scalar value).","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATISTIC_MISSING_AS_ZEROS","description": "If set to 'Y', any statistical averages should view missing values as zeros. Otherwise, averages will be skewed only to periods with activity.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "STATISTIC_COUNT_PERIOD","description": "If the collected statistic is a Count, this is the time period to use for count comparisons (e.g. log counts per hour).","dataType": "VARCHAR2","size": 10,"isNull": true,"isConstraint": true,"constraintValues": "'HOUR','DAY','WEEK'","conditionalConstraint": "","defaultValue": "'HOUR'"},{"name": "THRESHOLD_VALUE","description": "If HIST_COMPARISON_GID is null, the absolute value of HIST_STATISTICS_GID that triggers the alert. Otherwise, a multiplier of HIST_STATISTICS_GID to trigger the alert. E.g., if we want the last three hour maximum to exceed 150% of the last three day average, HIST_STATISTICS_GID=THREE_DAY_MAXIMUM, HIST_COMPARISON_GID=THREE_DAY_AVERAGE, and THRESHOLD_VALUE=1.5.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HIST_COMPARISON_GID","description": "Historical statistic to use as a basis for comparison.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMPARISON_MISSING_AS_ZEROS","description": "If set to 'Y', any historical averages should view missing values as zeros. Otherwise, averages will be skewed only to periods with activity.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "COMPARISON_MIN_VALUE","description": "When comparing the current metric to a percentage of a historical measure, this is the minimum value that the historical measure must exceed to trigger the threshold. This avoids sensitivity to initial buildup of historical data or quiet periods of no activity.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_RESERVED","description": "If ''Y'', the record is reserved for use with OTM staged thresholds. It cannot be edited or removed by a user.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PERFM_THRESH_CUMUL_GID"}],"foreignKeys": [{"foreignKeyName": "FK_PRFTCM_PERFM_HIST_STAT","cascadeDelete": false,"parentTableName": "PERFM_THRESH_HIST","columnRelation": [{"sequence": 1,"parentColumnName": "PERFM_THRESH_HIST_GID","columnName": "HIST_STATISTICS_GID"}]},{"foreignKeyName": "FK_PRFTCM_PERFM_THRESH_HIST_G","cascadeDelete": false,"parentTableName": "PERFM_THRESH_HIST","columnRelation": [{"sequence": 1,"parentColumnName": "PERFM_THRESH_HIST_GID","columnName": "HIST_COMPARISON_GID"}]}],"childTables": ["PERFM_THRESHOLD"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "perfm_thresh_cumulative",
+    "description": "A cumulative metric alert threshold"
+  },
+  "columns": [
+    {
+      "name": "PERFM_THRESH_CUMUL_GID",
+      "description": "Cumulative Metric Threshold ID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERFM_THRESH_CUMUL_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HIST_STATISTICS_GID",
+      "description": "Historical Statistic to collect recent activity. This will be compared to the comparison statistic (or a scalar value).",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATISTIC_MISSING_AS_ZEROS",
+      "description": "If set to 'Y', any statistical averages should view missing values as zeros. Otherwise, averages will be skewed only to periods with activity.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "STATISTIC_COUNT_PERIOD",
+      "description": "If the collected statistic is a Count, this is the time period to use for count comparisons (e.g. log counts per hour).",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'HOUR','DAY','WEEK'",
+      "conditionalConstraint": "",
+      "defaultValue": "'HOUR'"
+    },
+    {
+      "name": "THRESHOLD_VALUE",
+      "description": "If HIST_COMPARISON_GID is null, the absolute value of HIST_STATISTICS_GID that triggers the alert. Otherwise, a multiplier of HIST_STATISTICS_GID to trigger the alert. E.g., if we want the last three hour maximum to exceed 150% of the last three day average, HIST_STATISTICS_GID=THREE_DAY_MAXIMUM, HIST_COMPARISON_GID=THREE_DAY_AVERAGE, and THRESHOLD_VALUE=1.5.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HIST_COMPARISON_GID",
+      "description": "Historical statistic to use as a basis for comparison.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMPARISON_MISSING_AS_ZEROS",
+      "description": "If set to 'Y', any historical averages should view missing values as zeros. Otherwise, averages will be skewed only to periods with activity.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "COMPARISON_MIN_VALUE",
+      "description": "When comparing the current metric to a percentage of a historical measure, this is the minimum value that the historical measure must exceed to trigger the threshold. This avoids sensitivity to initial buildup of historical data or quiet periods of no activity.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_RESERVED",
+      "description": "If ''Y'', the record is reserved for use with OTM staged thresholds. It cannot be edited or removed by a user.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PERFM_THRESH_CUMUL_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_PRFTCM_PERFM_HIST_STAT",
+      "cascadeDelete": false,
+      "parentTableName": "PERFM_THRESH_HIST",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PERFM_THRESH_HIST_GID",
+          "columnName": "HIST_STATISTICS_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PRFTCM_PERFM_THRESH_HIST_G",
+      "cascadeDelete": false,
+      "parentTableName": "PERFM_THRESH_HIST",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PERFM_THRESH_HIST_GID",
+          "columnName": "HIST_COMPARISON_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "PERFM_THRESHOLD"
+  ],
+  "indices": []
+}

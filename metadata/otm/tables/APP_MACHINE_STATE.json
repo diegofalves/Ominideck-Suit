@@ -1,1 +1,148 @@
-{"table": {"schema": "glogowner","name": "app_machine_state","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_MACHINE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCHEDULED_SHUTDOWN_TIME","description": "Scheduled shutdown time. Null, if no shutdown has been scheduled.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATE","description": "Server state:  S_DOWN = server is down, S_STARTING = server is starting, S_STANDBY = server is in standby, S_HOT_CACHING = server is paused before cache loading, S_HOT_CACHED = server is paused after cache loading, S_UP = server is up, Q_USER_SESSION_DENY = quiescing: deny new user sessions, Q_USER_LRT_WARN = queiscing: warn user on any new long running tasks Q_USER_WARN = quiescing: warn user of imminent shutdown Q_LRT_QUIESCING = quiescing; stop polling any long running tasks, Q_INTEGRATION_QUIESCING = quiescing; refuse any inbound integrations, Q_QUIESCING = quiescing: stop new work Q_TERMINATING = quiescing: interrupt existing work, Q_WAITING = quiescing: waiting for server idle","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": true,"constraintValues": "'S_DOWN','S_STARTING','S_STANDBY','S_HOT_CACHING','S_HOT_CACHED','S_UP','Q_USER_SESSION_DENY','Q_USER_LRT_WARN','Q_USER_WARN','Q_LRT_QUIESCING','Q_INTEGRATION_QUIESCING','Q_QUIESCING','Q_INTERRUPTING','Q_WAITING'","conditionalConstraint": "","defaultValue": "'S_DOWN'"},{"name": "NEXT_STATE","description": "During shutdown, this is the next expected server state","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": true,"constraintValues": "'S_DOWN','S_STARTING','S_STANDBY','S_HOT_CACHING','S_HOT_CACHED','S_UP','Q_USER_SESSION_DENY','Q_USER_LRT_WARN','Q_USER_WARN','Q_LRT_QUIESCING','Q_INTEGRATION_QUIESCING','Q_QUIESCING','Q_INTERRUPTING','Q_WAITING'","conditionalConstraint": "","defaultValue": ""},{"name": "NEXT_STATE_TIME","description": "Estimated time of next server state change during shutdown","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_VERSION","description": "OTM Version for the server","dataType": "VARCHAR2","size": 300,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'19.2'"}],"primaryKey": [{"sequence": 1,"columnName": "APP_MACHINE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_APPMS_APP_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "APP_MACHINE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "app_machine_state",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_MACHINE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCHEDULED_SHUTDOWN_TIME",
+      "description": "Scheduled shutdown time. Null, if no shutdown has been scheduled.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATE",
+      "description": "Server state:  S_DOWN = server is down, S_STARTING = server is starting, S_STANDBY = server is in standby, S_HOT_CACHING = server is paused before cache loading, S_HOT_CACHED = server is paused after cache loading, S_UP = server is up, Q_USER_SESSION_DENY = quiescing: deny new user sessions, Q_USER_LRT_WARN = queiscing: warn user on any new long running tasks Q_USER_WARN = quiescing: warn user of imminent shutdown Q_LRT_QUIESCING = quiescing; stop polling any long running tasks, Q_INTEGRATION_QUIESCING = quiescing; refuse any inbound integrations, Q_QUIESCING = quiescing: stop new work Q_TERMINATING = quiescing: interrupt existing work, Q_WAITING = quiescing: waiting for server idle",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'S_DOWN','S_STARTING','S_STANDBY','S_HOT_CACHING','S_HOT_CACHED','S_UP','Q_USER_SESSION_DENY','Q_USER_LRT_WARN','Q_USER_WARN','Q_LRT_QUIESCING','Q_INTEGRATION_QUIESCING','Q_QUIESCING','Q_INTERRUPTING','Q_WAITING'",
+      "conditionalConstraint": "",
+      "defaultValue": "'S_DOWN'"
+    },
+    {
+      "name": "NEXT_STATE",
+      "description": "During shutdown, this is the next expected server state",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'S_DOWN','S_STARTING','S_STANDBY','S_HOT_CACHING','S_HOT_CACHED','S_UP','Q_USER_SESSION_DENY','Q_USER_LRT_WARN','Q_USER_WARN','Q_LRT_QUIESCING','Q_INTEGRATION_QUIESCING','Q_QUIESCING','Q_INTERRUPTING','Q_WAITING'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEXT_STATE_TIME",
+      "description": "Estimated time of next server state change during shutdown",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_VERSION",
+      "description": "OTM Version for the server",
+      "dataType": "VARCHAR2",
+      "size": 300,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'19.2'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "APP_MACHINE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_APPMS_APP_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "APP_MACHINE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

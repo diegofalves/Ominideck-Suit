@@ -1,1 +1,133 @@
-{"table": {"schema": "glogowner","name": "i_log_detail","description": "This table is related to the I_LOG table for storing the details of the audit trail information for the XML transmissions and transactions. The I_LOG_DETAIL table stores qualifier/value pairs associated with a given log message."},"columns": [{"name": "I_LOG_DETAIL_SEQNO","description": "I_LOG_DETAIL_SEQNO provides a sequence number for a transaction.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_LOG_SEQNO","description": "A pointer back to the log sequence number from I_Log table.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_LOG_DETAIL_QUAL","description": "I_LOG_DETAIL_QUAL provides the application name, transaction code and transaction number for an XML transaction.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_LOG_DETAIL_VALUE","description": "The actual value for log detail.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "I_LOG_DETAIL_SEQNO"}],"foreignKeys": [],"childTables": [],"indices": [{"indexName": "ILOG_DTL_ILOGSEQ","columnNames": [{"sequence": 1,"name": "I_LOG_SEQNO"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "i_log_detail",
+    "description": "This table is related to the I_LOG table for storing the details of the audit trail information for the XML transmissions and transactions. The I_LOG_DETAIL table stores qualifier/value pairs associated with a given log message."
+  },
+  "columns": [
+    {
+      "name": "I_LOG_DETAIL_SEQNO",
+      "description": "I_LOG_DETAIL_SEQNO provides a sequence number for a transaction.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_LOG_SEQNO",
+      "description": "A pointer back to the log sequence number from I_Log table.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_LOG_DETAIL_QUAL",
+      "description": "I_LOG_DETAIL_QUAL provides the application name, transaction code and transaction number for an XML transaction.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_LOG_DETAIL_VALUE",
+      "description": "The actual value for log detail.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "I_LOG_DETAIL_SEQNO"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "ILOG_DTL_ILOGSEQ",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_LOG_SEQNO"
+        }
+      ]
+    }
+  ]
+}

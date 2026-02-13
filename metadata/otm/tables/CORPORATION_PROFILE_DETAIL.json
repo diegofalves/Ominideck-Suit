@@ -1,1 +1,132 @@
-{"table": {"schema": "glogowner","name": "corporation_profile_detail","description": "This table is used to resolve the many-to-many relationship between the corporations and corporation profiles. A corporation can be part of one or more corporation profiles."},"columns": [{"name": "CORPORATION_PROFILE_GID","description": "CORPORATION_PROFILE_GID contains the unique identifier for the corporation profile.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CORPORATION_GID","description": "CORPORATION_GID contains the unique identifier for the corporation.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CORPORATION_PROFILE_GID"},{"sequence": 2,"columnName": "CORPORATION_GID"}],"foreignKeys": [{"foreignKeyName": "FK_CPD_CORP_PROFILE_GID","cascadeDelete": false,"parentTableName": "CORPORATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "CORPORATION_PROFILE_GID","columnName": "CORPORATION_PROFILE_GID"}]},{"foreignKeyName": "FK_CPD_CORPORATION_GID","cascadeDelete": false,"parentTableName": "CORPORATION","columnRelation": [{"sequence": 1,"parentColumnName": "CORPORATION_GID","columnName": "CORPORATION_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_CPD_CORPORATION_GID","columnNames": [{"sequence": 1,"name": "CORPORATION_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "corporation_profile_detail",
+    "description": "This table is used to resolve the many-to-many relationship between the corporations and corporation profiles. A corporation can be part of one or more corporation profiles."
+  },
+  "columns": [
+    {
+      "name": "CORPORATION_PROFILE_GID",
+      "description": "CORPORATION_PROFILE_GID contains the unique identifier for the corporation profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CORPORATION_GID",
+      "description": "CORPORATION_GID contains the unique identifier for the corporation.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CORPORATION_PROFILE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "CORPORATION_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CPD_CORP_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CORPORATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CORPORATION_PROFILE_GID",
+          "columnName": "CORPORATION_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CPD_CORPORATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CORPORATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CORPORATION_GID",
+          "columnName": "CORPORATION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_CPD_CORPORATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CORPORATION_GID"
+        }
+      ]
+    }
+  ]
+}

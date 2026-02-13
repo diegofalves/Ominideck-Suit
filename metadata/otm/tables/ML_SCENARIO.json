@@ -1,1 +1,185 @@
-{"table": {"schema": "glogowner","name": "ml_scenario","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCENARIO_GID","description": "The GID of machine learning scenario. The scenario provides the ability to filter data used in training.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCENARIO_XID","description": "The XID of the machine learning scenario.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_GID","description": "The GID of the machine learning project.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCENARIO_NAME","description": "The name for the machine learning scenario.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "The description for the machine learning scenario.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WORKFLOW_ID","description": "The workflow ID that is used to establish connection with machine learning services.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS","description": "Status value for the Machine Learning Scenario","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECTIVE_MODEL_TYPE","description": "The Objective Model Type value for the machine learning Project Objective. P = Shipment based ETA, E = Event based ETA, OR = Order Route Prediction and PC = Product Classification Prediction.","dataType": "VARCHAR2","size": 10,"isNull": false,"isConstraint": true,"constraintValues": "'P','E','OR','PC'","conditionalConstraint": "","defaultValue": "'P'"}],"primaryKey": [{"sequence": 1,"columnName": "SCENARIO_GID"},{"sequence": 2,"columnName": "PROJECT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_MPRO_ML_PROJECT","cascadeDelete": true,"parentTableName": "ML_PROJECT","columnRelation": [{"sequence": 1,"parentColumnName": "PROJECT_GID","columnName": "PROJECT_GID"}]}],"childTables": ["ML_PERFORM_PREDICTION_RESULT","ML_PERFORM_SCORING_RESULT","ML_SCENARIO_COLUMN_EXCLUDE","ML_SCENARIO_COLUMN_INCLUSION","ML_SCENARIO_FILTER","ML_SCENARIO_LEARNING_RESULT","ML_SCENARIO_MILESTONE","ML_SCENARIO_WORKFLOW"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ml_scenario",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCENARIO_GID",
+      "description": "The GID of machine learning scenario. The scenario provides the ability to filter data used in training.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCENARIO_XID",
+      "description": "The XID of the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_GID",
+      "description": "The GID of the machine learning project.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCENARIO_NAME",
+      "description": "The name for the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "The description for the machine learning scenario.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WORKFLOW_ID",
+      "description": "The workflow ID that is used to establish connection with machine learning services.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS",
+      "description": "Status value for the Machine Learning Scenario",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECTIVE_MODEL_TYPE",
+      "description": "The Objective Model Type value for the machine learning Project Objective. P = Shipment based ETA, E = Event based ETA, OR = Order Route Prediction and PC = Product Classification Prediction.",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'P','E','OR','PC'",
+      "conditionalConstraint": "",
+      "defaultValue": "'P'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SCENARIO_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PROJECT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_MPRO_ML_PROJECT",
+      "cascadeDelete": true,
+      "parentTableName": "ML_PROJECT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PROJECT_GID",
+          "columnName": "PROJECT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ML_PERFORM_PREDICTION_RESULT",
+    "ML_PERFORM_SCORING_RESULT",
+    "ML_SCENARIO_COLUMN_EXCLUDE",
+    "ML_SCENARIO_COLUMN_INCLUSION",
+    "ML_SCENARIO_FILTER",
+    "ML_SCENARIO_LEARNING_RESULT",
+    "ML_SCENARIO_MILESTONE",
+    "ML_SCENARIO_WORKFLOW"
+  ],
+  "indices": []
+}

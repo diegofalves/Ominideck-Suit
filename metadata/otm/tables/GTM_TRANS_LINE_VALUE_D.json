@@ -1,1 +1,205 @@
-{"table": {"schema": "glogowner","name": "gtm_trans_line_value_d","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TRANSACTION_LINE_GID","description": "The GID for the GTM Trade Transaction Line.","dataType": "VARCHAR2","size": 201,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_VALUE_QUALIFIER_GID","description": "Value Qualifier Gid","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NO","description": "Sequence Number","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VALUE_ATTRIBUTE","description": "Value attribute shows the attribute type of the value qualifier.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VALUE","description": "The currency value of the value attribute.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VALUE_BASE","description": "The currency value in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VALUE_CURRENCY_GID","description": "The GID for the value currency.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'USD'"},{"name": "VALUE_NOTE","description": "A note that shows how the value attribute is calculated.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REFERENCE_VALUE_ATTRIBUTE","description": "Reference value attribute column shows which other value attribute this belongs to.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TRANSACTION_LINE_GID"},{"sequence": 2,"columnName": "GTM_VALUE_QUALIFIER_GID"},{"sequence": 3,"columnName": "SEQUENCE_NO"}],"foreignKeys": [{"foreignKeyName": "FK_GTLVD_GTM_TRANS_LINE_VALUE","cascadeDelete": false,"parentTableName": "GTM_TRANS_LINE_VALUE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TRANSACTION_LINE_GID","columnName": "GTM_TRANSACTION_LINE_GID"},{"sequence": 2,"parentColumnName": "GTM_VALUE_QUALIFIER_GID","columnName": "GTM_VALUE_QUALIFIER_GID"}]},{"foreignKeyName": "FK_GTLVD_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "VALUE_CURRENCY_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_trans_line_value_d",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TRANSACTION_LINE_GID",
+      "description": "The GID for the GTM Trade Transaction Line.",
+      "dataType": "VARCHAR2",
+      "size": 201,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_VALUE_QUALIFIER_GID",
+      "description": "Value Qualifier Gid",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NO",
+      "description": "Sequence Number",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VALUE_ATTRIBUTE",
+      "description": "Value attribute shows the attribute type of the value qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VALUE",
+      "description": "The currency value of the value attribute.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VALUE_BASE",
+      "description": "The currency value in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VALUE_CURRENCY_GID",
+      "description": "The GID for the value currency.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'USD'"
+    },
+    {
+      "name": "VALUE_NOTE",
+      "description": "A note that shows how the value attribute is calculated.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REFERENCE_VALUE_ATTRIBUTE",
+      "description": "Reference value attribute column shows which other value attribute this belongs to.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TRANSACTION_LINE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_VALUE_QUALIFIER_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "SEQUENCE_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTLVD_GTM_TRANS_LINE_VALUE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TRANS_LINE_VALUE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TRANSACTION_LINE_GID",
+          "columnName": "GTM_TRANSACTION_LINE_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "GTM_VALUE_QUALIFIER_GID",
+          "columnName": "GTM_VALUE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTLVD_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "VALUE_CURRENCY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

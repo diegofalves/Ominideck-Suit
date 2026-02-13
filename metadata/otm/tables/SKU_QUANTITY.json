@@ -1,1 +1,146 @@
-{"table": {"schema": "glogowner","name": "sku_quantity","description": "SKU stock quantity."},"columns": [{"name": "SKU_GID","description": "SKU id.","dataType": "VARCHAR2","size": 201,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SKU_QUANTITY_TYPE_GID","description": "SKU inventory quantity type id.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SKU_QUANTITY_VALUE","description": "SKU inventory quantity.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SKU_ADJ_QUANTITY_VALUE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SKU_GID"},{"sequence": 2,"columnName": "SKU_QUANTITY_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SKUQ_SKU_GID","cascadeDelete": false,"parentTableName": "SKU","columnRelation": [{"sequence": 1,"parentColumnName": "SKU_GID","columnName": "SKU_GID"}]},{"foreignKeyName": "FK_SKUQ_SKU_QUANTITY_TYPE_GID","cascadeDelete": false,"parentTableName": "SKU_QUANTITY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "SKU_QUANTITY_TYPE_GID","columnName": "SKU_QUANTITY_TYPE_GID"}]}],"childTables": ["SKU_LEVEL","SKU_QUANTITY_ASSET","S_EQUIPMENT"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "sku_quantity",
+    "description": "SKU stock quantity."
+  },
+  "columns": [
+    {
+      "name": "SKU_GID",
+      "description": "SKU id.",
+      "dataType": "VARCHAR2",
+      "size": 201,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SKU_QUANTITY_TYPE_GID",
+      "description": "SKU inventory quantity type id.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SKU_QUANTITY_VALUE",
+      "description": "SKU inventory quantity.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SKU_ADJ_QUANTITY_VALUE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SKU_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SKU_QUANTITY_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SKUQ_SKU_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SKU",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SKU_GID",
+          "columnName": "SKU_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SKUQ_SKU_QUANTITY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SKU_QUANTITY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SKU_QUANTITY_TYPE_GID",
+          "columnName": "SKU_QUANTITY_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "SKU_LEVEL",
+    "SKU_QUANTITY_ASSET",
+    "S_EQUIPMENT"
+  ],
+  "indices": []
+}

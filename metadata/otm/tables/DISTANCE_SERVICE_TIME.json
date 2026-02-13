@@ -1,1 +1,140 @@
-{"table": {"schema": "glogowner","name": "distance_service_time","description": "This table is created to allow for GEPS to have a distance band based service commitment Rate Service Type.      Example:  Service Commitment (Weekend Equal 1 Day)            0 to 500 Miles - 3rd Morning         501 to 1,000 Miles - 4th Morning        1,001 to 1,500 Miles - 5th Morning             1,501 to 2,000 Miles - 6th Morning  2,001 to 3,000 Miles - 7th Morning"},"columns": [{"name": "RATE_SERVICE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_VALUE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVICE_DAYS","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_VALUE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "DISTANCE_VALUE_BASE","description": "DISTANCE_VALUE in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_SERVICE_GID"},{"sequence": 2,"columnName": "DISTANCE_VALUE"}],"foreignKeys": [{"foreignKeyName": "FK_DST_RATE_SERVICE_GID","cascadeDelete": false,"parentTableName": "RATE_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_SERVICE_GID","columnName": "RATE_SERVICE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "distance_service_time",
+    "description": "This table is created to allow for GEPS to have a distance band based service commitment Rate Service Type.      Example:  Service Commitment (Weekend Equal 1 Day)            0 to 500 Miles - 3rd Morning         501 to 1,000 Miles - 4th Morning        1,001 to 1,500 Miles - 5th Morning             1,501 to 2,000 Miles - 6th Morning  2,001 to 3,000 Miles - 7th Morning"
+  },
+  "columns": [
+    {
+      "name": "RATE_SERVICE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_VALUE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVICE_DAYS",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_VALUE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "DISTANCE_VALUE_BASE",
+      "description": "DISTANCE_VALUE in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_SERVICE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "DISTANCE_VALUE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DST_RATE_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_SERVICE_GID",
+          "columnName": "RATE_SERVICE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

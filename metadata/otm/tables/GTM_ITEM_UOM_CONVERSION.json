@@ -1,1 +1,155 @@
-{"table": {"schema": "glogowner","name": "gtm_item_uom_conversion","description": ""},"columns": [{"name": "GUIC_SEQ_NUM","description": "Internal sequence number for the item unit of measure conversion records.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_ITEM_GID","description": "The GID for the item that is having the item unit of measure information added, updated or removed. The item UOM conversion allows you to record multiple conversion rates and an item's unit of measurement.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FROM_UOM_CODE","description": "The from unit of measure for this entry. For example if you wish to convert from pounds (LB) to kilograms (KG) the from unit of measure would be pounds.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TO_UOM_CODE","description": "The to unit of measure for this entry. For example if you wish to convert from pounds (LB) to kilograms (KG) the to unit of measure would be kilograms.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONVERSION_RATE","description": "The conversion rate between the from and to unit of measure for this entry. For example if you wish to convert from pounds (LB) to kilograms (KG) the conversion rate would be - for the standard LB to KG conversion - 0.453592.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GUIC_SEQ_NUM"}],"foreignKeys": [{"foreignKeyName": "FK_GIUC_ITEM_GID","cascadeDelete": false,"parentTableName": "ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "ITEM_GID","columnName": "GTM_ITEM_GID"}]}],"childTables": [],"indices": [{"indexName": "UX_GTM_ITEM_GID","columnNames": [{"sequence": 1,"name": "GTM_ITEM_GID"},{"sequence": 2,"name": "FROM_UOM_CODE"},{"sequence": 3,"name": "TO_UOM_CODE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_item_uom_conversion",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "GUIC_SEQ_NUM",
+      "description": "Internal sequence number for the item unit of measure conversion records.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_ITEM_GID",
+      "description": "The GID for the item that is having the item unit of measure information added, updated or removed. The item UOM conversion allows you to record multiple conversion rates and an item's unit of measurement.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FROM_UOM_CODE",
+      "description": "The from unit of measure for this entry. For example if you wish to convert from pounds (LB) to kilograms (KG) the from unit of measure would be pounds.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TO_UOM_CODE",
+      "description": "The to unit of measure for this entry. For example if you wish to convert from pounds (LB) to kilograms (KG) the to unit of measure would be kilograms.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONVERSION_RATE",
+      "description": "The conversion rate between the from and to unit of measure for this entry. For example if you wish to convert from pounds (LB) to kilograms (KG) the conversion rate would be - for the standard LB to KG conversion - 0.453592.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GUIC_SEQ_NUM"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GIUC_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITEM_GID",
+          "columnName": "GTM_ITEM_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UX_GTM_ITEM_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_ITEM_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "FROM_UOM_CODE"
+        },
+        {
+          "sequence": 3,
+          "name": "TO_UOM_CODE"
+        }
+      ]
+    }
+  ]
+}

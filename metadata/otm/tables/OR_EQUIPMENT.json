@@ -1,1 +1,234 @@
-{"table": {"schema": "glogowner","name": "or_equipment","description": "Defines equipments associated with an order release that the user has supplied."},"columns": [{"name": "ORDER_RELEASE_GID","description": "The GID for the order release.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OR_EQUIPMENT_SEQ","description": "The equipment sequence to allow for multiple equipment request to be specified on the order release.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_GID","description": "The seal sequence to allow for multiple seals to be defined.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_TYPE_GID","description": "The equipment seal number for the order release ordered equipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_NUMBER","description": "The equipment number as an identifier specified for this order release equipment.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_INITIAL","description": "The equipment initial as an identifier specified for this order release equipment.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_INITIAL_NUMBER","description": "The equipment initial and number as an identifier specified for this order release equipment.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GID","description": "The actual equipment GID if the equipment is managed in the database.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ORDER_RELEASE_GID"},{"sequence": 2,"columnName": "OR_EQUIPMENT_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_OREQP_ORDER_RELEASE_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_GID"}]},{"foreignKeyName": "FK_OREQP_EQUIPMENT_GROUP_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_GID","columnName": "EQUIPMENT_GROUP_GID"}]},{"foreignKeyName": "FK_OREQP_EQUIPMENT_TYPE_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_TYPE_GID","columnName": "EQUIPMENT_TYPE_GID"}]},{"foreignKeyName": "FK_OREQP_EQUIPMENT_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GID","columnName": "EQUIPMENT_GID"}]}],"childTables": ["OR_EQUIPMENT_SEAL","SHIP_UNIT"],"indices": [{"indexName": "IX_OREQP_EQUIPMENT_GID","columnNames": [{"sequence": 1,"name": "EQUIPMENT_GID"}]},{"indexName": "IX_OREQP_ORDER_RELEASE_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "or_equipment",
+    "description": "Defines equipments associated with an order release that the user has supplied."
+  },
+  "columns": [
+    {
+      "name": "ORDER_RELEASE_GID",
+      "description": "The GID for the order release.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OR_EQUIPMENT_SEQ",
+      "description": "The equipment sequence to allow for multiple equipment request to be specified on the order release.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_GID",
+      "description": "The seal sequence to allow for multiple seals to be defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_TYPE_GID",
+      "description": "The equipment seal number for the order release ordered equipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_NUMBER",
+      "description": "The equipment number as an identifier specified for this order release equipment.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_INITIAL",
+      "description": "The equipment initial as an identifier specified for this order release equipment.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_INITIAL_NUMBER",
+      "description": "The equipment initial and number as an identifier specified for this order release equipment.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GID",
+      "description": "The actual equipment GID if the equipment is managed in the database.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ORDER_RELEASE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "OR_EQUIPMENT_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OREQP_ORDER_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OREQP_EQUIPMENT_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_GID",
+          "columnName": "EQUIPMENT_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OREQP_EQUIPMENT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_TYPE_GID",
+          "columnName": "EQUIPMENT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OREQP_EQUIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GID",
+          "columnName": "EQUIPMENT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "OR_EQUIPMENT_SEAL",
+    "SHIP_UNIT"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_OREQP_EQUIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EQUIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OREQP_ORDER_RELEASE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        }
+      ]
+    }
+  ]
+}

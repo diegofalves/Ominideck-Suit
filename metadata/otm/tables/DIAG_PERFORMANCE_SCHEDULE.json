@@ -1,1 +1,270 @@
-{"table": {"schema": "glogowner","name": "diag_performance_schedule","description": "Requested instance of time-based performance capture"},"columns": [{"name": "DIAG_PERFORMANCE_SCHEDULE_ID","description": "Unique ID for the schedule request","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "General description prepended to collection files and e-mails","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_TIME","description": "Start time for performance collection","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_TIME","description": "End time for performance collection","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAPTURE_FREQUENCY","description": "Frequency of collection","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "CAPTURE_FREQUENCY_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'M'"},{"name": "CAPTURE_FREQUENCY_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "60"},{"name": "CONTACT_GID","description": "Contact to receive results when all collections are complete","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COM_METHOD_GID","description": "Communication method to use for sending completed collections","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CLIENT_CONTACT_GID","description": "If sending by e-mail, contact information for replies. Also prepended to collection files.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATE","description": "State of collection","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'WAITING','ASSIGNED','RUNNING','COMPLETED','ABORTED','PAUSED'","conditionalConstraint": "","defaultValue": "'WAITING'"},{"name": "FILE_DIRECTORY","description": "Directory to hold collection files","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'performance'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_CONTROL_REQUEST_ID","description": "Process Control record managing the planned/recurring diagnostic collection.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERSIST_RESULT","description": "If Y, each performance collection is saved to the result table.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "IS_XML","description": "If Y, the output is XML; otherwise, it is HTML.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"}],"primaryKey": [{"sequence": 1,"columnName": "DIAG_PERFORMANCE_SCHEDULE_ID"}],"foreignKeys": [{"foreignKeyName": "FK_DPFS_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "CONTACT_GID"}]},{"foreignKeyName": "FK_DPFS_COM_METHOD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "COM_METHOD_GID"}]},{"foreignKeyName": "FK_DPFS_CLIENT_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "CLIENT_CONTACT_GID"}]}],"childTables": ["DIAG_PERFORMANCE_RESULT","DIAG_PERFORMANCE_SCHED_CAP"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "diag_performance_schedule",
+    "description": "Requested instance of time-based performance capture"
+  },
+  "columns": [
+    {
+      "name": "DIAG_PERFORMANCE_SCHEDULE_ID",
+      "description": "Unique ID for the schedule request",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "General description prepended to collection files and e-mails",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_TIME",
+      "description": "Start time for performance collection",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_TIME",
+      "description": "End time for performance collection",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAPTURE_FREQUENCY",
+      "description": "Frequency of collection",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "CAPTURE_FREQUENCY_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'M'"
+    },
+    {
+      "name": "CAPTURE_FREQUENCY_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "60"
+    },
+    {
+      "name": "CONTACT_GID",
+      "description": "Contact to receive results when all collections are complete",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COM_METHOD_GID",
+      "description": "Communication method to use for sending completed collections",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CLIENT_CONTACT_GID",
+      "description": "If sending by e-mail, contact information for replies. Also prepended to collection files.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATE",
+      "description": "State of collection",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'WAITING','ASSIGNED','RUNNING','COMPLETED','ABORTED','PAUSED'",
+      "conditionalConstraint": "",
+      "defaultValue": "'WAITING'"
+    },
+    {
+      "name": "FILE_DIRECTORY",
+      "description": "Directory to hold collection files",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'performance'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_CONTROL_REQUEST_ID",
+      "description": "Process Control record managing the planned/recurring diagnostic collection.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERSIST_RESULT",
+      "description": "If Y, each performance collection is saved to the result table.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "IS_XML",
+      "description": "If Y, the output is XML; otherwise, it is HTML.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DIAG_PERFORMANCE_SCHEDULE_ID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DPFS_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DPFS_COM_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DPFS_CLIENT_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "CLIENT_CONTACT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "DIAG_PERFORMANCE_RESULT",
+    "DIAG_PERFORMANCE_SCHED_CAP"
+  ],
+  "indices": []
+}

@@ -1,1 +1,173 @@
-{"table": {"schema": "glogowner","name": "attribute_rule_detail","description": "One record in attribute rule details table shall be mapped to one row of attribute type inside rule definition."},"columns": [{"name": "ATTRIBUTE_RULE_DETAIL_SEQNO","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_TYPE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_VALUES","description": "Holds a set of attribute values with comma as a seperator.","dataType": "VARCHAR2","size": 400,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OPERATOR","description": "Could take values ONE OF, NOT ONE OF","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'OneOf','NoneOf','GreaterThan','GreaterThanEqual','LessThan','LessThanEqual'","conditionalConstraint": "","defaultValue": "'OneOf'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "QUANTITY_VALUE","description": "Quantity Value in User entered UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UOM_CODE","description": "UOM Code for Quantity.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "QUANTITY_BASE_VALUE","description": "quantity value in default UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ATTRIBUTE_RULE_DETAIL_SEQNO"},{"sequence": 2,"columnName": "ATTRIBUTE_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_ATRD_ATTRIBUTE_RULE_GID","cascadeDelete": false,"parentTableName": "ATTRIBUTE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "ATTRIBUTE_RULE_GID","columnName": "ATTRIBUTE_RULE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "attribute_rule_detail",
+    "description": "One record in attribute rule details table shall be mapped to one row of attribute type inside rule definition."
+  },
+  "columns": [
+    {
+      "name": "ATTRIBUTE_RULE_DETAIL_SEQNO",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_VALUES",
+      "description": "Holds a set of attribute values with comma as a seperator.",
+      "dataType": "VARCHAR2",
+      "size": 400,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OPERATOR",
+      "description": "Could take values ONE OF, NOT ONE OF",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'OneOf','NoneOf','GreaterThan','GreaterThanEqual','LessThan','LessThanEqual'",
+      "conditionalConstraint": "",
+      "defaultValue": "'OneOf'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUANTITY_VALUE",
+      "description": "Quantity Value in User entered UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UOM_CODE",
+      "description": "UOM Code for Quantity.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUANTITY_BASE_VALUE",
+      "description": "quantity value in default UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ATTRIBUTE_RULE_DETAIL_SEQNO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "ATTRIBUTE_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ATRD_ATTRIBUTE_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ATTRIBUTE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ATTRIBUTE_RULE_GID",
+          "columnName": "ATTRIBUTE_RULE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

@@ -1,1 +1,951 @@
-{"table": {"schema": "glogowner","name": "s_ship_unit","description": "This table stores the shipment ship unit information. This table was added to identify the actual shipment ship unit as opposed to order release ship unit (in earlier versions of GC3)."},"columns": [{"name": "S_SHIP_UNIT_GID","description": "The GID for the ship unit associated to a shipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_XID","description": "The XID for the ship unit associated to a shipment.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_HANDLING_UNIT_GID","description": "The transport handling unit identifier defined for the ship unit. Examples are a box and a pallet.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_LENGTH","description": "The length of each shipment ship unit. If this row represents 20 of the same ship units, the total length is 20 x unit length.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_LENGTH_UOM_CODE","description": "Unit of measure for the unit length column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_LENGTH_BASE","description": "The unit length in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WIDTH","description": "The width of each shipment ship unit. Each row may represent the ship unit count number of same ship units. If this field is null or is 0, the weight of this shipment ship unit is computed as the total of container weight from its ship unit specification and the weight of its shipment ship unit lines.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WIDTH_UOM_CODE","description": "Unit of measure for the unit width.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WIDTH_BASE","description": "The unit width in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_HEIGHT","description": "The height of each shipment ship unit. If this row represents the 20 same ship units, the total height is 20 x unit height.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_HEIGHT_UOM_CODE","description": "The unit of measure for unit height column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_HEIGHT_BASE","description": "The unit height in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WEIGHT","description": "The weight of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WEIGHT_UOM_CODE","description": "The unit of measure for the unit weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_WEIGHT_BASE","description": "The unit weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_VOLUME","description": "The volume of each shipment ship unit. Each row may represent the ship unit count number of same ship units. If this field is null or is 0, the volume of this shipment ship unit is computed as the total of container volume from its ship unit specification and the volume of its shipment ship unit lines.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_VOLUME_UOM_CODE","description": "The unit of measure for the unit volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_VOLUME_BASE","description": "The unit volume in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_CODE","description": "The user-defined commodity code for the item. For example HTS, SITC, STCC, NMFC, etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_QUAL_GID","description": "A GID to define the type of the commodity code. For example HTS, SITC, STCC, NMFC etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SPLITABLE","description": "A true or false value to define whether the ship unit can be split when creating the shipments.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "SHIP_UNIT_COUNT","description": "Ship units that have the same dimension/weight and contents are represented as one row in the SHIP_UNIT table. SHIP_UNIT_COUNT is the number of these ship units.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "EARLY_PICKUP_DATE","description": "The early pickup date defined for the ship unit","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_WEIGHT","description": "The received gross weight of the shipment ship unit. It can be entered as a stop debrief. Used for reporting purposes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_WEIGHT_UOM","description": "The received gross weight unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_WEIGHT_BASE","description": "The received gross weight in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_VOLUME","description": "The received volume of the shipment ship unit. It can be entered as a stop debrief. Used for reporting purposes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_VOLUME_UOM","description": "The received volume unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_VOLUME_BASE","description": "The received volume in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_SHIP_UNIT_COUNT","description": "The received item package count. It can be entered as a stop debrief.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_GID","description": "The GID for the order release ship unit that is associated to this shipment ship unit.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_WEIGHT","description": "The unit net weight of the goods contained in the shipment ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_WEIGHT_UOM_CODE","description": "The unit net weight unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_WEIGHT_BASE","description": "The unit net weight in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_VOLUME","description": "The unit net volume of the goods contained in the shipment ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_VOLUME_UOM_CODE","description": "The unit net volume unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_NET_VOLUME_BASE","description": "The unit net volume in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_NET_WEIGHT","description": "The received net weight of the shipment ship unit. It can be entered as a stop debrief. Used for reporting purposes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_NET_WEIGHT_UOM_CODE","description": "The received net weight unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_NET_WEIGHT_BASE","description": "The received net weight in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_NET_VOLUME","description": "The received net volume of the shipment ship unit. It can be entered as a stop debrief. Used for reporting purposes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_NET_VOLUME_UOM_CODE","description": "The received net volume unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_NET_VOLUME_BASE","description": "The Received net volume in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CORE_DIAMETER","description": "For cylindrical objects, this defines the diameter of the core.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CORE_DIAMETER_UOM_CODE","description": "For cylindrical objects, unit of measure for the diameter of the core.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CORE_DIAMETER_BASE","description": "For cylindrical objects, the base value of the diameter of the core.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_DIAMETER","description": "For cylindrical objects, this defines the diameter of the ship unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_DIAMETER_UOM_CODE","description": "For cylindrical objects, the diameter of the ship unit unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNIT_DIAMETER_BASE","description": "For cylindrical objects, the base value of the diameter of the core. For cylindrical objects, the base value of the diameter.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG_1","description": "A flexible field to contain informational data that has been copied from the order to the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG_2","description": "A flexible field to contain informational data that has been copied from the order to the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG_3","description": "A flexible field to contain informational data that has been copied from the order to the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG_4","description": "A flexible field to contain informational data that has been copied from the order to the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "T_SHIP_UNIT_GID","description": "A GID for the order release ship unit.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_COUNT_SPLITTABLE","description": "Indicates whether the ship unit can be split on the count boundaries when planning during container optimization.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "TOTAL_GROSS_WEIGHT","description": "The total gross weight of the shipment ship unit (transport handling unit + lines).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_WEIGHT_BASE","description": "The total gross weight unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_WEIGHT_UOM_CODE","description": "The total gross weight in the base unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_VOLUME","description": "The total gross volume of the shipment ship unit (transport handling unit + lines).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_VOLUME_BASE","description": "The total gross volume unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_GROSS_VOLUME_UOM_CODE","description": "The total gross volume in the base unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MARKED_FOR_PURGE","description": "A Boolean field. When it is set to 'Y', this row and its child data will be purged.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "RANGE_START","description": "The range start value associated with the ship unit to handle the case where the ship unit count is >1 signifying that there are multiple instances of this record.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RANGE_END","description": "The range end value associated with the ship unit to handle the case where the ship unit count is >1 signifying that there are multiple instances of this record.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASE_METHOD_GID","description": "The release method (order configuration identifier) associated with defining this ship unit. It specifies such attributes as if the ship unit weight is calculated from the ship unit line weight.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ALLOW_REPACK","description": "If this flag is set to false, when planning order movement that contains this ship unit or combine shipments that contains this shipment ship unit, the shipment ship unit building process will not repack this ship unit.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "TOTAL_LOADING_SPLIT_WEIGHT","description": "Defines the total loading split weight if the ship unit can be split to load into the equipment.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_LS_WEIGHT_BASE","description": "The total loading split weight unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_LS_WEIGHT_UOM_CODE","description": "The total loading split weight in the base unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_LOADING_SPLIT_VOLUME","description": "Defines the total loading split volume if the ship unit can be split to load into the equipment.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_LS_VOLUME_BASE","description": "The total loading split volume unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_LS_VOLUME_UOM_CODE","description": "The total loading split volume in the base unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIORITY","description": "Defines the priority associated with ship unit.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": true,"constraintValues": "","conditionalConstraint": "PRIORITY BETWEEN 1 AND 999","defaultValue": ""},{"name": "IS_FIXED_ERU_COUNT","description": "Indicates whether the ERU defined on shipment ship unit is used or the ERU is derived from the order. A null value means N.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "S_SHIP_UNIT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SSU_SUSGID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "TRANSPORT_HANDLING_UNIT_GID"}]},{"foreignKeyName": "FK_S_SHPUT_FLXCOMQUL_GID","cascadeDelete": false,"parentTableName": "FLEX_COMMODITY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "FLEX_COMMODITY_QUAL_GID","columnName": "FLEX_COMMODITY_QUAL_GID"}]},{"foreignKeyName": "FK_S_SHPUT_SHIP_UNIT_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_GID","columnName": "SHIP_UNIT_GID"}]},{"foreignKeyName": "FK_SSU_RELEASE_METHOD_GID","cascadeDelete": false,"parentTableName": "RELEASE_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "RELEASE_METHOD_GID","columnName": "RELEASE_METHOD_GID"}]}],"childTables": ["INVOICE_SHIPMENT","ORDER_MOVEMENT_D","SHIPMENT_REQDOC_TEXT","SHIPMENT_STOP_D","SHIPMENT_STOP_DEBRIEF","SS_S_SHIP_UNIT","S_EQUIPMENT_S_SHIP_UNIT_JOIN","S_SHIP_UNIT_ACCESSORIAL","S_SHIP_UNIT_EQUIP_REF_UNIT","S_SHIP_UNIT_LINE","S_SHIP_UNIT_PIECE","S_SHIP_UNIT_REFNUM","S_SHIP_UNIT_REMARK","S_SHIP_UNIT_SEAL","S_SHIP_UNIT_SPECIAL_SERVICE","S_SHIP_UNIT_STATUS","TENDER_COLLAB_SSU"],"indices": [{"indexName": "IX_SSU_THU_GID","columnNames": [{"sequence": 1,"name": "TRANSPORT_HANDLING_UNIT_GID"}]},{"indexName": "IX_S_SHIP_UNIT_XID","columnNames": [{"sequence": 1,"name": "S_SHIP_UNIT_XID"}]},{"indexName": "IX_S_SHPUT_FLXCOMQUL_GID","columnNames": [{"sequence": 1,"name": "FLEX_COMMODITY_QUAL_GID"}]},{"indexName": "IX_S_SHPUT_SHIP_UNIT_GID","columnNames": [{"sequence": 1,"name": "SHIP_UNIT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "s_ship_unit",
+    "description": "This table stores the shipment ship unit information. This table was added to identify the actual shipment ship unit as opposed to order release ship unit (in earlier versions of GC3)."
+  },
+  "columns": [
+    {
+      "name": "S_SHIP_UNIT_GID",
+      "description": "The GID for the ship unit associated to a shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_XID",
+      "description": "The XID for the ship unit associated to a shipment.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_GID",
+      "description": "The transport handling unit identifier defined for the ship unit. Examples are a box and a pallet.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_LENGTH",
+      "description": "The length of each shipment ship unit. If this row represents 20 of the same ship units, the total length is 20 x unit length.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_LENGTH_UOM_CODE",
+      "description": "Unit of measure for the unit length column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_LENGTH_BASE",
+      "description": "The unit length in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WIDTH",
+      "description": "The width of each shipment ship unit. Each row may represent the ship unit count number of same ship units. If this field is null or is 0, the weight of this shipment ship unit is computed as the total of container weight from its ship unit specification and the weight of its shipment ship unit lines.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WIDTH_UOM_CODE",
+      "description": "Unit of measure for the unit width.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WIDTH_BASE",
+      "description": "The unit width in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_HEIGHT",
+      "description": "The height of each shipment ship unit. If this row represents the 20 same ship units, the total height is 20 x unit height.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_HEIGHT_UOM_CODE",
+      "description": "The unit of measure for unit height column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_HEIGHT_BASE",
+      "description": "The unit height in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WEIGHT",
+      "description": "The weight of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WEIGHT_UOM_CODE",
+      "description": "The unit of measure for the unit weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_WEIGHT_BASE",
+      "description": "The unit weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_VOLUME",
+      "description": "The volume of each shipment ship unit. Each row may represent the ship unit count number of same ship units. If this field is null or is 0, the volume of this shipment ship unit is computed as the total of container volume from its ship unit specification and the volume of its shipment ship unit lines.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_VOLUME_UOM_CODE",
+      "description": "The unit of measure for the unit volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_VOLUME_BASE",
+      "description": "The unit volume in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_CODE",
+      "description": "The user-defined commodity code for the item. For example HTS, SITC, STCC, NMFC, etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_QUAL_GID",
+      "description": "A GID to define the type of the commodity code. For example HTS, SITC, STCC, NMFC etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SPLITABLE",
+      "description": "A true or false value to define whether the ship unit can be split when creating the shipments.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "SHIP_UNIT_COUNT",
+      "description": "Ship units that have the same dimension/weight and contents are represented as one row in the SHIP_UNIT table. SHIP_UNIT_COUNT is the number of these ship units.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "EARLY_PICKUP_DATE",
+      "description": "The early pickup date defined for the ship unit",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_WEIGHT",
+      "description": "The received gross weight of the shipment ship unit. It can be entered as a stop debrief. Used for reporting purposes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_WEIGHT_UOM",
+      "description": "The received gross weight unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_WEIGHT_BASE",
+      "description": "The received gross weight in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_VOLUME",
+      "description": "The received volume of the shipment ship unit. It can be entered as a stop debrief. Used for reporting purposes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_VOLUME_UOM",
+      "description": "The received volume unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_VOLUME_BASE",
+      "description": "The received volume in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_SHIP_UNIT_COUNT",
+      "description": "The received item package count. It can be entered as a stop debrief.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_GID",
+      "description": "The GID for the order release ship unit that is associated to this shipment ship unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_WEIGHT",
+      "description": "The unit net weight of the goods contained in the shipment ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_WEIGHT_UOM_CODE",
+      "description": "The unit net weight unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_WEIGHT_BASE",
+      "description": "The unit net weight in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_VOLUME",
+      "description": "The unit net volume of the goods contained in the shipment ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_VOLUME_UOM_CODE",
+      "description": "The unit net volume unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_NET_VOLUME_BASE",
+      "description": "The unit net volume in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_NET_WEIGHT",
+      "description": "The received net weight of the shipment ship unit. It can be entered as a stop debrief. Used for reporting purposes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_NET_WEIGHT_UOM_CODE",
+      "description": "The received net weight unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_NET_WEIGHT_BASE",
+      "description": "The received net weight in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_NET_VOLUME",
+      "description": "The received net volume of the shipment ship unit. It can be entered as a stop debrief. Used for reporting purposes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_NET_VOLUME_UOM_CODE",
+      "description": "The received net volume unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_NET_VOLUME_BASE",
+      "description": "The Received net volume in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CORE_DIAMETER",
+      "description": "For cylindrical objects, this defines the diameter of the core.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CORE_DIAMETER_UOM_CODE",
+      "description": "For cylindrical objects, unit of measure for the diameter of the core.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CORE_DIAMETER_BASE",
+      "description": "For cylindrical objects, the base value of the diameter of the core.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_DIAMETER",
+      "description": "For cylindrical objects, this defines the diameter of the ship unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_DIAMETER_UOM_CODE",
+      "description": "For cylindrical objects, the diameter of the ship unit unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNIT_DIAMETER_BASE",
+      "description": "For cylindrical objects, the base value of the diameter of the core. For cylindrical objects, the base value of the diameter.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG_1",
+      "description": "A flexible field to contain informational data that has been copied from the order to the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG_2",
+      "description": "A flexible field to contain informational data that has been copied from the order to the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG_3",
+      "description": "A flexible field to contain informational data that has been copied from the order to the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG_4",
+      "description": "A flexible field to contain informational data that has been copied from the order to the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "T_SHIP_UNIT_GID",
+      "description": "A GID for the order release ship unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_COUNT_SPLITTABLE",
+      "description": "Indicates whether the ship unit can be split on the count boundaries when planning during container optimization.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "TOTAL_GROSS_WEIGHT",
+      "description": "The total gross weight of the shipment ship unit (transport handling unit + lines).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_WEIGHT_BASE",
+      "description": "The total gross weight unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_WEIGHT_UOM_CODE",
+      "description": "The total gross weight in the base unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_VOLUME",
+      "description": "The total gross volume of the shipment ship unit (transport handling unit + lines).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_VOLUME_BASE",
+      "description": "The total gross volume unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_GROSS_VOLUME_UOM_CODE",
+      "description": "The total gross volume in the base unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MARKED_FOR_PURGE",
+      "description": "A Boolean field. When it is set to 'Y', this row and its child data will be purged.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "RANGE_START",
+      "description": "The range start value associated with the ship unit to handle the case where the ship unit count is >1 signifying that there are multiple instances of this record.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RANGE_END",
+      "description": "The range end value associated with the ship unit to handle the case where the ship unit count is >1 signifying that there are multiple instances of this record.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASE_METHOD_GID",
+      "description": "The release method (order configuration identifier) associated with defining this ship unit. It specifies such attributes as if the ship unit weight is calculated from the ship unit line weight.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ALLOW_REPACK",
+      "description": "If this flag is set to false, when planning order movement that contains this ship unit or combine shipments that contains this shipment ship unit, the shipment ship unit building process will not repack this ship unit.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "TOTAL_LOADING_SPLIT_WEIGHT",
+      "description": "Defines the total loading split weight if the ship unit can be split to load into the equipment.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_LS_WEIGHT_BASE",
+      "description": "The total loading split weight unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_LS_WEIGHT_UOM_CODE",
+      "description": "The total loading split weight in the base unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_LOADING_SPLIT_VOLUME",
+      "description": "Defines the total loading split volume if the ship unit can be split to load into the equipment.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_LS_VOLUME_BASE",
+      "description": "The total loading split volume unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_LS_VOLUME_UOM_CODE",
+      "description": "The total loading split volume in the base unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIORITY",
+      "description": "Defines the priority associated with ship unit.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "PRIORITY BETWEEN 1 AND 999",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FIXED_ERU_COUNT",
+      "description": "Indicates whether the ERU defined on shipment ship unit is used or the ERU is derived from the order. A null value means N.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "S_SHIP_UNIT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SSU_SUSGID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_S_SHPUT_FLXCOMQUL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "FLEX_COMMODITY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FLEX_COMMODITY_QUAL_GID",
+          "columnName": "FLEX_COMMODITY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_S_SHPUT_SHIP_UNIT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_GID",
+          "columnName": "SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSU_RELEASE_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RELEASE_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RELEASE_METHOD_GID",
+          "columnName": "RELEASE_METHOD_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "INVOICE_SHIPMENT",
+    "ORDER_MOVEMENT_D",
+    "SHIPMENT_REQDOC_TEXT",
+    "SHIPMENT_STOP_D",
+    "SHIPMENT_STOP_DEBRIEF",
+    "SS_S_SHIP_UNIT",
+    "S_EQUIPMENT_S_SHIP_UNIT_JOIN",
+    "S_SHIP_UNIT_ACCESSORIAL",
+    "S_SHIP_UNIT_EQUIP_REF_UNIT",
+    "S_SHIP_UNIT_LINE",
+    "S_SHIP_UNIT_PIECE",
+    "S_SHIP_UNIT_REFNUM",
+    "S_SHIP_UNIT_REMARK",
+    "S_SHIP_UNIT_SEAL",
+    "S_SHIP_UNIT_SPECIAL_SERVICE",
+    "S_SHIP_UNIT_STATUS",
+    "TENDER_COLLAB_SSU"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_SSU_THU_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_S_SHIP_UNIT_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_SHIP_UNIT_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_S_SHPUT_FLXCOMQUL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FLEX_COMMODITY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_S_SHPUT_SHIP_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIP_UNIT_GID"
+        }
+      ]
+    }
+  ]
+}

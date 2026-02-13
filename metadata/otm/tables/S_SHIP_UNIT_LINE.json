@@ -1,1 +1,921 @@
-{"table": {"schema": "glogowner","name": "s_ship_unit_line","description": "This table stores the line item entry for each shipment ship unit entry for S_SHIP_UNIT table."},"columns": [{"name": "S_SHIP_UNIT_GID","description": "The GID for the ship unit associated with the shipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_LINE_NO","description": "The unique sequence within the ship unit to define the individual line items.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "WEIGHT","description": "The weight of the item.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_UOM_CODE","description": "Unit of measure for weight column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BASE","description": "The weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME","description": "The volume of the item.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_UOM_CODE","description": "Unit of measure for the volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_BASE","description": "The volume in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRACKING_TAG1","description": "Additional information about the item. This could be any tracking numbers, SKU codes, SPLC codes etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRACKING_TAG2","description": "Additional information about the item. This could be any tracking numbers, SKU codes, SPLC codes etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRACKING_TAG3","description": "Additional information about the item. This could be any tracking numbers, SKU codes, SPLC codes etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRACKING_TAG4","description": "Additional information about the item. This could be any tracking numbers, SKU codes, SPLC codes etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OR_LINE_GID","description": "A unique identifier to define the multiple order release lines per order release. The GID has the domain portion.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_GID","description": "A unique identifier created by the system for the order release. The GID contains the domain portion.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_BASE_GID","description": "The GID for the order base that is related to the shipment line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_GID","description": "The GID for the packaging unit that is related to the shipment line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_COUNT","description": "The packaging unit count for the packaged unit that is being shipped.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "ITEM_PACKAGE_COUNT","description": "The number of packages in this shipment ship unit line for one ship unit. Its shipment ship unit may represent more than one same ship units. E.g., for 20 ship units that contains 4 cases of 24 cans of cocoa, each shipment ship unit line row will have an item GID: cocoa, item count 4x24, item package specification: case-of-24-cans, item package count: 4. The ship unit count will be 20.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARED_VALUE","description": "The declared value of the packaged item quantity being shipped.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARED_VALUE_BASE","description": "The declared value in the base currency.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARED_VALUE_CURRENCY_GID","description": "The currency identifier for the declared value.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGED_ITEM_GID","description": "The GID for the packaged item.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HAZMAT_ITEM_GID","description": "The GID for the hazmat item.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_WEIGHT","description": "The received weight of the shipment line. It can be entered as a stop debrief. Used for reporting purposes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_WEIGHT_UOM","description": "The received weight unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_WEIGHT_BASE","description": "The received weight in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_VOLUME","description": "The received volume of the shipment line. It can be entered as a stop debrief. Used for reporting purposes.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_VOLUME_UOM","description": "The received volume unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_VOLUME_BASE","description": "The received volume in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_ITEM_PACKAGE_COUNT","description": "The received item package count. It can be entered as a stop debrief.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "SHIP_UNIT_GID","description": "The GID for the ship unit that contains this shipping line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_LINE_NO","description": "The ship unit line number defined for this shipping line.","dataType": "NUMBER","size": 4,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_PER","description": "The weight per shipping line count to handle shipping a multiple count.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_PER_UOM_CODE","description": "The weight per unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_PER_BASE","description": "The weight per in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_PER","description": "The weight per shipping line count to handle shipping a multiple count.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_PER_UOM_CODE","description": "The weight per unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_PER_BASE","description": "The weight per in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNT_PER_SHIP_UNIT","description": "The count per ship unit.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "RECEIVED_PACKAGING_UNIT_COUNT","description": "The received packaging unit count of the shipment line. It can be entered as stop debrief. Used for reporting purposes.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVED_COUNT_PER_SHIP_UNIT","description": "The received count per ship unit. It can be entered as stop debrief. Used for reporting purposes.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "T_ORDER_RELEASE_GID","description": "Used as a non-foreign key reference to the order release.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "T_OR_LINE_GID","description": "Used as a non-foreign key reference to the order release line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "T_SHIP_UNIT_GID","description": "Used as a non-foreign key reference to the order release ship unit line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "T_SHIP_UNIT_LINE_NO","description": "Used as a non-foreign key reference to the order release ship unit line.","dataType": "NUMBER","size": 4,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED_COMMODITY_GID","description": "The user defined commodity identifier associated with the item that is being shipped.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED1_ICON_GID","description": "Stores a user-defined icon that will appear within the user interface to help visually identify attributes for the ship unit line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED2_ICON_GID","description": "Stores a user-defined icon that will appear within the user interface to help visually identify attributes for the ship unit line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED3_ICON_GID","description": "Stores a user-defined icon that will appear within the user interface to help visually identify attributes for the ship unit line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MARINE_POLLUTANT_INDICATOR","description": "A Y/N indicator if the shipment line item is a marine pollutant.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HOT_INDICATOR","description": "A Y/N indicator if the shipment line item is hot.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOAD_CONFIG_SETUP_GID","description": "A load configuration set up identifier to be used by the load configuration engine as the input rules during ship unit building during repack.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "S_SHIP_UNIT_GID"},{"sequence": 2,"columnName": "S_SHIP_UNIT_LINE_NO"}],"foreignKeys": [{"foreignKeyName": "FK_SSUL_SUG","cascadeDelete": false,"parentTableName": "S_SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"}]},{"foreignKeyName": "FK_SSUL_ORL_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_LINE_GID","columnName": "OR_LINE_GID"}]},{"foreignKeyName": "FK_SSUL_OR_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_GID"}]},{"foreignKeyName": "FK_SSUL_OB_GID","cascadeDelete": false,"parentTableName": "OB_ORDER_BASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_BASE_GID","columnName": "ORDER_BASE_GID"}]},{"foreignKeyName": "FK_SSUL_ITEM_PACKAGE_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "PACKAGING_UNIT_GID"}]},{"foreignKeyName": "FK_SSUL_DECLARED_VALUE_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "DECLARED_VALUE_CURRENCY_GID"}]},{"foreignKeyName": "FK_SSU_PACKAGED_ITEM_GID","cascadeDelete": false,"parentTableName": "PACKAGED_ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "PACKAGED_ITEM_GID","columnName": "PACKAGED_ITEM_GID"}]},{"foreignKeyName": "FK_SSU_HAZMAT_ITEM_GID","cascadeDelete": false,"parentTableName": "HAZMAT_ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "HAZMAT_ITEM_GID","columnName": "HAZMAT_ITEM_GID"}]},{"foreignKeyName": "FK_SSUL_SHIP_UNIT_LINE","cascadeDelete": false,"parentTableName": "SHIP_UNIT_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_GID","columnName": "SHIP_UNIT_GID"},{"sequence": 2,"parentColumnName": "SHIP_UNIT_LINE_NO","columnName": "SHIP_UNIT_LINE_NO"}]},{"foreignKeyName": "FK_SSUL_USER_DEFINED_COMMODIT","cascadeDelete": false,"parentTableName": "USER_DEFINED_COMMODITY","columnRelation": [{"sequence": 1,"parentColumnName": "USER_DEFINED_COMMODITY_GID","columnName": "USER_DEFINED_COMMODITY_GID"}]},{"foreignKeyName": "FK_SSUL_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED1_ICON_GID"}]},{"foreignKeyName": "FK_SSUL_ICON2_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED2_ICON_GID"}]},{"foreignKeyName": "FK_SSUL_ICON3_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED3_ICON_GID"}]},{"foreignKeyName": "FK_SSUL_LOAD_CONFIG_SETUP_GID","cascadeDelete": false,"parentTableName": "LOAD_CONFIG_SETUP","columnRelation": [{"sequence": 1,"parentColumnName": "LOAD_CONFIG_SETUP_GID","columnName": "LOAD_CONFIG_SETUP_GID"}]}],"childTables": ["DVE_CALCULATION_LINE","LD_SCREENING_LINE","SHIPMENT_REQDOC_TEXT","SHIPMENT_STOP_DEBRIEF","SS_S_SHIP_UNIT_LINE","S_SHIP_UNIT_LINE_PIECE","S_SHIP_UNIT_LINE_REFNUM","S_SHIP_UNIT_LINE_REMARK","S_SHIP_UNIT_LINE_STATUS","S_SUL_ACCESSORIAL"],"indices": [{"indexName": "IX_SSUL_DECLARED_VALUE_GID","columnNames": [{"sequence": 1,"name": "DECLARED_VALUE_CURRENCY_GID"}]},{"indexName": "IX_SSUL_OB_GID","columnNames": [{"sequence": 1,"name": "ORDER_BASE_GID"}]},{"indexName": "IX_SSUL_PKGUNIT_GID","columnNames": [{"sequence": 1,"name": "PACKAGING_UNIT_GID"}]},{"indexName": "IX_SSUL_SHIP_UNIT_LINE","columnNames": [{"sequence": 1,"name": "SHIP_UNIT_GID"},{"sequence": 2,"name": "SHIP_UNIT_LINE_NO"}]},{"indexName": "IX_SSUL_TRACKING_TAG1","columnNames": [{"sequence": 1,"name": "TRACKING_TAG1"}]},{"indexName": "IX_SSUL_USER_DEFINED_COMMODIT","columnNames": [{"sequence": 1,"name": "USER_DEFINED_COMMODITY_GID"}]},{"indexName": "IX_SSU_HAZMAT_ITEM_GID","columnNames": [{"sequence": 1,"name": "HAZMAT_ITEM_GID"}]},{"indexName": "SSUL_ORGID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"}]},{"indexName": "SSUL_OR_LINE_GID","columnNames": [{"sequence": 1,"name": "OR_LINE_GID"}]},{"indexName": "SSUL_PACKAGED_ITEM_GID","columnNames": [{"sequence": 1,"name": "PACKAGED_ITEM_GID"}]},{"indexName": "SSUL_S_SHIP_UNIT_GID","columnNames": [{"sequence": 1,"name": "S_SHIP_UNIT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "s_ship_unit_line",
+    "description": "This table stores the line item entry for each shipment ship unit entry for S_SHIP_UNIT table."
+  },
+  "columns": [
+    {
+      "name": "S_SHIP_UNIT_GID",
+      "description": "The GID for the ship unit associated with the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_LINE_NO",
+      "description": "The unique sequence within the ship unit to define the individual line items.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "WEIGHT",
+      "description": "The weight of the item.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_UOM_CODE",
+      "description": "Unit of measure for weight column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BASE",
+      "description": "The weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME",
+      "description": "The volume of the item.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_UOM_CODE",
+      "description": "Unit of measure for the volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_BASE",
+      "description": "The volume in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRACKING_TAG1",
+      "description": "Additional information about the item. This could be any tracking numbers, SKU codes, SPLC codes etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRACKING_TAG2",
+      "description": "Additional information about the item. This could be any tracking numbers, SKU codes, SPLC codes etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRACKING_TAG3",
+      "description": "Additional information about the item. This could be any tracking numbers, SKU codes, SPLC codes etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRACKING_TAG4",
+      "description": "Additional information about the item. This could be any tracking numbers, SKU codes, SPLC codes etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OR_LINE_GID",
+      "description": "A unique identifier to define the multiple order release lines per order release. The GID has the domain portion.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_GID",
+      "description": "A unique identifier created by the system for the order release. The GID contains the domain portion.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_BASE_GID",
+      "description": "The GID for the order base that is related to the shipment line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_GID",
+      "description": "The GID for the packaging unit that is related to the shipment line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_COUNT",
+      "description": "The packaging unit count for the packaged unit that is being shipped.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "ITEM_PACKAGE_COUNT",
+      "description": "The number of packages in this shipment ship unit line for one ship unit. Its shipment ship unit may represent more than one same ship units. E.g., for 20 ship units that contains 4 cases of 24 cans of cocoa, each shipment ship unit line row will have an item GID: cocoa, item count 4x24, item package specification: case-of-24-cans, item package count: 4. The ship unit count will be 20.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARED_VALUE",
+      "description": "The declared value of the packaged item quantity being shipped.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARED_VALUE_BASE",
+      "description": "The declared value in the base currency.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARED_VALUE_CURRENCY_GID",
+      "description": "The currency identifier for the declared value.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGED_ITEM_GID",
+      "description": "The GID for the packaged item.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HAZMAT_ITEM_GID",
+      "description": "The GID for the hazmat item.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_WEIGHT",
+      "description": "The received weight of the shipment line. It can be entered as a stop debrief. Used for reporting purposes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_WEIGHT_UOM",
+      "description": "The received weight unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_WEIGHT_BASE",
+      "description": "The received weight in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_VOLUME",
+      "description": "The received volume of the shipment line. It can be entered as a stop debrief. Used for reporting purposes.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_VOLUME_UOM",
+      "description": "The received volume unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_VOLUME_BASE",
+      "description": "The received volume in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_ITEM_PACKAGE_COUNT",
+      "description": "The received item package count. It can be entered as a stop debrief.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "SHIP_UNIT_GID",
+      "description": "The GID for the ship unit that contains this shipping line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_LINE_NO",
+      "description": "The ship unit line number defined for this shipping line.",
+      "dataType": "NUMBER",
+      "size": 4,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_PER",
+      "description": "The weight per shipping line count to handle shipping a multiple count.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_PER_UOM_CODE",
+      "description": "The weight per unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_PER_BASE",
+      "description": "The weight per in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_PER",
+      "description": "The weight per shipping line count to handle shipping a multiple count.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_PER_UOM_CODE",
+      "description": "The weight per unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_PER_BASE",
+      "description": "The weight per in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNT_PER_SHIP_UNIT",
+      "description": "The count per ship unit.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "RECEIVED_PACKAGING_UNIT_COUNT",
+      "description": "The received packaging unit count of the shipment line. It can be entered as stop debrief. Used for reporting purposes.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVED_COUNT_PER_SHIP_UNIT",
+      "description": "The received count per ship unit. It can be entered as stop debrief. Used for reporting purposes.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "T_ORDER_RELEASE_GID",
+      "description": "Used as a non-foreign key reference to the order release.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "T_OR_LINE_GID",
+      "description": "Used as a non-foreign key reference to the order release line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "T_SHIP_UNIT_GID",
+      "description": "Used as a non-foreign key reference to the order release ship unit line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "T_SHIP_UNIT_LINE_NO",
+      "description": "Used as a non-foreign key reference to the order release ship unit line.",
+      "dataType": "NUMBER",
+      "size": 4,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED_COMMODITY_GID",
+      "description": "The user defined commodity identifier associated with the item that is being shipped.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED1_ICON_GID",
+      "description": "Stores a user-defined icon that will appear within the user interface to help visually identify attributes for the ship unit line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED2_ICON_GID",
+      "description": "Stores a user-defined icon that will appear within the user interface to help visually identify attributes for the ship unit line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED3_ICON_GID",
+      "description": "Stores a user-defined icon that will appear within the user interface to help visually identify attributes for the ship unit line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MARINE_POLLUTANT_INDICATOR",
+      "description": "A Y/N indicator if the shipment line item is a marine pollutant.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HOT_INDICATOR",
+      "description": "A Y/N indicator if the shipment line item is hot.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOAD_CONFIG_SETUP_GID",
+      "description": "A load configuration set up identifier to be used by the load configuration engine as the input rules during ship unit building during repack.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "S_SHIP_UNIT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "S_SHIP_UNIT_LINE_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SSUL_SUG",
+      "cascadeDelete": false,
+      "parentTableName": "S_SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_ORL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_LINE_GID",
+          "columnName": "OR_LINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_OR_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_OB_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OB_ORDER_BASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_BASE_GID",
+          "columnName": "ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_ITEM_PACKAGE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "PACKAGING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_DECLARED_VALUE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "DECLARED_VALUE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSU_PACKAGED_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "PACKAGED_ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PACKAGED_ITEM_GID",
+          "columnName": "PACKAGED_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSU_HAZMAT_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "HAZMAT_ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "HAZMAT_ITEM_GID",
+          "columnName": "HAZMAT_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_SHIP_UNIT_LINE",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_GID",
+          "columnName": "SHIP_UNIT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "SHIP_UNIT_LINE_NO",
+          "columnName": "SHIP_UNIT_LINE_NO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_USER_DEFINED_COMMODIT",
+      "cascadeDelete": false,
+      "parentTableName": "USER_DEFINED_COMMODITY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "USER_DEFINED_COMMODITY_GID",
+          "columnName": "USER_DEFINED_COMMODITY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED1_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_ICON2_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED2_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_ICON3_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED3_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSUL_LOAD_CONFIG_SETUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOAD_CONFIG_SETUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOAD_CONFIG_SETUP_GID",
+          "columnName": "LOAD_CONFIG_SETUP_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "DVE_CALCULATION_LINE",
+    "LD_SCREENING_LINE",
+    "SHIPMENT_REQDOC_TEXT",
+    "SHIPMENT_STOP_DEBRIEF",
+    "SS_S_SHIP_UNIT_LINE",
+    "S_SHIP_UNIT_LINE_PIECE",
+    "S_SHIP_UNIT_LINE_REFNUM",
+    "S_SHIP_UNIT_LINE_REMARK",
+    "S_SHIP_UNIT_LINE_STATUS",
+    "S_SUL_ACCESSORIAL"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_SSUL_DECLARED_VALUE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DECLARED_VALUE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSUL_OB_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSUL_PKGUNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PACKAGING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSUL_SHIP_UNIT_LINE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIP_UNIT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "SHIP_UNIT_LINE_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSUL_TRACKING_TAG1",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRACKING_TAG1"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSUL_USER_DEFINED_COMMODIT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "USER_DEFINED_COMMODITY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSU_HAZMAT_ITEM_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "HAZMAT_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "SSUL_ORGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "SSUL_OR_LINE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "OR_LINE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "SSUL_PACKAGED_ITEM_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PACKAGED_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "SSUL_S_SHIP_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_SHIP_UNIT_GID"
+        }
+      ]
+    }
+  ]
+}

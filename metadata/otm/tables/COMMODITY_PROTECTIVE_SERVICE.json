@@ -1,1 +1,162 @@
-{"table": {"schema": "glogowner","name": "commodity_protective_service","description": "THIS TABLE STRUCTURE IS SIMILAR TO THE INVOICE_PROTECTIVE_SERVICE TABLE.  PROTECTIVE SERVICE IS USED BY THE RAIL INDUSTRY TO COMMUNICATE TEMPERATURE REQUIREMENTS AND IS WHERE THE USER COMMUNICATES OPTIMAL TEMPERATURE FOR THE RR.  THE USER CAN SPECIFY UP TO 5 CODES THAT ARE ALL USED TOGETHER, THIS IS WHY THERE IS A SEQUENCE NUMBER INCLUDED WITHIN THE STRUCTURE."},"columns": [{"name": "COMMODITY_GID","description": "A unique identifier to define the commodities in the system.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROT_SRV_SEQ_NO","description": "THE SEQUENCE NUMBER.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROT_SRV_CODE","description": "THE PROTECTIVE SERVICE CODE.","dataType": "VARCHAR2","size": 9,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROT_SRV_RULE_CODE","description": "THE PROTECTIVE SERVICE RULE CODE.","dataType": "VARCHAR2","size": 4,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROT_SRV_TEMP","description": "THE PROTECTIVE SERVICE OPTIMAL TEMPERATURE.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROT_SRV_TEMP_UOM_CODE","description": "THE PROTECTIVE SERVICE TEMPERATURE UNIT OF MEASURE CODE.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROT_SRV_TEMP_BASE","description": "The protective service optimal temperature in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "COMMODITY_GID"},{"sequence": 2,"columnName": "PROT_SRV_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_CPS_COMMODITY_GID","cascadeDelete": false,"parentTableName": "COMMODITY","columnRelation": [{"sequence": 1,"parentColumnName": "COMMODITY_GID","columnName": "COMMODITY_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "commodity_protective_service",
+    "description": "THIS TABLE STRUCTURE IS SIMILAR TO THE INVOICE_PROTECTIVE_SERVICE TABLE.  PROTECTIVE SERVICE IS USED BY THE RAIL INDUSTRY TO COMMUNICATE TEMPERATURE REQUIREMENTS AND IS WHERE THE USER COMMUNICATES OPTIMAL TEMPERATURE FOR THE RR.  THE USER CAN SPECIFY UP TO 5 CODES THAT ARE ALL USED TOGETHER, THIS IS WHY THERE IS A SEQUENCE NUMBER INCLUDED WITHIN THE STRUCTURE."
+  },
+  "columns": [
+    {
+      "name": "COMMODITY_GID",
+      "description": "A unique identifier to define the commodities in the system.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROT_SRV_SEQ_NO",
+      "description": "THE SEQUENCE NUMBER.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROT_SRV_CODE",
+      "description": "THE PROTECTIVE SERVICE CODE.",
+      "dataType": "VARCHAR2",
+      "size": 9,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROT_SRV_RULE_CODE",
+      "description": "THE PROTECTIVE SERVICE RULE CODE.",
+      "dataType": "VARCHAR2",
+      "size": 4,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROT_SRV_TEMP",
+      "description": "THE PROTECTIVE SERVICE OPTIMAL TEMPERATURE.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROT_SRV_TEMP_UOM_CODE",
+      "description": "THE PROTECTIVE SERVICE TEMPERATURE UNIT OF MEASURE CODE.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROT_SRV_TEMP_BASE",
+      "description": "The protective service optimal temperature in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "COMMODITY_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PROT_SRV_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CPS_COMMODITY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COMMODITY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COMMODITY_GID",
+          "columnName": "COMMODITY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

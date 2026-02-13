@@ -1,1 +1,473 @@
-{"table": {"schema": "glogowner","name": "ob_ship_unit_content","description": "This table links to the OB_SHIP_UNIT to identify and define the contents of the box, package or pallet. For e.g., the shipment unit may be a 100 lb. Pallet and the contents may be ## Nike shoes."},"columns": [{"name": "OB_SHIP_UNIT_GID","description": "The GID for the ship unit associated with the order base.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NO","description": "The unique sequence within the ship unit to define the individual line items.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGED_ITEM_GID","description": "The packaged item GID defining the content line for the ship unit.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INITIAL_ITEM_GID","description": "The initial packaged item GID, this value can be used to handle the original packaged item order and the substituted and item to be processed in the packaged item GID field.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG1","description": "Additional information about the item. Like the color, size, code.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG2","description": "Additional information about the item. Like the color, size, code.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG3","description": "Additional information about the item. Like the color, size, code.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG4","description": "Additional information about the item. Like the color, size, code.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT","description": "The gross weight of the item.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_UOM_CODE","description": "Unit of measure for gross weight column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BASE","description": "The gross weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME","description": "The gross volume of the item.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_UOM_CODE","description": "Unit of measure for the gross volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_BASE","description": "The gross volume in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARED_VALUE","description": "The declared value, commercial value of the ship unit line contents for sale of goods.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "DECLARED_VALUE_BASE","description": "The declared value in the base currency.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "DECLARED_VALUE_CURRENCY_GID","description": "The declared value currency identifier.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'USD'"},{"name": "PACKAGED_COUNT","description": "The number of packages in this order release ship unit line for one ship unit. Its ship unit may represent more than one same ship units. E.g., for 20 ship units that contains 4 cases of 24 cans of cocoa, each order release ship unit line row will have an item GID: cocoa, item count 4x24, item package specification: case-of-24-cans, item package count: 4. The ship unit count will be 20.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_PER_SHIP_UNIT","description": "The weight per ship unit order base content line to handle shipping a multiple count number of ship units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_PER_SHIP_UNIT_UOM_CODE","description": "The weight per ship unit unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_PER_SHIP_UNIT_BASE","description": "The weight per ship unit in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNT_PER_SHIP_UNIT","description": "The packaged item count per ship unit order base content line count to handle shipping a multiple count number of ship units.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_PER_SHIP_UNIT","description": "The volume per order base content line to handle shipping a multiple count number of ship units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_PER_SHIP_UNIT_UOM_CODE","description": "The volume per ship unit unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_PER_SHIP_UNIT_BASE","description": "The volume per ship unit in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_GID","description": "The packaging unit identifier for any inner packaging associated to the ship unit such as carton configuration.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_COUNT","description": "The packaging unit count for the inner pack.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OB_SHIP_UNIT_GID"},{"sequence": 2,"columnName": "SEQUENCE_NO"}],"foreignKeys": [{"foreignKeyName": "FK_OBSUCON_OB_SHIP_UNIT","cascadeDelete": false,"parentTableName": "OB_SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "OB_SHIP_UNIT_GID","columnName": "OB_SHIP_UNIT_GID"}]},{"foreignKeyName": "FK_OSU_PACKAGED_ITEM_GID","cascadeDelete": false,"parentTableName": "PACKAGED_ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "PACKAGED_ITEM_GID","columnName": "PACKAGED_ITEM_GID"}]},{"foreignKeyName": "FK_OSUC_INITIAL_ITEM_GID","cascadeDelete": false,"parentTableName": "ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "ITEM_GID","columnName": "INITIAL_ITEM_GID"}]},{"foreignKeyName": "FK_OBSUCON_DVCGID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "DECLARED_VALUE_CURRENCY_GID"}]},{"foreignKeyName": "FK_OSUC_ITEM_PACKAGED_SPEC_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "PACKAGING_UNIT_GID"}]}],"childTables": ["OB_SU_CONTENT_ATTRIBUTE","OB_SU_CONTENT_INV_PARTY","OB_SU_CONTENT_REFNUM","OB_SU_CONTENT_REMARK"],"indices": [{"indexName": "IX_OBSUCON_DVCGID","columnNames": [{"sequence": 1,"name": "DECLARED_VALUE_CURRENCY_GID"}]},{"indexName": "IX_OSUC_INITIAL_ITEM_GID","columnNames": [{"sequence": 1,"name": "INITIAL_ITEM_GID"}]},{"indexName": "IX_OSUC_PKGUNIT_GID","columnNames": [{"sequence": 1,"name": "PACKAGING_UNIT_GID"}]},{"indexName": "IX_OSU_PACKAGED_ITEM_GID","columnNames": [{"sequence": 1,"name": "PACKAGED_ITEM_GID"}]},{"indexName": "OBSUC_OBSUGID","columnNames": [{"sequence": 1,"name": "OB_SHIP_UNIT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ob_ship_unit_content",
+    "description": "This table links to the OB_SHIP_UNIT to identify and define the contents of the box, package or pallet. For e.g., the shipment unit may be a 100 lb. Pallet and the contents may be ## Nike shoes."
+  },
+  "columns": [
+    {
+      "name": "OB_SHIP_UNIT_GID",
+      "description": "The GID for the ship unit associated with the order base.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NO",
+      "description": "The unique sequence within the ship unit to define the individual line items.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGED_ITEM_GID",
+      "description": "The packaged item GID defining the content line for the ship unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INITIAL_ITEM_GID",
+      "description": "The initial packaged item GID, this value can be used to handle the original packaged item order and the substituted and item to be processed in the packaged item GID field.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG1",
+      "description": "Additional information about the item. Like the color, size, code.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG2",
+      "description": "Additional information about the item. Like the color, size, code.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG3",
+      "description": "Additional information about the item. Like the color, size, code.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG4",
+      "description": "Additional information about the item. Like the color, size, code.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT",
+      "description": "The gross weight of the item.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_UOM_CODE",
+      "description": "Unit of measure for gross weight column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BASE",
+      "description": "The gross weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME",
+      "description": "The gross volume of the item.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_UOM_CODE",
+      "description": "Unit of measure for the gross volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_BASE",
+      "description": "The gross volume in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARED_VALUE",
+      "description": "The declared value, commercial value of the ship unit line contents for sale of goods.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DECLARED_VALUE_BASE",
+      "description": "The declared value in the base currency.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DECLARED_VALUE_CURRENCY_GID",
+      "description": "The declared value currency identifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'USD'"
+    },
+    {
+      "name": "PACKAGED_COUNT",
+      "description": "The number of packages in this order release ship unit line for one ship unit. Its ship unit may represent more than one same ship units. E.g., for 20 ship units that contains 4 cases of 24 cans of cocoa, each order release ship unit line row will have an item GID: cocoa, item count 4x24, item package specification: case-of-24-cans, item package count: 4. The ship unit count will be 20.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_PER_SHIP_UNIT",
+      "description": "The weight per ship unit order base content line to handle shipping a multiple count number of ship units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_PER_SHIP_UNIT_UOM_CODE",
+      "description": "The weight per ship unit unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_PER_SHIP_UNIT_BASE",
+      "description": "The weight per ship unit in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNT_PER_SHIP_UNIT",
+      "description": "The packaged item count per ship unit order base content line count to handle shipping a multiple count number of ship units.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_PER_SHIP_UNIT",
+      "description": "The volume per order base content line to handle shipping a multiple count number of ship units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_PER_SHIP_UNIT_UOM_CODE",
+      "description": "The volume per ship unit unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_PER_SHIP_UNIT_BASE",
+      "description": "The volume per ship unit in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_GID",
+      "description": "The packaging unit identifier for any inner packaging associated to the ship unit such as carton configuration.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_COUNT",
+      "description": "The packaging unit count for the inner pack.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OB_SHIP_UNIT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SEQUENCE_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OBSUCON_OB_SHIP_UNIT",
+      "cascadeDelete": false,
+      "parentTableName": "OB_SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OB_SHIP_UNIT_GID",
+          "columnName": "OB_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OSU_PACKAGED_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "PACKAGED_ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PACKAGED_ITEM_GID",
+          "columnName": "PACKAGED_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OSUC_INITIAL_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITEM_GID",
+          "columnName": "INITIAL_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBSUCON_DVCGID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "DECLARED_VALUE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OSUC_ITEM_PACKAGED_SPEC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "PACKAGING_UNIT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "OB_SU_CONTENT_ATTRIBUTE",
+    "OB_SU_CONTENT_INV_PARTY",
+    "OB_SU_CONTENT_REFNUM",
+    "OB_SU_CONTENT_REMARK"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_OBSUCON_DVCGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DECLARED_VALUE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OSUC_INITIAL_ITEM_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INITIAL_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OSUC_PKGUNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PACKAGING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OSU_PACKAGED_ITEM_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PACKAGED_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "OBSUC_OBSUGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "OB_SHIP_UNIT_GID"
+        }
+      ]
+    }
+  ]
+}

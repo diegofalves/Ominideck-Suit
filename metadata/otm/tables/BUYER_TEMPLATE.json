@@ -1,1 +1,199 @@
-{"table": {"schema": "glogowner","name": "buyer_template","description": "It is a buy template with transport mode, move perspective and order release template info."},"columns": [{"name": "BUYER_GID","description": "Along with buy_template_seq is the primary key of this table.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MOVE_PERSPECTIVE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_TEMPLATE_GID","description": "It is order_release_gid which has is_template='Y' in order_release table.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "Define if this template is active or inactive.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BUY_TEMPLATE_SEQ","description": "The sequence number with buyer_gid will be the primary key of this table","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "BUYER_GID"},{"sequence": 2,"columnName": "BUY_TEMPLATE_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_BRT_BUYER_GID","cascadeDelete": false,"parentTableName": "BUYER","columnRelation": [{"sequence": 1,"parentColumnName": "BUYER_GID","columnName": "BUYER_GID"}]},{"foreignKeyName": "FK_BRT_TRANSPORT_MODE_GID","cascadeDelete": false,"parentTableName": "TRANSPORT_MODE","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSPORT_MODE_GID","columnName": "TRANSPORT_MODE_GID"}]},{"foreignKeyName": "FK_BRT_MOVE_PERSPECTIVE_GID","cascadeDelete": false,"parentTableName": "MOVE_PERSPECTIVE","columnRelation": [{"sequence": 1,"parentColumnName": "MOVE_PERSPECTIVE_GID","columnName": "MOVE_PERSPECTIVE_GID"}]},{"foreignKeyName": "FK_BRT_ORDER_RELEASE_TEMPLATE","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_TEMPLATE_GID"}]}],"childTables": [],"indices": [{"indexName": "IDX_BT_ORD_REL_TEMPL_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_TEMPLATE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "buyer_template",
+    "description": "It is a buy template with transport mode, move perspective and order release template info."
+  },
+  "columns": [
+    {
+      "name": "BUYER_GID",
+      "description": "Along with buy_template_seq is the primary key of this table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MOVE_PERSPECTIVE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_TEMPLATE_GID",
+      "description": "It is order_release_gid which has is_template='Y' in order_release table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "Define if this template is active or inactive.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BUY_TEMPLATE_SEQ",
+      "description": "The sequence number with buyer_gid will be the primary key of this table",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "BUYER_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "BUY_TEMPLATE_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_BRT_BUYER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BUYER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BUYER_GID",
+          "columnName": "BUYER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BRT_TRANSPORT_MODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSPORT_MODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSPORT_MODE_GID",
+          "columnName": "TRANSPORT_MODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BRT_MOVE_PERSPECTIVE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MOVE_PERSPECTIVE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MOVE_PERSPECTIVE_GID",
+          "columnName": "MOVE_PERSPECTIVE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BRT_ORDER_RELEASE_TEMPLATE",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_TEMPLATE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IDX_BT_ORD_REL_TEMPL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_TEMPLATE_GID"
+        }
+      ]
+    }
+  ]
+}

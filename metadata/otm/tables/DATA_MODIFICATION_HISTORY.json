@@ -1,1 +1,205 @@
-{"table": {"schema": "glogowner","name": "data_modification_history","description": "This table is used to store data change information for major business objects for limited time."},"columns": [{"name": "TABLE_NAME","description": "Name of table whose data got modified or deleted","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE","description": "Data of the first column of the primary key of the affected row","dataType": "VARCHAR2","size": 4000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE2","description": "Data of the second column of the primary key of the affected row. It can be NULL depending on number columns in the primary key","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DML_TYPE","description": "Type of data modification, D for Delete","dataType": "VARCHAR2","size": 10,"isNull": false,"isConstraint": true,"constraintValues": "'D'","conditionalConstraint": "","defaultValue": ""},{"name": "DML_TIMESTAMP","description": "Date and time of data delete","dataType": "TIMESTAMP(9)","size": 7,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMMIT_TIMESTAMP","description": "Date and time of data commited","dataType": "TIMESTAMP(9)","size": 7,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMMIT_ID","description": "Date and time of data commited","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_NAME","description": "Name of user who modified or deleted data","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE3","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE4","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE5","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE6","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE7","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE8","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_KEY_COL_VALUE9","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [],"foreignKeys": [],"childTables": [],"indices": [{"indexName": "IX_DMH_DT_TAB_TYPE","columnNames": [{"sequence": 1,"name": "DML_TIMESTAMP"},{"sequence": 2,"name": "TABLE_NAME"},{"sequence": 3,"name": "DML_TYPE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "data_modification_history",
+    "description": "This table is used to store data change information for major business objects for limited time."
+  },
+  "columns": [
+    {
+      "name": "TABLE_NAME",
+      "description": "Name of table whose data got modified or deleted",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE",
+      "description": "Data of the first column of the primary key of the affected row",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE2",
+      "description": "Data of the second column of the primary key of the affected row. It can be NULL depending on number columns in the primary key",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DML_TYPE",
+      "description": "Type of data modification, D for Delete",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'D'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DML_TIMESTAMP",
+      "description": "Date and time of data delete",
+      "dataType": "TIMESTAMP(9)",
+      "size": 7,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMMIT_TIMESTAMP",
+      "description": "Date and time of data commited",
+      "dataType": "TIMESTAMP(9)",
+      "size": 7,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMMIT_ID",
+      "description": "Date and time of data commited",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_NAME",
+      "description": "Name of user who modified or deleted data",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE3",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE4",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE5",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE6",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE7",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE8",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_KEY_COL_VALUE9",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [],
+  "foreignKeys": [],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_DMH_DT_TAB_TYPE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DML_TIMESTAMP"
+        },
+        {
+          "sequence": 2,
+          "name": "TABLE_NAME"
+        },
+        {
+          "sequence": 3,
+          "name": "DML_TYPE"
+        }
+      ]
+    }
+  ]
+}

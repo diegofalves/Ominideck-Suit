@@ -1,1 +1,189 @@
-{"table": {"schema": "glogowner","name": "ti_hi","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NO","description": "The internal sequence number for each entry entered for package item, packing unit, transport handling unit, layers, and quantity per layer.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGED_ITEM_GID","description": "The GID for the package item that is having the TiHi information defined for a specific transport handling unit. TiHi refers to the number of boxes/cartons stored on a layer or tier (the Ti), and the number of layers high (how high) that these will be stacked on the transport handing unit e.g., a pallet. It can also be used in reference to the stacking pattern used to load a pallet in order to generate a relatively stable stack.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_GID","description": "The GID for the package unit.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_HANDLING_UNIT_GID","description": "The GID for the transport unit for the TiHi information being defined.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_LAYERS","description": "Number of layers high. For example, if a transport handling unit of a pallet can hold 24 cases - 4 layers with a quantity of 6 per layer the number of layers value is 4.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "QUANTITY_PER_LAYER","description": "Number of items per layer.  For example, if a transport handling unit of a pallet can hold 24 cases - 4 layers with a quantity of 6 per layer the quantity per layer is 6.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SEQUENCE_NO"}],"foreignKeys": [{"foreignKeyName": "FK_TH_PACKAGED_ITEM_GID","cascadeDelete": false,"parentTableName": "PACKAGED_ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "PACKAGED_ITEM_GID","columnName": "PACKAGED_ITEM_GID"}]},{"foreignKeyName": "FK_TH_SHIP_UNIT_SPEC_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "PACKAGING_UNIT_GID"}]},{"foreignKeyName": "FK_TH_SHIP_UNIT_SPEC_GID2","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "TRANSPORT_HANDLING_UNIT_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_TI_HI","columnNames": [{"sequence": 1,"name": "PACKAGED_ITEM_GID"},{"sequence": 2,"name": "PACKAGING_UNIT_GID"},{"sequence": 3,"name": "TRANSPORT_HANDLING_UNIT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ti_hi",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NO",
+      "description": "The internal sequence number for each entry entered for package item, packing unit, transport handling unit, layers, and quantity per layer.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGED_ITEM_GID",
+      "description": "The GID for the package item that is having the TiHi information defined for a specific transport handling unit. TiHi refers to the number of boxes/cartons stored on a layer or tier (the Ti), and the number of layers high (how high) that these will be stacked on the transport handing unit e.g., a pallet. It can also be used in reference to the stacking pattern used to load a pallet in order to generate a relatively stable stack.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_GID",
+      "description": "The GID for the package unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_GID",
+      "description": "The GID for the transport unit for the TiHi information being defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_LAYERS",
+      "description": "Number of layers high. For example, if a transport handling unit of a pallet can hold 24 cases - 4 layers with a quantity of 6 per layer the number of layers value is 4.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUANTITY_PER_LAYER",
+      "description": "Number of items per layer.  For example, if a transport handling unit of a pallet can hold 24 cases - 4 layers with a quantity of 6 per layer the quantity per layer is 6.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SEQUENCE_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_TH_PACKAGED_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "PACKAGED_ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PACKAGED_ITEM_GID",
+          "columnName": "PACKAGED_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TH_SHIP_UNIT_SPEC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "PACKAGING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TH_SHIP_UNIT_SPEC_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_TI_HI",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PACKAGED_ITEM_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "PACKAGING_UNIT_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    }
+  ]
+}

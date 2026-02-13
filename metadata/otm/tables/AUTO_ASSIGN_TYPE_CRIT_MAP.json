@@ -1,1 +1,147 @@
-{"table": {"schema": "glogowner","name": "auto_assign_type_crit_map","description": "Maps the criteria that may be used for each auto assign type"},"columns": [{"name": "AUTO_ASSIGN_TYPE_GID","description": "Id for the auto assign type such as SHIPMENT_INVOLVED_PARTY","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUTO_ASSIGN_CRITERIA_GID","description": "Id for the criteria that may be used for the given auto assign type","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AUTO_ASSIGN_TYPE_GID"},{"sequence": 2,"columnName": "AUTO_ASSIGN_CRITERIA_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AACM_AUTO_ASSIGN_TYPE_GID","cascadeDelete": false,"parentTableName": "AUTO_ASSIGN_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "AUTO_ASSIGN_TYPE_GID","columnName": "AUTO_ASSIGN_TYPE_GID"}]},{"foreignKeyName": "FK_AACM_AUTO_ASSIGN_CRITERIA_","cascadeDelete": false,"parentTableName": "AUTO_ASSIGN_CRITERIA","columnRelation": [{"sequence": 1,"parentColumnName": "AUTO_ASSIGN_CRITERIA_GID","columnName": "AUTO_ASSIGN_CRITERIA_GID"}]},{"foreignKeyName": "FK_AATCM_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["AUTO_ASSIGN_RULE_CRITERIA"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "auto_assign_type_crit_map",
+    "description": "Maps the criteria that may be used for each auto assign type"
+  },
+  "columns": [
+    {
+      "name": "AUTO_ASSIGN_TYPE_GID",
+      "description": "Id for the auto assign type such as SHIPMENT_INVOLVED_PARTY",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUTO_ASSIGN_CRITERIA_GID",
+      "description": "Id for the criteria that may be used for the given auto assign type",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AUTO_ASSIGN_TYPE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "AUTO_ASSIGN_CRITERIA_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AACM_AUTO_ASSIGN_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AUTO_ASSIGN_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUTO_ASSIGN_TYPE_GID",
+          "columnName": "AUTO_ASSIGN_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AACM_AUTO_ASSIGN_CRITERIA_",
+      "cascadeDelete": false,
+      "parentTableName": "AUTO_ASSIGN_CRITERIA",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUTO_ASSIGN_CRITERIA_GID",
+          "columnName": "AUTO_ASSIGN_CRITERIA_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AATCM_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AUTO_ASSIGN_RULE_CRITERIA"
+  ],
+  "indices": []
+}

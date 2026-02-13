@@ -1,1 +1,197 @@
-{"table": {"schema": "glogowner","name": "invoice_port","description": "One record per port stop sequence per invoice (the invoice should relate to only one shipment).  Since one trip may repeat the same port, the port itself is not part of the key. This table provides supplementary information about the involved ports related to the shipment on the invoice."},"columns": [{"name": "INVOICE_GID","description": "The GID for the invoice.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PORT_SEQ_NO","description": "The sequence number for the port on the invoice.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PORT_FUNCTION_CODE","description": "The port function code.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_IDENTIFIER","description": "The location identifier.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_IDENTIFIER_QUALIFIER","description": "The qualifier associated with the location identifier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PORT_NAME","description": "The name of the port on the invoice.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROVINCE_CODE","description": "The province code on the invoice.","dataType": "VARCHAR2","size": 6,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_CODE3_GID","description": "The country code GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "INVOICE_GID"},{"sequence": 2,"columnName": "PORT_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_INV_PT_INV_GID","cascadeDelete": false,"parentTableName": "INVOICE","columnRelation": [{"sequence": 1,"parentColumnName": "INVOICE_GID","columnName": "INVOICE_GID"}]},{"foreignKeyName": "FK_INV_PT_CNTY_CD_GID","cascadeDelete": false,"parentTableName": "COUNTRY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_CODE3_GID","columnName": "COUNTRY_CODE3_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_INV_PT_CNTY_CD_GID","columnNames": [{"sequence": 1,"name": "COUNTRY_CODE3_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "invoice_port",
+    "description": "One record per port stop sequence per invoice (the invoice should relate to only one shipment).  Since one trip may repeat the same port, the port itself is not part of the key. This table provides supplementary information about the involved ports related to the shipment on the invoice."
+  },
+  "columns": [
+    {
+      "name": "INVOICE_GID",
+      "description": "The GID for the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PORT_SEQ_NO",
+      "description": "The sequence number for the port on the invoice.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PORT_FUNCTION_CODE",
+      "description": "The port function code.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_IDENTIFIER",
+      "description": "The location identifier.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_IDENTIFIER_QUALIFIER",
+      "description": "The qualifier associated with the location identifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PORT_NAME",
+      "description": "The name of the port on the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROVINCE_CODE",
+      "description": "The province code on the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 6,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_CODE3_GID",
+      "description": "The country code GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "INVOICE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PORT_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_INV_PT_INV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INVOICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOICE_GID",
+          "columnName": "INVOICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_INV_PT_CNTY_CD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_CODE3_GID",
+          "columnName": "COUNTRY_CODE3_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_INV_PT_CNTY_CD_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "COUNTRY_CODE3_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,245 @@
-{"table": {"schema": "glogowner","name": "derived_field","description": "Derived Field.  Field on a derived data operations implementation"},"columns": [{"name": "DERIVED_DATA_OP_IMPL_GID","description": "Contains the unique identifier for the derived data operations implementation.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIELD_NAME","description": "Field name","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FILTERABLE","description": "Determines if the field is available for advanced filtering.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_CALCULABLE","description": "Determines if the field is available for calculations.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "FIELD_TYPE","description": "Field type","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'Text','Weight','Date','DateTime','Number','Currency','Distance','Duration','Length','Speed','Temperature','Volume'","conditionalConstraint": "","defaultValue": "'Text'"},{"name": "QUERY_TABLE_GID","description": "Unique identifier for the query table.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRECISION","description": "Precision value for number/uom fields","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARENT_FIELD_NAME","description": "Parent field name","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESSING_SEQUENCE","description": "Processing sequence in which the Calculated data should be retrived or filtered.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LABEL_KEY","description": "Translatable label for the field","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "XML_NAME","description": "XML name for the field","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DERIVED_DATA_OP_IMPL_GID"},{"sequence": 2,"columnName": "FIELD_NAME"}],"foreignKeys": [{"foreignKeyName": "FK_DF_DD_OP_IMPL_GID","cascadeDelete": false,"parentTableName": "DERIVED_DATA_OP_IMPL","columnRelation": [{"sequence": 1,"parentColumnName": "DERIVED_DATA_OP_IMPL_GID","columnName": "DERIVED_DATA_OP_IMPL_GID"}]},{"foreignKeyName": "FK_DF_QUERY_TABLE_GID","cascadeDelete": false,"parentTableName": "QUERY_TABLE","columnRelation": [{"sequence": 1,"parentColumnName": "QUERY_TABLE_GID","columnName": "QUERY_TABLE_GID"}]},{"foreignKeyName": "FK_DF_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["DERIVED_FIELD_PARAMETER"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "derived_field",
+    "description": "Derived Field.  Field on a derived data operations implementation"
+  },
+  "columns": [
+    {
+      "name": "DERIVED_DATA_OP_IMPL_GID",
+      "description": "Contains the unique identifier for the derived data operations implementation.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIELD_NAME",
+      "description": "Field name",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FILTERABLE",
+      "description": "Determines if the field is available for advanced filtering.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_CALCULABLE",
+      "description": "Determines if the field is available for calculations.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "FIELD_TYPE",
+      "description": "Field type",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Text','Weight','Date','DateTime','Number','Currency','Distance','Duration','Length','Speed','Temperature','Volume'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Text'"
+    },
+    {
+      "name": "QUERY_TABLE_GID",
+      "description": "Unique identifier for the query table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRECISION",
+      "description": "Precision value for number/uom fields",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARENT_FIELD_NAME",
+      "description": "Parent field name",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESSING_SEQUENCE",
+      "description": "Processing sequence in which the Calculated data should be retrived or filtered.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LABEL_KEY",
+      "description": "Translatable label for the field",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "XML_NAME",
+      "description": "XML name for the field",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DERIVED_DATA_OP_IMPL_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "FIELD_NAME"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DF_DD_OP_IMPL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DERIVED_DATA_OP_IMPL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DERIVED_DATA_OP_IMPL_GID",
+          "columnName": "DERIVED_DATA_OP_IMPL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DF_QUERY_TABLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "QUERY_TABLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "QUERY_TABLE_GID",
+          "columnName": "QUERY_TABLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DF_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "DERIVED_FIELD_PARAMETER"
+  ],
+  "indices": []
+}

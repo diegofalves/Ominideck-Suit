@@ -1,1 +1,372 @@
-{"table": {"schema": "glogowner","name": "p_shipment_set","description": "Defines selection criterion for building a shipment set"},"columns": [{"name": "P_SHIPMENT_SET_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "P_SHIPMENT_SET_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BEGIN_DATE","description": "Only shipments whose start date is after the begin_date are selected","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DATE","description": "Only shipments whose end date is before the end_date are selected","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVED_QUERY_GID","description": "Only shipments that meet the criterion specified in this saved query are selected","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GEO_HIERARCHY_PROFILE_GID","description": "Defines the 'good' geographies so we know which lanes to bring over to procurement","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_REGION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_REGION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_SET_TYPE","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'LAND'"},{"name": "OCEAN_SHIPMENT_TYPE","description": "","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'TL'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_REFERENCE_UNIT_GID","description": "Shipments which are present with this Equipment Reference Unit ID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SPOT_SHIPMENT_SET","description": "This column determines if the shipment set contains spot shipments or normal shipments. The default is N which is for normal shipmments. Set to Y for a shipment set with spot shipments.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "P_SHIPMENT_SET_GID"}],"foreignKeys": [{"foreignKeyName": "FK_PSS_SAVED_QUERY_GID","cascadeDelete": false,"parentTableName": "SAVED_QUERY","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_QUERY_GID","columnName": "SAVED_QUERY_GID"}]},{"foreignKeyName": "FK_PSS_GEO_HIERARCHY_SET_GID","cascadeDelete": false,"parentTableName": "GEO_HIERARCHY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "GEO_HIERARCHY_PROFILE_GID","columnName": "GEO_HIERARCHY_PROFILE_GID"}]},{"foreignKeyName": "FK_PSS_SOURCE_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "SOURCE_REGION_GID"}]},{"foreignKeyName": "FK_PSS_DEST_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "DEST_REGION_GID"}]},{"foreignKeyName": "FK_PSS_EQUIPMENT_GROUP_PROFILE","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_PSS_SERVPROV_PROFILE_GID","cascadeDelete": false,"parentTableName": "SERVPROV_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_PROFILE_GID","columnName": "SERVPROV_PROFILE_GID"}]},{"foreignKeyName": "FK_PSS_MODE_PROFILE_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "MODE_PROFILE_GID"}]},{"foreignKeyName": "FK_PSS_EQUIPMENT_REFERENCE_UN","cascadeDelete": false,"parentTableName": "EQUIPMENT_REFERENCE_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_REFERENCE_UNIT_GID","columnName": "EQUIPMENT_REFERENCE_UNIT_GID"}]}],"childTables": ["CR_PROJECT_P_SHIPMENT_SET","LANE_SUMMARY_SHIP_SET_JOIN","P_SHIPMENT_SET_D"],"indices": [{"indexName": "IX_PSS_DEST_REGION_GID","columnNames": [{"sequence": 1,"name": "DEST_REGION_GID"}]},{"indexName": "IX_PSS_GEO_HIERARCHY_SET_GID","columnNames": [{"sequence": 1,"name": "GEO_HIERARCHY_PROFILE_GID"}]},{"indexName": "IX_PSS_SAVED_QUERY_GID","columnNames": [{"sequence": 1,"name": "SAVED_QUERY_GID"}]},{"indexName": "IX_PSS_SOURCE_REGION_GID","columnNames": [{"sequence": 1,"name": "SOURCE_REGION_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "p_shipment_set",
+    "description": "Defines selection criterion for building a shipment set"
+  },
+  "columns": [
+    {
+      "name": "P_SHIPMENT_SET_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "P_SHIPMENT_SET_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BEGIN_DATE",
+      "description": "Only shipments whose start date is after the begin_date are selected",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DATE",
+      "description": "Only shipments whose end date is before the end_date are selected",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVED_QUERY_GID",
+      "description": "Only shipments that meet the criterion specified in this saved query are selected",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GEO_HIERARCHY_PROFILE_GID",
+      "description": "Defines the 'good' geographies so we know which lanes to bring over to procurement",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_REGION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_REGION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_SET_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'LAND'"
+    },
+    {
+      "name": "OCEAN_SHIPMENT_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'TL'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_REFERENCE_UNIT_GID",
+      "description": "Shipments which are present with this Equipment Reference Unit ID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SPOT_SHIPMENT_SET",
+      "description": "This column determines if the shipment set contains spot shipments or normal shipments. The default is N which is for normal shipmments. Set to Y for a shipment set with spot shipments.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "P_SHIPMENT_SET_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_PSS_SAVED_QUERY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_QUERY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_QUERY_GID",
+          "columnName": "SAVED_QUERY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PSS_GEO_HIERARCHY_SET_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GEO_HIERARCHY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GEO_HIERARCHY_PROFILE_GID",
+          "columnName": "GEO_HIERARCHY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PSS_SOURCE_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "SOURCE_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PSS_DEST_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "DEST_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PSS_EQUIPMENT_GROUP_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PSS_SERVPROV_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_PROFILE_GID",
+          "columnName": "SERVPROV_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PSS_MODE_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PSS_EQUIPMENT_REFERENCE_UN",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_REFERENCE_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_REFERENCE_UNIT_GID",
+          "columnName": "EQUIPMENT_REFERENCE_UNIT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "CR_PROJECT_P_SHIPMENT_SET",
+    "LANE_SUMMARY_SHIP_SET_JOIN",
+    "P_SHIPMENT_SET_D"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_PSS_DEST_REGION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DEST_REGION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_PSS_GEO_HIERARCHY_SET_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GEO_HIERARCHY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_PSS_SAVED_QUERY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SAVED_QUERY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_PSS_SOURCE_REGION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_REGION_GID"
+        }
+      ]
+    }
+  ]
+}

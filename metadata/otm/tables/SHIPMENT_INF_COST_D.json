@@ -1,1 +1,340 @@
-{"table": {"schema": "glogowner","name": "shipment_inf_cost_d","description": ""},"columns": [{"name": "SHIPMENT_GID","description": "The GID for the shipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_INF_COST_SEQNO","description": "The shipment informational cost sequence (key).","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DETAIL_SEQNO","description": "The detail sequence number (key).","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_TYPE","description": "The cost type for this shipment cost record.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','A','O','D','S','C'","conditionalConstraint": "","defaultValue": "'B'"},{"name": "COST","description": "The cost value. Examples are base and accessorial.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_CURRENCY_GID","description": "The cost currency GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COST_BASE","description": "The cost in the base currency.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_GID","description": "The accessorial code identifier associated to the cost record if it was calculated from the rate accessorial.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_COST_GID","description": "The accessorial cost identifier associated to the cost record if it was calculated from the rate accessorial.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_GEO_COST_GROUP_GID","description": "The rate detail cost group identifier that was used in calculating this cost value.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_GEO_COST_SEQ","description": "The rate detail cost sequence that was used in calculating this cost value.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SPECIAL_SERVICE_GID","description": "The special service identifier associated to the cost record if it was calculated from a special service.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_COST_FIXED","description": "A Y/N indicator defining the cost element as permanent and not to recalculate it based on shipment modifications.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "PROCESS_AS_FLOW_THRU","description": "A Y/N indicator defining the cost element as a flow through cost when sent to the financial systems.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ADJUSTMENT_REASON_GID","description": "An adjustment reason code GID  that categorizes the cost element as an adjustment and the type.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GENERAL_LEDGER_GID","description": "The general ledger GID associated with the cost element and sent to financial systems.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPMENT_GID"},{"sequence": 2,"columnName": "SHIPMENT_INF_COST_SEQNO"},{"sequence": 3,"columnName": "DETAIL_SEQNO"}],"foreignKeys": [{"foreignKeyName": "FK_SICD_SHIPMENT_INFO_COST","cascadeDelete": false,"parentTableName": "SHIPMENT_INF_COST","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"},{"sequence": 2,"parentColumnName": "SHIPMENT_INF_COST_SEQNO","columnName": "SHIPMENT_INF_COST_SEQNO"}]},{"foreignKeyName": "FK_SICD_COST_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "COST_CURRENCY_GID"}]},{"foreignKeyName": "FK_SICD_ACCESSORIAL_CODE_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_CODE_GID","columnName": "ACCESSORIAL_CODE_GID"}]},{"foreignKeyName": "FK_SICD_ACCESSORIAL_COST_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_COST","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_COST_GID","columnName": "ACCESSORIAL_COST_GID"}]},{"foreignKeyName": "FK_SICD_SPECIAL_SERVICE_GID","cascadeDelete": false,"parentTableName": "SPECIAL_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "SPECIAL_SERVICE_GID","columnName": "SPECIAL_SERVICE_GID"}]},{"foreignKeyName": "FK_SICD_ADJUSTMENT_REASON_GID","cascadeDelete": false,"parentTableName": "ADJUSTMENT_REASON","columnRelation": [{"sequence": 1,"parentColumnName": "ADJUSTMENT_REASON_GID","columnName": "ADJUSTMENT_REASON_GID"}]},{"foreignKeyName": "FK_SICD_GENERAL_LEDGER_GID","cascadeDelete": false,"parentTableName": "GENERAL_LEDGER_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "GENERAL_LEDGER_GID","columnName": "GENERAL_LEDGER_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "shipment_inf_cost_d",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The GID for the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_INF_COST_SEQNO",
+      "description": "The shipment informational cost sequence (key).",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DETAIL_SEQNO",
+      "description": "The detail sequence number (key).",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_TYPE",
+      "description": "The cost type for this shipment cost record.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','A','O','D','S','C'",
+      "conditionalConstraint": "",
+      "defaultValue": "'B'"
+    },
+    {
+      "name": "COST",
+      "description": "The cost value. Examples are base and accessorial.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_CURRENCY_GID",
+      "description": "The cost currency GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COST_BASE",
+      "description": "The cost in the base currency.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "The accessorial code identifier associated to the cost record if it was calculated from the rate accessorial.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_COST_GID",
+      "description": "The accessorial cost identifier associated to the cost record if it was calculated from the rate accessorial.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_GEO_COST_GROUP_GID",
+      "description": "The rate detail cost group identifier that was used in calculating this cost value.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_GEO_COST_SEQ",
+      "description": "The rate detail cost sequence that was used in calculating this cost value.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SPECIAL_SERVICE_GID",
+      "description": "The special service identifier associated to the cost record if it was calculated from a special service.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_COST_FIXED",
+      "description": "A Y/N indicator defining the cost element as permanent and not to recalculate it based on shipment modifications.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "PROCESS_AS_FLOW_THRU",
+      "description": "A Y/N indicator defining the cost element as a flow through cost when sent to the financial systems.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ADJUSTMENT_REASON_GID",
+      "description": "An adjustment reason code GID  that categorizes the cost element as an adjustment and the type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GENERAL_LEDGER_GID",
+      "description": "The general ledger GID associated with the cost element and sent to financial systems.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SHIPMENT_INF_COST_SEQNO"
+    },
+    {
+      "sequence": 3,
+      "columnName": "DETAIL_SEQNO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SICD_SHIPMENT_INFO_COST",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_INF_COST",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "SHIPMENT_INF_COST_SEQNO",
+          "columnName": "SHIPMENT_INF_COST_SEQNO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SICD_COST_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "COST_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SICD_ACCESSORIAL_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_CODE_GID",
+          "columnName": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SICD_ACCESSORIAL_COST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_COST",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_COST_GID",
+          "columnName": "ACCESSORIAL_COST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SICD_SPECIAL_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SPECIAL_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SPECIAL_SERVICE_GID",
+          "columnName": "SPECIAL_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SICD_ADJUSTMENT_REASON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ADJUSTMENT_REASON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ADJUSTMENT_REASON_GID",
+          "columnName": "ADJUSTMENT_REASON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SICD_GENERAL_LEDGER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GENERAL_LEDGER_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GENERAL_LEDGER_GID",
+          "columnName": "GENERAL_LEDGER_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

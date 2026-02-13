@@ -1,1 +1,773 @@
-{"table": {"schema": "glogowner","name": "i_transmission","description": "The I_TRANSMISSION table stores all XML transmissions which are received by GLog, or sent out of Glog. This table is an audit trail for the XML transmissions sent to the GC3 system. These transmissions can be query transmissions or may contain one or more transactions to be carried out by GC3. The actual transmission is stored as a LONG variable. The details abut the user sending the transmission are also stored."},"columns": [{"name": "I_TRANSMISSION_NO","description": "The I_TRANSMISSION_NO column uniquely identifies the transmission.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSMISSION_TYPE","description": "","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CREATE_DATE","description": "The CREATE_DATE column specifies when the transmission was first created.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "SYSDATE"},{"name": "TRANSACTION_COUNT","description": "The TRANSACTION_COUNT column specifies the number of transactions associated with this transmission.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SENDER_HOST_NAME","description": "The SENDER_HOST_NAME column specifies the name of the machine that sent the transmission.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RECEIVER_HOST_NAME","description": "The SENDER_HOST_NAME column specifies the name of the machine that received the transmission.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USERNAME","description": "The USERNAME column specifies the GLog username used to log into GLog to persist the transmission. This is required when IS_INBOUND is Y.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PASSWORD","description": "The PASSWORD column specifies the GLog password used to log into GLog to persist the transmission. This is required when IS_INBOUND is Y.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_INBOUND","description": "The IS_INBOUND column indicates that a transmission is either inbound (value equals Y) or not (value equals N).","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "SENDER_TRANSMISSION_NO","description": "The SENDER_TRANSMISSION_NO column specifies the transmission number that the sender assigned to the transmission.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SENDER_TRANSMISSION_ID","description": "","dataType": "VARCHAR2","size": 200,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REFERENCE_TRANSMISSION_NO","description": "The REFERENCE_TRANSMISSION_NO column can be used when GLog responds to a prior transmission. In this case, it specifies to which transmission the response belongs.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS","description": "The STATUS column is set to FRESH when the transmission is first stored in the I_TRANSMISSION table. Currently, it is never being changed to anything else.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'FRESH'"},{"name": "RUN_NEW_DOMAIN","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ACK_COM_METHOD_GID","description": "The ACK_COM_METHOD_GID column may be set to EMAIL to request email acknowledgement of a transmission.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACK_EMAIL_ADDRESS","description": "The ACK_EMAIL_ADDRESS column holds the valid email address to which a transmission acknowledgement gets sent if email is set in the ACK_COM_METHOD_GID column.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACK_EMAIL_SMTPHOST","description": "The ACK_EMAIL_SMTPHOST column specifies the hostname to send an email acknowledegment of receipt of the transmission.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACK_SERVLET_URL","description": "The URL for sending teh acknowledgement.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "XML_BLOB","description": "The XML_BLOB column specifies the entire XML text of the transmission.","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "XML_PI","description": "This field contains the XML Processing Instructions.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_SYSTEM_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REQUESTING_USER","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_PROCESS_IN_SEQUENCE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "RETRY_COUNT","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "ACK_OPTION","description": "","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": true,"constraintValues": "'ERROR','NO','YES'","conditionalConstraint": "","defaultValue": ""},{"name": "APP_SERVER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_MACHINE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTACT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXT_SYS_COM_METHOD_GID","description": "Indicates the communication method used for outbound XML Transmissions.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXT_SYS_COM_INFO","description": "This field specifies the attributes of the external system communication method used for the outbound integration.  For example, when the comm method is FTP, this column would contain the filename.","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_PROCESS_ON_ERROR","description": "Specifies if processing of the Transmission should be stopped when an error occurs in a Transaction.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROCESS_ID","description": "Process ID for the Transmission.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "XML_BLOB_TYPE","description": "Specifies if the contents of the XML_BLOB is the complete Transmission XML(T), the Transmission Header(TH), Message XML(M), Message Header XML(MH), Message Body XML(MB) or is not used (NA).","dataType": "VARCHAR2","size": 2,"isNull": true,"isConstraint": true,"constraintValues": "'T','TH','NA','B','M','MH','MB'","conditionalConstraint": "","defaultValue": ""},{"name": "ADD_XML_DECLARATION","description": "Specifies if the XML declaration should be added when sending the XML.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "ADD_TRANSMISSION_WRAPPER","description": "Specifies if the Transmission XML element should be used to wrap the individual Transaction elements.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSMISSION_WRAPPER_ELEMENT","description": "Specifies the element name to wrap the Transmission.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "XML_BLOB_SIZE","description": "Specifies the size of the XML.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_STATUS","description": "Specifies the external status for the Transmission.  The external status represents the result of processing at the external system.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIRST_ATTEMPT_DATE","description": "Specifies the first time an attempt is made to process the transmission.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_ATTEMPT_DATE","description": "Specifies the last time an attempt is made to process the transmission.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_METHOD","description": "","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_MESSAGE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIME_TYPE","description": "Describes the XML_BLOB content.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VERSION","description": "Specifies the app version which corresponds to the XML_BLOB.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_ROLE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "I_TRANSMISSION_NO"}],"foreignKeys": [{"foreignKeyName": "FK_TRSMSN_COMMTD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "ACK_COM_METHOD_GID"}]},{"foreignKeyName": "FK_TRSMSN_EXTSYS_GID","cascadeDelete": false,"parentTableName": "EXTERNAL_SYSTEM","columnRelation": [{"sequence": 1,"parentColumnName": "EXTERNAL_SYSTEM_GID","columnName": "EXTERNAL_SYSTEM_GID"}]},{"foreignKeyName": "FK_IT_APP_SERVER_GID","cascadeDelete": false,"parentTableName": "APP_SERVER","columnRelation": [{"sequence": 1,"parentColumnName": "APP_SERVER_GID","columnName": "APP_SERVER_GID"}]},{"foreignKeyName": "FK_IT_APP_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "APP_MACHINE_GID"}]},{"foreignKeyName": "FK_IT_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "CONTACT_GID"}]},{"foreignKeyName": "FK_IT_EXT_SYS_COM_METHOD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "EXT_SYS_COM_METHOD_GID"}]},{"foreignKeyName": "FK_ITRNS_USER_ROLE_GID","cascadeDelete": false,"parentTableName": "USER_ROLE","columnRelation": [{"sequence": 1,"parentColumnName": "USER_ROLE_GID","columnName": "USER_ROLE_GID"}]}],"childTables": [],"indices": [{"indexName": "IND_ITRANM_CREATE_DATE","columnNames": [{"sequence": 1,"name": "CREATE_DATE"}]},{"indexName": "IX_IT_APP_MACHINE_GID","columnNames": [{"sequence": 1,"name": "APP_MACHINE_GID"}]},{"indexName": "IX_IT_APP_SERVER_GID","columnNames": [{"sequence": 1,"name": "APP_SERVER_GID"}]},{"indexName": "IX_IT_CONTACT_GID","columnNames": [{"sequence": 1,"name": "CONTACT_GID"}]},{"indexName": "IX_IT_EXT_SYS_COM_METHOD_GID","columnNames": [{"sequence": 1,"name": "EXT_SYS_COM_METHOD_GID"}]},{"indexName": "IX_I_TRNSMIS_I_MSG_GID","columnNames": [{"sequence": 1,"name": "I_MESSAGE_GID"}]},{"indexName": "IX_TRSMSN_COMMTD_GID","columnNames": [{"sequence": 1,"name": "ACK_COM_METHOD_GID"}]},{"indexName": "IX_TRSMSN_EXTSYS_GID","columnNames": [{"sequence": 1,"name": "EXTERNAL_SYSTEM_GID"}]},{"indexName": "IX_I_TRANSM_REF_TRANS_NO","columnNames": [{"sequence": 1,"name": "REFERENCE_TRANSMISSION_NO"}]},{"indexName": "IX_I_TRANSM_SEND_REF_TRANS_NO","columnNames": [{"sequence": 1,"name": "SENDER_TRANSMISSION_ID"},{"sequence": 2,"name": "REFERENCE_TRANSMISSION_NO"}]},{"indexName": "IX_I_TRANSM_SEND_TRANS_NO","columnNames": [{"sequence": 1,"name": "SENDER_TRANSMISSION_NO"}]},{"indexName": "IX_I_TRANSMI_STATUS_APP_INBND","columnNames": [{"sequence": 1,"name": "STATUS"},{"sequence": 2,"name": "APP_MACHINE_GID"},{"sequence": 3,"name": "IS_INBOUND"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "i_transmission",
+    "description": "The I_TRANSMISSION table stores all XML transmissions which are received by GLog, or sent out of Glog. This table is an audit trail for the XML transmissions sent to the GC3 system. These transmissions can be query transmissions or may contain one or more transactions to be carried out by GC3. The actual transmission is stored as a LONG variable. The details abut the user sending the transmission are also stored."
+  },
+  "columns": [
+    {
+      "name": "I_TRANSMISSION_NO",
+      "description": "The I_TRANSMISSION_NO column uniquely identifies the transmission.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSMISSION_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CREATE_DATE",
+      "description": "The CREATE_DATE column specifies when the transmission was first created.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "SYSDATE"
+    },
+    {
+      "name": "TRANSACTION_COUNT",
+      "description": "The TRANSACTION_COUNT column specifies the number of transactions associated with this transmission.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SENDER_HOST_NAME",
+      "description": "The SENDER_HOST_NAME column specifies the name of the machine that sent the transmission.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RECEIVER_HOST_NAME",
+      "description": "The SENDER_HOST_NAME column specifies the name of the machine that received the transmission.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USERNAME",
+      "description": "The USERNAME column specifies the GLog username used to log into GLog to persist the transmission. This is required when IS_INBOUND is Y.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PASSWORD",
+      "description": "The PASSWORD column specifies the GLog password used to log into GLog to persist the transmission. This is required when IS_INBOUND is Y.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_INBOUND",
+      "description": "The IS_INBOUND column indicates that a transmission is either inbound (value equals Y) or not (value equals N).",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "SENDER_TRANSMISSION_NO",
+      "description": "The SENDER_TRANSMISSION_NO column specifies the transmission number that the sender assigned to the transmission.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SENDER_TRANSMISSION_ID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 200,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REFERENCE_TRANSMISSION_NO",
+      "description": "The REFERENCE_TRANSMISSION_NO column can be used when GLog responds to a prior transmission. In this case, it specifies to which transmission the response belongs.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS",
+      "description": "The STATUS column is set to FRESH when the transmission is first stored in the I_TRANSMISSION table. Currently, it is never being changed to anything else.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'FRESH'"
+    },
+    {
+      "name": "RUN_NEW_DOMAIN",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ACK_COM_METHOD_GID",
+      "description": "The ACK_COM_METHOD_GID column may be set to EMAIL to request email acknowledgement of a transmission.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACK_EMAIL_ADDRESS",
+      "description": "The ACK_EMAIL_ADDRESS column holds the valid email address to which a transmission acknowledgement gets sent if email is set in the ACK_COM_METHOD_GID column.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACK_EMAIL_SMTPHOST",
+      "description": "The ACK_EMAIL_SMTPHOST column specifies the hostname to send an email acknowledegment of receipt of the transmission.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACK_SERVLET_URL",
+      "description": "The URL for sending teh acknowledgement.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "XML_BLOB",
+      "description": "The XML_BLOB column specifies the entire XML text of the transmission.",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "XML_PI",
+      "description": "This field contains the XML Processing Instructions.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_SYSTEM_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REQUESTING_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_PROCESS_IN_SEQUENCE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "RETRY_COUNT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "ACK_OPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'ERROR','NO','YES'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_SERVER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_MACHINE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTACT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXT_SYS_COM_METHOD_GID",
+      "description": "Indicates the communication method used for outbound XML Transmissions.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXT_SYS_COM_INFO",
+      "description": "This field specifies the attributes of the external system communication method used for the outbound integration.  For example, when the comm method is FTP, this column would contain the filename.",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_PROCESS_ON_ERROR",
+      "description": "Specifies if processing of the Transmission should be stopped when an error occurs in a Transaction.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROCESS_ID",
+      "description": "Process ID for the Transmission.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "XML_BLOB_TYPE",
+      "description": "Specifies if the contents of the XML_BLOB is the complete Transmission XML(T), the Transmission Header(TH), Message XML(M), Message Header XML(MH), Message Body XML(MB) or is not used (NA).",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'T','TH','NA','B','M','MH','MB'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ADD_XML_DECLARATION",
+      "description": "Specifies if the XML declaration should be added when sending the XML.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ADD_TRANSMISSION_WRAPPER",
+      "description": "Specifies if the Transmission XML element should be used to wrap the individual Transaction elements.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSMISSION_WRAPPER_ELEMENT",
+      "description": "Specifies the element name to wrap the Transmission.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "XML_BLOB_SIZE",
+      "description": "Specifies the size of the XML.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_STATUS",
+      "description": "Specifies the external status for the Transmission.  The external status represents the result of processing at the external system.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIRST_ATTEMPT_DATE",
+      "description": "Specifies the first time an attempt is made to process the transmission.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_ATTEMPT_DATE",
+      "description": "Specifies the last time an attempt is made to process the transmission.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_METHOD",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_MESSAGE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIME_TYPE",
+      "description": "Describes the XML_BLOB content.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VERSION",
+      "description": "Specifies the app version which corresponds to the XML_BLOB.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_ROLE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "I_TRANSMISSION_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_TRSMSN_COMMTD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "ACK_COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TRSMSN_EXTSYS_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EXTERNAL_SYSTEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXTERNAL_SYSTEM_GID",
+          "columnName": "EXTERNAL_SYSTEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IT_APP_SERVER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_SERVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_SERVER_GID",
+          "columnName": "APP_SERVER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IT_APP_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "APP_MACHINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IT_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IT_EXT_SYS_COM_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "EXT_SYS_COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ITRNS_USER_ROLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "USER_ROLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "USER_ROLE_GID",
+          "columnName": "USER_ROLE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IND_ITRANM_CREATE_DATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CREATE_DATE"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IT_APP_MACHINE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "APP_MACHINE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IT_APP_SERVER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "APP_SERVER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IT_CONTACT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IT_EXT_SYS_COM_METHOD_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXT_SYS_COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_I_TRNSMIS_I_MSG_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_MESSAGE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_TRSMSN_COMMTD_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACK_COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_TRSMSN_EXTSYS_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXTERNAL_SYSTEM_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_I_TRANSM_REF_TRANS_NO",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REFERENCE_TRANSMISSION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_I_TRANSM_SEND_REF_TRANS_NO",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SENDER_TRANSMISSION_ID"
+        },
+        {
+          "sequence": 2,
+          "name": "REFERENCE_TRANSMISSION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_I_TRANSM_SEND_TRANS_NO",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SENDER_TRANSMISSION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_I_TRANSMI_STATUS_APP_INBND",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS"
+        },
+        {
+          "sequence": 2,
+          "name": "APP_MACHINE_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "IS_INBOUND"
+        }
+      ]
+    }
+  ]
+}

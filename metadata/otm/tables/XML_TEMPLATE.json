@@ -1,1 +1,151 @@
-{"table": {"schema": "glogowner","name": "xml_template","description": "Template XML"},"columns": [{"name": "XML_TEMPLATE_GID","description": "XML template ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "XML_TEMPLATE_XID","description": "XML template XID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEMPLATE_BLOB","description": "XML template","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USE_DATA","description": "If it is 'N', the actual data in template_Blob is ignored.  Otherwise, the data is utilized to further restrict the output.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DESCRIPTION","description": "Description about the template and its usage","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GLOG_XML_ELEMENT_GID","description": "Specify the XML element ID which this tempalte will be applied","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "XML_TEMPLATE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_XT_GLOG_XML_ELEMENT_GID","cascadeDelete": false,"parentTableName": "INT_GLOG_XML_ELEMENT","columnRelation": [{"sequence": 1,"parentColumnName": "GLOG_XML_ELEMENT_GID","columnName": "GLOG_XML_ELEMENT_GID"}]}],"childTables": ["OUT_XML_PROFILE"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "xml_template",
+    "description": "Template XML"
+  },
+  "columns": [
+    {
+      "name": "XML_TEMPLATE_GID",
+      "description": "XML template ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "XML_TEMPLATE_XID",
+      "description": "XML template XID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEMPLATE_BLOB",
+      "description": "XML template",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USE_DATA",
+      "description": "If it is 'N', the actual data in template_Blob is ignored.  Otherwise, the data is utilized to further restrict the output.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Description about the template and its usage",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GLOG_XML_ELEMENT_GID",
+      "description": "Specify the XML element ID which this tempalte will be applied",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "XML_TEMPLATE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_XT_GLOG_XML_ELEMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INT_GLOG_XML_ELEMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GLOG_XML_ELEMENT_GID",
+          "columnName": "GLOG_XML_ELEMENT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "OUT_XML_PROFILE"
+  ],
+  "indices": []
+}

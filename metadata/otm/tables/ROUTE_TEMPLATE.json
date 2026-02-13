@@ -1,1 +1,614 @@
-{"table": {"schema": "glogowner","name": "route_template","description": ""},"columns": [{"name": "ROUTE_TEMPLATE_GID","description": "Route template ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROUTE_TEMPLATE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CREATION_SOURCE","description": "C: Import from CR; U: Created from UI; I: Import from intergration","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": true,"constraintValues": "'C','U','I'","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "Based on UTC timezone.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "Based on UTC timezone.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERSPECTIVE","description": "'B': BUY; 'S': SELL; 'A': ALL","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','S','A'","conditionalConstraint": "","defaultValue": "'A'"},{"name": "NUM_INSTANCES","description": "Copied from Strategic Tool 'Volume'","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "Not required when created; required when creating Instances","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_PROFILE_GID","description": "Not required when created; required when creating Instances","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_GID","description": "Not required when created; required when creating Instances","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DEPOT_LOC_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DEPOT_LOC_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_CLOSED_LOOP","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ALLOW_OVERLAPPING_SHIPMENTS","description": "Allow shipment time window overlap","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "STR_DURATION","description": "Copied from Strategic CR Product","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_DURATION_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_DURATION_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_LOADED_DISTANCE","description": "Copied from Strategic CR Product","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_LOADED_DISTANCE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_LOADED_DISTANCE_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_DEADHEAD_DISTANCE","description": "Copied from Strategic CR Product","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_DEADHEAD_DISTANCE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_DEADHEAD_DISTANCE_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_TOTAL_DISTANCE","description": "Copied from Strategic CR Product","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_TOTAL_DISTANCE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_TOTAL_DISTANCE_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_DEADHEAD_PERC","description": "=STR_DEADHEAD_DISTANCE/STR_TOTAL_DISTANCE","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STR_CONF_FACTOR","description": "Copied from Strategic CR Product","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVING_PER_INST","description": "Savings per Instance.  Copied from Strategic CR Product","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVING_PER_INST_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVING_PER_INST_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED1_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED2_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED3_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED4_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED5_ICON_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INDICATOR","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ROUTE_TEMPLATE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_ROUTE_SERVPROV_GID","cascadeDelete": false,"parentTableName": "SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"}]},{"foreignKeyName": "FK_ROUTE_EQUIPMENT_GROUP_PROFI","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_ROUTE_TRANSPORT_MODE_GID","cascadeDelete": false,"parentTableName": "TRANSPORT_MODE","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSPORT_MODE_GID","columnName": "TRANSPORT_MODE_GID"}]},{"foreignKeyName": "FK_ROUTE_START_DEPOT_LOC_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "START_DEPOT_LOC_GID"}]},{"foreignKeyName": "FK_ROUTE_END_DEPOT_LOC_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "END_DEPOT_LOC_GID"}]},{"foreignKeyName": "FK_ROUTE_SAVING_PER_INSTANCE","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "SAVING_PER_INST_CURRENCY_GID"}]},{"foreignKeyName": "FK_ROUTE_USER_DEFINED1_ICON_G","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED1_ICON_GID"}]},{"foreignKeyName": "FK_ROUTE_USER_DEFINED2_ICON_G","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED2_ICON_GID"}]},{"foreignKeyName": "FK_ROUTE_USER_DEFINED3_ICON_G","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED3_ICON_GID"}]},{"foreignKeyName": "FK_ROUTE_USER_DEFINED4_ICON_G","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED4_ICON_GID"}]},{"foreignKeyName": "FK_ROUTE_USER_DEFINED5_ICON_G","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED5_ICON_GID"}]}],"childTables": ["ROUTE_INSTANCE","ROUTE_TEMPLATE_INV_PARTY","ROUTE_TEMPLATE_LEG","ROUTE_TEMPLATE_REFNUM","ROUTE_TEMPLATE_REMARK","ROUTE_TEMPLATE_STATUS"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "route_template",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "ROUTE_TEMPLATE_GID",
+      "description": "Route template ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUTE_TEMPLATE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CREATION_SOURCE",
+      "description": "C: Import from CR; U: Created from UI; I: Import from intergration",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'C','U','I'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "Based on UTC timezone.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "Based on UTC timezone.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERSPECTIVE",
+      "description": "'B': BUY; 'S': SELL; 'A': ALL",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','S','A'",
+      "conditionalConstraint": "",
+      "defaultValue": "'A'"
+    },
+    {
+      "name": "NUM_INSTANCES",
+      "description": "Copied from Strategic Tool 'Volume'",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "Not required when created; required when creating Instances",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_PROFILE_GID",
+      "description": "Not required when created; required when creating Instances",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_GID",
+      "description": "Not required when created; required when creating Instances",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DEPOT_LOC_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DEPOT_LOC_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_CLOSED_LOOP",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ALLOW_OVERLAPPING_SHIPMENTS",
+      "description": "Allow shipment time window overlap",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "STR_DURATION",
+      "description": "Copied from Strategic CR Product",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_DURATION_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_DURATION_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_LOADED_DISTANCE",
+      "description": "Copied from Strategic CR Product",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_LOADED_DISTANCE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_LOADED_DISTANCE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_DEADHEAD_DISTANCE",
+      "description": "Copied from Strategic CR Product",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_DEADHEAD_DISTANCE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_DEADHEAD_DISTANCE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_TOTAL_DISTANCE",
+      "description": "Copied from Strategic CR Product",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_TOTAL_DISTANCE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_TOTAL_DISTANCE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_DEADHEAD_PERC",
+      "description": "=STR_DEADHEAD_DISTANCE/STR_TOTAL_DISTANCE",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STR_CONF_FACTOR",
+      "description": "Copied from Strategic CR Product",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVING_PER_INST",
+      "description": "Savings per Instance.  Copied from Strategic CR Product",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVING_PER_INST_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVING_PER_INST_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED1_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED2_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED3_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED4_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED5_ICON_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INDICATOR",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ROUTE_TEMPLATE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ROUTE_SERVPROV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_EQUIPMENT_GROUP_PROFI",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_TRANSPORT_MODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSPORT_MODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSPORT_MODE_GID",
+          "columnName": "TRANSPORT_MODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_START_DEPOT_LOC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "START_DEPOT_LOC_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_END_DEPOT_LOC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "END_DEPOT_LOC_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_SAVING_PER_INSTANCE",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "SAVING_PER_INST_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_USER_DEFINED1_ICON_G",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED1_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_USER_DEFINED2_ICON_G",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED2_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_USER_DEFINED3_ICON_G",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED3_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_USER_DEFINED4_ICON_G",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED4_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ROUTE_USER_DEFINED5_ICON_G",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED5_ICON_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ROUTE_INSTANCE",
+    "ROUTE_TEMPLATE_INV_PARTY",
+    "ROUTE_TEMPLATE_LEG",
+    "ROUTE_TEMPLATE_REFNUM",
+    "ROUTE_TEMPLATE_REMARK",
+    "ROUTE_TEMPLATE_STATUS"
+  ],
+  "indices": []
+}

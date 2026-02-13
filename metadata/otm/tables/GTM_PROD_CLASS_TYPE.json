@@ -1,1 +1,252 @@
-{"table": {"schema": "glogowner","name": "gtm_prod_class_type","description": "Product classification type such as Schedule B or HTS-US"},"columns": [{"name": "GTM_PROD_CLASS_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_PROD_CLASS_TYPE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CLASSIFICATION_CATEGORY","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_CONTENT_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REGION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_CODE3_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "Indicates the OTM Release version.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_PROD_CLASS_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GPCT_CLASSIFICATION_CATEGO","cascadeDelete": false,"parentTableName": "GTM_PROD_CLASS_CATEGORY","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_PROD_CLASS_CATEGORY_GID","columnName": "CLASSIFICATION_CATEGORY"}]},{"foreignKeyName": "FK_GPCT_GTM_CONTENT_TYPE_GID","cascadeDelete": false,"parentTableName": "GTM_CONTENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CONTENT_TYPE_GID","columnName": "GTM_CONTENT_TYPE_GID"}]},{"foreignKeyName": "FK_GPCT_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "REGION_GID"}]},{"foreignKeyName": "FK_GPCT_COUNTRY_CODE3_GID","cascadeDelete": false,"parentTableName": "COUNTRY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_CODE3_GID","columnName": "COUNTRY_CODE3_GID"}]},{"foreignKeyName": "FK_GPCT_OTM_RELEASE_GID","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["GTM_CAMPAIGN","GTM_CAMPAIGN_LINE","GTM_CLASS_CODE_MAPPING","GTM_COMPLIANCE_RULE","GTM_COMP_RULE_VALUE","GTM_CRULE_CLASS_CODE_ATTRIBUTE","GTM_ITEM_CLASSIFICATION","GTM_ITEM_CLASS_TEMPLATE_D","GTM_PC_SERVICE_PARAMETER","GTM_PRODUCT_GROUP_D_CODE","GTM_PROD_CLASS_CODE","GTM_REGISTRATION","GTM_STRUCTURE","GTM_STRUCTURE_COMPONENT","GTM_TARIFF_CODE","GTM_TARIFF_CODE_PROFILE","GTM_TARIFF_RATE","GTM_TARIFF_ROI","GTM_TIP_AUTHORIZATION","GTM_TIP_INVENTORY","GTM_TIP_INV_MOVEMENT","GTM_TIP_RULE","GTM_TRADE_INCENTIVE_PROGRAM","GTM_TRADE_PREFERENCE","GTM_TRANSACTION_LINE","GTM_TRANS_LINE_QF","GTM_TRANS_LINE_REPORT_QUANTITY","GTM_TR_ITEM_STRUCTURE","GTM_TR_PROD_CLASSIFICATION","GTM_TR_REQD_CLASSIFICATION","ITEM_QF"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_prod_class_type",
+    "description": "Product classification type such as Schedule B or HTS-US"
+  },
+  "columns": [
+    {
+      "name": "GTM_PROD_CLASS_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_PROD_CLASS_TYPE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CLASSIFICATION_CATEGORY",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_CONTENT_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REGION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_CODE3_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "Indicates the OTM Release version.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_PROD_CLASS_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GPCT_CLASSIFICATION_CATEGO",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_PROD_CLASS_CATEGORY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_PROD_CLASS_CATEGORY_GID",
+          "columnName": "CLASSIFICATION_CATEGORY"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GPCT_GTM_CONTENT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_CONTENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CONTENT_TYPE_GID",
+          "columnName": "GTM_CONTENT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GPCT_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GPCT_COUNTRY_CODE3_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_CODE3_GID",
+          "columnName": "COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GPCT_OTM_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "GTM_CAMPAIGN",
+    "GTM_CAMPAIGN_LINE",
+    "GTM_CLASS_CODE_MAPPING",
+    "GTM_COMPLIANCE_RULE",
+    "GTM_COMP_RULE_VALUE",
+    "GTM_CRULE_CLASS_CODE_ATTRIBUTE",
+    "GTM_ITEM_CLASSIFICATION",
+    "GTM_ITEM_CLASS_TEMPLATE_D",
+    "GTM_PC_SERVICE_PARAMETER",
+    "GTM_PRODUCT_GROUP_D_CODE",
+    "GTM_PROD_CLASS_CODE",
+    "GTM_REGISTRATION",
+    "GTM_STRUCTURE",
+    "GTM_STRUCTURE_COMPONENT",
+    "GTM_TARIFF_CODE",
+    "GTM_TARIFF_CODE_PROFILE",
+    "GTM_TARIFF_RATE",
+    "GTM_TARIFF_ROI",
+    "GTM_TIP_AUTHORIZATION",
+    "GTM_TIP_INVENTORY",
+    "GTM_TIP_INV_MOVEMENT",
+    "GTM_TIP_RULE",
+    "GTM_TRADE_INCENTIVE_PROGRAM",
+    "GTM_TRADE_PREFERENCE",
+    "GTM_TRANSACTION_LINE",
+    "GTM_TRANS_LINE_QF",
+    "GTM_TRANS_LINE_REPORT_QUANTITY",
+    "GTM_TR_ITEM_STRUCTURE",
+    "GTM_TR_PROD_CLASSIFICATION",
+    "GTM_TR_REQD_CLASSIFICATION",
+    "ITEM_QF"
+  ],
+  "indices": []
+}

@@ -1,1 +1,184 @@
-{"table": {"schema": "glogowner","name": "out_xml_profile","description": "This table and OUT_XMl_PROFILE_D table together specify the outbound xml profiles that can be used to limit the size of xml documents pushed out from gc3 to external systems.  The Out_xml_profile table contains the header record for the profile and defines the 'gid' for that profile.  The out_xml_profile_d table provides the details which comprise a given profile.  Each record in the out_xml_profile_d table indicates a specific 'chunk' of xml that should be excluded from the outbound document."},"columns": [{"name": "OUT_XML_PROFILE_GID","description": "Globally unique identifier for an outbound xml profile.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OUT_XML_PROFILE_XID","description": "Domain unique identifier for an outbound xml profile.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEFAULT_MODE","description": "Specifies whether the default mode for generating XML should be MIN or MAX.  When not specified, the property is the default.","dataType": "VARCHAR2","size": 3,"isNull": true,"isConstraint": true,"constraintValues": "'MIN','MAX'","conditionalConstraint": "","defaultValue": ""},{"name": "SHOULD_VALIDATE","description": "Specifies if the XML produced should conform to the schema.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "XML_TEMPLATE_GID","description": "XML template ID","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USE_TEMPLATE","description": "If it equals 'Y', integration will use template to build the XML","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "INT_PREFERENCE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OUT_XML_PROFILE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_OXP_XML_TEMPLATE_GID","cascadeDelete": false,"parentTableName": "XML_TEMPLATE","columnRelation": [{"sequence": 1,"parentColumnName": "XML_TEMPLATE_GID","columnName": "XML_TEMPLATE_GID"}]},{"foreignKeyName": "FK_OXP_INT_PREFERENCE_GID","cascadeDelete": false,"parentTableName": "INT_PREFERENCE","columnRelation": [{"sequence": 1,"parentColumnName": "INT_PREFERENCE_GID","columnName": "INT_PREFERENCE_GID"}]}],"childTables": ["DOCUMENT_DEF_CHECK","EXTERNAL_SYSTEM_OUT_XML","GTM_DECL_MESSAGE","INT_GLOG_XML_ELEMENT","OUT_XML_PROFILE_CHILD","OUT_XML_PROFILE_D","OUT_XML_PROFILE_XPATH","SERVPROV","STYLESHEET_PROFILE","WEB_SVC_OPERATION_PARAM"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "out_xml_profile",
+    "description": "This table and OUT_XMl_PROFILE_D table together specify the outbound xml profiles that can be used to limit the size of xml documents pushed out from gc3 to external systems.  The Out_xml_profile table contains the header record for the profile and defines the 'gid' for that profile.  The out_xml_profile_d table provides the details which comprise a given profile.  Each record in the out_xml_profile_d table indicates a specific 'chunk' of xml that should be excluded from the outbound document."
+  },
+  "columns": [
+    {
+      "name": "OUT_XML_PROFILE_GID",
+      "description": "Globally unique identifier for an outbound xml profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OUT_XML_PROFILE_XID",
+      "description": "Domain unique identifier for an outbound xml profile.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEFAULT_MODE",
+      "description": "Specifies whether the default mode for generating XML should be MIN or MAX.  When not specified, the property is the default.",
+      "dataType": "VARCHAR2",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'MIN','MAX'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHOULD_VALIDATE",
+      "description": "Specifies if the XML produced should conform to the schema.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "XML_TEMPLATE_GID",
+      "description": "XML template ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USE_TEMPLATE",
+      "description": "If it equals 'Y', integration will use template to build the XML",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "INT_PREFERENCE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OUT_XML_PROFILE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OXP_XML_TEMPLATE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "XML_TEMPLATE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "XML_TEMPLATE_GID",
+          "columnName": "XML_TEMPLATE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OXP_INT_PREFERENCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INT_PREFERENCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INT_PREFERENCE_GID",
+          "columnName": "INT_PREFERENCE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "DOCUMENT_DEF_CHECK",
+    "EXTERNAL_SYSTEM_OUT_XML",
+    "GTM_DECL_MESSAGE",
+    "INT_GLOG_XML_ELEMENT",
+    "OUT_XML_PROFILE_CHILD",
+    "OUT_XML_PROFILE_D",
+    "OUT_XML_PROFILE_XPATH",
+    "SERVPROV",
+    "STYLESHEET_PROFILE",
+    "WEB_SVC_OPERATION_PARAM"
+  ],
+  "indices": []
+}

@@ -1,1 +1,400 @@
-{"table": {"schema": "glogowner","name": "auto_approve_rule_detail","description": ""},"columns": [{"name": "SEQUENCE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUTO_APPROVE_RULE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TYPE","description": "","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'C','W'","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOWABLE_PERCENT_ABOVE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOWABLE_PERCENT_BELOW","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPROVE_TO_AMOUNT","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPROVE_TO_AMOUNT_BASE","description": "APPROVE_TO_AMOUNT in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "APPROVE_TO_CURRENCY_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPROVE_TO_WEIGHT","description": "","dataType": "NUMBER","size": 8,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPROVE_TO_WEIGHT_BASE","description": "APPROVE_TO_WEIGHT in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "APPROVE_TO_UOM_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_CURR_ABOVE","description": "The currency amount an invoice may be above the shipment cost for auto approve for the given range.  The lesser of this amount, if specified, and the amount calculated by the cost percent above will be used.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_CURR_ABOVE_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_CURR_ABOVE_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_CURR_BELOW","description": "The cuurency amount an invoice may be below the shipment cost for auto approve for the given range.  The lesser of this amount, if specified, and the amount calculated by the cost percent below will be used.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_CURR_BELOW_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_CURR_BELOW_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_WEIGHT_ABOVE","description": "The weight an invoice may be above the shipment weight for auto approve for the given range.  The lesser of this amount, if specified, and the weight calculated by the weight percent above will be used.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_WEIGHT_ABOVE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_WEIGHT_ABOVE_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_WEIGHT_BELOW","description": "The weight an invoice may be below the shipment weight for auto approve for the given range.  The lesser of this amount, if specified, and the weight calculated by the weight percent below will be used.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_WEIGHT_BELOW_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_WEIGHT_BELOW_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SEQUENCE"},{"sequence": 2,"columnName": "AUTO_APPROVE_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AAR_AUTO_APPROVE_RULE_GID","cascadeDelete": false,"parentTableName": "AUTO_APPROVE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "AUTO_APPROVE_RULE_GID","columnName": "AUTO_APPROVE_RULE_GID"}]},{"foreignKeyName": "FK_AAR_APPROVE_TO_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "APPROVE_TO_CURRENCY_GID"}]},{"foreignKeyName": "FK_AARD_ALLOWABLE_CURR_AB_CURR","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "ALLOW_CURR_ABOVE_CURRENCY_GID"}]},{"foreignKeyName": "FK_AARD_ALLOW_CURR_BELOW_CURRE","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "ALLOW_CURR_BELOW_CURRENCY_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_AARD_ALLOWABLE_CURR_AB_CURR","columnNames": [{"sequence": 1,"name": "ALLOW_CURR_ABOVE_CURRENCY_GID"}]},{"indexName": "IX_AARD_ALLOW_CURR_BELOW_CURRE","columnNames": [{"sequence": 1,"name": "ALLOW_CURR_BELOW_CURRENCY_GID"}]},{"indexName": "IX_AAR_APPROVE_TO_CURRENCY_GID","columnNames": [{"sequence": 1,"name": "APPROVE_TO_CURRENCY_GID"}]},{"indexName": "IX_AAR_AUTO_APPROVE_RULE_GID","columnNames": [{"sequence": 1,"name": "AUTO_APPROVE_RULE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "auto_approve_rule_detail",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "SEQUENCE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUTO_APPROVE_RULE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TYPE",
+      "description": "",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'C','W'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOWABLE_PERCENT_ABOVE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOWABLE_PERCENT_BELOW",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPROVE_TO_AMOUNT",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPROVE_TO_AMOUNT_BASE",
+      "description": "APPROVE_TO_AMOUNT in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "APPROVE_TO_CURRENCY_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPROVE_TO_WEIGHT",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPROVE_TO_WEIGHT_BASE",
+      "description": "APPROVE_TO_WEIGHT in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "APPROVE_TO_UOM_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_CURR_ABOVE",
+      "description": "The currency amount an invoice may be above the shipment cost for auto approve for the given range.  The lesser of this amount, if specified, and the amount calculated by the cost percent above will be used.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_CURR_ABOVE_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_CURR_ABOVE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_CURR_BELOW",
+      "description": "The cuurency amount an invoice may be below the shipment cost for auto approve for the given range.  The lesser of this amount, if specified, and the amount calculated by the cost percent below will be used.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_CURR_BELOW_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_CURR_BELOW_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_WEIGHT_ABOVE",
+      "description": "The weight an invoice may be above the shipment weight for auto approve for the given range.  The lesser of this amount, if specified, and the weight calculated by the weight percent above will be used.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_WEIGHT_ABOVE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_WEIGHT_ABOVE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_WEIGHT_BELOW",
+      "description": "The weight an invoice may be below the shipment weight for auto approve for the given range.  The lesser of this amount, if specified, and the weight calculated by the weight percent below will be used.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_WEIGHT_BELOW_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_WEIGHT_BELOW_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SEQUENCE"
+    },
+    {
+      "sequence": 2,
+      "columnName": "AUTO_APPROVE_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AAR_AUTO_APPROVE_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AUTO_APPROVE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUTO_APPROVE_RULE_GID",
+          "columnName": "AUTO_APPROVE_RULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AAR_APPROVE_TO_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "APPROVE_TO_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AARD_ALLOWABLE_CURR_AB_CURR",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "ALLOW_CURR_ABOVE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AARD_ALLOW_CURR_BELOW_CURRE",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "ALLOW_CURR_BELOW_CURRENCY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_AARD_ALLOWABLE_CURR_AB_CURR",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ALLOW_CURR_ABOVE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_AARD_ALLOW_CURR_BELOW_CURRE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ALLOW_CURR_BELOW_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_AAR_APPROVE_TO_CURRENCY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "APPROVE_TO_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_AAR_AUTO_APPROVE_RULE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "AUTO_APPROVE_RULE_GID"
+        }
+      ]
+    }
+  ]
+}

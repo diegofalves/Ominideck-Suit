@@ -1,1 +1,385 @@
-{"table": {"schema": "glogowner","name": "distance_by_addresses","description": ""},"columns": [{"name": "RATE_DISTANCE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NO","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_ADDRESS_TYPE","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'CITY PROVINCE','CITY COUNTRY','POSTAL CODE','POSTAL COUNTRY','LAT_LONG'","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_CITY","description": "","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_COUNTY_QUALIFIER","description": "","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_PROVINCE_CODE","description": "","dataType": "VARCHAR2","size": 6,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_POSTAL_CODE","description": "","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_COUNTRY_CODE3_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_ADDRESS_TYPE","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": true,"constraintValues": "'CITY PROVINCE','CITY COUNTRY','POSTAL CODE','POSTAL COUNTRY','LAT_LONG'","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_CITY","description": "","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_COUNTY_QUALIFIER","description": "","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_PROVINCE_CODE","description": "","dataType": "VARCHAR2","size": 6,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_POSTAL_CODE","description": "","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_COUNTRY_CODE3_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_VALUE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_VALUE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_VALUE_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_LOCATION_GID","description": "This is used to save location gid of source address when source address type is LAT_LONG for any EDE.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_LOCATION_GID","description": "This is used to save location gid of destination address when destination address type is LAT_LONG for any EDE.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_DISTANCE_GID"},{"sequence": 2,"columnName": "SEQUENCE_NO"}],"foreignKeys": [{"foreignKeyName": "FK_DBA_RATE_DISTANCE_GID","cascadeDelete": false,"parentTableName": "RATE_DISTANCE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_DISTANCE_GID","columnName": "RATE_DISTANCE_GID"}]},{"foreignKeyName": "FK_DBA_SOURCE_COUNTRY_CODE3_G","cascadeDelete": false,"parentTableName": "COUNTRY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_CODE3_GID","columnName": "SOURCE_COUNTRY_CODE3_GID"}]},{"foreignKeyName": "FK_DBA_DEST_COUNTRY_CODE3_GID","cascadeDelete": false,"parentTableName": "COUNTRY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_CODE3_GID","columnName": "DEST_COUNTRY_CODE3_GID"}]},{"foreignKeyName": "FK_DBA_SOURCE_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SOURCE_LOCATION_GID"}]},{"foreignKeyName": "FK_DBA_DEST_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DEST_LOCATION_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_DBA_CITY_COUNTRY","columnNames": [{"sequence": 1,"name": "SOURCE_CITY"},{"sequence": 2,"name": "SOURCE_COUNTRY_CODE3_GID"},{"sequence": 3,"name": "DEST_CITY"},{"sequence": 4,"name": "DEST_COUNTRY_CODE3_GID"}]},{"indexName": "IX_DBA_CITY_PROVINCE","columnNames": [{"sequence": 1,"name": "SOURCE_CITY"},{"sequence": 2,"name": "SOURCE_PROVINCE_CODE"},{"sequence": 3,"name": "DEST_CITY"},{"sequence": 4,"name": "DEST_PROVINCE_CODE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "distance_by_addresses",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "RATE_DISTANCE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NO",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_ADDRESS_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'CITY PROVINCE','CITY COUNTRY','POSTAL CODE','POSTAL COUNTRY','LAT_LONG'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_CITY",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_COUNTY_QUALIFIER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_PROVINCE_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 6,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_POSTAL_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_COUNTRY_CODE3_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_ADDRESS_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'CITY PROVINCE','CITY COUNTRY','POSTAL CODE','POSTAL COUNTRY','LAT_LONG'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_CITY",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_COUNTY_QUALIFIER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_PROVINCE_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 6,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_POSTAL_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_COUNTRY_CODE3_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_VALUE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_VALUE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_VALUE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_LOCATION_GID",
+      "description": "This is used to save location gid of source address when source address type is LAT_LONG for any EDE.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_LOCATION_GID",
+      "description": "This is used to save location gid of destination address when destination address type is LAT_LONG for any EDE.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_DISTANCE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SEQUENCE_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DBA_RATE_DISTANCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_DISTANCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_DISTANCE_GID",
+          "columnName": "RATE_DISTANCE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DBA_SOURCE_COUNTRY_CODE3_G",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_CODE3_GID",
+          "columnName": "SOURCE_COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DBA_DEST_COUNTRY_CODE3_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_CODE3_GID",
+          "columnName": "DEST_COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DBA_SOURCE_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SOURCE_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DBA_DEST_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DEST_LOCATION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_DBA_CITY_COUNTRY",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_CITY"
+        },
+        {
+          "sequence": 2,
+          "name": "SOURCE_COUNTRY_CODE3_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "DEST_CITY"
+        },
+        {
+          "sequence": 4,
+          "name": "DEST_COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_DBA_CITY_PROVINCE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_CITY"
+        },
+        {
+          "sequence": 2,
+          "name": "SOURCE_PROVINCE_CODE"
+        },
+        {
+          "sequence": 3,
+          "name": "DEST_CITY"
+        },
+        {
+          "sequence": 4,
+          "name": "DEST_PROVINCE_CODE"
+        }
+      ]
+    }
+  ]
+}

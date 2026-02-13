@@ -1,1 +1,272 @@
-{"table": {"schema": "glogowner","name": "invoice_stop","description": "Contains the stops that are related to the shipment referred to on the invoice.  The difference between an invoice stop and an invoice route is that a new route indicates a change in transportation carrier (and the location of the interchange), while a stop is simply a stop to pick up or deliver goods."},"columns": [{"name": "INVOICE_GID","description": "The GID for the invoice.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_SEQ_NO","description": "Stop sequence number.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "The GID for the location on the invoice.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_REFNUM_QUAL_GID","description": "The location reference number qualifier GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_REFNUM","description": "A reference number for the location on the invoice.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOICE_STOP_REASON_GID","description": "The invoice stop reason GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_PREFIX","description": "Equipment prefix.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_NUMBER","description": "The equipment number on the invoice.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DATE","description": "Start date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DATE","description": "End date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "INVOICE_GID"},{"sequence": 2,"columnName": "STOP_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_INV_STP_INV_GID","cascadeDelete": false,"parentTableName": "INVOICE","columnRelation": [{"sequence": 1,"parentColumnName": "INVOICE_GID","columnName": "INVOICE_GID"}]},{"foreignKeyName": "FK_INV_STP_LOC_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"}]},{"foreignKeyName": "FK_INV_STP_LRQ_GID","cascadeDelete": false,"parentTableName": "LOCATION_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_REFNUM_QUAL_GID","columnName": "LOCATION_REFNUM_QUAL_GID"}]},{"foreignKeyName": "FK_INV_STP_ISR_GID","cascadeDelete": false,"parentTableName": "INVOICE_STOP_REASON","columnRelation": [{"sequence": 1,"parentColumnName": "INVOICE_STOP_REASON_GID","columnName": "INVOICE_STOP_REASON_GID"}]}],"childTables": ["INVOICE_STOP_REFNUM","INVOICE_STOP_SEAL"],"indices": [{"indexName": "IND_INV_STOP_LOCATION_GID","columnNames": [{"sequence": 1,"name": "LOCATION_GID"}]},{"indexName": "IX_INV_STP_INVOICE_GID","columnNames": [{"sequence": 1,"name": "INVOICE_GID"}]},{"indexName": "IX_INV_STP_ISR_GID","columnNames": [{"sequence": 1,"name": "INVOICE_STOP_REASON_GID"}]},{"indexName": "IX_INV_STP_LRQ_GID","columnNames": [{"sequence": 1,"name": "LOCATION_REFNUM_QUAL_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "invoice_stop",
+    "description": "Contains the stops that are related to the shipment referred to on the invoice.  The difference between an invoice stop and an invoice route is that a new route indicates a change in transportation carrier (and the location of the interchange), while a stop is simply a stop to pick up or deliver goods."
+  },
+  "columns": [
+    {
+      "name": "INVOICE_GID",
+      "description": "The GID for the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_SEQ_NO",
+      "description": "Stop sequence number.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "The GID for the location on the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_REFNUM_QUAL_GID",
+      "description": "The location reference number qualifier GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_REFNUM",
+      "description": "A reference number for the location on the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOICE_STOP_REASON_GID",
+      "description": "The invoice stop reason GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_PREFIX",
+      "description": "Equipment prefix.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_NUMBER",
+      "description": "The equipment number on the invoice.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DATE",
+      "description": "Start date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DATE",
+      "description": "End date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "INVOICE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STOP_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_INV_STP_INV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INVOICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOICE_GID",
+          "columnName": "INVOICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_INV_STP_LOC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_INV_STP_LRQ_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_REFNUM_QUAL_GID",
+          "columnName": "LOCATION_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_INV_STP_ISR_GID",
+      "cascadeDelete": false,
+      "parentTableName": "INVOICE_STOP_REASON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOICE_STOP_REASON_GID",
+          "columnName": "INVOICE_STOP_REASON_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "INVOICE_STOP_REFNUM",
+    "INVOICE_STOP_SEAL"
+  ],
+  "indices": [
+    {
+      "indexName": "IND_INV_STOP_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_INV_STP_INVOICE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INVOICE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_INV_STP_ISR_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INVOICE_STOP_REASON_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_INV_STP_LRQ_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_REFNUM_QUAL_GID"
+        }
+      ]
+    }
+  ]
+}

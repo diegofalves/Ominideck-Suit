@@ -1,1 +1,153 @@
-{"table": {"schema": "glogowner","name": "s_sul_accessorial","description": ""},"columns": [{"name": "S_SHIP_UNIT_GID","description": "The GID for the ship unit associated with the shipment","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_LINE_NO","description": "The unique sequence within the ship unit to define the individual line items.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_CODE_GID","description": "The accessorial code GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "S_SHIP_UNIT_GID"},{"sequence": 2,"columnName": "S_SHIP_UNIT_LINE_NO"},{"sequence": 3,"columnName": "ACCESSORIAL_CODE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SSULA_S_SHIP_UNIT_LINE","cascadeDelete": false,"parentTableName": "S_SHIP_UNIT_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"},{"sequence": 2,"parentColumnName": "S_SHIP_UNIT_LINE_NO","columnName": "S_SHIP_UNIT_LINE_NO"}]},{"foreignKeyName": "FK_SSULA_ACCESSORIAL_CODE_GID","cascadeDelete": false,"parentTableName": "ACCESSORIAL_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ACCESSORIAL_CODE_GID","columnName": "ACCESSORIAL_CODE_GID"}]}],"childTables": ["S_SUL_ACCESSORIAL_REMARK"],"indices": [{"indexName": "IX_SSULA_S_SHIP_UNIT_GID","columnNames": [{"sequence": 1,"name": "S_SHIP_UNIT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "s_sul_accessorial",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "S_SHIP_UNIT_GID",
+      "description": "The GID for the ship unit associated with the shipment",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_LINE_NO",
+      "description": "The unique sequence within the ship unit to define the individual line items.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_CODE_GID",
+      "description": "The accessorial code GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "S_SHIP_UNIT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "S_SHIP_UNIT_LINE_NO"
+    },
+    {
+      "sequence": 3,
+      "columnName": "ACCESSORIAL_CODE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SSULA_S_SHIP_UNIT_LINE",
+      "cascadeDelete": false,
+      "parentTableName": "S_SHIP_UNIT_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "S_SHIP_UNIT_LINE_NO",
+          "columnName": "S_SHIP_UNIT_LINE_NO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSULA_ACCESSORIAL_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACCESSORIAL_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACCESSORIAL_CODE_GID",
+          "columnName": "ACCESSORIAL_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "S_SUL_ACCESSORIAL_REMARK"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_SSULA_S_SHIP_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_SHIP_UNIT_GID"
+        }
+      ]
+    }
+  ]
+}

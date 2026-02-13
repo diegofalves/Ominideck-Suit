@@ -1,1 +1,165 @@
-{"table": {"schema": "glogowner","name": "gtm_trans_reqd_reviewer","description": "Reviewer for a trade required document"},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TRANSACTION_GID","description": "The GID for the GTM trade transaction.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_DEF_GID","description": "Required document type for the GTM trade transaction.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTACT_GID","description": "The GID for the document reviewer.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AS_INVOLVED_PARTY_QUAL_GID","description": "The involved party of the reviewer if they are acting as a party on the trade transaction.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TRANSACTION_GID"},{"sequence": 2,"columnName": "DOCUMENT_DEF_GID"},{"sequence": 3,"columnName": "CONTACT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GTRQR_GTM_TRANSACTION_REQD","cascadeDelete": false,"parentTableName": "GTM_TRANSACTION_REQDOC","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TRANSACTION_GID","columnName": "GTM_TRANSACTION_GID"},{"sequence": 2,"parentColumnName": "DOCUMENT_DEF_GID","columnName": "DOCUMENT_DEF_GID"}]},{"foreignKeyName": "FK_GTRQR_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "CONTACT_GID"}]},{"foreignKeyName": "FK_GTRQR_INVOLVED_PARTY_QUAL","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "AS_INVOLVED_PARTY_QUAL_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_trans_reqd_reviewer",
+    "description": "Reviewer for a trade required document"
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TRANSACTION_GID",
+      "description": "The GID for the GTM trade transaction.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_DEF_GID",
+      "description": "Required document type for the GTM trade transaction.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTACT_GID",
+      "description": "The GID for the document reviewer.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AS_INVOLVED_PARTY_QUAL_GID",
+      "description": "The involved party of the reviewer if they are acting as a party on the trade transaction.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TRANSACTION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "DOCUMENT_DEF_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "CONTACT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTRQR_GTM_TRANSACTION_REQD",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TRANSACTION_REQDOC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TRANSACTION_GID",
+          "columnName": "GTM_TRANSACTION_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "DOCUMENT_DEF_GID",
+          "columnName": "DOCUMENT_DEF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTRQR_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTRQR_INVOLVED_PARTY_QUAL",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "AS_INVOLVED_PARTY_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

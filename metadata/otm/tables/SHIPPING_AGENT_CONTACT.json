@@ -1,1 +1,663 @@
-{"table": {"schema": "glogowner","name": "shipping_agent_contact","description": "Used to define the agent contacts for a given agent."},"columns": [{"name": "SHIPPING_AGENT_CONTACT_GID","description": "Internal Id of the shipping agent contact","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPPING_AGENT_CONTACT_XID","description": "External Id of the shipping agent contact","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPPING_AGENT_GID","description": "Id of the related shipping agent","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_QUAL_GID","description": "The role of the agent","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_CONTACT_GID","description": "The primary contact id of the agent","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COM_METHOD_GID","description": "The preferred communication method of the agent","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "Indicator of whether or not the agent is active","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "EFFECTIVE_DATE","description": "Date the agent becomes effective","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "Date the agent expires","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRIMARY_LEG_MODE_PROFILE_GID","description": "Mode profile to be compared to transport mode of primary leg sell/buy shipment depending on agent type","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_LOC_REGION_GID","description": "Location profile to be compared with dest location of primary leg sell/buy shipment depending on agent type","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPPER_LOCATION_PROFILE_GID","description": "Location profile to be compared with location related to 'SHIPPER' involved party on the order","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONSIGNEE_LOCATION_PROFILE_GID","description": "Location profile to be compared with location related to 'CONSIGNEE' involved party on the order","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_PRIMARY","description": "Indicator of whether or not the agent is considered the primary in the corresponding geography","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "IS_ALLOW_HOUSE_COLLECT","description": "Indicator of whether or not the house bill is allowed to have a 'COLLECT' payment method","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "MAX_HOUSE_COLLECT_AMT","description": "Maximum amount of freight charges on the house bill that can be 'COLLECT'","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_HOUSE_COLLECT_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_HOUSE_COLLECT_AMT_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_TYPE","description": "Type of Master B/L ('Express', or 'Original')","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'EXPRESS','ORIGINAL'","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_CONSIGNEE_TYPE","description": "Determines who to make the Master B/L Consignee party ('Consol Agent', 'House B/L Consignee', House B/L Notify Party')","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'CONSOL AGENT','HOUSE B/L CONSIGNEE','HOUSE B/L NOTIFY PARTY'","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_CONS_CONTACT_GID","description": "Contact Id of the Master B/L Consignee if assigned by the 'Consol Agent'.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_CONS_COM_METH_GID","description": "Communication Method of the Master B/L Consignee.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_NOTIFY_TYPE","description": "Determines who to make the Master B/L Notify party ('Consol Agent', 'House B/L Consignee', 'House B/L Notify Party')","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'CONSOL AGENT','HOUSE B/L CONSIGNEE','HOUSE B/L NOTIFY PARTY'","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_NOTIFY_CONTACT_GID","description": "Contact Id of the Master B/L Notify if assigned by the 'Consol Agent'.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_NOTIFY_COM_METH_GID","description": "Communication Method of the Master B/L Notify.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_A_NOTIFY_TYPE","description": "Determines who to make the Master B/L Also Notify party ('Consol Agent', 'House B/L Consignee', 'House B/L Notify Party')","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'CONSOL AGENT','HOUSE B/L CONSIGNEE','HOUSE B/L NOTIFY PARTY'","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_A_NOTIFY_CONTACT_GID","description": "Contact Id of the Master B/L Also Notify if assigned by the 'Consol Agent'.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAST_BL_A_NOTIFY_COM_METH_GID","description": "Communication Method of the Master B/L Also Notify.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_INTERNAL","description": "Indicator of whether or not the 'Sales Agent' is an internal or external sales agent","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "PAYMENT_METHOD_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NFRC_RULE_GID","description": "This field will be used to create NFRC shipment when run assign shipping agent to job action.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPPING_AGENT_TYPE_GID","description": "Indicates which shipping agent type this agent is.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPPING_AGENT_CONTACT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SHAR_SHIPPING_AGENT_GID","cascadeDelete": false,"parentTableName": "SHIPPING_AGENT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPPING_AGENT_GID","columnName": "SHIPPING_AGENT_GID"}]},{"foreignKeyName": "FK_SHAR_INVOLVED_PARTY_QUAL_G","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "INVOLVED_PARTY_QUAL_GID"}]},{"foreignKeyName": "FK_SHAR_INVOLVED_PARTY_CONTAC","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "INVOLVED_PARTY_CONTACT_GID"}]},{"foreignKeyName": "FK_SHAR_COM_METHOD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "COM_METHOD_GID"}]},{"foreignKeyName": "FK_SHAR_PRIMARY_LEG_MODE_PROF","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "PRIMARY_LEG_MODE_PROFILE_GID"}]},{"foreignKeyName": "FK_SHAR_DEST_LOC_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "DEST_LOC_REGION_GID"}]},{"foreignKeyName": "FK_SHAR_SHIPPER_LOCATION_PROF","cascadeDelete": false,"parentTableName": "LOCATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_PROFILE_GID","columnName": "SHIPPER_LOCATION_PROFILE_GID"}]},{"foreignKeyName": "FK_SHAR_CONSIGNEE_LOCATION_PR","cascadeDelete": false,"parentTableName": "LOCATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_PROFILE_GID","columnName": "CONSIGNEE_LOCATION_PROFILE_GID"}]},{"foreignKeyName": "FK_SHAC_MAX_HOUSE_COLLECT_CURR","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "MAX_HOUSE_COLLECT_CURRENCY_GID"}]},{"foreignKeyName": "FK_SHAR_MAST_BL_CONS_CONTACT_","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "MAST_BL_CONS_CONTACT_GID"}]},{"foreignKeyName": "FK_SHAR_MAST_BL_CONS_COMM_MET","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "MAST_BL_CONS_COM_METH_GID"}]},{"foreignKeyName": "FK_SHAR_MAST_BL_NOTIFY_CONTAC","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "MAST_BL_NOTIFY_CONTACT_GID"}]},{"foreignKeyName": "FK_SHAR_MAST_BL_NOTIFY_COMM_M","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "MAST_BL_NOTIFY_COM_METH_GID"}]},{"foreignKeyName": "FK_SHAR_MAST_BL_A_NOTIFY_CONT","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "MAST_BL_A_NOTIFY_CONTACT_GID"}]},{"foreignKeyName": "FK_SHAR_MAST_BL_A_NOTIFY_COMM","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "MAST_BL_A_NOTIFY_COM_METH_GID"}]},{"foreignKeyName": "FK_SHAC_PAYMENT_METHOD_CODE_GI","cascadeDelete": false,"parentTableName": "PAYMENT_METHOD_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "PAYMENT_METHOD_CODE_GID","columnName": "PAYMENT_METHOD_CODE_GID"}]},{"foreignKeyName": "FK_SAC_NFRC_RULE_GID","cascadeDelete": false,"parentTableName": "NFRC_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "NFRC_RULE_GID","columnName": "NFRC_RULE_GID"}]},{"foreignKeyName": "FK_SAC_SHIPPING_AGENT_TYPE","cascadeDelete": false,"parentTableName": "SHIPPING_AGENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPPING_AGENT_TYPE_GID","columnName": "SHIPPING_AGENT_TYPE_GID"}]}],"childTables": ["GL_USER_SHP_AGNT_CONTACT_JOIN","JOB_INVOLVED_PARTY","SHIPMENT","SHIPMENT_AGENT_RSP","SHIPPING_AGENT_CONTACT_NOTE","SHIPPING_AGENT_CONTACT_PROFIT","SHIPPING_AGENT_CONTACT_TEXT"],"indices": [{"indexName": "IX_SHAR_MAST_BL_A_NOTIFY_COMM","columnNames": [{"sequence": 1,"name": "MAST_BL_A_NOTIFY_COM_METH_GID"}]},{"indexName": "IX_SHAR_MAST_BL_NOTIFY_COMM_M","columnNames": [{"sequence": 1,"name": "MAST_BL_NOTIFY_COM_METH_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "shipping_agent_contact",
+    "description": "Used to define the agent contacts for a given agent."
+  },
+  "columns": [
+    {
+      "name": "SHIPPING_AGENT_CONTACT_GID",
+      "description": "Internal Id of the shipping agent contact",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPPING_AGENT_CONTACT_XID",
+      "description": "External Id of the shipping agent contact",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPPING_AGENT_GID",
+      "description": "Id of the related shipping agent",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_QUAL_GID",
+      "description": "The role of the agent",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_CONTACT_GID",
+      "description": "The primary contact id of the agent",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COM_METHOD_GID",
+      "description": "The preferred communication method of the agent",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "Indicator of whether or not the agent is active",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "Date the agent becomes effective",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "Date the agent expires",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRIMARY_LEG_MODE_PROFILE_GID",
+      "description": "Mode profile to be compared to transport mode of primary leg sell/buy shipment depending on agent type",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_LOC_REGION_GID",
+      "description": "Location profile to be compared with dest location of primary leg sell/buy shipment depending on agent type",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPPER_LOCATION_PROFILE_GID",
+      "description": "Location profile to be compared with location related to 'SHIPPER' involved party on the order",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONSIGNEE_LOCATION_PROFILE_GID",
+      "description": "Location profile to be compared with location related to 'CONSIGNEE' involved party on the order",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_PRIMARY",
+      "description": "Indicator of whether or not the agent is considered the primary in the corresponding geography",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "IS_ALLOW_HOUSE_COLLECT",
+      "description": "Indicator of whether or not the house bill is allowed to have a 'COLLECT' payment method",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "MAX_HOUSE_COLLECT_AMT",
+      "description": "Maximum amount of freight charges on the house bill that can be 'COLLECT'",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_HOUSE_COLLECT_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_HOUSE_COLLECT_AMT_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_TYPE",
+      "description": "Type of Master B/L ('Express', or 'Original')",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'EXPRESS','ORIGINAL'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_CONSIGNEE_TYPE",
+      "description": "Determines who to make the Master B/L Consignee party ('Consol Agent', 'House B/L Consignee', House B/L Notify Party')",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'CONSOL AGENT','HOUSE B/L CONSIGNEE','HOUSE B/L NOTIFY PARTY'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_CONS_CONTACT_GID",
+      "description": "Contact Id of the Master B/L Consignee if assigned by the 'Consol Agent'.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_CONS_COM_METH_GID",
+      "description": "Communication Method of the Master B/L Consignee.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_NOTIFY_TYPE",
+      "description": "Determines who to make the Master B/L Notify party ('Consol Agent', 'House B/L Consignee', 'House B/L Notify Party')",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'CONSOL AGENT','HOUSE B/L CONSIGNEE','HOUSE B/L NOTIFY PARTY'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_NOTIFY_CONTACT_GID",
+      "description": "Contact Id of the Master B/L Notify if assigned by the 'Consol Agent'.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_NOTIFY_COM_METH_GID",
+      "description": "Communication Method of the Master B/L Notify.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_A_NOTIFY_TYPE",
+      "description": "Determines who to make the Master B/L Also Notify party ('Consol Agent', 'House B/L Consignee', 'House B/L Notify Party')",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'CONSOL AGENT','HOUSE B/L CONSIGNEE','HOUSE B/L NOTIFY PARTY'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_A_NOTIFY_CONTACT_GID",
+      "description": "Contact Id of the Master B/L Also Notify if assigned by the 'Consol Agent'.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAST_BL_A_NOTIFY_COM_METH_GID",
+      "description": "Communication Method of the Master B/L Also Notify.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_INTERNAL",
+      "description": "Indicator of whether or not the 'Sales Agent' is an internal or external sales agent",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "PAYMENT_METHOD_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NFRC_RULE_GID",
+      "description": "This field will be used to create NFRC shipment when run assign shipping agent to job action.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPPING_AGENT_TYPE_GID",
+      "description": "Indicates which shipping agent type this agent is.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPPING_AGENT_CONTACT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SHAR_SHIPPING_AGENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPPING_AGENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPPING_AGENT_GID",
+          "columnName": "SHIPPING_AGENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_INVOLVED_PARTY_QUAL_G",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "INVOLVED_PARTY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_INVOLVED_PARTY_CONTAC",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "INVOLVED_PARTY_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_COM_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_PRIMARY_LEG_MODE_PROF",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "PRIMARY_LEG_MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_DEST_LOC_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "DEST_LOC_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_SHIPPER_LOCATION_PROF",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_PROFILE_GID",
+          "columnName": "SHIPPER_LOCATION_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_CONSIGNEE_LOCATION_PR",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_PROFILE_GID",
+          "columnName": "CONSIGNEE_LOCATION_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAC_MAX_HOUSE_COLLECT_CURR",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "MAX_HOUSE_COLLECT_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_MAST_BL_CONS_CONTACT_",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "MAST_BL_CONS_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_MAST_BL_CONS_COMM_MET",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "MAST_BL_CONS_COM_METH_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_MAST_BL_NOTIFY_CONTAC",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "MAST_BL_NOTIFY_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_MAST_BL_NOTIFY_COMM_M",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "MAST_BL_NOTIFY_COM_METH_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_MAST_BL_A_NOTIFY_CONT",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "MAST_BL_A_NOTIFY_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAR_MAST_BL_A_NOTIFY_COMM",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "MAST_BL_A_NOTIFY_COM_METH_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHAC_PAYMENT_METHOD_CODE_GI",
+      "cascadeDelete": false,
+      "parentTableName": "PAYMENT_METHOD_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PAYMENT_METHOD_CODE_GID",
+          "columnName": "PAYMENT_METHOD_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SAC_NFRC_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "NFRC_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "NFRC_RULE_GID",
+          "columnName": "NFRC_RULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SAC_SHIPPING_AGENT_TYPE",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPPING_AGENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPPING_AGENT_TYPE_GID",
+          "columnName": "SHIPPING_AGENT_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "GL_USER_SHP_AGNT_CONTACT_JOIN",
+    "JOB_INVOLVED_PARTY",
+    "SHIPMENT",
+    "SHIPMENT_AGENT_RSP",
+    "SHIPPING_AGENT_CONTACT_NOTE",
+    "SHIPPING_AGENT_CONTACT_PROFIT",
+    "SHIPPING_AGENT_CONTACT_TEXT"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_SHAR_MAST_BL_A_NOTIFY_COMM",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MAST_BL_A_NOTIFY_COM_METH_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SHAR_MAST_BL_NOTIFY_COMM_M",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MAST_BL_NOTIFY_COM_METH_GID"
+        }
+      ]
+    }
+  ]
+}

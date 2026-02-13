@@ -1,1 +1,259 @@
-{"table": {"schema": "glogowner","name": "i_log","description": "This table contains the audit trail information about the XML transmissions and the transactions within them. The status of the transmission and transactions received, processed or in error is stored per record. The status is stored as I-Information, W-Warning, E-Errors. In other words: The I_LOG table store integration log messages, which include errors, warnings, and informational messages."},"columns": [{"name": "I_LOG_SEQNO","description": "The I_LOG_SEQNO column uniquely identifies each row in the I_LOG table.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_TRANSACTION_NO","description": "The I_TRANSACTION_NO column specifies the transaction to which this log message pertains.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_TRANSMISSION_NO","description": "The I_TRANSMISSION_NO column specifies the transmission to which this log message pertains.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WRITTEN_BY","description": "The WRITTEN_BY column specifies the application that wrote this log message.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_MESSAGE_CLASS","description": "The I_MESSAGE_CLASS column indicates if the message is an error (E), warning (W) or informational (I) in nature.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'I','E','W'","conditionalConstraint": "","defaultValue": "'I'"},{"name": "I_MESSAGE_CODE","description": "The I_MESSAGE_CODE column is a textual message code. An example is INVALID_DATE_FORMAT.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_MESSAGE_TEXT","description": "The I_MESSAGE_TEXT column contains the full text of the message.","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_STAMP","description": "The TIME_STAMP column indicates the date and time for when the log message was written.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "SYSDATE"},{"name": "PARTITION_KEY","description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_MESSAGE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESSING_ERROR_CODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROCESS_ID","description": "Process ID of process which inserted the log records","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "I_LOG_SEQNO"}],"foreignKeys": [{"foreignKeyName": "FK_IL_PROCESSING_ERROR_CODE_G","cascadeDelete": false,"parentTableName": "DIAG_PROCESS_FAILURE_REASON","columnRelation": [{"sequence": 1,"parentColumnName": "REASON_CODE_GID","columnName": "PROCESSING_ERROR_CODE_GID"}]}],"childTables": [],"indices": [{"indexName": "ILOG_TRANS","columnNames": [{"sequence": 1,"name": "I_TRANSMISSION_NO"}]},{"indexName": "IND_ILOG_ITRANSA_NO","columnNames": [{"sequence": 1,"name": "I_TRANSACTION_NO"}]},{"indexName": "IND_TRANS_NOS","columnNames": [{"sequence": 1,"name": "I_TRANSMISSION_NO"},{"sequence": 2,"name": "I_TRANSACTION_NO"}]},{"indexName": "IX_IL_PROCESSING_ERROR_CODE_G","columnNames": [{"sequence": 1,"name": "PROCESSING_ERROR_CODE_GID"}]},{"indexName": "IX_I_MESSAGE_GID","columnNames": [{"sequence": 1,"name": "I_MESSAGE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "i_log",
+    "description": "This table contains the audit trail information about the XML transmissions and the transactions within them. The status of the transmission and transactions received, processed or in error is stored per record. The status is stored as I-Information, W-Warning, E-Errors. In other words: The I_LOG table store integration log messages, which include errors, warnings, and informational messages."
+  },
+  "columns": [
+    {
+      "name": "I_LOG_SEQNO",
+      "description": "The I_LOG_SEQNO column uniquely identifies each row in the I_LOG table.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_TRANSACTION_NO",
+      "description": "The I_TRANSACTION_NO column specifies the transaction to which this log message pertains.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_TRANSMISSION_NO",
+      "description": "The I_TRANSMISSION_NO column specifies the transmission to which this log message pertains.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WRITTEN_BY",
+      "description": "The WRITTEN_BY column specifies the application that wrote this log message.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_MESSAGE_CLASS",
+      "description": "The I_MESSAGE_CLASS column indicates if the message is an error (E), warning (W) or informational (I) in nature.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'I','E','W'",
+      "conditionalConstraint": "",
+      "defaultValue": "'I'"
+    },
+    {
+      "name": "I_MESSAGE_CODE",
+      "description": "The I_MESSAGE_CODE column is a textual message code. An example is INVALID_DATE_FORMAT.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_MESSAGE_TEXT",
+      "description": "The I_MESSAGE_TEXT column contains the full text of the message.",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_STAMP",
+      "description": "The TIME_STAMP column indicates the date and time for when the log message was written.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "SYSDATE"
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_MESSAGE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESSING_ERROR_CODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROCESS_ID",
+      "description": "Process ID of process which inserted the log records",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "I_LOG_SEQNO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_IL_PROCESSING_ERROR_CODE_G",
+      "cascadeDelete": false,
+      "parentTableName": "DIAG_PROCESS_FAILURE_REASON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REASON_CODE_GID",
+          "columnName": "PROCESSING_ERROR_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "ILOG_TRANS",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_TRANSMISSION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IND_ILOG_ITRANSA_NO",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_TRANSACTION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IND_TRANS_NOS",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_TRANSMISSION_NO"
+        },
+        {
+          "sequence": 2,
+          "name": "I_TRANSACTION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IL_PROCESSING_ERROR_CODE_G",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PROCESSING_ERROR_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_I_MESSAGE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_MESSAGE_GID"
+        }
+      ]
+    }
+  ]
+}

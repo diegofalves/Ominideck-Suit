@@ -799,6 +799,38 @@
       font-weight: 500;
     }
 
+    .panel-brand__nav {
+      grid-column: 3;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .panel-brand__link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid #d9e6fa;
+      background: #f7fbff;
+      color: #123a74;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .panel-brand__link:hover {
+      background: #eaf2ff;
+      border-color: #b9cff4;
+      transform: translateY(-1px);
+    }
+
     @media (max-width: 768px) {
       .panel-brand {
         display: flex;
@@ -824,6 +856,10 @@
 
       .panel-brand__title {
         font-size: clamp(13px, 3.8vw, 20px);
+      }
+
+      .panel-brand__nav {
+        justify-content: center;
       }
     }
 
@@ -898,6 +934,10 @@
     <h1 class="panel-brand__title">Painel de Construção - Projeto de Migração</h1>
     <p class="panel-brand__subtitle">Gestão e acompanhamento da migração OTM DEV para OTM PROD</p>
   </div>
+  <nav class="panel-brand__nav" aria-label="Navegação do painel">
+    <a class="panel-brand__link" href="/">Voltar para Home</a>
+    <a class="panel-brand__link" href="/dashboard-migracao">Voltar para Dashboard</a>
+  </nav>
 </header>
 {% set change_history = project.project_metadata.change_history if project and project.project_metadata else [] %}
 <script>

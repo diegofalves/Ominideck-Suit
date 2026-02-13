@@ -1,1 +1,212 @@
-{"table": {"schema": "glogowner","name": "udc_classification_list_d","description": "The User Defined Commodities contained in the UDC Classification List."},"columns": [{"name": "UDC_CLASSIFICATION_LIST_GID","description": "Unique ID for name of list.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQ_NO","description": "Unique sequence number","dataType": "NUMBER","size": 8,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED_COMMODITY_GID","description": "User Defined Commodity that is part of list.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "Only classify item this way when rating for this service provider.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_OFFERING_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERSPECTIVE","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'B','S'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "UDC_CLASSIFICATION_LIST_GID"},{"sequence": 2,"columnName": "SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_UDCCLD_UDC_CLS_LIST_GID","cascadeDelete": false,"parentTableName": "UDC_CLASSIFICATION_LIST","columnRelation": [{"sequence": 1,"parentColumnName": "UDC_CLASSIFICATION_LIST_GID","columnName": "UDC_CLASSIFICATION_LIST_GID"}]},{"foreignKeyName": "FK_UDCCLD_USRDEFCOMMD_GID","cascadeDelete": false,"parentTableName": "USER_DEFINED_COMMODITY","columnRelation": [{"sequence": 1,"parentColumnName": "USER_DEFINED_COMMODITY_GID","columnName": "USER_DEFINED_COMMODITY_GID"}]},{"foreignKeyName": "FK_UDCCLD_SERVPROV_GID","cascadeDelete": false,"parentTableName": "SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"}]},{"foreignKeyName": "FK_UCLD_RATE_OFFERING_GID","cascadeDelete": false,"parentTableName": "RATE_OFFERING","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_OFFERING_GID","columnName": "RATE_OFFERING_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_UDC_CLASSIFICATION_LIST_D","columnNames": [{"sequence": 1,"name": "UDC_CLASSIFICATION_LIST_GID"},{"sequence": 2,"name": "SERVPROV_GID"},{"sequence": 3,"name": "RATE_OFFERING_GID"},{"sequence": 4,"name": "PERSPECTIVE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "udc_classification_list_d",
+    "description": "The User Defined Commodities contained in the UDC Classification List."
+  },
+  "columns": [
+    {
+      "name": "UDC_CLASSIFICATION_LIST_GID",
+      "description": "Unique ID for name of list.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQ_NO",
+      "description": "Unique sequence number",
+      "dataType": "NUMBER",
+      "size": 8,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED_COMMODITY_GID",
+      "description": "User Defined Commodity that is part of list.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "Only classify item this way when rating for this service provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_OFFERING_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERSPECTIVE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'B','S'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "UDC_CLASSIFICATION_LIST_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_UDCCLD_UDC_CLS_LIST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "UDC_CLASSIFICATION_LIST",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "UDC_CLASSIFICATION_LIST_GID",
+          "columnName": "UDC_CLASSIFICATION_LIST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_UDCCLD_USRDEFCOMMD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "USER_DEFINED_COMMODITY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "USER_DEFINED_COMMODITY_GID",
+          "columnName": "USER_DEFINED_COMMODITY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_UDCCLD_SERVPROV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_UCLD_RATE_OFFERING_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_OFFERING",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_OFFERING_GID",
+          "columnName": "RATE_OFFERING_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_UDC_CLASSIFICATION_LIST_D",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "UDC_CLASSIFICATION_LIST_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "SERVPROV_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "RATE_OFFERING_GID"
+        },
+        {
+          "sequence": 4,
+          "name": "PERSPECTIVE"
+        }
+      ]
+    }
+  ]
+}

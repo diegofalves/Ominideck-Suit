@@ -1,1 +1,144 @@
-{"table": {"schema": "glogowner","name": "cms_param","description": "Default parameter generators for documents sent to this CMS."},"columns": [{"name": "CONTENT_MANAGEMENT_SYSTEM_GID","description": "Content Management System ID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAM_NAME","description": "Parameter name","dataType": "VARCHAR2","size": 100,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAM_VALUE_GEN_GID","description": "Parameter value generator","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MODIFIABLE","description": "Y, if the parameter can be regenerated after document creation","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "CONTENT_MANAGEMENT_SYSTEM_GID"},{"sequence": 2,"columnName": "PARAM_NAME"}],"foreignKeys": [{"foreignKeyName": "FK_CMSP_CONTENT_MANAGEMENT_SY","cascadeDelete": false,"parentTableName": "CONTENT_MANAGEMENT_SYSTEM","columnRelation": [{"sequence": 1,"parentColumnName": "CONTENT_MANAGEMENT_SYSTEM_GID","columnName": "CONTENT_MANAGEMENT_SYSTEM_GID"}]},{"foreignKeyName": "FK_CMSP_CMS_PARAM_GEN_GID","cascadeDelete": false,"parentTableName": "CMS_PARAM_GENERATOR","columnRelation": [{"sequence": 1,"parentColumnName": "CMS_PARAM_GEN_GID","columnName": "PARAM_VALUE_GEN_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "cms_param",
+    "description": "Default parameter generators for documents sent to this CMS."
+  },
+  "columns": [
+    {
+      "name": "CONTENT_MANAGEMENT_SYSTEM_GID",
+      "description": "Content Management System ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAM_NAME",
+      "description": "Parameter name",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAM_VALUE_GEN_GID",
+      "description": "Parameter value generator",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MODIFIABLE",
+      "description": "Y, if the parameter can be regenerated after document creation",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CONTENT_MANAGEMENT_SYSTEM_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PARAM_NAME"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CMSP_CONTENT_MANAGEMENT_SY",
+      "cascadeDelete": false,
+      "parentTableName": "CONTENT_MANAGEMENT_SYSTEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTENT_MANAGEMENT_SYSTEM_GID",
+          "columnName": "CONTENT_MANAGEMENT_SYSTEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CMSP_CMS_PARAM_GEN_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CMS_PARAM_GENERATOR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CMS_PARAM_GEN_GID",
+          "columnName": "PARAM_VALUE_GEN_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

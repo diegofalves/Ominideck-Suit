@@ -1,1 +1,316 @@
-{"table": {"schema": "glogowner","name": "flex_field_def","description": "This table defines ATTRIBUTE fields for OTM object tables. The defined ATTRIBUTE field can be used as PickList, DropList, FixedDropList, FlexPickList or FlexDropList on Manager Layout and Screen Set."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_FIELD_DEF_GID","description": "Primary key of the table.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_FIELD_DEF_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TABLE_NAME","description": "a valid OTM table name which has flex fields","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIELD_NAME","description": "FLex field name which this definition is for.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ML_TYPE","description": "field type on manager layout, pl(pickList), dl(dropList), fxdl(fixedDropList), flxpl(flexPickList), flxdl(flexDropList)","dataType": "VARCHAR2","size": 5,"isNull": false,"isConstraint": true,"constraintValues": "'pl','dl','fxdl','flxpl','flxdl'","conditionalConstraint": "","defaultValue": ""},{"name": "ML_QUERY_TABLE_GID","description": "The value will used by PickList or DropList on Manager Layout","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ML_FINDER_SET_GID","description": "The value will used by PickList on Manager Layout","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ML_VALID_VALUE_TYPE_GID","description": "Required for fixedDropList type. Valid Values from this ID will be options for this field on Manager Layout","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ML_QUERY","description": "SQL select statement to be used for this field on Manager Layout","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SS_TYPE","description": "field type on screen set, pl(pickList), dl(dropList), fxdl(fixedDropList), flxpl(flexPickList), flxdl(flexDropList)","dataType": "VARCHAR2","size": 5,"isNull": false,"isConstraint": true,"constraintValues": "'pl','dl','fxdl','flxpl','flxdl'","conditionalConstraint": "","defaultValue": ""},{"name": "SS_QUERY_TABLE_GID","description": "The value will used by PickList or DropList on Screen Set","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SS_FINDER_SET_GID","description": "The value will used by PickList on Screen Set","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SS_VALID_VALUE_TYPE_GID","description": "Required for fixedDropList type. Valid Values from this ID will be options for this field on Screen Set","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SS_QUERY","description": "SQL select statement to be used for this field on Screen Set","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "FLEX_FIELD_DEF_GID"}],"foreignKeys": [{"foreignKeyName": "FK_FFD_QUERY_TABLE_GID","cascadeDelete": false,"parentTableName": "QUERY_TABLE","columnRelation": [{"sequence": 1,"parentColumnName": "QUERY_TABLE_GID","columnName": "ML_QUERY_TABLE_GID"}]},{"foreignKeyName": "FK_FFD_FINDER_SET_GID","cascadeDelete": false,"parentTableName": "FINDER_SET","columnRelation": [{"sequence": 1,"parentColumnName": "FINDER_SET_GID","columnName": "ML_FINDER_SET_GID"}]},{"foreignKeyName": "FK_FFD_VALID_VALUE_TYPE_GID","cascadeDelete": false,"parentTableName": "VALID_VALUE_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "VALID_VALUE_TYPE_GID","columnName": "ML_VALID_VALUE_TYPE_GID"}]},{"foreignKeyName": "FK_FFD_QUERY_TABLE_GID2","cascadeDelete": false,"parentTableName": "QUERY_TABLE","columnRelation": [{"sequence": 1,"parentColumnName": "QUERY_TABLE_GID","columnName": "SS_QUERY_TABLE_GID"}]},{"foreignKeyName": "FK_FFD_FINDER_SET_GID2","cascadeDelete": false,"parentTableName": "FINDER_SET","columnRelation": [{"sequence": 1,"parentColumnName": "FINDER_SET_GID","columnName": "SS_FINDER_SET_GID"}]},{"foreignKeyName": "FK_FFD_VALID_VALUE_TYPE_GID2","cascadeDelete": false,"parentTableName": "VALID_VALUE_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "VALID_VALUE_TYPE_GID","columnName": "SS_VALID_VALUE_TYPE_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_TBL_FLD_DN","columnNames": [{"sequence": 1,"name": "TABLE_NAME"},{"sequence": 2,"name": "FIELD_NAME"},{"sequence": 3,"name": "DOMAIN_NAME"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "flex_field_def",
+    "description": "This table defines ATTRIBUTE fields for OTM object tables. The defined ATTRIBUTE field can be used as PickList, DropList, FixedDropList, FlexPickList or FlexDropList on Manager Layout and Screen Set."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_FIELD_DEF_GID",
+      "description": "Primary key of the table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_FIELD_DEF_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TABLE_NAME",
+      "description": "a valid OTM table name which has flex fields",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIELD_NAME",
+      "description": "FLex field name which this definition is for.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ML_TYPE",
+      "description": "field type on manager layout, pl(pickList), dl(dropList), fxdl(fixedDropList), flxpl(flexPickList), flxdl(flexDropList)",
+      "dataType": "VARCHAR2",
+      "size": 5,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'pl','dl','fxdl','flxpl','flxdl'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ML_QUERY_TABLE_GID",
+      "description": "The value will used by PickList or DropList on Manager Layout",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ML_FINDER_SET_GID",
+      "description": "The value will used by PickList on Manager Layout",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ML_VALID_VALUE_TYPE_GID",
+      "description": "Required for fixedDropList type. Valid Values from this ID will be options for this field on Manager Layout",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ML_QUERY",
+      "description": "SQL select statement to be used for this field on Manager Layout",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SS_TYPE",
+      "description": "field type on screen set, pl(pickList), dl(dropList), fxdl(fixedDropList), flxpl(flexPickList), flxdl(flexDropList)",
+      "dataType": "VARCHAR2",
+      "size": 5,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'pl','dl','fxdl','flxpl','flxdl'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SS_QUERY_TABLE_GID",
+      "description": "The value will used by PickList or DropList on Screen Set",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SS_FINDER_SET_GID",
+      "description": "The value will used by PickList on Screen Set",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SS_VALID_VALUE_TYPE_GID",
+      "description": "Required for fixedDropList type. Valid Values from this ID will be options for this field on Screen Set",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SS_QUERY",
+      "description": "SQL select statement to be used for this field on Screen Set",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "FLEX_FIELD_DEF_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_FFD_QUERY_TABLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "QUERY_TABLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "QUERY_TABLE_GID",
+          "columnName": "ML_QUERY_TABLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_FFD_FINDER_SET_GID",
+      "cascadeDelete": false,
+      "parentTableName": "FINDER_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FINDER_SET_GID",
+          "columnName": "ML_FINDER_SET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_FFD_VALID_VALUE_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "VALID_VALUE_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VALID_VALUE_TYPE_GID",
+          "columnName": "ML_VALID_VALUE_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_FFD_QUERY_TABLE_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "QUERY_TABLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "QUERY_TABLE_GID",
+          "columnName": "SS_QUERY_TABLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_FFD_FINDER_SET_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "FINDER_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FINDER_SET_GID",
+          "columnName": "SS_FINDER_SET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_FFD_VALID_VALUE_TYPE_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "VALID_VALUE_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VALID_VALUE_TYPE_GID",
+          "columnName": "SS_VALID_VALUE_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_TBL_FLD_DN",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TABLE_NAME"
+        },
+        {
+          "sequence": 2,
+          "name": "FIELD_NAME"
+        },
+        {
+          "sequence": 3,
+          "name": "DOMAIN_NAME"
+        }
+      ]
+    }
+  ]
+}

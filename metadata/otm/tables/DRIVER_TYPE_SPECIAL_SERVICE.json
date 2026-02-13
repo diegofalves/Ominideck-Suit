@@ -1,1 +1,165 @@
-{"table": {"schema": "glogowner","name": "driver_type_special_service","description": "Define Driver Type special services."},"columns": [{"name": "DRIVER_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SPECIAL_SERVICE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "The effective date of this special service for this driver type.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "The expiration date of this special service for this driver type.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYABLE_INDICATOR_GID","description": "allows overriding the payable indicator for a special service for a particular driver type","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DRIVER_TYPE_GID"},{"sequence": 2,"columnName": "SPECIAL_SERVICE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_DTSS_DRIVER_TYPE_GID","cascadeDelete": false,"parentTableName": "DRIVER_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_TYPE_GID","columnName": "DRIVER_TYPE_GID"}]},{"foreignKeyName": "FK_DTSS_SPECIAL_SERVICE_GID","cascadeDelete": false,"parentTableName": "SPECIAL_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "SPECIAL_SERVICE_GID","columnName": "SPECIAL_SERVICE_GID"}]},{"foreignKeyName": "FK_DTSS_PAYABLE_INDICATOR_GID","cascadeDelete": false,"parentTableName": "PAYABLE_INDICATOR","columnRelation": [{"sequence": 1,"parentColumnName": "PAYABLE_INDICATOR_GID","columnName": "PAYABLE_INDICATOR_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "driver_type_special_service",
+    "description": "Define Driver Type special services."
+  },
+  "columns": [
+    {
+      "name": "DRIVER_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SPECIAL_SERVICE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "The effective date of this special service for this driver type.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "The expiration date of this special service for this driver type.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYABLE_INDICATOR_GID",
+      "description": "allows overriding the payable indicator for a special service for a particular driver type",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DRIVER_TYPE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SPECIAL_SERVICE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DTSS_DRIVER_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_TYPE_GID",
+          "columnName": "DRIVER_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DTSS_SPECIAL_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SPECIAL_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SPECIAL_SERVICE_GID",
+          "columnName": "SPECIAL_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DTSS_PAYABLE_INDICATOR_GID",
+      "cascadeDelete": false,
+      "parentTableName": "PAYABLE_INDICATOR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PAYABLE_INDICATOR_GID",
+          "columnName": "PAYABLE_INDICATOR_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

@@ -1,1 +1,225 @@
-{"table": {"schema": "glogowner","name": "loc_role_profile_handling","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "The GID for the location where the location role profile handling time is being defined. At cross docks and other throughpoints (e.g., pools, ports, etc.), goods arrive on incoming shipments, and then depart on outgoing shipments. For an order at a throughpoint, time is usually required between the end of the incoming shipment and the start of the outgoing shipment. This time might include, for example, how long it takes to move the order from one dock door to another, or how long it takes to prepare documents required for the outgoing shipment. Handling times for this through-point location can be based on the order source and destination. (For example, an order going to a foreign destination will need a longer time at the cross dock for the completion of import/export documentation.) For an order going through this throughpoint, the most specific matching entry in the grid will be used to determine the handling time. For example, if one entry has 5 hours for an order source region representing France, and another entry has 10 hours for an order source region representing Paris, only the 10 hour entry will apply for an order release from a source location in Paris. An order source/destination region of null (blank) is allowed and will match to any source /destination location but is less specific than a non null entry. The handling times are used to adjust the order movement operational pickup/delivery dates.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_ROLE_GID","description": "The GID for the location role.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_ROLE_PROF_HAND_SEQ","description": "Internal key for the 1 to n location role profile handling time entries.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_REGION_GID","description": "The GID for the source region. Used to match an order to an entry.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_REGION_GID","description": "The GID for the destination region. Used to match an order to an entry.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIXED_HANDLING_TIME","description": "Amount fixed handling time to add. Days, hours, and minutes.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIXED_HANDLING_TIME_UOM_CODE","description": "Unit of measture for fixed handling time in days, hours, and minutes.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FIXED_HANDLING_TIME_BASE","description": "Fixed handling time in base unit of measure.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LOCATION_GID"},{"sequence": 2,"columnName": "LOCATION_ROLE_GID"},{"sequence": 3,"columnName": "LOCATION_ROLE_PROF_HAND_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_LRPH_LOCATION_ROLE_PROFILE","cascadeDelete": false,"parentTableName": "LOCATION_ROLE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"},{"sequence": 2,"parentColumnName": "LOCATION_ROLE_GID","columnName": "LOCATION_ROLE_GID"}]},{"foreignKeyName": "FK_LRPH_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "SOURCE_REGION_GID"}]},{"foreignKeyName": "FK_LRPH_DEST_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "DEST_REGION_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_LOC","columnNames": [{"sequence": 1,"name": "LOCATION_GID"}]},{"indexName": "IX_LOCATION_ROLE","columnNames": [{"sequence": 1,"name": "LOCATION_ROLE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "loc_role_profile_handling",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "The GID for the location where the location role profile handling time is being defined. At cross docks and other throughpoints (e.g., pools, ports, etc.), goods arrive on incoming shipments, and then depart on outgoing shipments. For an order at a throughpoint, time is usually required between the end of the incoming shipment and the start of the outgoing shipment. This time might include, for example, how long it takes to move the order from one dock door to another, or how long it takes to prepare documents required for the outgoing shipment. Handling times for this through-point location can be based on the order source and destination. (For example, an order going to a foreign destination will need a longer time at the cross dock for the completion of import/export documentation.) For an order going through this throughpoint, the most specific matching entry in the grid will be used to determine the handling time. For example, if one entry has 5 hours for an order source region representing France, and another entry has 10 hours for an order source region representing Paris, only the 10 hour entry will apply for an order release from a source location in Paris. An order source/destination region of null (blank) is allowed and will match to any source /destination location but is less specific than a non null entry. The handling times are used to adjust the order movement operational pickup/delivery dates.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_ROLE_GID",
+      "description": "The GID for the location role.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_ROLE_PROF_HAND_SEQ",
+      "description": "Internal key for the 1 to n location role profile handling time entries.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_REGION_GID",
+      "description": "The GID for the source region. Used to match an order to an entry.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_REGION_GID",
+      "description": "The GID for the destination region. Used to match an order to an entry.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIXED_HANDLING_TIME",
+      "description": "Amount fixed handling time to add. Days, hours, and minutes.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIXED_HANDLING_TIME_UOM_CODE",
+      "description": "Unit of measture for fixed handling time in days, hours, and minutes.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FIXED_HANDLING_TIME_BASE",
+      "description": "Fixed handling time in base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LOCATION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "LOCATION_ROLE_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "LOCATION_ROLE_PROF_HAND_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LRPH_LOCATION_ROLE_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_ROLE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "LOCATION_ROLE_GID",
+          "columnName": "LOCATION_ROLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRPH_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "SOURCE_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LRPH_DEST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "DEST_REGION_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_LOC",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_LOCATION_ROLE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_ROLE_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,173 @@
-{"table": {"schema": "glogowner","name": "gtm_rps_profile_pref_cset","description": "This table contains information related to the service preferences that must be run on a party based on the constraint set, for the Restricted Party Screening Profile."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_RPS_PROFILE_GID","description": "The Restricted Party Service Profile GID for which the service preferences are configured.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_RPS_PROFILE_SEQ","description": "The Restricted Party Service Profile Sequence Number that is part of the primary key.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_SERVICE_PREF_GID","description": "The service preference associated with the Restricted Party Service Profile.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_CONSTRAINT_SET_GID","description": "The constraints that should be evaluated when determining whether the service preference can be run on the party.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_RPS_PROFILE_GID"},{"sequence": 2,"columnName": "GTM_RPS_PROFILE_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_GRPPC_GTM_RPS_PROFILE_GID","cascadeDelete": false,"parentTableName": "GTM_RPS_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_RPS_PROFILE_GID","columnName": "GTM_RPS_PROFILE_GID"}]},{"foreignKeyName": "FK_GRPPC_GTM_SERVICE_PREF_GID","cascadeDelete": false,"parentTableName": "GTM_SERVICE_PREF","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_SERVICE_PREF_GID","columnName": "GTM_SERVICE_PREF_GID"}]},{"foreignKeyName": "FK_GRPPC_GTM_CONSTRAINT_SET_G","cascadeDelete": false,"parentTableName": "GTM_CONSTRAINT_SET","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CONSTRAINT_SET_GID","columnName": "GTM_CONSTRAINT_SET_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_GTM_SERV_PREF_CSET","columnNames": [{"sequence": 1,"name": "GTM_RPS_PROFILE_GID"},{"sequence": 2,"name": "GTM_SERVICE_PREF_GID"},{"sequence": 3,"name": "GTM_CONSTRAINT_SET_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_rps_profile_pref_cset",
+    "description": "This table contains information related to the service preferences that must be run on a party based on the constraint set, for the Restricted Party Screening Profile."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_RPS_PROFILE_GID",
+      "description": "The Restricted Party Service Profile GID for which the service preferences are configured.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_RPS_PROFILE_SEQ",
+      "description": "The Restricted Party Service Profile Sequence Number that is part of the primary key.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_SERVICE_PREF_GID",
+      "description": "The service preference associated with the Restricted Party Service Profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_CONSTRAINT_SET_GID",
+      "description": "The constraints that should be evaluated when determining whether the service preference can be run on the party.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_RPS_PROFILE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_RPS_PROFILE_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GRPPC_GTM_RPS_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_RPS_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_RPS_PROFILE_GID",
+          "columnName": "GTM_RPS_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GRPPC_GTM_SERVICE_PREF_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_SERVICE_PREF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_SERVICE_PREF_GID",
+          "columnName": "GTM_SERVICE_PREF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GRPPC_GTM_CONSTRAINT_SET_G",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_CONSTRAINT_SET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CONSTRAINT_SET_GID",
+          "columnName": "GTM_CONSTRAINT_SET_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_GTM_SERV_PREF_CSET",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_RPS_PROFILE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "GTM_SERVICE_PREF_GID"
+        },
+        {
+          "sequence": 3,
+          "name": "GTM_CONSTRAINT_SET_GID"
+        }
+      ]
+    }
+  ]
+}

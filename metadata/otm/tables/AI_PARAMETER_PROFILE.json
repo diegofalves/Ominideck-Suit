@@ -1,1 +1,278 @@
-{"table": {"schema": "glogowner","name": "ai_parameter_profile","description": "Parameter profile for generative AI. This includes Cohere-specific parameters."},"columns": [{"name": "AI_PARAMETER_PROFILE_GID","description": "AI Parameter Profile GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AI_PARAMETER_PROFILE_XID","description": "AI Parameter Profile XID.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FREQUENCY_PENALTY","description": "To reduce repetitiveness of generated tokens, this number penalizes new tokens based on their frequency in the generated text so far.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "MAX_TOKENS","description": "The maximum number of output tokens that the model will generate for the response.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1200"},{"name": "PRESENCE_PENALTY","description": "To reduce repetitiveness of generated tokens, this number penalizes new tokens based on whether they have appeared in the generated text so far.","dataType": "NUMBER","isNull": false,"isConstraint": true,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "SAFETY_MODE","description": "Safety mode: Adds a safety instruction for the model to use when generating responses.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'Contextual','Off','Strict'","conditionalConstraint": "","defaultValue": "'Strict'"},{"name": "SEED","description": "If specified, the backend will make a best effort to sample tokens deterministically, so that repeated requests with the same seed and parameters yield the same result.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEMPERATURE","description": "A number that sets the randomness of the generated output.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "TOP_K","description": "A sampling method in which the model chooses the next token randomly from the top k most likely tokens.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "TOP_P","description": "If set to a probability 0.0 < p < 1.0, it ensures that only the most likely tokens, with total probability mass of p, are considered for generation at each step.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ".75"},{"name": "IS_ECHO","description": "Whether or not the prompt should be echoed in the AI respons.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "IS_STREAM","description": "If Y, results should be streamed back to the user.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "SUMMARY_FORMAT","description": "Format for AI summarizations.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'Auto','Bullets','Paragraph'","conditionalConstraint": "","defaultValue": "'Auto'"},{"name": "SUMMARY_LENGTH","description": "Length for AI summarizations.","dataType": "VARCHAR2","size": 10,"isNull": false,"isConstraint": true,"constraintValues": "'Auto','Long','Medium','Short'","conditionalConstraint": "","defaultValue": "'Auto'"},{"name": "TRANSLATION_GID","description": "Translation label for the parameter profile.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROW_PROTECT","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'R','H'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AI_PARAMETER_PROFILE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_AIPP_TRANSLATION_GID","cascadeDelete": false,"parentTableName": "TRANSLATION","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSLATION_GID","columnName": "TRANSLATION_GID"}]},{"foreignKeyName": "FK_AIPP_OTM_RELEASE_GID","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["AI_USE_CASE"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ai_parameter_profile",
+    "description": "Parameter profile for generative AI. This includes Cohere-specific parameters."
+  },
+  "columns": [
+    {
+      "name": "AI_PARAMETER_PROFILE_GID",
+      "description": "AI Parameter Profile GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AI_PARAMETER_PROFILE_XID",
+      "description": "AI Parameter Profile XID.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FREQUENCY_PENALTY",
+      "description": "To reduce repetitiveness of generated tokens, this number penalizes new tokens based on their frequency in the generated text so far.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "MAX_TOKENS",
+      "description": "The maximum number of output tokens that the model will generate for the response.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1200"
+    },
+    {
+      "name": "PRESENCE_PENALTY",
+      "description": "To reduce repetitiveness of generated tokens, this number penalizes new tokens based on whether they have appeared in the generated text so far.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "SAFETY_MODE",
+      "description": "Safety mode: Adds a safety instruction for the model to use when generating responses.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Contextual','Off','Strict'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Strict'"
+    },
+    {
+      "name": "SEED",
+      "description": "If specified, the backend will make a best effort to sample tokens deterministically, so that repeated requests with the same seed and parameters yield the same result.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEMPERATURE",
+      "description": "A number that sets the randomness of the generated output.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "TOP_K",
+      "description": "A sampling method in which the model chooses the next token randomly from the top k most likely tokens.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "TOP_P",
+      "description": "If set to a probability 0.0 < p < 1.0, it ensures that only the most likely tokens, with total probability mass of p, are considered for generation at each step.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ".75"
+    },
+    {
+      "name": "IS_ECHO",
+      "description": "Whether or not the prompt should be echoed in the AI respons.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "IS_STREAM",
+      "description": "If Y, results should be streamed back to the user.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "SUMMARY_FORMAT",
+      "description": "Format for AI summarizations.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Auto','Bullets','Paragraph'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Auto'"
+    },
+    {
+      "name": "SUMMARY_LENGTH",
+      "description": "Length for AI summarizations.",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Auto','Long','Medium','Short'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Auto'"
+    },
+    {
+      "name": "TRANSLATION_GID",
+      "description": "Translation label for the parameter profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROW_PROTECT",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'R','H'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AI_PARAMETER_PROFILE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AIPP_TRANSLATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSLATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSLATION_GID",
+          "columnName": "TRANSLATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_AIPP_OTM_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AI_USE_CASE"
+  ],
+  "indices": []
+}

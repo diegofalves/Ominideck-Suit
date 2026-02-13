@@ -1,1 +1,143 @@
-{"table": {"schema": "glogowner","name": "partner_item_remark","description": "Contains the remarks for partner item."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTNER_ITEM_GID","description": "Specifies the unique identifier across all domains for the partner item","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_SEQUENCE","description": "The sequence number for partner item remark","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_QUAL_GID","description": "The unique identifier for the remark qualifier.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_TEXT","description": "The text for the remark about partner item.","dataType": "VARCHAR2","size": 4000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PARTNER_ITEM_GID"},{"sequence": 2,"columnName": "REMARK_SEQUENCE"}],"foreignKeys": [{"foreignKeyName": "FK_PIRK_PARTNER_ITEM_GID","cascadeDelete": true,"parentTableName": "PARTNER_ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "PARTNER_ITEM_GID","columnName": "PARTNER_ITEM_GID"}]},{"foreignKeyName": "FK_PIRK_REMARK_QUAL_GID","cascadeDelete": false,"parentTableName": "REMARK_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "REMARK_QUAL_GID","columnName": "REMARK_QUAL_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "partner_item_remark",
+    "description": "Contains the remarks for partner item."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTNER_ITEM_GID",
+      "description": "Specifies the unique identifier across all domains for the partner item",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_SEQUENCE",
+      "description": "The sequence number for partner item remark",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_QUAL_GID",
+      "description": "The unique identifier for the remark qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_TEXT",
+      "description": "The text for the remark about partner item.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PARTNER_ITEM_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "REMARK_SEQUENCE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_PIRK_PARTNER_ITEM_GID",
+      "cascadeDelete": true,
+      "parentTableName": "PARTNER_ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PARTNER_ITEM_GID",
+          "columnName": "PARTNER_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PIRK_REMARK_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REMARK_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REMARK_QUAL_GID",
+          "columnName": "REMARK_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

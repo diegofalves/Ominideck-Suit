@@ -1,1 +1,283 @@
-{"table": {"schema": "glogowner","name": "gtm_dt_config_rule","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DT_CONFIG_RULE_GID","description": "Uniquely identifies a data configuration rule","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DT_CONFIG_RULE_XID","description": "Uniquely identifies a data configuration rule in a domain.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "Takes the values Y/N","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "RULE_PRIORITY","description": "Decides the priority of the rule.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "Description of the data configuration rule","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "Rule is active from effective date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "Rule is active till expiration date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_TYPE_GID","description": "Identifies the type of the shipment ? Consol Shipment, Secondary Charge Shipment etc.,","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_PRIMARY","description": "Identifies the primary shipment among the multiple shipments. Takes the values Y/N.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "SHIPMENT_REFNUM_QUAL_GID","description": "Gives the Shipment Refnum Qualifier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_REFNUM_VALUE","description": "Holds the Shipment Refnum Value which ise matched against a shipment?s refnum qualifier.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SAVED_QUERY_GID","description": "Identifies a particular shipment based on the condition given the query.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DT_CONFIG_GID","description": "Applies this data configuration to a shipment  in order to create or update a trade transaction.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_PROFILE_GID","description": "Gives the Transport Mode Profile ID","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_DT_CONFIG_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GDCR_SHIPMENT_TYPE_GID","cascadeDelete": false,"parentTableName": "SHIPMENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_TYPE_GID","columnName": "SHIPMENT_TYPE_GID"}]},{"foreignKeyName": "FK_GDCR_SHIPMENT_REFNUM_QUAL","cascadeDelete": false,"parentTableName": "SHIPMENT_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_REFNUM_QUAL_GID","columnName": "SHIPMENT_REFNUM_QUAL_GID"}]},{"foreignKeyName": "FK_GDCR_SAVED_QUERY_GID","cascadeDelete": false,"parentTableName": "SAVED_QUERY","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_QUERY_GID","columnName": "SAVED_QUERY_GID"}]},{"foreignKeyName": "FK_GDCR_GTM_DT_CONFIG_GID","cascadeDelete": false,"parentTableName": "GTM_DT_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_DT_CONFIG_GID","columnName": "GTM_DT_CONFIG_GID"}]},{"foreignKeyName": "FK_GDCR_MODE_PROFILE_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "TRANSPORT_MODE_PROFILE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_dt_config_rule",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DT_CONFIG_RULE_GID",
+      "description": "Uniquely identifies a data configuration rule",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DT_CONFIG_RULE_XID",
+      "description": "Uniquely identifies a data configuration rule in a domain.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "Takes the values Y/N",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "RULE_PRIORITY",
+      "description": "Decides the priority of the rule.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Description of the data configuration rule",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "Rule is active from effective date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "Rule is active till expiration date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_TYPE_GID",
+      "description": "Identifies the type of the shipment ? Consol Shipment, Secondary Charge Shipment etc.,",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_PRIMARY",
+      "description": "Identifies the primary shipment among the multiple shipments. Takes the values Y/N.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "SHIPMENT_REFNUM_QUAL_GID",
+      "description": "Gives the Shipment Refnum Qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_REFNUM_VALUE",
+      "description": "Holds the Shipment Refnum Value which ise matched against a shipment?s refnum qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SAVED_QUERY_GID",
+      "description": "Identifies a particular shipment based on the condition given the query.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DT_CONFIG_GID",
+      "description": "Applies this data configuration to a shipment  in order to create or update a trade transaction.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_PROFILE_GID",
+      "description": "Gives the Transport Mode Profile ID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_DT_CONFIG_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GDCR_SHIPMENT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_TYPE_GID",
+          "columnName": "SHIPMENT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDCR_SHIPMENT_REFNUM_QUAL",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_REFNUM_QUAL_GID",
+          "columnName": "SHIPMENT_REFNUM_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDCR_SAVED_QUERY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_QUERY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_QUERY_GID",
+          "columnName": "SAVED_QUERY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDCR_GTM_DT_CONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DT_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_DT_CONFIG_GID",
+          "columnName": "GTM_DT_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDCR_MODE_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "TRANSPORT_MODE_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

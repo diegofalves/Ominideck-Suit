@@ -1,1 +1,132 @@
-{"table": {"schema": "glogowner","name": "container_group_d","description": ""},"columns": [{"name": "CONTAINER_GROUP_GID","description": "The GID for the container group associated with the equipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_EQUIPMENT_GID","description": "The GID for the equipment instance on a shipment for this container group.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CONTAINER_GROUP_GID"},{"sequence": 2,"columnName": "S_EQUIPMENT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_CGD_CONTAINER_GROUP_GID","cascadeDelete": false,"parentTableName": "CONTAINER_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "CONTAINER_GROUP_GID","columnName": "CONTAINER_GROUP_GID"}]},{"foreignKeyName": "FK_CGD_S_EQUIPMENT_GID","cascadeDelete": false,"parentTableName": "S_EQUIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "S_EQUIPMENT_GID","columnName": "S_EQUIPMENT_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_CGD_S_EQUIPMENT_GID","columnNames": [{"sequence": 1,"name": "S_EQUIPMENT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "container_group_d",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "CONTAINER_GROUP_GID",
+      "description": "The GID for the container group associated with the equipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_EQUIPMENT_GID",
+      "description": "The GID for the equipment instance on a shipment for this container group.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CONTAINER_GROUP_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "S_EQUIPMENT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CGD_CONTAINER_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTAINER_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTAINER_GROUP_GID",
+          "columnName": "CONTAINER_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CGD_S_EQUIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "S_EQUIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_EQUIPMENT_GID",
+          "columnName": "S_EQUIPMENT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_CGD_S_EQUIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_EQUIPMENT_GID"
+        }
+      ]
+    }
+  ]
+}

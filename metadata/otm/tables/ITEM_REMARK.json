@@ -1,1 +1,143 @@
-{"table": {"schema": "glogowner","name": "item_remark","description": "This table contains any free entry text remarks for the item, that the user wants to add."},"columns": [{"name": "ITEM_GID","description": "The GID for the item being shipped.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_SEQUENCE","description": "The sequence number for the item remark.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_QUAL_GID","description": "The GID for the remark qualifier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_TEXT","description": "The text of the remark about the item.","dataType": "VARCHAR2","size": 4000,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ITEM_GID"},{"sequence": 2,"columnName": "REMARK_SEQUENCE"}],"foreignKeys": [{"foreignKeyName": "FK_ITEMR_ITEM_GID","cascadeDelete": false,"parentTableName": "ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "ITEM_GID","columnName": "ITEM_GID"}]},{"foreignKeyName": "FK_ITEMR_REMARK","cascadeDelete": false,"parentTableName": "REMARK_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "REMARK_QUAL_GID","columnName": "REMARK_QUAL_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "item_remark",
+    "description": "This table contains any free entry text remarks for the item, that the user wants to add."
+  },
+  "columns": [
+    {
+      "name": "ITEM_GID",
+      "description": "The GID for the item being shipped.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_SEQUENCE",
+      "description": "The sequence number for the item remark.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_QUAL_GID",
+      "description": "The GID for the remark qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_TEXT",
+      "description": "The text of the remark about the item.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ITEM_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "REMARK_SEQUENCE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ITEMR_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITEM_GID",
+          "columnName": "ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ITEMR_REMARK",
+      "cascadeDelete": false,
+      "parentTableName": "REMARK_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REMARK_QUAL_GID",
+          "columnName": "REMARK_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

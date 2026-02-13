@@ -1,1 +1,230 @@
-{"table": {"schema": "glogowner","name": "vat_provincial_cnfg_persp","description": "Child of VAT_CONFIGURATION; contains information on provincial tax for a particular country and perspective;  similar to VAT_CONFIGURATION_PERSPECTIVE, but for provincial tax instead of European VAT"},"columns": [{"name": "VAT_CONFIGURATION_GID","description": "The id for the VAT Configuration this record belongs to","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERSPECTIVE","description": "Perspective to indicate when this rule should be applied","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'A','B','S'","conditionalConstraint": "","defaultValue": "'A'"},{"name": "COUNTRY_CODE3_GID","description": "Specifies the country code to indicate when this rule should be applied","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GOODS_LOCATION_TYPE","description": "Indicates how tax calculation logic should determine the origin and destination of goods","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'ORDER','SHIPMENT'","conditionalConstraint": "","defaultValue": "'ORDER'"},{"name": "CUSTOMER_INV_PARTY_QUAL_GID","description": "This is the involved party which determines the 'customer' for the purpose of determining Provincial Tax. Usually BILL-TO","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ALLOCATE","description": "Indicates whether the tax should be allocated.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IMPORT_VAT_CODE_GID","description": "If specified, this code will be used for import moves","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPORT_VAT_CODE_GID","description": "If specified, this code will be used for export moves","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "VAT_CONFIGURATION_GID"},{"sequence": 2,"columnName": "PERSPECTIVE"},{"sequence": 3,"columnName": "COUNTRY_CODE3_GID"}],"foreignKeys": [{"foreignKeyName": "FK_VPCP_VAT_CONFIGURATION_GID","cascadeDelete": false,"parentTableName": "VAT_CONFIGURATION","columnRelation": [{"sequence": 1,"parentColumnName": "VAT_CONFIGURATION_GID","columnName": "VAT_CONFIGURATION_GID"}]},{"foreignKeyName": "FK_VPCP_COUNTRY_CODE3_GID","cascadeDelete": false,"parentTableName": "COUNTRY_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_CODE3_GID","columnName": "COUNTRY_CODE3_GID"}]},{"foreignKeyName": "FK_VPCP_CUSTOMER_INV_PARTY_QU","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "CUSTOMER_INV_PARTY_QUAL_GID"}]},{"foreignKeyName": "FK_VPCP_IMPORT_VAT_CODE_GID","cascadeDelete": false,"parentTableName": "VAT_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "VAT_CODE_GID","columnName": "IMPORT_VAT_CODE_GID"}]},{"foreignKeyName": "FK_VPCP_EXPORT_VAT_CODE_GID","cascadeDelete": false,"parentTableName": "VAT_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "VAT_CODE_GID","columnName": "EXPORT_VAT_CODE_GID"}]}],"childTables": ["VAT_PROVINCIAL_CNFG_PERSP_D"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "vat_provincial_cnfg_persp",
+    "description": "Child of VAT_CONFIGURATION; contains information on provincial tax for a particular country and perspective;  similar to VAT_CONFIGURATION_PERSPECTIVE, but for provincial tax instead of European VAT"
+  },
+  "columns": [
+    {
+      "name": "VAT_CONFIGURATION_GID",
+      "description": "The id for the VAT Configuration this record belongs to",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERSPECTIVE",
+      "description": "Perspective to indicate when this rule should be applied",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'A','B','S'",
+      "conditionalConstraint": "",
+      "defaultValue": "'A'"
+    },
+    {
+      "name": "COUNTRY_CODE3_GID",
+      "description": "Specifies the country code to indicate when this rule should be applied",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GOODS_LOCATION_TYPE",
+      "description": "Indicates how tax calculation logic should determine the origin and destination of goods",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'ORDER','SHIPMENT'",
+      "conditionalConstraint": "",
+      "defaultValue": "'ORDER'"
+    },
+    {
+      "name": "CUSTOMER_INV_PARTY_QUAL_GID",
+      "description": "This is the involved party which determines the 'customer' for the purpose of determining Provincial Tax. Usually BILL-TO",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ALLOCATE",
+      "description": "Indicates whether the tax should be allocated.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IMPORT_VAT_CODE_GID",
+      "description": "If specified, this code will be used for import moves",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPORT_VAT_CODE_GID",
+      "description": "If specified, this code will be used for export moves",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "VAT_CONFIGURATION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PERSPECTIVE"
+    },
+    {
+      "sequence": 3,
+      "columnName": "COUNTRY_CODE3_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_VPCP_VAT_CONFIGURATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "VAT_CONFIGURATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VAT_CONFIGURATION_GID",
+          "columnName": "VAT_CONFIGURATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_VPCP_COUNTRY_CODE3_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_CODE3_GID",
+          "columnName": "COUNTRY_CODE3_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_VPCP_CUSTOMER_INV_PARTY_QU",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "CUSTOMER_INV_PARTY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_VPCP_IMPORT_VAT_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "VAT_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VAT_CODE_GID",
+          "columnName": "IMPORT_VAT_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_VPCP_EXPORT_VAT_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "VAT_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VAT_CODE_GID",
+          "columnName": "EXPORT_VAT_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "VAT_PROVINCIAL_CNFG_PERSP_D"
+  ],
+  "indices": []
+}

@@ -1,1 +1,236 @@
-{"table": {"schema": "glogowner","name": "ml_project","description": "Database domain where this data is stored."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROJECT_NAME","description": "","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROBLEM_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_ML_SENT_TIME","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WORKFLOW_ID","description": "","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOGIC_CONFIG_GID","description": "Unique global identifier for a set of logic configuration parameters.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS","description": "Status value for the Machine learning Project","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBJECTIVE_MODEL_TYPE","description": "The Objective Model Type value for the machine learning Project Objective. P = Planned ETA Prediction, PE = Planned and Event Prediction, OR = Order Route Prediction and PC = Product Classification Prediction.","dataType": "VARCHAR2","size": 10,"isNull": true,"isConstraint": true,"constraintValues": "'P','PE','OR','PC'","conditionalConstraint": "","defaultValue": ""},{"name": "ML_DATA_MAPPING_GID","description": "Machine Learning data mapping gid for this project.The will be used while loading the data to HDOWNER table","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PROJECT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_MLP_PROBLEM_TYPE_GID","cascadeDelete": false,"parentTableName": "ML_PROBLEM_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "PROBLEM_TYPE_GID","columnName": "PROBLEM_TYPE_GID"}]},{"foreignKeyName": "FK_MLP_LOGIC_CONFIG_GID","cascadeDelete": false,"parentTableName": "LOGIC_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "LOGIC_CONFIG_GID","columnName": "LOGIC_CONFIG_GID"}]},{"foreignKeyName": "FK_MLP_ML_DATA_MAPPING_GID","cascadeDelete": false,"parentTableName": "ML_DATA_MAPPING","columnRelation": [{"sequence": 1,"parentColumnName": "ML_DATA_MAPPING_GID","columnName": "ML_DATA_MAPPING_GID"}]}],"childTables": ["ML_PERFORM_PREDICTION_RESULT","ML_PERFORM_SCORING_RESULT","ML_PROJECT_D","ML_PROJECT_DATA_PUSH_RESULT","ML_SCENARIO","ML_SCENARIO_COLUMN_INCLUSION","ML_SCENARIO_WORKFLOW"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ml_project",
+    "description": "Database domain where this data is stored."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROJECT_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROBLEM_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_ML_SENT_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WORKFLOW_ID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOGIC_CONFIG_GID",
+      "description": "Unique global identifier for a set of logic configuration parameters.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS",
+      "description": "Status value for the Machine learning Project",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBJECTIVE_MODEL_TYPE",
+      "description": "The Objective Model Type value for the machine learning Project Objective. P = Planned ETA Prediction, PE = Planned and Event Prediction, OR = Order Route Prediction and PC = Product Classification Prediction.",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'P','PE','OR','PC'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ML_DATA_MAPPING_GID",
+      "description": "Machine Learning data mapping gid for this project.The will be used while loading the data to HDOWNER table",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PROJECT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_MLP_PROBLEM_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ML_PROBLEM_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PROBLEM_TYPE_GID",
+          "columnName": "PROBLEM_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MLP_LOGIC_CONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOGIC_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGIC_CONFIG_GID",
+          "columnName": "LOGIC_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MLP_ML_DATA_MAPPING_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ML_DATA_MAPPING",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ML_DATA_MAPPING_GID",
+          "columnName": "ML_DATA_MAPPING_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ML_PERFORM_PREDICTION_RESULT",
+    "ML_PERFORM_SCORING_RESULT",
+    "ML_PROJECT_D",
+    "ML_PROJECT_DATA_PUSH_RESULT",
+    "ML_SCENARIO",
+    "ML_SCENARIO_COLUMN_INCLUSION",
+    "ML_SCENARIO_WORKFLOW"
+  ],
+  "indices": []
+}

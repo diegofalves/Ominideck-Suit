@@ -1,1 +1,205 @@
-{"table": {"schema": "glogowner","name": "order_release_status","description": "The status of the order release for a base order. This table links to the defined status(es) in the Status_Type and Status_Value table."},"columns": [{"name": "ORDER_RELEASE_GID","description": "The GID for the order release.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_TYPE_GID","description": "The status type GID for the status value on the order release.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_VALUE_GID","description": "The status value for the order release status.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ORDER_RELEASE_GID"},{"sequence": 2,"columnName": "STATUS_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_ORS_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_GID"}]},{"foreignKeyName": "FK_ORS_STSVGID","cascadeDelete": false,"parentTableName": "STATUS_VALUE","columnRelation": [{"sequence": 2,"parentColumnName": "STATUS_VALUE_GID","columnName": "STATUS_VALUE_GID"},{"sequence": 1,"parentColumnName": "STATUS_TYPE_GID","columnName": "STATUS_TYPE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_ORS_STSVALGID","columnNames": [{"sequence": 1,"name": "STATUS_VALUE_GID"},{"sequence": 2,"name": "ORDER_RELEASE_GID"}]},{"indexName": "IX_ORS_STSVGID","columnNames": [{"sequence": 1,"name": "STATUS_TYPE_GID"},{"sequence": 2,"name": "STATUS_VALUE_GID"}]},{"indexName": "ORS_ORGID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"}]},{"indexName": "IX_ORS_INSERT_DATE","columnNames": [{"sequence": 1,"name": "INSERT_DATE"}]},{"indexName": "IX_ORS_ORD_REL_UPDATE_DATE","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"},{"sequence": 2,"name": "UPDATE_DATE"}]},{"indexName": "IX_ORS_UPDATE_DATE","columnNames": [{"sequence": 1,"name": "UPDATE_DATE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "order_release_status",
+    "description": "The status of the order release for a base order. This table links to the defined status(es) in the Status_Type and Status_Value table."
+  },
+  "columns": [
+    {
+      "name": "ORDER_RELEASE_GID",
+      "description": "The GID for the order release.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_TYPE_GID",
+      "description": "The status type GID for the status value on the order release.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_VALUE_GID",
+      "description": "The status value for the order release status.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ORDER_RELEASE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STATUS_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ORS_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ORS_STSVGID",
+      "cascadeDelete": false,
+      "parentTableName": "STATUS_VALUE",
+      "columnRelation": [
+        {
+          "sequence": 2,
+          "parentColumnName": "STATUS_VALUE_GID",
+          "columnName": "STATUS_VALUE_GID"
+        },
+        {
+          "sequence": 1,
+          "parentColumnName": "STATUS_TYPE_GID",
+          "columnName": "STATUS_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_ORS_STSVALGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_VALUE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ORS_STSVGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "STATUS_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STATUS_VALUE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "ORS_ORGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ORS_INSERT_DATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INSERT_DATE"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ORS_ORD_REL_UPDATE_DATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "UPDATE_DATE"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ORS_UPDATE_DATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "UPDATE_DATE"
+        }
+      ]
+    }
+  ]
+}

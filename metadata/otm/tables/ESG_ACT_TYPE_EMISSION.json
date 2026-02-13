@@ -1,1 +1,155 @@
-{"table": {"schema": "glogowner","name": "esg_act_type_emission","description": "This table is to store the types of emissions associated with an emission activity type. For example, CO2 and CO2e are associated with the transportation activity type."},"columns": [{"name": "ESG_ACTIVITY_TYPE_GID","description": "The globally unique ID of an emission activity type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACT_TYPE_EMISSION_SEQ","description": "A system-generated sequence number for the record.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESG_EMISSION_TYPE_GID","description": "The type of emission that needs to be considered for the emission activity type. E.g., CO2, CO2e for Activity Type Transportation.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ESG_ACTIVITY_TYPE_GID"},{"sequence": 2,"columnName": "ACT_TYPE_EMISSION_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_EATE_ESG_ACTIVITY_TYPE_GID","cascadeDelete": false,"parentTableName": "ESG_ACTIVITY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "ESG_ACTIVITY_TYPE_GID","columnName": "ESG_ACTIVITY_TYPE_GID"}]},{"foreignKeyName": "FK_EATE_ESG_EMISSION_TYPE_GID","cascadeDelete": false,"parentTableName": "ESG_EMISSION_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "ESG_EMISSION_TYPE_GID","columnName": "ESG_EMISSION_TYPE_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_ESG_EMISSION_TYPE_GID","columnNames": [{"sequence": 1,"name": "ESG_ACTIVITY_TYPE_GID"},{"sequence": 2,"name": "ESG_EMISSION_TYPE_GID"}]},{"indexName": "IX_ESG_EMISSION_TYPE_GID","columnNames": [{"sequence": 1,"name": "ESG_EMISSION_TYPE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "esg_act_type_emission",
+    "description": "This table is to store the types of emissions associated with an emission activity type. For example, CO2 and CO2e are associated with the transportation activity type."
+  },
+  "columns": [
+    {
+      "name": "ESG_ACTIVITY_TYPE_GID",
+      "description": "The globally unique ID of an emission activity type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACT_TYPE_EMISSION_SEQ",
+      "description": "A system-generated sequence number for the record.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESG_EMISSION_TYPE_GID",
+      "description": "The type of emission that needs to be considered for the emission activity type. E.g., CO2, CO2e for Activity Type Transportation.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ESG_ACTIVITY_TYPE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "ACT_TYPE_EMISSION_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EATE_ESG_ACTIVITY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ESG_ACTIVITY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ESG_ACTIVITY_TYPE_GID",
+          "columnName": "ESG_ACTIVITY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EATE_ESG_EMISSION_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ESG_EMISSION_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ESG_EMISSION_TYPE_GID",
+          "columnName": "ESG_EMISSION_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_ESG_EMISSION_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ESG_ACTIVITY_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "ESG_EMISSION_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ESG_EMISSION_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ESG_EMISSION_TYPE_GID"
+        }
+      ]
+    }
+  ]
+}

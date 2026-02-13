@@ -1,1 +1,143 @@
-{"table": {"schema": "glogowner","name": "sku_event_quantity","description": "Optional quantity change attached to a SKU event."},"columns": [{"name": "SKU_EVENT_GID","description": "SKU event id.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SKU_QUANTITY_TYPE_GID","description": "SKU quantity type id.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SKU_QUANTITY_VALUE","description": "SKU quantity update amount.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "QUANTITY_UPDATE_TYPE","description": "SKU quantity update type. Valid values are 'REPLACEMENT', 'INCREMENT', 'DECREMENT'.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'REPLACE','INCREMENT','DECREMENT'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SKU_EVENT_GID"},{"sequence": 2,"columnName": "SKU_QUANTITY_TYPE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SEQ_SKU_EVENT_GID","cascadeDelete": true,"parentTableName": "SKU_EVENT","columnRelation": [{"sequence": 1,"parentColumnName": "SKU_EVENT_GID","columnName": "SKU_EVENT_GID"}]},{"foreignKeyName": "FK_SEQ_SKU_QUANTITY_TYPE_GID","cascadeDelete": false,"parentTableName": "SKU_QUANTITY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "SKU_QUANTITY_TYPE_GID","columnName": "SKU_QUANTITY_TYPE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "sku_event_quantity",
+    "description": "Optional quantity change attached to a SKU event."
+  },
+  "columns": [
+    {
+      "name": "SKU_EVENT_GID",
+      "description": "SKU event id.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SKU_QUANTITY_TYPE_GID",
+      "description": "SKU quantity type id.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SKU_QUANTITY_VALUE",
+      "description": "SKU quantity update amount.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUANTITY_UPDATE_TYPE",
+      "description": "SKU quantity update type. Valid values are 'REPLACEMENT', 'INCREMENT', 'DECREMENT'.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'REPLACE','INCREMENT','DECREMENT'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SKU_EVENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SKU_QUANTITY_TYPE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SEQ_SKU_EVENT_GID",
+      "cascadeDelete": true,
+      "parentTableName": "SKU_EVENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SKU_EVENT_GID",
+          "columnName": "SKU_EVENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SEQ_SKU_QUANTITY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SKU_QUANTITY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SKU_QUANTITY_TYPE_GID",
+          "columnName": "SKU_QUANTITY_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

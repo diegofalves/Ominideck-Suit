@@ -1,1 +1,680 @@
-{"table": {"schema": "glogowner","name": "monitor_agent","description": "A Monitor_Agent has state reflecting the events of interest of the Monitor_Agent's Agent specified.  A Monitor_Agent is an abstraction of several types of specialized agents.  They are Planned, Unplanned, Exception, Execution, and Assignment.  These are specified by the Montor_Agent_Type_GID reference to the Monitor_Agent_Type table.  A Monitor_Agent belongs to a Monitor Profile and therefore can't be 'shared' among Monitor Profiles.  I.e. each Monitor_Agent_GID is unique.  Note: a Monitor Agent belonging to a Monitor Profile Template is referred to as a Monitor Agent Template.  Similar to a Monitor Profile 'instance' is created from a Monitor Profile Template, a Monitor Agent 'instance' is created from a Monitor Agent Template."},"columns": [{"name": "MONITOR_AGENT_GID","description": "The unique identifier for a monitor agent.  If this is a monitor agent belonging to a monitor profile template, then this is the concatentation fo the monitor_agent_xid, '-', and the domain_name.  If this monitor agent belongs to a monitor profile, then the xid is generated and guaranteed to be unique.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITOR_AGENT_XID","description": "The external identifier for the monitor agent.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITOR_AGENT_NAME","description": "Text, as entered by the user, for familiar reference.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITOR_AGENT_TEMPLATE_GID","description": "Null if this is a monitor agent template -or- The GID for the monitor agent template from which this monitor agent instance was created.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITOR_PROFILE_GID","description": "The monitor profile to which this monitor agent belongs.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AGENT_GID","description": "Specifies the agent used to listen for events and perform actions.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITOR_AGENT_TYPE_GID","description": "The unique identifier (foreign key) into the Monitor_Agent_Type table.  Types of Agents are MonitorPlannedAgent, MonitorUnplannedAgent, MonitorExceptionAgent, MonitorExecutionAgent, and MonitorAssignmentAgent","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_RECORD_EVENT","description": "","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_PERFORM_AGENT_ACTION","description": "'Y' if the monitor agent is to perform its agent's actions after receiving an event of interest.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "OCCURRENCE_COUNT","description": "The number of events received by this agent.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "Used for a MonitorPlannedAgent only.  Optionally for a 'Template' type, Has the expiration date and time specified if, during the definition, the user wants to specify a specific date and time for this Agent to evaluate to true.  For example, 12/31/01 11:59:59    OR Has the expiration time specified (no date) if, during definition, the user wants to specify a time, where the date gets determined during execution.  For example, 5:00pm and when the assignment takes place, the instance will specify the date, for example, 9/2/02 5:00pm.    OR    NULL if the expiration date and time will be determined by the dependency service during execution.    .  Optionally for an 'instance' type,    Has the expiration date and time specified if, during the definition, the user specified a specific date and time for this Agent to evaluate to true.  For example, 12/31/01 11:59:59    OR Has the expiration time specified  with the calculated date from execution.  For example, 5:00pm and when the assignment takes place, the instance will specify the date, for example, 9/2/02 5:00pm.    OR    Date and Time determined by the dependency service during execution","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_EVENT_OCCUR_DATE","description": "Null for a 'Template' type OR The date and time the event occurred for the event most recently received by this agent which the query conditions evaluated to true and has its IS_RECORD_EVENT = true.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_EVENT_RECEIVED_DATE","description": "Null for a 'Template' type OR The date and time the event was received for the event most recently received by this agent which the query conditions evaluated to true and has its IS_RECORD_EVENT = true.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_RESET_OFFSET","description": "For a MonitorPlannedAgent only.  The duration, in hours, to which to offset an expiration date.  For example, if this agent receives a time event of interest, after performing its action(s), it resets its expiration date to it expiration date + the Time_Reset_Offset and subscribes a workflow trigger to listen for the specified expiration date as an event.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_RESET_OFFSET_UOM_CODE","description": "Unit of measure for TIME_RESET_OFFSET column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TIME_RESET_OFFSET_BASE","description": "TIME_RESET_OFFSET in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTEXT_OFFSET","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTEXT_OFFSET_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTEXT_OFFSET_BASE","description": "CONTEXT_OFFSET in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTEXT_BASED_ON","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MANDATORY","description": "'Y' indicates that an event of interest to this agent must be received at least once during its 'life'.  Its life is determined to be 'over' when the 'final' agent has received an event. -OR 'N' indicates that it is required that the Agent does not receive an event during its 'life'.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_INIT_EXPIRATION_DATE","description": "When a Monitor Profile is initially assigned to a Business Object, subscribe a workflow trigger to listen for the specified expiration date as an event.  Note this is for a MonitorPlannedAgent only. 'Y' indicates that when this MonitorTimerAgent is assigned, it uses the event's date and time as the base to initially calculate its expiration date.  For example, if this agent is assigned by an event whose date/time occurred 9/01/02 9:00am, and this agents Time_Reset_Offset is 2hrs, then the expiration date is set for 9/01/02 11:00am when assigned to a Business Object.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_FIRST_MONITORED_EVENT","description": "'Y' if this agent is the first Monitor Planned, and 'N' if this agent is not the first Monitor Planned Agent.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_LAST_MONITORED_EVENT","description": "'Y' if this agent is the agent in which when an event is received, it is considered to be the 'last' event to be received by its Monitor Profile.  When this occurs, its 'life' is considered over.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "MAX_OCCURRENCE_COUNT","description": "The maximum number of times that the event should be recorded.  If the number of occurrences exceeds this number, an exception will be raised.  If no there is no desired maximum, then this field should be null.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_CONTROL_REQUEST_ID","description": "If this monitor agent is a monitor planned agent type, and it has a Time Expiration set, the Process Control Request ID is the identifier of the MonitorShipmentTimeBasedEvent published for this Monitor Planned Agent.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_REASSIGN_MONITOR_PROFILE","description": "","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DISPLAY_SEQUENCE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_DISABLED","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "REPLICATION_CRITERIA_FROM","description": "","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REPLICATION_CRITERIA_WHERE","description": "","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PREVIOUS_EXPIRATION_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MONITORED_OBJECT","description": "Gid of the object that is being monitored","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_STATUS_CODE_GID","description": "Status code of the last event monitored by this agent","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_REASON_CODE_GID","description": "Reason code of the last event monitored by this agent","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTEXT_SAVED_QUERY_GID","description": "The saved query gid when the based on offset = SQLQuery","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOLERANCE_RULE_GID","description": "Tolerance rule for a planned milestone.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_TOLERANCE_RULE_ACTIVE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_RELATED_PROFILING","description": "If 'Y' , the event received on planned milestone will trigger related profiling.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "REPLICATION_TYPE","description": "The type that the monitor agent is replicate for, such as Equipment, Stop.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REPLICATION_PARAMETER","description": "The detail information of the replication type.  e.g. For Replication_Type='STOP', Replication_Parameter is '-stop_number 1 -location_gid PHL'","dataType": "VARCHAR2","size": 200,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "MONITOR_AGENT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_MONAGENT_MONPROFILE","cascadeDelete": true,"parentTableName": "MONITOR_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MONITOR_PROFILE_GID","columnName": "MONITOR_PROFILE_GID"}]},{"foreignKeyName": "FK_MONAGENT_AGENT","cascadeDelete": false,"parentTableName": "AGENT","columnRelation": [{"sequence": 1,"parentColumnName": "AGENT_GID","columnName": "AGENT_GID"}]},{"foreignKeyName": "FK_MONAGENT_MONAGENTTYPE","cascadeDelete": false,"parentTableName": "MONITOR_AGENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "MONITOR_AGENT_TYPE_GID","columnName": "MONITOR_AGENT_TYPE_GID"}]},{"foreignKeyName": "FK_MA_LAST_STATUS_CODE_GID","cascadeDelete": false,"parentTableName": "BS_STATUS_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_STATUS_CODE_GID","columnName": "LAST_STATUS_CODE_GID"}]},{"foreignKeyName": "FK_MA_LAST_REASON_CODE_GID","cascadeDelete": false,"parentTableName": "BS_REASON_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "BS_REASON_CODE_GID","columnName": "LAST_REASON_CODE_GID"}]},{"foreignKeyName": "FK_MA_CONTEXT_SAVED_QUERY_GID","cascadeDelete": false,"parentTableName": "SAVED_QUERY","columnRelation": [{"sequence": 1,"parentColumnName": "SAVED_QUERY_GID","columnName": "CONTEXT_SAVED_QUERY_GID"}]},{"foreignKeyName": "FK_MA_TOLERANCE_RULE_GID","cascadeDelete": false,"parentTableName": "MONITOR_TOLERANCE_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "TOLERANCE_RULE_GID","columnName": "TOLERANCE_RULE_GID"}]}],"childTables": ["MONITOR_AGENT_EVENT","MONITOR_AGENT_LINK"],"indices": [{"indexName": "IND_MONAGNT_MNTR_PROFILE_GID","columnNames": [{"sequence": 1,"name": "MONITOR_PROFILE_GID"}]},{"indexName": "IX_MA_CONTEXT_SAVED_QUERY_GID","columnNames": [{"sequence": 1,"name": "CONTEXT_SAVED_QUERY_GID"}]},{"indexName": "IX_MA_LAST_REASON_CODE_GID","columnNames": [{"sequence": 1,"name": "LAST_REASON_CODE_GID"}]},{"indexName": "IX_MA_LAST_STATUS_CODE_GID","columnNames": [{"sequence": 1,"name": "LAST_STATUS_CODE_GID"}]},{"indexName": "IX_MA_TOLERANCE_RULE_GID","columnNames": [{"sequence": 1,"name": "TOLERANCE_RULE_GID"}]},{"indexName": "IX_MONAGENT_AGENT","columnNames": [{"sequence": 1,"name": "AGENT_GID"}]},{"indexName": "IX_MONAGENT_MONAGENTTYPE","columnNames": [{"sequence": 1,"name": "MONITOR_AGENT_TYPE_GID"}]},{"indexName": "IX_MONAGENT_PROCONTROL_REQ_ID","columnNames": [{"sequence": 1,"name": "PROCESS_CONTROL_REQUEST_ID"}]},{"indexName": "IX_MONITOR_AGENT_XID","columnNames": [{"sequence": 1,"name": "MONITOR_AGENT_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "monitor_agent",
+    "description": "A Monitor_Agent has state reflecting the events of interest of the Monitor_Agent's Agent specified.  A Monitor_Agent is an abstraction of several types of specialized agents.  They are Planned, Unplanned, Exception, Execution, and Assignment.  These are specified by the Montor_Agent_Type_GID reference to the Monitor_Agent_Type table.  A Monitor_Agent belongs to a Monitor Profile and therefore can't be 'shared' among Monitor Profiles.  I.e. each Monitor_Agent_GID is unique.  Note: a Monitor Agent belonging to a Monitor Profile Template is referred to as a Monitor Agent Template.  Similar to a Monitor Profile 'instance' is created from a Monitor Profile Template, a Monitor Agent 'instance' is created from a Monitor Agent Template."
+  },
+  "columns": [
+    {
+      "name": "MONITOR_AGENT_GID",
+      "description": "The unique identifier for a monitor agent.  If this is a monitor agent belonging to a monitor profile template, then this is the concatentation fo the monitor_agent_xid, '-', and the domain_name.  If this monitor agent belongs to a monitor profile, then the xid is generated and guaranteed to be unique.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITOR_AGENT_XID",
+      "description": "The external identifier for the monitor agent.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITOR_AGENT_NAME",
+      "description": "Text, as entered by the user, for familiar reference.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITOR_AGENT_TEMPLATE_GID",
+      "description": "Null if this is a monitor agent template -or- The GID for the monitor agent template from which this monitor agent instance was created.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITOR_PROFILE_GID",
+      "description": "The monitor profile to which this monitor agent belongs.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AGENT_GID",
+      "description": "Specifies the agent used to listen for events and perform actions.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITOR_AGENT_TYPE_GID",
+      "description": "The unique identifier (foreign key) into the Monitor_Agent_Type table.  Types of Agents are MonitorPlannedAgent, MonitorUnplannedAgent, MonitorExceptionAgent, MonitorExecutionAgent, and MonitorAssignmentAgent",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_RECORD_EVENT",
+      "description": "",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_PERFORM_AGENT_ACTION",
+      "description": "'Y' if the monitor agent is to perform its agent's actions after receiving an event of interest.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "OCCURRENCE_COUNT",
+      "description": "The number of events received by this agent.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "Used for a MonitorPlannedAgent only.  Optionally for a 'Template' type, Has the expiration date and time specified if, during the definition, the user wants to specify a specific date and time for this Agent to evaluate to true.  For example, 12/31/01 11:59:59    OR Has the expiration time specified (no date) if, during definition, the user wants to specify a time, where the date gets determined during execution.  For example, 5:00pm and when the assignment takes place, the instance will specify the date, for example, 9/2/02 5:00pm.    OR    NULL if the expiration date and time will be determined by the dependency service during execution.    .  Optionally for an 'instance' type,    Has the expiration date and time specified if, during the definition, the user specified a specific date and time for this Agent to evaluate to true.  For example, 12/31/01 11:59:59    OR Has the expiration time specified  with the calculated date from execution.  For example, 5:00pm and when the assignment takes place, the instance will specify the date, for example, 9/2/02 5:00pm.    OR    Date and Time determined by the dependency service during execution",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_EVENT_OCCUR_DATE",
+      "description": "Null for a 'Template' type OR The date and time the event occurred for the event most recently received by this agent which the query conditions evaluated to true and has its IS_RECORD_EVENT = true.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_EVENT_RECEIVED_DATE",
+      "description": "Null for a 'Template' type OR The date and time the event was received for the event most recently received by this agent which the query conditions evaluated to true and has its IS_RECORD_EVENT = true.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_RESET_OFFSET",
+      "description": "For a MonitorPlannedAgent only.  The duration, in hours, to which to offset an expiration date.  For example, if this agent receives a time event of interest, after performing its action(s), it resets its expiration date to it expiration date + the Time_Reset_Offset and subscribes a workflow trigger to listen for the specified expiration date as an event.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_RESET_OFFSET_UOM_CODE",
+      "description": "Unit of measure for TIME_RESET_OFFSET column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIME_RESET_OFFSET_BASE",
+      "description": "TIME_RESET_OFFSET in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTEXT_OFFSET",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTEXT_OFFSET_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTEXT_OFFSET_BASE",
+      "description": "CONTEXT_OFFSET in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTEXT_BASED_ON",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MANDATORY",
+      "description": "'Y' indicates that an event of interest to this agent must be received at least once during its 'life'.  Its life is determined to be 'over' when the 'final' agent has received an event. -OR 'N' indicates that it is required that the Agent does not receive an event during its 'life'.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_INIT_EXPIRATION_DATE",
+      "description": "When a Monitor Profile is initially assigned to a Business Object, subscribe a workflow trigger to listen for the specified expiration date as an event.  Note this is for a MonitorPlannedAgent only. 'Y' indicates that when this MonitorTimerAgent is assigned, it uses the event's date and time as the base to initially calculate its expiration date.  For example, if this agent is assigned by an event whose date/time occurred 9/01/02 9:00am, and this agents Time_Reset_Offset is 2hrs, then the expiration date is set for 9/01/02 11:00am when assigned to a Business Object.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_FIRST_MONITORED_EVENT",
+      "description": "'Y' if this agent is the first Monitor Planned, and 'N' if this agent is not the first Monitor Planned Agent.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_LAST_MONITORED_EVENT",
+      "description": "'Y' if this agent is the agent in which when an event is received, it is considered to be the 'last' event to be received by its Monitor Profile.  When this occurs, its 'life' is considered over.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "MAX_OCCURRENCE_COUNT",
+      "description": "The maximum number of times that the event should be recorded.  If the number of occurrences exceeds this number, an exception will be raised.  If no there is no desired maximum, then this field should be null.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_CONTROL_REQUEST_ID",
+      "description": "If this monitor agent is a monitor planned agent type, and it has a Time Expiration set, the Process Control Request ID is the identifier of the MonitorShipmentTimeBasedEvent published for this Monitor Planned Agent.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_REASSIGN_MONITOR_PROFILE",
+      "description": "",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DISPLAY_SEQUENCE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_DISABLED",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "REPLICATION_CRITERIA_FROM",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REPLICATION_CRITERIA_WHERE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PREVIOUS_EXPIRATION_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MONITORED_OBJECT",
+      "description": "Gid of the object that is being monitored",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_STATUS_CODE_GID",
+      "description": "Status code of the last event monitored by this agent",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_REASON_CODE_GID",
+      "description": "Reason code of the last event monitored by this agent",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTEXT_SAVED_QUERY_GID",
+      "description": "The saved query gid when the based on offset = SQLQuery",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOLERANCE_RULE_GID",
+      "description": "Tolerance rule for a planned milestone.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_TOLERANCE_RULE_ACTIVE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_RELATED_PROFILING",
+      "description": "If 'Y' , the event received on planned milestone will trigger related profiling.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "REPLICATION_TYPE",
+      "description": "The type that the monitor agent is replicate for, such as Equipment, Stop.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REPLICATION_PARAMETER",
+      "description": "The detail information of the replication type.  e.g. For Replication_Type='STOP', Replication_Parameter is '-stop_number 1 -location_gid PHL'",
+      "dataType": "VARCHAR2",
+      "size": 200,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "MONITOR_AGENT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_MONAGENT_MONPROFILE",
+      "cascadeDelete": true,
+      "parentTableName": "MONITOR_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MONITOR_PROFILE_GID",
+          "columnName": "MONITOR_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MONAGENT_AGENT",
+      "cascadeDelete": false,
+      "parentTableName": "AGENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AGENT_GID",
+          "columnName": "AGENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MONAGENT_MONAGENTTYPE",
+      "cascadeDelete": false,
+      "parentTableName": "MONITOR_AGENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MONITOR_AGENT_TYPE_GID",
+          "columnName": "MONITOR_AGENT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MA_LAST_STATUS_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_STATUS_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_STATUS_CODE_GID",
+          "columnName": "LAST_STATUS_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MA_LAST_REASON_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BS_REASON_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BS_REASON_CODE_GID",
+          "columnName": "LAST_REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MA_CONTEXT_SAVED_QUERY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SAVED_QUERY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SAVED_QUERY_GID",
+          "columnName": "CONTEXT_SAVED_QUERY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_MA_TOLERANCE_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MONITOR_TOLERANCE_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TOLERANCE_RULE_GID",
+          "columnName": "TOLERANCE_RULE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "MONITOR_AGENT_EVENT",
+    "MONITOR_AGENT_LINK"
+  ],
+  "indices": [
+    {
+      "indexName": "IND_MONAGNT_MNTR_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MONITOR_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MA_CONTEXT_SAVED_QUERY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CONTEXT_SAVED_QUERY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MA_LAST_REASON_CODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LAST_REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MA_LAST_STATUS_CODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LAST_STATUS_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MA_TOLERANCE_RULE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TOLERANCE_RULE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MONAGENT_AGENT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "AGENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MONAGENT_MONAGENTTYPE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MONITOR_AGENT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MONAGENT_PROCONTROL_REQ_ID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PROCESS_CONTROL_REQUEST_ID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_MONITOR_AGENT_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MONITOR_AGENT_XID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,167 @@
-{"table": {"schema": "glogowner","name": "s_ship_unit_line_refnum","description": ""},"columns": [{"name": "S_SHIP_UNIT_GID","description": "The GID for the ship unit associated with the shipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_LINE_NO","description": "The shipment ship unit line number.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SUL_REFNUM_QUAL_GID","description": "The reference number qualifier identifier defining the reference code.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REFNUM_VALUE","description": "The text associated to the remark code.","dataType": "VARCHAR2","size": 240,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "S_SHIP_UNIT_GID"},{"sequence": 2,"columnName": "S_SHIP_UNIT_LINE_NO"},{"sequence": 3,"columnName": "S_SUL_REFNUM_QUAL_GID"},{"sequence": 4,"columnName": "REFNUM_VALUE"}],"foreignKeys": [{"foreignKeyName": "FK_SSULR_S_SHIP_UNIT_LINE","cascadeDelete": true,"parentTableName": "S_SHIP_UNIT_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"},{"sequence": 2,"parentColumnName": "S_SHIP_UNIT_LINE_NO","columnName": "S_SHIP_UNIT_LINE_NO"}]},{"foreignKeyName": "FK_SSULR_S_SUL_REFNUM_QUAL_GID","cascadeDelete": false,"parentTableName": "S_SUL_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "S_SUL_REFNUM_QUAL_GID","columnName": "S_SUL_REFNUM_QUAL_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_SSULR_REFNUM_VALUE","columnNames": [{"sequence": 1,"name": "REFNUM_VALUE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "s_ship_unit_line_refnum",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "S_SHIP_UNIT_GID",
+      "description": "The GID for the ship unit associated with the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_LINE_NO",
+      "description": "The shipment ship unit line number.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SUL_REFNUM_QUAL_GID",
+      "description": "The reference number qualifier identifier defining the reference code.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REFNUM_VALUE",
+      "description": "The text associated to the remark code.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "S_SHIP_UNIT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "S_SHIP_UNIT_LINE_NO"
+    },
+    {
+      "sequence": 3,
+      "columnName": "S_SUL_REFNUM_QUAL_GID"
+    },
+    {
+      "sequence": 4,
+      "columnName": "REFNUM_VALUE"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SSULR_S_SHIP_UNIT_LINE",
+      "cascadeDelete": true,
+      "parentTableName": "S_SHIP_UNIT_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "S_SHIP_UNIT_LINE_NO",
+          "columnName": "S_SHIP_UNIT_LINE_NO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSULR_S_SUL_REFNUM_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "S_SUL_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SUL_REFNUM_QUAL_GID",
+          "columnName": "S_SUL_REFNUM_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_SSULR_REFNUM_VALUE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REFNUM_VALUE"
+        }
+      ]
+    }
+  ]
+}

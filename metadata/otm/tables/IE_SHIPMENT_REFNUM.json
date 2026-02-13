@@ -1,1 +1,193 @@
-{"table": {"schema": "glogowner","name": "ie_shipment_refnum","description": "The IE series of tables is a method to store the EDI information from a Blob into a more relational format. However these may change in ver 3.0."},"columns": [{"name": "I_REC_NO","description": "The record number primary key identifier for the tracking event specified.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_TRANSACTION_NO","description": "The transaction identifier for the shipment reference number data of the tracking event.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_REFNUM_QUAL_GID","description": "The shipment reference number qualifier identifier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_REFNUM_VALUE","description": "The shipment reference number value for the qualifier defined.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "The monthly range partition to manage purging status messages.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "I_REC_NO"}],"foreignKeys": [{"foreignKeyName": "FK_IE_SR_SRQGID","cascadeDelete": false,"parentTableName": "SHIPMENT_REFNUM_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_REFNUM_QUAL_GID","columnName": "SHIPMENT_REFNUM_QUAL_GID"}]}],"childTables": [],"indices": [{"indexName": "IE_SHPREF_ITXNO","columnNames": [{"sequence": 1,"name": "I_TRANSACTION_NO"}]},{"indexName": "IE_SHPREF_QUAL_VALUE","columnNames": [{"sequence": 1,"name": "SHIPMENT_REFNUM_QUAL_GID"},{"sequence": 2,"name": "SHIPMENT_REFNUM_VALUE"}]},{"indexName": "IDX_IESREF_SHIPREFVAL_TRAN","columnNames": [{"sequence": 1,"name": "SHIPMENT_REFNUM_QUAL_GID"},{"sequence": 2,"name": "SHIPMENT_REFNUM_VALUE"},{"sequence": 3,"name": "I_TRANSACTION_NO"}]},{"indexName": "IX_IESREF_TRAN_REF_QUAL","columnNames": [{"sequence": 1,"name": "I_TRANSACTION_NO"},{"sequence": 2,"name": "SHIPMENT_REFNUM_VALUE"},{"sequence": 3,"name": "SHIPMENT_REFNUM_QUAL_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ie_shipment_refnum",
+    "description": "The IE series of tables is a method to store the EDI information from a Blob into a more relational format. However these may change in ver 3.0."
+  },
+  "columns": [
+    {
+      "name": "I_REC_NO",
+      "description": "The record number primary key identifier for the tracking event specified.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_TRANSACTION_NO",
+      "description": "The transaction identifier for the shipment reference number data of the tracking event.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_REFNUM_QUAL_GID",
+      "description": "The shipment reference number qualifier identifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_REFNUM_VALUE",
+      "description": "The shipment reference number value for the qualifier defined.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "The monthly range partition to manage purging status messages.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "I_REC_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_IE_SR_SRQGID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_REFNUM_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_REFNUM_QUAL_GID",
+          "columnName": "SHIPMENT_REFNUM_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IE_SHPREF_ITXNO",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_TRANSACTION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IE_SHPREF_QUAL_VALUE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_REFNUM_QUAL_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "SHIPMENT_REFNUM_VALUE"
+        }
+      ]
+    },
+    {
+      "indexName": "IDX_IESREF_SHIPREFVAL_TRAN",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_REFNUM_QUAL_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "SHIPMENT_REFNUM_VALUE"
+        },
+        {
+          "sequence": 3,
+          "name": "I_TRANSACTION_NO"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_IESREF_TRAN_REF_QUAL",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "I_TRANSACTION_NO"
+        },
+        {
+          "sequence": 2,
+          "name": "SHIPMENT_REFNUM_VALUE"
+        },
+        {
+          "sequence": 3,
+          "name": "SHIPMENT_REFNUM_QUAL_GID"
+        }
+      ]
+    }
+  ]
+}

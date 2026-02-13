@@ -1,1 +1,153 @@
-{"table": {"schema": "glogowner","name": "gtm_dt_config_attribute","description": "This table holds the values and relation between data transfer configuration and data transfer attribute defination table"},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DT_CONFIG_GID","description": "gtm_dt_config_gid contains unique identifier for data transfer configuration","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_DT_ATTRIBUTE_DEF_GID","description": "gtm_dt_attribute_def_gid contains unique identifier for data transfer attribute","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NUMBER","description": "This stores the sequence number entered by the user for each attribute in UI","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_DT_CONFIG_GID"},{"sequence": 2,"columnName": "GTM_DT_ATTRIBUTE_DEF_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GDTCA_GTMDTCONFIGGID","cascadeDelete": false,"parentTableName": "GTM_DT_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_DT_CONFIG_GID","columnName": "GTM_DT_CONFIG_GID"}]},{"foreignKeyName": "FK_GDTCA_GTMDTATTRIBDEF","cascadeDelete": false,"parentTableName": "GTM_DT_ATTRIBUTE_DEF","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_DT_ATTRIBUTE_DEF_GID","columnName": "GTM_DT_ATTRIBUTE_DEF_GID"}]}],"childTables": ["GTM_DT_CONFIG_ATTRIBUTE_D"],"indices": [{"indexName": "IX_GTM_DT_CONFIG_GID","columnNames": [{"sequence": 1,"name": "GTM_DT_CONFIG_GID"}]},{"indexName": "IX_SEQUENCE_NUMBER","columnNames": [{"sequence": 1,"name": "SEQUENCE_NUMBER"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_dt_config_attribute",
+    "description": "This table holds the values and relation between data transfer configuration and data transfer attribute defination table"
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DT_CONFIG_GID",
+      "description": "gtm_dt_config_gid contains unique identifier for data transfer configuration",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_DT_ATTRIBUTE_DEF_GID",
+      "description": "gtm_dt_attribute_def_gid contains unique identifier for data transfer attribute",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NUMBER",
+      "description": "This stores the sequence number entered by the user for each attribute in UI",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_DT_CONFIG_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_DT_ATTRIBUTE_DEF_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GDTCA_GTMDTCONFIGGID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DT_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_DT_CONFIG_GID",
+          "columnName": "GTM_DT_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GDTCA_GTMDTATTRIBDEF",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DT_ATTRIBUTE_DEF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_DT_ATTRIBUTE_DEF_GID",
+          "columnName": "GTM_DT_ATTRIBUTE_DEF_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "GTM_DT_CONFIG_ATTRIBUTE_D"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_GTM_DT_CONFIG_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_DT_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SEQUENCE_NUMBER",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SEQUENCE_NUMBER"
+        }
+      ]
+    }
+  ]
+}

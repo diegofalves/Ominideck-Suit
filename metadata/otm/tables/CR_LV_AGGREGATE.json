@@ -1,1 +1,512 @@
-{"table": {"schema": "glogowner","name": "cr_lv_aggregate","description": "Individual aggregation of lane volume by date/shift."},"columns": [{"name": "CR_LV_AGGREGATE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CR_LV_AGGREGATE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CR_PROJECT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CR_FORECAST_GID","description": "The LV Forecast to which this aggregate contributes.  This link exists even if the aggregate is an outlier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CR_AGGREGATION_GID","description": "The ID of the aggregation in which this aggregate was created.  Null for user-created data.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_REGION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_REGION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DATE","description": "Start date for shipments in the aggregate.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DOW","description": "Start day of week (1 = Sunday)","dataType": "NUMBER","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_DAY","description": "Start day within cycle.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "START_SHIFT","description": "","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_START_TIME","description": "Number of seconds from midnight","dataType": "NUMBER","size": 5,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DATE","description": "End date for shipments in the aggregate.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DOW","description": "End day-of-week (1 = Sunday)","dataType": "NUMBER","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_DAY","description": "End day within cycle.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "END_SHIFT","description": "","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_END_TIME","description": "Number of seconds from midnight","dataType": "NUMBER","size": 5,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_VOLUME","description": "Total number of shipments for this aggregate.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_TRANSIT_TIME","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_TRANSIT_TIME_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_TRANSIT_TIME_BASE","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_MARKET_COST","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_MARKET_COST_CURRENCY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_MARKET_COST_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_DISTANCE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_DISTANCE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_DISTANCE_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_USER_EDITED","description": "Indicates whether this aggregate has been edited/created by the user.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "IS_OUTLIER","description": "Indicates whether this aggregate is excluded as an outlier.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CR_LV_AGGREGATE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_CRLA_CR_PROJECT_GID","cascadeDelete": false,"parentTableName": "CR_PROJECT","columnRelation": [{"sequence": 1,"parentColumnName": "CR_PROJECT_GID","columnName": "CR_PROJECT_GID"}]},{"foreignKeyName": "FK_CRLA_CR_FORECAST_GID","cascadeDelete": false,"parentTableName": "CR_FORECAST","columnRelation": [{"sequence": 1,"parentColumnName": "CR_FORECAST_GID","columnName": "CR_FORECAST_GID"}]},{"foreignKeyName": "FK_CRLA_CR_AGGREGATION_GID","cascadeDelete": false,"parentTableName": "CR_AGGREGATION","columnRelation": [{"sequence": 1,"parentColumnName": "CR_AGGREGATION_GID","columnName": "CR_AGGREGATION_GID"}]},{"foreignKeyName": "FK_CRLA_SOURCE_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "SOURCE_REGION_GID"}]},{"foreignKeyName": "FK_CRLA_DEST_REGION_GID","cascadeDelete": false,"parentTableName": "REGION","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GID","columnName": "DEST_REGION_GID"}]},{"foreignKeyName": "FK_CRLA_EQUIPMENT_GROUP_PROFIL","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_CRLA_AVERAGE_MARKET_CO_CURR","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "AVG_MARKET_COST_CURRENCY_GID"}]}],"childTables": ["CR_LV_AGGREGATE_CATEGORY","CR_LV_AGGREGATE_P_SHIPMENT"],"indices": [{"indexName": "IX_CRLVAGG_CR_FORECAST_GID","columnNames": [{"sequence": 1,"name": "CR_FORECAST_GID"}]},{"indexName": "IX_CRLVAGG_CR_PROJECT_GID","columnNames": [{"sequence": 1,"name": "CR_PROJECT_GID"}]},{"indexName": "IX_CRLVAGG_SD_REGION_GID","columnNames": [{"sequence": 1,"name": "SOURCE_REGION_GID"},{"sequence": 2,"name": "DEST_REGION_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "cr_lv_aggregate",
+    "description": "Individual aggregation of lane volume by date/shift."
+  },
+  "columns": [
+    {
+      "name": "CR_LV_AGGREGATE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CR_LV_AGGREGATE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CR_PROJECT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CR_FORECAST_GID",
+      "description": "The LV Forecast to which this aggregate contributes.  This link exists even if the aggregate is an outlier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CR_AGGREGATION_GID",
+      "description": "The ID of the aggregation in which this aggregate was created.  Null for user-created data.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_REGION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_REGION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DATE",
+      "description": "Start date for shipments in the aggregate.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DOW",
+      "description": "Start day of week (1 = Sunday)",
+      "dataType": "NUMBER",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_DAY",
+      "description": "Start day within cycle.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "START_SHIFT",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_START_TIME",
+      "description": "Number of seconds from midnight",
+      "dataType": "NUMBER",
+      "size": 5,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DATE",
+      "description": "End date for shipments in the aggregate.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DOW",
+      "description": "End day-of-week (1 = Sunday)",
+      "dataType": "NUMBER",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_DAY",
+      "description": "End day within cycle.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "END_SHIFT",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_END_TIME",
+      "description": "Number of seconds from midnight",
+      "dataType": "NUMBER",
+      "size": 5,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_VOLUME",
+      "description": "Total number of shipments for this aggregate.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_TRANSIT_TIME",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_TRANSIT_TIME_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_TRANSIT_TIME_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_MARKET_COST",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_MARKET_COST_CURRENCY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_MARKET_COST_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_DISTANCE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_DISTANCE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_DISTANCE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_USER_EDITED",
+      "description": "Indicates whether this aggregate has been edited/created by the user.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_OUTLIER",
+      "description": "Indicates whether this aggregate is excluded as an outlier.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CR_LV_AGGREGATE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CRLA_CR_PROJECT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CR_PROJECT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CR_PROJECT_GID",
+          "columnName": "CR_PROJECT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CRLA_CR_FORECAST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CR_FORECAST",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CR_FORECAST_GID",
+          "columnName": "CR_FORECAST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CRLA_CR_AGGREGATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CR_AGGREGATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CR_AGGREGATION_GID",
+          "columnName": "CR_AGGREGATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CRLA_SOURCE_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "SOURCE_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CRLA_DEST_REGION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GID",
+          "columnName": "DEST_REGION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CRLA_EQUIPMENT_GROUP_PROFIL",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CRLA_AVERAGE_MARKET_CO_CURR",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "AVG_MARKET_COST_CURRENCY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "CR_LV_AGGREGATE_CATEGORY",
+    "CR_LV_AGGREGATE_P_SHIPMENT"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_CRLVAGG_CR_FORECAST_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CR_FORECAST_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_CRLVAGG_CR_PROJECT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CR_PROJECT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_CRLVAGG_SD_REGION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_REGION_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "DEST_REGION_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,228 @@
-{"table": {"schema": "glogowner","name": "gtm_tip_value_calc_detail","description": "Trade Incentive Program Value Calculation Detail"},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TIP_VALUE_CALCULATION_GID","description": "Trade Incentive Program Value Calculation GID","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NUMBER","description": "Sequence Number","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARGET_OBJECT","description": "Target Object, under which the result of Value Calculation will be persisted.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'INVENTORY'","conditionalConstraint": "","defaultValue": ""},{"name": "TARGET_VALUE_QUALIFIER_GID","description": "The Value Qualifier GID on the target object, for which the result of Value calculation will be persisted.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VALUE_OPERATION","description": "Value Operation. Can be either Increase or Decrease.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'INCREASE','DECREASE'","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_VALUE_QUALIFIER_GID","description": "The Value Qualifier GID of the source, which will be used as a factor in the calculation.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TIP_RATE_TYPE_GID","description": "GID of GTM Trade Incentive Program Rate Type.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TIP_VALUE_CALCULATION_GID"},{"sequence": 2,"columnName": "SEQUENCE_NUMBER"}],"foreignKeys": [{"foreignKeyName": "FK_GTVCD_GTM_TIP_VALUE_CALC","cascadeDelete": false,"parentTableName": "GTM_TIP_VALUE_CALCULATION","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TIP_VALUE_CALCULATION_GID","columnName": "GTM_TIP_VALUE_CALCULATION_GID"}]},{"foreignKeyName": "FK_GTVCD_TGT_GTM_VALUE_QUAL","cascadeDelete": false,"parentTableName": "GTM_VALUE_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_VALUE_QUALIFIER_GID","columnName": "TARGET_VALUE_QUALIFIER_GID"}]},{"foreignKeyName": "FK_GTVCD_SRC_GTM_VALUE_QUAL","cascadeDelete": false,"parentTableName": "GTM_VALUE_QUALIFIER","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_VALUE_QUALIFIER_GID","columnName": "SOURCE_VALUE_QUALIFIER_GID"}]},{"foreignKeyName": "FK_GTVCD_GTM_TIP_RATE_TYPE_GI","cascadeDelete": false,"parentTableName": "GTM_TIP_RATE_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TIP_RATE_TYPE_GID","columnName": "GTM_TIP_RATE_TYPE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_TARGET_VALUE_QUAL_GID","columnNames": [{"sequence": 1,"name": "TARGET_VALUE_QUALIFIER_GID"}]},{"indexName": "IX_SOURCE_VALUE_QUAL_GID","columnNames": [{"sequence": 1,"name": "SOURCE_VALUE_QUALIFIER_GID"}]},{"indexName": "IX_GTM_TIP_VALUE_CALC_GID","columnNames": [{"sequence": 1,"name": "GTM_TIP_VALUE_CALCULATION_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_tip_value_calc_detail",
+    "description": "Trade Incentive Program Value Calculation Detail"
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TIP_VALUE_CALCULATION_GID",
+      "description": "Trade Incentive Program Value Calculation GID",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NUMBER",
+      "description": "Sequence Number",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARGET_OBJECT",
+      "description": "Target Object, under which the result of Value Calculation will be persisted.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'INVENTORY'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARGET_VALUE_QUALIFIER_GID",
+      "description": "The Value Qualifier GID on the target object, for which the result of Value calculation will be persisted.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VALUE_OPERATION",
+      "description": "Value Operation. Can be either Increase or Decrease.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'INCREASE','DECREASE'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_VALUE_QUALIFIER_GID",
+      "description": "The Value Qualifier GID of the source, which will be used as a factor in the calculation.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TIP_RATE_TYPE_GID",
+      "description": "GID of GTM Trade Incentive Program Rate Type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TIP_VALUE_CALCULATION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SEQUENCE_NUMBER"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTVCD_GTM_TIP_VALUE_CALC",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TIP_VALUE_CALCULATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TIP_VALUE_CALCULATION_GID",
+          "columnName": "GTM_TIP_VALUE_CALCULATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTVCD_TGT_GTM_VALUE_QUAL",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_VALUE_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_VALUE_QUALIFIER_GID",
+          "columnName": "TARGET_VALUE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTVCD_SRC_GTM_VALUE_QUAL",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_VALUE_QUALIFIER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_VALUE_QUALIFIER_GID",
+          "columnName": "SOURCE_VALUE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTVCD_GTM_TIP_RATE_TYPE_GI",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TIP_RATE_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TIP_RATE_TYPE_GID",
+          "columnName": "GTM_TIP_RATE_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_TARGET_VALUE_QUAL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TARGET_VALUE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SOURCE_VALUE_QUAL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_VALUE_QUALIFIER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_GTM_TIP_VALUE_CALC_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_TIP_VALUE_CALCULATION_GID"
+        }
+      ]
+    }
+  ]
+}

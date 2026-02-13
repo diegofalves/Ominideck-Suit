@@ -1,1 +1,155 @@
-{"table": {"schema": "glogowner","name": "esg_act_type_attribute","description": "This table is used for identifying the additional attributes to be captured against the emission activity for an emission activity type while calculating the emissions."},"columns": [{"name": "ESG_ACTIVITY_TYPE_GID","description": "The globally unique ID of an emission activity type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACT_TYPE_ATTRIBUTE_SEQ","description": "A system-generated sequence number for the record.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMARK_QUAL_GID","description": "Remark qualifier of the business entity, the value of which needs to be captured, while copying the additional attributes from the business entity, like shipment, to the emission activity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ESG_ACTIVITY_TYPE_GID"},{"sequence": 2,"columnName": "ACT_TYPE_ATTRIBUTE_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_EATA_ESG_ACTIVITY_TYPE_GID","cascadeDelete": false,"parentTableName": "ESG_ACTIVITY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "ESG_ACTIVITY_TYPE_GID","columnName": "ESG_ACTIVITY_TYPE_GID"}]},{"foreignKeyName": "FK_EATA_REMARK_QUAL_GID","cascadeDelete": false,"parentTableName": "REMARK_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "REMARK_QUAL_GID","columnName": "REMARK_QUAL_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_EATA_REMQUAL_EATYP_GID","columnNames": [{"sequence": 1,"name": "ESG_ACTIVITY_TYPE_GID"},{"sequence": 2,"name": "REMARK_QUAL_GID"}]},{"indexName": "IX_EATA_REMARK_QUAL_GID","columnNames": [{"sequence": 1,"name": "REMARK_QUAL_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "esg_act_type_attribute",
+    "description": "This table is used for identifying the additional attributes to be captured against the emission activity for an emission activity type while calculating the emissions."
+  },
+  "columns": [
+    {
+      "name": "ESG_ACTIVITY_TYPE_GID",
+      "description": "The globally unique ID of an emission activity type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACT_TYPE_ATTRIBUTE_SEQ",
+      "description": "A system-generated sequence number for the record.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMARK_QUAL_GID",
+      "description": "Remark qualifier of the business entity, the value of which needs to be captured, while copying the additional attributes from the business entity, like shipment, to the emission activity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ESG_ACTIVITY_TYPE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "ACT_TYPE_ATTRIBUTE_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EATA_ESG_ACTIVITY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ESG_ACTIVITY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ESG_ACTIVITY_TYPE_GID",
+          "columnName": "ESG_ACTIVITY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EATA_REMARK_QUAL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REMARK_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REMARK_QUAL_GID",
+          "columnName": "REMARK_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_EATA_REMQUAL_EATYP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ESG_ACTIVITY_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "REMARK_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EATA_REMARK_QUAL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REMARK_QUAL_GID"
+        }
+      ]
+    }
+  ]
+}

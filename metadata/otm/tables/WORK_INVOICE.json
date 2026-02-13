@@ -1,1 +1,247 @@
-{"table": {"schema": "glogowner","name": "work_invoice","description": "Includes a record of driver activities for a shipment. This is the record sent to payroll and used to calculate driver pay."},"columns": [{"name": "WORK_INVOICE_GID","description": "The GID for the work invoice.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WORK_INVOICE_XID","description": "The XID for the work invoice.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WORK_INVOICE_NUMBER","description": "The GID for the work invoice from a business standpoint; if a corrected work invoice is generated, this number will be retained.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVER_GID","description": "The GID of the driver for this work invoice.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDARY_DRIVER_GID","description": "If driven by a team, the secondary driver ID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATE_SENT","description": "Date this work invoice was sent to payroll.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REVENUE","description": "The sell side revenue.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REVENUE_CURRENCY_GID","description": "The XID for the revenue currency.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REVENUE_BASE","description": "Revenue in the base unit of measure currency.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MARKED_FOR_PURGE","description": "Indicates this record can be purged as part of the next purge run.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "WORK_INVOICE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_WKINV_DRIVER_GID","cascadeDelete": false,"parentTableName": "DRIVER","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_GID","columnName": "DRIVER_GID"}]},{"foreignKeyName": "FK_WKINV_SECONDARY_DRIVER_GID","cascadeDelete": false,"parentTableName": "DRIVER","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_GID","columnName": "SECONDARY_DRIVER_GID"}]},{"foreignKeyName": "FK_WKINV_REVENUE_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "REVENUE_CURRENCY_GID"}]}],"childTables": ["WORK_INVOICE_ACTIVITY","WORK_INVOICE_SHIPMENT_JOIN","WORK_INVOICE_STATUS"],"indices": [{"indexName": "IX_WORK_INVOICE_DRIVER_GID","columnNames": [{"sequence": 1,"name": "DRIVER_GID"}]},{"indexName": "IX_WI_SEC_DRIVER_GID","columnNames": [{"sequence": 1,"name": "SECONDARY_DRIVER_GID"}]},{"indexName": "IX_WORK_INVOICE_INSERT_DATE","columnNames": [{"sequence": 1,"name": "INSERT_DATE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "work_invoice",
+    "description": "Includes a record of driver activities for a shipment. This is the record sent to payroll and used to calculate driver pay."
+  },
+  "columns": [
+    {
+      "name": "WORK_INVOICE_GID",
+      "description": "The GID for the work invoice.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WORK_INVOICE_XID",
+      "description": "The XID for the work invoice.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WORK_INVOICE_NUMBER",
+      "description": "The GID for the work invoice from a business standpoint; if a corrected work invoice is generated, this number will be retained.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVER_GID",
+      "description": "The GID of the driver for this work invoice.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDARY_DRIVER_GID",
+      "description": "If driven by a team, the secondary driver ID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATE_SENT",
+      "description": "Date this work invoice was sent to payroll.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REVENUE",
+      "description": "The sell side revenue.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REVENUE_CURRENCY_GID",
+      "description": "The XID for the revenue currency.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REVENUE_BASE",
+      "description": "Revenue in the base unit of measure currency.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MARKED_FOR_PURGE",
+      "description": "Indicates this record can be purged as part of the next purge run.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "WORK_INVOICE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_WKINV_DRIVER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_GID",
+          "columnName": "DRIVER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_WKINV_SECONDARY_DRIVER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_GID",
+          "columnName": "SECONDARY_DRIVER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_WKINV_REVENUE_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "REVENUE_CURRENCY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "WORK_INVOICE_ACTIVITY",
+    "WORK_INVOICE_SHIPMENT_JOIN",
+    "WORK_INVOICE_STATUS"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_WORK_INVOICE_DRIVER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DRIVER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_WI_SEC_DRIVER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SECONDARY_DRIVER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_WORK_INVOICE_INSERT_DATE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INSERT_DATE"
+        }
+      ]
+    }
+  ]
+}

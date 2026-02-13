@@ -1,1 +1,191 @@
-{"table": {"schema": "glogowner","name": "gtm_transaction_reference","description": "This table contains the details of the associated shipments or order releases and their respective data configurations of a trade transaction."},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NO","description": "Uniquely identifies the association of trade transaction with the related object.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TRANSACTION_GID","description": "The GID for the GTM trade transaction.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DATA_QUERY_TYPE_GID","description": "Identifies the data query type of the object.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSACTION_REF_GID","description": "Gives the Shipment or Order Release ID based on the data query type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_PRIMARY","description": "Gives the primary shipment among the multiple shipments. Takes the values Y/N.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "GTM_DT_CONFIG_GID","description": "Gives the data configuration used to create/copy data from the related object to trade transaction.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SEQUENCE_NO"},{"sequence": 2,"columnName": "GTM_TRANSACTION_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GTRF_GTM_TRANSACTION_GID","cascadeDelete": false,"parentTableName": "GTM_TRANSACTION","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TRANSACTION_GID","columnName": "GTM_TRANSACTION_GID"}]},{"foreignKeyName": "FK_GTRF_DATA_QUERY_TYPE_GID","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_GTRF_GTM_DT_CONFIG_GID","cascadeDelete": false,"parentTableName": "GTM_DT_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_DT_CONFIG_GID","columnName": "GTM_DT_CONFIG_GID"}]}],"childTables": [],"indices": [{"indexName": "UK_GTM_TRANSACTION_REFERENCE","columnNames": [{"sequence": 1,"name": "DATA_QUERY_TYPE_GID"},{"sequence": 2,"name": "TRANSACTION_REF_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_transaction_reference",
+    "description": "This table contains the details of the associated shipments or order releases and their respective data configurations of a trade transaction."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NO",
+      "description": "Uniquely identifies the association of trade transaction with the related object.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TRANSACTION_GID",
+      "description": "The GID for the GTM trade transaction.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DATA_QUERY_TYPE_GID",
+      "description": "Identifies the data query type of the object.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSACTION_REF_GID",
+      "description": "Gives the Shipment or Order Release ID based on the data query type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_PRIMARY",
+      "description": "Gives the primary shipment among the multiple shipments. Takes the values Y/N.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "GTM_DT_CONFIG_GID",
+      "description": "Gives the data configuration used to create/copy data from the related object to trade transaction.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SEQUENCE_NO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "GTM_TRANSACTION_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTRF_GTM_TRANSACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_TRANSACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TRANSACTION_GID",
+          "columnName": "GTM_TRANSACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTRF_DATA_QUERY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTRF_GTM_DT_CONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_DT_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_DT_CONFIG_GID",
+          "columnName": "GTM_DT_CONFIG_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_GTM_TRANSACTION_REFERENCE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DATA_QUERY_TYPE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "TRANSACTION_REF_GID"
+        }
+      ]
+    }
+  ]
+}

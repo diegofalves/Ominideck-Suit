@@ -1,1 +1,183 @@
-{"table": {"schema": "glogowner","name": "perfm_thresh_notify","description": "Profile for Metric Alert Notification. Defines recipients and actions to take on the alert."},"columns": [{"name": "PERFM_THRESH_NOTIFY_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERFM_THRESH_NOTIFY_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONSOLIDATION","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONSOLIDATION_UOM_CODE","description": "Time for consolidation of disparate thresholds for this notification profile. I.e., send a single notification in this time period, containing a list of all thresholds exceeded.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONSOLIDATION_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRIGGER_QDLOGS","description": "If Y, a qdlogs request will be made along with the notification. The notification e-mail will include the qdlogs archive name.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "TRIGGER_QDLOGS_JRA","description": "If 'Y', a JRA recording should be grabbed when qdlogs are triggered.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "TRIGGER_QDLOGS_HEAP_DUMP","description": "If 'Y', a heap dump should be grabbed when qdlogs are triggered.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "TRIGGER_PERF_COLLECTION","description": "A comma-delimited list of Performance collectors to retrieve and attach as a zip file to the notification. Also supports 'STANDARD' and 'ALL' collections.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_RESERVED","description": "If ''Y'', the record is reserved for use with OTM staged thresholds. It cannot be edited or removed by a user.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PERFM_THRESH_NOTIFY_GID"}],"foreignKeys": [],"childTables": ["PERFM_THRESHOLD","PERFM_THRESH_NOTIFY_CONTACT","PERFM_THRESH_NOTIFY_EMAIL"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "perfm_thresh_notify",
+    "description": "Profile for Metric Alert Notification. Defines recipients and actions to take on the alert."
+  },
+  "columns": [
+    {
+      "name": "PERFM_THRESH_NOTIFY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERFM_THRESH_NOTIFY_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONSOLIDATION",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONSOLIDATION_UOM_CODE",
+      "description": "Time for consolidation of disparate thresholds for this notification profile. I.e., send a single notification in this time period, containing a list of all thresholds exceeded.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONSOLIDATION_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRIGGER_QDLOGS",
+      "description": "If Y, a qdlogs request will be made along with the notification. The notification e-mail will include the qdlogs archive name.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "TRIGGER_QDLOGS_JRA",
+      "description": "If 'Y', a JRA recording should be grabbed when qdlogs are triggered.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "TRIGGER_QDLOGS_HEAP_DUMP",
+      "description": "If 'Y', a heap dump should be grabbed when qdlogs are triggered.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "TRIGGER_PERF_COLLECTION",
+      "description": "A comma-delimited list of Performance collectors to retrieve and attach as a zip file to the notification. Also supports 'STANDARD' and 'ALL' collections.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_RESERVED",
+      "description": "If ''Y'', the record is reserved for use with OTM staged thresholds. It cannot be edited or removed by a user.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PERFM_THRESH_NOTIFY_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [
+    "PERFM_THRESHOLD",
+    "PERFM_THRESH_NOTIFY_CONTACT",
+    "PERFM_THRESH_NOTIFY_EMAIL"
+  ],
+  "indices": []
+}

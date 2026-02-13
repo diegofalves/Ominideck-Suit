@@ -1,1 +1,809 @@
-{"table": {"schema": "glogowner","name": "claim_line_item","description": "Stores line items for a claim"},"columns": [{"name": "CLAIM_GID","description": "The claim GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LINE_ITEM_SEQ_NO","description": "Sequence number to keep claim line items unique; actual line items should start with sequence number 1; 0 is reserved to attach costs that relate to the claim as a whole.","dataType": "NUMBER","size": 9,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_LINE_GID","description": "The GID for the order release (if applicable) to which this claim line item applies.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERIAL_NUMBER","description": "Serial number for the claim line item.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGE_TYPE_GID","description": "Type of damage; these values are user defined.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGED_WEIGHT","description": "Weight of damaged portion.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGED_WEIGHT_UOM_CODE","description": "UOM qualifier for damaged weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGED_WEIGHT_BASE","description": "Damaged weight in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGED_VOLUME","description": "Volume of damaged portion.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGED_VOLUME_UOM_CODE","description": "UOM qualifier for damaged volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGED_VOLUME_BASE","description": "Damaged volume in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGED_QUANTITY","description": "Quantity of damaged goods.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DAMAGED_FRACTION","description": "Percentage of damage.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIGINAL_WEIGHT","description": "Total or original weight for the line item (undamaged + damaged goods).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIGINAL_WEIGHT_UOM_CODE","description": "UOM qualifier for original weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIGINAL_WEIGHT_BASE","description": "Original weight in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIGINAL_VOLUME","description": "Total or original volume for the line item (undamaged + damaged goods).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIGINAL_VOLUME_UOM_CODE","description": "UOM qualifier for original volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIGINAL_VOLUME_BASE","description": "Original volume in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIGINAL_QUANTITY","description": "Total or original quantity for the line item (undamaged + damaged goods).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_WEIGHT","description": "New weight after reconditioning activities.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_WEIGHT_UOM_CODE","description": "UOM qualifier for new weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_WEIGHT_BASE","description": "New weight in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_VOLUME","description": "New volume after reconditioning activities","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_VOLUME_UOM_CODE","description": "UOM qualifier for new volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_VOLUME_BASE","description": "New volume in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_QUANTITY","description": "New quantity after reconditioning activities.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_WEIGHT","description": "Weight of portion that was removed as part of reconditioning.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_WEIGHT_UOM_CODE","description": "UOM qualifier for removed weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_WEIGHT_BASE","description": "Removed weight in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_VOLUME","description": "Volume of portion that was removed as part of reconditioning.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_VOLUME_UOM_CODE","description": "UOM qualifier for removed volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_VOLUME_BASE","description": "Removed volume in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_QUANTITY","description": "Quantity of goods that were removed as part of reconditioning.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIG_CYLINDER_DIAM","description": "For cylindrical objects, the original diameter prior to damage.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIG_CYLINDER_DIAM_UOM_CODE","description": "UOM qualifier for original cylinder diameter.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIG_CYLINDER_DIAM_BASE","description": "Original cylinder diameter in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIG_CYL_CORE_DIAM","description": "For cylindrical objects, the hollow core diameter that should not be counted as damaged product in damage calculations.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIG_CYL_CORE_DIAM_UOM_CODE","description": "UOM qualifier for original cylinder core diameter.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORIG_CYL_CORE_DIAM_BASE","description": "Original cylinder core diameter in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_CYL_DEPTH","description": "For cylindrical objects, the depth from the outer edge of the cylinder that was removed.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_CYL_DEPTH_UOM_CODE","description": "UOM qualifier for removed cylinder depth.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_CYL_DEPTH_BASE","description": "Removed cylinder depth in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_CYLINDER_DIAM","description": "For cylindrical objects, the new diameter of the object.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_CYLINDER_DIAM_UOM_CODE","description": "UOM qualifier for new cylinder diameter.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NEW_CYLINDER_DIAM_BASE","description": "New cylinder diameter in base UOM.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REMOVED_FRACTION","description": "Percentage of goods removed as part of reconditioning.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARED_VALUE","description": "Declared value of the entire amount of goods represented on the line; the system will populate this when creating a claim from objects in GC3 if the declared value is available.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARED_VALUE_CURRENCY_GID","description": "The GID for currency for the declared value currency.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARED_VALUE_BASE","description": "Declared value amount in base currency.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGE_STATUS_GID","description": "Indicates the status of packages on the claim line item.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'SUSPECT'"},{"name": "TRANSPORT_HANDLING_UNIT_GID","description": "Transport handling unit for the claim line item.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRICE_PER_UNIT","description": "Sales value of goods per unit specified (for a $10/lb. value, this field represents the $10 part); used in the damage value calculation.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRICE_PER_UNIT_CURRENCY_GID","description": "Currency for the price per unit value.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRICE_PER_UNIT_BASE","description": "Base amount for the price per unit value.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRICE_PER_UNIT_UOM_TYPE","description": "UOM type of the unit for which sales value is defined such as 'weight' or 'volume'; used in the damage value calculation.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PRICE_PER_UNIT_UOM_CODE","description": "UOM for the per value for size of loss (for a $10/lb. value, this field represents the 'lb.' part); used in the damage value calculation.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SIZE_OF_LOSS","description": "The calculated total of all claim line item costs for this claim line item.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SIZE_OF_LOSS_CURRENCY_GID","description": "Currency for the system calculated total of all claim line item costs for this claim line item.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SIZE_OF_LOSS_BASE","description": "Base amount for the system calculated total of all claim line item costs for this claim line item.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "CLAIM_GID"},{"sequence": 2,"columnName": "LINE_ITEM_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_COR_CLAIM_GID","cascadeDelete": false,"parentTableName": "CLAIM","columnRelation": [{"sequence": 1,"parentColumnName": "CLAIM_GID","columnName": "CLAIM_GID"}]},{"foreignKeyName": "FK_CLI_ORDER_RELEASE_LINE_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_LINE_GID","columnName": "ORDER_RELEASE_LINE_GID"}]},{"foreignKeyName": "FK_CLI_DAMAGE_TYPE_GID","cascadeDelete": false,"parentTableName": "DAMAGE_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DAMAGE_TYPE_GID","columnName": "DAMAGE_TYPE_GID"}]},{"foreignKeyName": "FK_CLI_DECLARED_VALUE_CURRENC","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "DECLARED_VALUE_CURRENCY_GID"}]},{"foreignKeyName": "FK_CLI_PACKAGE_STATUS_GID","cascadeDelete": false,"parentTableName": "CLAIM_LINE_ITEM_PACKAGE_STATUS","columnRelation": [{"sequence": 1,"parentColumnName": "CLAIM_LINE_PACKAGE_STATUS_GID","columnName": "PACKAGE_STATUS_GID"}]},{"foreignKeyName": "FK_CLI_TRANSPORT_HANDLING_UNI","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "TRANSPORT_HANDLING_UNIT_GID"}]},{"foreignKeyName": "FK_CLI_PRICE_PER_UNIT_CURRENCY","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "PRICE_PER_UNIT_CURRENCY_GID"}]},{"foreignKeyName": "FK_CLI_SIZE_OF_LOSS_CURRENCY_G","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "SIZE_OF_LOSS_CURRENCY_GID"}]}],"childTables": ["CLAIM_LINE_ITEM_COST","CLAIM_LINE_ITEM_REFNUM"],"indices": [{"indexName": "IX_CLI_ORDER_RELEASE_LINE_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_LINE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "claim_line_item",
+    "description": "Stores line items for a claim"
+  },
+  "columns": [
+    {
+      "name": "CLAIM_GID",
+      "description": "The claim GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LINE_ITEM_SEQ_NO",
+      "description": "Sequence number to keep claim line items unique; actual line items should start with sequence number 1; 0 is reserved to attach costs that relate to the claim as a whole.",
+      "dataType": "NUMBER",
+      "size": 9,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_LINE_GID",
+      "description": "The GID for the order release (if applicable) to which this claim line item applies.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERIAL_NUMBER",
+      "description": "Serial number for the claim line item.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGE_TYPE_GID",
+      "description": "Type of damage; these values are user defined.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGED_WEIGHT",
+      "description": "Weight of damaged portion.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGED_WEIGHT_UOM_CODE",
+      "description": "UOM qualifier for damaged weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGED_WEIGHT_BASE",
+      "description": "Damaged weight in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGED_VOLUME",
+      "description": "Volume of damaged portion.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGED_VOLUME_UOM_CODE",
+      "description": "UOM qualifier for damaged volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGED_VOLUME_BASE",
+      "description": "Damaged volume in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGED_QUANTITY",
+      "description": "Quantity of damaged goods.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DAMAGED_FRACTION",
+      "description": "Percentage of damage.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIGINAL_WEIGHT",
+      "description": "Total or original weight for the line item (undamaged + damaged goods).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIGINAL_WEIGHT_UOM_CODE",
+      "description": "UOM qualifier for original weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIGINAL_WEIGHT_BASE",
+      "description": "Original weight in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIGINAL_VOLUME",
+      "description": "Total or original volume for the line item (undamaged + damaged goods).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIGINAL_VOLUME_UOM_CODE",
+      "description": "UOM qualifier for original volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIGINAL_VOLUME_BASE",
+      "description": "Original volume in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIGINAL_QUANTITY",
+      "description": "Total or original quantity for the line item (undamaged + damaged goods).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_WEIGHT",
+      "description": "New weight after reconditioning activities.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_WEIGHT_UOM_CODE",
+      "description": "UOM qualifier for new weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_WEIGHT_BASE",
+      "description": "New weight in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_VOLUME",
+      "description": "New volume after reconditioning activities",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_VOLUME_UOM_CODE",
+      "description": "UOM qualifier for new volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_VOLUME_BASE",
+      "description": "New volume in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_QUANTITY",
+      "description": "New quantity after reconditioning activities.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_WEIGHT",
+      "description": "Weight of portion that was removed as part of reconditioning.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_WEIGHT_UOM_CODE",
+      "description": "UOM qualifier for removed weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_WEIGHT_BASE",
+      "description": "Removed weight in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_VOLUME",
+      "description": "Volume of portion that was removed as part of reconditioning.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_VOLUME_UOM_CODE",
+      "description": "UOM qualifier for removed volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_VOLUME_BASE",
+      "description": "Removed volume in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_QUANTITY",
+      "description": "Quantity of goods that were removed as part of reconditioning.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIG_CYLINDER_DIAM",
+      "description": "For cylindrical objects, the original diameter prior to damage.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIG_CYLINDER_DIAM_UOM_CODE",
+      "description": "UOM qualifier for original cylinder diameter.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIG_CYLINDER_DIAM_BASE",
+      "description": "Original cylinder diameter in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIG_CYL_CORE_DIAM",
+      "description": "For cylindrical objects, the hollow core diameter that should not be counted as damaged product in damage calculations.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIG_CYL_CORE_DIAM_UOM_CODE",
+      "description": "UOM qualifier for original cylinder core diameter.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORIG_CYL_CORE_DIAM_BASE",
+      "description": "Original cylinder core diameter in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_CYL_DEPTH",
+      "description": "For cylindrical objects, the depth from the outer edge of the cylinder that was removed.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_CYL_DEPTH_UOM_CODE",
+      "description": "UOM qualifier for removed cylinder depth.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_CYL_DEPTH_BASE",
+      "description": "Removed cylinder depth in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_CYLINDER_DIAM",
+      "description": "For cylindrical objects, the new diameter of the object.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_CYLINDER_DIAM_UOM_CODE",
+      "description": "UOM qualifier for new cylinder diameter.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NEW_CYLINDER_DIAM_BASE",
+      "description": "New cylinder diameter in base UOM.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REMOVED_FRACTION",
+      "description": "Percentage of goods removed as part of reconditioning.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARED_VALUE",
+      "description": "Declared value of the entire amount of goods represented on the line; the system will populate this when creating a claim from objects in GC3 if the declared value is available.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARED_VALUE_CURRENCY_GID",
+      "description": "The GID for currency for the declared value currency.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARED_VALUE_BASE",
+      "description": "Declared value amount in base currency.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGE_STATUS_GID",
+      "description": "Indicates the status of packages on the claim line item.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'SUSPECT'"
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_GID",
+      "description": "Transport handling unit for the claim line item.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRICE_PER_UNIT",
+      "description": "Sales value of goods per unit specified (for a $10/lb. value, this field represents the $10 part); used in the damage value calculation.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRICE_PER_UNIT_CURRENCY_GID",
+      "description": "Currency for the price per unit value.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRICE_PER_UNIT_BASE",
+      "description": "Base amount for the price per unit value.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRICE_PER_UNIT_UOM_TYPE",
+      "description": "UOM type of the unit for which sales value is defined such as 'weight' or 'volume'; used in the damage value calculation.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PRICE_PER_UNIT_UOM_CODE",
+      "description": "UOM for the per value for size of loss (for a $10/lb. value, this field represents the 'lb.' part); used in the damage value calculation.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SIZE_OF_LOSS",
+      "description": "The calculated total of all claim line item costs for this claim line item.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SIZE_OF_LOSS_CURRENCY_GID",
+      "description": "Currency for the system calculated total of all claim line item costs for this claim line item.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SIZE_OF_LOSS_BASE",
+      "description": "Base amount for the system calculated total of all claim line item costs for this claim line item.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "CLAIM_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "LINE_ITEM_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_COR_CLAIM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CLAIM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CLAIM_GID",
+          "columnName": "CLAIM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLI_ORDER_RELEASE_LINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_LINE_GID",
+          "columnName": "ORDER_RELEASE_LINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLI_DAMAGE_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DAMAGE_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DAMAGE_TYPE_GID",
+          "columnName": "DAMAGE_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLI_DECLARED_VALUE_CURRENC",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "DECLARED_VALUE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLI_PACKAGE_STATUS_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CLAIM_LINE_ITEM_PACKAGE_STATUS",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CLAIM_LINE_PACKAGE_STATUS_GID",
+          "columnName": "PACKAGE_STATUS_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLI_TRANSPORT_HANDLING_UNI",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLI_PRICE_PER_UNIT_CURRENCY",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "PRICE_PER_UNIT_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CLI_SIZE_OF_LOSS_CURRENCY_G",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "SIZE_OF_LOSS_CURRENCY_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "CLAIM_LINE_ITEM_COST",
+    "CLAIM_LINE_ITEM_REFNUM"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_CLI_ORDER_RELEASE_LINE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_LINE_GID"
+        }
+      ]
+    }
+  ]
+}

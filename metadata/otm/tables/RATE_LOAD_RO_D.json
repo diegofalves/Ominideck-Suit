@@ -1,1 +1,218 @@
-{"table": {"schema": "glogowner","name": "rate_load_ro_d","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_LOAD_RO_D_SEQ","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_LOAD_SUMMARY_SEQ","description": "Reference to rate load summary.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_MGMT_RO_GID","description": "Reference to uploaded rate offering.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OPERATIONAL_RO_GID","description": "Parent rate offering GID of rate mgmt ro GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_ENTERED_RO_GID","description": "Rate offering Gid entered in the spreadsheet. Reference to rate load ro d seq.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_LOAD_WARNING_INDICATOR","description": "Set to 'Y' if the uploaded rate offering has any warnings during the rate load process.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_UPLOADED_DATE","description": "Captures the date and time at which the rate offering is last uploaded.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_APPROVAL_DATE","description": "Captures the date and time at which the approval action is last run on this rate offering.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPLOADED_BY","description": "Captures the user who last uploaded this rate offering.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATUS_CHANGED_BY","description": "Captures the user who last run the approval action on the rate offering.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_LOAD_RO_D_SEQ"}],"foreignKeys": [{"foreignKeyName": "FK_RLRD_RATE_LOAD_SUMMARY_SEQ","cascadeDelete": false,"parentTableName": "RATE_LOAD_SUMMARY","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_LOAD_SUMMARY_SEQ","columnName": "RATE_LOAD_SUMMARY_SEQ"}]},{"foreignKeyName": "FK_RLRD_RATE_MGMT_RO_GID","cascadeDelete": false,"parentTableName": "RATE_OFFERING","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_OFFERING_GID","columnName": "RATE_MGMT_RO_GID"}]},{"foreignKeyName": "FK_RLRD_OPERATION_RO_GID","cascadeDelete": false,"parentTableName": "RATE_OFFERING","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_OFFERING_GID","columnName": "OPERATIONAL_RO_GID"}]}],"childTables": ["RATE_LOAD_RO_D_STATUS","RATE_LOAD_RO_D_WARNING","RATE_LOAD_RR_D"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "rate_load_ro_d",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_LOAD_RO_D_SEQ",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_LOAD_SUMMARY_SEQ",
+      "description": "Reference to rate load summary.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_MGMT_RO_GID",
+      "description": "Reference to uploaded rate offering.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OPERATIONAL_RO_GID",
+      "description": "Parent rate offering GID of rate mgmt ro GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_ENTERED_RO_GID",
+      "description": "Rate offering Gid entered in the spreadsheet. Reference to rate load ro d seq.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_LOAD_WARNING_INDICATOR",
+      "description": "Set to 'Y' if the uploaded rate offering has any warnings during the rate load process.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_UPLOADED_DATE",
+      "description": "Captures the date and time at which the rate offering is last uploaded.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_APPROVAL_DATE",
+      "description": "Captures the date and time at which the approval action is last run on this rate offering.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPLOADED_BY",
+      "description": "Captures the user who last uploaded this rate offering.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATUS_CHANGED_BY",
+      "description": "Captures the user who last run the approval action on the rate offering.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_LOAD_RO_D_SEQ"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RLRD_RATE_LOAD_SUMMARY_SEQ",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_LOAD_SUMMARY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_LOAD_SUMMARY_SEQ",
+          "columnName": "RATE_LOAD_SUMMARY_SEQ"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RLRD_RATE_MGMT_RO_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_OFFERING",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_OFFERING_GID",
+          "columnName": "RATE_MGMT_RO_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RLRD_OPERATION_RO_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_OFFERING",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_OFFERING_GID",
+          "columnName": "OPERATIONAL_RO_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "RATE_LOAD_RO_D_STATUS",
+    "RATE_LOAD_RO_D_WARNING",
+    "RATE_LOAD_RR_D"
+  ],
+  "indices": []
+}

@@ -1,1 +1,1268 @@
-{"table": {"schema": "glogowner","name": "servprov","description": "This table stores the information about the service providers."},"columns": [{"name": "SERVPROV_GID","description": "The service provider GID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_XID","description": "The service provider XID.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TENDER_RESPONSE_TIME","description": "The expected response time by this service provider for shipment tenders.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TENDER_RESPONSE_TIME_UOM_CODE","description": "Unit of measure for TENDER_RESPONSE_TIME column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TENDER_RESPONSE_TIME_BASE","description": "Tender response time in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_PROFILE_GID","description": "A GID to define the mode profiles(group) that the service provider uses.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MATCH_RULE_PROFILE_GID","description": "The GID for the match rule profile. Match Rule Profile Invoices are matched with existing shipments using an ordered list of rules. The Match Rule Profile is a group of service providers that follow the same rules for matching invoices to shipments.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MATCH_VALID_RULE_PROFILE_GID","description": "A profile for the match validation rules that should be tested if the Validate Match action is run on an invoice for this service provider.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AUTO_PAYMENT_FLAG","description": "Mark Autopay to have Oracle Transportation Management automatically create an invoice with every shipment for this service provider. Clear the check box, if you want to generate invoices manually in Settlement instead.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "AUTO_APPROVE_RULE_PROFILE_GID","description": "The GID for the auto approve rule profile.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOCATION_RULE_PROFILE_GID","description": "The GID for the allocation rule profile. Allocation Rule Profile governs how your shipping costs are allocated.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_DISPATCH_BY_REGION","description": "A flag to turn on/off the Tender by Locale feature.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "ALLOW_TENDER","description": "Allow Tender determines whether the system can automatically tender (ordinary tender as opposed to Broadcast or Spot Bid tenders mentioned below) shipments to this service provider. Clear the check box to prevent the system from automatically tendering shipments to this service provider. If you have not loaded any rates into the system but still want to be able to create shipments, you may want to set up a dummy service provider with this check box cleared. You must mark this check box if you also plan to configure Broadcast/Spot Bid tendering for the service provider. Note: Setting up a service provider's tender timeout requirements is done via the Contact Manager Notification Tab.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "OUT_XML_PROFILE_GID","description": "Associates the service provider with an out_xml_profile, which helps define the content of outgoing XML to this service provider.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_SERVICE_GID","description": "Rate Service GID. This will be the default Rate Service used to re-drive the shipment if the service provider does not have a rate offering that matches the shipment","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACCEPT_SPOT_BIDS","description": "Is set to Y(es) if the service provider will participate in spot bid tendering.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_ACCEPT_BROADCAST_TENDERS","description": "Is set to Y(es) if the service provider will participate in broadcast tendering.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_LOCALIZE_BROADCAST_CONTACT","description": "If 'Y', use the preference /language, etc. of BROADCAST_SPOT_CONTACT. Otherwise, use shipment's LOGISTICS involved party's preference is used for broadcast notification.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'N','Y'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "SPOT_RATE_ADJUSTMENT_FACTOR","description": "Spot Rate Adjustment Factor is the percentage factor to be applied to the spot rate for a service provider to adjust the spot rate for service provider performance. For example, 10% means a spot rate of $100 will be adjusted to 100 + 0.1 * 100 = $110.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BROADCAST_SPOT_CONTACT_GID","description": "Overrides the shipper's primary contact to be used to determine localization preferences for tender notification.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DO_CONDITIONAL_ACCEPTS","description": "Determines if the service provider can participate in conditional booking.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "IS_INTERNAL_NVOCC","description": "The Internal NVOCC check box identifies whether the service provider acts as an NVOCC (Non-Vessel Operating Common Carrier). If this check box is marked, you can use the Book with Internal NVOCC action from a sell shipment (that is assigned a service provider with this setting) on a job to create buy shipments and link them to a new job.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "NVOCC_DOMAIN_NAME","description": "The NVOCC Domain field determines the domain in which the buy shipments and new job are created.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACCEPT_BY_SSU_ALLOWED","description": "Mark the Allow Accept By Ship Unit check box to let a service provider partially accept a tender by its shipment's Transport Handling Units. Allowing a service provider to partially accept a tender gives service providers a role on the planning process. A new shipment and tender are created based off the amount the Service provider accepts. The original tender (minus the partially accepted units) is still available for future tendering.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_COPY_INV_DELTA_BACK_TO_SHIP","description": "The Copy Invoice Delta to Shipment check box indicates whether differences between the approved amount and the amount on the actual invoice should be copied to the shipment. So for example, the shipment was $100, and the invoice was $100, but only $80 was approved and this check box was selected. Then the change, or delta, of $20 will be added to the shipment as an extra adjustment charge. This is not supported when the parent/consolidated invoice is approved by total.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "INVOICING_PROCESS","description": "The Invoicing Process drop-down list box determines what type of invoice will be generated for shipments from this carrier. If it is set to Standard, then regular invoices will be generated. If you set it to BOL Back, then a BOL Back will be generated. BOL backs are often used for ocean shipments.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','S'","conditionalConstraint": "","defaultValue": "'S'"},{"name": "LINE_APPROVE_TOL_PROFILE_GID","description": "Indicates the line approval tolerance rule profile to apply.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCAC_GID","description": "The Standard Carrier Alpha Code for this Service Provider.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_MARK_LIST_GID","description": "The Equipment Mark List for this Service Provider.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MINORITY","description": "Select the Minority check box if the business is minority-owned.","dataType": "VARCHAR2","size": 2,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "INCUMBENT","description": "Select the Incumbent check box to indicate that this service provider has been used previously.","dataType": "VARCHAR2","size": 2,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "TIER","description": "Enter a value in the Tier field to assign a numerical value to a service provider. The tier value is used to signify which service providers are more important than others.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SCORECARD_VALUE","description": "If you use a scorecard to organize your bids, enter a value in the Scorecard Value field.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EPA_INDEX_VALUE","description": "If the provider participates in the EPA Smartway program, record it's SIF in the EPA Smartway SIF field.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FLEET","description": "Only shipments created for fleet service providers can perform fleet related actions.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "SOURCING_CONTACT_GID","description": "The GID for the contact at the service provider who is responsible for sourcing activities.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_SPOT_RATING","description": "Flag to indicate that service provider is valid for Spot Rating actions","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "ATTRIBUTE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OBT_XML_PROFILE_GID","description": "Associates the service provider with an online_booking_xml_profile, Which helps to define the content of XML to this service provider for UI display.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "This flag will define whether service provider is active or not.By default this flag will be Y.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "SG_TENDER_OUT_XML_PROFILE_GID","description": "Associates the service provider with an out_xml_profile, which helps define the content of outgoing ship group tender XML to this service provider.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_SG_TENDER","description": "Ship group allow tender determines whether the system can automatically tender  ship group to this service provider.By default it is set to 'N'","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"}],"primaryKey": [{"sequence": 1,"columnName": "SERVPROV_GID"}],"foreignKeys": [{"foreignKeyName": "FK_CAR_MODE_PROFILE_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "MODE_PROFILE_GID"}]},{"foreignKeyName": "FK_SP_MRP_GID","cascadeDelete": false,"parentTableName": "MATCH_RULE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MATCH_RULE_PROFILE_GID","columnName": "MATCH_RULE_PROFILE_GID"}]},{"foreignKeyName": "FK_S_MATCH_VALID_RULE_PROFILE","cascadeDelete": false,"parentTableName": "MATCH_VALID_RULE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MATCH_VALID_RULE_PROFILE_GID","columnName": "MATCH_VALID_RULE_PROFILE_GID"}]},{"foreignKeyName": "FK_SSS_AUTO_ARP_GID","cascadeDelete": false,"parentTableName": "AUTO_APPROVE_RULE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "AUTO_APPROVE_RULE_PROFILE_GID","columnName": "AUTO_APPROVE_RULE_PROFILE_GID"}]},{"foreignKeyName": "FK_SSS_ALLOC_ARP_GID","cascadeDelete": false,"parentTableName": "ALLOCATION_RULE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "ALLOCATION_RULE_PROFILE_GID","columnName": "ALLOCATION_RULE_PROFILE_GID"}]},{"foreignKeyName": "FK_S_OUT_XML_PROFILE_GID","cascadeDelete": false,"parentTableName": "OUT_XML_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "OUT_XML_PROFILE_GID","columnName": "OUT_XML_PROFILE_GID"}]},{"foreignKeyName": "FK_S_RATE_SERVICE_GID","cascadeDelete": false,"parentTableName": "RATE_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_SERVICE_GID","columnName": "RATE_SERVICE_GID"}]},{"foreignKeyName": "FK_S_BROADCAST_SPOT_CONTACT_G","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "BROADCAST_SPOT_CONTACT_GID"}]},{"foreignKeyName": "FK_CAR_LINE_APPROVE_TOL_PROFIL","cascadeDelete": false,"parentTableName": "LINE_APPROVE_TOL_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LINE_APPROVE_TOL_PROFILE_GID","columnName": "LINE_APPROVE_TOL_PROFILE_GID"}]},{"foreignKeyName": "FK_CAR_SCAC_GID","cascadeDelete": false,"parentTableName": "SCAC","columnRelation": [{"sequence": 1,"parentColumnName": "SCAC_GID","columnName": "SCAC_GID"}]},{"foreignKeyName": "FK_CAR_EQUIPMENT_MARK_LIST_GI","cascadeDelete": false,"parentTableName": "EQUIPMENT_MARK_LIST","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_MARK_LIST_GID","columnName": "EQUIPMENT_MARK_LIST_GID"}]},{"foreignKeyName": "FK_CAR_SOURCING_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "SOURCING_CONTACT_GID"}]},{"foreignKeyName": "FK_CAR_OUT_XML_PROFILE_GID","cascadeDelete": false,"parentTableName": "OUT_XML_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "OUT_XML_PROFILE_GID","columnName": "SG_TENDER_OUT_XML_PROFILE_GID"}]}],"childTables": ["BULK_PLAN_BY_SERVPROV","BULK_PLAN_PARTITION_SERVPROV","CAPACITY_COMMITMENT_ALLOC_D","CAPACITY_GROUP","CAPACITY_OVERRIDE_LINE","CHARTER_VOYAGE","COMMIT_ALLOC_USAGE_D","CONSOL","CRT_LOAD_PROCESS","CUSTOMER_ACCOUNT_NUMBER","E_KPI_TARGET_VALUE_TYPE","INTERIM_FLIGHT","INTERIM_FLIGHT_INSTANCE","INVOICE","LANE_TENDER_INFO","LOCATION_SERVPROV_PREF","LOGISTICS_GUIDE_AGGREGATE_DATA","LOGISTICS_GUIDE_DETAIL","MATCH_RULE_SERVPROV","NFRC_RULE","OB_LEG_CONSTRAINT","OB_ORDER_BASE","OPERATIONAL_LOCATION_D","ORDER_MOVEMENT","ORDER_RELEASE","ORDER_RELEASE_LEG_CONSTRAINT","ORDER_ROUTING_RULE_D","P_BID","P_SHIPMENT","QUOTE","QUOTE_COST_OPTION_SHIPMENT","RATE_OFFERING","ROUTE_INSTANCE","ROUTE_TEMPLATE","SC_RULE_CONTRACT","SECONDARY_CHARGE_RULE","SERVPROV_ALIAS","SERVPROV_CB_PROFILE","SERVPROV_POLICY","SERVPROV_PROFILE_DETAIL","SERVPROV_SERVICE","SERVPROV_TENDER_CONSTRAINT","SG_STATUS_HISTORY","SHIPMENT","SHIP_COMMIT_ALLOC_JOIN","SHIP_GROUP","SHIP_GROUP_RULE","SS_STATUS_HISTORY","TENDER_COLLAB_SERVPROV","TENDER_COLLAB_SG_SERVPROV","TENDER_SERVPROV_BID","TENDER_SERVPROV_SPOT_RATE","UDC_CLASSIFICATION_LIST_D","VOYAGE","X_OAG_SERVPROV_MAP","X_VOY_CAR_MAP"],"indices": [{"indexName": "IX_CAR_EQUIPMENT_MARK_LIST_GI","columnNames": [{"sequence": 1,"name": "EQUIPMENT_MARK_LIST_GID"}]},{"indexName": "IX_CAR_LINE_APPROVE_TOL_PROFIL","columnNames": [{"sequence": 1,"name": "LINE_APPROVE_TOL_PROFILE_GID"}]},{"indexName": "IX_CAR_MODE_PROFILE_GID","columnNames": [{"sequence": 1,"name": "MODE_PROFILE_GID"}]},{"indexName": "IX_CAR_SOURCING_CONTACT_GID","columnNames": [{"sequence": 1,"name": "SOURCING_CONTACT_GID"}]},{"indexName": "IX_SERVPROV_SCAC_GID","columnNames": [{"sequence": 1,"name": "SCAC_GID"}]},{"indexName": "IX_SERVPROV_XID","columnNames": [{"sequence": 1,"name": "SERVPROV_XID"}]},{"indexName": "IX_SP_MRP_GID","columnNames": [{"sequence": 1,"name": "MATCH_RULE_PROFILE_GID"}]},{"indexName": "IX_SSS_ALLOC_ARP_GID","columnNames": [{"sequence": 1,"name": "ALLOCATION_RULE_PROFILE_GID"}]},{"indexName": "IX_SSS_AUTO_ARP_GID","columnNames": [{"sequence": 1,"name": "AUTO_APPROVE_RULE_PROFILE_GID"}]},{"indexName": "IX_S_BROADCAST_SPOT_CONTACT_G","columnNames": [{"sequence": 1,"name": "BROADCAST_SPOT_CONTACT_GID"}]},{"indexName": "IX_S_MATCH_VALID_RULE_PROFILE","columnNames": [{"sequence": 1,"name": "MATCH_VALID_RULE_PROFILE_GID"}]},{"indexName": "IX_S_OUT_XML_PROFILE_GID","columnNames": [{"sequence": 1,"name": "OUT_XML_PROFILE_GID"}]},{"indexName": "IX_S_RATE_SERVICE_GID","columnNames": [{"sequence": 1,"name": "RATE_SERVICE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "servprov",
+    "description": "This table stores the information about the service providers."
+  },
+  "columns": [
+    {
+      "name": "SERVPROV_GID",
+      "description": "The service provider GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_XID",
+      "description": "The service provider XID.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TENDER_RESPONSE_TIME",
+      "description": "The expected response time by this service provider for shipment tenders.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TENDER_RESPONSE_TIME_UOM_CODE",
+      "description": "Unit of measure for TENDER_RESPONSE_TIME column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TENDER_RESPONSE_TIME_BASE",
+      "description": "Tender response time in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_PROFILE_GID",
+      "description": "A GID to define the mode profiles(group) that the service provider uses.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MATCH_RULE_PROFILE_GID",
+      "description": "The GID for the match rule profile. Match Rule Profile Invoices are matched with existing shipments using an ordered list of rules. The Match Rule Profile is a group of service providers that follow the same rules for matching invoices to shipments.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MATCH_VALID_RULE_PROFILE_GID",
+      "description": "A profile for the match validation rules that should be tested if the Validate Match action is run on an invoice for this service provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AUTO_PAYMENT_FLAG",
+      "description": "Mark Autopay to have Oracle Transportation Management automatically create an invoice with every shipment for this service provider. Clear the check box, if you want to generate invoices manually in Settlement instead.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "AUTO_APPROVE_RULE_PROFILE_GID",
+      "description": "The GID for the auto approve rule profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOCATION_RULE_PROFILE_GID",
+      "description": "The GID for the allocation rule profile. Allocation Rule Profile governs how your shipping costs are allocated.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_DISPATCH_BY_REGION",
+      "description": "A flag to turn on/off the Tender by Locale feature.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "ALLOW_TENDER",
+      "description": "Allow Tender determines whether the system can automatically tender (ordinary tender as opposed to Broadcast or Spot Bid tenders mentioned below) shipments to this service provider. Clear the check box to prevent the system from automatically tendering shipments to this service provider. If you have not loaded any rates into the system but still want to be able to create shipments, you may want to set up a dummy service provider with this check box cleared. You must mark this check box if you also plan to configure Broadcast/Spot Bid tendering for the service provider. Note: Setting up a service provider's tender timeout requirements is done via the Contact Manager Notification Tab.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "OUT_XML_PROFILE_GID",
+      "description": "Associates the service provider with an out_xml_profile, which helps define the content of outgoing XML to this service provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_SERVICE_GID",
+      "description": "Rate Service GID. This will be the default Rate Service used to re-drive the shipment if the service provider does not have a rate offering that matches the shipment",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACCEPT_SPOT_BIDS",
+      "description": "Is set to Y(es) if the service provider will participate in spot bid tendering.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_ACCEPT_BROADCAST_TENDERS",
+      "description": "Is set to Y(es) if the service provider will participate in broadcast tendering.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_LOCALIZE_BROADCAST_CONTACT",
+      "description": "If 'Y', use the preference /language, etc. of BROADCAST_SPOT_CONTACT. Otherwise, use shipment's LOGISTICS involved party's preference is used for broadcast notification.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'N','Y'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "SPOT_RATE_ADJUSTMENT_FACTOR",
+      "description": "Spot Rate Adjustment Factor is the percentage factor to be applied to the spot rate for a service provider to adjust the spot rate for service provider performance. For example, 10% means a spot rate of $100 will be adjusted to 100 + 0.1 * 100 = $110.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BROADCAST_SPOT_CONTACT_GID",
+      "description": "Overrides the shipper's primary contact to be used to determine localization preferences for tender notification.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DO_CONDITIONAL_ACCEPTS",
+      "description": "Determines if the service provider can participate in conditional booking.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_INTERNAL_NVOCC",
+      "description": "The Internal NVOCC check box identifies whether the service provider acts as an NVOCC (Non-Vessel Operating Common Carrier). If this check box is marked, you can use the Book with Internal NVOCC action from a sell shipment (that is assigned a service provider with this setting) on a job to create buy shipments and link them to a new job.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "NVOCC_DOMAIN_NAME",
+      "description": "The NVOCC Domain field determines the domain in which the buy shipments and new job are created.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACCEPT_BY_SSU_ALLOWED",
+      "description": "Mark the Allow Accept By Ship Unit check box to let a service provider partially accept a tender by its shipment's Transport Handling Units. Allowing a service provider to partially accept a tender gives service providers a role on the planning process. A new shipment and tender are created based off the amount the Service provider accepts. The original tender (minus the partially accepted units) is still available for future tendering.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_COPY_INV_DELTA_BACK_TO_SHIP",
+      "description": "The Copy Invoice Delta to Shipment check box indicates whether differences between the approved amount and the amount on the actual invoice should be copied to the shipment. So for example, the shipment was $100, and the invoice was $100, but only $80 was approved and this check box was selected. Then the change, or delta, of $20 will be added to the shipment as an extra adjustment charge. This is not supported when the parent/consolidated invoice is approved by total.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "INVOICING_PROCESS",
+      "description": "The Invoicing Process drop-down list box determines what type of invoice will be generated for shipments from this carrier. If it is set to Standard, then regular invoices will be generated. If you set it to BOL Back, then a BOL Back will be generated. BOL backs are often used for ocean shipments.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','S'",
+      "conditionalConstraint": "",
+      "defaultValue": "'S'"
+    },
+    {
+      "name": "LINE_APPROVE_TOL_PROFILE_GID",
+      "description": "Indicates the line approval tolerance rule profile to apply.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCAC_GID",
+      "description": "The Standard Carrier Alpha Code for this Service Provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_MARK_LIST_GID",
+      "description": "The Equipment Mark List for this Service Provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MINORITY",
+      "description": "Select the Minority check box if the business is minority-owned.",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INCUMBENT",
+      "description": "Select the Incumbent check box to indicate that this service provider has been used previously.",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TIER",
+      "description": "Enter a value in the Tier field to assign a numerical value to a service provider. The tier value is used to signify which service providers are more important than others.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SCORECARD_VALUE",
+      "description": "If you use a scorecard to organize your bids, enter a value in the Scorecard Value field.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EPA_INDEX_VALUE",
+      "description": "If the provider participates in the EPA Smartway program, record it's SIF in the EPA Smartway SIF field.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FLEET",
+      "description": "Only shipments created for fleet service providers can perform fleet related actions.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "SOURCING_CONTACT_GID",
+      "description": "The GID for the contact at the service provider who is responsible for sourcing activities.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_SPOT_RATING",
+      "description": "Flag to indicate that service provider is valid for Spot Rating actions",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "ATTRIBUTE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OBT_XML_PROFILE_GID",
+      "description": "Associates the service provider with an online_booking_xml_profile, Which helps to define the content of XML to this service provider for UI display.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "This flag will define whether service provider is active or not.By default this flag will be Y.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "SG_TENDER_OUT_XML_PROFILE_GID",
+      "description": "Associates the service provider with an out_xml_profile, which helps define the content of outgoing ship group tender XML to this service provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_SG_TENDER",
+      "description": "Ship group allow tender determines whether the system can automatically tender  ship group to this service provider.By default it is set to 'N'",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SERVPROV_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CAR_MODE_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SP_MRP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MATCH_RULE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MATCH_RULE_PROFILE_GID",
+          "columnName": "MATCH_RULE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_S_MATCH_VALID_RULE_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "MATCH_VALID_RULE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MATCH_VALID_RULE_PROFILE_GID",
+          "columnName": "MATCH_VALID_RULE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSS_AUTO_ARP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "AUTO_APPROVE_RULE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "AUTO_APPROVE_RULE_PROFILE_GID",
+          "columnName": "AUTO_APPROVE_RULE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSS_ALLOC_ARP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ALLOCATION_RULE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ALLOCATION_RULE_PROFILE_GID",
+          "columnName": "ALLOCATION_RULE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_S_OUT_XML_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OUT_XML_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OUT_XML_PROFILE_GID",
+          "columnName": "OUT_XML_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_S_RATE_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_SERVICE_GID",
+          "columnName": "RATE_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_S_BROADCAST_SPOT_CONTACT_G",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "BROADCAST_SPOT_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CAR_LINE_APPROVE_TOL_PROFIL",
+      "cascadeDelete": false,
+      "parentTableName": "LINE_APPROVE_TOL_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LINE_APPROVE_TOL_PROFILE_GID",
+          "columnName": "LINE_APPROVE_TOL_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CAR_SCAC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SCAC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SCAC_GID",
+          "columnName": "SCAC_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CAR_EQUIPMENT_MARK_LIST_GI",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_MARK_LIST",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_MARK_LIST_GID",
+          "columnName": "EQUIPMENT_MARK_LIST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CAR_SOURCING_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "SOURCING_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_CAR_OUT_XML_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OUT_XML_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OUT_XML_PROFILE_GID",
+          "columnName": "SG_TENDER_OUT_XML_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "BULK_PLAN_BY_SERVPROV",
+    "BULK_PLAN_PARTITION_SERVPROV",
+    "CAPACITY_COMMITMENT_ALLOC_D",
+    "CAPACITY_GROUP",
+    "CAPACITY_OVERRIDE_LINE",
+    "CHARTER_VOYAGE",
+    "COMMIT_ALLOC_USAGE_D",
+    "CONSOL",
+    "CRT_LOAD_PROCESS",
+    "CUSTOMER_ACCOUNT_NUMBER",
+    "E_KPI_TARGET_VALUE_TYPE",
+    "INTERIM_FLIGHT",
+    "INTERIM_FLIGHT_INSTANCE",
+    "INVOICE",
+    "LANE_TENDER_INFO",
+    "LOCATION_SERVPROV_PREF",
+    "LOGISTICS_GUIDE_AGGREGATE_DATA",
+    "LOGISTICS_GUIDE_DETAIL",
+    "MATCH_RULE_SERVPROV",
+    "NFRC_RULE",
+    "OB_LEG_CONSTRAINT",
+    "OB_ORDER_BASE",
+    "OPERATIONAL_LOCATION_D",
+    "ORDER_MOVEMENT",
+    "ORDER_RELEASE",
+    "ORDER_RELEASE_LEG_CONSTRAINT",
+    "ORDER_ROUTING_RULE_D",
+    "P_BID",
+    "P_SHIPMENT",
+    "QUOTE",
+    "QUOTE_COST_OPTION_SHIPMENT",
+    "RATE_OFFERING",
+    "ROUTE_INSTANCE",
+    "ROUTE_TEMPLATE",
+    "SC_RULE_CONTRACT",
+    "SECONDARY_CHARGE_RULE",
+    "SERVPROV_ALIAS",
+    "SERVPROV_CB_PROFILE",
+    "SERVPROV_POLICY",
+    "SERVPROV_PROFILE_DETAIL",
+    "SERVPROV_SERVICE",
+    "SERVPROV_TENDER_CONSTRAINT",
+    "SG_STATUS_HISTORY",
+    "SHIPMENT",
+    "SHIP_COMMIT_ALLOC_JOIN",
+    "SHIP_GROUP",
+    "SHIP_GROUP_RULE",
+    "SS_STATUS_HISTORY",
+    "TENDER_COLLAB_SERVPROV",
+    "TENDER_COLLAB_SG_SERVPROV",
+    "TENDER_SERVPROV_BID",
+    "TENDER_SERVPROV_SPOT_RATE",
+    "UDC_CLASSIFICATION_LIST_D",
+    "VOYAGE",
+    "X_OAG_SERVPROV_MAP",
+    "X_VOY_CAR_MAP"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_CAR_EQUIPMENT_MARK_LIST_GI",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EQUIPMENT_MARK_LIST_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_CAR_LINE_APPROVE_TOL_PROFIL",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LINE_APPROVE_TOL_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_CAR_MODE_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_CAR_SOURCING_CONTACT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCING_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SERVPROV_SCAC_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SCAC_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SERVPROV_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SERVPROV_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SP_MRP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MATCH_RULE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSS_ALLOC_ARP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ALLOCATION_RULE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSS_AUTO_ARP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "AUTO_APPROVE_RULE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_S_BROADCAST_SPOT_CONTACT_G",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "BROADCAST_SPOT_CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_S_MATCH_VALID_RULE_PROFILE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MATCH_VALID_RULE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_S_OUT_XML_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "OUT_XML_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_S_RATE_SERVICE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_SERVICE_GID"
+        }
+      ]
+    }
+  ]
+}

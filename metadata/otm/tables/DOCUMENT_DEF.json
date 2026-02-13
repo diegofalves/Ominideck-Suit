@@ -1,1 +1,322 @@
-{"table": {"schema": "glogowner","name": "document_def","description": ""},"columns": [{"name": "DOCUMENT_DEF_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_DEF_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REPORT_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OWNER_DATA_QUERY_TYPE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APP_ACTION_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ATTACHMENT","description": "Y, if the document type is an attachment. Otherwise, it is a report preparation.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "FIXED_ACCOUNT","description": "A fixed ECM account to assign all document instances. See CONTENT_MANAGEMENT_SYSTEM.ACCOUNT_TYPE for more information.","dataType": "VARCHAR2","size": 500,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTENT_MANAGEMENT_SYSTEM_GID","description": "Content management system for document storage","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_CMS_TYPE","description": "Custom document type for the CMS.","dataType": "VARCHAR2","size": 300,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOCUMENT_TEMPLATE_GID","description": "represents a template document","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_CONSOLIDATED","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DOCUMENT_DEF_GID"}],"foreignKeys": [{"foreignKeyName": "FK_DOCD_REPORT_GID","cascadeDelete": true,"parentTableName": "REPORT","columnRelation": [{"sequence": 1,"parentColumnName": "REPORT_GID","columnName": "REPORT_GID"}]},{"foreignKeyName": "FK_DOCD_OWNER_DATA_QUERY_TYPE","cascadeDelete": false,"parentTableName": "DATA_QUERY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "DATA_QUERY_TYPE_GID","columnName": "OWNER_DATA_QUERY_TYPE_GID"}]},{"foreignKeyName": "FK_DOCD_APP_ACTION_GID","cascadeDelete": false,"parentTableName": "APP_ACTION","columnRelation": [{"sequence": 1,"parentColumnName": "APP_ACTION_GID","columnName": "APP_ACTION_GID"}]},{"foreignKeyName": "FK_DOCD_CONTENT_MGT_SYS","cascadeDelete": false,"parentTableName": "CONTENT_MANAGEMENT_SYSTEM","columnRelation": [{"sequence": 1,"parentColumnName": "CONTENT_MANAGEMENT_SYSTEM_GID","columnName": "CONTENT_MANAGEMENT_SYSTEM_GID"}]},{"foreignKeyName": "FK_DOCD_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": ["AGENT_TEXT","DOCUMENT","DOCUMENT_DEF_CHECK","DOCUMENT_DEF_CMS_PARAM","DOCUMENT_DEF_OWNER_DETAILS","DOCUMENT_DEF_PROFILE_D","DOCUMENT_DEF_TEMPLATE_MAP","DOCUMENT_DEF_TEXT","DOCUMENT_SET_D","DRIVER_TEXT","EQUIPMENT_TEXT","GTM_CAMPAIGN_REQDOC","GTM_CA_LINE_REQDOC","GTM_CRULE_DOCUMENT_REVIEWER","GTM_CRULE_DOCUMENT_SUBSCRIBER","GTM_LICENSE_TEXT","GTM_REGIME_DOCUMENT_DEF","GTM_RULE_RESTRICTION","GTM_TIP_AUTH_TEXT","GTM_TIP_RULE_TEXT","GTM_TIP_TEXT","GTM_TRANSACTION_REQDOC","INVOICE_TEXT","IPP_PRINTER_DOC","ITEM_QF_REQDOC","ITEM_REQDOC","ITEM_REQDOC_DOC","ITEM_REQDOC_DOC_REVIEW","ITEM_REQDOC_REVIEWER","ITEM_REQDOC_STATUS","ITEM_REQDOC_SUBSCRIBER","ITEM_REQDOC_TEXT","ITEM_TEXT","JOB_TEXT","NOTIFY_SUBJECT_STYLESHEET","OB_TEXT","ORDER_RELEASE_LINE_TEXT","ORDER_RELEASE_TEXT","POWER_UNIT_TEXT","QUOTE_TEXT","SHIPMENT_REQDOC","SHIPMENT_TEXT","SHIPPING_AGENT_CONTACT_TEXT","SHIPPING_AGENT_TEXT","SHIP_UNIT_TEXT","SKU_TEXT"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "document_def",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOCUMENT_DEF_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_DEF_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REPORT_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OWNER_DATA_QUERY_TYPE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APP_ACTION_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ATTACHMENT",
+      "description": "Y, if the document type is an attachment. Otherwise, it is a report preparation.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "FIXED_ACCOUNT",
+      "description": "A fixed ECM account to assign all document instances. See CONTENT_MANAGEMENT_SYSTEM.ACCOUNT_TYPE for more information.",
+      "dataType": "VARCHAR2",
+      "size": 500,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTENT_MANAGEMENT_SYSTEM_GID",
+      "description": "Content management system for document storage",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_CMS_TYPE",
+      "description": "Custom document type for the CMS.",
+      "dataType": "VARCHAR2",
+      "size": 300,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOCUMENT_TEMPLATE_GID",
+      "description": "represents a template document",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_CONSOLIDATED",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DOCUMENT_DEF_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DOCD_REPORT_GID",
+      "cascadeDelete": true,
+      "parentTableName": "REPORT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REPORT_GID",
+          "columnName": "REPORT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DOCD_OWNER_DATA_QUERY_TYPE",
+      "cascadeDelete": false,
+      "parentTableName": "DATA_QUERY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DATA_QUERY_TYPE_GID",
+          "columnName": "OWNER_DATA_QUERY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DOCD_APP_ACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_ACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_ACTION_GID",
+          "columnName": "APP_ACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DOCD_CONTENT_MGT_SYS",
+      "cascadeDelete": false,
+      "parentTableName": "CONTENT_MANAGEMENT_SYSTEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTENT_MANAGEMENT_SYSTEM_GID",
+          "columnName": "CONTENT_MANAGEMENT_SYSTEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DOCD_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AGENT_TEXT",
+    "DOCUMENT",
+    "DOCUMENT_DEF_CHECK",
+    "DOCUMENT_DEF_CMS_PARAM",
+    "DOCUMENT_DEF_OWNER_DETAILS",
+    "DOCUMENT_DEF_PROFILE_D",
+    "DOCUMENT_DEF_TEMPLATE_MAP",
+    "DOCUMENT_DEF_TEXT",
+    "DOCUMENT_SET_D",
+    "DRIVER_TEXT",
+    "EQUIPMENT_TEXT",
+    "GTM_CAMPAIGN_REQDOC",
+    "GTM_CA_LINE_REQDOC",
+    "GTM_CRULE_DOCUMENT_REVIEWER",
+    "GTM_CRULE_DOCUMENT_SUBSCRIBER",
+    "GTM_LICENSE_TEXT",
+    "GTM_REGIME_DOCUMENT_DEF",
+    "GTM_RULE_RESTRICTION",
+    "GTM_TIP_AUTH_TEXT",
+    "GTM_TIP_RULE_TEXT",
+    "GTM_TIP_TEXT",
+    "GTM_TRANSACTION_REQDOC",
+    "INVOICE_TEXT",
+    "IPP_PRINTER_DOC",
+    "ITEM_QF_REQDOC",
+    "ITEM_REQDOC",
+    "ITEM_REQDOC_DOC",
+    "ITEM_REQDOC_DOC_REVIEW",
+    "ITEM_REQDOC_REVIEWER",
+    "ITEM_REQDOC_STATUS",
+    "ITEM_REQDOC_SUBSCRIBER",
+    "ITEM_REQDOC_TEXT",
+    "ITEM_TEXT",
+    "JOB_TEXT",
+    "NOTIFY_SUBJECT_STYLESHEET",
+    "OB_TEXT",
+    "ORDER_RELEASE_LINE_TEXT",
+    "ORDER_RELEASE_TEXT",
+    "POWER_UNIT_TEXT",
+    "QUOTE_TEXT",
+    "SHIPMENT_REQDOC",
+    "SHIPMENT_TEXT",
+    "SHIPPING_AGENT_CONTACT_TEXT",
+    "SHIPPING_AGENT_TEXT",
+    "SHIP_UNIT_TEXT",
+    "SKU_TEXT"
+  ],
+  "indices": []
+}

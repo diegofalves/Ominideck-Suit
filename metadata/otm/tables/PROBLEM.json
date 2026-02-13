@@ -1,1 +1,426 @@
-{"table": {"schema": "glogowner","name": "problem","description": "This is a new table in ver 2.6. It is used to store the notification messages in the message center from GC3 when a event happens or a processing is done."},"columns": [{"name": "PROBLEM_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROBLEM_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GL_USER_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROBLEM_TITLE","description": "","dataType": "VARCHAR2","size": 300,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROBLEM_BODY","description": "","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROBLEM_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROBLEM_STATUS","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROBLEM_SEVERITY","description": "","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROBLEM_URL","description": "","dataType": "VARCHAR2","size": 500,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NOTIFY_FUNCTION_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INDICATOR","description": "","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED1_ICON_GID","description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED2_ICON_GID","description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED3_ICON_GID","description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED4_ICON_GID","description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_DEFINED5_ICON_GID","description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "I_MESSAGE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "PROBLEM_GID"}],"foreignKeys": [{"foreignKeyName": "FK_PROBLEM_GLUSER_GID","cascadeDelete": true,"parentTableName": "GL_USER","columnRelation": [{"sequence": 1,"parentColumnName": "GL_USER_GID","columnName": "GL_USER_GID"}]},{"foreignKeyName": "FK_PROBLEM_NOTFUN_GID","cascadeDelete": false,"parentTableName": "NOTIFY_FUNCTION","columnRelation": [{"sequence": 1,"parentColumnName": "NOTIFY_FUNCTION_GID","columnName": "NOTIFY_FUNCTION_GID"}]},{"foreignKeyName": "FK_P_USER_DEFINED1_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED1_ICON_GID"}]},{"foreignKeyName": "FK_P_USER_DEFINED2_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED2_ICON_GID"}]},{"foreignKeyName": "FK_P_USER_DEFINED3_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED3_ICON_GID"}]},{"foreignKeyName": "FK_P_USER_DEFINED4_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED4_ICON_GID"}]},{"foreignKeyName": "FK_P_USER_DEFINED5_ICON_GID","cascadeDelete": false,"parentTableName": "ICON","columnRelation": [{"sequence": 1,"parentColumnName": "ICON_GID","columnName": "USER_DEFINED5_ICON_GID"}]}],"childTables": ["PROBLEM_NOTE"],"indices": [{"indexName": "IND_PROBLEM_GLUSER_GID","columnNames": [{"sequence": 1,"name": "GL_USER_GID"}]},{"indexName": "IX_PROBLEM_NOTFUN_GID","columnNames": [{"sequence": 1,"name": "NOTIFY_FUNCTION_GID"}]},{"indexName": "IX_PROBLEM_XID","columnNames": [{"sequence": 1,"name": "PROBLEM_XID"}]},{"indexName": "IX_P_USER_DEFINED1_ICON_GID","columnNames": [{"sequence": 1,"name": "USER_DEFINED1_ICON_GID"}]},{"indexName": "IX_P_USER_DEFINED2_ICON_GID","columnNames": [{"sequence": 1,"name": "USER_DEFINED2_ICON_GID"}]},{"indexName": "IX_P_USER_DEFINED3_ICON_GID","columnNames": [{"sequence": 1,"name": "USER_DEFINED3_ICON_GID"}]},{"indexName": "IX_P_USER_DEFINED4_ICON_GID","columnNames": [{"sequence": 1,"name": "USER_DEFINED4_ICON_GID"}]},{"indexName": "IX_P_USER_DEFINED5_ICON_GID","columnNames": [{"sequence": 1,"name": "USER_DEFINED5_ICON_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "problem",
+    "description": "This is a new table in ver 2.6. It is used to store the notification messages in the message center from GC3 when a event happens or a processing is done."
+  },
+  "columns": [
+    {
+      "name": "PROBLEM_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROBLEM_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GL_USER_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROBLEM_TITLE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 300,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROBLEM_BODY",
+      "description": "",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROBLEM_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROBLEM_STATUS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROBLEM_SEVERITY",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROBLEM_URL",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 500,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NOTIFY_FUNCTION_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INDICATOR",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED1_ICON_GID",
+      "description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED2_ICON_GID",
+      "description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED3_ICON_GID",
+      "description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED4_ICON_GID",
+      "description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_DEFINED5_ICON_GID",
+      "description": "Can store a user-defined icon that will appear within the user interface to help visually identify attributes of the problem.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "I_MESSAGE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "Populated through a trigger, this key is used to determine into which partition this record should be inserted.  The formula is based upon the insert_date column and the frequency in which this table is associated (weekly, monthly, quarterly).  Valid values are 1-4.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "PROBLEM_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_PROBLEM_GLUSER_GID",
+      "cascadeDelete": true,
+      "parentTableName": "GL_USER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GL_USER_GID",
+          "columnName": "GL_USER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_PROBLEM_NOTFUN_GID",
+      "cascadeDelete": false,
+      "parentTableName": "NOTIFY_FUNCTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "NOTIFY_FUNCTION_GID",
+          "columnName": "NOTIFY_FUNCTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_P_USER_DEFINED1_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED1_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_P_USER_DEFINED2_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED2_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_P_USER_DEFINED3_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED3_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_P_USER_DEFINED4_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED4_ICON_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_P_USER_DEFINED5_ICON_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ICON",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ICON_GID",
+          "columnName": "USER_DEFINED5_ICON_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "PROBLEM_NOTE"
+  ],
+  "indices": [
+    {
+      "indexName": "IND_PROBLEM_GLUSER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GL_USER_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_PROBLEM_NOTFUN_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "NOTIFY_FUNCTION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_PROBLEM_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PROBLEM_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_P_USER_DEFINED1_ICON_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "USER_DEFINED1_ICON_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_P_USER_DEFINED2_ICON_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "USER_DEFINED2_ICON_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_P_USER_DEFINED3_ICON_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "USER_DEFINED3_ICON_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_P_USER_DEFINED4_ICON_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "USER_DEFINED4_ICON_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_P_USER_DEFINED5_ICON_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "USER_DEFINED5_ICON_GID"
+        }
+      ]
+    }
+  ]
+}

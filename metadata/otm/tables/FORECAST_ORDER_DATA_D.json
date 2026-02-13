@@ -1,1 +1,163 @@
-{"table": {"schema": "glogowner","name": "forecast_order_data_d","description": "This table stores the details of orders created and failed."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FORECAST_ORDER_DATA_GID","description": "The GID of the forecast order data.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_ORDER_ID","description": "The Order ID from the external system.","dataType": "VARCHAR2","size": 240,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FAILURE_REASON","description": "Reason behind the failure to create orders.","dataType": "VARCHAR2","size": 240,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_GID","description": "The GID of the order release.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "EXTERNAL_ORDER_ID"},{"sequence": 2,"columnName": "FORECAST_ORDER_DATA_GID"}],"foreignKeys": [{"foreignKeyName": "FK_FODD_FORECAST_ORDER_DATA_G","cascadeDelete": false,"parentTableName": "FORECAST_ORDER_DATA","columnRelation": [{"sequence": 1,"parentColumnName": "FORECAST_ORDER_DATA_GID","columnName": "FORECAST_ORDER_DATA_GID"}]},{"foreignKeyName": "FK_FODD_ORDER_RELEASE_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_GID","columnName": "ORDER_RELEASE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_FOD_ORDER_RELEASE_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_GID"}]},{"indexName": "IX_FORECAST_ORDER_DATA_GID","columnNames": [{"sequence": 1,"name": "FORECAST_ORDER_DATA_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "forecast_order_data_d",
+    "description": "This table stores the details of orders created and failed."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FORECAST_ORDER_DATA_GID",
+      "description": "The GID of the forecast order data.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_ORDER_ID",
+      "description": "The Order ID from the external system.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FAILURE_REASON",
+      "description": "Reason behind the failure to create orders.",
+      "dataType": "VARCHAR2",
+      "size": 240,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_GID",
+      "description": "The GID of the order release.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "EXTERNAL_ORDER_ID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "FORECAST_ORDER_DATA_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_FODD_FORECAST_ORDER_DATA_G",
+      "cascadeDelete": false,
+      "parentTableName": "FORECAST_ORDER_DATA",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FORECAST_ORDER_DATA_GID",
+          "columnName": "FORECAST_ORDER_DATA_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_FODD_ORDER_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_GID",
+          "columnName": "ORDER_RELEASE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_FOD_ORDER_RELEASE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_FORECAST_ORDER_DATA_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FORECAST_ORDER_DATA_GID"
+        }
+      ]
+    }
+  ]
+}

@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, jsonify, session
 import json
 import os
 import subprocess
 import sys
 
+from collections import defaultdict
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+from uuid import uuid4
 
 from ui.backend.loaders import load_all
 from ui.backend.form_to_domain import form_to_domain
@@ -25,12 +28,14 @@ app = Flask(
     template_folder="../frontend/templates",
     static_folder="../frontend/static"
 )
+app.secret_key = os.environ.get("OMNIDECK_SECRET_KEY", "omnideck-internal-secret")
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 GROUP_ZERO_ID = "SEM_GRUPO"
 LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
 IGNORED_GROUP_ID = "IGNORADOS"
 PROTECTED_GROUP_IDS = set(LEGACY_GROUP_ZERO_IDS) | {IGNORED_GROUP_ID}
+CADASTROS_PATH = PROJECT_ROOT / "domain" / "consultoria" / "cadastros.json"
 
 # -------------------------------------------------
 # Rotas
@@ -113,10 +118,344 @@ def _apply_no_cache_headers(response):
     return response
 
 
+def _to_positive_int(value: Any, default: int) -> int:
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return default
+    return parsed if parsed > 0 else default
+
+
+def _run_script(script_relative_path: str, args: Optional[List[str]] = None, timeout: int = 600) -> Tuple[int, Dict[str, Any], str]:
+    script_path = PROJECT_ROOT / script_relative_path
+    if not script_path.exists():
+        return (
+            404,
+            {
+                "status": "error",
+                "message": f"Script nao encontrado: {script_path}",
+                "result": None,
+            },
+            "",
+        )
+
+    command = [sys.executable, str(script_path)]
+    if args:
+        command.extend(args)
+
+    try:
+        completed = subprocess.run(
+            command,
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired:
+        return (
+            504,
+            {
+                "status": "error",
+                "message": "Tempo limite atingido na execucao do script.",
+                "result": None,
+            },
+            "",
+        )
+    except Exception as exc:
+        return (
+            500,
+            {
+                "status": "error",
+                "message": f"Falha ao executar script: {exc}",
+                "result": None,
+            },
+            "",
+        )
+
+    stdout = (completed.stdout or "").strip()
+    stderr = (completed.stderr or "").strip()
+
+    parsed_result: Optional[Dict[str, Any]] = None
+    if stdout:
+        try:
+            raw = json.loads(stdout)
+            parsed_result = raw if isinstance(raw, dict) else {"payload": raw}
+        except json.JSONDecodeError:
+            parsed_result = {"raw_output": stdout}
+
+    if completed.returncode != 0:
+        return (
+            500,
+            {
+                "status": "error",
+                "message": "Script retornou erro.",
+                "result": parsed_result,
+            },
+            stderr,
+        )
+
+    return (
+        200,
+        {
+            "status": "success",
+            "message": "Script executado com sucesso.",
+            "result": parsed_result,
+        },
+        stderr,
+    )
+
+
+def _normalize_status(value: Any) -> str:
+    normalized = str(value or "").strip().upper()
+    if normalized in {"DONE", "IN_PROGRESS", "PENDING"}:
+        return normalized
+    return "PENDING"
+
+
+def _safe_pct(done: int, total: int) -> float:
+    if total <= 0:
+        return 0.0
+    return round((done / total) * 100.0, 1)
+
+
+def _build_migration_dashboard(project: Dict[str, Any]) -> Dict[str, Any]:
+    groups = project.get("groups", [])
+    if not isinstance(groups, list):
+        groups = []
+
+    excluded_ids = {IGNORED_GROUP_ID}
+    tracked_objects: List[Dict[str, Any]] = []
+    ignored_count = 0
+    deployment_type_counter: Dict[str, int] = defaultdict(int)
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        group_id = str(group.get("group_id") or "").strip().upper()
+        group_label = str(group.get("label") or group_id or "Sem nome").strip()
+        objects = group.get("objects", [])
+        if not isinstance(objects, list):
+            continue
+
+        if group_id in excluded_ids:
+            ignored_count += len([obj for obj in objects if isinstance(obj, dict)])
+            continue
+
+        for idx, obj in enumerate(objects):
+            if not isinstance(obj, dict):
+                continue
+            status = obj.get("status", {})
+            status_doc = _normalize_status(
+                status.get("documentation") if isinstance(status, dict) else ""
+            )
+            status_dep = _normalize_status(
+                status.get("deployment") if isinstance(status, dict) else ""
+            )
+            status_mig = _normalize_status(
+                status.get("migration_project") if isinstance(status, dict) else ""
+            )
+            deployment_type = str(obj.get("deployment_type") or "SEM_DEFINICAO").strip() or "SEM_DEFINICAO"
+            deployment_type_counter[deployment_type] += 1
+
+            tracked_objects.append(
+                {
+                    "group_id": group_id,
+                    "group_label": group_label,
+                    "name": str(obj.get("name") or f"Item #{idx + 1}").strip(),
+                    "object_type": str(obj.get("object_type") or "").strip() or "-",
+                    "deployment_type": deployment_type,
+                    "sequence": int(obj.get("sequence") or 0),
+                    "status_documentation": status_doc,
+                    "status_deployment": status_dep,
+                    "status_migration_project": status_mig,
+                }
+            )
+
+    total_objects = len(tracked_objects)
+    done_doc = len([o for o in tracked_objects if o["status_documentation"] == "DONE"])
+    done_dep = len([o for o in tracked_objects if o["status_deployment"] == "DONE"])
+    done_mig = len([o for o in tracked_objects if o["status_migration_project"] == "DONE"])
+
+    group_stats_map: Dict[str, Dict[str, Any]] = {}
+    for item in tracked_objects:
+        group_id = item["group_id"]
+        if group_id not in group_stats_map:
+            group_stats_map[group_id] = {
+                "group_id": group_id,
+                "group_label": item["group_label"],
+                "total": 0,
+                "done_documentation": 0,
+                "done_deployment": 0,
+                "done_migration_project": 0,
+                "in_progress_any": 0,
+                "pending_any": 0,
+            }
+        row = group_stats_map[group_id]
+        row["total"] += 1
+        if item["status_documentation"] == "DONE":
+            row["done_documentation"] += 1
+        if item["status_deployment"] == "DONE":
+            row["done_deployment"] += 1
+        if item["status_migration_project"] == "DONE":
+            row["done_migration_project"] += 1
+        statuses = [
+            item["status_documentation"],
+            item["status_deployment"],
+            item["status_migration_project"],
+        ]
+        if "IN_PROGRESS" in statuses:
+            row["in_progress_any"] += 1
+        if "PENDING" in statuses:
+            row["pending_any"] += 1
+
+    groups_stats = sorted(
+        group_stats_map.values(),
+        key=lambda r: (
+            999.0
+            - (
+                _safe_pct(r["done_documentation"], r["total"])
+                + _safe_pct(r["done_deployment"], r["total"])
+                + _safe_pct(r["done_migration_project"], r["total"])
+            )
+            / 3.0,
+            r["group_label"],
+        ),
+    )
+
+    for row in groups_stats:
+        avg_done_pct = (
+            _safe_pct(row["done_documentation"], row["total"])
+            + _safe_pct(row["done_deployment"], row["total"])
+            + _safe_pct(row["done_migration_project"], row["total"])
+        ) / 3.0
+        row["progress_pct"] = round(avg_done_pct, 1)
+
+    critical_items = []
+    for item in tracked_objects:
+        pending_count = len(
+            [
+                status
+                for status in (
+                    item["status_documentation"],
+                    item["status_deployment"],
+                    item["status_migration_project"],
+                )
+                if status != "DONE"
+            ]
+        )
+        if pending_count == 0:
+            continue
+        critical_items.append(
+            {
+                **item,
+                "pending_count": pending_count,
+            }
+        )
+
+    critical_items.sort(
+        key=lambda i: (
+            -i["pending_count"],
+            0 if i["status_migration_project"] == "PENDING" else 1,
+            i["group_label"],
+            i["sequence"],
+            i["name"],
+        )
+    )
+
+    deployment_breakdown = sorted(
+        [
+            {
+                "deployment_type": k,
+                "count": v,
+                "pct": _safe_pct(v, total_objects),
+            }
+            for k, v in deployment_type_counter.items()
+        ],
+        key=lambda d: (-d["count"], d["deployment_type"]),
+    )
+
+    return {
+        "project_name": str(project.get("project", {}).get("name") or "Projeto de Migração").strip(),
+        "project_code": str(project.get("project", {}).get("code") or "-").strip(),
+        "total_groups": len(groups_stats),
+        "total_objects": total_objects,
+        "ignored_objects": ignored_count,
+        "phases": {
+            "documentation": {
+                "done": done_doc,
+                "total": total_objects,
+                "pct": _safe_pct(done_doc, total_objects),
+            },
+            "deployment": {
+                "done": done_dep,
+                "total": total_objects,
+                "pct": _safe_pct(done_dep, total_objects),
+            },
+            "migration_project": {
+                "done": done_mig,
+                "total": total_objects,
+                "pct": _safe_pct(done_mig, total_objects),
+            },
+        },
+        "overall_pct": round(
+            (
+                _safe_pct(done_doc, total_objects)
+                + _safe_pct(done_dep, total_objects)
+                + _safe_pct(done_mig, total_objects)
+            )
+            / 3.0,
+            1,
+        ),
+        "groups": groups_stats,
+        "critical_items": critical_items[:20],
+        "deployment_breakdown": deployment_breakdown,
+        "generated_at": str(project.get("project_metadata", {}).get("last_updated_at") or ""),
+    }
+
+
+def _default_cadastros_payload() -> Dict[str, Any]:
+    return {
+        "consultants": [],
+        "clients": [],
+        "projects": [],
+        "consultancies": [],
+    }
+
+
+def _load_cadastros() -> Dict[str, Any]:
+    if not CADASTROS_PATH.exists():
+        return _default_cadastros_payload()
+    try:
+        payload = json.loads(CADASTROS_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return _default_cadastros_payload()
+    if not isinstance(payload, dict):
+        return _default_cadastros_payload()
+
+    normalized = _default_cadastros_payload()
+    for key in normalized.keys():
+        raw = payload.get(key, [])
+        if isinstance(raw, list):
+            normalized[key] = [item for item in raw if isinstance(item, dict)]
+    return normalized
+
+
+def _save_cadastros(payload: Dict[str, Any]) -> None:
+    CADASTROS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    CADASTROS_PATH.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def _new_id(prefix: str) -> str:
+    return f"{prefix}_{uuid4().hex[:10]}".upper()
+
+
 @app.after_request
 def disable_cache_for_dynamic_routes(response):
     path = request.path or ""
-    if path == "/projeto-migracao" or path.startswith("/api/"):
+    if path in {"/projeto-migracao", "/execucao-scripts", "/dashboard-migracao", "/cadastros"} or path.startswith("/api/"):
         return _apply_no_cache_headers(response)
     return response
 
@@ -505,10 +844,237 @@ def api_otm_update_object_cache():
     )
 
 
+@app.route("/api/scripts/update-translations-cache", methods=["POST"])
+def api_scripts_update_translations_cache():
+    payload = request.get_json(silent=True) or {}
+    if not isinstance(payload, dict):
+        payload = {}
+
+    args: List[str] = []
+    if _is_truthy(payload.get("incremental")):
+        args.append("--incremental")
+
+    timeout_seconds = _to_positive_int(payload.get("timeout"), 1800)
+    page_size = _to_positive_int(payload.get("page_size"), 5000)
+    args.extend(["--timeout", str(timeout_seconds), "--page-size", str(page_size)])
+
+    status_code, response_body, stderr = _run_script(
+        "infra/update_otm_translations_cache.py",
+        args=args,
+        timeout=max(timeout_seconds + 60, 600),
+    )
+    if stderr:
+        response_body["stderr"] = stderr[-2000:]
+    return jsonify(response_body), status_code
+
+
+@app.route("/api/scripts/update-help-index", methods=["POST"])
+def api_scripts_update_help_index():
+    payload = request.get_json(silent=True) or {}
+    if not isinstance(payload, dict):
+        payload = {}
+
+    args: List[str] = []
+    doc_version = str(payload.get("doc_version") or "").strip().lower()
+    if doc_version:
+        args.extend(["--doc-version", doc_version])
+
+    book_key = str(payload.get("book_key") or "").strip().lower()
+    if book_key:
+        args.extend(["--book", book_key])
+
+    max_pages = _to_positive_int(payload.get("max_pages"), 0)
+    if max_pages > 0:
+        args.extend(["--max-pages", str(max_pages)])
+
+    if _is_truthy(payload.get("dry_run")):
+        args.append("--dry-run")
+    if _is_truthy(payload.get("incremental")):
+        args.append("--incremental")
+    if _is_truthy(payload.get("build_index_only")):
+        args.append("--build-index-only")
+
+    status_code, response_body, stderr = _run_script(
+        "infra/update_otm_help_index.py",
+        args=args,
+        timeout=7200,
+    )
+    if stderr:
+        response_body["stderr"] = stderr[-2000:]
+    return jsonify(response_body), status_code
+
+
+@app.route("/api/scripts/validate-eligible-tables", methods=["POST"])
+def api_scripts_validate_eligible_tables():
+    status_code, response_body, stderr = _run_script(
+        "infra/validate_migration_project_eligible_tables.py",
+        args=[],
+        timeout=120,
+    )
+    if stderr:
+        response_body["stderr"] = stderr[-2000:]
+    return jsonify(response_body), status_code
+
+
 # ===== MAIN ROUTES =====
+
+@app.route("/", methods=["GET"])
+def home():
+    return render_template("home.html")
+
+
+@app.route("/execucao-scripts", methods=["GET"])
+def execucao_scripts():
+    return render_template("execucao_scripts.html")
+
+
+@app.route("/cadastros", methods=["GET", "POST"])
+def cadastros():
+    payload = _load_cadastros()
+    error_message = ""
+    success_message = ""
+
+    if request.method == "POST":
+        entity = str(request.form.get("entity") or "").strip().lower()
+
+        if entity == "consultant":
+            name = str(request.form.get("consultant_name") or "").strip()
+            email = str(request.form.get("consultant_email") or "").strip()
+            role = str(request.form.get("consultant_role") or "").strip()
+            status = str(request.form.get("consultant_status") or "ACTIVE").strip().upper()
+
+            if not name:
+                error_message = "Informe o nome do consultor."
+            else:
+                payload["consultants"].append(
+                    {
+                        "consultant_id": _new_id("CONSULTANT"),
+                        "name": name,
+                        "email": email,
+                        "role": role,
+                        "status": status or "ACTIVE",
+                    }
+                )
+                _save_cadastros(payload)
+                return redirect("/cadastros?ok=consultor")
+
+        elif entity == "client":
+            name = str(request.form.get("client_name") or "").strip()
+            segment = str(request.form.get("client_segment") or "").strip()
+            contact_name = str(request.form.get("client_contact_name") or "").strip()
+            contact_email = str(request.form.get("client_contact_email") or "").strip()
+
+            if not name:
+                error_message = "Informe o nome do cliente."
+            else:
+                payload["clients"].append(
+                    {
+                        "client_id": _new_id("CLIENT"),
+                        "name": name,
+                        "segment": segment,
+                        "contact_name": contact_name,
+                        "contact_email": contact_email,
+                    }
+                )
+                _save_cadastros(payload)
+                return redirect("/cadastros?ok=cliente")
+
+        elif entity == "project":
+            code = str(request.form.get("project_code") or "").strip().upper()
+            name = str(request.form.get("project_name") or "").strip()
+            client_id = str(request.form.get("project_client_id") or "").strip()
+            status = str(request.form.get("project_status") or "PLANNING").strip().upper()
+            start_date = str(request.form.get("project_start_date") or "").strip()
+            end_date = str(request.form.get("project_end_date") or "").strip()
+            env_dev_url = str(request.form.get("project_env_dev_url") or "").strip()
+            env_test_url = str(request.form.get("project_env_test_url") or "").strip()
+            env_prod_url = str(request.form.get("project_env_prod_url") or "").strip()
+            integration_user = str(request.form.get("project_integration_user") or "").strip()
+            integration_password = str(request.form.get("project_integration_password") or "").strip()
+
+            if not code or not name:
+                error_message = "Informe código e nome do projeto."
+            elif not client_id:
+                error_message = "Selecione o cliente do projeto."
+            else:
+                payload["projects"].append(
+                    {
+                        "project_id": _new_id("PROJECT"),
+                        "code": code,
+                        "name": name,
+                        "client_id": client_id,
+                        "status": status or "PLANNING",
+                        "start_date": start_date,
+                        "end_date": end_date,
+                        "environments": {
+                            "dev_url": env_dev_url,
+                            "test_url": env_test_url,
+                            "prod_url": env_prod_url,
+                        },
+                        "integration": {
+                            "user": integration_user,
+                            "password": integration_password,
+                        },
+                    }
+                )
+                _save_cadastros(payload)
+                return redirect("/cadastros?ok=projeto")
+
+        elif entity == "consultancy":
+            consultant_id = str(request.form.get("consultancy_consultant_id") or "").strip()
+            client_id = str(request.form.get("consultancy_client_id") or "").strip()
+            project_id = str(request.form.get("consultancy_project_id") or "").strip()
+            service_name = str(request.form.get("consultancy_service_name") or "").strip()
+            hourly_rate = str(request.form.get("consultancy_hourly_rate") or "").strip()
+            status = str(request.form.get("consultancy_status") or "PLANNED").strip().upper()
+
+            if not consultant_id or not client_id or not project_id:
+                error_message = "Selecione consultor, cliente e projeto para cadastrar a consultoria."
+            elif not service_name:
+                error_message = "Informe o tipo de consultoria/serviço."
+            else:
+                payload["consultancies"].append(
+                    {
+                        "consultancy_id": _new_id("CONSULTANCY"),
+                        "consultant_id": consultant_id,
+                        "client_id": client_id,
+                        "project_id": project_id,
+                        "service_name": service_name,
+                        "hourly_rate": hourly_rate,
+                        "status": status or "PLANNED",
+                    }
+                )
+                _save_cadastros(payload)
+                return redirect("/cadastros?ok=consultoria")
+
+        else:
+            error_message = "Tipo de cadastro inválido."
+
+    ok_param = str(request.args.get("ok") or "").strip().lower()
+    if ok_param:
+        success_message = f"Cadastro de {ok_param} realizado com sucesso."
+
+    return render_template(
+        "cadastros.html",
+        cadastros=payload,
+        success_message=success_message,
+        error_message=error_message,
+    )
+
+
+@app.route("/dashboard-migracao", methods=["GET"])
+def dashboard_migracao():
+    session["can_access_migration_panel"] = True
+    project = load_project() or {}
+    dashboard = _build_migration_dashboard(project)
+    return render_template("dashboard_migracao.html", dashboard=dashboard)
+
 
 @app.route("/projeto-migracao", methods=["GET", "POST"])
 def projeto_migracao():
+    if not session.get("can_access_migration_panel"):
+        return redirect("/dashboard-migracao")
+
     data = load_all()
     project = load_project()
 

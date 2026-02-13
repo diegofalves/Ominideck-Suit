@@ -1,1 +1,122 @@
-{"table": {"schema": "glogowner","name": "item_relationship","description": "Connects items together."},"columns": [{"name": "ITEM_GID","description": "The GID for the item that is having the previous item information added, updated, or removed.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PREVIOUS_ITEM_GID","description": "The GID for the previous or superseded item.  This is a legacy field that is no longer shown on the UI.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ITEM_GID"},{"sequence": 2,"columnName": "PREVIOUS_ITEM_GID"}],"foreignKeys": [{"foreignKeyName": "FK_IR_ITEM_GID","cascadeDelete": true,"parentTableName": "ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "ITEM_GID","columnName": "ITEM_GID"}]},{"foreignKeyName": "FK_IR_PREVIOUS_ITEM_GID","cascadeDelete": true,"parentTableName": "ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "ITEM_GID","columnName": "PREVIOUS_ITEM_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "item_relationship",
+    "description": "Connects items together."
+  },
+  "columns": [
+    {
+      "name": "ITEM_GID",
+      "description": "The GID for the item that is having the previous item information added, updated, or removed.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PREVIOUS_ITEM_GID",
+      "description": "The GID for the previous or superseded item.  This is a legacy field that is no longer shown on the UI.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ITEM_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PREVIOUS_ITEM_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_IR_ITEM_GID",
+      "cascadeDelete": true,
+      "parentTableName": "ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITEM_GID",
+          "columnName": "ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_IR_PREVIOUS_ITEM_GID",
+      "cascadeDelete": true,
+      "parentTableName": "ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITEM_GID",
+          "columnName": "PREVIOUS_ITEM_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

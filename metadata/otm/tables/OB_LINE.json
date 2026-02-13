@@ -1,1 +1,1450 @@
-{"table": {"schema": "glogowner","name": "ob_line","description": "This table consists of the individual line items for the order base. For e.g., if the order base has an order of: 500 Nike Shoes, from Philly to N.Y. latest by Jan/1/2001 the line items may contain: 200 Nike Shoes, from Philly to N.Y. 200 Socks, from Nashville to N.Y. Etc. Generally the line item should have the same destination for an order base, however that is not a rule. The tags are used in the line item for tracking purposes. These can be any combination of defined serial numbers. Four tags can be specified for tracking at various levels."},"columns": [{"name": "OB_LINE_GID","description": "The GID for the order base line associated with the order base.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OB_LINE_XID","description": "The XID for the order base line.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_BASE_GID","description": "The order base GID associated to this order base line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_LOCATION_GID","description": "The source location GID for the pickup location associated with this order base line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DEST_LOCATION_GID","description": "The destination location GID for the delivery location associated with this order base line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG1","description": "Additional information about the item. Like the color or size code etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG2","description": "Additional information about the item. Like the color or size code etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG3","description": "Additional information about the item. Like the color or size code etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TAG4","description": "Additional information about the item. Like the color or size code etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SPLIT_ALLOWED","description": "A true or false flag to define whether the line item can be split during the order release or shipment.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "WEIGHT","description": "The weight of the packaged items for this line.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_UOM_CODE","description": "The weight unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BASE","description": "The weight in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME","description": "The volume of the packaged items for this line.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_UOM_CODE","description": "The volume unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_BASE","description": "The volume in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DECLARED_VALUE","description": "The declared value contains the stated value for the order base line item.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "DECLARED_VALUE_BASE","description": "The declared value in the base currency.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "DECLARED_VALUE_CURRENCY_GID","description": "The declared value currency identifier.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'USD'"},{"name": "EARLY_PICKUP_DATE","description": "The earliest date when the item can be picked up.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LATE_PICKUP_DATE","description": "The latest date when the item can be picked up.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EARLY_DELIVERY_DATE","description": "The earliest date when the item can be delivered.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LATE_DELIVERY_DATE","description": "The latest date when the item can be picked delivered.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGED_ITEM_GID","description": "The packaged item GID defining the item associated to this order base line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_AUTO_RELEASE","description": "A Y/N indicator to create the order release line from the order base line when it is initially created.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "PACKAGED_COUNT","description": "The package count associated with the packaged item for this line. For example, 10 cases of product A.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "LOAD_POINT","description": "The specific loading location for the source location on the line.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UNLOAD_POINT","description": "The specific unloading location for the delivery location on the line.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PICKUP_IS_APPT","description": "Indicates if the early/late pickup times are appointment times.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DELIVERY_IS_APPT","description": "Indicates if the early/late delivery times are appointment times.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "PLAN_FROM_LOCATION_GID","description": "The plan from location GID can define a location other than the source location of the line to beginning planning transport.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLAN_FROM_LOAD_POINT","description": "The specific loading location for the plan from location on the line.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLAN_TO_LOCATION_GID","description": "The plan to location GID can define a location other than the destination location of the line to terminate planning transport.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLAN_TO_UNLOAD_POINT","description": "The specific unloading location for the plan to location on the line.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NUM_LAYERS_PER_SHIP_UNIT","description": "The number of layers for the transportation handling unit defined on the order base line. This allows you to define the TiHi date used to build ship units on the order release per each transactional line passed in, instead of looking to the static TiHi data on the packaged item table.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SHIPPABLE","description": "A Y/N indicator defining if the order base line is ready to be shipped by creating an order release for it.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "QUANTITY_PER_LAYER","description": "The quantity per layer for the transportation handling unit defined on the order base line. This allows you to define the TiHi date used to build ship units on the order release per each transactional line passed in, instead of looking to the static TiHi data on the packaged item table","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASED_WEIGHT","description": "The total released weight that has already been released against this order base line.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASED_WEIGHT_UOM_CODE","description": "The released weight unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASED_WEIGHT_BASE","description": "The released weight in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASED_VOLUME","description": "The total volume that has already been released against this order base line.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASED_VOLUME_UOM_CODE","description": "The released volume unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASED_VOLUME_BASE","description": "The released volume in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RELEASED_COUNT","description": "The total released package count that has already been released against this order base line.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_GID","description": "The packaging unit (considered an inner pack to the packaged item level) for this order base line.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_COUNT","description": "The packaging unit count associated to the packaging unit for this order base line.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_HANDLING_UNIT_GID","description": "The transport handling unit that is to be used when building the order release ship unit. If defined here, it will take precedence to the data that is defined on the static packaged item table.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INITIAL_ITEM_GID","description": "Can be used to define the substitution.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROUNDING_INSTRUCTION","description": "How the releasing logic will look to handle rounding when calculating the released values.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'U','D','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ROUND_TO","description": "Round to packaging unit quantity (PUQ), layer (LAY), or transport handling unit (THU).","dataType": "VARCHAR2","size": 3,"isNull": true,"isConstraint": true,"constraintValues": "'PUQ','LAY','THU'","conditionalConstraint": "","defaultValue": ""},{"name": "BUFFER_LOCATION_GID","description": "The buffer location GID. A buffer location can be an stock holding location that the order release ship to location will be built to. A subsequent order release will be created to move from this buffer location to the planned ship to location.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "THU_PROFILE_GID","description": "The transport handling unit profile (list of valid THUs for this order line) that is to be used when building the order release ship unit. If defined here it will take precedence to the data that is defined on the static packaged Item table.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "READY_QUANTITY","description": "The quantity of the line that is ready to be released.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "OB_LINE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_OBL_ORDER_BASE_GID","cascadeDelete": false,"parentTableName": "OB_ORDER_BASE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_BASE_GID","columnName": "ORDER_BASE_GID"}]},{"foreignKeyName": "FK_OL_LOC_LOAD_UNLOAD_POINT","cascadeDelete": false,"parentTableName": "LOCATION_LOAD_UNLOAD_POINT","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SOURCE_LOCATION_GID"},{"sequence": 2,"parentColumnName": "LOAD_UNLOAD_POINT","columnName": "LOAD_POINT"}]},{"foreignKeyName": "FK_OBL_SOURCE_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "SOURCE_LOCATION_GID"}]},{"foreignKeyName": "FK_OL_LOC_LOAD_UNLOAD_POINT2","cascadeDelete": false,"parentTableName": "LOCATION_LOAD_UNLOAD_POINT","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DEST_LOCATION_GID"},{"sequence": 2,"parentColumnName": "LOAD_UNLOAD_POINT","columnName": "UNLOAD_POINT"}]},{"foreignKeyName": "FK_OBL_DEST_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "DEST_LOCATION_GID"}]},{"foreignKeyName": "FK_OBL_DVC_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "DECLARED_VALUE_CURRENCY_GID"}]},{"foreignKeyName": "FK_OL_PACKAGED_ITEM_GID","cascadeDelete": false,"parentTableName": "PACKAGED_ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "PACKAGED_ITEM_GID","columnName": "PACKAGED_ITEM_GID"}]},{"foreignKeyName": "FK_OL_LOC_LOAD_UNLOAD_POINT3","cascadeDelete": false,"parentTableName": "LOCATION_LOAD_UNLOAD_POINT","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "PLAN_FROM_LOCATION_GID"},{"sequence": 2,"parentColumnName": "LOAD_UNLOAD_POINT","columnName": "PLAN_FROM_LOAD_POINT"}]},{"foreignKeyName": "FK_OBL_PLAN_FROM_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "PLAN_FROM_LOCATION_GID"}]},{"foreignKeyName": "FK_OL_LOC_LOAD_UNLOAD_POINT4","cascadeDelete": false,"parentTableName": "LOCATION_LOAD_UNLOAD_POINT","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "PLAN_TO_LOCATION_GID"},{"sequence": 2,"parentColumnName": "LOAD_UNLOAD_POINT","columnName": "PLAN_TO_UNLOAD_POINT"}]},{"foreignKeyName": "FK_OBL_PLAN_TO_LOCATION_GID2","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "PLAN_TO_LOCATION_GID"}]},{"foreignKeyName": "FK_OL_ITEM_PACKAGED_SPEC_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "PACKAGING_UNIT_GID"}]},{"foreignKeyName": "FK_OL_SHIP_UNIT_SPEC_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "TRANSPORT_HANDLING_UNIT_GID"}]},{"foreignKeyName": "FK_OL_ITEM_GID","cascadeDelete": false,"parentTableName": "ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "ITEM_GID","columnName": "INITIAL_ITEM_GID"}]},{"foreignKeyName": "FK_OBL_BUFFER_LOCATION_GID2","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "BUFFER_LOCATION_GID"}]},{"foreignKeyName": "FK_OBL_SHIP_UNIT_SPEC_PROFILE","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_PROFILE_GID","columnName": "THU_PROFILE_GID"}]}],"childTables": ["ALLOCATION_OB_LINE","ALLOCATION_OB_LINE_D","DVE_CALCULATION_LINE","LD_SCREENING_LINE","OBL_EQUIP_REF_UNIT_JOIN","OBL_TO_AGGREGATED_ORL","OB_LINE_ATTRIBUTE","OB_LINE_INVOLVED_PARTY","OB_LINE_PRU_DETAIL","OB_LINE_REFNUM","OB_LINE_REMARK","OB_LINE_STATUS","OB_RELEASE_INSTRUCTION","OMR_D","ORDER_RELEASE_LINE","SHIP_UNIT_LINE"],"indices": [{"indexName": "IX_OBL_BUFFER_LOCATION_GID2","columnNames": [{"sequence": 1,"name": "BUFFER_LOCATION_GID"}]},{"indexName": "IX_OBL_DVC_GID","columnNames": [{"sequence": 1,"name": "DECLARED_VALUE_CURRENCY_GID"}]},{"indexName": "IX_OBL_PLAN_TO_LOCATION_GID","columnNames": [{"sequence": 1,"name": "PLAN_TO_LOCATION_GID"}]},{"indexName": "IX_OB_LINE_XID","columnNames": [{"sequence": 1,"name": "OB_LINE_XID"}]},{"indexName": "IX_OL_INITIAL_ITEM_GID","columnNames": [{"sequence": 1,"name": "INITIAL_ITEM_GID"}]},{"indexName": "IX_OL_ITEM_PKGUNIT_GID","columnNames": [{"sequence": 1,"name": "PACKAGING_UNIT_GID"}]},{"indexName": "IX_OL_LOAD_UNLOAD_POINT","columnNames": [{"sequence": 1,"name": "SOURCE_LOCATION_GID"},{"sequence": 2,"name": "LOAD_POINT"}]},{"indexName": "IX_OL_LOAD_UNLOAD_POINT2","columnNames": [{"sequence": 1,"name": "DEST_LOCATION_GID"},{"sequence": 2,"name": "UNLOAD_POINT"}]},{"indexName": "IX_OL_LOC_LOAD_UNLOAD_POINT3","columnNames": [{"sequence": 1,"name": "PLAN_FROM_LOCATION_GID"},{"sequence": 2,"name": "PLAN_FROM_LOAD_POINT"}]},{"indexName": "IX_OL_LOC_LOAD_UNLOAD_POINT4","columnNames": [{"sequence": 1,"name": "PLAN_TO_LOCATION_GID"},{"sequence": 2,"name": "PLAN_TO_UNLOAD_POINT"}]},{"indexName": "IX_OL_PACKAGED_ITEM_GID","columnNames": [{"sequence": 1,"name": "PACKAGED_ITEM_GID"}]},{"indexName": "IX_OL_PLAN_FROM_LOCATION_GID","columnNames": [{"sequence": 1,"name": "PLAN_FROM_LOCATION_GID"}]},{"indexName": "IX_OL_THU_GID","columnNames": [{"sequence": 1,"name": "TRANSPORT_HANDLING_UNIT_GID"}]},{"indexName": "OBL_DEST_LOCATION_GID","columnNames": [{"sequence": 1,"name": "DEST_LOCATION_GID"}]},{"indexName": "OBL_ORDER_BASE_GID","columnNames": [{"sequence": 1,"name": "ORDER_BASE_GID"}]},{"indexName": "OBL_SOURCE_LOCATION_GID","columnNames": [{"sequence": 1,"name": "SOURCE_LOCATION_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "ob_line",
+    "description": "This table consists of the individual line items for the order base. For e.g., if the order base has an order of: 500 Nike Shoes, from Philly to N.Y. latest by Jan/1/2001 the line items may contain: 200 Nike Shoes, from Philly to N.Y. 200 Socks, from Nashville to N.Y. Etc. Generally the line item should have the same destination for an order base, however that is not a rule. The tags are used in the line item for tracking purposes. These can be any combination of defined serial numbers. Four tags can be specified for tracking at various levels."
+  },
+  "columns": [
+    {
+      "name": "OB_LINE_GID",
+      "description": "The GID for the order base line associated with the order base.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OB_LINE_XID",
+      "description": "The XID for the order base line.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_BASE_GID",
+      "description": "The order base GID associated to this order base line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_LOCATION_GID",
+      "description": "The source location GID for the pickup location associated with this order base line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DEST_LOCATION_GID",
+      "description": "The destination location GID for the delivery location associated with this order base line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG1",
+      "description": "Additional information about the item. Like the color or size code etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG2",
+      "description": "Additional information about the item. Like the color or size code etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG3",
+      "description": "Additional information about the item. Like the color or size code etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TAG4",
+      "description": "Additional information about the item. Like the color or size code etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SPLIT_ALLOWED",
+      "description": "A true or false flag to define whether the line item can be split during the order release or shipment.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "WEIGHT",
+      "description": "The weight of the packaged items for this line.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_UOM_CODE",
+      "description": "The weight unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BASE",
+      "description": "The weight in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME",
+      "description": "The volume of the packaged items for this line.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_UOM_CODE",
+      "description": "The volume unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_BASE",
+      "description": "The volume in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DECLARED_VALUE",
+      "description": "The declared value contains the stated value for the order base line item.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DECLARED_VALUE_BASE",
+      "description": "The declared value in the base currency.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DECLARED_VALUE_CURRENCY_GID",
+      "description": "The declared value currency identifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'USD'"
+    },
+    {
+      "name": "EARLY_PICKUP_DATE",
+      "description": "The earliest date when the item can be picked up.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LATE_PICKUP_DATE",
+      "description": "The latest date when the item can be picked up.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EARLY_DELIVERY_DATE",
+      "description": "The earliest date when the item can be delivered.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LATE_DELIVERY_DATE",
+      "description": "The latest date when the item can be picked delivered.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGED_ITEM_GID",
+      "description": "The packaged item GID defining the item associated to this order base line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_AUTO_RELEASE",
+      "description": "A Y/N indicator to create the order release line from the order base line when it is initially created.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "PACKAGED_COUNT",
+      "description": "The package count associated with the packaged item for this line. For example, 10 cases of product A.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "LOAD_POINT",
+      "description": "The specific loading location for the source location on the line.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UNLOAD_POINT",
+      "description": "The specific unloading location for the delivery location on the line.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PICKUP_IS_APPT",
+      "description": "Indicates if the early/late pickup times are appointment times.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DELIVERY_IS_APPT",
+      "description": "Indicates if the early/late delivery times are appointment times.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "PLAN_FROM_LOCATION_GID",
+      "description": "The plan from location GID can define a location other than the source location of the line to beginning planning transport.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLAN_FROM_LOAD_POINT",
+      "description": "The specific loading location for the plan from location on the line.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLAN_TO_LOCATION_GID",
+      "description": "The plan to location GID can define a location other than the destination location of the line to terminate planning transport.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLAN_TO_UNLOAD_POINT",
+      "description": "The specific unloading location for the plan to location on the line.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NUM_LAYERS_PER_SHIP_UNIT",
+      "description": "The number of layers for the transportation handling unit defined on the order base line. This allows you to define the TiHi date used to build ship units on the order release per each transactional line passed in, instead of looking to the static TiHi data on the packaged item table.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SHIPPABLE",
+      "description": "A Y/N indicator defining if the order base line is ready to be shipped by creating an order release for it.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "QUANTITY_PER_LAYER",
+      "description": "The quantity per layer for the transportation handling unit defined on the order base line. This allows you to define the TiHi date used to build ship units on the order release per each transactional line passed in, instead of looking to the static TiHi data on the packaged item table",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASED_WEIGHT",
+      "description": "The total released weight that has already been released against this order base line.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASED_WEIGHT_UOM_CODE",
+      "description": "The released weight unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASED_WEIGHT_BASE",
+      "description": "The released weight in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASED_VOLUME",
+      "description": "The total volume that has already been released against this order base line.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASED_VOLUME_UOM_CODE",
+      "description": "The released volume unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASED_VOLUME_BASE",
+      "description": "The released volume in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RELEASED_COUNT",
+      "description": "The total released package count that has already been released against this order base line.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_GID",
+      "description": "The packaging unit (considered an inner pack to the packaged item level) for this order base line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_COUNT",
+      "description": "The packaging unit count associated to the packaging unit for this order base line.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_GID",
+      "description": "The transport handling unit that is to be used when building the order release ship unit. If defined here, it will take precedence to the data that is defined on the static packaged item table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INITIAL_ITEM_GID",
+      "description": "Can be used to define the substitution.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUNDING_INSTRUCTION",
+      "description": "How the releasing logic will look to handle rounding when calculating the released values.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'U','D','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ROUND_TO",
+      "description": "Round to packaging unit quantity (PUQ), layer (LAY), or transport handling unit (THU).",
+      "dataType": "VARCHAR2",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'PUQ','LAY','THU'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BUFFER_LOCATION_GID",
+      "description": "The buffer location GID. A buffer location can be an stock holding location that the order release ship to location will be built to. A subsequent order release will be created to move from this buffer location to the planned ship to location.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "THU_PROFILE_GID",
+      "description": "The transport handling unit profile (list of valid THUs for this order line) that is to be used when building the order release ship unit. If defined here it will take precedence to the data that is defined on the static packaged Item table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "READY_QUANTITY",
+      "description": "The quantity of the line that is ready to be released.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "OB_LINE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_OBL_ORDER_BASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OB_ORDER_BASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_BASE_GID",
+          "columnName": "ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OL_LOC_LOAD_UNLOAD_POINT",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_LOAD_UNLOAD_POINT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SOURCE_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "LOAD_UNLOAD_POINT",
+          "columnName": "LOAD_POINT"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBL_SOURCE_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "SOURCE_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OL_LOC_LOAD_UNLOAD_POINT2",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_LOAD_UNLOAD_POINT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DEST_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "LOAD_UNLOAD_POINT",
+          "columnName": "UNLOAD_POINT"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBL_DEST_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "DEST_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBL_DVC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "DECLARED_VALUE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OL_PACKAGED_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "PACKAGED_ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PACKAGED_ITEM_GID",
+          "columnName": "PACKAGED_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OL_LOC_LOAD_UNLOAD_POINT3",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_LOAD_UNLOAD_POINT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "PLAN_FROM_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "LOAD_UNLOAD_POINT",
+          "columnName": "PLAN_FROM_LOAD_POINT"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBL_PLAN_FROM_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "PLAN_FROM_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OL_LOC_LOAD_UNLOAD_POINT4",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_LOAD_UNLOAD_POINT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "PLAN_TO_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "LOAD_UNLOAD_POINT",
+          "columnName": "PLAN_TO_UNLOAD_POINT"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBL_PLAN_TO_LOCATION_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "PLAN_TO_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OL_ITEM_PACKAGED_SPEC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "PACKAGING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OL_SHIP_UNIT_SPEC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OL_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITEM_GID",
+          "columnName": "INITIAL_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBL_BUFFER_LOCATION_GID2",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "BUFFER_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_OBL_SHIP_UNIT_SPEC_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_PROFILE_GID",
+          "columnName": "THU_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ALLOCATION_OB_LINE",
+    "ALLOCATION_OB_LINE_D",
+    "DVE_CALCULATION_LINE",
+    "LD_SCREENING_LINE",
+    "OBL_EQUIP_REF_UNIT_JOIN",
+    "OBL_TO_AGGREGATED_ORL",
+    "OB_LINE_ATTRIBUTE",
+    "OB_LINE_INVOLVED_PARTY",
+    "OB_LINE_PRU_DETAIL",
+    "OB_LINE_REFNUM",
+    "OB_LINE_REMARK",
+    "OB_LINE_STATUS",
+    "OB_RELEASE_INSTRUCTION",
+    "OMR_D",
+    "ORDER_RELEASE_LINE",
+    "SHIP_UNIT_LINE"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_OBL_BUFFER_LOCATION_GID2",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "BUFFER_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OBL_DVC_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DECLARED_VALUE_CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OBL_PLAN_TO_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PLAN_TO_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OB_LINE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "OB_LINE_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_INITIAL_ITEM_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "INITIAL_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_ITEM_PKGUNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PACKAGING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_LOAD_UNLOAD_POINT",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "LOAD_POINT"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_LOAD_UNLOAD_POINT2",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DEST_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "UNLOAD_POINT"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_LOC_LOAD_UNLOAD_POINT3",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PLAN_FROM_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "PLAN_FROM_LOAD_POINT"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_LOC_LOAD_UNLOAD_POINT4",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PLAN_TO_LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "PLAN_TO_UNLOAD_POINT"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_PACKAGED_ITEM_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PACKAGED_ITEM_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_PLAN_FROM_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PLAN_FROM_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_OL_THU_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "OBL_DEST_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DEST_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "OBL_ORDER_BASE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_BASE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "OBL_SOURCE_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SOURCE_LOCATION_GID"
+        }
+      ]
+    }
+  ]
+}

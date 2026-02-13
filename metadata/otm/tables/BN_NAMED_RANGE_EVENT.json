@@ -1,1 +1,154 @@
-{"table": {"schema": "glogowner","name": "bn_named_range_event","description": "Defines threshold for different levels of depletion warnings."},"columns": [{"name": "BN_NAMED_RANGE_GID","description": "The identifier of the named range to which this warning level applies.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WARNING_LEVEL","description": "The depletion warning level.","dataType": "NUMBER","size": 2,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "The description of the warning level.","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WARNING_THRESHOLD","description": "Determines when a depletion warning is raised.  An event is raised if the available numbers in the range fall below the threshold.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_WARNING_EVENTS","description": "The maximum number of events to be raised for this level or warning.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "ACTUAL_WARNING_EVENTS_COUNT","description": "The actual number of events raised.   The number is reset when the named range is modified by adding the new ranges or updating existing ranges.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "BN_NAMED_RANGE_GID"},{"sequence": 2,"columnName": "WARNING_LEVEL"}],"foreignKeys": [{"foreignKeyName": "FK_BNRE_BN_NAMED_RANGE_GID","cascadeDelete": false,"parentTableName": "BN_NAMED_RANGE","columnRelation": [{"sequence": 1,"parentColumnName": "BN_NAMED_RANGE_GID","columnName": "BN_NAMED_RANGE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "bn_named_range_event",
+    "description": "Defines threshold for different levels of depletion warnings."
+  },
+  "columns": [
+    {
+      "name": "BN_NAMED_RANGE_GID",
+      "description": "The identifier of the named range to which this warning level applies.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WARNING_LEVEL",
+      "description": "The depletion warning level.",
+      "dataType": "NUMBER",
+      "size": 2,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "The description of the warning level.",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WARNING_THRESHOLD",
+      "description": "Determines when a depletion warning is raised.  An event is raised if the available numbers in the range fall below the threshold.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_WARNING_EVENTS",
+      "description": "The maximum number of events to be raised for this level or warning.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "ACTUAL_WARNING_EVENTS_COUNT",
+      "description": "The actual number of events raised.   The number is reset when the named range is modified by adding the new ranges or updating existing ranges.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "BN_NAMED_RANGE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "WARNING_LEVEL"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_BNRE_BN_NAMED_RANGE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BN_NAMED_RANGE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BN_NAMED_RANGE_GID",
+          "columnName": "BN_NAMED_RANGE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

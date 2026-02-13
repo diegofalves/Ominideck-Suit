@@ -1,1 +1,465 @@
-{"table": {"schema": "glogowner","name": "shipment_stop_debrief","description": ""},"columns": [{"name": "SHIPMENT_GID","description": "The GID for the shipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_NUM","description": "The stop number.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY","description": "Specifies the activity (pickup, drop off) for the stop and the debrief values.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'P','D','O'","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NO","description": "The sequence number (key).","dataType": "VARCHAR2","size": 22,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_GID","description": "The GID for ship unit for the shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_SHIP_UNIT_LINE_NO","description": "The GID for ship unit line number for the shipment.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ITEM_PACKAGE_COUNT","description": "The count of the package item count.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_GID","description": "The packaging unit GID for the packaging unit count that is contained in the packaged item.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_UNIT_COUNT","description": "The packaging unit count for the packing unit contained in the packaged item.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_HANDLING_UNIT_GID","description": "The transport handling unit GID associated with the transport handling unit.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_HANDLING_UNIT_COUNT","description": "The transport handling count GID for the stop debrief.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ITEM_GID","description": "The item GID for the stop debrief.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NON_CONF_REASON_CODE_GID","description": "The non conformance reason code GID associated with the stop debrief recording.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIP_UNIT_GID","description": "The ship unit GID linked to the stop debrief.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "S_EQUIPMENT_GID","description": "The equipment GID linked to the stop debrief.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MATCH_TYPE","description": "The match type code for linking the stop debrief data.","dataType": "VARCHAR2","size": 20,"isNull": true,"isConstraint": true,"constraintValues": "'MATCH','OVER','UNDER','ERROR'","conditionalConstraint": "","defaultValue": ""},{"name": "ORDER_RELEASE_LINE_GID","description": "The order release line GID linked to the stop debrief.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPMENT_GID"},{"sequence": 2,"columnName": "STOP_NUM"},{"sequence": 3,"columnName": "ACTIVITY"},{"sequence": 4,"columnName": "SEQUENCE_NO"}],"foreignKeys": [{"foreignKeyName": "FK_SSD_SHIPMENT_STOP","cascadeDelete": false,"parentTableName": "SHIPMENT_STOP","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"},{"sequence": 2,"parentColumnName": "STOP_NUM","columnName": "STOP_NUM"}]},{"foreignKeyName": "FK_SSD_S_SHIP_UNIT_GID","cascadeDelete": false,"parentTableName": "S_SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"}]},{"foreignKeyName": "FK_SSD_S_SHIP_UNIT_LINE","cascadeDelete": false,"parentTableName": "S_SHIP_UNIT_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "S_SHIP_UNIT_GID","columnName": "S_SHIP_UNIT_GID"},{"sequence": 2,"parentColumnName": "S_SHIP_UNIT_LINE_NO","columnName": "S_SHIP_UNIT_LINE_NO"}]},{"foreignKeyName": "FK_SSD_PACKAGING_UNIT_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "PACKAGING_UNIT_GID"}]},{"foreignKeyName": "FK_SSD_TRANSPORT_HANDLING_UNI","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "TRANSPORT_HANDLING_UNIT_GID"}]},{"foreignKeyName": "FK_SSD_ITEM_GID","cascadeDelete": false,"parentTableName": "ITEM","columnRelation": [{"sequence": 1,"parentColumnName": "ITEM_GID","columnName": "ITEM_GID"}]},{"foreignKeyName": "FK_SSD_NON_CONF_REASON_CODE_G","cascadeDelete": false,"parentTableName": "NON_CONF_REASON_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "NON_CONF_REASON_CODE_GID","columnName": "NON_CONF_REASON_CODE_GID"}]},{"foreignKeyName": "FK_SSD_SHIP_UNIT_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_GID","columnName": "SHIP_UNIT_GID"}]},{"foreignKeyName": "FK_SSD_S_EQUIPMENT_GID","cascadeDelete": false,"parentTableName": "S_EQUIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "S_EQUIPMENT_GID","columnName": "S_EQUIPMENT_GID"}]},{"foreignKeyName": "FK_SSD_ORDER_RELEASE_LINE_GID","cascadeDelete": false,"parentTableName": "ORDER_RELEASE_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "ORDER_RELEASE_LINE_GID","columnName": "ORDER_RELEASE_LINE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_SSDBF_ORLINE_GID","columnNames": [{"sequence": 1,"name": "ORDER_RELEASE_LINE_GID"}]},{"indexName": "IX_SSDBF_SHIP_UNIT_GID","columnNames": [{"sequence": 1,"name": "SHIP_UNIT_GID"}]},{"indexName": "IX_SSD_ITEM_GID","columnNames": [{"sequence": 1,"name": "ITEM_GID"}]},{"indexName": "IX_SSD_NON_CONF_REASON_CODE_G","columnNames": [{"sequence": 1,"name": "NON_CONF_REASON_CODE_GID"}]},{"indexName": "IX_SSD_PACKAGING_UNIT_GID","columnNames": [{"sequence": 1,"name": "PACKAGING_UNIT_GID"}]},{"indexName": "IX_SSD_S_EQUIPMENT_GID","columnNames": [{"sequence": 1,"name": "S_EQUIPMENT_GID"}]},{"indexName": "IX_SSD_TRANSPORT_HANDLING_UNI","columnNames": [{"sequence": 1,"name": "TRANSPORT_HANDLING_UNIT_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "shipment_stop_debrief",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The GID for the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_NUM",
+      "description": "The stop number.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY",
+      "description": "Specifies the activity (pickup, drop off) for the stop and the debrief values.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'P','D','O'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NO",
+      "description": "The sequence number (key).",
+      "dataType": "VARCHAR2",
+      "size": 22,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_GID",
+      "description": "The GID for ship unit for the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_SHIP_UNIT_LINE_NO",
+      "description": "The GID for ship unit line number for the shipment.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ITEM_PACKAGE_COUNT",
+      "description": "The count of the package item count.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_GID",
+      "description": "The packaging unit GID for the packaging unit count that is contained in the packaged item.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_UNIT_COUNT",
+      "description": "The packaging unit count for the packing unit contained in the packaged item.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_GID",
+      "description": "The transport handling unit GID associated with the transport handling unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_COUNT",
+      "description": "The transport handling count GID for the stop debrief.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ITEM_GID",
+      "description": "The item GID for the stop debrief.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NON_CONF_REASON_CODE_GID",
+      "description": "The non conformance reason code GID associated with the stop debrief recording.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIP_UNIT_GID",
+      "description": "The ship unit GID linked to the stop debrief.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "S_EQUIPMENT_GID",
+      "description": "The equipment GID linked to the stop debrief.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MATCH_TYPE",
+      "description": "The match type code for linking the stop debrief data.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'MATCH','OVER','UNDER','ERROR'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ORDER_RELEASE_LINE_GID",
+      "description": "The order release line GID linked to the stop debrief.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STOP_NUM"
+    },
+    {
+      "sequence": 3,
+      "columnName": "ACTIVITY"
+    },
+    {
+      "sequence": 4,
+      "columnName": "SEQUENCE_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SSD_SHIPMENT_STOP",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_STOP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "STOP_NUM",
+          "columnName": "STOP_NUM"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_S_SHIP_UNIT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "S_SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_S_SHIP_UNIT_LINE",
+      "cascadeDelete": false,
+      "parentTableName": "S_SHIP_UNIT_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_SHIP_UNIT_GID",
+          "columnName": "S_SHIP_UNIT_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "S_SHIP_UNIT_LINE_NO",
+          "columnName": "S_SHIP_UNIT_LINE_NO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_PACKAGING_UNIT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "PACKAGING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_TRANSPORT_HANDLING_UNI",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_ITEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITEM_GID",
+          "columnName": "ITEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_NON_CONF_REASON_CODE_G",
+      "cascadeDelete": false,
+      "parentTableName": "NON_CONF_REASON_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "NON_CONF_REASON_CODE_GID",
+          "columnName": "NON_CONF_REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_SHIP_UNIT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_GID",
+          "columnName": "SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_S_EQUIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "S_EQUIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "S_EQUIPMENT_GID",
+          "columnName": "S_EQUIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SSD_ORDER_RELEASE_LINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ORDER_RELEASE_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ORDER_RELEASE_LINE_GID",
+          "columnName": "ORDER_RELEASE_LINE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_SSDBF_ORLINE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ORDER_RELEASE_LINE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSDBF_SHIP_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIP_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSD_ITEM_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ITEM_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSD_NON_CONF_REASON_CODE_G",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "NON_CONF_REASON_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSD_PACKAGING_UNIT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PACKAGING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSD_S_EQUIPMENT_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "S_EQUIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SSD_TRANSPORT_HANDLING_UNI",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    }
+  ]
+}

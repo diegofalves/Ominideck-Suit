@@ -1,1 +1,195 @@
-{"table": {"schema": "glogowner","name": "transactional_event_contact","description": ""},"columns": [{"name": "TRANSACTIONAL_EVENT_GID","description": "The GID for the transactional event. Transactional Events provide a simplified mechanism for you to register interest in an event for a specific business object, just for this one transaction. For example: Michael Smith needs to be notified if the shipment costs change on Shipment 1004. The buyer, Will Mathers, needs to be notified if the dates change on order Release 2293-09. The Finance Manager needs to be notified if the cost changes on Invoice PM955830. A transactional event is a pre-selected, pre-parameterized event or set of events, which defines a phase in the life-cycle of a business object. You register interest in the phase on the business object. For example, buyers may have interest if the dates or quantities change on their purchase orders. However, they do not want to know every time there is a change, only on specific purchase orders. To accomplish this: Define a Transactional Event ID called IMPORTANT DATE OR QUANTITY CHANGES. Select the Type ORDER RELEASE. Use the event, as defined in the Subject field, ORDER - DATES MODIFIED. Leave the Restrictions field blank. If, though, you wanted to limit this to events brought in via integration only, then you would enter INTEGRATION here. You can select multiple restrictions at once if necessary. Save this line, and create another for the Subject ORDER - QUANTITIES MODIFIED. The buyers can then pick IMPORTANT DATE OR QUANTITY CHANGES form a list of Transactional E","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTACT_GID","description": "The GID for the contact.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COM_METHOD_GID","description": "The communication method ID identifies the preferred communication method for this contact. If you do not select a communication method for this contact, the choice of communication method is delegated to the communication method records associated with each event. The system selects the highest-ranked communication method from the supported methods at the time of notification. The system looks at all parties involved in a shipment to ensure that a common method of communication exists when sending notification. For example, it checks to make sure that the service provider can send faxes and that the corporation can receive them.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STYLESHEET_PROFILE_GID","description": "The GID for the stylesheet profile to use for this transactional event.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AS_INVOLVED_PARTY_QUAL_GID","description": "The GID for the acting as involved party qualifier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "TRANSACTIONAL_EVENT_GID"},{"sequence": 2,"columnName": "CONTACT_GID"},{"sequence": 3,"columnName": "COM_METHOD_GID"}],"foreignKeys": [{"foreignKeyName": "FK_TEC_TRANSACTIONAL_EVENT_GI","cascadeDelete": false,"parentTableName": "TRANSACTIONAL_EVENT","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSACTIONAL_EVENT_GID","columnName": "TRANSACTIONAL_EVENT_GID"}]},{"foreignKeyName": "FK_TEC_CONTACT_GID","cascadeDelete": false,"parentTableName": "CONTACT","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_GID","columnName": "CONTACT_GID"}]},{"foreignKeyName": "FK_TEC_COM_METHOD_GID","cascadeDelete": false,"parentTableName": "COM_METHOD","columnRelation": [{"sequence": 1,"parentColumnName": "COM_METHOD_GID","columnName": "COM_METHOD_GID"}]},{"foreignKeyName": "FK_TEC_STYLESHEET_PROFILE_GID","cascadeDelete": false,"parentTableName": "STYLESHEET_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "STYLESHEET_PROFILE_GID","columnName": "STYLESHEET_PROFILE_GID"}]},{"foreignKeyName": "FK_TEC_AS_INVOLVED_PARTY_QUAL","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "AS_INVOLVED_PARTY_QUAL_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "transactional_event_contact",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "TRANSACTIONAL_EVENT_GID",
+      "description": "The GID for the transactional event. Transactional Events provide a simplified mechanism for you to register interest in an event for a specific business object, just for this one transaction. For example: Michael Smith needs to be notified if the shipment costs change on Shipment 1004. The buyer, Will Mathers, needs to be notified if the dates change on order Release 2293-09. The Finance Manager needs to be notified if the cost changes on Invoice PM955830. A transactional event is a pre-selected, pre-parameterized event or set of events, which defines a phase in the life-cycle of a business object. You register interest in the phase on the business object. For example, buyers may have interest if the dates or quantities change on their purchase orders. However, they do not want to know every time there is a change, only on specific purchase orders. To accomplish this: Define a Transactional Event ID called IMPORTANT DATE OR QUANTITY CHANGES. Select the Type ORDER RELEASE. Use the event, as defined in the Subject field, ORDER - DATES MODIFIED. Leave the Restrictions field blank. If, though, you wanted to limit this to events brought in via integration only, then you would enter INTEGRATION here. You can select multiple restrictions at once if necessary. Save this line, and create another for the Subject ORDER - QUANTITIES MODIFIED. The buyers can then pick IMPORTANT DATE OR QUANTITY CHANGES form a list of Transactional E",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTACT_GID",
+      "description": "The GID for the contact.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COM_METHOD_GID",
+      "description": "The communication method ID identifies the preferred communication method for this contact. If you do not select a communication method for this contact, the choice of communication method is delegated to the communication method records associated with each event. The system selects the highest-ranked communication method from the supported methods at the time of notification. The system looks at all parties involved in a shipment to ensure that a common method of communication exists when sending notification. For example, it checks to make sure that the service provider can send faxes and that the corporation can receive them.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STYLESHEET_PROFILE_GID",
+      "description": "The GID for the stylesheet profile to use for this transactional event.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AS_INVOLVED_PARTY_QUAL_GID",
+      "description": "The GID for the acting as involved party qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "TRANSACTIONAL_EVENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "CONTACT_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "COM_METHOD_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_TEC_TRANSACTIONAL_EVENT_GI",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSACTIONAL_EVENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSACTIONAL_EVENT_GID",
+          "columnName": "TRANSACTIONAL_EVENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TEC_CONTACT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_GID",
+          "columnName": "CONTACT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TEC_COM_METHOD_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COM_METHOD",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COM_METHOD_GID",
+          "columnName": "COM_METHOD_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TEC_STYLESHEET_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "STYLESHEET_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "STYLESHEET_PROFILE_GID",
+          "columnName": "STYLESHEET_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_TEC_AS_INVOLVED_PARTY_QUAL",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "AS_INVOLVED_PARTY_QUAL_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

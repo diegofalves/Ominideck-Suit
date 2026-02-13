@@ -1,1 +1,349 @@
-{"table": {"schema": "glogowner","name": "country_code","description": "COUNTRY_CODE stores a three-digit code for every country, which is standard data for the countries. This table also stores (for reference only) two-digit codes for those countries that have them. GC3 always uses the three-digit code country code."},"columns": [{"name": "COUNTRY_CODE3_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_CODE3_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_CODE2","description": "","dataType": "VARCHAR2","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_NAME","description": "COUNTRY_NAME contains the country name.","dataType": "VARCHAR2","size": 120,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_NUMBER","description": "","dataType": "VARCHAR2","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_ZONE_GID","description": "COUNTRY_ZONE_GID contains the unique identifier for the country zone. Zones can include: AFR ANT ASI AUS CAM CAR EAF EUR FAR MID NAM NPL SAF SAM SAO","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COUNTRY_CODE_FIPS","description": "","dataType": "VARCHAR2","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GEO_POSTAL_CODE_LENGTH","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_EU_MEMBER_COUNTRY","description": "Indicates if country is member of European Union.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "VALIDATE_POSTAL_CODE","description": "This flag should be set to 'Y' if address validation has been loaded into the POSTAL_CODE_VALIDATE table for this particular country.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "CAR_REGISTRATION_CODE","description": "1-3 character car registration code.","dataType": "VARCHAR2","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_INSPECTION_REQUIRED","description": "Inspection is required for this country. Default is 'N'","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_COLLECT_ALLOWED","description": "Collect is allowed for this country. Default is 'Y'","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "BOL_TYPE","description": "BOL Type. Copied down to shipment","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BOL_ISSUANCE_TYPE","description": "BOL Issuance Type. Copied down to shipment","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MEMO_BL_ALLOWED","description": "Indicate if this country allows Memo B/L","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "IATA_REGION","description": "The IATA region code for this country.  Will be 1, 2, or 3","dataType": "VARCHAR2","size": 2,"isNull": false,"isConstraint": true,"constraintValues": "'1','2','3'","conditionalConstraint": "","defaultValue": "'1'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "COUNTRY_CODE3_GID"}],"foreignKeys": [{"foreignKeyName": "FK_CC_COUNTRY_ZONE_GID","cascadeDelete": false,"parentTableName": "COUNTRY_ZONE","columnRelation": [{"sequence": 1,"parentColumnName": "COUNTRY_ZONE_GID","columnName": "COUNTRY_ZONE_GID"}]}],"childTables": ["COUNTRY_CODE_ATTRIBUTE","COUNTY_OVERRIDE_DETAIL","CURRENCY","DISTANCE_BY_ADDRESSES","DM_TRANSACTION","DRIVER_CDL","ESG_ACTIVITY_DETAIL","GEO_CITYPROV_POINT","GEO_HIERARCHY","GEO_POSTAL_POINT","GTM_CAMPAIGN","GTM_CAMPAIGN_LINE","GTM_COMPLIANCE_RULE","GTM_COMPLIANCE_RULE_COUNTRY","GTM_DECL_MESSAGE","GTM_ITEM_COUNTRY_OF_ORIGIN","GTM_JURISDICTION","GTM_LICENSE_REGION","GTM_PROD_CLASS_TYPE","GTM_RULES_OF_ORIGIN","GTM_STRUCTURE","GTM_STRUCTURE_COMPONENT","GTM_TARIFF_COUNTRY","GTM_TA_PARTNER","GTM_TIP_INVENTORY","GTM_TIP_INV_MOVEMENT","GTM_TRANSACTION","GTM_TRANSACTION_LINE","IE_SHIPMENTSTATUS","IM_MILEAGE","INVOICE","INVOICE_LINEITEM","INVOICE_LINEITEM_VAT","INVOICE_PORT","INV_SUPPLY_PROVINCE_VAT_REG","ITEM","ITEM_ORIGIN","ITEM_QF","ITEM_VALUE_SET","JOB_INVOLVED_PARTY","LG_ADDRESS","LOCATION","ORDER_RELEASE","ORDER_RELEASE_LINE","POWER_UNIT","PROVINCE_CODE_PROFILE_D","QUOTE","QUOTE_COST_OPTION_SHIPMENT","REGION_DETAIL","ROUTE_CODE","SERVPROV_TENDER_CONSTRAINT","SPLC","TIME_ZONE_LOCALE","VAT_PROVINCIAL_CNFG_PERSP","VAT_PROVINCIAL_REGISTRATION","VAT_RATE","VAT_REGISTRATION","VESSEL","X_LANE"],"indices": [{"indexName": "IX_CC_COUNTRY_ZONE_GID","columnNames": [{"sequence": 1,"name": "COUNTRY_ZONE_GID"}]},{"indexName": "IX_COUNTRY_CODE3_XID","columnNames": [{"sequence": 1,"name": "COUNTRY_CODE3_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "country_code",
+    "description": "COUNTRY_CODE stores a three-digit code for every country, which is standard data for the countries. This table also stores (for reference only) two-digit codes for those countries that have them. GC3 always uses the three-digit code country code."
+  },
+  "columns": [
+    {
+      "name": "COUNTRY_CODE3_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_CODE3_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_CODE2",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_NAME",
+      "description": "COUNTRY_NAME contains the country name.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_NUMBER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_ZONE_GID",
+      "description": "COUNTRY_ZONE_GID contains the unique identifier for the country zone. Zones can include: AFR ANT ASI AUS CAM CAR EAF EUR FAR MID NAM NPL SAF SAM SAO",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COUNTRY_CODE_FIPS",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GEO_POSTAL_CODE_LENGTH",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_EU_MEMBER_COUNTRY",
+      "description": "Indicates if country is member of European Union.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "VALIDATE_POSTAL_CODE",
+      "description": "This flag should be set to 'Y' if address validation has been loaded into the POSTAL_CODE_VALIDATE table for this particular country.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "CAR_REGISTRATION_CODE",
+      "description": "1-3 character car registration code.",
+      "dataType": "VARCHAR2",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_INSPECTION_REQUIRED",
+      "description": "Inspection is required for this country. Default is 'N'",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_COLLECT_ALLOWED",
+      "description": "Collect is allowed for this country. Default is 'Y'",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "BOL_TYPE",
+      "description": "BOL Type. Copied down to shipment",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BOL_ISSUANCE_TYPE",
+      "description": "BOL Issuance Type. Copied down to shipment",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MEMO_BL_ALLOWED",
+      "description": "Indicate if this country allows Memo B/L",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "IATA_REGION",
+      "description": "The IATA region code for this country.  Will be 1, 2, or 3",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'1','2','3'",
+      "conditionalConstraint": "",
+      "defaultValue": "'1'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "COUNTRY_CODE3_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_CC_COUNTRY_ZONE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "COUNTRY_ZONE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "COUNTRY_ZONE_GID",
+          "columnName": "COUNTRY_ZONE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "COUNTRY_CODE_ATTRIBUTE",
+    "COUNTY_OVERRIDE_DETAIL",
+    "CURRENCY",
+    "DISTANCE_BY_ADDRESSES",
+    "DM_TRANSACTION",
+    "DRIVER_CDL",
+    "ESG_ACTIVITY_DETAIL",
+    "GEO_CITYPROV_POINT",
+    "GEO_HIERARCHY",
+    "GEO_POSTAL_POINT",
+    "GTM_CAMPAIGN",
+    "GTM_CAMPAIGN_LINE",
+    "GTM_COMPLIANCE_RULE",
+    "GTM_COMPLIANCE_RULE_COUNTRY",
+    "GTM_DECL_MESSAGE",
+    "GTM_ITEM_COUNTRY_OF_ORIGIN",
+    "GTM_JURISDICTION",
+    "GTM_LICENSE_REGION",
+    "GTM_PROD_CLASS_TYPE",
+    "GTM_RULES_OF_ORIGIN",
+    "GTM_STRUCTURE",
+    "GTM_STRUCTURE_COMPONENT",
+    "GTM_TARIFF_COUNTRY",
+    "GTM_TA_PARTNER",
+    "GTM_TIP_INVENTORY",
+    "GTM_TIP_INV_MOVEMENT",
+    "GTM_TRANSACTION",
+    "GTM_TRANSACTION_LINE",
+    "IE_SHIPMENTSTATUS",
+    "IM_MILEAGE",
+    "INVOICE",
+    "INVOICE_LINEITEM",
+    "INVOICE_LINEITEM_VAT",
+    "INVOICE_PORT",
+    "INV_SUPPLY_PROVINCE_VAT_REG",
+    "ITEM",
+    "ITEM_ORIGIN",
+    "ITEM_QF",
+    "ITEM_VALUE_SET",
+    "JOB_INVOLVED_PARTY",
+    "LG_ADDRESS",
+    "LOCATION",
+    "ORDER_RELEASE",
+    "ORDER_RELEASE_LINE",
+    "POWER_UNIT",
+    "PROVINCE_CODE_PROFILE_D",
+    "QUOTE",
+    "QUOTE_COST_OPTION_SHIPMENT",
+    "REGION_DETAIL",
+    "ROUTE_CODE",
+    "SERVPROV_TENDER_CONSTRAINT",
+    "SPLC",
+    "TIME_ZONE_LOCALE",
+    "VAT_PROVINCIAL_CNFG_PERSP",
+    "VAT_PROVINCIAL_REGISTRATION",
+    "VAT_RATE",
+    "VAT_REGISTRATION",
+    "VESSEL",
+    "X_LANE"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_CC_COUNTRY_ZONE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "COUNTRY_ZONE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_COUNTRY_CODE3_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "COUNTRY_CODE3_XID"
+        }
+      ]
+    }
+  ]
+}

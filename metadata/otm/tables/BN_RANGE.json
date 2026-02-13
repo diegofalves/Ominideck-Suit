@@ -1,1 +1,170 @@
-{"table": {"schema": "glogowner","name": "bn_range","description": "Defines pre-assigned ranges, which are instances of named ranges."},"columns": [{"name": "BN_RANGE_GID","description": "The unique identifier for the range.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BN_RANGE_XID","description": "The external identifier for the range.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BN_NAMED_RANGE_GID","description": "The named range to which this range belongs.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BN_RULE_GID","description": "The business number rule used to generate numbers for the range.  The only segment types allowed are BN sequences, either alphabetical or numerical.  If the field is null, the set of numbers defined in the bn_range_number table is used.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQUENCE_NO","description": "Sequence number used for ordering ranges in a named range.","dataType": "NUMBER","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "BN_RANGE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_BNRNG_BN_NAMED_RANGE_GID","cascadeDelete": false,"parentTableName": "BN_NAMED_RANGE","columnRelation": [{"sequence": 1,"parentColumnName": "BN_NAMED_RANGE_GID","columnName": "BN_NAMED_RANGE_GID"}]},{"foreignKeyName": "FK_BNRNG_BN_RULE_GID","cascadeDelete": false,"parentTableName": "BN_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "BN_RULE_GID","columnName": "BN_RULE_GID"}]}],"childTables": ["BN_RANGE_COUNT","BN_RANGE_COUNT_TEST","BN_RANGE_NUMBER","BN_RANGE_NUMBER_TEST"],"indices": [{"indexName": "UK_BN_RANGE","columnNames": [{"sequence": 1,"name": "BN_NAMED_RANGE_GID"},{"sequence": 2,"name": "BN_RULE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "bn_range",
+    "description": "Defines pre-assigned ranges, which are instances of named ranges."
+  },
+  "columns": [
+    {
+      "name": "BN_RANGE_GID",
+      "description": "The unique identifier for the range.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BN_RANGE_XID",
+      "description": "The external identifier for the range.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BN_NAMED_RANGE_GID",
+      "description": "The named range to which this range belongs.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BN_RULE_GID",
+      "description": "The business number rule used to generate numbers for the range.  The only segment types allowed are BN sequences, either alphabetical or numerical.  If the field is null, the set of numbers defined in the bn_range_number table is used.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQUENCE_NO",
+      "description": "Sequence number used for ordering ranges in a named range.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "BN_RANGE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_BNRNG_BN_NAMED_RANGE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BN_NAMED_RANGE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BN_NAMED_RANGE_GID",
+          "columnName": "BN_NAMED_RANGE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_BNRNG_BN_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "BN_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BN_RULE_GID",
+          "columnName": "BN_RULE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "BN_RANGE_COUNT",
+    "BN_RANGE_COUNT_TEST",
+    "BN_RANGE_NUMBER",
+    "BN_RANGE_NUMBER_TEST"
+  ],
+  "indices": [
+    {
+      "indexName": "UK_BN_RANGE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "BN_NAMED_RANGE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "BN_RULE_GID"
+        }
+      ]
+    }
+  ]
+}

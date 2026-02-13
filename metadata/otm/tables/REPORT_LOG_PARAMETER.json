@@ -1,1 +1,121 @@
-{"table": {"schema": "reportowner","name": "report_log_parameter","description": "This table allows multiple parameters for each table"},"columns": [{"name": "FILE_NAME","description": "File name for the report","dataType": "VARCHAR2","size": 100,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAMETER_NAME","description": "Parameter name is generally the object name, for example, shipement and order_base","dataType": "VARCHAR2","size": 100,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARAMETER_VALUE","description": "Parameter value is the pk value for the object","dataType": "VARCHAR2","size": 2000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Domain of the User. Is used for creating the GID.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "For audit trail purposes. This field stores the id of the user who first entered the record.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "For audit trail purposes. This field stores the date and time when the record was first entered in the database.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "For audit trail purposes. This field stores the id of the user who last updated the record.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "For audit trail purposes. This field stores the date and time when the record was updated in the database.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "FILE_NAME"},{"sequence": 2,"columnName": "PARAMETER_NAME"}],"foreignKeys": [{"foreignKeyName": "FK_RLP_FILE_NAME","cascadeDelete": false,"parentTableName": "REPORT_LOG","columnRelation": [{"sequence": 1,"parentColumnName": "FILE_NAME","columnName": "FILE_NAME"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "reportowner",
+    "name": "report_log_parameter",
+    "description": "This table allows multiple parameters for each table"
+  },
+  "columns": [
+    {
+      "name": "FILE_NAME",
+      "description": "File name for the report",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAMETER_NAME",
+      "description": "Parameter name is generally the object name, for example, shipement and order_base",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARAMETER_VALUE",
+      "description": "Parameter value is the pk value for the object",
+      "dataType": "VARCHAR2",
+      "size": 2000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Domain of the User. Is used for creating the GID.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "For audit trail purposes. This field stores the id of the user who first entered the record.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "For audit trail purposes. This field stores the date and time when the record was first entered in the database.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "For audit trail purposes. This field stores the id of the user who last updated the record.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "For audit trail purposes. This field stores the date and time when the record was updated in the database.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "FILE_NAME"
+    },
+    {
+      "sequence": 2,
+      "columnName": "PARAMETER_NAME"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RLP_FILE_NAME",
+      "cascadeDelete": false,
+      "parentTableName": "REPORT_LOG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FILE_NAME",
+          "columnName": "FILE_NAME"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

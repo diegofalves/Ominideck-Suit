@@ -1,1 +1,708 @@
-{"table": {"schema": "glogowner","name": "secondary_charge_rule","description": ""},"columns": [{"name": "SECONDARY_CHARGE_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SECONDARY_CHARGE_RULE_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SPECIAL_SERVICE_PROFILE_GID","description": "for a shipment special service or stop special service rule type, any profile specified here must be validated for the rule to be used","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_PROFILE_GID","description": "applies to Stop Special Service rules; if specified, the location for the stop must be compatible with the profile","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EFFECTIVE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPIRATION_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "X_LANE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ITINERARY_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RULE_TYPE","description": "","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'S','G','SHIP_SPEC_SVC','STOP_SPEC_SVC','SHIP_STOP'","conditionalConstraint": "","defaultValue": "'G'"},{"name": "ROUTE_CODE_PROFILE_GID","description": "ROUTE_CODE_PROFILE_GID contains the unique identifier for the route code profile which is used to handle REBATE scenario.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CRITERIA_SERVPROV_GID","description": "CRITERIA_SERVPROV_GID contains the unique identifier for the service provider which is used to handle REBATE scenario.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PORT_OF_LOAD_LOC_PROFILE_GID","description": "If set, shipments must match this port of load for secondary charge to apply","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PORT_OF_DIS_LOC_PROFILE_GID","description": "If set, shipments must match this port of discharge for secondary charge to apply","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_TYPE","description": "How to set the location on the secondary charge shipment","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'SOURCE TO DEST','SOURCE','DEST','PORT OF LOAD','PORT OF DISCHARGE','STOP','ALL'","conditionalConstraint": "","defaultValue": "'SOURCE TO DEST'"},{"name": "FLEX_COMMODITY_PROFILE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "QUANTITY_TYPE","description": "Use quantities planned, actual quantity picked up, actual quantity dropped off, planned picked up or planned dropped off.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'PLANNED','PICKED UP','RECEIVED','PLANNED PICKED UP','PLANNED RECEIVED'","conditionalConstraint": "","defaultValue": "'PLANNED'"},{"name": "PAYMENT_METHOD_CODE_GID","description": "Payment method code to be copied to the secondary charge shipment.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RES_LOCATION_PROFILE_ID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CRITERIA_RATE_OFFERING_GID","description": "This field is for matching the RO of the shipment against which the rule is being run.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INVOLVED_PARTY_QUAL_GID","description": "This field is for matching the Involved Party Qualifier with the involved party qualifier on involved party contact record of the shipment against which the rule is being run.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CONTACT_PROFILE_GID","description": "This field is for checking the compatibility of the contact profile with the contact on the involved party contact record of the shipment against which the rule is being run.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CALCULATE_SHIP_UNIT_DURATION","description": "The flag determines if we have to calculate the ship unit dwell time for the ship units of the secondary charge created as a result of this rule.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "PERSPECTIVE","description": "This field is for specifying if the rule is meant for buy or sell shipments or both.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','S','A'","conditionalConstraint": "","defaultValue": "'A'"},{"name": "CRITERIA_RATE_GEO_GID","description": "This field is for matching the RR of the shipment against which the rule is being run.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPMENT_TYPE_GID","description": "This field is for matching the Shipment type of the shipment against which the rule is being run.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SECONDARY_CHARGE_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SCCR_SPECIAL_SERVICE_PROFI","cascadeDelete": false,"parentTableName": "SPECIAL_SERVICE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "SPECIAL_SERVICE_PROFILE_GID","columnName": "SPECIAL_SERVICE_PROFILE_GID"}]},{"foreignKeyName": "FK_SCCR_LOCATION_PROFILE_GID","cascadeDelete": false,"parentTableName": "LOCATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_PROFILE_GID","columnName": "LOCATION_PROFILE_GID"}]},{"foreignKeyName": "FK_SCR_TRANSPORT_MODE_GID","cascadeDelete": false,"parentTableName": "TRANSPORT_MODE","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSPORT_MODE_GID","columnName": "TRANSPORT_MODE_GID"}]},{"foreignKeyName": "FK_SCR_X_LANE_GID","cascadeDelete": false,"parentTableName": "X_LANE","columnRelation": [{"sequence": 1,"parentColumnName": "X_LANE_GID","columnName": "X_LANE_GID"}]},{"foreignKeyName": "FK_SCR_MODE_PROFILE_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "MODE_PROFILE_GID"}]},{"foreignKeyName": "FK_ITINERARY_PROFILE_GID","cascadeDelete": false,"parentTableName": "ITINERARY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "ITINERARY_PROFILE_GID","columnName": "ITINERARY_PROFILE_GID"}]},{"foreignKeyName": "FK_SCCR_ROUTE_CODE_PROFILE_GI","cascadeDelete": false,"parentTableName": "ROUTE_CODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "ROUTE_CODE_PROFILE_GID","columnName": "ROUTE_CODE_PROFILE_GID"}]},{"foreignKeyName": "FK_SCCR_CRITERIA_SERVPROV_GID","cascadeDelete": false,"parentTableName": "SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_GID","columnName": "CRITERIA_SERVPROV_GID"}]},{"foreignKeyName": "FK_SCR_PORT_OF_LOAD_LOC_PROFI","cascadeDelete": false,"parentTableName": "LOCATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_PROFILE_GID","columnName": "PORT_OF_LOAD_LOC_PROFILE_GID"}]},{"foreignKeyName": "FK_SCR_PORT_OF_DIS_LOC_PROFIL","cascadeDelete": false,"parentTableName": "LOCATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_PROFILE_GID","columnName": "PORT_OF_DIS_LOC_PROFILE_GID"}]},{"foreignKeyName": "FK_SCR_FLEX_COMMODITY_PROFILE_","cascadeDelete": false,"parentTableName": "FLEX_COMMODITY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "FLEX_COMMODITY_PROFILE_GID","columnName": "FLEX_COMMODITY_PROFILE_GID"}]},{"foreignKeyName": "FK_SCR_PAYMENT_METHOD_CODE_GI","cascadeDelete": false,"parentTableName": "PAYMENT_METHOD_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "PAYMENT_METHOD_CODE_GID","columnName": "PAYMENT_METHOD_CODE_GID"}]},{"foreignKeyName": "FK_SCCR_CRIT_RATE_OFFERING_GID","cascadeDelete": false,"parentTableName": "RATE_OFFERING","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_OFFERING_GID","columnName": "CRITERIA_RATE_OFFERING_GID"}]},{"foreignKeyName": "FK_SCCR_INVOLVED_PARTY_QUAL_G","cascadeDelete": false,"parentTableName": "INVOLVED_PARTY_QUAL","columnRelation": [{"sequence": 1,"parentColumnName": "INVOLVED_PARTY_QUAL_GID","columnName": "INVOLVED_PARTY_QUAL_GID"}]},{"foreignKeyName": "FK_SCCR_CONTACT_PROFILE_GID","cascadeDelete": false,"parentTableName": "CONTACT_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "CONTACT_PROFILE_GID","columnName": "CONTACT_PROFILE_GID"}]},{"foreignKeyName": "FK_SCCR_CRIT_RATE_GEO_GID","cascadeDelete": false,"parentTableName": "RATE_GEO","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_GEO_GID","columnName": "CRITERIA_RATE_GEO_GID"}]},{"foreignKeyName": "FK_SCCR_SHIPMENT_TYPE_GID","cascadeDelete": false,"parentTableName": "SHIPMENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_TYPE_GID","columnName": "SHIPMENT_TYPE_GID"}]}],"childTables": ["DM_RULE_D","DM_TRANSACTION_LINEITEM","SC_COPY_REFNUM_QUAL","SC_INVOLVED_PARTY","SC_RULE_CONTRACT","SHIPMENT","SHIP_GROUP_SC_DEF"],"indices": [{"indexName": "IX_ITINERARY_PROFILE_GID","columnNames": [{"sequence": 1,"name": "ITINERARY_PROFILE_GID"}]},{"indexName": "IX_SCCR_CRITERIA_SERVPROV_GID","columnNames": [{"sequence": 1,"name": "CRITERIA_SERVPROV_GID"}]},{"indexName": "IX_SCCR_LOCATION_PROFILE_GID","columnNames": [{"sequence": 1,"name": "LOCATION_PROFILE_GID"}]},{"indexName": "IX_SCCR_ROUTE_CODE_PROFILE_GI","columnNames": [{"sequence": 1,"name": "ROUTE_CODE_PROFILE_GID"}]},{"indexName": "IX_SCCR_SPECIAL_SERVICE_PROFI","columnNames": [{"sequence": 1,"name": "SPECIAL_SERVICE_PROFILE_GID"}]},{"indexName": "IX_SCR_FLEX_COMMODITY_PROFILE_","columnNames": [{"sequence": 1,"name": "FLEX_COMMODITY_PROFILE_GID"}]},{"indexName": "IX_SCR_MODE_PROFILE_GID","columnNames": [{"sequence": 1,"name": "MODE_PROFILE_GID"}]},{"indexName": "IX_SCR_PAYMENT_METHOD_CODE_GI","columnNames": [{"sequence": 1,"name": "PAYMENT_METHOD_CODE_GID"}]},{"indexName": "IX_SCR_PORT_OF_DIS_LOC_PROFIL","columnNames": [{"sequence": 1,"name": "PORT_OF_DIS_LOC_PROFILE_GID"}]},{"indexName": "IX_SCR_PORT_OF_LOAD_LOC_PROFI","columnNames": [{"sequence": 1,"name": "PORT_OF_LOAD_LOC_PROFILE_GID"}]},{"indexName": "IX_SCR_TRANSPORT_MODE_GID","columnNames": [{"sequence": 1,"name": "TRANSPORT_MODE_GID"}]},{"indexName": "IX_SCR_X_LANE_GID","columnNames": [{"sequence": 1,"name": "X_LANE_GID"}]},{"indexName": "IX_SECONDARY_CHARGE_RULE_XID","columnNames": [{"sequence": 1,"name": "SECONDARY_CHARGE_RULE_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "secondary_charge_rule",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "SECONDARY_CHARGE_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SECONDARY_CHARGE_RULE_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SPECIAL_SERVICE_PROFILE_GID",
+      "description": "for a shipment special service or stop special service rule type, any profile specified here must be validated for the rule to be used",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_PROFILE_GID",
+      "description": "applies to Stop Special Service rules; if specified, the location for the stop must be compatible with the profile",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EFFECTIVE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPIRATION_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "X_LANE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ITINERARY_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RULE_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'S','G','SHIP_SPEC_SVC','STOP_SPEC_SVC','SHIP_STOP'",
+      "conditionalConstraint": "",
+      "defaultValue": "'G'"
+    },
+    {
+      "name": "ROUTE_CODE_PROFILE_GID",
+      "description": "ROUTE_CODE_PROFILE_GID contains the unique identifier for the route code profile which is used to handle REBATE scenario.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CRITERIA_SERVPROV_GID",
+      "description": "CRITERIA_SERVPROV_GID contains the unique identifier for the service provider which is used to handle REBATE scenario.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PORT_OF_LOAD_LOC_PROFILE_GID",
+      "description": "If set, shipments must match this port of load for secondary charge to apply",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PORT_OF_DIS_LOC_PROFILE_GID",
+      "description": "If set, shipments must match this port of discharge for secondary charge to apply",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_TYPE",
+      "description": "How to set the location on the secondary charge shipment",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'SOURCE TO DEST','SOURCE','DEST','PORT OF LOAD','PORT OF DISCHARGE','STOP','ALL'",
+      "conditionalConstraint": "",
+      "defaultValue": "'SOURCE TO DEST'"
+    },
+    {
+      "name": "FLEX_COMMODITY_PROFILE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUANTITY_TYPE",
+      "description": "Use quantities planned, actual quantity picked up, actual quantity dropped off, planned picked up or planned dropped off.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'PLANNED','PICKED UP','RECEIVED','PLANNED PICKED UP','PLANNED RECEIVED'",
+      "conditionalConstraint": "",
+      "defaultValue": "'PLANNED'"
+    },
+    {
+      "name": "PAYMENT_METHOD_CODE_GID",
+      "description": "Payment method code to be copied to the secondary charge shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RES_LOCATION_PROFILE_ID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CRITERIA_RATE_OFFERING_GID",
+      "description": "This field is for matching the RO of the shipment against which the rule is being run.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INVOLVED_PARTY_QUAL_GID",
+      "description": "This field is for matching the Involved Party Qualifier with the involved party qualifier on involved party contact record of the shipment against which the rule is being run.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CONTACT_PROFILE_GID",
+      "description": "This field is for checking the compatibility of the contact profile with the contact on the involved party contact record of the shipment against which the rule is being run.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CALCULATE_SHIP_UNIT_DURATION",
+      "description": "The flag determines if we have to calculate the ship unit dwell time for the ship units of the secondary charge created as a result of this rule.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "PERSPECTIVE",
+      "description": "This field is for specifying if the rule is meant for buy or sell shipments or both.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','S','A'",
+      "conditionalConstraint": "",
+      "defaultValue": "'A'"
+    },
+    {
+      "name": "CRITERIA_RATE_GEO_GID",
+      "description": "This field is for matching the RR of the shipment against which the rule is being run.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPMENT_TYPE_GID",
+      "description": "This field is for matching the Shipment type of the shipment against which the rule is being run.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SECONDARY_CHARGE_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SCCR_SPECIAL_SERVICE_PROFI",
+      "cascadeDelete": false,
+      "parentTableName": "SPECIAL_SERVICE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SPECIAL_SERVICE_PROFILE_GID",
+          "columnName": "SPECIAL_SERVICE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCCR_LOCATION_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_PROFILE_GID",
+          "columnName": "LOCATION_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCR_TRANSPORT_MODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSPORT_MODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSPORT_MODE_GID",
+          "columnName": "TRANSPORT_MODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCR_X_LANE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "X_LANE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "X_LANE_GID",
+          "columnName": "X_LANE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCR_MODE_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ITINERARY_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ITINERARY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ITINERARY_PROFILE_GID",
+          "columnName": "ITINERARY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCCR_ROUTE_CODE_PROFILE_GI",
+      "cascadeDelete": false,
+      "parentTableName": "ROUTE_CODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ROUTE_CODE_PROFILE_GID",
+          "columnName": "ROUTE_CODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCCR_CRITERIA_SERVPROV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "CRITERIA_SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCR_PORT_OF_LOAD_LOC_PROFI",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_PROFILE_GID",
+          "columnName": "PORT_OF_LOAD_LOC_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCR_PORT_OF_DIS_LOC_PROFIL",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_PROFILE_GID",
+          "columnName": "PORT_OF_DIS_LOC_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCR_FLEX_COMMODITY_PROFILE_",
+      "cascadeDelete": false,
+      "parentTableName": "FLEX_COMMODITY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FLEX_COMMODITY_PROFILE_GID",
+          "columnName": "FLEX_COMMODITY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCR_PAYMENT_METHOD_CODE_GI",
+      "cascadeDelete": false,
+      "parentTableName": "PAYMENT_METHOD_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PAYMENT_METHOD_CODE_GID",
+          "columnName": "PAYMENT_METHOD_CODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCCR_CRIT_RATE_OFFERING_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_OFFERING",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_OFFERING_GID",
+          "columnName": "CRITERIA_RATE_OFFERING_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCCR_INVOLVED_PARTY_QUAL_G",
+      "cascadeDelete": false,
+      "parentTableName": "INVOLVED_PARTY_QUAL",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "INVOLVED_PARTY_QUAL_GID",
+          "columnName": "INVOLVED_PARTY_QUAL_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCCR_CONTACT_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CONTACT_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CONTACT_PROFILE_GID",
+          "columnName": "CONTACT_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCCR_CRIT_RATE_GEO_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_GEO",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_GEO_GID",
+          "columnName": "CRITERIA_RATE_GEO_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SCCR_SHIPMENT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_TYPE_GID",
+          "columnName": "SHIPMENT_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "DM_RULE_D",
+    "DM_TRANSACTION_LINEITEM",
+    "SC_COPY_REFNUM_QUAL",
+    "SC_INVOLVED_PARTY",
+    "SC_RULE_CONTRACT",
+    "SHIPMENT",
+    "SHIP_GROUP_SC_DEF"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_ITINERARY_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ITINERARY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCCR_CRITERIA_SERVPROV_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CRITERIA_SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCCR_LOCATION_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCCR_ROUTE_CODE_PROFILE_GI",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ROUTE_CODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCCR_SPECIAL_SERVICE_PROFI",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SPECIAL_SERVICE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCR_FLEX_COMMODITY_PROFILE_",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FLEX_COMMODITY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCR_MODE_PROFILE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCR_PAYMENT_METHOD_CODE_GI",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PAYMENT_METHOD_CODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCR_PORT_OF_DIS_LOC_PROFIL",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PORT_OF_DIS_LOC_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCR_PORT_OF_LOAD_LOC_PROFI",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PORT_OF_LOAD_LOC_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCR_TRANSPORT_MODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRANSPORT_MODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SCR_X_LANE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "X_LANE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SECONDARY_CHARGE_RULE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SECONDARY_CHARGE_RULE_XID"
+        }
+      ]
+    }
+  ]
+}

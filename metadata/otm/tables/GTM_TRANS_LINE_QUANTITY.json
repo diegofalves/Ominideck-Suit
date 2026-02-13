@@ -1,1 +1,172 @@
-{"table": {"schema": "glogowner","name": "gtm_trans_line_quantity","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TRANS_LINE_QTY_SEQ_NO","description": "The sequence number of the quantity on the trade transaction line.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TRANSACTION_LINE_GID","description": "The GID for the GTM trade transaction line.","dataType": "VARCHAR2","size": 201,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UOM_CODE","description": "The unit of measure of the quantity on the trade transaction line.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "QUANTITY_VALUE","description": "The value of the quantity on the trade transaction line.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_QUANTITY_TYPE_GID","description": "The GID for the GTM quantity qualifier.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TRANS_LINE_QTY_SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_GTLQ_GTM_TRANSACTION_LINE","cascadeDelete": true,"parentTableName": "GTM_TRANSACTION_LINE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_TRANSACTION_LINE_GID","columnName": "GTM_TRANSACTION_LINE_GID"}]},{"foreignKeyName": "FK_GTLQ_GTM_QUANTITY_TYPE_GID","cascadeDelete": false,"parentTableName": "GTM_QUANTITY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_QUANTITY_TYPE_GID","columnName": "GTM_QUANTITY_TYPE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_GTLQ_GTM_TRANS_LINE_GID","columnNames": [{"sequence": 1,"name": "GTM_TRANSACTION_LINE_GID"}]},{"indexName": "UK_GTLQ_GTM_TRNSLN_TYPE_GID","columnNames": [{"sequence": 1,"name": "GTM_TRANSACTION_LINE_GID"},{"sequence": 2,"name": "GTM_QUANTITY_TYPE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_trans_line_quantity",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TRANS_LINE_QTY_SEQ_NO",
+      "description": "The sequence number of the quantity on the trade transaction line.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TRANSACTION_LINE_GID",
+      "description": "The GID for the GTM trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 201,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UOM_CODE",
+      "description": "The unit of measure of the quantity on the trade transaction line.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "QUANTITY_VALUE",
+      "description": "The value of the quantity on the trade transaction line.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_QUANTITY_TYPE_GID",
+      "description": "The GID for the GTM quantity qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TRANS_LINE_QTY_SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTLQ_GTM_TRANSACTION_LINE",
+      "cascadeDelete": true,
+      "parentTableName": "GTM_TRANSACTION_LINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_TRANSACTION_LINE_GID",
+          "columnName": "GTM_TRANSACTION_LINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTLQ_GTM_QUANTITY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_QUANTITY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_QUANTITY_TYPE_GID",
+          "columnName": "GTM_QUANTITY_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_GTLQ_GTM_TRANS_LINE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_TRANSACTION_LINE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "UK_GTLQ_GTM_TRNSLN_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "GTM_TRANSACTION_LINE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "GTM_QUANTITY_TYPE_GID"
+        }
+      ]
+    }
+  ]
+}

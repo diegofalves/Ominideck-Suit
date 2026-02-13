@@ -1,1 +1,1866 @@
-{"table": {"schema": "glogowner","name": "shipment_stop","description": "This table stores departure and arrival information about every stop along the way for the life of the shipment (both planned and actual).  The key is both the SHIPMENT_GID and the STOP_NUM."},"columns": [{"name": "SHIPMENT_GID","description": "The GID for the equipment associated to a shipment.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_NUM","description": "The stop number within the shipment. Stop number = 1 is the pickup stop, and the max (stop number) for a shipment is the delivery stop.","dataType": "NUMBER","size": 3,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "The location GID for the shipment stop.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_ROLE_GID","description": "The location role GID for the shipment stop (such as port, cross dock, etc.).","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLANNED_ARRIVAL","description": "The planned date and time of arrival at the stop.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESTIMATED_ARRIVAL","description": "The estimated time of arrival at the stop. It represents the up to the minute ETA that takes into account ETA updates. This date is editable by the carrier or load planner and should incorporate any known delays to delivery. It represents to the best of our knowledge, when we expect the shipment to arrive.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FIXED_ARRIVAL","description": "A Y/N indicator defining the arrival time as fixed and will not be changed on subsequent modification.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ACTUAL_ARRIVAL","description": "A Y/N indicator defining the arrival time as fixed and will not be changed on subsequent modification.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PLANNED_DEPARTURE","description": "The planned departure date and time at the stop.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ESTIMATED_DEPARTURE","description": "The estimated time of departure for the stop. It represents the up to the minute ETA that takes into account ETA updates. This date is editable by the carrier or load planner and should incorporate any known delays to departure. It represents to the best of our knowledge, when we expect the shipment to depart from the stop.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FIXED_DEPARTURE","description": "A Y/N indicator defining the departure time as fixed and will not be changed on subsequent modification.","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ACTUAL_DEPARTURE","description": "The actual departure date and time at the stop.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WAIT_TIME","description": "The time the truck or the transportation mode has to wait at the stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WAIT_TIME_UOM_CODE","description": "The unit of measure for the wait time.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WAIT_TIME_BASE","description": "The wait time in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REST_TIME","description": "The time the truck or the transportation mode should take for rest at the stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REST_TIME_UOM_CODE","description": "The unit of measure for the rest time.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REST_TIME_BASE","description": "The rest time in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVE_TIME","description": "The drive time to the stop from the last stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVE_TIME_UOM_CODE","description": "Unit of measure for the drive time.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVE_TIME_BASE","description": "The drive time in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DIST_FROM_PREV_STOP","description": "The distance from the last stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DIST_FROM_PREV_STOP_UOM_CODE","description": "The unit of measure for the distance from previous stop.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DIST_FROM_PREV_STOP_BASE","description": "The distance from previous stop in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME","description": "The time spent at the stop for pickup or delivery.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME_UOM_CODE","description": "The unit of measure for the activity time.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME_BASE","description": "The activity time in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_PERMANENT","description": "A Y/N indicator defining the stop as permanent and will not be changed on subsequent modifications.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_DEPOT","description": "A Y/N indicator used to define if the stop is a depot.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "APPOINTMENT_PICKUP","description": "A Y/N indicator defining if the stop requires a pickup appointment.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPOINTMENT_DELIVERY","description": "A Y/N indicator defining if the stop requires a delivery appointment.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_TIME","description": "The sum of the fixed accessorial time for a particular stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_TIME_UOM_CODE","description": "The accessorial time unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACCESSORIAL_TIME_BASE","description": "The accessorial time in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARENT_LOCATION_GID","description": "If an operational location, such as terminal at a port, is chosen for this stop, the location GID will be copied to this field and the location GID field will contain the operational location.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_OVERRIDE_GID","description": "The location GID defining the location to be used to override the actual location on the stop record.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_REQUIREMENT_TYPE","description": "Used only for trips.","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'MANDATORY','OPTIONAL'","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_SERVICE_GID","description": "The rate service GID set if the stop times were calculated using the rate service engine.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ARBITRARY_TYPE","description": "SOURCE or DEST to indicate the type of arbitrary. If null, this stop is not an arbitrary.","dataType": "VARCHAR2","size": 10,"isNull": true,"isConstraint": true,"constraintValues": "'SOURCE','DEST'","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FIXED_DISTANCE","description": "When set to Y, indicates the existence of a user-entered value for the distance from previous stop field.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "EXT_SEQ_NO","description": "The external sequence number for the stop.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUSH_HOUR_TIME","description": "The amount of time that the drive time defined on the stop in inside the rush hour window.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUSH_HOUR_TIME_UOM_CODE","description": "The rush hour unit of measure code.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUSH_HOUR_TIME_BASE","description": "The rush hour time in the base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOYAGE_GID","description": "The voyage GID.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MOTHER_VESSEL","description": "Designates a leg as mother vessel to automatically populated header.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "FLIGHT_INSTANCE_ID","description": "The flight instance GID.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REPETITION_SCHEDULE_GID","description": "The repetition schedule GID if the stop times were calculated from a repetition schedule.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOP_TYPE","description": "Define the type of this stop.","dataType": "VARCHAR2","size": 16,"isNull": true,"isConstraint": true,"constraintValues": "'P','D','PD','O','NFR','T'","conditionalConstraint": "","defaultValue": ""},{"name": "SLACK_VARIANCE","description": "The slack variance.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DRIVER_NON_PAYABLE","description": "Allows the user to specify that stop is payable or not.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "REPETITION_SCHED_STOP_NUMBER","description": "The repetition schedule stop GID if the stop times were calculated from a repetition schedule.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_TYPE","description": "L - Loaded, B- Bobtail, D - Deadhead","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPOINTMENT_WINDOW_START","description": "The appointment window start.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPOINTMENT_WINDOW_END","description": "The appointment window end.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_DISTANCE_GID","description": "The rate distance to be used when finding distance from this stop to next stop. This is done mainly for arbitrary case.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROUTE_CODE_GID","description": "The route code to be used when finding distance from this stop to next stop This is done mainly for handling arbitrary case.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_WEIGHT","description": "The running total weight from current stop to next stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_WEIGHT_UOM_CODE","description": "The unit of measure for the running weight column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_WEIGHT_BASE","description": "The running weight contains the running weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_LENGTH","description": "The running total length from current stop to next stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_LENGTH_BASE","description": "The running length contains the running length in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_LENGTH_UOM_CODE","description": "The unit of measure for the running length.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_WIDTH","description": "The running total width from current stop to next stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_WIDTH_BASE","description": "The running width contains the running width in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_WIDTH_UOM_CODE","description": "The unit of measure for the running width column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_HEIGHT","description": "The running total height from current stop to next stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_HEIGHT_BASE","description": "The running height contains the running height in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RUNNING_HEIGHT_UOM_CODE","description": "The unit of measure for the running height column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEFT_WIDTH_OOG","description": "The left width-wise out of gauge.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEFT_WIDTH_OOG_BASE","description": "The left width-wise out of gauge in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LEFT_WIDTH_OOG_UOM_CODE","description": "The unit of measure for the left width out of gauge column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RIGHT_WIDTH_OOG","description": "The right width-wise out of gauge.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RIGHT_WIDTH_OOG_BASE","description": "The right width-wise out of gauge in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RIGHT_WIDTH_OOG_UOM_CODE","description": "The unit of measure for the right width out of gauge column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FWD_LENGTH_OOG","description": "The forward length-wise out of gauge.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FWD_LENGTH_OOG_BASE","description": "The forward length-wise out of gauge in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FWD_LENGTH_OOG_UOM_CODE","description": "The unit of measure for the forward length wise out of gauge column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REAR_LENGTH_OOG","description": "The rear length-wise out of gauge.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REAR_LENGTH_OOG_BASE","description": "The rear length-wise out of gauge in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REAR_LENGTH_OOG_UOM_CODE","description": "The unit of measure for the rear length-wise out of gauge column.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PREDICTED_ARRIVAL","description": "Denotes the predicted arrival time at the stop.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PREDICTED_ARRIVAL_LOW","description": "Denotes the predicted arrival time low value at the stop.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PREDICTED_ARRIVAL_HIGH","description": "Denotes the predicted arrival time high value at the stop.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_VOYAGE_CODE","description": "Specifies the number of the voyage as assigned by the carrier that transports the shipments from this stop.","dataType": "VARCHAR2","size": 80,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPOINTMENT_DURATION","description": "The total appointment duration at the stop.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPOINTMENT_DURATION_BASE","description": "The appointment duration in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "APPOINTMENT_DURATION_UOM_CODE","description": "The unit of measure for the appointment duration.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "NFR_STOP_TYPE","description": "Defines how or process that NFR stop got added","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": true,"constraintValues": "'WA','REST'","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SHIPMENT_GID"},{"sequence": 2,"columnName": "STOP_NUM"}],"foreignKeys": [{"foreignKeyName": "FK_ST_SHIPMENT_GID","cascadeDelete": false,"parentTableName": "SHIPMENT","columnRelation": [{"sequence": 1,"parentColumnName": "SHIPMENT_GID","columnName": "SHIPMENT_GID"}]},{"foreignKeyName": "FK_ST_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"}]},{"foreignKeyName": "FK_ST_LOC_ROLE_GID","cascadeDelete": false,"parentTableName": "LOCATION_ROLE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_ROLE_GID","columnName": "LOCATION_ROLE_GID"}]},{"foreignKeyName": "FK_SS_PARENT_LOCATION_GID","cascadeDelete": false,"parentTableName": "LOCATION","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "PARENT_LOCATION_GID"}]},{"foreignKeyName": "FK_SS_LOCATION_OVERRIDE_GID","cascadeDelete": false,"parentTableName": "LOCATION_OVERRIDE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_OVERRIDE_GID","columnName": "LOCATION_OVERRIDE_GID"}]},{"foreignKeyName": "FK_SHPST_RATE_SERVICE_GID","cascadeDelete": false,"parentTableName": "RATE_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_SERVICE_GID","columnName": "RATE_SERVICE_GID"}]},{"foreignKeyName": "FK_SHPST_VOYAGE_GID","cascadeDelete": false,"parentTableName": "VOYAGE","columnRelation": [{"sequence": 1,"parentColumnName": "VOYAGE_GID","columnName": "VOYAGE_GID"}]},{"foreignKeyName": "FK_SHPST_FLIGHT_INSTANCE_ID","cascadeDelete": false,"parentTableName": "FLIGHT_INSTANCE","columnRelation": [{"sequence": 1,"parentColumnName": "FLIGHT_INSTANCE_ID","columnName": "FLIGHT_INSTANCE_ID"}]},{"foreignKeyName": "FK_SHPST_REPETITION_SCHEDULE","cascadeDelete": false,"parentTableName": "REPETITION_SCHEDULE","columnRelation": [{"sequence": 1,"parentColumnName": "REPETITION_SCHEDULE_GID","columnName": "REPETITION_SCHEDULE_GID"}]},{"foreignKeyName": "FK_SHPST_RATE_DISTANCE_GID","cascadeDelete": false,"parentTableName": "RATE_DISTANCE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_DISTANCE_GID","columnName": "RATE_DISTANCE_GID"}]},{"foreignKeyName": "FK_SHPST_ROUTE_CODE_GID","cascadeDelete": false,"parentTableName": "ROUTE_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "ROUTE_CODE_GID","columnName": "ROUTE_CODE_GID"}]}],"childTables": ["SHIPMENT_SPECIAL_SERVICE","SHIPMENT_STOP_ACTIVITY","SHIPMENT_STOP_D","SHIPMENT_STOP_DEBRIEF","SHIPMENT_STOP_INV_PARTY","SHIPMENT_STOP_REFNUM","SHIPMENT_STOP_REMARK","SHIPMENT_STOP_STATUS","SHIPMENT_S_EQUIPMENT_JOIN"],"indices": [{"indexName": "IX_SHPST_FLIGHT_INSTANCE_ID","columnNames": [{"sequence": 1,"name": "FLIGHT_INSTANCE_ID"}]},{"indexName": "IX_SHPST_RATE_SERVICE_GID","columnNames": [{"sequence": 1,"name": "RATE_SERVICE_GID"}]},{"indexName": "IX_SHPST_REPETITION_SCHEDULE","columnNames": [{"sequence": 1,"name": "REPETITION_SCHEDULE_GID"}]},{"indexName": "IX_SHPST_VOYAGE_GID","columnNames": [{"sequence": 1,"name": "VOYAGE_GID"}]},{"indexName": "IX_SS_LOCATION_OVERRIDE_GID","columnNames": [{"sequence": 1,"name": "LOCATION_OVERRIDE_GID"}]},{"indexName": "IX_SS_PARENT_LOCATION_GID","columnNames": [{"sequence": 1,"name": "PARENT_LOCATION_GID"}]},{"indexName": "IX_ST_LOC_ROLE_GID","columnNames": [{"sequence": 1,"name": "LOCATION_ROLE_GID"}]},{"indexName": "SPMT_STP_SPMTGID","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"}]},{"indexName": "SS_LOCATION_GID","columnNames": [{"sequence": 1,"name": "LOCATION_GID"}]},{"indexName": "IX_SHPST_SHIP_STOP_TYP","columnNames": [{"sequence": 1,"name": "SHIPMENT_GID"},{"sequence": 2,"name": "STOP_TYPE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "shipment_stop",
+    "description": "This table stores departure and arrival information about every stop along the way for the life of the shipment (both planned and actual).  The key is both the SHIPMENT_GID and the STOP_NUM."
+  },
+  "columns": [
+    {
+      "name": "SHIPMENT_GID",
+      "description": "The GID for the equipment associated to a shipment.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_NUM",
+      "description": "The stop number within the shipment. Stop number = 1 is the pickup stop, and the max (stop number) for a shipment is the delivery stop.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "The location GID for the shipment stop.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_ROLE_GID",
+      "description": "The location role GID for the shipment stop (such as port, cross dock, etc.).",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLANNED_ARRIVAL",
+      "description": "The planned date and time of arrival at the stop.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESTIMATED_ARRIVAL",
+      "description": "The estimated time of arrival at the stop. It represents the up to the minute ETA that takes into account ETA updates. This date is editable by the carrier or load planner and should incorporate any known delays to delivery. It represents to the best of our knowledge, when we expect the shipment to arrive.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FIXED_ARRIVAL",
+      "description": "A Y/N indicator defining the arrival time as fixed and will not be changed on subsequent modification.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ACTUAL_ARRIVAL",
+      "description": "A Y/N indicator defining the arrival time as fixed and will not be changed on subsequent modification.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PLANNED_DEPARTURE",
+      "description": "The planned departure date and time at the stop.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ESTIMATED_DEPARTURE",
+      "description": "The estimated time of departure for the stop. It represents the up to the minute ETA that takes into account ETA updates. This date is editable by the carrier or load planner and should incorporate any known delays to departure. It represents to the best of our knowledge, when we expect the shipment to depart from the stop.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FIXED_DEPARTURE",
+      "description": "A Y/N indicator defining the departure time as fixed and will not be changed on subsequent modification.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ACTUAL_DEPARTURE",
+      "description": "The actual departure date and time at the stop.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WAIT_TIME",
+      "description": "The time the truck or the transportation mode has to wait at the stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WAIT_TIME_UOM_CODE",
+      "description": "The unit of measure for the wait time.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WAIT_TIME_BASE",
+      "description": "The wait time in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REST_TIME",
+      "description": "The time the truck or the transportation mode should take for rest at the stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REST_TIME_UOM_CODE",
+      "description": "The unit of measure for the rest time.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REST_TIME_BASE",
+      "description": "The rest time in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVE_TIME",
+      "description": "The drive time to the stop from the last stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVE_TIME_UOM_CODE",
+      "description": "Unit of measure for the drive time.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVE_TIME_BASE",
+      "description": "The drive time in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DIST_FROM_PREV_STOP",
+      "description": "The distance from the last stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DIST_FROM_PREV_STOP_UOM_CODE",
+      "description": "The unit of measure for the distance from previous stop.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DIST_FROM_PREV_STOP_BASE",
+      "description": "The distance from previous stop in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME",
+      "description": "The time spent at the stop for pickup or delivery.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME_UOM_CODE",
+      "description": "The unit of measure for the activity time.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME_BASE",
+      "description": "The activity time in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_PERMANENT",
+      "description": "A Y/N indicator defining the stop as permanent and will not be changed on subsequent modifications.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_DEPOT",
+      "description": "A Y/N indicator used to define if the stop is a depot.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "APPOINTMENT_PICKUP",
+      "description": "A Y/N indicator defining if the stop requires a pickup appointment.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPOINTMENT_DELIVERY",
+      "description": "A Y/N indicator defining if the stop requires a delivery appointment.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_TIME",
+      "description": "The sum of the fixed accessorial time for a particular stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_TIME_UOM_CODE",
+      "description": "The accessorial time unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACCESSORIAL_TIME_BASE",
+      "description": "The accessorial time in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARENT_LOCATION_GID",
+      "description": "If an operational location, such as terminal at a port, is chosen for this stop, the location GID will be copied to this field and the location GID field will contain the operational location.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_OVERRIDE_GID",
+      "description": "The location GID defining the location to be used to override the actual location on the stop record.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_REQUIREMENT_TYPE",
+      "description": "Used only for trips.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'MANDATORY','OPTIONAL'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_SERVICE_GID",
+      "description": "The rate service GID set if the stop times were calculated using the rate service engine.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ARBITRARY_TYPE",
+      "description": "SOURCE or DEST to indicate the type of arbitrary. If null, this stop is not an arbitrary.",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'SOURCE','DEST'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FIXED_DISTANCE",
+      "description": "When set to Y, indicates the existence of a user-entered value for the distance from previous stop field.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "EXT_SEQ_NO",
+      "description": "The external sequence number for the stop.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUSH_HOUR_TIME",
+      "description": "The amount of time that the drive time defined on the stop in inside the rush hour window.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUSH_HOUR_TIME_UOM_CODE",
+      "description": "The rush hour unit of measure code.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUSH_HOUR_TIME_BASE",
+      "description": "The rush hour time in the base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOYAGE_GID",
+      "description": "The voyage GID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MOTHER_VESSEL",
+      "description": "Designates a leg as mother vessel to automatically populated header.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "FLIGHT_INSTANCE_ID",
+      "description": "The flight instance GID.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REPETITION_SCHEDULE_GID",
+      "description": "The repetition schedule GID if the stop times were calculated from a repetition schedule.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOP_TYPE",
+      "description": "Define the type of this stop.",
+      "dataType": "VARCHAR2",
+      "size": 16,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'P','D','PD','O','NFR','T'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SLACK_VARIANCE",
+      "description": "The slack variance.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DRIVER_NON_PAYABLE",
+      "description": "Allows the user to specify that stop is payable or not.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "REPETITION_SCHED_STOP_NUMBER",
+      "description": "The repetition schedule stop GID if the stop times were calculated from a repetition schedule.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_TYPE",
+      "description": "L - Loaded, B- Bobtail, D - Deadhead",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPOINTMENT_WINDOW_START",
+      "description": "The appointment window start.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPOINTMENT_WINDOW_END",
+      "description": "The appointment window end.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_DISTANCE_GID",
+      "description": "The rate distance to be used when finding distance from this stop to next stop. This is done mainly for arbitrary case.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUTE_CODE_GID",
+      "description": "The route code to be used when finding distance from this stop to next stop This is done mainly for handling arbitrary case.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_WEIGHT",
+      "description": "The running total weight from current stop to next stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_WEIGHT_UOM_CODE",
+      "description": "The unit of measure for the running weight column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_WEIGHT_BASE",
+      "description": "The running weight contains the running weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_LENGTH",
+      "description": "The running total length from current stop to next stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_LENGTH_BASE",
+      "description": "The running length contains the running length in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_LENGTH_UOM_CODE",
+      "description": "The unit of measure for the running length.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_WIDTH",
+      "description": "The running total width from current stop to next stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_WIDTH_BASE",
+      "description": "The running width contains the running width in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_WIDTH_UOM_CODE",
+      "description": "The unit of measure for the running width column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_HEIGHT",
+      "description": "The running total height from current stop to next stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_HEIGHT_BASE",
+      "description": "The running height contains the running height in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RUNNING_HEIGHT_UOM_CODE",
+      "description": "The unit of measure for the running height column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEFT_WIDTH_OOG",
+      "description": "The left width-wise out of gauge.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEFT_WIDTH_OOG_BASE",
+      "description": "The left width-wise out of gauge in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LEFT_WIDTH_OOG_UOM_CODE",
+      "description": "The unit of measure for the left width out of gauge column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RIGHT_WIDTH_OOG",
+      "description": "The right width-wise out of gauge.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RIGHT_WIDTH_OOG_BASE",
+      "description": "The right width-wise out of gauge in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RIGHT_WIDTH_OOG_UOM_CODE",
+      "description": "The unit of measure for the right width out of gauge column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FWD_LENGTH_OOG",
+      "description": "The forward length-wise out of gauge.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FWD_LENGTH_OOG_BASE",
+      "description": "The forward length-wise out of gauge in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FWD_LENGTH_OOG_UOM_CODE",
+      "description": "The unit of measure for the forward length wise out of gauge column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REAR_LENGTH_OOG",
+      "description": "The rear length-wise out of gauge.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REAR_LENGTH_OOG_BASE",
+      "description": "The rear length-wise out of gauge in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REAR_LENGTH_OOG_UOM_CODE",
+      "description": "The unit of measure for the rear length-wise out of gauge column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PREDICTED_ARRIVAL",
+      "description": "Denotes the predicted arrival time at the stop.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PREDICTED_ARRIVAL_LOW",
+      "description": "Denotes the predicted arrival time low value at the stop.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PREDICTED_ARRIVAL_HIGH",
+      "description": "Denotes the predicted arrival time high value at the stop.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_VOYAGE_CODE",
+      "description": "Specifies the number of the voyage as assigned by the carrier that transports the shipments from this stop.",
+      "dataType": "VARCHAR2",
+      "size": 80,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPOINTMENT_DURATION",
+      "description": "The total appointment duration at the stop.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPOINTMENT_DURATION_BASE",
+      "description": "The appointment duration in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "APPOINTMENT_DURATION_UOM_CODE",
+      "description": "The unit of measure for the appointment duration.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "NFR_STOP_TYPE",
+      "description": "Defines how or process that NFR stop got added",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'WA','REST'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SHIPMENT_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "STOP_NUM"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ST_SHIPMENT_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIPMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIPMENT_GID",
+          "columnName": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ST_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ST_LOC_ROLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_ROLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_ROLE_GID",
+          "columnName": "LOCATION_ROLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SS_PARENT_LOCATION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "PARENT_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SS_LOCATION_OVERRIDE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_OVERRIDE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_OVERRIDE_GID",
+          "columnName": "LOCATION_OVERRIDE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHPST_RATE_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_SERVICE_GID",
+          "columnName": "RATE_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHPST_VOYAGE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "VOYAGE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "VOYAGE_GID",
+          "columnName": "VOYAGE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHPST_FLIGHT_INSTANCE_ID",
+      "cascadeDelete": false,
+      "parentTableName": "FLIGHT_INSTANCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FLIGHT_INSTANCE_ID",
+          "columnName": "FLIGHT_INSTANCE_ID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHPST_REPETITION_SCHEDULE",
+      "cascadeDelete": false,
+      "parentTableName": "REPETITION_SCHEDULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REPETITION_SCHEDULE_GID",
+          "columnName": "REPETITION_SCHEDULE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHPST_RATE_DISTANCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_DISTANCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_DISTANCE_GID",
+          "columnName": "RATE_DISTANCE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SHPST_ROUTE_CODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ROUTE_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ROUTE_CODE_GID",
+          "columnName": "ROUTE_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "SHIPMENT_SPECIAL_SERVICE",
+    "SHIPMENT_STOP_ACTIVITY",
+    "SHIPMENT_STOP_D",
+    "SHIPMENT_STOP_DEBRIEF",
+    "SHIPMENT_STOP_INV_PARTY",
+    "SHIPMENT_STOP_REFNUM",
+    "SHIPMENT_STOP_REMARK",
+    "SHIPMENT_STOP_STATUS",
+    "SHIPMENT_S_EQUIPMENT_JOIN"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_SHPST_FLIGHT_INSTANCE_ID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FLIGHT_INSTANCE_ID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SHPST_RATE_SERVICE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SHPST_REPETITION_SCHEDULE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REPETITION_SCHEDULE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SHPST_VOYAGE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "VOYAGE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SS_LOCATION_OVERRIDE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_OVERRIDE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SS_PARENT_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PARENT_LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_ST_LOC_ROLE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_ROLE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "SPMT_STP_SPMTGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "SS_LOCATION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOCATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SHPST_SHIP_STOP_TYP",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPMENT_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "STOP_TYPE"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,197 @@
-{"table": {"schema": "glogowner","name": "action_drag","description": "This table defines the drag and drop behavior in the workspace.  It defines which drags are legal and what action to run."},"columns": [{"name": "ACTION_DRAG_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTION_DRAG_XID","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FROM_QUERY_TABLE_GID","description": "origin query of a drag and drop","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TO_QUERY_TABLE_GID","description": "target query of a drag and drop","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTION_GID","description": "action to run when performing a drag and drop","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STATE","description": "action_def_state to invoke for a drag and drop","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "ACTION_DRAG_GID"}],"foreignKeys": [{"foreignKeyName": "FK_ADRG_FROM_QUERY_TABLE_GID","cascadeDelete": false,"parentTableName": "QUERY_TABLE","columnRelation": [{"sequence": 1,"parentColumnName": "QUERY_TABLE_GID","columnName": "FROM_QUERY_TABLE_GID"}]},{"foreignKeyName": "FK_ADRG_TO_QUERY_TABLE_GID","cascadeDelete": false,"parentTableName": "QUERY_TABLE","columnRelation": [{"sequence": 1,"parentColumnName": "QUERY_TABLE_GID","columnName": "TO_QUERY_TABLE_GID"}]},{"foreignKeyName": "FK_ADRG_ACTION_GID","cascadeDelete": false,"parentTableName": "ACTION","columnRelation": [{"sequence": 1,"parentColumnName": "ACTION_GID","columnName": "ACTION_GID"}]},{"foreignKeyName": "FK_ADRG_OTM_RELEASE","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "action_drag",
+    "description": "This table defines the drag and drop behavior in the workspace.  It defines which drags are legal and what action to run."
+  },
+  "columns": [
+    {
+      "name": "ACTION_DRAG_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTION_DRAG_XID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FROM_QUERY_TABLE_GID",
+      "description": "origin query of a drag and drop",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TO_QUERY_TABLE_GID",
+      "description": "target query of a drag and drop",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTION_GID",
+      "description": "action to run when performing a drag and drop",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STATE",
+      "description": "action_def_state to invoke for a drag and drop",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "ACTION_DRAG_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ADRG_FROM_QUERY_TABLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "QUERY_TABLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "QUERY_TABLE_GID",
+          "columnName": "FROM_QUERY_TABLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ADRG_TO_QUERY_TABLE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "QUERY_TABLE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "QUERY_TABLE_GID",
+          "columnName": "TO_QUERY_TABLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ADRG_ACTION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACTION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACTION_GID",
+          "columnName": "ACTION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ADRG_OTM_RELEASE",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

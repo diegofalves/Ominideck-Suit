@@ -1,1 +1,203 @@
-{"table": {"schema": "glogowner","name": "driver_hos_rule_state","description": "Child table of DRIVER_ASSIGNMENT.  Used to store the HOS state of a driver at the end of each Driver Shipment assignment."},"columns": [{"name": "DRIVER_ASSIGNMENT_SEQ_NO","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HOS_RULE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME_UTILIZED","description": "Amount of time that has be used against the HOS Rule since the last rest duration.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME_UTILIZE_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME_UTILIZE_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RULE_BEGIN_TIME","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME_REMAIN","description": "Amount of time that can be used against the HOS Rule before the next rest duration.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME_REMAIN_UOM_CODE","description": "","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ACTIVITY_TIME_REMAIN_BASE","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "DRIVER_ASSIGNMENT_SEQ_NO"},{"sequence": 2,"columnName": "HOS_RULE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_DHRS_DRIVER_ASSIGNMENT_SEQ","cascadeDelete": false,"parentTableName": "DRIVER_ASSIGNMENT","columnRelation": [{"sequence": 1,"parentColumnName": "DRIVER_ASSIGNMENT_SEQ_NO","columnName": "DRIVER_ASSIGNMENT_SEQ_NO"}]},{"foreignKeyName": "FK_DHRS_HOS_RULE_GID","cascadeDelete": false,"parentTableName": "HOS_RULE","columnRelation": [{"sequence": 1,"parentColumnName": "HOS_RULE_GID","columnName": "HOS_RULE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_DRVR_HOSRLSTATE_HOSRLE_GID","columnNames": [{"sequence": 1,"name": "HOS_RULE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "driver_hos_rule_state",
+    "description": "Child table of DRIVER_ASSIGNMENT.  Used to store the HOS state of a driver at the end of each Driver Shipment assignment."
+  },
+  "columns": [
+    {
+      "name": "DRIVER_ASSIGNMENT_SEQ_NO",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HOS_RULE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME_UTILIZED",
+      "description": "Amount of time that has be used against the HOS Rule since the last rest duration.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME_UTILIZE_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME_UTILIZE_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RULE_BEGIN_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME_REMAIN",
+      "description": "Amount of time that can be used against the HOS Rule before the next rest duration.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME_REMAIN_UOM_CODE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ACTIVITY_TIME_REMAIN_BASE",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "DRIVER_ASSIGNMENT_SEQ_NO"
+    },
+    {
+      "sequence": 2,
+      "columnName": "HOS_RULE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DHRS_DRIVER_ASSIGNMENT_SEQ",
+      "cascadeDelete": false,
+      "parentTableName": "DRIVER_ASSIGNMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DRIVER_ASSIGNMENT_SEQ_NO",
+          "columnName": "DRIVER_ASSIGNMENT_SEQ_NO"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DHRS_HOS_RULE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "HOS_RULE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "HOS_RULE_GID",
+          "columnName": "HOS_RULE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_DRVR_HOSRLSTATE_HOSRLE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "HOS_RULE_GID"
+        }
+      ]
+    }
+  ]
+}

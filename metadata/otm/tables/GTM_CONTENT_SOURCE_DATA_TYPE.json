@@ -1,1 +1,188 @@
-{"table": {"schema": "glogowner","name": "gtm_content_source_data_type","description": "Specifies the mapping from the gtm content data type to the content source provider data type."},"columns": [{"name": "GTM_CONTENT_SOURCE_GID","description": "Specifies the unique identifier for the GTM Content Source.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQ_NO","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_DATA_TYPE","description": "Specifies the content source data type identifier.","dataType": "VARCHAR2","size": 40,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_CONTENT_TYPE_GID","description": "Specifies the gtm content type identifier.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_COUNTRY_ID","description": "","dataType": "VARCHAR2","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_SUPPORTED","description": "Specifies if the content source data type is supported in GTM for data retrieval.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OTM_RELEASE","description": "Indicates the OTM Release version","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_CONTENT_SOURCE_GID"},{"sequence": 2,"columnName": "SEQ_NO"}],"foreignKeys": [{"foreignKeyName": "FK_GCSDT_GTM_CONTENT_SOURCE_GI","cascadeDelete": false,"parentTableName": "GTM_CONTENT_SOURCE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CONTENT_SOURCE_GID","columnName": "GTM_CONTENT_SOURCE_GID"}]},{"foreignKeyName": "FK_GCSDT_GTM_CONTENT_TYPE_GID","cascadeDelete": false,"parentTableName": "GTM_CONTENT_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_CONTENT_TYPE_GID","columnName": "GTM_CONTENT_TYPE_GID"}]},{"foreignKeyName": "FK_GCSDT_OTM_RELEASE_GID","cascadeDelete": false,"parentTableName": "OTM_RELEASE","columnRelation": [{"sequence": 1,"parentColumnName": "OTM_RELEASE_GID","columnName": "OTM_RELEASE"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_content_source_data_type",
+    "description": "Specifies the mapping from the gtm content data type to the content source provider data type."
+  },
+  "columns": [
+    {
+      "name": "GTM_CONTENT_SOURCE_GID",
+      "description": "Specifies the unique identifier for the GTM Content Source.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQ_NO",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_DATA_TYPE",
+      "description": "Specifies the content source data type identifier.",
+      "dataType": "VARCHAR2",
+      "size": 40,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_CONTENT_TYPE_GID",
+      "description": "Specifies the gtm content type identifier.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_COUNTRY_ID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_SUPPORTED",
+      "description": "Specifies if the content source data type is supported in GTM for data retrieval.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OTM_RELEASE",
+      "description": "Indicates the OTM Release version",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_CONTENT_SOURCE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "SEQ_NO"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GCSDT_GTM_CONTENT_SOURCE_GI",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_CONTENT_SOURCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CONTENT_SOURCE_GID",
+          "columnName": "GTM_CONTENT_SOURCE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GCSDT_GTM_CONTENT_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_CONTENT_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_CONTENT_TYPE_GID",
+          "columnName": "GTM_CONTENT_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GCSDT_OTM_RELEASE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OTM_RELEASE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OTM_RELEASE_GID",
+          "columnName": "OTM_RELEASE"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

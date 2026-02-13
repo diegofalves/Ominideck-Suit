@@ -1,1 +1,109 @@
-{"table": {"schema": "glogowner","name": "audit_control","description": "This table controls whether to audit a domain or not"},"columns": [{"name": "AUDIT_DOMAIN","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_AUDIT_ON","description": "","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "AUDIT_DOMAIN"}],"foreignKeys": [{"foreignKeyName": "FK_AC_AUDIT_DOMAIN","cascadeDelete": false,"parentTableName": "DOMAIN","columnRelation": [{"sequence": 1,"parentColumnName": "DOMAIN_NAME","columnName": "AUDIT_DOMAIN"}]}],"childTables": ["AUDIT_OBJECT_CONTROL","GTM_AUDIT_CONTROL_SERVICE"],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "audit_control",
+    "description": "This table controls whether to audit a domain or not"
+  },
+  "columns": [
+    {
+      "name": "AUDIT_DOMAIN",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_AUDIT_ON",
+      "description": "",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "AUDIT_DOMAIN"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_AC_AUDIT_DOMAIN",
+      "cascadeDelete": false,
+      "parentTableName": "DOMAIN",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DOMAIN_NAME",
+          "columnName": "AUDIT_DOMAIN"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "AUDIT_OBJECT_CONTROL",
+    "GTM_AUDIT_CONTROL_SERVICE"
+  ],
+  "indices": []
+}

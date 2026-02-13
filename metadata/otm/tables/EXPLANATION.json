@@ -1,1 +1,283 @@
-{"table": {"schema": "glogowner","name": "explanation","description": ""},"columns": [{"name": "EXPLANATION_ID","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPL_USER_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPL_PROCESS_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPL_PROCESS_TIME","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPL_SEVERITY_GID","description": "","dataType": "VARCHAR2","size": 10,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'INFO'"},{"name": "PARENT_EXPL_ID","description": "","dataType": "NUMBER","size": 12,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQ_IN_PARENT_EXPL","description": "","dataType": "NUMBER","size": 4,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQ_IN_PARENT_ISSUE","description": "","dataType": "NUMBER","size": 4,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SEQ_IN_PARENT_CAUSE","description": "","dataType": "NUMBER","size": 4,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOG_PROCESS_ID","description": "","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PROCESS_MACHINE_GID","description": "","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXPLANATION_CLOB","description": "","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARTITION_KEY","description": "","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "EXPLANATION_ID"}],"foreignKeys": [{"foreignKeyName": "FK_EXPL_USER_GID","cascadeDelete": false,"parentTableName": "GL_USER","columnRelation": [{"sequence": 1,"parentColumnName": "GL_USER_GID","columnName": "EXPL_USER_GID"}]},{"foreignKeyName": "FK_EXPL_SEVERITY_GID","cascadeDelete": false,"parentTableName": "EXPL_SEVERITY","columnRelation": [{"sequence": 1,"parentColumnName": "EXPL_SEVERITY_GID","columnName": "EXPL_SEVERITY_GID"}]},{"foreignKeyName": "FK_E_PROCESS_MACHINE_GID","cascadeDelete": false,"parentTableName": "APP_MACHINE","columnRelation": [{"sequence": 1,"parentColumnName": "APP_MACHINE_GID","columnName": "PROCESS_MACHINE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_EXPL_PROCESS_GID","columnNames": [{"sequence": 1,"name": "EXPL_PROCESS_GID"}]},{"indexName": "IX_EXPL_PROCESS_TIME","columnNames": [{"sequence": 1,"name": "EXPL_PROCESS_TIME"}]},{"indexName": "IX_EXPL_SEVERITY_GID","columnNames": [{"sequence": 1,"name": "EXPL_SEVERITY_GID"}]},{"indexName": "IX_EXPL_USER_GID","columnNames": [{"sequence": 1,"name": "EXPL_USER_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "explanation",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "EXPLANATION_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPL_USER_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPL_PROCESS_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPL_PROCESS_TIME",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPL_SEVERITY_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'INFO'"
+    },
+    {
+      "name": "PARENT_EXPL_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 12,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQ_IN_PARENT_EXPL",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 4,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQ_IN_PARENT_ISSUE",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 4,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQ_IN_PARENT_CAUSE",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 4,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOG_PROCESS_ID",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PROCESS_MACHINE_GID",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXPLANATION_CLOB",
+      "description": "",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARTITION_KEY",
+      "description": "",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "EXPLANATION_ID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_EXPL_USER_GID",
+      "cascadeDelete": false,
+      "parentTableName": "GL_USER",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GL_USER_GID",
+          "columnName": "EXPL_USER_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_EXPL_SEVERITY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EXPL_SEVERITY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXPL_SEVERITY_GID",
+          "columnName": "EXPL_SEVERITY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_E_PROCESS_MACHINE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "APP_MACHINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "APP_MACHINE_GID",
+          "columnName": "PROCESS_MACHINE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_EXPL_PROCESS_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXPL_PROCESS_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EXPL_PROCESS_TIME",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXPL_PROCESS_TIME"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EXPL_SEVERITY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXPL_SEVERITY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_EXPL_USER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXPL_USER_GID"
+        }
+      ]
+    }
+  ]
+}

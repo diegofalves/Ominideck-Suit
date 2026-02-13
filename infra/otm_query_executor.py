@@ -11,6 +11,7 @@ Fluxo principal:
 
 import json
 import re
+import time
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, Optional
 
@@ -36,6 +37,8 @@ CREDENCIAIS = (OTM_USER, OTM_PASSWORD)
 OTM_HTTP_METHOD = "POST"
 OTM_VERIFY_SSL = True
 OTM_TIMEOUT = DEFAULT_TIMEOUT
+OTM_RETRY_ATTEMPTS = 3
+OTM_RETRY_BACKOFF_SECONDS = 2.0
 OTM_DEFAULT_HEADERS: Dict[str, str] = {"Accept": "application/xml"}
 OTM_DEFAULT_REQUEST_PARAMS: Dict[str, Any] = {"format": "xml"}
 OTM_SQL_PARAM_NAME = "sql"
@@ -158,31 +161,48 @@ def _send_otm_request(
 
     timeout = float(context.get("timeout", OTM_TIMEOUT))
     verify_ssl = bool(context.get("verify_ssl", OTM_VERIFY_SSL))
+    retry_attempts = int(context.get("retry_attempts", OTM_RETRY_ATTEMPTS))
+    retry_backoff_seconds = float(
+        context.get("retry_backoff_seconds", OTM_RETRY_BACKOFF_SECONDS)
+    )
+    if retry_attempts <= 0:
+        retry_attempts = 1
+    if retry_backoff_seconds < 0:
+        retry_backoff_seconds = 0.0
     params = _build_request_params(execution_type, rendered_query_payload, context)
 
-    try:
-        if request_method == "GET":
-            response = requests.get(
-                endpoint_url,
-                params=params,
-                headers=headers,
-                auth=auth,
-                timeout=timeout,
-                verify=verify_ssl,
-            )
-        else:
-            response = requests.post(
-                endpoint_url,
-                data=params,
-                headers=headers,
-                auth=auth,
-                timeout=timeout,
-                verify=verify_ssl,
-            )
-        response.raise_for_status()
-        return response.text
-    except requests.RequestException as exc:
-        raise OTMQueryError(f"Erro de conexao HTTP com OTM: {exc}") from exc
+    last_exception: Optional[requests.RequestException] = None
+    for attempt in range(1, retry_attempts + 1):
+        try:
+            if request_method == "GET":
+                response = requests.get(
+                    endpoint_url,
+                    params=params,
+                    headers=headers,
+                    auth=auth,
+                    timeout=timeout,
+                    verify=verify_ssl,
+                )
+            else:
+                response = requests.post(
+                    endpoint_url,
+                    data=params,
+                    headers=headers,
+                    auth=auth,
+                    timeout=timeout,
+                    verify=verify_ssl,
+                )
+            response.raise_for_status()
+            return response.text
+        except requests.RequestException as exc:
+            last_exception = exc
+            if attempt >= retry_attempts:
+                break
+            sleep_seconds = retry_backoff_seconds * (2 ** (attempt - 1))
+            if sleep_seconds > 0:
+                time.sleep(sleep_seconds)
+
+    raise OTMQueryError(f"Erro de conexao HTTP com OTM: {last_exception}") from last_exception
 
 
 def _xml_element_to_dict(element: ET.Element) -> Any:

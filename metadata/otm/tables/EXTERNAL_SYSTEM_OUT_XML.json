@@ -1,1 +1,156 @@
-{"table": {"schema": "glogowner","name": "external_system_out_xml","description": ""},"columns": [{"name": "EXTERNAL_SYSTEM_GID","description": "Reference to row in the external system table.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INT_GLOG_XML_ELEMENT_GID","description": "Reference to row in int_glog_xml_element table.   Specifies the G-Log XML Element type to which this out xml profile applies.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "OUT_XML_PROFILE_GID","description": "Reference to row in outbound xml profile table.  When sending an outbound xml transmission to this external system, this profile will be used to determin the content of the xml transmission.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSMISSION_PRIORITY","description": "","dataType": "NUMBER","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "EXTERNAL_SYSTEM_GID"},{"sequence": 2,"columnName": "INT_GLOG_XML_ELEMENT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_ESOX_EXTERNAL_SYSTEM_GID","cascadeDelete": false,"parentTableName": "EXTERNAL_SYSTEM","columnRelation": [{"sequence": 1,"parentColumnName": "EXTERNAL_SYSTEM_GID","columnName": "EXTERNAL_SYSTEM_GID"}]},{"foreignKeyName": "FK_ESOX_INT_GLOG_XML_ELEMENT_G","cascadeDelete": false,"parentTableName": "INT_GLOG_XML_ELEMENT","columnRelation": [{"sequence": 1,"parentColumnName": "GLOG_XML_ELEMENT_GID","columnName": "INT_GLOG_XML_ELEMENT_GID"}]},{"foreignKeyName": "FK_ESOX_OUT_XML_PROFILE_GID","cascadeDelete": false,"parentTableName": "OUT_XML_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "OUT_XML_PROFILE_GID","columnName": "OUT_XML_PROFILE_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "external_system_out_xml",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "EXTERNAL_SYSTEM_GID",
+      "description": "Reference to row in the external system table.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INT_GLOG_XML_ELEMENT_GID",
+      "description": "Reference to row in int_glog_xml_element table.   Specifies the G-Log XML Element type to which this out xml profile applies.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "OUT_XML_PROFILE_GID",
+      "description": "Reference to row in outbound xml profile table.  When sending an outbound xml transmission to this external system, this profile will be used to determin the content of the xml transmission.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSMISSION_PRIORITY",
+      "description": "",
+      "dataType": "NUMBER",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "EXTERNAL_SYSTEM_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "INT_GLOG_XML_ELEMENT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_ESOX_EXTERNAL_SYSTEM_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EXTERNAL_SYSTEM",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXTERNAL_SYSTEM_GID",
+          "columnName": "EXTERNAL_SYSTEM_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ESOX_INT_GLOG_XML_ELEMENT_G",
+      "cascadeDelete": false,
+      "parentTableName": "INT_GLOG_XML_ELEMENT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GLOG_XML_ELEMENT_GID",
+          "columnName": "INT_GLOG_XML_ELEMENT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_ESOX_OUT_XML_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "OUT_XML_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "OUT_XML_PROFILE_GID",
+          "columnName": "OUT_XML_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

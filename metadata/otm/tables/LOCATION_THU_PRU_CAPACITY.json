@@ -1,1 +1,189 @@
-{"table": {"schema": "glogowner","name": "location_thu_pru_capacity","description": ""},"columns": [{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_GID","description": "The GID for the location. The Location Package Reference Unit Capacity capabilities are used to define the transport handling unit capacity for a location and location role combination.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOCATION_ROLE_GID","description": "The GID for the location role.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_HANDLING_UNIT_GID","description": "The GID for the transport handling unit.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGING_REFERENCE_UNIT_GID","description": "The GID for the package unit reference unit.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_PRU_COUNT","description": "Enter a Limit Packaging Reference Unit Count. This represents the number of package references units that can fill the usable space in the location. The area of a location may suggest more packaging reference units can fit, but due to the actual dimensions of the packaged reference units, a lower limit may be reached.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LIMIT_PRU_COUNT","description": "Enter a Total Packaging Reference Unit Count. This total represents by volume the amount of packaging reference units that can fill the space. It does not take into account the actual shape and dimensions of the packaging reference unit, but rather how many packaging reference units can fit in the space based on the volume of each packaging reference unit.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "LOCATION_GID"},{"sequence": 2,"columnName": "LOCATION_ROLE_GID"},{"sequence": 3,"columnName": "TRANSPORT_HANDLING_UNIT_GID"},{"sequence": 4,"columnName": "PACKAGING_REFERENCE_UNIT_GID"}],"foreignKeys": [{"foreignKeyName": "FK_LTCD_LOCATION_ROLE_PROFILE","cascadeDelete": false,"parentTableName": "LOCATION_ROLE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "LOCATION_GID","columnName": "LOCATION_GID"},{"sequence": 2,"parentColumnName": "LOCATION_ROLE_GID","columnName": "LOCATION_ROLE_GID"}]},{"foreignKeyName": "FK_LTCD_SHIP_UNIT_SPEC_GID","cascadeDelete": false,"parentTableName": "SHIP_UNIT_SPEC","columnRelation": [{"sequence": 1,"parentColumnName": "SHIP_UNIT_SPEC_GID","columnName": "TRANSPORT_HANDLING_UNIT_GID"}]},{"foreignKeyName": "FK_LTCD_PACKAGING_REFERENCE_U","cascadeDelete": false,"parentTableName": "PACKAGING_REFERENCE_UNIT","columnRelation": [{"sequence": 1,"parentColumnName": "PACKAGING_REFERENCE_UNIT_GID","columnName": "PACKAGING_REFERENCE_UNIT_GID"}]}],"childTables": [],"indices": []}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "location_thu_pru_capacity",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_GID",
+      "description": "The GID for the location. The Location Package Reference Unit Capacity capabilities are used to define the transport handling unit capacity for a location and location role combination.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOCATION_ROLE_GID",
+      "description": "The GID for the location role.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_HANDLING_UNIT_GID",
+      "description": "The GID for the transport handling unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGING_REFERENCE_UNIT_GID",
+      "description": "The GID for the package unit reference unit.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_PRU_COUNT",
+      "description": "Enter a Limit Packaging Reference Unit Count. This represents the number of package references units that can fill the usable space in the location. The area of a location may suggest more packaging reference units can fit, but due to the actual dimensions of the packaged reference units, a lower limit may be reached.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LIMIT_PRU_COUNT",
+      "description": "Enter a Total Packaging Reference Unit Count. This total represents by volume the amount of packaging reference units that can fill the space. It does not take into account the actual shape and dimensions of the packaging reference unit, but rather how many packaging reference units can fit in the space based on the volume of each packaging reference unit.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "LOCATION_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "LOCATION_ROLE_GID"
+    },
+    {
+      "sequence": 3,
+      "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+    },
+    {
+      "sequence": 4,
+      "columnName": "PACKAGING_REFERENCE_UNIT_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_LTCD_LOCATION_ROLE_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "LOCATION_ROLE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOCATION_GID",
+          "columnName": "LOCATION_GID"
+        },
+        {
+          "sequence": 2,
+          "parentColumnName": "LOCATION_ROLE_GID",
+          "columnName": "LOCATION_ROLE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LTCD_SHIP_UNIT_SPEC_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SHIP_UNIT_SPEC",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SHIP_UNIT_SPEC_GID",
+          "columnName": "TRANSPORT_HANDLING_UNIT_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_LTCD_PACKAGING_REFERENCE_U",
+      "cascadeDelete": false,
+      "parentTableName": "PACKAGING_REFERENCE_UNIT",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PACKAGING_REFERENCE_UNIT_GID",
+          "columnName": "PACKAGING_REFERENCE_UNIT_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": []
+}

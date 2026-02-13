@@ -1,1 +1,185 @@
-{"table": {"schema": "glogowner","name": "distance_lookup","description": "The DISTANCE table specifies the distance associated with a given X_LANE_GID and RATE_DISTANCE_GID. Note that multiple distances can be specified for the same xlane by specifying different rate_distance_gids. For example, one could specify both the straight-line and practical route distance for a given xlane."},"columns": [{"name": "X_LANE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_DISTANCE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_VALUE","description": "The value of the distance associated with the x_lane and the rate_distance_gid.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_VALUE_UOM_CODE","description": "The unit of measure for the distance_value field.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "DISTANCE_VALUE_BASE","description": "The value of the distance associated with the x_lane and the rate_distance_gid in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "X_LANE_GID"},{"sequence": 2,"columnName": "RATE_DISTANCE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_DISTLK_X_LANE_GID","cascadeDelete": false,"parentTableName": "X_LANE","columnRelation": [{"sequence": 1,"parentColumnName": "X_LANE_GID","columnName": "X_LANE_GID"}]},{"foreignKeyName": "FK_DISTLK_RATE_DIST_GID","cascadeDelete": false,"parentTableName": "RATE_DISTANCE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_DISTANCE_GID","columnName": "RATE_DISTANCE_GID"}]}],"childTables": [],"indices": [{"indexName": "IX_DISTLK_RATE_DIST_GID","columnNames": [{"sequence": 1,"name": "RATE_DISTANCE_GID"}]},{"indexName": "IX_DL_X_LANE_GID","columnNames": [{"sequence": 1,"name": "X_LANE_GID"}]},{"indexName": "IX_RATE_DIST_XLANE_GID","columnNames": [{"sequence": 1,"name": "RATE_DISTANCE_GID"},{"sequence": 2,"name": "X_LANE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "distance_lookup",
+    "description": "The DISTANCE table specifies the distance associated with a given X_LANE_GID and RATE_DISTANCE_GID. Note that multiple distances can be specified for the same xlane by specifying different rate_distance_gids. For example, one could specify both the straight-line and practical route distance for a given xlane."
+  },
+  "columns": [
+    {
+      "name": "X_LANE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_DISTANCE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_VALUE",
+      "description": "The value of the distance associated with the x_lane and the rate_distance_gid.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_VALUE_UOM_CODE",
+      "description": "The unit of measure for the distance_value field.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "DISTANCE_VALUE_BASE",
+      "description": "The value of the distance associated with the x_lane and the rate_distance_gid in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "X_LANE_GID"
+    },
+    {
+      "sequence": 2,
+      "columnName": "RATE_DISTANCE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_DISTLK_X_LANE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "X_LANE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "X_LANE_GID",
+          "columnName": "X_LANE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_DISTLK_RATE_DIST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_DISTANCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_DISTANCE_GID",
+          "columnName": "RATE_DISTANCE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "IX_DISTLK_RATE_DIST_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_DISTANCE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_DL_X_LANE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "X_LANE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RATE_DIST_XLANE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_DISTANCE_GID"
+        },
+        {
+          "sequence": 2,
+          "name": "X_LANE_GID"
+        }
+      ]
+    }
+  ]
+}

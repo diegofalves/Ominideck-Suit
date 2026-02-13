@@ -1,1 +1,235 @@
-{"table": {"schema": "glogowner","name": "sql_execution","description": "Intermediate table holding summary of customer SQL performance for lookup and analysis."},"columns": [{"name": "SQL_EXECUTION_SEQ","description": "Unique ID for the SQL ID and Type.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SQL_ID","description": "The SQL ID for the monitored statement.","dataType": "VARCHAR2","size": 13,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TYPE","description": "The source of any explain plan or performance information: APRIORI - theoretical explain plans; CURSOR - the cursor cache; AWR - the automatic workload repository.","dataType": "VARCHAR2","size": 30,"isNull": false,"isConstraint": true,"constraintValues": "'APRIORI','CURSOR','AWR'","conditionalConstraint": "","defaultValue": "'APRIORI'"},{"name": "CATEGORY","description": "The category of the statement.","dataType": "VARCHAR2","size": 100,"isNull": true,"isConstraint": true,"constraintValues": "'SAVED QUERY','INT SAVED QUERY','AGENT','FINDER','SQL EXEC','OTHER'","conditionalConstraint": "","defaultValue": ""},{"name": "USE_CASE","description": "The use case for the statement within its category. (E.g. SAVED_QUERY_GID for saved queries).","dataType": "VARCHAR2","size": 1000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SQL","description": "SQL of the monitored statement.","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SQL_FULL","description": "Full SQL of the monitored statement.","dataType": "CLOB","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_ELAPSED_TIME","description": "Elapsed time for the statement to run. For cursor cache queries, this is the cumulative time since the cursor was placed in cache; for AWR it's the cumulative elapsed time during the snapshots.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_ROWS_PROCESSED","description": "The total number of rows processed by the statement. For cursor cache queries, this is the rows processed since the cursor was placed in the cache; for AWR, the rows processed during the snapshots.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_EXECUTIONS","description": "The total number of exceptions of the statement. For cursor cache queries, this is the executions since the cursor was placed in the cache; For AWR, the executions during the snapshots.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_ELAPSED_TIME","description": "Average elapsed time per statement execution. For cursor cache statements, this is the average since the cursor was placed in cache; for AWR it's the average during the snapshots.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "AVG_ROWS_PROCESSED","description": "Average rows processed per statement execution for the statement to run. For cursor cache statements, this is the average since the cursor was placed in cache; for AWR it's the average during the snapshots.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LAST_EXECUTION_TIME","description": "For cursor cache queries, the last execution time for the statement. For AWR queries, this is left null.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "HAS_PLAN","description": "If Y, the SQL execution has a corresponding explain plan available.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SQL_EXECUTION_SEQ"}],"foreignKeys": [],"childTables": [],"indices": [{"indexName": "UK_SQL_ID_TYPE","columnNames": [{"sequence": 1,"name": "SQL_ID"},{"sequence": 2,"name": "TYPE"},{"sequence": 3,"name": "DOMAIN_NAME"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "sql_execution",
+    "description": "Intermediate table holding summary of customer SQL performance for lookup and analysis."
+  },
+  "columns": [
+    {
+      "name": "SQL_EXECUTION_SEQ",
+      "description": "Unique ID for the SQL ID and Type.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SQL_ID",
+      "description": "The SQL ID for the monitored statement.",
+      "dataType": "VARCHAR2",
+      "size": 13,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TYPE",
+      "description": "The source of any explain plan or performance information: APRIORI - theoretical explain plans; CURSOR - the cursor cache; AWR - the automatic workload repository.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'APRIORI','CURSOR','AWR'",
+      "conditionalConstraint": "",
+      "defaultValue": "'APRIORI'"
+    },
+    {
+      "name": "CATEGORY",
+      "description": "The category of the statement.",
+      "dataType": "VARCHAR2",
+      "size": 100,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'SAVED QUERY','INT SAVED QUERY','AGENT','FINDER','SQL EXEC','OTHER'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USE_CASE",
+      "description": "The use case for the statement within its category. (E.g. SAVED_QUERY_GID for saved queries).",
+      "dataType": "VARCHAR2",
+      "size": 1000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SQL",
+      "description": "SQL of the monitored statement.",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SQL_FULL",
+      "description": "Full SQL of the monitored statement.",
+      "dataType": "CLOB",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_ELAPSED_TIME",
+      "description": "Elapsed time for the statement to run. For cursor cache queries, this is the cumulative time since the cursor was placed in cache; for AWR it's the cumulative elapsed time during the snapshots.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_ROWS_PROCESSED",
+      "description": "The total number of rows processed by the statement. For cursor cache queries, this is the rows processed since the cursor was placed in the cache; for AWR, the rows processed during the snapshots.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_EXECUTIONS",
+      "description": "The total number of exceptions of the statement. For cursor cache queries, this is the executions since the cursor was placed in the cache; For AWR, the executions during the snapshots.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_ELAPSED_TIME",
+      "description": "Average elapsed time per statement execution. For cursor cache statements, this is the average since the cursor was placed in cache; for AWR it's the average during the snapshots.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "AVG_ROWS_PROCESSED",
+      "description": "Average rows processed per statement execution for the statement to run. For cursor cache statements, this is the average since the cursor was placed in cache; for AWR it's the average during the snapshots.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LAST_EXECUTION_TIME",
+      "description": "For cursor cache queries, the last execution time for the statement. For AWR queries, this is left null.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "HAS_PLAN",
+      "description": "If Y, the SQL execution has a corresponding explain plan available.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SQL_EXECUTION_SEQ"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [],
+  "indices": [
+    {
+      "indexName": "UK_SQL_ID_TYPE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SQL_ID"
+        },
+        {
+          "sequence": 2,
+          "name": "TYPE"
+        },
+        {
+          "sequence": 3,
+          "name": "DOMAIN_NAME"
+        }
+      ]
+    }
+  ]
+}

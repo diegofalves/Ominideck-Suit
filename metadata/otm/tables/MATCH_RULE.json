@@ -1,1 +1,217 @@
-{"table": {"schema": "glogowner","name": "match_rule","description": ""},"columns": [{"name": "MATCH_RULE_GID","description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MATCH_RULE_XID","description": "GC3 Unique identifier for the entity. Is used for creating the GID","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MATCH_RULE_DESC","description": "","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MATCH_RULE_NAME","description": "","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SOURCE_LOCATION_RULE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DEST_LOCATION_RULE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'N'"},{"name": "RULE_TYPE","description": "","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": true,"constraintValues": "'CONSOLIDATED','NON-CONSOLIDATED','BOTH'","conditionalConstraint": "","defaultValue": "'NON-CONSOLIDATED'"},{"name": "FIND_SHIPMENTS_TYPE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','S','A'","conditionalConstraint": "","defaultValue": "'B'"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MATCH_RULE_TYPE","description": "This field identifies if the match rules is for matching invoice or invoice tracking number.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": true,"constraintValues": "'INVOICE','INVOICE_LINEITEM'","conditionalConstraint": "","defaultValue": "'INVOICE'"},{"name": "MATCH_RULE_OUTCOME","description": "match rule outcome indicate with which entity business object it should be matched with. Possible values are shipment, ship unit and ship unit line.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": true,"constraintValues": "'SHIPMENT','S_SHIP_UNIT','S_SHIP_UNIT_LINE','SHIP_GROUP'","conditionalConstraint": "","defaultValue": "'SHIPMENT'"},{"name": "REFNUM_QUALS_MATCH_ALL","description": "This columns specifies if we have to match all of the refnum qualifiers provided or not. Y specifies that we have to match all and Value 'N' means match any one of the qualifier.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "SERVPROV_EXACT_MATCH","description": "This columns specifies if we have to match the alias qualifer and alias value of the invoice service provider with that of shipment service provider or not. If the value is 'N' it means that the shipments service provider tshould match one of the service provider provided in the table MATCH_RULE_SERVPOV for this match rule.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'Y'"}],"primaryKey": [{"sequence": 1,"columnName": "MATCH_RULE_GID"}],"foreignKeys": [],"childTables": ["MATCH_RULE_PROFILE_D","MATCH_RULE_REFNUM","MATCH_RULE_SERVPROV"],"indices": [{"indexName": "IX_MATCH_RULE_XID","columnNames": [{"sequence": 1,"name": "MATCH_RULE_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "match_rule",
+    "description": ""
+  },
+  "columns": [
+    {
+      "name": "MATCH_RULE_GID",
+      "description": "GC3 Global identifier for the entity. Is created by concatenating Domain Name,'.' and XID.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MATCH_RULE_XID",
+      "description": "GC3 Unique identifier for the entity. Is used for creating the GID",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MATCH_RULE_DESC",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MATCH_RULE_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SOURCE_LOCATION_RULE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DEST_LOCATION_RULE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "RULE_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'CONSOLIDATED','NON-CONSOLIDATED','BOTH'",
+      "conditionalConstraint": "",
+      "defaultValue": "'NON-CONSOLIDATED'"
+    },
+    {
+      "name": "FIND_SHIPMENTS_TYPE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','S','A'",
+      "conditionalConstraint": "",
+      "defaultValue": "'B'"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MATCH_RULE_TYPE",
+      "description": "This field identifies if the match rules is for matching invoice or invoice tracking number.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'INVOICE','INVOICE_LINEITEM'",
+      "conditionalConstraint": "",
+      "defaultValue": "'INVOICE'"
+    },
+    {
+      "name": "MATCH_RULE_OUTCOME",
+      "description": "match rule outcome indicate with which entity business object it should be matched with. Possible values are shipment, ship unit and ship unit line.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'SHIPMENT','S_SHIP_UNIT','S_SHIP_UNIT_LINE','SHIP_GROUP'",
+      "conditionalConstraint": "",
+      "defaultValue": "'SHIPMENT'"
+    },
+    {
+      "name": "REFNUM_QUALS_MATCH_ALL",
+      "description": "This columns specifies if we have to match all of the refnum qualifiers provided or not. Y specifies that we have to match all and Value 'N' means match any one of the qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "SERVPROV_EXACT_MATCH",
+      "description": "This columns specifies if we have to match the alias qualifer and alias value of the invoice service provider with that of shipment service provider or not. If the value is 'N' it means that the shipments service provider tshould match one of the service provider provided in the table MATCH_RULE_SERVPOV for this match rule.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "MATCH_RULE_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [
+    "MATCH_RULE_PROFILE_D",
+    "MATCH_RULE_REFNUM",
+    "MATCH_RULE_SERVPROV"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_MATCH_RULE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MATCH_RULE_XID"
+        }
+      ]
+    }
+  ]
+}

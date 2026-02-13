@@ -1,1 +1,222 @@
-{"table": {"schema": "glogowner","name": "gtm_tr_item_structure","description": "Table to store the result of Structure assignment. Also this will enable user to create a struture specific toa transaction Line item dynamically."},"columns": [{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TR_ITEM_STRUCTURE_GID","description": "Unique ID to represent a transaction Line Item Struture.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TR_ITEM_STRUCTURE_XID","description": "contains the XID unique identifier for the transaction line item structure.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_TR_ITEM_STRUCTURE_NAME","description": "contains text for the name of the transaction Line item structure","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRADE_DIRECTION","description": "Trade Direction. Used to define import, export or both specific structure","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','I','E'","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_PROD_CLASS_TYPE_GID","description": "Product Classification Type ID Used to define product classification type specific structure","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_PROD_CLASS_CODE_GID","description": "Product Classification Code  Used to define product classification code specific structure","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "GTM_STRUCTURE_GID","description": "GTM_STRUCTURE_GID contains the unique identifier for the trade item structure.  This field will be automatically populated when the struture gets assigned automatically.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DESCRIPTION","description": "DESCRIPTION contains text for the description of the trade item structure","dataType": "VARCHAR2","size": 4000,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MARKED_FOR_PURGE","description": "The Column indicates whether the transaction structure has been marked for purge.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "CLASSIFICATION_CODE","description": "Classification code for an item.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "GTM_TR_ITEM_STRUCTURE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_GTLIS_GTM_PROD_CLASS_TYPE","cascadeDelete": false,"parentTableName": "GTM_PROD_CLASS_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_PROD_CLASS_TYPE_GID","columnName": "GTM_PROD_CLASS_TYPE_GID"}]},{"foreignKeyName": "FK_GTLIS_GTM_PROD_CLASS_CODE","cascadeDelete": false,"parentTableName": "GTM_PROD_CLASS_CODE","columnRelation": [{"sequence": 1,"parentColumnName": "GTM_PROD_CLASS_CODE_GID","columnName": "GTM_PROD_CLASS_CODE_GID"}]}],"childTables": ["GTM_TRANSACTION_LINE","GTM_TR_ITEM_STRUCTURE_CODE","GTM_TR_ITEM_STRUCTURE_REFNUM","GTM_TR_ITEM_STRUCTURE_REMARK","GTM_TR_STRUC_MATCH_RULE_DETAIL"],"indices": [{"indexName": "IDX_GTIS_CLASS_CODE","columnNames": [{"sequence": 1,"name": "CLASSIFICATION_CODE"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "gtm_tr_item_structure",
+    "description": "Table to store the result of Structure assignment. Also this will enable user to create a struture specific toa transaction Line item dynamically."
+  },
+  "columns": [
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TR_ITEM_STRUCTURE_GID",
+      "description": "Unique ID to represent a transaction Line Item Struture.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TR_ITEM_STRUCTURE_XID",
+      "description": "contains the XID unique identifier for the transaction line item structure.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_TR_ITEM_STRUCTURE_NAME",
+      "description": "contains text for the name of the transaction Line item structure",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRADE_DIRECTION",
+      "description": "Trade Direction. Used to define import, export or both specific structure",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','I','E'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_PROD_CLASS_TYPE_GID",
+      "description": "Product Classification Type ID Used to define product classification type specific structure",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_PROD_CLASS_CODE_GID",
+      "description": "Product Classification Code  Used to define product classification code specific structure",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "GTM_STRUCTURE_GID",
+      "description": "GTM_STRUCTURE_GID contains the unique identifier for the trade item structure.  This field will be automatically populated when the struture gets assigned automatically.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "DESCRIPTION contains text for the description of the trade item structure",
+      "dataType": "VARCHAR2",
+      "size": 4000,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MARKED_FOR_PURGE",
+      "description": "The Column indicates whether the transaction structure has been marked for purge.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "CLASSIFICATION_CODE",
+      "description": "Classification code for an item.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "GTM_TR_ITEM_STRUCTURE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_GTLIS_GTM_PROD_CLASS_TYPE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_PROD_CLASS_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_PROD_CLASS_TYPE_GID",
+          "columnName": "GTM_PROD_CLASS_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_GTLIS_GTM_PROD_CLASS_CODE",
+      "cascadeDelete": false,
+      "parentTableName": "GTM_PROD_CLASS_CODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "GTM_PROD_CLASS_CODE_GID",
+          "columnName": "GTM_PROD_CLASS_CODE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "GTM_TRANSACTION_LINE",
+    "GTM_TR_ITEM_STRUCTURE_CODE",
+    "GTM_TR_ITEM_STRUCTURE_REFNUM",
+    "GTM_TR_ITEM_STRUCTURE_REMARK",
+    "GTM_TR_STRUC_MATCH_RULE_DETAIL"
+  ],
+  "indices": [
+    {
+      "indexName": "IDX_GTIS_CLASS_CODE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CLASSIFICATION_CODE"
+        }
+      ]
+    }
+  ]
+}

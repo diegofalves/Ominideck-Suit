@@ -1,1 +1,3148 @@
-{"table": {"schema": "glogowner","name": "rate_offering","description": "The contract between the carrier and the consignee (or service provider.  One record per contract."},"columns": [{"name": "RATE_OFFERING_GID","description": "The GID for the rate offering.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_OFFERING_XID","description": "The XID for the rate offering.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_OFFERING_TYPE_GID","description": "The GID for the rate offering type.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_OFFERING_DESC","description": "Stores descriptive information about the rate offering.","dataType": "VARCHAR2","size": 255,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SERVPROV_GID","description": "The GID for the service provider.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_GROUP_GID","description": "The GID for the rate group.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CURRENCY_GID","description": "The GID for the currency.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TRANSPORT_MODE_GID","description": "The GID for the transport mode.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_CLASSIFICATION1","description": "The user classification fields are provided to capture information about the rate offering's usage. VARCHAR2(30)","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_CLASSIFICATION2","description": "The user classification fields are provided to capture information about the rate offering's usage. VARCHAR2(30)","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_CLASSIFICATION3","description": "The user classification fields are provided to capture information about the rate offering's usage. VARCHAR2(30)","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "USER_CLASSIFICATION4","description": "The user classification fields are provided to capture information about the rate offering's usage. VARCHAR2(30)","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EQUIPMENT_GROUP_PROFILE_GID","description": "The GID for the equipment group profile.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_SERVICE_GID","description": "The GID for the rate service.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_VERSION_GID","description": "The GID for the rate version.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_DISTANCE_CONSTRAINT","description": "The maximum distance field is intended to be used to match the rate offering with shipments. The system calculates the distance between the source and destination address of the shipment being considered, then compares that calculated distance to the maximum Distance field value to see if the rate offering matches or is below the maximum distance constraint.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_DIST_CONSTRAINT_UOM_CODE","description": "The unit of measure for the maximum distance. Usually MI or KM.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_DIST_CONSTRAINT_BASE","description": "The maximum distance constraint value in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_WEIGHT_CONSTRAINT","description": "The minimum weight constraint is used when matching rate offerings with shipments. If a shipment's weight is less than the minimum value, then this rate offering does not qualify for the shipment in question.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_WEIGHT_CONSTRAINT_UOM_CODE","description": "The unit of measure for the minimum weight constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_WEIGHT_CONSTRAINT_BASE","description": "The minimum weight constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_WEIGHT_CONSTRAINT","description": "The maximum weight constraint is used when matching rate offerings with shipments. If a shipment's weight is greater than the maximum value, then this rate offering does not qualify for the shipment in question.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_WEIGHT_CONSTRAINT_UOM_CODE","description": "The unit of measure for the maximum weight constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_WEIGHT_CONSTRAINT_BASE","description": "The maximum weight constrain in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_VOLUME_CONSTRAINT","description": "The minimum volume constraint is used when matching rate offerings with shipments. If a shipment's volume is less than the minimum value, then this rate offering does not qualify for the shipment in question.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_VOLUME_CONSTRAINT_UOM_CODE","description": "The unit of measure for the maximum volume constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_VOLUME_CONSTRAINT_BASE","description": "The minimum volume constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_VOLUME_CONSTRAINT","description": "The maximum volume constraint is used when matching rate offerings with shipments. If a shipment's volume is greater than the maximum value, then this rate offering does not qualify for the shipment in question.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_VOLUME_CONSTRAINT_UOM_CODE","description": "The unit of measure for the maximum volume constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_VOLUME_CONSTRAINT_BASE","description": "The unit of measure for the maximum weight constraint.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SHIP_UNIT_WEIGHT","description": "The maximum ship unit weight constraint is used when matching rate offerings with shipments. If any ship unit on the shipment exceeds the maximum ship unit weight, this rate offering does not qualify for the shipment in question.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SHIP_UNIT_WEIGHT_UOM_CODE","description": "The unit of measure for the maximum ship unit weight constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SHIP_UNIT_WEIGHT_BASE","description": "The maximum ship unit weight in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_NAME","description": "The Tariff Name fields allows you to put the name of the tariff that the rate offering is related to. For example, if this is a base rate offering you can put the name of the tariff that the rate offering is based on/is using.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_COST","description": "The Minimum Cost field stores the absolute minimum charge that applies for the rate offering.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_COST_GID","description": "The GID for minimum cost.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_COST_BASE","description": "The minimum cost in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_DISTANCE_GID","description": "The GID for rate distance.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_QUALITY_GID","description": "The GID for rate quantity.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_CLASSIFICATION_GID","description": "The GID for rate classification.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXTERNAL_RATING_ENGINE_GID","description": "The GID for the external rating engine.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CIRCUITY_ALLOWANCE_PERCENT","description": "Circuity Allowance Percent indicates the allowed amount of out of route distance (as a percent of the direct source to final destination distance) that is free/ before Circuitous Distance Cost are charged.  Circuity Allowance Percent = (t/d-1)*100 where: t is the allowed total distance traveled between the first and last stop of the shipment. d is the shortest distance between the first and last stop of the shipment. If the allowed total distance is 1500 miles and the distance between the first and last stop is 1300 miles, Circuity Allowance Percent = (1500/1300-1)*100 = (1.15-1)*100 = 15%. The lower the percentage, the more in line the route must be.","dataType": "NUMBER","precision": 5,"scale": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TOTAL_STOPS_CONSTRAINT","description": "For rate offerings where the service provider will provide multi-stop coverage, the total stops constraints sets a constraint on the total number of stops (pickup and delivery) that the rate can be used for.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PICKUP_STOPS_CONSTRAINT","description": "For rate offerings where the service provider will provide multi-stop coverage, the total pickup stops constraints sets a constraint on the total number of pickup stops that the rate can be used for.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DELIVERY_STOPS_CONSTRAINT","description": "For rate offerings where the service provider will provide multi-stop coverage, the total delivery stops constraints sets a constraint on the total number of delivery stops that the rate can be used for.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CIRCUITY_DISTANCE_COST","description": "Circuity Distance Cost is the per distance unit charge for each unit over the included/free amount.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CIRCUITY_DISTANCE_COST_GID","description": "The GID for the circuity distance cost.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CIRCUITY_DISTANCE_COST_BASE","description": "The circuity distance cost in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_CIRCUITY_PERCENT","description": "The rate offering constraint that defines the maximum circuity percent for the rate offering. If this value is exceeded, the rate offering cannot be applied to the shipment. To use this field, you must have a value in the Circuity Distance Cost field. If there is no additional cost applicable, then enter a cost of 0.00.","dataType": "NUMBER","precision": 5,"scale": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_CIRCUITY_DISTANCE","description": "The rate offering constraint that defines the maximum circuity distance for the rate offering. If this value is exceeded, the rate offering cannot be applied to the shipment. To use this field, you must have a value in the Circuity Distance Cost field. If there is no additional cost applicable, then enter a cost of 0.00.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_CIRCUITY_DISTANCE_UOM_CODE","description": "Defines the distance unit of measure for calculating out of route percent or distance and related charges.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_CIRCUITY_DISTANCE_BASE","description": "The maximum circuity distance in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "STOPS_INCLUDED_IN_RATE","description": "The Stops Included in Rate field indicates the number of free stops included in the rate offering before stop-off charges apply. The source and destination locations count as stops so, typically, the minimum number of stops included in the rate is 2. Additional charges apply for all stops not included in the rate.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FLEX_COMMODITY_PROFILE_GID","description": "The GID for the flex commodity profile.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPPER_MIN_VALUE","description": "HIDE","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPPER_MIN_VALUE_GID","description": "The GID for the shipper minimum value.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHIPPER_MIN_VALUE_BASE","description": "The shipper minimum value in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXCHANGE_RATE_GID","description": "The GID for the exchange rate.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "COMMODITY_USAGE","description": "Indicates if the rate offering is or is not a commodity based rate offering i.e., are rates based on the classification of the freight. Values (F/C).","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'F','C'","conditionalConstraint": "","defaultValue": "'F'"},{"name": "FAK_RATE_AS","description": "Freight all kinds rate as commodity. Values (Y/N).","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "FAK_FLEX_COMMODITY_VALUE","description": "Freight all kinds rate as commodity value.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RM_ABSOLUTE_MIN_COST","description": "The Absolute Minimum Base Charge field determines the minimum charge that applies regardless of discounted savings.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RM_ABSOLUTE_MIN_COST_GID","description": "The GID for the absolute minimum base charge.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RM_ABSOLUTE_MIN_COST_BASE","description": "The absolute minimum base charge in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_COST","description": "The absolute maximum cost that applies, regardless of actual rated cost to ship.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_COST_GID","description": "The GID for the maximum cost.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_COST_BASE","description": "The maximum cost in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_STOPS","description": "The absolute minimum number of stops allowed for shipments using this rate.","dataType": "NUMBER","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHORT_LINE_COST","description": "HIDE","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHORT_LINE_COST_GID","description": "The GID for the short line cost.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SHORT_LINE_COST_BASE","description": "The short line cost in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_LENGTH_CONSTRAINT","description": "The minimum length constraint is used when matching the rate offering to a shipment. If a ship unit's length is less than the minimum, the rate offering does not qualify.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_LENGTH_CONSTRAINT_UOM_CODE","description": "The unit of measure for the minimum length constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_LENGTH_CONSTRAINT_BASE","description": "The minimum length constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_LENGTH_CONSTRAINT","description": "The maximum length constraint is used when matching the rate offering to a shipment. If a ship unit's length requirements is greater than the maximum length constraint, the rate offering does not qualify.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_LENGTH_CONSTRAINT_UOM_CODE","description": "The unit of measure for the maximum length constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_LENGTH_CONSTRAINT_BASE","description": "The maximum length constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_WIDTH_CONSTRAINT","description": "The minimum width constraint is used when matching the rate offering to a shipment. If a ship unit's width is less than the minimum, the rate offering does not qualify.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_WIDTH_CONSTRAINT_UOM_CODE","description": "The unit of measure for the minimum width constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_WIDTH_CONSTRAINT_BASE","description": "The minimum width constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_WIDTH_CONSTRAINT","description": "The maximum width constraint is used when matching the rate offering to a shipment. If a ship unit's length requirements is greater than the maximum width constraint, the rate offering does not qualify.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_WIDTH_CONSTRAINT_UOM_CODE","description": "The unit of measure for the maximum width constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_WIDTH_CONSTRAINT_BASE","description": "The maximum width constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_HEIGHT_CONSTRAINT","description": "The minimum height constraint is used when matching the rate offering to a shipment. If a ship unit's height is less than the minimum, the rate offering does not qualify.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_HEIGHT_CONSTRAINT_UOM_CODE","description": "The unit of measure for the minimum height constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_HEIGHT_CONSTRAINT_BASE","description": "The minimum height constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_HEIGHT_CONSTRAINT","description": "The maximum height constraint is used when matching the rate offering to a shipment. If a ship units' length requirements is greater than the maximum height constraint the rate offering does not qualify.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_HEIGHT_CONSTRAINT_UOM_CODE","description": "The unit of measure for the maximum height constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_HEIGHT_CONSTRAINT_BASE","description": "The maximum height constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_GIRTH_CONSTRAINT","description": "The minimum girth constraint is used when matching the rate offering to a shipment. If a ship unit's girth is less than the minimum, the rate offering does not qualify. Note: Dimensional girth is calculated as length + (2xWidth + 2xHeight).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_GIRTH_CONSTRAINT_UOM_CODE","description": "The unit of measure for the minimum girth constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_GIRTH_CONSTRAINT_BASE","description": "The minimum girth constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_GIRTH_CONSTRAINT","description": "The maximum girth constraint is used when matching the rate offering to a shipment. If a ship unit's length requirements is greater than the maximum girth constraint the rate offering does not qualify. Note: Dimensional girth is calculated as length + (2xWidth + 2xHeight).","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_GIRTH_CONSTRAINT_UOM_CODE","description": "The unit of measure for the maximum girth constraint.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_GIRTH_CONSTRAINT_BASE","description": "The maximum girth constraint in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_BREAK_PROFILE_GID","description": "The GID for the weight break profile.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MULTI_STOP_COST_METHOD","description": "HIDE","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'L','F','N'","conditionalConstraint": "","defaultValue": ""},{"name": "WEIGHT_UOM_CODE","description": "The unit of measure for weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "VOLUME_UOM_CODE","description": "The unit of measure for volume.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DISTANCE_UOM_CODE","description": "The unit of measure for distance.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DIM_RATE_FACTOR_GID","description": "The GID for the DIM rate factor.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PERSPECTIVE","description": "Indicates if the rate offering can be used for Buy shipment rating (B) or Sell shipment rating (S) or if the rate offering supports Both Buy and Sell shipment rating (A). Values (B/S/A).","dataType": "CHAR","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'B','S','A'","conditionalConstraint": "","defaultValue": "'B'"},{"name": "CORPORATION_PROFILE_GID","description": "The GID for the corporation profile.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CAPACITY_GROUP_GID","description": "The GID for the capacity group.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CM_MAX_NUM_SHIPMENTS","description": "The maximum shipments in a continuous move tour.","dataType": "NUMBER","size": 5,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CM_IS_SAME_EQUIP","description": "Indicates whether the shipments in the continuous move tour are restricted to utilize the same equipment type.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CM_PREV_SHIPMENT_PERCENT","description": "The percentage of the empty leg cost allocated to previous shipment.","dataType": "NUMBER","precision": 5,"scale": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CM_IS_PERCENT_OF_DISTANCE","description": "Indicates whether the percent of the total loaded distance is used to allocate the empty leg cost.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_REFNUM_QUALIFIER","description": "Tariff Refnum Qualifier is an informational field that allows you to qualify the Tariff Ref Num field. For example you can qualify the Tariff Ref Num fields with the Tariff Refnum Qualifier fields using standard qualifier that describe the relationship of the shipper and service provider regarding the prices related to the rate offering. The property glog.shipment.tarifffields.active determines if tariff fields are automatically copied from a rate offering to a shipment.","dataType": "VARCHAR2","size": 3,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_REFNUM","description": "Tariff Refnum is an informational field that can be used to store the rate offerings related tariff number. The Tariff Refnum should be qualified by the Tariff Refnum Qualifier.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_PUB_AUTHORITY","description": "Tariff Pub Authority is an informational field that can be used to store the rate offerings related tariff publication authority.","dataType": "VARCHAR2","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_REG_AGENCY_CODE","description": "The Tariff Reg Agency Code is an informational field that is meant to store information about the regulatory agency that the rates are fled with. For example the STB (Surface Transportation Board) or ICC) Interstate Commerce Commission.","dataType": "VARCHAR2","size": 5,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_AGENCY_CODE","description": "Tariff Agency Code is an informational field that can be used to store the service provider SCAC or initials of the entity who owns the tariff such as the Railroad Publication Service.","dataType": "VARCHAR2","size": 4,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_ISSUING_CARRIER_ID","description": "The Tariff Issuing Carrier field is an informational field that is meant to store information from the service provider related to the tariff. Examples are C, JQ, SCQ, QTAMR, UPLQ, BNQ, X, BC, NSPQ.","dataType": "VARCHAR2","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_REFNUM_SUFFIX","description": "Tariff Refnum Suffix is a suffix field for the tariff reference number.","dataType": "VARCHAR2","size": 2,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_SUPPLEMENT_ID","description": "The Tariff Supplement ID field is an informational field that is meant to provide information related to tariff amendments, revisions, or supplements of the rate authority.","dataType": "VARCHAR2","size": 4,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TARIFF_EFFECTIVE_DATE","description": "The Tariff Effective Date is an informational field that stores the date when the tariff goes into effect or can be used. This is not the rate offering effective date.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ALLOW_UNCOSTED_LINE_ITEMS","description": "Allow Uncosted Line Items (Y/N) is used when there are one or more ratable objects on the shipment which are not charged or considered for rating when rating a shipment using rate record. Marked: Some basis options within a shipment pass through the rating engine without a charge if other basis options qualify. For example, if a shipment contains four line items, and a rate is found that contains charges for 3 of those items, that rate qualifies for the shipment and the fourth line item ships for free.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "RAIL_INTER_MODAL_PLAN_GID","description": "The GID for the rail inter-modal plan.  I.e., Plan 20: door-to-door, Plan 25: ramp-to-ramp, etc.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CUSTOMER_RATE_CODE","description": "This code signifies what rate is used on a leg; either 'C' for the Customer's rate, or 'S' for the Shipper's rate.","dataType": "CHAR","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'C','S'","conditionalConstraint": "","defaultValue": ""},{"name": "COFC_TOFC","description": "Container-On-Flat-Car Trailer-On-Flat-Car code used along with the Rail Inter Modal Plan to determine the rate.","dataType": "CHAR","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'C','T','F'","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ACTIVE","description": "Indicates if the rate offering is active (Y) or inactive (N). If inactive (N) the rate offering will not be used in planning. Values (Y/N).","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "HANDLES_UNKNOWN_SHIPPER","description": "HIDE","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "USES_TIME_BASED_RATES","description": "HIDE","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "EXPIRE_MARK_ID","description": "Indicates that the rate has been marked for expiration.","dataType": "VARCHAR2","size": 30,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_DISTANCE_CONSTRAINT","description": "The minimum distance required for this rate offering to be valid.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_DISTANCE_CONSTRNT_UOM_CODE","description": "The unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_DISTANCE_CONSTRAINT_BASE","description": "The minimum distance required for this rate offering to be valid, in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "REGION_GROUP_GID","description": "The Region Group field is an informational region group that allows you to define a set of regions that represent the regions covered by the rate offering.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_DEPOT_APPLICABLE","description": "If the Depot Applicable option is selected, then the depot stops (source and/or destination locations) will be saved to the shipment. If it is not selected, the depot stops will not be saved to the shipment, but they will be charged and saved to the shipment financials if it is defined in the itinerary. Values (Y/N).","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "RECALCULATE_COST","description": "For some time-based rates, the shipment cost calculated during bulk plan and build shipment process may need to be recalculated since it is time dependent. The Recalculate Cost option is used to force the recalculating of cost after a shipment is built. This option works in conjunction with the Rerate All Shipments After Bulk Plan parameter as follows. If the Recalculate Cost is set, planning logic will make sure to account for service time-based rating costs when making planning decisions, and that this has the potential for increasing run-time. If Rerate All Shipments After Bulk Plan is TRUE, shipments will be re-rated regardless of the Recalculate Cost check box. If Rerate All Shipments After Bulk Plan is FALSE and the Recalculate Cost check box is selected, then the system recalculates the shipment cost keeping the same service provider and equipment. If Rerate All Shipments After Bulk Plan is FALSE and the Recalculate Cost option check box is cleared, then the shipment cost is not recalculated.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "TRACK_CAPACITY_USAGE","description": "The Track Capacity Usage field when set to Y, and the Capacity Group field if provided, causes the system to track capacity usage during the planning process. If the Track Capacity Usage is N or the Capacity Group field is blank, the system will not track capacity usage during the planning process. Values (Y/N).","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": ""},{"name": "ROUNDING_TYPE","description": "The type of rounding that will occur during rating. Value are: N=no rounding, I=round to nearest interval, F=floor, and C=ceiling.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'N','I','F','C'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ROUNDING_INTERVAL","description": "Numbers will be rounded (or truncated) to the nearest increment of this value.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ROUNDING_FIELDS_LEVEL","description": "Determines which kinds of fields will be affected by the rounding settings during costing. Values are 0-7, where 0=all fields, 1=none, 2=numeric fields only, 3=unit fields (weight, etc.), 4=currency, 5=numeric and unit fields, 6=numeric and currency fields, and 7=unit and currency fields.","dataType": "NUMBER","size": 2,"isNull": true,"isConstraint": true,"constraintValues": "","conditionalConstraint": "ROUNDING_FIELDS_LEVEL BETWEEN 0 AND 7","defaultValue": "0"},{"name": "ROUNDING_APPLICATION","description": "Determines when to apply the rounding rules. Values are A/N/C/O where A=always, N=never, C=conditionals only, and O=cost calculations only.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'A','N','C','O'","conditionalConstraint": "","defaultValue": "'A'"},{"name": "DEFICIT_CALCULATIONS_TYPE","description": "When to apply deficit calculations. Values are Y/N/P where Y = Yes, N = No and P = Payant Pour","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N','P','F','R'","conditionalConstraint": "","defaultValue": ""},{"name": "IS_CONTRACT_RATE","description": "Informational indicator to identify rate offerings that are managed for a client in a 3rd party logistics provider setup. Values (Y/N).","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "USE_TACT_AS_DISPLAY_RATE_1","description": "If Y, the build shipment logic will invoke the rating engine a second time, restricting it's search to TACT rates only, and apply the result to the shipment as a display rate.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "IS_DIRECT_ONLY_RATE","description": "If Y, this rate will only be applicable to direct shipments.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "HAZARDOUS_RATE_TYPE","description": "N - Applies to shipments with no hazardous items, H - Applies only to shipments with hazardous items, A - Applies to hazardous and non-hazardous shipments.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'N','A','H'","conditionalConstraint": "","defaultValue": "'A'"},{"name": "USE_TACT_AS_DISPLAY_RATE_2","description": "If Y, the build shipment logic will invoke the rating engine a second time, restricting it's search to TACT rates only, and apply the result.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "USE_TACT_AS_DISPLAY_RATE_3","description": "If Y, the build shipment logic will invoke the rating engine a second time, restricting it's search to TACT rates only, and apply the result.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "DOMAIN_PROFILE_GID","description": "Providing a domain profile allows for the rate offering to be constrained to the domains in the domain profile and serves as a constraint on the rate offering. If none of the rate offerings have a customer domain profile constraint, then all rate offerings are returned. If some of the rate offerings have customer domain profiles, the rate offerings are grouped by service provider. For each service provider, only the offerings whose domain profile constraint is satisfied are returned. So, given two rate offerings, one with a constraint, and one without a constraint: if the order release domain list is compatible with the constraint, only the rate offering with the constraint is returned, otherwise, only the offering without the constraint is returned.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ROUTE_EXECUTION_RATE","description": "If 'Y', this rate offering is used for Route Execution only. For migration: old existing rate offerings migrated to the default value ('N').","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "MIN_TENDER_LEAD_TIME","description": "The lower bound of a tender lead time. That is, if tender lead time of a shipment is less than this lower bound, rate would be invalid.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_TENDER_LEAD_TIME_UOM_CODE","description": "The minimum tender lead time unit of measure. Days, Hours, minutes.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_TENDER_LEAD_TIME_BASE","description": "Minimum tender lead time in base units of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_TENDER_LEAD_TIME","description": "The upper bound of tender lead time. That is, if tender lead time of a shipment is bigger than this upper bound, rate would be invalid.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_TENDER_LEAD_TIME_UOM_CODE","description": "The maximum tender lead time unit of measure. Days, Hours, minutes.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_TENDER_LEAD_TIME_BASE","description": "The maximum tender lead time in base units of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGE_WEIGHT_MIN","description": "Not a constraint. Weight value used when calculating total shipment minimum package weight. During rating, it will be multiplied by the number of packages on the shipment, and accessed by the Minimum Package Weight RBI.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGE_WEIGHT_MIN_UOM_CODE","description": "Package weight minimum unit of measure.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGE_WEIGHT_MIN_BASE","description": "Package weight minimum in base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_AVERAGE_PKG_WEIGHT","description": "Constraint. If the total shipment weight/number of packages > this constraint, the rate will not be considered.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_AVERAGE_PKG_WEIGH_UOM_CODE","description": "The unit of measure for the average package weight.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_AVERAGE_PKG_WEIGH_BASE","description": "Average package weight in base units of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PACKAGE_COUNT_METHOD","description": "Determines how packages are counted when testing the Maximum Average Package Weight constraint. L - Use line item package count. U - Ship unit count.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'L','U'","conditionalConstraint": "","defaultValue": "'L'"},{"name": "MAX_SHIPUNIT_LINE_PKG_WEIGHT","description": "The ship unit line weight maximum is used to match with ship unit lines. This field represents the maximum value allowed by this contract for the weight of a single package.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SHIPUNIT_LINE_PKG_UOM_CODE","description": "The unit of measure for ship unit line weight maximum.","dataType": "VARCHAR2","size": 64,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_SHIPUNIT_LINE_PKG_BASE","description": "The maximum ship unit line package base unit of measure.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_NUM_OF_SHIPMENT_SEGMENTS","description": "The Max Num of Shipment Segments field determines the maximum number of segments on a shipment. A segment is defined as starting when product is loaded on the equipment and ending when the equipment is completely emptied.","dataType": "NUMBER","size": 10,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "1"},{"name": "RO_TIME_PERIOD_DEF_GID","description": "The time period definition (if any) assigned to the rate offering for the purposes of tiered rating.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "EXT_RE_FIELDSET_GID","description": "Specifies the external rating engine fieldset to be used when invoking an external rating engine using our generic interface.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_OFFERING_SEQ","description": "System generated unique identifier for a rate offering. Internal use only.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "LOGIC_CONFIG_GID","description": "Specifies the logic config group ID used to look up any logic parameters specified as charge multipliers.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "Database domain where this data is stored.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "The user ID of the data insert user.","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "Date and time of data insert.","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "The user ID of the data update user.","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "Date and time of the most recent data update.","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_TEMPLATE","description": "Used to identify rate offerings that will be used as a rate record template for Sourcing. Values (Y/N).","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_SOURCING_RATE","description": "Indicates is the rate offering is a sourcing rate offering. Sourcing rates are view only within the system. Values (Y/N).","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "ATTRIBUTE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE11","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE12","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE13","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE14","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE15","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE16","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE17","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE18","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE19","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE20","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)","dataType": "VARCHAR2","size": 150,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_NUMBER10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE1","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE2","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE3","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE4","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE5","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE6","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE7","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE8","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE9","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ATTRIBUTE_DATE10","description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FALLBACK_RATE_SERVICE_GID","description": "The fall back rate service will be used for driving the shipment if the regular rate service is unable to drive the shipment. For example, you may typically have voyage information for two months into the future. However, sometimes a possible order will come in for three months into the future. This works for all rate inquiry types. For example, this will enable you to run rate inquiry Network Rate and Route for this order information, using the same itineraries and rates, and get answers for rate and route even though you do not have voyage information that far in the future. The parameter FALLBACK RS NUM OF DAYS determines how many days into the future to allow use of the fallback rate offering.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PARENT_RATE_OFFERING_GID","description": "The Parent Rate Offering field is used with rate maintenance. The Parent Rate Offering ID provides a way to track different versions of the rates during the approval process. To compare rate versions, you must specify either a parent rate offering ID or parent rate record ID on any template rate offerings or rate records.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "CALC_CHARGEABLE_WT_VOL_WITH","description": "This field provides different options for calculating the shipments total weight and volume. 'Shipment Total Dimensional Weight/Volume', the chargeable weight/volume will be calculated based on the Shipment Total Dimensional Weight/Volume. 'Sum of Individual Ship Unit Dimensional Weight/Volume', the chargeable weight/volume will be calculated based on the Sum of Individual Ship Unit Dimensional Weight/Volume.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_DIGITAL_FREIGHT","description": "If set to Y, then fetch rates from digital freight and use them only for tender.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "MAX_DIGI_FRT_PCT","description": "Define a percentage around how much higher the carrier rates are compared to the planned cost of the shipment when using rates from digital freight.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ABSOLUTE_COST_DF","description": "Absolute cost for digital freight rates.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ABSOLUTE_COST_DF_BASE","description": "Absolute cost in base units.","dataType": "NUMBER","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "ABSOLUTE_COST_DF_CURR_GID","description": "The currency GID for the absolute cost.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_MARKET_RATE","description": "If Y then this rate will be used to fetch market rates for the shipment.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y', 'N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "SERVPROV_PROFILE_GID","description": "A unique identifier to define the group profile for multiple service providers.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "RATE_SERVICE_PROFILE_GID","description": "A unique identifier to define the group profile for multiple rate services.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_PROFILE_GID","description": "A unique identifier to define the group profile for multiple modes.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "RATE_OFFERING_GID"}],"foreignKeys": [{"foreignKeyName": "FK_RO_OFFERING_TYPE_GID","cascadeDelete": false,"parentTableName": "RATE_OFFERING_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_OFFERING_TYPE_GID","columnName": "RATE_OFFERING_TYPE_GID"}]},{"foreignKeyName": "FK_RO_SERVPROV_GID","cascadeDelete": false,"parentTableName": "SERVPROV","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_GID","columnName": "SERVPROV_GID"}]},{"foreignKeyName": "FK_RO_RATE_GROUP_GID","cascadeDelete": false,"parentTableName": "RATE_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_GROUP_GID","columnName": "RATE_GROUP_GID"}]},{"foreignKeyName": "FK_RO_CURRENCY_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "CURRENCY_GID"}]},{"foreignKeyName": "FK_RO_TRANS_MODE_GID","cascadeDelete": false,"parentTableName": "TRANSPORT_MODE","columnRelation": [{"sequence": 1,"parentColumnName": "TRANSPORT_MODE_GID","columnName": "TRANSPORT_MODE_GID"}]},{"foreignKeyName": "FK_RO_EQUIP_GROUP_GID","cascadeDelete": false,"parentTableName": "EQUIPMENT_GROUP_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID","columnName": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"foreignKeyName": "FK_RATE_SERVICE_GID","cascadeDelete": false,"parentTableName": "RATE_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_SERVICE_GID","columnName": "RATE_SERVICE_GID"}]},{"foreignKeyName": "FK_RO_RATE_VERSION_GID","cascadeDelete": false,"parentTableName": "RATE_VERSION","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_VERSION_GID","columnName": "RATE_VERSION_GID"}]},{"foreignKeyName": "FK_RO_MIN_COST_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "MIN_COST_GID"}]},{"foreignKeyName": "FK_RO_RATE_DISTANCE_GID","cascadeDelete": false,"parentTableName": "RATE_DISTANCE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_DISTANCE_GID","columnName": "RATE_DISTANCE_GID"}]},{"foreignKeyName": "FK_RO_RATE_QUALITY_GID","cascadeDelete": false,"parentTableName": "RATE_QUALITY","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_QUALITY_GID","columnName": "RATE_QUALITY_GID"}]},{"foreignKeyName": "FK_RO_RCGID","cascadeDelete": false,"parentTableName": "RATE_CLASSIFICATION","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_CLASSIFICATION_GID","columnName": "RATE_CLASSIFICATION_GID"}]},{"foreignKeyName": "FK_RO_EREGID","cascadeDelete": false,"parentTableName": "EXTERNAL_RATING_ENGINE","columnRelation": [{"sequence": 1,"parentColumnName": "EXTERNAL_RATING_ENGINE_GID","columnName": "EXTERNAL_RATING_ENGINE_GID"}]},{"foreignKeyName": "FK_RO_CIRTY_DIST_COST_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "CIRCUITY_DISTANCE_COST_GID"}]},{"foreignKeyName": "FK_RO_FCP_GID","cascadeDelete": false,"parentTableName": "FLEX_COMMODITY_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "FLEX_COMMODITY_PROFILE_GID","columnName": "FLEX_COMMODITY_PROFILE_GID"}]},{"foreignKeyName": "FK_RO_SHIPPER_MIN_VALUE_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "SHIPPER_MIN_VALUE_GID"}]},{"foreignKeyName": "FK_RO_EXCHANGE_RATE_GID","cascadeDelete": false,"parentTableName": "EXCHANGE_RATE","columnRelation": [{"sequence": 1,"parentColumnName": "EXCHANGE_RATE_GID","columnName": "EXCHANGE_RATE_GID"}]},{"foreignKeyName": "FK_RO_RM_ABSOLUTE_MIN_COST_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "RM_ABSOLUTE_MIN_COST_GID"}]},{"foreignKeyName": "FK_RO_MAX_COST_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "MAX_COST_GID"}]},{"foreignKeyName": "FK_RO_SHORT_LINE_COST_GID","cascadeDelete": false,"parentTableName": "CURRENCY","columnRelation": [{"sequence": 1,"parentColumnName": "CURRENCY_GID","columnName": "SHORT_LINE_COST_GID"}]},{"foreignKeyName": "FK_RO_WEIGHT_BRK_PRO_GID","cascadeDelete": false,"parentTableName": "WEIGHT_BREAK_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "WEIGHT_BREAK_PROFILE_GID","columnName": "WEIGHT_BREAK_PROFILE_GID"}]},{"foreignKeyName": "FK_RO_DIMRATE_GID","cascadeDelete": false,"parentTableName": "DIM_RATE_FACTOR","columnRelation": [{"sequence": 1,"parentColumnName": "DIM_RATE_FACTOR_GID","columnName": "DIM_RATE_FACTOR_GID"}]},{"foreignKeyName": "FK_RO_CORP_PROFILE","cascadeDelete": false,"parentTableName": "CORPORATION_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "CORPORATION_PROFILE_GID","columnName": "CORPORATION_PROFILE_GID"}]},{"foreignKeyName": "FK_RO_CAPACITY_GROUP_GID","cascadeDelete": false,"parentTableName": "CAPACITY_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "CAPACITY_GROUP_GID","columnName": "CAPACITY_GROUP_GID"}]},{"foreignKeyName": "FK_RO_RAIL_INTERMODAL_PLAN","cascadeDelete": false,"parentTableName": "RAIL_INTER_MODAL_PLAN","columnRelation": [{"sequence": 1,"parentColumnName": "RAIL_INTER_MODAL_PLAN_GID","columnName": "RAIL_INTER_MODAL_PLAN_GID"}]},{"foreignKeyName": "FK_RO_REGION_GROUP_GID","cascadeDelete": false,"parentTableName": "REGION_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "REGION_GROUP_GID","columnName": "REGION_GROUP_GID"}]},{"foreignKeyName": "FK_RO_RO_TIME_PERIOD_DEF_GID","cascadeDelete": false,"parentTableName": "RO_TIME_PERIOD_DEF","columnRelation": [{"sequence": 1,"parentColumnName": "RO_TIME_PERIOD_DEF_GID","columnName": "RO_TIME_PERIOD_DEF_GID"}]},{"foreignKeyName": "FK_RO_EXT_RE_FIELDSET_GID","cascadeDelete": false,"parentTableName": "EXT_RE_FIELDSET","columnRelation": [{"sequence": 1,"parentColumnName": "EXT_RE_FIELDSET_GID","columnName": "EXT_RE_FIELDSET_GID"}]},{"foreignKeyName": "FK_RO_LOGIC_CONFIG_GID","cascadeDelete": false,"parentTableName": "LOGIC_CONFIG","columnRelation": [{"sequence": 1,"parentColumnName": "LOGIC_CONFIG_GID","columnName": "LOGIC_CONFIG_GID"}]},{"foreignKeyName": "FK_RATE_RATE_SERVICE_GID","cascadeDelete": false,"parentTableName": "RATE_SERVICE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_SERVICE_GID","columnName": "FALLBACK_RATE_SERVICE_GID"}]},{"foreignKeyName": "FK_RATE_SERVPROV_PROFILE_GID","cascadeDelete": false,"parentTableName": "SERVPROV_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "SERVPROV_PROFILE_GID","columnName": "SERVPROV_PROFILE_GID"}]},{"foreignKeyName": "FK_RATE_RATE_SERVICE_PROFILE","cascadeDelete": false,"parentTableName": "RATE_SERVICE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "RATE_SERVICE_PROFILE_GID","columnName": "RATE_SERVICE_PROFILE_GID"}]},{"foreignKeyName": "FK_RATE_MODE_PROFILE_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "MODE_PROFILE_GID"}]}],"childTables": ["ACTIVITY_TIME_DEF","CAPACITY_COMMITMENT_ALLOC_D","CM_ENDING_EXCLUSION_REGION","CM_RULE","COMMIT_ALLOC_USAGE_D","DM_RULE","DM_RULE_D","DM_TRANSACTION_LINEITEM","DRIVER","DRIVER_TYPE","LEG","LOGISTICS_GUIDE_DETAIL","OB_LEG_CONSTRAINT","OB_ORDER_BASE","ORDER_MOVEMENT","ORDER_RELEASE","ORDER_RELEASE_LEG_CONSTRAINT","PLANNING_RATE_OFFERING","P_PROJECT_RATE_OFFERING","QUOTE_COST_OPTION_SHIPMENT","RATE_BASE_DEF","RATE_FACTOR_RULE_JOIN","RATE_GEO","RATE_LOAD_DATA","RATE_LOAD_DEFINITION","RATE_LOAD_RO_D","RATE_LOAD_RR_D","RATE_OFFERING_ACCESSORIAL","RATE_OFFERING_COMMENT","RATE_OFFERING_INV_PARTY","RATE_OFFERING_REMARK","RATE_OFFERING_STOPS","RATE_PREFERENCE_DETAIL","RATE_RULES_AND_TERMS","RESOURCE_SCHEDULE","RESOURCE_SCHEDULE_INSTANCE","RO_LANE_SPECIAL_SERVICE","RO_NMFC_CODE_SUBST","RO_SPECIAL_SERVICE","SC_RULE_CONTRACT","SECONDARY_CHARGE_RULE","SHIPMENT","SHIP_COMMIT_ALLOC_JOIN","SMC_DISCOUNT","TENDER_SERVPROV_SPOT_RATE","TEXT_TEMPLATE_PROFILE","UDC_CLASSIFICATION_LIST_D"],"indices": [{"indexName": "UK_RATE_OFFERING_SEQ","columnNames": [{"sequence": 1,"name": "RATE_OFFERING_SEQ"}]},{"indexName": "IX_RATE_OFFERING_XID","columnNames": [{"sequence": 1,"name": "RATE_OFFERING_XID"}]},{"indexName": "IX_RATE_SERVICE_GID","columnNames": [{"sequence": 1,"name": "RATE_SERVICE_GID"}]},{"indexName": "IX_RO_CAPACITY_GROUP_GID","columnNames": [{"sequence": 1,"name": "CAPACITY_GROUP_GID"}]},{"indexName": "IX_RO_CIRTY_DIST_COST_GID","columnNames": [{"sequence": 1,"name": "CIRCUITY_DISTANCE_COST_GID"}]},{"indexName": "IX_RO_CORP_PROFILE","columnNames": [{"sequence": 1,"name": "CORPORATION_PROFILE_GID"}]},{"indexName": "IX_RO_CURRENCY_GID","columnNames": [{"sequence": 1,"name": "CURRENCY_GID"}]},{"indexName": "IX_RO_DIMRATE_GID","columnNames": [{"sequence": 1,"name": "DIM_RATE_FACTOR_GID"}]},{"indexName": "IX_RO_EQUIP_GROUP_GID","columnNames": [{"sequence": 1,"name": "EQUIPMENT_GROUP_PROFILE_GID"}]},{"indexName": "IX_RO_EREGID","columnNames": [{"sequence": 1,"name": "EXTERNAL_RATING_ENGINE_GID"}]},{"indexName": "IX_RO_EXCHANGE_RATE_GID","columnNames": [{"sequence": 1,"name": "EXCHANGE_RATE_GID"}]},{"indexName": "IX_RO_EXT_RE_FIELDSET_GID","columnNames": [{"sequence": 1,"name": "EXT_RE_FIELDSET_GID"}]},{"indexName": "IX_RO_FCP_GID","columnNames": [{"sequence": 1,"name": "FLEX_COMMODITY_PROFILE_GID"}]},{"indexName": "IX_RO_LOGIC_CONFIG_GID","columnNames": [{"sequence": 1,"name": "LOGIC_CONFIG_GID"}]},{"indexName": "IX_RO_MAX_COST_GID","columnNames": [{"sequence": 1,"name": "MAX_COST_GID"}]},{"indexName": "IX_RO_MIN_COST_GID","columnNames": [{"sequence": 1,"name": "MIN_COST_GID"}]},{"indexName": "IX_RO_OFFERING_TYPE_GID","columnNames": [{"sequence": 1,"name": "RATE_OFFERING_TYPE_GID"}]},{"indexName": "IX_RO_RAIL_INTERMODAL_PLAN","columnNames": [{"sequence": 1,"name": "RAIL_INTER_MODAL_PLAN_GID"}]},{"indexName": "IX_RO_RATE_DISTANCE_GID","columnNames": [{"sequence": 1,"name": "RATE_DISTANCE_GID"}]},{"indexName": "IX_RO_RATE_GROUP_GID","columnNames": [{"sequence": 1,"name": "RATE_GROUP_GID"}]},{"indexName": "IX_RO_RATE_QUALITY_GID","columnNames": [{"sequence": 1,"name": "RATE_QUALITY_GID"}]},{"indexName": "IX_RO_RATE_VERSION_GID","columnNames": [{"sequence": 1,"name": "RATE_VERSION_GID"}]},{"indexName": "IX_RO_RCGID","columnNames": [{"sequence": 1,"name": "RATE_CLASSIFICATION_GID"}]},{"indexName": "IX_RO_REGION_GROUP_GID","columnNames": [{"sequence": 1,"name": "REGION_GROUP_GID"}]},{"indexName": "IX_RO_RM_ABSOLUTE_MIN_COST_GID","columnNames": [{"sequence": 1,"name": "RM_ABSOLUTE_MIN_COST_GID"}]},{"indexName": "IX_RO_RO_TIME_PERIOD_DEF_GID","columnNames": [{"sequence": 1,"name": "RO_TIME_PERIOD_DEF_GID"}]},{"indexName": "IX_RO_SERVPROV_GID","columnNames": [{"sequence": 1,"name": "SERVPROV_GID"}]},{"indexName": "IX_RO_SHIPPER_MIN_VALUE_GID","columnNames": [{"sequence": 1,"name": "SHIPPER_MIN_VALUE_GID"}]},{"indexName": "IX_RO_SHORT_LINE_COST_GID","columnNames": [{"sequence": 1,"name": "SHORT_LINE_COST_GID"}]},{"indexName": "IX_RO_TRANS_MODE_GID","columnNames": [{"sequence": 1,"name": "TRANSPORT_MODE_GID"}]},{"indexName": "IX_RO_WEIGHT_BRK_PRO_GID","columnNames": [{"sequence": 1,"name": "WEIGHT_BREAK_PROFILE_GID"}]},{"indexName": "IX_RO_PARENT_RATE_OFFER_GID","columnNames": [{"sequence": 1,"name": "PARENT_RATE_OFFERING_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "rate_offering",
+    "description": "The contract between the carrier and the consignee (or service provider.  One record per contract."
+  },
+  "columns": [
+    {
+      "name": "RATE_OFFERING_GID",
+      "description": "The GID for the rate offering.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_OFFERING_XID",
+      "description": "The XID for the rate offering.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_OFFERING_TYPE_GID",
+      "description": "The GID for the rate offering type.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_OFFERING_DESC",
+      "description": "Stores descriptive information about the rate offering.",
+      "dataType": "VARCHAR2",
+      "size": 255,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SERVPROV_GID",
+      "description": "The GID for the service provider.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_GROUP_GID",
+      "description": "The GID for the rate group.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CURRENCY_GID",
+      "description": "The GID for the currency.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TRANSPORT_MODE_GID",
+      "description": "The GID for the transport mode.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_CLASSIFICATION1",
+      "description": "The user classification fields are provided to capture information about the rate offering's usage. VARCHAR2(30)",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_CLASSIFICATION2",
+      "description": "The user classification fields are provided to capture information about the rate offering's usage. VARCHAR2(30)",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_CLASSIFICATION3",
+      "description": "The user classification fields are provided to capture information about the rate offering's usage. VARCHAR2(30)",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "USER_CLASSIFICATION4",
+      "description": "The user classification fields are provided to capture information about the rate offering's usage. VARCHAR2(30)",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EQUIPMENT_GROUP_PROFILE_GID",
+      "description": "The GID for the equipment group profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_SERVICE_GID",
+      "description": "The GID for the rate service.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_VERSION_GID",
+      "description": "The GID for the rate version.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_DISTANCE_CONSTRAINT",
+      "description": "The maximum distance field is intended to be used to match the rate offering with shipments. The system calculates the distance between the source and destination address of the shipment being considered, then compares that calculated distance to the maximum Distance field value to see if the rate offering matches or is below the maximum distance constraint.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_DIST_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the maximum distance. Usually MI or KM.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_DIST_CONSTRAINT_BASE",
+      "description": "The maximum distance constraint value in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_WEIGHT_CONSTRAINT",
+      "description": "The minimum weight constraint is used when matching rate offerings with shipments. If a shipment's weight is less than the minimum value, then this rate offering does not qualify for the shipment in question.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_WEIGHT_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the minimum weight constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_WEIGHT_CONSTRAINT_BASE",
+      "description": "The minimum weight constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_WEIGHT_CONSTRAINT",
+      "description": "The maximum weight constraint is used when matching rate offerings with shipments. If a shipment's weight is greater than the maximum value, then this rate offering does not qualify for the shipment in question.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_WEIGHT_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the maximum weight constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_WEIGHT_CONSTRAINT_BASE",
+      "description": "The maximum weight constrain in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_VOLUME_CONSTRAINT",
+      "description": "The minimum volume constraint is used when matching rate offerings with shipments. If a shipment's volume is less than the minimum value, then this rate offering does not qualify for the shipment in question.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_VOLUME_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the maximum volume constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_VOLUME_CONSTRAINT_BASE",
+      "description": "The minimum volume constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_VOLUME_CONSTRAINT",
+      "description": "The maximum volume constraint is used when matching rate offerings with shipments. If a shipment's volume is greater than the maximum value, then this rate offering does not qualify for the shipment in question.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_VOLUME_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the maximum volume constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_VOLUME_CONSTRAINT_BASE",
+      "description": "The unit of measure for the maximum weight constraint.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SHIP_UNIT_WEIGHT",
+      "description": "The maximum ship unit weight constraint is used when matching rate offerings with shipments. If any ship unit on the shipment exceeds the maximum ship unit weight, this rate offering does not qualify for the shipment in question.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SHIP_UNIT_WEIGHT_UOM_CODE",
+      "description": "The unit of measure for the maximum ship unit weight constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SHIP_UNIT_WEIGHT_BASE",
+      "description": "The maximum ship unit weight in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_NAME",
+      "description": "The Tariff Name fields allows you to put the name of the tariff that the rate offering is related to. For example, if this is a base rate offering you can put the name of the tariff that the rate offering is based on/is using.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_COST",
+      "description": "The Minimum Cost field stores the absolute minimum charge that applies for the rate offering.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_COST_GID",
+      "description": "The GID for minimum cost.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_COST_BASE",
+      "description": "The minimum cost in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_DISTANCE_GID",
+      "description": "The GID for rate distance.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_QUALITY_GID",
+      "description": "The GID for rate quantity.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_CLASSIFICATION_GID",
+      "description": "The GID for rate classification.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXTERNAL_RATING_ENGINE_GID",
+      "description": "The GID for the external rating engine.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CIRCUITY_ALLOWANCE_PERCENT",
+      "description": "Circuity Allowance Percent indicates the allowed amount of out of route distance (as a percent of the direct source to final destination distance) that is free/ before Circuitous Distance Cost are charged.  Circuity Allowance Percent = (t/d-1)*100 where: t is the allowed total distance traveled between the first and last stop of the shipment. d is the shortest distance between the first and last stop of the shipment. If the allowed total distance is 1500 miles and the distance between the first and last stop is 1300 miles, Circuity Allowance Percent = (1500/1300-1)*100 = (1.15-1)*100 = 15%. The lower the percentage, the more in line the route must be.",
+      "dataType": "NUMBER",
+      "precision": 5,
+      "scale": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TOTAL_STOPS_CONSTRAINT",
+      "description": "For rate offerings where the service provider will provide multi-stop coverage, the total stops constraints sets a constraint on the total number of stops (pickup and delivery) that the rate can be used for.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PICKUP_STOPS_CONSTRAINT",
+      "description": "For rate offerings where the service provider will provide multi-stop coverage, the total pickup stops constraints sets a constraint on the total number of pickup stops that the rate can be used for.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DELIVERY_STOPS_CONSTRAINT",
+      "description": "For rate offerings where the service provider will provide multi-stop coverage, the total delivery stops constraints sets a constraint on the total number of delivery stops that the rate can be used for.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CIRCUITY_DISTANCE_COST",
+      "description": "Circuity Distance Cost is the per distance unit charge for each unit over the included/free amount.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CIRCUITY_DISTANCE_COST_GID",
+      "description": "The GID for the circuity distance cost.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CIRCUITY_DISTANCE_COST_BASE",
+      "description": "The circuity distance cost in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_CIRCUITY_PERCENT",
+      "description": "The rate offering constraint that defines the maximum circuity percent for the rate offering. If this value is exceeded, the rate offering cannot be applied to the shipment. To use this field, you must have a value in the Circuity Distance Cost field. If there is no additional cost applicable, then enter a cost of 0.00.",
+      "dataType": "NUMBER",
+      "precision": 5,
+      "scale": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_CIRCUITY_DISTANCE",
+      "description": "The rate offering constraint that defines the maximum circuity distance for the rate offering. If this value is exceeded, the rate offering cannot be applied to the shipment. To use this field, you must have a value in the Circuity Distance Cost field. If there is no additional cost applicable, then enter a cost of 0.00.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_CIRCUITY_DISTANCE_UOM_CODE",
+      "description": "Defines the distance unit of measure for calculating out of route percent or distance and related charges.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_CIRCUITY_DISTANCE_BASE",
+      "description": "The maximum circuity distance in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "STOPS_INCLUDED_IN_RATE",
+      "description": "The Stops Included in Rate field indicates the number of free stops included in the rate offering before stop-off charges apply. The source and destination locations count as stops so, typically, the minimum number of stops included in the rate is 2. Additional charges apply for all stops not included in the rate.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FLEX_COMMODITY_PROFILE_GID",
+      "description": "The GID for the flex commodity profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPPER_MIN_VALUE",
+      "description": "HIDE",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPPER_MIN_VALUE_GID",
+      "description": "The GID for the shipper minimum value.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHIPPER_MIN_VALUE_BASE",
+      "description": "The shipper minimum value in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXCHANGE_RATE_GID",
+      "description": "The GID for the exchange rate.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COMMODITY_USAGE",
+      "description": "Indicates if the rate offering is or is not a commodity based rate offering i.e., are rates based on the classification of the freight. Values (F/C).",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'F','C'",
+      "conditionalConstraint": "",
+      "defaultValue": "'F'"
+    },
+    {
+      "name": "FAK_RATE_AS",
+      "description": "Freight all kinds rate as commodity. Values (Y/N).",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "FAK_FLEX_COMMODITY_VALUE",
+      "description": "Freight all kinds rate as commodity value.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RM_ABSOLUTE_MIN_COST",
+      "description": "The Absolute Minimum Base Charge field determines the minimum charge that applies regardless of discounted savings.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RM_ABSOLUTE_MIN_COST_GID",
+      "description": "The GID for the absolute minimum base charge.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RM_ABSOLUTE_MIN_COST_BASE",
+      "description": "The absolute minimum base charge in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_COST",
+      "description": "The absolute maximum cost that applies, regardless of actual rated cost to ship.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_COST_GID",
+      "description": "The GID for the maximum cost.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_COST_BASE",
+      "description": "The maximum cost in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_STOPS",
+      "description": "The absolute minimum number of stops allowed for shipments using this rate.",
+      "dataType": "NUMBER",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHORT_LINE_COST",
+      "description": "HIDE",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHORT_LINE_COST_GID",
+      "description": "The GID for the short line cost.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SHORT_LINE_COST_BASE",
+      "description": "The short line cost in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_LENGTH_CONSTRAINT",
+      "description": "The minimum length constraint is used when matching the rate offering to a shipment. If a ship unit's length is less than the minimum, the rate offering does not qualify.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_LENGTH_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the minimum length constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_LENGTH_CONSTRAINT_BASE",
+      "description": "The minimum length constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_LENGTH_CONSTRAINT",
+      "description": "The maximum length constraint is used when matching the rate offering to a shipment. If a ship unit's length requirements is greater than the maximum length constraint, the rate offering does not qualify.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_LENGTH_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the maximum length constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_LENGTH_CONSTRAINT_BASE",
+      "description": "The maximum length constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_WIDTH_CONSTRAINT",
+      "description": "The minimum width constraint is used when matching the rate offering to a shipment. If a ship unit's width is less than the minimum, the rate offering does not qualify.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_WIDTH_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the minimum width constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_WIDTH_CONSTRAINT_BASE",
+      "description": "The minimum width constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_WIDTH_CONSTRAINT",
+      "description": "The maximum width constraint is used when matching the rate offering to a shipment. If a ship unit's length requirements is greater than the maximum width constraint, the rate offering does not qualify.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_WIDTH_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the maximum width constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_WIDTH_CONSTRAINT_BASE",
+      "description": "The maximum width constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_HEIGHT_CONSTRAINT",
+      "description": "The minimum height constraint is used when matching the rate offering to a shipment. If a ship unit's height is less than the minimum, the rate offering does not qualify.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_HEIGHT_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the minimum height constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_HEIGHT_CONSTRAINT_BASE",
+      "description": "The minimum height constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_HEIGHT_CONSTRAINT",
+      "description": "The maximum height constraint is used when matching the rate offering to a shipment. If a ship units' length requirements is greater than the maximum height constraint the rate offering does not qualify.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_HEIGHT_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the maximum height constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_HEIGHT_CONSTRAINT_BASE",
+      "description": "The maximum height constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_GIRTH_CONSTRAINT",
+      "description": "The minimum girth constraint is used when matching the rate offering to a shipment. If a ship unit's girth is less than the minimum, the rate offering does not qualify. Note: Dimensional girth is calculated as length + (2xWidth + 2xHeight).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_GIRTH_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the minimum girth constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_GIRTH_CONSTRAINT_BASE",
+      "description": "The minimum girth constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_GIRTH_CONSTRAINT",
+      "description": "The maximum girth constraint is used when matching the rate offering to a shipment. If a ship unit's length requirements is greater than the maximum girth constraint the rate offering does not qualify. Note: Dimensional girth is calculated as length + (2xWidth + 2xHeight).",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_GIRTH_CONSTRAINT_UOM_CODE",
+      "description": "The unit of measure for the maximum girth constraint.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_GIRTH_CONSTRAINT_BASE",
+      "description": "The maximum girth constraint in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_BREAK_PROFILE_GID",
+      "description": "The GID for the weight break profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MULTI_STOP_COST_METHOD",
+      "description": "HIDE",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'L','F','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "WEIGHT_UOM_CODE",
+      "description": "The unit of measure for weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "VOLUME_UOM_CODE",
+      "description": "The unit of measure for volume.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DISTANCE_UOM_CODE",
+      "description": "The unit of measure for distance.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DIM_RATE_FACTOR_GID",
+      "description": "The GID for the DIM rate factor.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PERSPECTIVE",
+      "description": "Indicates if the rate offering can be used for Buy shipment rating (B) or Sell shipment rating (S) or if the rate offering supports Both Buy and Sell shipment rating (A). Values (B/S/A).",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'B','S','A'",
+      "conditionalConstraint": "",
+      "defaultValue": "'B'"
+    },
+    {
+      "name": "CORPORATION_PROFILE_GID",
+      "description": "The GID for the corporation profile.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CAPACITY_GROUP_GID",
+      "description": "The GID for the capacity group.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CM_MAX_NUM_SHIPMENTS",
+      "description": "The maximum shipments in a continuous move tour.",
+      "dataType": "NUMBER",
+      "size": 5,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CM_IS_SAME_EQUIP",
+      "description": "Indicates whether the shipments in the continuous move tour are restricted to utilize the same equipment type.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CM_PREV_SHIPMENT_PERCENT",
+      "description": "The percentage of the empty leg cost allocated to previous shipment.",
+      "dataType": "NUMBER",
+      "precision": 5,
+      "scale": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CM_IS_PERCENT_OF_DISTANCE",
+      "description": "Indicates whether the percent of the total loaded distance is used to allocate the empty leg cost.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_REFNUM_QUALIFIER",
+      "description": "Tariff Refnum Qualifier is an informational field that allows you to qualify the Tariff Ref Num field. For example you can qualify the Tariff Ref Num fields with the Tariff Refnum Qualifier fields using standard qualifier that describe the relationship of the shipper and service provider regarding the prices related to the rate offering. The property glog.shipment.tarifffields.active determines if tariff fields are automatically copied from a rate offering to a shipment.",
+      "dataType": "VARCHAR2",
+      "size": 3,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_REFNUM",
+      "description": "Tariff Refnum is an informational field that can be used to store the rate offerings related tariff number. The Tariff Refnum should be qualified by the Tariff Refnum Qualifier.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_PUB_AUTHORITY",
+      "description": "Tariff Pub Authority is an informational field that can be used to store the rate offerings related tariff publication authority.",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_REG_AGENCY_CODE",
+      "description": "The Tariff Reg Agency Code is an informational field that is meant to store information about the regulatory agency that the rates are fled with. For example the STB (Surface Transportation Board) or ICC) Interstate Commerce Commission.",
+      "dataType": "VARCHAR2",
+      "size": 5,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_AGENCY_CODE",
+      "description": "Tariff Agency Code is an informational field that can be used to store the service provider SCAC or initials of the entity who owns the tariff such as the Railroad Publication Service.",
+      "dataType": "VARCHAR2",
+      "size": 4,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_ISSUING_CARRIER_ID",
+      "description": "The Tariff Issuing Carrier field is an informational field that is meant to store information from the service provider related to the tariff. Examples are C, JQ, SCQ, QTAMR, UPLQ, BNQ, X, BC, NSPQ.",
+      "dataType": "VARCHAR2",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_REFNUM_SUFFIX",
+      "description": "Tariff Refnum Suffix is a suffix field for the tariff reference number.",
+      "dataType": "VARCHAR2",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_SUPPLEMENT_ID",
+      "description": "The Tariff Supplement ID field is an informational field that is meant to provide information related to tariff amendments, revisions, or supplements of the rate authority.",
+      "dataType": "VARCHAR2",
+      "size": 4,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TARIFF_EFFECTIVE_DATE",
+      "description": "The Tariff Effective Date is an informational field that stores the date when the tariff goes into effect or can be used. This is not the rate offering effective date.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ALLOW_UNCOSTED_LINE_ITEMS",
+      "description": "Allow Uncosted Line Items (Y/N) is used when there are one or more ratable objects on the shipment which are not charged or considered for rating when rating a shipment using rate record. Marked: Some basis options within a shipment pass through the rating engine without a charge if other basis options qualify. For example, if a shipment contains four line items, and a rate is found that contains charges for 3 of those items, that rate qualifies for the shipment and the fourth line item ships for free.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "RAIL_INTER_MODAL_PLAN_GID",
+      "description": "The GID for the rail inter-modal plan.  I.e., Plan 20: door-to-door, Plan 25: ramp-to-ramp, etc.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CUSTOMER_RATE_CODE",
+      "description": "This code signifies what rate is used on a leg; either 'C' for the Customer's rate, or 'S' for the Shipper's rate.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'C','S'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "COFC_TOFC",
+      "description": "Container-On-Flat-Car Trailer-On-Flat-Car code used along with the Rail Inter Modal Plan to determine the rate.",
+      "dataType": "CHAR",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'C','T','F'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ACTIVE",
+      "description": "Indicates if the rate offering is active (Y) or inactive (N). If inactive (N) the rate offering will not be used in planning. Values (Y/N).",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "HANDLES_UNKNOWN_SHIPPER",
+      "description": "HIDE",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "USES_TIME_BASED_RATES",
+      "description": "HIDE",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "EXPIRE_MARK_ID",
+      "description": "Indicates that the rate has been marked for expiration.",
+      "dataType": "VARCHAR2",
+      "size": 30,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_DISTANCE_CONSTRAINT",
+      "description": "The minimum distance required for this rate offering to be valid.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_DISTANCE_CONSTRNT_UOM_CODE",
+      "description": "The unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_DISTANCE_CONSTRAINT_BASE",
+      "description": "The minimum distance required for this rate offering to be valid, in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "REGION_GROUP_GID",
+      "description": "The Region Group field is an informational region group that allows you to define a set of regions that represent the regions covered by the rate offering.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_DEPOT_APPLICABLE",
+      "description": "If the Depot Applicable option is selected, then the depot stops (source and/or destination locations) will be saved to the shipment. If it is not selected, the depot stops will not be saved to the shipment, but they will be charged and saved to the shipment financials if it is defined in the itinerary. Values (Y/N).",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "RECALCULATE_COST",
+      "description": "For some time-based rates, the shipment cost calculated during bulk plan and build shipment process may need to be recalculated since it is time dependent. The Recalculate Cost option is used to force the recalculating of cost after a shipment is built. This option works in conjunction with the Rerate All Shipments After Bulk Plan parameter as follows. If the Recalculate Cost is set, planning logic will make sure to account for service time-based rating costs when making planning decisions, and that this has the potential for increasing run-time. If Rerate All Shipments After Bulk Plan is TRUE, shipments will be re-rated regardless of the Recalculate Cost check box. If Rerate All Shipments After Bulk Plan is FALSE and the Recalculate Cost check box is selected, then the system recalculates the shipment cost keeping the same service provider and equipment. If Rerate All Shipments After Bulk Plan is FALSE and the Recalculate Cost option check box is cleared, then the shipment cost is not recalculated.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "TRACK_CAPACITY_USAGE",
+      "description": "The Track Capacity Usage field when set to Y, and the Capacity Group field if provided, causes the system to track capacity usage during the planning process. If the Track Capacity Usage is N or the Capacity Group field is blank, the system will not track capacity usage during the planning process. Values (Y/N).",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUNDING_TYPE",
+      "description": "The type of rounding that will occur during rating. Value are: N=no rounding, I=round to nearest interval, F=floor, and C=ceiling.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'N','I','F','C'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ROUNDING_INTERVAL",
+      "description": "Numbers will be rounded (or truncated) to the nearest increment of this value.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ROUNDING_FIELDS_LEVEL",
+      "description": "Determines which kinds of fields will be affected by the rounding settings during costing. Values are 0-7, where 0=all fields, 1=none, 2=numeric fields only, 3=unit fields (weight, etc.), 4=currency, 5=numeric and unit fields, 6=numeric and currency fields, and 7=unit and currency fields.",
+      "dataType": "NUMBER",
+      "size": 2,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "",
+      "conditionalConstraint": "ROUNDING_FIELDS_LEVEL BETWEEN 0 AND 7",
+      "defaultValue": "0"
+    },
+    {
+      "name": "ROUNDING_APPLICATION",
+      "description": "Determines when to apply the rounding rules. Values are A/N/C/O where A=always, N=never, C=conditionals only, and O=cost calculations only.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'A','N','C','O'",
+      "conditionalConstraint": "",
+      "defaultValue": "'A'"
+    },
+    {
+      "name": "DEFICIT_CALCULATIONS_TYPE",
+      "description": "When to apply deficit calculations. Values are Y/N/P where Y = Yes, N = No and P = Payant Pour",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N','P','F','R'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_CONTRACT_RATE",
+      "description": "Informational indicator to identify rate offerings that are managed for a client in a 3rd party logistics provider setup. Values (Y/N).",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "USE_TACT_AS_DISPLAY_RATE_1",
+      "description": "If Y, the build shipment logic will invoke the rating engine a second time, restricting it's search to TACT rates only, and apply the result to the shipment as a display rate.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "IS_DIRECT_ONLY_RATE",
+      "description": "If Y, this rate will only be applicable to direct shipments.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "HAZARDOUS_RATE_TYPE",
+      "description": "N - Applies to shipments with no hazardous items, H - Applies only to shipments with hazardous items, A - Applies to hazardous and non-hazardous shipments.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'N','A','H'",
+      "conditionalConstraint": "",
+      "defaultValue": "'A'"
+    },
+    {
+      "name": "USE_TACT_AS_DISPLAY_RATE_2",
+      "description": "If Y, the build shipment logic will invoke the rating engine a second time, restricting it's search to TACT rates only, and apply the result.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "USE_TACT_AS_DISPLAY_RATE_3",
+      "description": "If Y, the build shipment logic will invoke the rating engine a second time, restricting it's search to TACT rates only, and apply the result.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "DOMAIN_PROFILE_GID",
+      "description": "Providing a domain profile allows for the rate offering to be constrained to the domains in the domain profile and serves as a constraint on the rate offering. If none of the rate offerings have a customer domain profile constraint, then all rate offerings are returned. If some of the rate offerings have customer domain profiles, the rate offerings are grouped by service provider. For each service provider, only the offerings whose domain profile constraint is satisfied are returned. So, given two rate offerings, one with a constraint, and one without a constraint: if the order release domain list is compatible with the constraint, only the rate offering with the constraint is returned, otherwise, only the offering without the constraint is returned.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ROUTE_EXECUTION_RATE",
+      "description": "If 'Y', this rate offering is used for Route Execution only. For migration: old existing rate offerings migrated to the default value ('N').",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "MIN_TENDER_LEAD_TIME",
+      "description": "The lower bound of a tender lead time. That is, if tender lead time of a shipment is less than this lower bound, rate would be invalid.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_TENDER_LEAD_TIME_UOM_CODE",
+      "description": "The minimum tender lead time unit of measure. Days, Hours, minutes.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_TENDER_LEAD_TIME_BASE",
+      "description": "Minimum tender lead time in base units of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_TENDER_LEAD_TIME",
+      "description": "The upper bound of tender lead time. That is, if tender lead time of a shipment is bigger than this upper bound, rate would be invalid.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_TENDER_LEAD_TIME_UOM_CODE",
+      "description": "The maximum tender lead time unit of measure. Days, Hours, minutes.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_TENDER_LEAD_TIME_BASE",
+      "description": "The maximum tender lead time in base units of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGE_WEIGHT_MIN",
+      "description": "Not a constraint. Weight value used when calculating total shipment minimum package weight. During rating, it will be multiplied by the number of packages on the shipment, and accessed by the Minimum Package Weight RBI.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGE_WEIGHT_MIN_UOM_CODE",
+      "description": "Package weight minimum unit of measure.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGE_WEIGHT_MIN_BASE",
+      "description": "Package weight minimum in base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_AVERAGE_PKG_WEIGHT",
+      "description": "Constraint. If the total shipment weight/number of packages > this constraint, the rate will not be considered.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_AVERAGE_PKG_WEIGH_UOM_CODE",
+      "description": "The unit of measure for the average package weight.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_AVERAGE_PKG_WEIGH_BASE",
+      "description": "Average package weight in base units of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PACKAGE_COUNT_METHOD",
+      "description": "Determines how packages are counted when testing the Maximum Average Package Weight constraint. L - Use line item package count. U - Ship unit count.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'L','U'",
+      "conditionalConstraint": "",
+      "defaultValue": "'L'"
+    },
+    {
+      "name": "MAX_SHIPUNIT_LINE_PKG_WEIGHT",
+      "description": "The ship unit line weight maximum is used to match with ship unit lines. This field represents the maximum value allowed by this contract for the weight of a single package.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SHIPUNIT_LINE_PKG_UOM_CODE",
+      "description": "The unit of measure for ship unit line weight maximum.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_SHIPUNIT_LINE_PKG_BASE",
+      "description": "The maximum ship unit line package base unit of measure.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_NUM_OF_SHIPMENT_SEGMENTS",
+      "description": "The Max Num of Shipment Segments field determines the maximum number of segments on a shipment. A segment is defined as starting when product is loaded on the equipment and ending when the equipment is completely emptied.",
+      "dataType": "NUMBER",
+      "size": 10,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "RO_TIME_PERIOD_DEF_GID",
+      "description": "The time period definition (if any) assigned to the rate offering for the purposes of tiered rating.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "EXT_RE_FIELDSET_GID",
+      "description": "Specifies the external rating engine fieldset to be used when invoking an external rating engine using our generic interface.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_OFFERING_SEQ",
+      "description": "System generated unique identifier for a rate offering. Internal use only.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "LOGIC_CONFIG_GID",
+      "description": "Specifies the logic config group ID used to look up any logic parameters specified as charge multipliers.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "Database domain where this data is stored.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "The user ID of the data insert user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "Date and time of data insert.",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "The user ID of the data update user.",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "Date and time of the most recent data update.",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_TEMPLATE",
+      "description": "Used to identify rate offerings that will be used as a rate record template for Sourcing. Values (Y/N).",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_SOURCING_RATE",
+      "description": "Indicates is the rate offering is a sourcing rate offering. Sourcing rates are view only within the system. Values (Y/N).",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "ATTRIBUTE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE11",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE12",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE13",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE14",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE15",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE16",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE17",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE18",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE19",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE20",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type VARCHAR2 (150)",
+      "dataType": "VARCHAR2",
+      "size": 150,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_NUMBER10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type NUMBER",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE1",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE2",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE3",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE4",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE5",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE6",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE7",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE8",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE9",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ATTRIBUTE_DATE10",
+      "description": "Attribute fields (flexfields) allow you to add additional information about an object. Data Type Date",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FALLBACK_RATE_SERVICE_GID",
+      "description": "The fall back rate service will be used for driving the shipment if the regular rate service is unable to drive the shipment. For example, you may typically have voyage information for two months into the future. However, sometimes a possible order will come in for three months into the future. This works for all rate inquiry types. For example, this will enable you to run rate inquiry Network Rate and Route for this order information, using the same itineraries and rates, and get answers for rate and route even though you do not have voyage information that far in the future. The parameter FALLBACK RS NUM OF DAYS determines how many days into the future to allow use of the fallback rate offering.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PARENT_RATE_OFFERING_GID",
+      "description": "The Parent Rate Offering field is used with rate maintenance. The Parent Rate Offering ID provides a way to track different versions of the rates during the approval process. To compare rate versions, you must specify either a parent rate offering ID or parent rate record ID on any template rate offerings or rate records.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "CALC_CHARGEABLE_WT_VOL_WITH",
+      "description": "This field provides different options for calculating the shipments total weight and volume. 'Shipment Total Dimensional Weight/Volume', the chargeable weight/volume will be calculated based on the Shipment Total Dimensional Weight/Volume. 'Sum of Individual Ship Unit Dimensional Weight/Volume', the chargeable weight/volume will be calculated based on the Sum of Individual Ship Unit Dimensional Weight/Volume.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_DIGITAL_FREIGHT",
+      "description": "If set to Y, then fetch rates from digital freight and use them only for tender.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "MAX_DIGI_FRT_PCT",
+      "description": "Define a percentage around how much higher the carrier rates are compared to the planned cost of the shipment when using rates from digital freight.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ABSOLUTE_COST_DF",
+      "description": "Absolute cost for digital freight rates.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ABSOLUTE_COST_DF_BASE",
+      "description": "Absolute cost in base units.",
+      "dataType": "NUMBER",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "ABSOLUTE_COST_DF_CURR_GID",
+      "description": "The currency GID for the absolute cost.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_MARKET_RATE",
+      "description": "If Y then this rate will be used to fetch market rates for the shipment.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y', 'N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "SERVPROV_PROFILE_GID",
+      "description": "A unique identifier to define the group profile for multiple service providers.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "RATE_SERVICE_PROFILE_GID",
+      "description": "A unique identifier to define the group profile for multiple rate services.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_PROFILE_GID",
+      "description": "A unique identifier to define the group profile for multiple modes.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "RATE_OFFERING_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_RO_OFFERING_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_OFFERING_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_OFFERING_TYPE_GID",
+          "columnName": "RATE_OFFERING_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_SERVPROV_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_GID",
+          "columnName": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_RATE_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_GROUP_GID",
+          "columnName": "RATE_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_CURRENCY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_TRANS_MODE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "TRANSPORT_MODE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "TRANSPORT_MODE_GID",
+          "columnName": "TRANSPORT_MODE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_EQUIP_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EQUIPMENT_GROUP_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EQUIPMENT_GROUP_PROFILE_GID",
+          "columnName": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RATE_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_SERVICE_GID",
+          "columnName": "RATE_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_RATE_VERSION_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_VERSION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_VERSION_GID",
+          "columnName": "RATE_VERSION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_MIN_COST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "MIN_COST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_RATE_DISTANCE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_DISTANCE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_DISTANCE_GID",
+          "columnName": "RATE_DISTANCE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_RATE_QUALITY_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_QUALITY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_QUALITY_GID",
+          "columnName": "RATE_QUALITY_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_RCGID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_CLASSIFICATION",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_CLASSIFICATION_GID",
+          "columnName": "RATE_CLASSIFICATION_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_EREGID",
+      "cascadeDelete": false,
+      "parentTableName": "EXTERNAL_RATING_ENGINE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXTERNAL_RATING_ENGINE_GID",
+          "columnName": "EXTERNAL_RATING_ENGINE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_CIRTY_DIST_COST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "CIRCUITY_DISTANCE_COST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_FCP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "FLEX_COMMODITY_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "FLEX_COMMODITY_PROFILE_GID",
+          "columnName": "FLEX_COMMODITY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_SHIPPER_MIN_VALUE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "SHIPPER_MIN_VALUE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_EXCHANGE_RATE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EXCHANGE_RATE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXCHANGE_RATE_GID",
+          "columnName": "EXCHANGE_RATE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_RM_ABSOLUTE_MIN_COST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "RM_ABSOLUTE_MIN_COST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_MAX_COST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "MAX_COST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_SHORT_LINE_COST_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CURRENCY",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CURRENCY_GID",
+          "columnName": "SHORT_LINE_COST_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_WEIGHT_BRK_PRO_GID",
+      "cascadeDelete": false,
+      "parentTableName": "WEIGHT_BREAK_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "WEIGHT_BREAK_PROFILE_GID",
+          "columnName": "WEIGHT_BREAK_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_DIMRATE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "DIM_RATE_FACTOR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "DIM_RATE_FACTOR_GID",
+          "columnName": "DIM_RATE_FACTOR_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_CORP_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "CORPORATION_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CORPORATION_PROFILE_GID",
+          "columnName": "CORPORATION_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_CAPACITY_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "CAPACITY_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "CAPACITY_GROUP_GID",
+          "columnName": "CAPACITY_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_RAIL_INTERMODAL_PLAN",
+      "cascadeDelete": false,
+      "parentTableName": "RAIL_INTER_MODAL_PLAN",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RAIL_INTER_MODAL_PLAN_GID",
+          "columnName": "RAIL_INTER_MODAL_PLAN_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_REGION_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "REGION_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "REGION_GROUP_GID",
+          "columnName": "REGION_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_RO_TIME_PERIOD_DEF_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RO_TIME_PERIOD_DEF",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RO_TIME_PERIOD_DEF_GID",
+          "columnName": "RO_TIME_PERIOD_DEF_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_EXT_RE_FIELDSET_GID",
+      "cascadeDelete": false,
+      "parentTableName": "EXT_RE_FIELDSET",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "EXT_RE_FIELDSET_GID",
+          "columnName": "EXT_RE_FIELDSET_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RO_LOGIC_CONFIG_GID",
+      "cascadeDelete": false,
+      "parentTableName": "LOGIC_CONFIG",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "LOGIC_CONFIG_GID",
+          "columnName": "LOGIC_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RATE_RATE_SERVICE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_SERVICE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_SERVICE_GID",
+          "columnName": "FALLBACK_RATE_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RATE_SERVPROV_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SERVPROV_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SERVPROV_PROFILE_GID",
+          "columnName": "SERVPROV_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RATE_RATE_SERVICE_PROFILE",
+      "cascadeDelete": false,
+      "parentTableName": "RATE_SERVICE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "RATE_SERVICE_PROFILE_GID",
+          "columnName": "RATE_SERVICE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_RATE_MODE_PROFILE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "MODE_PROFILE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ACTIVITY_TIME_DEF",
+    "CAPACITY_COMMITMENT_ALLOC_D",
+    "CM_ENDING_EXCLUSION_REGION",
+    "CM_RULE",
+    "COMMIT_ALLOC_USAGE_D",
+    "DM_RULE",
+    "DM_RULE_D",
+    "DM_TRANSACTION_LINEITEM",
+    "DRIVER",
+    "DRIVER_TYPE",
+    "LEG",
+    "LOGISTICS_GUIDE_DETAIL",
+    "OB_LEG_CONSTRAINT",
+    "OB_ORDER_BASE",
+    "ORDER_MOVEMENT",
+    "ORDER_RELEASE",
+    "ORDER_RELEASE_LEG_CONSTRAINT",
+    "PLANNING_RATE_OFFERING",
+    "P_PROJECT_RATE_OFFERING",
+    "QUOTE_COST_OPTION_SHIPMENT",
+    "RATE_BASE_DEF",
+    "RATE_FACTOR_RULE_JOIN",
+    "RATE_GEO",
+    "RATE_LOAD_DATA",
+    "RATE_LOAD_DEFINITION",
+    "RATE_LOAD_RO_D",
+    "RATE_LOAD_RR_D",
+    "RATE_OFFERING_ACCESSORIAL",
+    "RATE_OFFERING_COMMENT",
+    "RATE_OFFERING_INV_PARTY",
+    "RATE_OFFERING_REMARK",
+    "RATE_OFFERING_STOPS",
+    "RATE_PREFERENCE_DETAIL",
+    "RATE_RULES_AND_TERMS",
+    "RESOURCE_SCHEDULE",
+    "RESOURCE_SCHEDULE_INSTANCE",
+    "RO_LANE_SPECIAL_SERVICE",
+    "RO_NMFC_CODE_SUBST",
+    "RO_SPECIAL_SERVICE",
+    "SC_RULE_CONTRACT",
+    "SECONDARY_CHARGE_RULE",
+    "SHIPMENT",
+    "SHIP_COMMIT_ALLOC_JOIN",
+    "SMC_DISCOUNT",
+    "TENDER_SERVPROV_SPOT_RATE",
+    "TEXT_TEMPLATE_PROFILE",
+    "UDC_CLASSIFICATION_LIST_D"
+  ],
+  "indices": [
+    {
+      "indexName": "UK_RATE_OFFERING_SEQ",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_OFFERING_SEQ"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RATE_OFFERING_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_OFFERING_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RATE_SERVICE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_SERVICE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_CAPACITY_GROUP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CAPACITY_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_CIRTY_DIST_COST_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CIRCUITY_DISTANCE_COST_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_CORP_PROFILE",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CORPORATION_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_CURRENCY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "CURRENCY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_DIMRATE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "DIM_RATE_FACTOR_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_EQUIP_GROUP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EQUIPMENT_GROUP_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_EREGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXTERNAL_RATING_ENGINE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_EXCHANGE_RATE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXCHANGE_RATE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_EXT_RE_FIELDSET_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "EXT_RE_FIELDSET_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_FCP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "FLEX_COMMODITY_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_LOGIC_CONFIG_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "LOGIC_CONFIG_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_MAX_COST_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MAX_COST_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_MIN_COST_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MIN_COST_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_OFFERING_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_OFFERING_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_RAIL_INTERMODAL_PLAN",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RAIL_INTER_MODAL_PLAN_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_RATE_DISTANCE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_DISTANCE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_RATE_GROUP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_RATE_QUALITY_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_QUALITY_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_RATE_VERSION_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_VERSION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_RCGID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RATE_CLASSIFICATION_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_REGION_GROUP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "REGION_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_RM_ABSOLUTE_MIN_COST_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RM_ABSOLUTE_MIN_COST_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_RO_TIME_PERIOD_DEF_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "RO_TIME_PERIOD_DEF_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_SERVPROV_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SERVPROV_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_SHIPPER_MIN_VALUE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHIPPER_MIN_VALUE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_SHORT_LINE_COST_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SHORT_LINE_COST_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_TRANS_MODE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TRANSPORT_MODE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_WEIGHT_BRK_PRO_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "WEIGHT_BREAK_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_RO_PARENT_RATE_OFFER_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PARENT_RATE_OFFERING_GID"
+        }
+      ]
+    }
+  ]
+}

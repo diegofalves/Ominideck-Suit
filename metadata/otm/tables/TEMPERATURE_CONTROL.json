@@ -1,1 +1,181 @@
-{"table": {"schema": "glogowner","name": "temperature_control","description": "This table stores various user defined temperature ranges that can be used to categorize the items and commodities."},"columns": [{"name": "TEMPERATURE_CONTROL_GID","description": "TEMPERATURE_CONTROL_GID contains the unique identifier for temperature control information for the item being shipped. Examples include: AMBIENT, INSULATED, REFRIGERATED","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEMPERATURE_CONTROL_XID","description": "TEMPERATURE_CONTROL_XID contains the unique external identifier for the temperature control of the item being shipped.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "TEMPERATURE_CONTROL_NAME","description": "TEMPERATURE_CONTROL_NAME contains the temperature control name for the item being shipped.","dataType": "VARCHAR2","size": 120,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_TEMP","description": "MIN_TEMP contains the minimum temperature at which the item can be shipped.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MIN_TEMP_UOM_CODE","description": "Unit of measure for MIN_TEMP column.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "MIN_TEMP_BASE","description": "MIN_TEMP in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "MAX_TEMP","description": "MAX_TEMP contains the maximum temperature at which the item can be shipped.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MAX_TEMP_UOM_CODE","description": "Unit of measure for MAX_TEMP column.","dataType": "VARCHAR2","size": 64,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'NULL'"},{"name": "MAX_TEMP_BASE","description": "MAX_TEMP in base units.","dataType": "NUMBER","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "0"},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "TEMPERATURE_CONTROL_GID"}],"foreignKeys": [],"childTables": ["COMMODITY","EQUIPMENT_GROUP","EQUIPMENT_GROUP_COMPARTMENT","EQUIPMENT_TYPE"],"indices": [{"indexName": "IX_TEMPERATURE_CONTROL_XID","columnNames": [{"sequence": 1,"name": "TEMPERATURE_CONTROL_XID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "temperature_control",
+    "description": "This table stores various user defined temperature ranges that can be used to categorize the items and commodities."
+  },
+  "columns": [
+    {
+      "name": "TEMPERATURE_CONTROL_GID",
+      "description": "TEMPERATURE_CONTROL_GID contains the unique identifier for temperature control information for the item being shipped. Examples include: AMBIENT, INSULATED, REFRIGERATED",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEMPERATURE_CONTROL_XID",
+      "description": "TEMPERATURE_CONTROL_XID contains the unique external identifier for the temperature control of the item being shipped.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "TEMPERATURE_CONTROL_NAME",
+      "description": "TEMPERATURE_CONTROL_NAME contains the temperature control name for the item being shipped.",
+      "dataType": "VARCHAR2",
+      "size": 120,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_TEMP",
+      "description": "MIN_TEMP contains the minimum temperature at which the item can be shipped.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MIN_TEMP_UOM_CODE",
+      "description": "Unit of measure for MIN_TEMP column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "MIN_TEMP_BASE",
+      "description": "MIN_TEMP in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "MAX_TEMP",
+      "description": "MAX_TEMP contains the maximum temperature at which the item can be shipped.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MAX_TEMP_UOM_CODE",
+      "description": "Unit of measure for MAX_TEMP column.",
+      "dataType": "VARCHAR2",
+      "size": 64,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'NULL'"
+    },
+    {
+      "name": "MAX_TEMP_BASE",
+      "description": "MAX_TEMP in base units.",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "0"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "TEMPERATURE_CONTROL_GID"
+    }
+  ],
+  "foreignKeys": [],
+  "childTables": [
+    "COMMODITY",
+    "EQUIPMENT_GROUP",
+    "EQUIPMENT_GROUP_COMPARTMENT",
+    "EQUIPMENT_TYPE"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_TEMPERATURE_CONTROL_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "TEMPERATURE_CONTROL_XID"
+        }
+      ]
+    }
+  ]
+}

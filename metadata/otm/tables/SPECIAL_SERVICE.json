@@ -1,1 +1,450 @@
-{"table": {"schema": "glogowner","name": "special_service","description": "This is the master table that holds various special services required for transportation, pickup and delivery. A special service differs from an accessory in that the customer does not have to pay for using the special service. An example of a special service can be a pump required to pull the chemicals from a delivery truck.  The special services defined can be linked at the item level or at the location level in GC3. The logic in GC3 checks to see if a special service is required and thus, schedules the pick-up or delivery accordingly."},"columns": [{"name": "SPECIAL_SERVICE_GID","description": "SPECIAL_SERVICE_GID contains the unique identifier for the special service for the item being shipped.","dataType": "VARCHAR2","size": 101,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SPECIAL_SERVICE_XID","description": "SPECIAL_SERVICE_XID contains the unique exterbak identifier for the special service for the item being shipped.","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "PAYABLE_INDICATOR_GID","description": "indicates the default payable status  of this special service","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "BILLABLE_INDICATOR_GID","description": "indicates the default billable status of this special service","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "SPECIAL_SERVICE_DESC","description": "SPECIAL_SERVICE_DESC contains the description for the special service for the item being shipped.","dataType": "VARCHAR2","size": 256,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "MODE_PROFILE_GID","description": "MODE_PROFILE_GID contains the unique identifier for the mode profile for the item being shipped.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_ARBITRARY","description": "Designates whether or not a special service is an arbitrary type special service.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "SPECL_SRV_GROUP_GID","description": "Allow user to organize special services by group","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "IS_FOR_DRIVER_CHK","description": "Designates this special service is to be checked during driver assignment.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_FOR_PU_CHK","description": "Designates this special service is to be checked during power unit assignment.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_FOR_EQUIP_CHK","description": "Designates this special service is to be checked during equipment assignment.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_IGNORABLE","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "IS_TIME_BASED","description": "","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'N'"},{"name": "DRIVER_LEVEL","description": "Designates this special service is to apply at the driver or driver type level.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'DRIVER','DRIVER_TYPE','ALL','NOT_APPLICABLE'","conditionalConstraint": "","defaultValue": "'ALL'"},{"name": "EQUIP_LEVEL","description": "Designates this special service is to apply at the equipment or equipment type level.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'EQUIPMENT','EQUIPMENT_TYPE','ALL','NOT_APPLICABLE'","conditionalConstraint": "","defaultValue": "'ALL'"},{"name": "PU_LEVEL","description": "Designates this special service is to apply at the power unit or power unit level.","dataType": "VARCHAR2","size": 20,"isNull": false,"isConstraint": true,"constraintValues": "'POWER_UNIT','POWER_UNIT_TYPE','ALL','NOT_APPLICABLE'","conditionalConstraint": "","defaultValue": "'ALL'"},{"name": "IS_FOR_RATING","description": "Designates this special service is to be used for rating.","dataType": "VARCHAR2","size": 1,"isNull": false,"isConstraint": true,"constraintValues": "'Y','N'","conditionalConstraint": "","defaultValue": "'Y'"},{"name": "ACTIVITY_TYPE_GID","description": "Hard coded list of stop activities that have internal OTM logic tied to it. This field is the one that maps the hard coded logic to the user definable notion of special service.","dataType": "VARCHAR2","size": 101,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "FOR_SOURCE_DEST","description": "The default stop which this special service will be on. S for Source, D for Destination, B for Both and L for Lane Based.","dataType": "VARCHAR2","size": 1,"isNull": true,"isConstraint": true,"constraintValues": "'B','D','S','L'","conditionalConstraint": "","defaultValue": ""},{"name": "SEQ_NUM","description": "Define this special service happens 1-before loading, 2-between unloading and loading, 3-after loading","dataType": "NUMBER","isNull": false,"isConstraint": true,"constraintValues": "1,2,3","conditionalConstraint": "","defaultValue": "1"},{"name": "DRIVER_TIME_TYPE","description": "Indicates if the time associated with this special service is considered work time, drive time, rest time, or wait time for a driver, or does not count as driver time (when the value is null).","dataType": "VARCHAR2","size": 50,"isNull": true,"isConstraint": true,"constraintValues": "'DRIVER_WORK','DRIVER_DRIVE','DRIVER_REST','DRIVER_WAIT'","conditionalConstraint": "","defaultValue": ""},{"name": "DOMAIN_NAME","description": "","dataType": "VARCHAR2","size": 50,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": "'PUBLIC'"},{"name": "INSERT_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "INSERT_DATE","description": "","dataType": "DATE","isNull": false,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_USER","description": "","dataType": "VARCHAR2","size": 128,"isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""},{"name": "UPDATE_DATE","description": "","dataType": "DATE","isNull": true,"isConstraint": false,"constraintValues": "","conditionalConstraint": "","defaultValue": ""}],"primaryKey": [{"sequence": 1,"columnName": "SPECIAL_SERVICE_GID"}],"foreignKeys": [{"foreignKeyName": "FK_SPECS_PAYABLE_INDICATOR_GI","cascadeDelete": false,"parentTableName": "PAYABLE_INDICATOR","columnRelation": [{"sequence": 1,"parentColumnName": "PAYABLE_INDICATOR_GID","columnName": "PAYABLE_INDICATOR_GID"}]},{"foreignKeyName": "FK_SPECS_BILLABLE_INDICATOR_G","cascadeDelete": false,"parentTableName": "BILLABLE_INDICATOR","columnRelation": [{"sequence": 1,"parentColumnName": "BILLABLE_INDICATOR_GID","columnName": "BILLABLE_INDICATOR_GID"}]},{"foreignKeyName": "FK_SPSERV_MODEPRFL_GID","cascadeDelete": false,"parentTableName": "MODE_PROFILE","columnRelation": [{"sequence": 1,"parentColumnName": "MODE_PROFILE_GID","columnName": "MODE_PROFILE_GID"}]},{"foreignKeyName": "FK_SPECS_SPECL_SRV_GROUP_GID","cascadeDelete": false,"parentTableName": "SPECL_SRV_GROUP","columnRelation": [{"sequence": 1,"parentColumnName": "SPECL_SRV_GROUP_GID","columnName": "SPECL_SRV_GROUP_GID"}]},{"foreignKeyName": "FK_SPECS_ACTIVITY_TYPE_GID","cascadeDelete": false,"parentTableName": "ACTIVITY_TYPE","columnRelation": [{"sequence": 1,"parentColumnName": "ACTIVITY_TYPE_GID","columnName": "ACTIVITY_TYPE_GID"}]}],"childTables": ["ACTIVITY_TIME_DEF","ATRL_SS_JOIN","DM_RULE_D","DM_TRANSACTION_LINEITEM","DRIVER_SPECIAL_SERVICE","DRIVER_TYPE_SPECIAL_SERVICE","EQUIPMENT_SPECIAL_SERVICE","EQUIPMENT_TYPE_SPECIAL_SERVICE","IE_SPECIAL_SERVICE","ITEM_SPECIAL_SERVICE","LEG_INTERIM_POINT","LOCATION_SPECIAL_SERVICE","OB_SPECIAL_SERVICE","OB_SU_SPECIAL_SERVICE","ORDER_RELEASE_SPECIAL_SERVICE","ORL_SPECIAL_SERVICE","OR_STOP_SPECIAL_SERVICE","POWER_UNIT_SPECIAL_SERVICE","PU_TYPE_SPECIAL_SERVICE","RG_SPECIAL_SERVICE","RO_LANE_SPECIAL_SERVICE","RO_SPECIAL_SERVICE","SHIPMENT_COST","SHIPMENT_INF_COST_D","SHIPMENT_SPECIAL_SERVICE","SHIP_UNIT_SPECIAL_SERVICE","SPECIAL_SERVICE_PROFILE_D","SPECL_SRV_COMP_SET_D","SSCS_SS_JOIN","S_SHIP_UNIT_SPECIAL_SERVICE","TRACKING_LOCATION_RT_D","WORK_INVOICE_ACTIVITY"],"indices": [{"indexName": "IX_SPECIAL_SERVICE_XID","columnNames": [{"sequence": 1,"name": "SPECIAL_SERVICE_XID"}]},{"indexName": "IX_SPECS_ACTIVITY_TYPE_GID","columnNames": [{"sequence": 1,"name": "ACTIVITY_TYPE_GID"}]},{"indexName": "IX_SPECS_BILLABLE_INDICATOR_G","columnNames": [{"sequence": 1,"name": "BILLABLE_INDICATOR_GID"}]},{"indexName": "IX_SPECS_PAYABLE_INDICATOR_GI","columnNames": [{"sequence": 1,"name": "PAYABLE_INDICATOR_GID"}]},{"indexName": "IX_SPECS_SPECL_SRV_GROUP_GID","columnNames": [{"sequence": 1,"name": "SPECL_SRV_GROUP_GID"}]},{"indexName": "IX_SPSERV_MODEPRFL_GID","columnNames": [{"sequence": 1,"name": "MODE_PROFILE_GID"}]}]}
+{
+  "table": {
+    "schema": "glogowner",
+    "name": "special_service",
+    "description": "This is the master table that holds various special services required for transportation, pickup and delivery. A special service differs from an accessory in that the customer does not have to pay for using the special service. An example of a special service can be a pump required to pull the chemicals from a delivery truck.  The special services defined can be linked at the item level or at the location level in GC3. The logic in GC3 checks to see if a special service is required and thus, schedules the pick-up or delivery accordingly."
+  },
+  "columns": [
+    {
+      "name": "SPECIAL_SERVICE_GID",
+      "description": "SPECIAL_SERVICE_GID contains the unique identifier for the special service for the item being shipped.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SPECIAL_SERVICE_XID",
+      "description": "SPECIAL_SERVICE_XID contains the unique exterbak identifier for the special service for the item being shipped.",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "PAYABLE_INDICATOR_GID",
+      "description": "indicates the default payable status  of this special service",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "BILLABLE_INDICATOR_GID",
+      "description": "indicates the default billable status of this special service",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SPECIAL_SERVICE_DESC",
+      "description": "SPECIAL_SERVICE_DESC contains the description for the special service for the item being shipped.",
+      "dataType": "VARCHAR2",
+      "size": 256,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "MODE_PROFILE_GID",
+      "description": "MODE_PROFILE_GID contains the unique identifier for the mode profile for the item being shipped.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_ARBITRARY",
+      "description": "Designates whether or not a special service is an arbitrary type special service.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "SPECL_SRV_GROUP_GID",
+      "description": "Allow user to organize special services by group",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "IS_FOR_DRIVER_CHK",
+      "description": "Designates this special service is to be checked during driver assignment.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_FOR_PU_CHK",
+      "description": "Designates this special service is to be checked during power unit assignment.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_FOR_EQUIP_CHK",
+      "description": "Designates this special service is to be checked during equipment assignment.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_IGNORABLE",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "IS_TIME_BASED",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'N'"
+    },
+    {
+      "name": "DRIVER_LEVEL",
+      "description": "Designates this special service is to apply at the driver or driver type level.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'DRIVER','DRIVER_TYPE','ALL','NOT_APPLICABLE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'ALL'"
+    },
+    {
+      "name": "EQUIP_LEVEL",
+      "description": "Designates this special service is to apply at the equipment or equipment type level.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'EQUIPMENT','EQUIPMENT_TYPE','ALL','NOT_APPLICABLE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'ALL'"
+    },
+    {
+      "name": "PU_LEVEL",
+      "description": "Designates this special service is to apply at the power unit or power unit level.",
+      "dataType": "VARCHAR2",
+      "size": 20,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'POWER_UNIT','POWER_UNIT_TYPE','ALL','NOT_APPLICABLE'",
+      "conditionalConstraint": "",
+      "defaultValue": "'ALL'"
+    },
+    {
+      "name": "IS_FOR_RATING",
+      "description": "Designates this special service is to be used for rating.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "'Y','N'",
+      "conditionalConstraint": "",
+      "defaultValue": "'Y'"
+    },
+    {
+      "name": "ACTIVITY_TYPE_GID",
+      "description": "Hard coded list of stop activities that have internal OTM logic tied to it. This field is the one that maps the hard coded logic to the user definable notion of special service.",
+      "dataType": "VARCHAR2",
+      "size": 101,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "FOR_SOURCE_DEST",
+      "description": "The default stop which this special service will be on. S for Source, D for Destination, B for Both and L for Lane Based.",
+      "dataType": "VARCHAR2",
+      "size": 1,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'B','D','S','L'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "SEQ_NUM",
+      "description": "Define this special service happens 1-before loading, 2-between unloading and loading, 3-after loading",
+      "dataType": "NUMBER",
+      "isNull": false,
+      "isConstraint": true,
+      "constraintValues": "1,2,3",
+      "conditionalConstraint": "",
+      "defaultValue": "1"
+    },
+    {
+      "name": "DRIVER_TIME_TYPE",
+      "description": "Indicates if the time associated with this special service is considered work time, drive time, rest time, or wait time for a driver, or does not count as driver time (when the value is null).",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": true,
+      "isConstraint": true,
+      "constraintValues": "'DRIVER_WORK','DRIVER_DRIVE','DRIVER_REST','DRIVER_WAIT'",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 50,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": "'PUBLIC'"
+    },
+    {
+      "name": "INSERT_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "INSERT_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": false,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_USER",
+      "description": "",
+      "dataType": "VARCHAR2",
+      "size": 128,
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "UPDATE_DATE",
+      "description": "",
+      "dataType": "DATE",
+      "isNull": true,
+      "isConstraint": false,
+      "constraintValues": "",
+      "conditionalConstraint": "",
+      "defaultValue": ""
+    }
+  ],
+  "primaryKey": [
+    {
+      "sequence": 1,
+      "columnName": "SPECIAL_SERVICE_GID"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "foreignKeyName": "FK_SPECS_PAYABLE_INDICATOR_GI",
+      "cascadeDelete": false,
+      "parentTableName": "PAYABLE_INDICATOR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "PAYABLE_INDICATOR_GID",
+          "columnName": "PAYABLE_INDICATOR_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SPECS_BILLABLE_INDICATOR_G",
+      "cascadeDelete": false,
+      "parentTableName": "BILLABLE_INDICATOR",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "BILLABLE_INDICATOR_GID",
+          "columnName": "BILLABLE_INDICATOR_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SPSERV_MODEPRFL_GID",
+      "cascadeDelete": false,
+      "parentTableName": "MODE_PROFILE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "MODE_PROFILE_GID",
+          "columnName": "MODE_PROFILE_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SPECS_SPECL_SRV_GROUP_GID",
+      "cascadeDelete": false,
+      "parentTableName": "SPECL_SRV_GROUP",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "SPECL_SRV_GROUP_GID",
+          "columnName": "SPECL_SRV_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "foreignKeyName": "FK_SPECS_ACTIVITY_TYPE_GID",
+      "cascadeDelete": false,
+      "parentTableName": "ACTIVITY_TYPE",
+      "columnRelation": [
+        {
+          "sequence": 1,
+          "parentColumnName": "ACTIVITY_TYPE_GID",
+          "columnName": "ACTIVITY_TYPE_GID"
+        }
+      ]
+    }
+  ],
+  "childTables": [
+    "ACTIVITY_TIME_DEF",
+    "ATRL_SS_JOIN",
+    "DM_RULE_D",
+    "DM_TRANSACTION_LINEITEM",
+    "DRIVER_SPECIAL_SERVICE",
+    "DRIVER_TYPE_SPECIAL_SERVICE",
+    "EQUIPMENT_SPECIAL_SERVICE",
+    "EQUIPMENT_TYPE_SPECIAL_SERVICE",
+    "IE_SPECIAL_SERVICE",
+    "ITEM_SPECIAL_SERVICE",
+    "LEG_INTERIM_POINT",
+    "LOCATION_SPECIAL_SERVICE",
+    "OB_SPECIAL_SERVICE",
+    "OB_SU_SPECIAL_SERVICE",
+    "ORDER_RELEASE_SPECIAL_SERVICE",
+    "ORL_SPECIAL_SERVICE",
+    "OR_STOP_SPECIAL_SERVICE",
+    "POWER_UNIT_SPECIAL_SERVICE",
+    "PU_TYPE_SPECIAL_SERVICE",
+    "RG_SPECIAL_SERVICE",
+    "RO_LANE_SPECIAL_SERVICE",
+    "RO_SPECIAL_SERVICE",
+    "SHIPMENT_COST",
+    "SHIPMENT_INF_COST_D",
+    "SHIPMENT_SPECIAL_SERVICE",
+    "SHIP_UNIT_SPECIAL_SERVICE",
+    "SPECIAL_SERVICE_PROFILE_D",
+    "SPECL_SRV_COMP_SET_D",
+    "SSCS_SS_JOIN",
+    "S_SHIP_UNIT_SPECIAL_SERVICE",
+    "TRACKING_LOCATION_RT_D",
+    "WORK_INVOICE_ACTIVITY"
+  ],
+  "indices": [
+    {
+      "indexName": "IX_SPECIAL_SERVICE_XID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SPECIAL_SERVICE_XID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SPECS_ACTIVITY_TYPE_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "ACTIVITY_TYPE_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SPECS_BILLABLE_INDICATOR_G",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "BILLABLE_INDICATOR_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SPECS_PAYABLE_INDICATOR_GI",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "PAYABLE_INDICATOR_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SPECS_SPECL_SRV_GROUP_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "SPECL_SRV_GROUP_GID"
+        }
+      ]
+    },
+    {
+      "indexName": "IX_SPSERV_MODEPRFL_GID",
+      "columnNames": [
+        {
+          "sequence": 1,
+          "name": "MODE_PROFILE_GID"
+        }
+      ]
+    }
+  ]
+}
