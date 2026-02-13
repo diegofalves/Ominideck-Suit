@@ -1,0 +1,82 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="configure-oracle-identity-cloud-service.html" title="Previous" type="text/html"><link rel="next" href="configure-properties-for-oracle-analytics-cloud.html" title="Next" type="text/html"><meta name="description" content="To enable the User Synchronization feature, you'll need to create an External System. The External System will contain the URL for your Identity Cloud Service and the OAuth Credentials which will authorize Oracle Transportation Management to automatically manage Users/Groups in Identity Cloud Service."><meta property="og:description" content="To enable the User Synchronization feature, you'll need to create an External System. The External System will contain the URL for your Identity Cloud Service and the OAuth Credentials which will authorize Oracle Transportation Management to automatically manage Users/Groups in Identity Cloud Service."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:09 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Configure an External System</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Configure an External System","description":"To enable the User Synchronization feature, you'll need to create an External System. The External System will contain the URL for your Identity Cloud Service and the OAuth Credentials which will authorize Oracle Transportation Management to automatically manage Users/Groups in Identity Cloud Service.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="configure-oracle-identity-cloud-service.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="configure-properties-for-oracle-analytics-cloud.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Configure an External System<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="configure-an-external-system"></span><span id="OTMCAconfigure-an-external-system" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30257413">Configure an External System</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <p class="p">To enable the User Synchronization feature, you'll need to create an External System. The
+            External System will contain the URL for your Identity Cloud Service and the OAuth
+            Credentials which will authorize Oracle Transportation Management to automatically
+            manage Users/Groups in Identity Cloud Service.</p>
+        <p class="p">Before starting these steps, you must obtain your Oracle Identity Cloud Service (IDCS)
+            URL. </p>
+        <ol class="ol" id="u30257413__ol_qdf_k3q_2fc">
+            <li class="li">Sign in to the Oracle Cloud Console and navigate to the Oracle Transportation and
+                Global Trade Management Environments screen.</li>
+            <li class="li">Select one of the Environments and click the <span class="ph uicontrol">Identity Domain</span>
+                tab. </li>
+            <li class="li">Copy the <span class="ph uicontrol">Domain URL</span>.</li>
+            <li class="li">Sign in to your Transportation and Global Trade Management Cloud instance to create
+                an External System.</li>
+            <li class="li">Go to <span class="ph uicontrol">Business Process Automation &gt; Communication Management &gt; External
+                    Systems</span>.</li>
+            <li class="li">Click the <span class="ph uicontrol">New</span> button.</li>
+            <li class="li">Enter an <span class="ph uicontrol">External System ID</span>.</li>
+            <li class="li">In the <span class="ph uicontrol">User Name</span> field, provide the Client ID from the
+                Confidential Application you created in your Oracle Identity Cloud Service
+                instance.</li>
+            <li class="li">In the <span class="ph uicontrol">Password</span> and <span class="ph uicontrol">Password (Confirm)</span>
+                fields, provide the Client Secret from the Confidential Application you created in
+                your Oracle Identity Cloud Service instance.</li>
+            <li class="li">In the <span class="ph uicontrol">Target Namespace</span> field, select the
+                    <span class="ph uicontrol">None</span> option.</li>
+            <li class="li">In the <span class="ph uicontrol">Content Type</span> field, enter
+                    "<span class="ph uicontrol">application/json</span>" (without the quotes).</li>
+            <li class="li">Clear the <span class="ph uicontrol">Transport Through Data Stream</span> checkbox.</li>
+            <li class="li">In the <span class="ph uicontrol">Authentication Type</span> field select the "<span class="ph uicontrol">OAuth
+                    2.0 - Client Credentials</span>" option.</li>
+            <li class="li">In the <span class="ph uicontrol">Authorization Service Authentication Type</span> field,
+                select "<span class="ph uicontrol">HTTP Authentication (Basic)</span>".</li>
+            <li class="li">In the <span class="ph uicontrol">Authorization Service URL</span> field, enter your Oracle
+                Identity Cloud Service instance URL with "<code class="ph codeph">/oauth2/v1/token</code>"
+                appended to the end such that it looks like
+                    <code class="ph codeph">https://&lt;YOUR_IDCS_URL_HERE&gt;/oauth2/v1/token</code>. Use the URL
+                obtained earlier from the Oracle Cloud Console.</li>
+            <li class="li">In the <span class="ph uicontrol">Application Scope</span> field enter
+                    "<span class="ph uicontrol">urn:opc:idm:__myscopes__</span>" (without the quotes).</li>
+            <li class="li">In the <span class="ph uicontrol">URL</span> field, enter your Oracle Identity Cloud Service
+                instance URL such that it looks like
+                    "<span class="ph uicontrol">https://&lt;YOUR_IDCS_URL_HERE&gt;</span>".</li>
+            <li class="li">Click <span class="ph uicontrol">Finish</span> button.</li>
+        </ol>
+    </div>
+</div></article></body></html>

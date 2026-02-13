@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources - Generate shipments on a ground schedule in an ad hoc manner.</title>
+		<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+		<meta name="dcterms.dateCopyrighted" content="2018, 2025">
+		<meta name="dcterms.category" content="cloud">
+		<meta name="dcterms.identifier" content="G28976-01">
+		
+		
+        <link rel="stylesheet" href="/sp_common/rest-template/ohc-rest-template/css/rest.css">
+        <script>
+            document.write('<style type="text/css">');
+            document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+            document.write('</style>');
+        </script>
+        <script data-main="/sp_common/rest-template/ohc-rest-template/js/rest-config" src="/sp_common/rest-template/requirejs/require.js"></script>
+        <script>
+            if(window.require === undefined) {
+                document.write('<script data-main="sp_common/rest-template/ohc-rest-template/js/rest-config" src="sp_common/rest-template/requirejs/require.js"><\/script>');
+                document.write('<link href="sp_common/rest-template/ohc-rest-template/css/rest.css" rel="stylesheet">');
+            }
+        </script>
+
+        	
+
+        <meta name="description" content="Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.">
+        <meta property="og:site_name" content="Oracle Help Center">
+        <meta property="og:title" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+        <meta property="og:description" content="Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.">
+        <meta name="generator" content="Oracle REST API Publisher 1.4.0">
+		<meta name="date" content="2025-06-03 17:56:41 UTC">
+        <link rel="shortcut icon" href="/sp_common/rest-template/ohc-common/img/favicon.ico">
+        <meta name="application-name" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+        <link type="application/swagger+json" title="OpenAPI 3.0" href="openapi.json" rel="alternate">
+        <link rel="prev" href="api-power-data-repetition-schedules-custom-actions.html" title="Previous" type="text/html">
+        <link rel="next" href="api-power-data-repetition-schedules-details.html" title="Next" type="text/html">
+    
+    <meta name="dcterms.created" content="2025-06-03T18:12:44+00:00">
+    <meta name="dcterms.title" content="REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources">
+    <meta name="dcterms.isVersionOf" content="OTMRA">
+    <meta name="dcterms.product" content="en/cloud/saas/transportation/25c">
+    <meta name="dcterms.release" content="Release 25C">
+  <script id="ssot-metadata" type="application/json">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources - Generate shipments on a ground schedule in an ad hoc manner.","description":"Fusion Cloud Transportation and Global Trade Management business object resource REST APIs can be used to access in-system data and construct integrations to other systems.","datePublished":"2025-06-03 CST","dateModified":"2025-06-03 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+    <body>
+        <div class="noscript alert alert-danger text-center" role="alert">
+            <a class="pull-left" href="api-power-data-repetition-schedules-custom-actions.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a>
+            <a class="pull-right" href="api-power-data-repetition-schedules-details.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+        </div>
+        <article>
+
+            
+            <header id="top">
+
+                <ol class="breadcrumb">
+                    <li><a href="index.html">REST API for Fusion Cloud Transportation and Global Trade Management Business Object Resources</a></li>
+                    <li>Tasks</li>
+                    
+                    <li>
+                        
+                        Power Data
+                        
+                    </li>
+                    
+                    <li>
+                        
+                        <a href="api-power-data-repetition-schedules.html">Repetition Schedules</a>
+                        
+                    </li>
+                    
+                    <li class="active">
+                        
+                        <a href="api-power-data-repetition-schedules-custom-actions.html">Custom Actions</a>
+                        
+                    </li>
+                    
+                </ol>
+                
+                <p class="draftsubtitle"></p>
+                
+
+                <div>
+                	<div class="dropdown btn-group pull-right" style="clear: right;">
+                		<button id="dLabel" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jump to <span class="caret"></span>
+                		</button>
+      					<ul class="dropdown-menu" aria-labelledby="dLabel">
+          					<li><a href="#request" data-toggle="ignore">Request</a></li>
+          					<li><a href="#response" data-toggle="ignore">Response</a></li>
+          					
+          					
+      					</ul>
+    				</div>
+                    
+                        <h2>Generate shipments on a ground schedule in an ad hoc manner.</h2>
+                    
+     			</div>
+
+                <div>
+                    <div class="label label-post text-uppercase">post</div>
+                    <p><strong>/custom-actions/forceGenerateShipments/repetitionSchedules/{repetitionScheduleID}</strong></p>
+                </div>
+            </header>
+            <section>
+
+                <div class="description"></div>
+
+                <h3 id="request">Request</h3>
+                
+
+                  
+
+                
+                <div class="h5">Path Parameters</div>
+                <div class="schema-container">
+                <ul class="schema-properties">
+                
+                    <li><a role="button" data-toggle="collapse" href="#request-path-param-0" aria-expanded="false" aria-controls="request-path-param-0">
+                    repetitionScheduleID(required):  string
+                    </a>
+                    <div class="collapse" id="request-path-param-0">
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>The Repitition Schedule ID.</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    </li>
+                
+                </ul>
+
+                
+                </div>
+                
+
+
+
+                
+
+                
+
+                
+
+                  
+
+                
+
+                
+                    
+                        
+                            <div class="h5">Supported Media Types</div>
+                            <ul class="media-types">
+                        
+                            <li>application/json</li>
+                        
+                            </ul>
+                        
+                    
+                
+
+                
+
+                    
+
+                        <div class="entity">
+                        <div class="h5 hidden-print">Request Body - application/json (<span class="schema-path"></span>)</div>
+
+                        
+                            
+                        
+
+                           <div class="schema-container">
+                            
+                              <div id="request-bodyparam-paths--custom-actions-forceGenerateShipments-repetitionSchedules-{repetitionScheduleID}-post-requestBody-content-application-json-schema" class="swagger-schema">
+    <div class="panel-heading">Root Schema : schema</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Request parameters to generate shipments on a ground schedule in an ad hoc manner.</div>
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#request-bodyparam-paths--custom-actions-forceGenerateShipments-repetitionSchedules-{repetitionScheduleID}-post-requestBody-content-application-json-schema-properties-date-properties-date-0" aria-expanded="false" aria-controls="request-bodyparam-paths--custom-actions-forceGenerateShipments-repetitionSchedules-{repetitionScheduleID}-post-requestBody-content-application-json-schema-properties-date-properties-date-0">
+                    
+                    date: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="request-bodyparam-paths--custom-actions-forceGenerateShipments-repetitionSchedules-{repetitionScheduleID}-post-requestBody-content-application-json-schema-properties-date-properties-date-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Date for which ground schedule shipments will be generated.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#request-bodyparam-paths--custom-actions-forceGenerateShipments-repetitionSchedules-{repetitionScheduleID}-post-requestBody-content-application-json-schema-properties-numberOfShipments-properties-numberOfShipments-0" aria-expanded="false" aria-controls="request-bodyparam-paths--custom-actions-forceGenerateShipments-repetitionSchedules-{repetitionScheduleID}-post-requestBody-content-application-json-schema-properties-numberOfShipments-properties-numberOfShipments-0">
+                    
+                    numberOfShipments: integer
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="request-bodyparam-paths--custom-actions-forceGenerateShipments-repetitionSchedules-{repetitionScheduleID}-post-requestBody-content-application-json-schema-properties-numberOfShipments-properties-numberOfShipments-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Number of ground schedule shipments to be generated.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Request parameters to generate shipments on a ground schedule in an ad hoc manner.&quot;,
+    &quot;type&quot;:&quot;object&quot;,
+    &quot;properties&quot;:{
+        &quot;date&quot;:{
+            &quot;description&quot;:&quot;Date for which ground schedule shipments will be generated.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;numberOfShipments&quot;:{
+            &quot;description&quot;:&quot;Number of ground schedule shipments to be generated.&quot;,
+            &quot;type&quot;:&quot;integer&quot;
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                            
+                            </div>
+
+                        </div>
+
+                    
+
+                    
+
+
+
+                    
+
+                
+
+                
+
+                 <a style="float: right" href="#top">Back to Top</a>
+
+                <h3 id="response">Response</h3>
+
+				
+                
+                
+                <div class="h5">Supported Media Types</div>
+                <ul class="media-types">
+                    
+                    <li>application/json</li>
+                    
+                </ul>
+                
+                
+                
+
+
+
+                
+                    <div class="response">
+                        <h4 class="response-code ">200 Response</h4>
+                        <div class="response-body">
+                            <div>Default response.</div>
+                            
+
+                            
+                                <div class="entity">
+                                <div class="h5 hidden-print">Body (<span class="schema-path"></span>)</div>
+                                <div class="schema-container">
+                                
+                                <div id="200-components-schemas-forceGenerateShipmentsResponse" class="swagger-schema">
+    <div class="panel-heading">Root Schema : forceGenerateShipmentsResponse</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>Response of generated ground schedule shipments.</div>
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-cutoffDateUsed-properties-cutoffDateUsed-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-cutoffDateUsed-properties-cutoffDateUsed-0">
+                    
+                    cutoffDateUsed: boolean
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-cutoffDateUsed-properties-cutoffDateUsed-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Is the cut off time used. If not start time is used.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-domainName-properties-domainName-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-domainName-properties-domainName-0">
+                    
+                    domainName: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-domainName-properties-domainName-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Generated ground schedule shipments domain.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-durationInDays-properties-durationInDays-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-durationInDays-properties-durationInDays-0">
+                    
+                    durationInDays: integer
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-durationInDays-properties-durationInDays-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Number of days to generate shipments.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-generationEndDate-properties-generationEndDate-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-generationEndDate-properties-generationEndDate-0">
+                    
+                    generationEndDate: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-generationEndDate-properties-generationEndDate-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Shipments generation end date/time.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-generationStartDate-properties-generationStartDate-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-generationStartDate-properties-generationStartDate-0">
+                    
+                    generationStartDate: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-generationStartDate-properties-generationStartDate-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Shipments generation start date/time.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-groundScheduleGenerationId-properties-groundScheduleGenerationId-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-groundScheduleGenerationId-properties-groundScheduleGenerationId-0">
+                    
+                    groundScheduleGenerationId: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-groundScheduleGenerationId-properties-groundScheduleGenerationId-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Ground schedule shipment generation result GID.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-processEndTime-properties-processEndTime-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-processEndTime-properties-processEndTime-0">
+                    
+                    processEndTime: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-processEndTime-properties-processEndTime-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Generation process end time.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-processStartTime-properties-processStartTime-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-processStartTime-properties-processStartTime-0">
+                    
+                    processStartTime: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-processStartTime-properties-processStartTime-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Generation process start time.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-queryName-properties-queryName-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-queryName-properties-queryName-0">
+                    
+                    queryName: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-queryName-properties-queryName-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Query Name</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-shipments-properties-shipments-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-shipments-properties-shipments-0">
+                    
+                    shipments: array
+                    
+                    
+
+                </a>
+                <a href="#200-components-schemas-forceGenerateShipmentsResponse-properties-shipments" role="button" class="btn btn-default btn-sm btn-xsm">
+                    shipments
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-shipments-properties-shipments-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="description">List of generated shipment IDs.</div>
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-shipmentsBuilt-properties-shipmentsBuilt-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-shipmentsBuilt-properties-shipmentsBuilt-0">
+                    
+                    shipmentsBuilt: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-shipmentsBuilt-properties-shipmentsBuilt-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Number of shipments generated.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-shipmentsExpected-properties-shipmentsExpected-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-shipmentsExpected-properties-shipmentsExpected-0">
+                    
+                    shipmentsExpected: string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-shipmentsExpected-properties-shipmentsExpected-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Number of shipments expected to be generated.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;Response of generated ground schedule shipments.&quot;,
+    &quot;type&quot;:&quot;object&quot;,
+    &quot;properties&quot;:{
+        &quot;groundScheduleGenerationId&quot;:{
+            &quot;description&quot;:&quot;Ground schedule shipment generation result GID.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;processStartTime&quot;:{
+            &quot;description&quot;:&quot;Generation process start time.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;processEndTime&quot;:{
+            &quot;description&quot;:&quot;Generation process end time.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;domainName&quot;:{
+            &quot;description&quot;:&quot;Generated ground schedule shipments domain.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;shipmentsExpected&quot;:{
+            &quot;description&quot;:&quot;Number of shipments expected to be generated.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;shipmentsBuilt&quot;:{
+            &quot;description&quot;:&quot;Number of shipments generated.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;shipments&quot;:{
+            &quot;description&quot;:&quot;List of generated shipment IDs.&quot;,
+            &quot;type&quot;:&quot;array&quot;,
+            &quot;items&quot;:{
+                &quot;type&quot;:&quot;string&quot;
+            }
+        },
+        &quot;cutoffDateUsed&quot;:{
+            &quot;description&quot;:&quot;Is the cut off time used. If not start time is used.&quot;,
+            &quot;type&quot;:&quot;boolean&quot;
+        },
+        &quot;durationInDays&quot;:{
+            &quot;description&quot;:&quot;Number of days to generate shipments.&quot;,
+            &quot;type&quot;:&quot;integer&quot;
+        },
+        &quot;queryName&quot;:{
+            &quot;description&quot;:&quot;Query Name&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;generationStartDate&quot;:{
+            &quot;description&quot;:&quot;Shipments generation start date/time.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;generationEndDate&quot;:{
+            &quot;description&quot;:&quot;Shipments generation end date/time.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        }
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                <div id="200-components-schemas-forceGenerateShipmentsResponse-properties-shipments" class="swagger-schema">
+    <div class="panel-heading">Nested Schema : shipments</div>
+    
+    	
+    	<div class="schema-type">Type: <code>array</code></div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div>List of generated shipment IDs.</div>
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li><a role="button" data-toggle="prop-collapse" href="#200-components-schemas-forceGenerateShipmentsResponse-properties-shipments-items-items-0" aria-expanded="false" aria-controls="200-components-schemas-forceGenerateShipmentsResponse-properties-shipments-items-items-0">
+            Array of: 
+                string</a>
+            
+            <div class="collapse schema-summary" id="200-components-schemas-forceGenerateShipmentsResponse-properties-shipments-items-items-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;description&quot;:&quot;List of generated shipment IDs.&quot;,
+    &quot;type&quot;:&quot;array&quot;,
+    &quot;items&quot;:{
+        &quot;type&quot;:&quot;string&quot;
+    }
+}</code></pre>
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                </div>
+                                </div>
+                            
+
+                            
+
+                            
+                        </div>
+                    </div>
+                
+                    <div class="response">
+                        <h4 class="response-code ">400 Response</h4>
+                        <div class="response-body">
+                            <div>Error response.</div>
+                            
+
+                            
+                                <div class="entity">
+                                <div class="h5 hidden-print">Body (<span class="schema-path"></span>)</div>
+                                <div class="schema-container">
+                                
+                                <div id="400-components-schemas-errorResponse" class="swagger-schema">
+    <div class="panel-heading">Root Schema : errorResponse</div>
+    
+    	<div class="schema-type">Type: <code>object</code></div>
+    	
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a href="#" role="button" data-toggle="schema-view" class="toggle-schema pull-right btn btn-default btn-sm btn-xsm">Show Source</a>
+        <ul class="schema-properties">
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#400-components-schemas-errorResponse-properties-detail-properties-detail-0" aria-expanded="false" aria-controls="400-components-schemas-errorResponse-properties-detail-properties-detail-0">
+                    
+                    detail(required): string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="400-components-schemas-errorResponse-properties-detail-properties-detail-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Provides more information about the error.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#400-components-schemas-errorResponse-properties-status-properties-status-0" aria-expanded="false" aria-controls="400-components-schemas-errorResponse-properties-status-properties-status-0">
+                    
+                    status(required): number
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="400-components-schemas-errorResponse-properties-status-properties-status-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>HTTP status code.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+            <li>
+                <a role="button" data-toggle="prop-collapse" href="#400-components-schemas-errorResponse-properties-title-properties-title-0" aria-expanded="false" aria-controls="400-components-schemas-errorResponse-properties-title-properties-title-0">
+                    
+                    title(required): string
+                    
+                    
+                     
+                    
+                </a>
+                
+
+                <div class="collapse schema-summary" id="400-components-schemas-errorResponse-properties-title-properties-title-0">
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>Provides a short summary message.</div>
+
+
+
+
+                
+            </div>
+            </li>
+            
+        </ul>
+        <pre class="schema-source" style="display: none;"><code class="json">{
+    &quot;properties&quot;:{
+        &quot;status&quot;:{
+            &quot;description&quot;:&quot;HTTP status code.&quot;,
+            &quot;type&quot;:&quot;number&quot;
+        },
+        &quot;title&quot;:{
+            &quot;description&quot;:&quot;Provides a short summary message.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        },
+        &quot;detail&quot;:{
+            &quot;description&quot;:&quot;Provides more information about the error.&quot;,
+            &quot;type&quot;:&quot;string&quot;
+        }
+    },
+    &quot;required&quot;:[
+        &quot;status&quot;,
+        &quot;title&quot;,
+        &quot;detail&quot;
+    ]
+}</code></pre>
+    
+
+    
+
+    
+
+    
+
+
+    
+
+
+
+    
+
+    
+
+
+</div>
+
+                                
+                                </div>
+                                </div>
+                            
+
+                            
+
+                            
+                        </div>
+                    </div>
+                
+
+				
+
+				 <a style="float: right" href="#top">Back to Top</a>
+
+                
+
+            </section>
+
+            
+        </article>
+    </body>
+</html>

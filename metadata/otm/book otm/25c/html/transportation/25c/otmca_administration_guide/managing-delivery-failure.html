@@ -1,0 +1,133 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="configuring-a-custom-return-path.html" title="Previous" type="text/html"><link rel="next" href="configuring-an-external-smtp-host.html" title="Next" type="text/html"><meta name="description" content="Outbound Email Delivery may fail at various points in the delivery process and for various reasons:"><meta property="og:description" content="Outbound Email Delivery may fail at various points in the delivery process and for various reasons:"><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:09 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Managing Suppressions</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Managing Suppressions","description":"Outbound Email Delivery may fail at various points in the delivery process and for various reasons:","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="configuring-a-custom-return-path.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="configuring-an-external-smtp-host.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Managing Suppressions<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="managing-delivery-failure"></span><span id="OTMCAmanaging-delivery-failure" data-help-type="cloud-saas-docid"></span><span id="managing_suppressions" data-help-type="cloud-saas"></span><span id="monitoring_email_delivery_suppressions" data-help-type="cloud-saas"></span><span id="resolving_email_delivery_suppression" data-help-type="cloud-saas"></span><span id="monitoring_transportation_and_global_trade_management_email_blocking" data-help-type="cloud-saas"></span><span id="resolving_transportation_and_global_trade_management_email_blocking" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225123">Managing Suppressions</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">Outbound Email Delivery may fail at various points in the delivery process and for
+            various reasons:</p>
+        <ul class="ul" id="u30225123__ul_zhw_lls_qpb">
+            <li class="li">Mailboxes may reject email with hard or repetitively soft bounces. This may result
+                in email recipients being suppressed by Email Delivery until the underlying causes
+                of the bounces is resolved.</li>
+            <li class="li">Email Delivery may reject emails due to complaints, manual entry or list-unsubscribe
+                requests.</li>
+            <li class="li">Transportation and Global Trade Management may block outbound emails not properly
+                registered with Email Delivery or passing Sender Policy Framework (SPF) checks.</li>
+            <li class="li">Transportation and Global Trade Management may block outbound emails due to various
+                mail quotas.</li>
+        </ul>
+        <p class="p">If email recipients report they are not receiving emails, a number of monitoring and
+            configuration screens in Transportation and Global Trade Management can aid in
+            determining the underlying cause and correcting the issue.</p>
+    </div>
+<div class="topic nested1" lang="en" id="u30225124"><h2 class="title topictitle2"><span id="managing-delivery-failure"></span><span id="OTMCAmanaging-delivery-failure" data-help-type="cloud-saas-docid"></span>Monitoring Email Delivery Failures</h2>
+      
+      <div class="body">
+        <div class="p">Email delivery failures reported back to Transportation and Global Trade Management can
+            be monitored via:<ul class="ul" id="u30225124__ul_szb_rls_qpb">
+                <li class="li">
+                    <p class="p"><span class="ph uicontrol">Logging</span>: The <span class="ph uicontrol">MailError</span> log ID
+                        shows the From and To address of each failed email. By setting up an ad-hoc
+                        log that enables this logging, all such email can be tracked as they
+                        fail.</p>
+                </li>
+                <li class="li"><span class="ph uicontrol">Real-time Diagnostics</span>: The <span class="ph uicontrol">Mail
+                        Failures</span> screen shows summary information for failed emails. For
+                    each From/To address pairing that failed, you can monitor:<ul class="ul" id="u30225124__ul_rzm_wls_qpb">
+                        <li class="li">
+                            <p class="p">the number of emails failed due to Email Delivery recipient
+                                suppression</p>
+                        </li>
+                        <li class="li">
+                            <p class="p">the number of emails failed due to other address issues</p>
+                        </li>
+                        <li class="li">
+                            <p class="p">whether the sender has been correctly registered as a valid Email
+                                Delivery Mail Sender</p>
+                        </li>
+                        <li class="li">
+                            <p class="p">whether Email Delivery is currently suppressing the recipient</p>
+                        </li>
+                    </ul></li>
+                <li class="li"><span class="ph uicontrol">Historical Diagnostics</span>: As part of Historical Metrics,
+                    the following metric types can be used to track mail suppression over the
+                    preceding hours, days and weeks:<ul class="ul" id="u30225124__ul_nsh_2ms_qpb">
+                        <li class="li"><span class="ph uicontrol">MAIL â FAILED</span> shows a count of general mail
+                            failures due to addressing issues</li>
+                        <li class="li"><span class="ph uicontrol">MAIL â SUPPRESSED</span> sshows a count of mail failures
+                            due explicitly to Oracle Mail recipient suppression </li>
+                    </ul>Note that these metrics are collected for three subcomponents: Total,
+                    Common Addresses and User Addresses. Common Addresses refer to valid senders
+                    pre-authorized for use for all Transportation and Global Trade Management
+                    customers. User Addresses refer to senders configured on the Mail Sender screen
+                    for your installation and domains.</li>
+            </ul></div>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225125"><h2 class="title topictitle2"><span id="managing-delivery-failure"></span><span id="OTMCAmanaging-delivery-failure" data-help-type="cloud-saas-docid"></span>Resolving Email Delivery Suppression</h2>
+      
+      <div class="body">
+        <p class="p">If emails are failing due to Email Delivery recipient suppression, the underlying cause
+            of Email Delivery Suppression should be determined and resolved (which may be due to an
+            aberrant failure like a hard bounce due to temporary communication issues) Once
+            resolved, you can request Email Delivery remove the mail suppression by clicking
+                <span class="ph uicontrol">Unsuppress</span> on the Mail Failures screen. Note that while this
+            will remove the suppression, the removal may be temporary if the underlying cause is not
+            resolved. Email Delivery may simply suppress the recipient address again. If this
+            happens, Transportation and Global Trade Management needs to work with Oracle Cloud
+            Email Operations to determine the cause.</p>
+        <p class="p">Incorrect SPF configuration can often lead to Email Delivery suppression. Itâs important
+            to correctly configure your SPF with respect to your e-mail domains and any downstream
+            servers. Use the Mail Sender or Mail Validation screens to verify that your sender is
+            properly configured for SPF verification.</p>
+        <p class="p"> Email Delivery suppression may also be due to excessive mail use. See the Mail Quota
+            section below for guidelines on monitoring your overall, per content and per recipient
+            email use.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225126"><h2 class="title topictitle2"><span id="managing-delivery-failure"></span><span id="OTMCAmanaging-delivery-failure" data-help-type="cloud-saas-docid"></span>Monitoring Transportation and Global Trade Management Email Blocking</h2>
+      
+      <div class="body">
+        <p class="p">Unless using a pre-authorized sender address for outbound emails, customers must register
+            all from addresses to Email Delivery via the Mail Sender screen. The system will block
+            sending of any email to a sender not successfully registered as a Mail Sender. These
+            blocks can be monitored with <span class="ph uicontrol">MailError</span> logging. In addition, the
+            system can block outbound mail that fails SPF checks. This can avoid having Email
+            Delivery suppress all recipients receiving email from an invalid sender and shift the
+            responsibility for SPF validation to Transportation and Global Trade Management.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225127"><h2 class="title topictitle2"><span id="managing-delivery-failure"></span><span id="OTMCAmanaging-delivery-failure" data-help-type="cloud-saas-docid"></span>Resolving Transportation and Global Trade Management Email Blocking</h2>
+      
+      <div class="body">
+        <p class="p">If emails are being blocked by Transportation and Global Trade Management, make sure you
+            have successfully registered your From addresses as valid mail senders on the Mail
+            Sender screen.</p>
+    </div>
+</div></div></article></body></html>

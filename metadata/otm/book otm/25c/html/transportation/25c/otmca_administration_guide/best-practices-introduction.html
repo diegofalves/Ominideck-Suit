@@ -1,0 +1,52 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="csv-db-xml.html" title="Previous" type="text/html"><link rel="next" href="security-and-user-provisioning-best-practices.html" title="Next" type="text/html"><meta name="description" content="OTM Cloud is a SaaS application that was first released as a software product in the year 2000, with GTM following in 2009. Both products were built on the premise of allowing great flexibility and configurability with the use and flow of the application. This flexibility allows great power and is a large reason that OTM has been the leader in the Gartner Magic Quadrant for so many years. However, if not designed or implemented correctly, bad configurations can cause instability and/or performance problems. In recent years, Oracle's engineering team has built many guardrails in the application that prevent the most egregious errors, but there are still configuration mistakes that are outside our control to contain. This section contains recommendations from OTM experts on the best practices for configuring those key parts of the application. Oracle will continue to expand this section as we discover more common configuration mistakes, so please stay tuned. We hope that you use this guide to both drive new configuration work and review existing configurations. Most of the content in this best practices section is intended for the OTM superuser, not for the average user. As always, we encourage feedback on this documentation."><meta property="og:description" content="OTM Cloud is a SaaS application that was first released as a software product in the year 2000, with GTM following in 2009. Both products were built on the premise of allowing great flexibility and configurability with the use and flow of the application. This flexibility allows great power and is a large reason that OTM has been the leader in the Gartner Magic Quadrant for so many years. However, if not designed or implemented correctly, bad configurations can cause instability and/or performance problems. In recent years, Oracle's engineering team has built many guardrails in the application that prevent the most egregious errors, but there are still configuration mistakes that are outside our control to contain. This section contains recommendations from OTM experts on the best practices for configuring those key parts of the application. Oracle will continue to expand this section as we discover more common configuration mistakes, so please stay tuned. We hope that you use this guide to both drive new configuration work and review existing configurations. Most of the content in this best practices section is intended for the OTM superuser, not for the average user. As always, we encourage feedback on this documentation."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:10 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Best Practices Introduction</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Best Practices Introduction","description":"OTM Cloud is a SaaS application that was first released as a software product in the year 2000, with GTM following in 2009. Both products were built on the premise of allowing great flexibility and configurability with the use and flow of the application. This flexibility allows great power and is a large reason that OTM has been the leader in the Gartner Magic Quadrant for so many years. However, if not designed or implemented correctly, bad configurations can cause instability and/or performance problems. In recent years, Oracle's engineering team has built many guardrails in the application that prevent the most egregious errors, but there are still configuration mistakes that are outside our control to contain. This section contains recommendations from OTM experts on the best practices for configuring those key parts of the application. Oracle will continue to expand this section as we discover more common configuration mistakes, so please stay tuned. We hope that you use this guide to both drive new configuration work and review existing configurations. Most of the content in this best practices section is intended for the OTM superuser, not for the average user. As always, we encourage feedback on this documentation.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="csv-db-xml.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="security-and-user-provisioning-best-practices.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Best Practices Introduction<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="best-practices-introduction"></span><span id="OTMCAbest-practices-introduction" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30255370">Best Practices Introduction</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <p class="p">OTM Cloud is a SaaS application that was first released as a software product in the year
+            2000, with GTM following in 2009. Both products were built on the premise of allowing
+            great flexibility and configurability with the use and flow of the application. This
+            flexibility allows great power and is a large reason that OTM has been the leader in the
+            Gartner Magic Quadrant for so many years. However, if not designed or implemented
+            correctly, bad configurations can cause instability and/or performance problems. In
+            recent years, Oracle's engineering team has built many guardrails in the application
+            that prevent the most egregious errors, but there are still configuration mistakes that
+            are outside our control to contain. This section contains recommendations from OTM
+            experts on the best practices for configuring those key parts of the application. Oracle
+            will continue to expand this section as we discover more common configuration mistakes,
+            so please stay tuned. We hope that you use this guide to both drive new configuration
+            work and review existing configurations. Most of the content in this best practices
+            section is intended for the OTM superuser, not for the average user. As always, we
+            encourage feedback on this documentation.</p>
+    </div>
+</div></article></body></html>

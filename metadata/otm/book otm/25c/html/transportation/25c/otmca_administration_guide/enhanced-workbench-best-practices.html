@@ -1,0 +1,67 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="custom-sql-best-practices.html" title="Previous" type="text/html"><link rel="next" href="optimization-best-practices.html" title="Next" type="text/html"><meta name="description" content="Maintain performance by minimizing data content by periodically evaluating components, screensets, and columns on the layouts. Only keep the required content on the layouts. If particular content is unused by most users, it should be added as a hidden tab. Hidden tabs only load only when they're exposed. Derived fields add to processing time when layout is loaded. Oracle recommends a maximum of 5-6 derived fields per screenset. The actions on the screenset are a part of the data content, so creating custom screen sets for tables with the minimum number of required actions can help reduce the data content and improve the performance of the workbench. A custom screenset with only required columns of interest to the user in the Table regions will improve performance of the layout. It's recommended to keep the number of columns to less than 20-25. Keep the page size smaller using these settings: Go to Configuration and Administration &gt; Preferences &gt; User Preferences. Add the Finder Page Size preference to your user preference. This controls both Finder Results and Workbench tables. Although the default is 25, set the value to 10-12. Go to Configuration and Administration &gt; User Configuration &gt; Screen Set Manager. On the Results tab, set the Records Per Page size. This controls the workbench table attached to this screenset. Tables perform best with less than 500 records. Gantt charts perform best when adding less than 100 objects and there's a smaller time range (around 5-7 days)."><meta property="og:description" content="Maintain performance by minimizing data content by periodically evaluating components, screensets, and columns on the layouts. Only keep the required content on the layouts. If particular content is unused by most users, it should be added as a hidden tab. Hidden tabs only load only when they're exposed. Derived fields add to processing time when layout is loaded. Oracle recommends a maximum of 5-6 derived fields per screenset. The actions on the screenset are a part of the data content, so creating custom screen sets for tables with the minimum number of required actions can help reduce the data content and improve the performance of the workbench. A custom screenset with only required columns of interest to the user in the Table regions will improve performance of the layout. It's recommended to keep the number of columns to less than 20-25. Keep the page size smaller using these settings: Go to Configuration and Administration &gt; Preferences &gt; User Preferences. Add the Finder Page Size preference to your user preference. This controls both Finder Results and Workbench tables. Although the default is 25, set the value to 10-12. Go to Configuration and Administration &gt; User Configuration &gt; Screen Set Manager. On the Results tab, set the Records Per Page size. This controls the workbench table attached to this screenset. Tables perform best with less than 500 records. Gantt charts perform best when adding less than 100 objects and there's a smaller time range (around 5-7 days)."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:10 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Enhanced Workbench Best Practices</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Enhanced Workbench Best Practices","description":"Maintain performance by minimizing data content by periodically evaluating components, screensets, and columns on the layouts. Only keep the required content on the layouts. If particular content is unused by most users, it should be added as a hidden tab. Hidden tabs only load only when they're exposed. Derived fields add to processing time when layout is loaded. Oracle recommends a maximum of 5-6 derived fields per screenset. The actions on the screenset are a part of the data content, so creating custom screen sets for tables with the minimum number of required actions can help reduce the data content and improve the performance of the workbench. A custom screenset with only required columns of interest to the user in the Table regions will improve performance of the layout. It's recommended to keep the number of columns to less than 20-25. Keep the page size smaller using these settings: Go to Configuration and Administration &gt; Preferences &gt; User Preferences. Add the Finder Page Size preference to your user preference. This controls both Finder Results and Workbench tables. Although the default is 25, set the value to 10-12. Go to Configuration and Administration &gt; User Configuration &gt; Screen Set Manager. On the Results tab, set the Records Per Page size. This controls the workbench table attached to this screenset. Tables perform best with less than 500 records. Gantt charts perform best when adding less than 100 objects and there's a smaller time range (around 5-7 days).","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="custom-sql-best-practices.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="optimization-best-practices.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Enhanced Workbench Best Practices<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="enhanced-workbench-best-practices"></span><span id="OTMCAenhanced-workbench-best-practices" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30255514">Enhanced Workbench Best Practices</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <div class="p">
+            <ul class="ul" id="u30255514__ol_n2m_fs3_42c">
+                <li class="li">Maintain performance by minimizing data content by periodically evaluating
+                    components, screensets, and columns on the  layouts.</li>
+                <li class="li">Only keep the required content on the layouts. If particular content is unused
+                    by most users, it should be added as a hidden tab. Hidden tabs only load only
+                    when they're exposed.</li>
+                <li class="li">Derived fields add to processing time when layout is loaded. Oracle recommends a
+                    maximum of 5-6 derived fields per screenset.</li>
+                <li class="li">The actions on the screenset are a part of the data content, so creating custom
+                    screen sets for tables with the minimum number of required actions can help
+                    reduce the data content and improve the performance of the workbench.</li>
+                <li class="li">A custom screenset with only required columns of interest to the user in the
+                    Table regions will improve performance of the layout. It's recommended to keep
+                    the number of columns to less than 20-25.</li>
+                <li class="li">Keep the page size smaller using these settings:<ul class="ul" id="u30255514__ul_ymh_hs3_42c">
+                        <li class="li">Go to <span class="ph uicontrol">Configuration and Administration &gt; Preferences &gt; User
+                                Preferences</span>. Add the Finder Page Size preference to your
+                            user preference. This controls both Finder Results and Workbench tables.
+                            Although the default is 25, set the value to 10-12.</li>
+                        <li class="li">Go to <span class="ph uicontrol">Configuration and Administration &gt; User Configuration &gt;
+                                Screen Set Manager</span>. On the Results tab, set the Records
+                            Per Page size. This controls the workbench table attached to this
+                            screenset.</li>
+                    </ul></li>
+                <li class="li">Tables perform best with less than 500 records.</li>
+                <li class="li">Gantt charts perform best when adding less than 100 objects and there's a
+                    smaller time range (around 5-7 days).</li>
+            </ul>
+        </div>
+    </div>
+</div></article></body></html>

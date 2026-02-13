@@ -1,0 +1,91 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="configuring-oracle-analytics-cloud-for-generating-reports.html" title="Previous" type="text/html"><link rel="next" href="enable-user-synchronization-from-otm-to-idcs.html" title="Next" type="text/html"><meta name="description" content="If you are not planning to enable the User Synchronization feature, you will need to manually create the Identity Cloud Service Groups before assigning them to Users. The Identity Cloud Service Groups must follow a particular naming convention, which is a combination of the Role and Environment Type with an underscore between them. The Environment Type will be one of: PRODUCTION, TEST, DEVELOPMENT, or LNM. The Role will be one of the following: OTMBISERVPROV: This role should only be used to access the Servprov Main Dashboard. This role is only used for TI. OTMBINoAccess: A user with a business intelligence role of No Access will not be able to access any dashboard. OTMBILSPHost: This is the only role that can be used with the LSP Host dashboard. Also this role is incompatible with any of the other dashboards listed in the table below. This role is only used for TI. OTMBILSPCustomer: This is the only role that can be used with the LSP Customer dashboard. Also this role is incompatible with any of the other dashboards listed in the table below. This role is only used for TI. OTMBIAdministrator: his role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI role of PRESENTATION SERVER ADMINISTRATOR. OTMBIContentConsumer: This role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI roles of EXECUTIVE and OPERATIONAL. OTMBIContentAuthor: This role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI role of DEVELOPER. OTMBIKPIManager: This the only role that can be used to edit target values of metrics from dashboard. This role must be assigned together with one of the other roles. For example, use the BIAuthor or BIConsumer role to give the user access view and/or edit the default dashboard while the KPIMANAGER role provides the ability to edit targets."><meta property="og:description" content="If you are not planning to enable the User Synchronization feature, you will need to manually create the Identity Cloud Service Groups before assigning them to Users. The Identity Cloud Service Groups must follow a particular naming convention, which is a combination of the Role and Environment Type with an underscore between them. The Environment Type will be one of: PRODUCTION, TEST, DEVELOPMENT, or LNM. The Role will be one of the following: OTMBISERVPROV: This role should only be used to access the Servprov Main Dashboard. This role is only used for TI. OTMBINoAccess: A user with a business intelligence role of No Access will not be able to access any dashboard. OTMBILSPHost: This is the only role that can be used with the LSP Host dashboard. Also this role is incompatible with any of the other dashboards listed in the table below. This role is only used for TI. OTMBILSPCustomer: This is the only role that can be used with the LSP Customer dashboard. Also this role is incompatible with any of the other dashboards listed in the table below. This role is only used for TI. OTMBIAdministrator: his role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI role of PRESENTATION SERVER ADMINISTRATOR. OTMBIContentConsumer: This role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI roles of EXECUTIVE and OPERATIONAL. OTMBIContentAuthor: This role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI role of DEVELOPER. OTMBIKPIManager: This the only role that can be used to edit target values of metrics from dashboard. This role must be assigned together with one of the other roles. For example, use the BIAuthor or BIConsumer role to give the user access view and/or edit the default dashboard while the KPIMANAGER role provides the ability to edit targets."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:11 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Manually Assigning Users to Groups in the Identity Cloud Service Console</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Manually Assigning Users to Groups in the Identity Cloud Service Console","description":"If you are not planning to enable the User Synchronization feature, you will need to manually create the Identity Cloud Service Groups before assigning them to Users. The Identity Cloud Service Groups must follow a particular naming convention, which is a combination of the Role and Environment Type with an underscore between them. The Environment Type will be one of: PRODUCTION, TEST, DEVELOPMENT, or LNM. The Role will be one of the following: OTMBISERVPROV: This role should only be used to access the Servprov Main Dashboard. This role is only used for TI. OTMBINoAccess: A user with a business intelligence role of No Access will not be able to access any dashboard. OTMBILSPHost: This is the only role that can be used with the LSP Host dashboard. Also this role is incompatible with any of the other dashboards listed in the table below. This role is only used for TI. OTMBILSPCustomer: This is the only role that can be used with the LSP Customer dashboard. Also this role is incompatible with any of the other dashboards listed in the table below. This role is only used for TI. OTMBIAdministrator: his role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI role of PRESENTATION SERVER ADMINISTRATOR. OTMBIContentConsumer: This role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI roles of EXECUTIVE and OPERATIONAL. OTMBIContentAuthor: This role mimics the OAS role of the same name. This role can be used for TI, GTI. This new role replaces the legacy TI BI role of DEVELOPER. OTMBIKPIManager: This the only role that can be used to edit target values of metrics from dashboard. This role must be assigned together with one of the other roles. For example, use the BIAuthor or BIConsumer role to give the user access view and/or edit the default dashboard while the KPIMANAGER role provides the ability to edit targets.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="configuring-oracle-analytics-cloud-for-generating-reports.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="enable-user-synchronization-from-otm-to-idcs.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Manually Assigning Users to Groups in the Identity Cloud Service Console<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="manually-assigning-users-to-groups-in-the-identity-cloud-service-console"></span><span id="OTMCAmanually-assigning-users-to-groups-in-the-identity-cloud-service-console" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30257562">Manually Assigning Users to Groups in the Identity Cloud Service Console</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <div class="p">If you are not planning to enable the User Synchronization feature, you will need to
+            manually create the Identity Cloud Service Groups before assigning them to Users. The
+            Identity Cloud Service Groups must follow a particular naming convention, which is a
+            combination of the Role and Environment Type with an underscore between them. The
+            Environment Type will be one of: PRODUCTION, TEST, DEVELOPMENT, or LNM. The Role will be
+            one of the following:<ul class="ul" id="u30257562__ul_npc_rk1_gfc">
+                <li class="li"><span class="ph uicontrol">OTMBISERVPROV</span>: This role should only be used to access
+                    the Servprov Main Dashboard. This role is only used for TI.</li>
+                <li class="li"><span class="ph uicontrol">OTMBINoAccess</span>: A user with a business intelligence role
+                    of No Access will not be able to access any dashboard.</li>
+                <li class="li"><span class="ph uicontrol">OTMBILSPHost</span>: This is the only role that can be used with
+                    the LSP Host dashboard. Also this role is incompatible with any of the other
+                    dashboards listed in the table below. This role is only used for TI.</li>
+                <li class="li"><span class="ph uicontrol">OTMBILSPCustomer</span>: This is the only role that can be used
+                    with the LSP Customer dashboard. Also this role is incompatible with any of the
+                    other dashboards listed in the table below. This role is only used for TI.</li>
+                <li class="li"><span class="ph uicontrol">OTMBIAdministrator</span>: his role mimics the OAS role of the
+                    same name. This role can be used for TI, GTI. This new role replaces the legacy
+                    TI BI role of PRESENTATION SERVER ADMINISTRATOR.</li>
+                <li class="li"><span class="ph uicontrol">OTMBIContentConsumer</span>: This role mimics the OAS role of
+                    the same name. This role can be used for TI, GTI. This new role replaces the
+                    legacy TI BI roles of EXECUTIVE and OPERATIONAL.</li>
+                <li class="li"><span class="ph uicontrol">OTMBIContentAuthor</span>: This role mimics the OAS role of the
+                    same name. This role can be used for TI, GTI. This new role replaces the legacy
+                    TI BI role of DEVELOPER.</li>
+                <li class="li"><span class="ph uicontrol">OTMBIKPIManager</span>: This the only role that can be used to
+                    edit target values of metrics from dashboard. This role must be assigned
+                    together with one of the other roles. For example, use the BIAuthor or
+                    BIConsumer role to give the user access view and/or edit the default dashboard
+                    while the KPIMANAGER role provides the ability to edit targets.</li>
+            </ul></div>
+        <div class="p">For example, to give a user the ability to run Reports in the Production environment, you
+            would need to create a Group in Identity Cloud Service with the name
+            âOTMBIContentConsumer_PRODUCTION" and assign it to the User. In order to create Groups
+            and assign Users to those Groups, you will need to do the following:<ol class="ol" id="u30257562__ol_ysm_1ry_ffc">
+                <li class="li">Sign in to the Oracle Cloud Console.</li>
+                <li class="li">Navigate to <span class="ph uicontrol">Identity &amp; Security &gt; Identity Domains</span> on
+                    the menu.</li>
+                <li class="li">Select the Domain listed as the "Current Domain".</li>
+                <li class="li">Navigate to the <span class="ph uicontrol">User Management</span> tab, and in the
+                        <span class="ph uicontrol">Groups</span> section, click <span class="ph uicontrol">Create
+                        Group</span>.</li>
+                <li class="li">Enter a <span class="ph uicontrol">Group Name</span> as follows based on the Role and
+                    Environment Type:<ul class="ul" id="u30257562__ul_r2l_cry_ffc">
+                        <li class="li">For Production pod type, enter "OTMBIContentConsumer_PRODUCTION".</li>
+                        <li class="li">For Development pod type, enter "OTMBIContentConsumer_DEVELOPMENT".</li>
+                        <li class="li">For Test pod type, enter "OTMBIContentConsumer_TEST".</li>
+                    </ul></li>
+                <li class="li">Navigate to the <span class="ph uicontrol">User Management</span> tab, and in the
+                        <span class="ph uicontrol">Users</span> section, click <span class="ph uicontrol">Create
+                        User</span>, or modify an existing user.</li>
+                <li class="li">Enter the details and add the group created earlier to the user and click
+                        <span class="ph uicontrol">Create</span>.</li>
+            </ol></div>
+    </div>
+</div></article></body></html>

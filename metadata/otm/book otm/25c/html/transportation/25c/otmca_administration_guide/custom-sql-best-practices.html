@@ -1,0 +1,65 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="agents-and-workflow-best-practices.html" title="Previous" type="text/html"><link rel="next" href="enhanced-workbench-best-practices.html" title="Next" type="text/html"><meta name="description" content="Limit Direct SQL to the table matching the Data Query Type of the agent. For example, update the order_release table in an ORDER_RELEASE agent. Even updating a child table such as shipment_stop in a shipment agent can run the risk of database deadlocks. Don't use tables from unused functionality for other purposes. Tables are designed accounting for column indexing and volume/purging with a specific purpose in mind, and misuse can cause performance and instability problems. If Direct SQL Update is used, restrict it working with attribute fields, reference number, remark fields. Don't update internal tables from Direct SQL Update as this could corrupt/conflict with Oracle Transportation Management internal code. Custom SQL and reports should use the view name corresponding to desired table. The view name is the table name without â_Tâ suffix. Use the tools available for diagnosing custom SQL: On the SQL Execution Interface screen, select the &#34;Show Execution Plan&#34; box to get an Explain Plan for the SQL you entered. Be sure to sign in with the same user that would run the SQL so you're running with the appropriate VPD. Use the AWR Report screen to obtain an AWR Report for a time period you choose. Note that snapshots are written on the hour, so requested data may not be available until the top of the hour. Use the AWR SQL Detail Report screen to obtain an Explain Plan of a SQL given the SQL ID from an AWR Report."><meta property="og:description" content="Limit Direct SQL to the table matching the Data Query Type of the agent. For example, update the order_release table in an ORDER_RELEASE agent. Even updating a child table such as shipment_stop in a shipment agent can run the risk of database deadlocks. Don't use tables from unused functionality for other purposes. Tables are designed accounting for column indexing and volume/purging with a specific purpose in mind, and misuse can cause performance and instability problems. If Direct SQL Update is used, restrict it working with attribute fields, reference number, remark fields. Don't update internal tables from Direct SQL Update as this could corrupt/conflict with Oracle Transportation Management internal code. Custom SQL and reports should use the view name corresponding to desired table. The view name is the table name without â_Tâ suffix. Use the tools available for diagnosing custom SQL: On the SQL Execution Interface screen, select the &#34;Show Execution Plan&#34; box to get an Explain Plan for the SQL you entered. Be sure to sign in with the same user that would run the SQL so you're running with the appropriate VPD. Use the AWR Report screen to obtain an AWR Report for a time period you choose. Note that snapshots are written on the hour, so requested data may not be available until the top of the hour. Use the AWR SQL Detail Report screen to obtain an Explain Plan of a SQL given the SQL ID from an AWR Report."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:10 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Custom SQL Best Practices</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Custom SQL Best Practices","description":"Limit Direct SQL to the table matching the Data Query Type of the agent. For example, update the order_release table in an ORDER_RELEASE agent. Even updating a child table such as shipment_stop in a shipment agent can run the risk of database deadlocks. Don't use tables from unused functionality for other purposes. Tables are designed accounting for column indexing and volume/purging with a specific purpose in mind, and misuse can cause performance and instability problems. If Direct SQL Update is used, restrict it working with attribute fields, reference number, remark fields. Don't update internal tables from Direct SQL Update as this could corrupt/conflict with Oracle Transportation Management internal code. Custom SQL and reports should use the view name corresponding to desired table. The view name is the table name without â_Tâ suffix. Use the tools available for diagnosing custom SQL: On the SQL Execution Interface screen, select the &#34;Show Execution Plan&#34; box to get an Explain Plan for the SQL you entered. Be sure to sign in with the same user that would run the SQL so you're running with the appropriate VPD. Use the AWR Report screen to obtain an AWR Report for a time period you choose. Note that snapshots are written on the hour, so requested data may not be available until the top of the hour. Use the AWR SQL Detail Report screen to obtain an Explain Plan of a SQL given the SQL ID from an AWR Report.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="agents-and-workflow-best-practices.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="enhanced-workbench-best-practices.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Custom SQL Best Practices<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="custom-sql-best-practices"></span><span id="OTMCAcustom-sql-best-practices" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30255366">Custom SQL Best Practices</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <div class="p">
+            <ul class="ul" id="u30255366__ul_tp2_gps_m2c">
+                <li class="li">Limit Direct SQL to the table matching the Data Query Type of the agent. For
+                    example, update the order_release table in an ORDER_RELEASE agent. Even updating
+                    a child table such as shipment_stop in a shipment agent can run the risk of
+                    database deadlocks.</li>
+                <li class="li">Don't use tables from unused functionality for other purposes. Tables are
+                    designed accounting for column indexing and volume/purging with a specific
+                    purpose in mind, and misuse can cause performance and instability problems.</li>
+                <li class="li">If Direct SQL Update is used, restrict it working with attribute fields,
+                    reference number, remark fields.</li>
+                <li class="li">Don't update internal tables from Direct SQL Update as this could
+                    corrupt/conflict with Oracle Transportation Management internal code.</li>
+                <li class="li">Custom SQL and reports should use the view name corresponding to desired table.
+                    The view name is the table name without â_Tâ suffix.</li>
+                <li class="li">Use the tools available for diagnosing custom SQL:<ul class="ul" id="u30255366__ul_myd_mlh_n2c">
+                        <li class="li">On the SQL Execution Interface screen, select the "Show Execution Plan"
+                            box to get an Explain Plan for the SQL you entered. Be sure to sign in
+                            with the same user that would run the SQL so you're running with the
+                            appropriate VPD.</li>
+                        <li class="li">Use the AWR Report screen to obtain an AWR Report for a time period you
+                            choose. Note that snapshots are written on the hour, so requested data
+                            may not be available until the top of the hour.</li>
+                        <li class="li">Use the AWR SQL Detail Report screen to obtain an Explain Plan of a SQL
+                            given the SQL ID from an AWR Report.</li>
+                    </ul></li>
+            </ul>
+        </div>
+    </div>
+</div></article></body></html>

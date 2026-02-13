@@ -1,0 +1,441 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="migration-projects.html" title="Previous" type="text/html"><link rel="next" href="loading-legacy-data.html" title="Next" type="text/html"><meta name="description" content="To maintain best performance, it's necessary to periodically purge or archive data from the operational database. Oracle Transportation and Global Trade Management uses multiple methods for purging and archiving data. This section explains these concepts in more detail."><meta property="og:description" content="To maintain best performance, it's necessary to periodically purge or archive data from the operational database. Oracle Transportation and Global Trade Management uses multiple methods for purging and archiving data. This section explains these concepts in more detail."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:09 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Business Data Purge and Archive</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Business Data Purge and Archive","description":"To maintain best performance, it's necessary to periodically purge or archive data from the operational database. Oracle Transportation and Global Trade Management uses multiple methods for purging and archiving data. This section explains these concepts in more detail.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="migration-projects.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="loading-legacy-data.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Business Data Purge and Archive<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="schedule-at-which-oldest-partition-is-purged-in-preparation-for"></span><span id="OTMCAschedule-at-which-oldest-partition-is-purged-in-preparation-for" data-help-type="cloud-saas-docid"></span><span id="business_data_purge" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225228">Business Data Purge and Archive</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">To maintain best performance, it's necessary to periodically purge or archive data from
+            the operational database. Oracle Transportation and Global Trade Management uses
+            multiple methods for purging and archiving data. This section explains these concepts in
+            more detail.</p>
+        <p class="p">Purging old data helps maintain best performance in the operational system. Archiving is
+            used with purging for critical business objects which need to be accessible for an
+            extended period of time. When data is archived, it's moved to an archive database schema
+            and compressed. Data in the archive schema can be queried, but can't be modified. </p>
+        <div class="infobox-"><span class="notep1">Note:</span> Templates aren't deleted when you purge data.</div>
+        <div class="infobox-" id="u30225228__note_w1y_qlr_hgc"><span class="notep1">Note:</span> Oracle Analytics data isnât purged.</div>
+        <div class="p">These business objects support archiving, with the following settings:<ul class="ul" id="u30225228__ul_mzb_qv3_wqb">
+                <li class="li"><span class="ph uicontrol">Operational Retention Period</span>: How long the data is kept
+                    in the operational database. If the data hasn't been updated for the period
+                    specified by Operational Retention Period, then it's archived. The Operational
+                    Retention Period is <span class="ph uicontrol">2 years</span> for Shipment, Invoice, Work
+                    Invoice, Order Release, OB Order Base, DM Transaction, GTM Campaign, Device and
+                    P_BID entities. The Operational Retention Period is <span class="ph uicontrol">5
+                        years</span> for GTM Transaction entity.</li>
+                <li class="li"><span class="ph uicontrol">Frequency</span>: How often the job runs to archive data. The
+                    Frequency is <span class="ph uicontrol">weekly</span>.</li>
+                <li class="li"><span class="ph uicontrol">Archive Retention Period</span>: How long the data is kept
+                    before it's permanently purged from the system. The Archive Retention Period is
+                        <span class="ph uicontrol">10 years</span>.</li>
+            </ul></div>
+        <section class="section" id="u30225228__section_wkh_ffd_kxb"><h2 class="title sectiontitle">Purge Only Option</h2>
+            
+            <p class="p">The Business Data Purge process stores deleted data in the archive database schema by
+                default. A domain can be marked to skip archiving of the purged data by selecting
+                the Purge Only (No Archive) checkbox on the Domain Settings page. To enable the
+                    <span class="ph uicontrol">Purge Only</span> option, you must open a service request with
+                Oracle Support. Oracle Support also offers an option to skip archiving for all
+                domains, in which case the Purge Only (No Archive) checkbox isn't functional.
+                Likewise, if you haven't contacted Oracle Support about enabling Purge Only, the
+                checkbox isn'tfunctional on the Domain Settings page.</p>
+            <div class="infobox-" id="u30225228__note_uyl_d3k_kxb"><span class="notep1">Note:</span> 
+                <p class="p">If you select the Purge Only (No Archive) checkbox on the Domain Settings page,
+                    domain data will be completely lost when the two-year purge starts.</p>
+            </div>
+        </section>
+        <section class="section" id="u30225228__section_iq2_jfd_kxb"><h2 class="title sectiontitle">Business Objects that Support Archiving</h2>
+            
+            <p class="p">All objects found in <span class="ph uicontrol">Configuration and Administration &gt; Process
+                    Management &gt; Mark for Purge</span> in the Purge Type field support
+                archiving.</p>
+            <p class="p">Archived data are found in the Report Manager in the "Archive" reports section. The
+                archive reports take a single parameter, which is the ID of the object to be
+                retrieved from the archive. The search for the ID lets you query the archive schema
+                business objects using flexible criteria. Some sample archive reports are provided
+                upon installation.</p>
+            <p class="p">Documents associated with the business objects above are archived when the business
+                objects are archived. A DBA or Admin user role may access the archived documents
+                using the Archived Documents UI, via <span class="ph uicontrol">Business Process Automation &gt;
+                    Document Management &gt; Archived Documents</span>. Not all documents are
+                associated with business objects, and those which aren't associated aren't archived
+                or purged.</p>
+            <div class="infobox-" id="u30225228__note_tpj_kfd_kxb"><span class="notep1">Note:</span> There are no indexes on the archive schema database tables,
+                thus the performance of the search is expected to be slower than the operational
+                database. If the data returned by the sample report is not sufficient, it's
+                recommended to copy the default report and change it as needed.</div>
+        </section>
+        <section class="section" id="u30225228__section_ocf_k53_wqb"><h2 class="title sectiontitle">Scheduled Purges</h2>
+            
+            <p class="p">Scheduled purges are used for purging miscellaneous transient and diagnostic data.
+                The following table defines the retention period and purge frequency. The timing and
+                frequency of these processes should not be altered.</p>
+            <table class="customlayout" style="table-layout: auto; width: 95%" summary="This table defines the retention period and purge frequency."><p class="titleintable">Retention period and purge frequency</p><colgroup><col><col><col></colgroup><thead class="thead">
+                        <tr class="row">
+                            <th class="entry colsep-1 rowsep-1" id="u30225228__table_t5y_btx_vjb__entry__1">Entity</th>
+                            <th class="entry colsep-1 rowsep-1" id="u30225228__table_t5y_btx_vjb__entry__2">Retention Period</th>
+                            <th class="entry colsep-1 rowsep-1" id="u30225228__table_t5y_btx_vjb__entry__3">Purge Frequency</th>
+                        </tr>
+                    </thead><tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Action Log</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">7 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Audit</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Bulk Plan Results</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Bulk Reporting</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">
+                                <p class="p">Business Intelligence Publisher (BIP) Schedule Job History</p>
+                                <div class="infobox-" id="u30225228__note_fsc_z1z_pbc"><span class="notep1">Note:</span> 
+                                    <p class="p">The retention period of 7 days is applicable only for jobs
+                                        scheduled in Business Intelligence Publisher and not for
+                                        jobs scheduled in Oracle Transportation Management via
+                                            <span class="ph uicontrol">Business Process Automation &gt; Reporting &gt;
+                                            View Scheduled Jobs</span>.</p>
+                                </div>
+                            </td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">7 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">During upgrade</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Demurrage Transaction</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Device Association</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Document Content</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Email Delivery Suppression</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Daily</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">GTM Data Content</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">GL User Authentication</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">GTM Campaign</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">GTM Shipment</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">5 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">GTM TIP Inventory</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">5 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">GTM Transaction</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">5 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Invoice</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Mail</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">7 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Object Lock</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Order Base</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Order Release</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Planning Diagnostics</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">30 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">QD Logs</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">7 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">RPLS Ad hoc Audit</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">60 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Every two months</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Sell Side Shipment</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Shipment</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Tracked Files</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">1 hour</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Hourly</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__1">Work Invoice</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__2">2 years</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_t5y_btx_vjb__entry__3">Weekly</td>
+                        </tr>
+                    </tbody></table>
+        </section>
+        <section class="section" id="u30225228__section_ht2_m53_wqb"><h2 class="title sectiontitle">Partitioned Purges</h2>
+            
+            <p class="p">Oracle Transportation and Global Trade Management contains several integration and
+                logging tables that can become quite large very quickly; these tables have been
+                partitioned to allow for quick purges of older data. By partitioning the tables, a
+                particular partition (segment) can be truncated, instead of records being
+                individually deleted, which is inefficient for large amounts of data. The following
+                table explains the time period which is used to create the partitions and the number
+                of partitions for each entity. </p>
+            <table class="customlayout" style="table-layout: auto; width: 95%" summary="This table explains the time period which is used to create the partitions and&#xA;                    the number of partitions for each entity."><p class="titleintable">Time period which is used to create the partitions and the number of
+                    partitions</p><colgroup><col><col><col></colgroup><thead class="thead">
+                        <tr class="row">
+                            <th class="entry colsep-1 rowsep-1" id="u30225228__table_svs_jtx_vjb__entry__1">Entity</th>
+                            <th class="entry colsep-1 rowsep-1" id="u30225228__table_svs_jtx_vjb__entry__2">Time Period</th>
+                            <th class="entry colsep-1 rowsep-1" id="u30225228__table_svs_jtx_vjb__entry__3">Partitions</th>
+                        </tr>
+                    </thead><tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - LIFETIME</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Monthly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - VISIBILITY</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Monthly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - NOTIFY</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">14 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - INTEGRATION_IN</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Daily</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - INTEGRATION_OUT</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Monthly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - NS_CONTACT_POINT_OVERRIDE</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">3 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - ADHOC_NOTIFY</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">3 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - VISIBILITY_SHIPMENT</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">11 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - VISIBILITY_INVOLVED_PARTY</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">11 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Data Queue - VISIBILITY_PIECE</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">11 days</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">12</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Explanation</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Daily</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">7</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Integration Logging</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Monthly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Integration Logging(Mobile)</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Daily</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">7</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Login History</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Monthly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Mobile Messages</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Daily</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">7</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Object Lock</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Daily</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">7</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Problem</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Monthly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Process Control History</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Quarterly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Transaction(Mobile)</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Daily</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">7</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Transaction(Inbound)</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Bi-Weekly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Transaction(Outbound)</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Weekly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Transaction(Mobile)</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Daily</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">7</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Transmission(Inbound)</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Bi-Weekly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Transmission(Outbound)</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Weekly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__1">Tender Transmission(Outbound)</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__2">Quarterly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_svs_jtx_vjb__entry__3">4</td>
+                        </tr>
+                    </tbody></table>
+            <p class="p"> These jobs are set to run at 1 AM on the last day of the cycle. Every table reuses
+                its partitions, because the intention is that before the end of the cycle, the
+                oldest partition is purged in preparation for the new cycle. For example, for a
+                monthly table, on April 30th, partition 1 should be purged to remove Januaryâs data,
+                which will then be used for May. For example:</p>
+            <p class="p">If the time period of the table is monthly, then the data is segmented as
+                follows:</p>
+            <ul class="ul" id="u30225228__ul_tvs_jtx_vjb">
+                <li class="li">Jan â partition 1</li>
+                <li class="li">Feb â partition 2</li>
+                <li class="li">Mar â partition 3</li>
+                <li class="li">Apr â partition 4</li>
+                <li class="li">May - partition 5</li>
+                <li class="li">June â partition 6, etc.</li>
+            </ul>
+            <table class="customlayout" style="table-layout: auto; width: 95%" summary="This table explains which oldest partition is purged in preparation for the&#xA;                    new cycle."><p class="titleintable">Schedule at which oldest partition is purged in preparation for the new
+                    cycle</p><colgroup><col><col></colgroup><thead class="thead">
+                        <tr class="row">
+                            <th class="entry colsep-1 rowsep-1" id="u30225228__table_rlx_kqr_lpb__entry__1">Time Period</th>
+                            <th class="entry colsep-1 rowsep-1" id="u30225228__table_rlx_kqr_lpb__entry__2">Oldest Partition Purge Schedule</th>
+                        </tr>
+                    </thead><tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__1">Daily</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__2">Every day at 10 PM UTC</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__1">Weekly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__2">Every Monday at 4 AM UTC</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__1">Bi-Weekly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__2">Every other Sunday at 4:30 AM UTC</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__1">Monthly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__2">Every last day of the month at 5 AM UTC</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__1">Quarterly</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225228__table_rlx_kqr_lpb__entry__2">Every last day of the quarter at 6 AM UTC</td>
+                        </tr>
+                    </tbody></table>
+        </section>
+    </div>
+</div></article></body></html>

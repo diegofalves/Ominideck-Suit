@@ -1,0 +1,84 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="managing-delivery-failure.html" title="Previous" type="text/html"><link rel="next" href="managing-mail-quota.html" title="Next" type="text/html"><meta name="description" content="Oracle Transportation and Global Trade Management service supports customers configuring OTM to send email via their own SMTP server. Doing so alleviates the need to configure SPF/DKIM and the need to create an Approved Sender since the email. The disadvantage of this approach is that there is a greater change of instability because the email traffic is routed over the Public Internet. Transportation and Global Trade Management does not have an automatic retry capability with this approach, so intermittent connectivity issues with the external SMTP server will result in emails failing to deliver. Since this traffic traverses the Public Internet, only authenticated SMTP transport with TLS is supported on Port 587."><meta property="og:description" content="Oracle Transportation and Global Trade Management service supports customers configuring OTM to send email via their own SMTP server. Doing so alleviates the need to configure SPF/DKIM and the need to create an Approved Sender since the email. The disadvantage of this approach is that there is a greater change of instability because the email traffic is routed over the Public Internet. Transportation and Global Trade Management does not have an automatic retry capability with this approach, so intermittent connectivity issues with the external SMTP server will result in emails failing to deliver. Since this traffic traverses the Public Internet, only authenticated SMTP transport with TLS is supported on Port 587."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:10 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Configuring an External SMTP Host</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Configuring an External SMTP Host","description":"Oracle Transportation and Global Trade Management service supports customers configuring OTM to send email via their own SMTP server. Doing so alleviates the need to configure SPF/DKIM and the need to create an Approved Sender since the email. The disadvantage of this approach is that there is a greater change of instability because the email traffic is routed over the Public Internet. Transportation and Global Trade Management does not have an automatic retry capability with this approach, so intermittent connectivity issues with the external SMTP server will result in emails failing to deliver. Since this traffic traverses the Public Internet, only authenticated SMTP transport with TLS is supported on Port 587.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="managing-delivery-failure.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="managing-mail-quota.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Configuring an External SMTP Host<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="configuring-an-external-smtp-host"></span><span id="OTMCAconfiguring-an-external-smtp-host" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30226900">Configuring an External SMTP Host</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <p class="p">Oracle Transportation and Global Trade Management service supports customers configuring
+            OTM to send email via their own SMTP server. Doing so alleviates the need to configure
+            SPF/DKIM and the need to create an Approved Sender since the email. The disadvantage of
+            this approach is that there is a greater change of instability because the email traffic
+            is routed over the Public Internet. Transportation and Global Trade Management does not
+            have an automatic retry capability with this approach, so intermittent connectivity
+            issues with the external SMTP server will result in emails failing to deliver. Since
+            this traffic traverses the Public Internet, only authenticated SMTP transport with TLS
+            is supported on Port 587.</p>
+        <p class="p">In order to use this approach, you will first need to open a Service Request to request
+            the outbound IP Address that will be the source of the mail traffic from the
+            Transportation and Global Trade Management instance. You will need to whitelist the
+            source IP address on your SMTP Server.</p>
+        <div class="p">Once the whitelisting is complete, add the following properties to the CUSTOM Property
+                Set.<ul class="ul" id="u30226900__ul_mkx_nft_ssb">
+                <li class="li">glog.mail.smtp.external.host</li>
+                <li class="li">glog.mail.smtp.external.port</li>
+            </ul></div>
+        <p class="p">For the "host" property, the value must use the following format:</p>
+        <pre class="pre codeblock" id="u30226900__codeblock_ab1_tft_ssb"><code>[&lt;user&gt;][/{w&lt;key&gt;][@]&lt;host&gt; </code></pre>
+        <div class="p">where:<ul class="ul" id="u30226900__ul_tm5_tft_ssb">
+                <li class="li"><code class="ph codeph">&lt;user&gt;</code> is the mail server user for authentication.</li>
+                <li class="li"><code class="ph codeph">&lt;key&gt;</code> is a password wallet key that is used to store the
+                    mail server user's password in a wallet.</li>
+                <li class="li"><code class="ph codeph">&lt;host&gt;</code> is the SMTP host name.</li>
+            </ul></div>
+        <div class="p">To set this property in the CUSTOM Property Set:<ol class="ol" id="u30226900__ol_mld_bgt_ssb">
+                <li class="li">Choose a name for the password wallet key, i.e. "smtp.external".</li>
+                <li class="li">Edit the CUSTOM Property Set and add a new property for the SMTP host using the
+                    password wallet key, i.e.
+                    "glog.mail.smtp.external.host=myuser/{wsmtp.external@host.&lt;YOUR
+                    DOMAIN&gt;.com".</li>
+                <li class="li">Add a new property for the SMTP port, i.e.
+                    "glog.mail.smtp.external.port=587".</li>
+                <li class="li">Save the property set.</li>
+                <li class="li">Edit the CUSTOM Property Set again and add a new property where the key is your
+                    password wallet key and the value is your password, i.e.
+                    "smtp.external=PASSWORD".</li>
+                <li class="li">Save the property set.</li>
+            </ol></div>
+        <p class="p">On the second save, the password will be properly stored in a wallet, and you should be
+            able to start sending mail.</p>
+        <div class="infobox-" id="u30226900__note_n51_rgt_ssb"><span class="notep1">Note:</span> It is very important that you follow the steps provided exactly.
+            Make sure that you add the "glog.mail.smtp.external.host" property and save the property
+            set before adding the "smtp.external" property. If you added both properties at the same
+            time, it will not work correctly. If needed, delete these two properties and try
+            again.</div>
+    </div>
+</div></article></body></html>

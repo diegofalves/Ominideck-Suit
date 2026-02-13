@@ -1,0 +1,136 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="optimization-best-practices.html" title="Previous" type="text/html"><link rel="next" href="troubleshooting-maintenance-best-practices.html" title="Next" type="text/html"><meta name="description" content="All the parameters sent from Oracle Transportation Management to BI Publisher will be strings, so you must account for strings in the where condition for the queries written in data model of BI Publisher. Date strings are sent with a specific date format, and this date format is also sent as a parameter from Oracle Transportation Management. When dealing with dates, you must convert date string using the format, so also define a parameter to receive the date format. Reports executed from Oracle Transportation Management on BI Publisher are always treated as Online Reports for BI Publisher even if they're scheduled in Oracle Transportation Management. This means the query timeouts and memory guard properties, such as Report Size Limit, set in BI Publisher for Online Reports will be applied to the reports requested from Oracle Transportation Management. Reporting within Oracle Transportation Management is meant for running transactional reports that deal with single object records, not aggregate or analytical reports. Any aggregate or analytical reports that deal with huge data sets should be scheduled directly in BI Publisher. When writing queries, keep in mind the VPD that will be used. When logged into BI Publisher, the logged in user's VPD will apply, meaning it will use the VPD of the default role assigned to the user. In Oracle Transportation Management, if switching roles, the VPD will change to the newly selected role, so make sure the queries work for that VPD, too. See the following BI Publisher Documentation: Best Practices for SQL Data Sets SQL Query Tuning"><meta property="og:description" content="All the parameters sent from Oracle Transportation Management to BI Publisher will be strings, so you must account for strings in the where condition for the queries written in data model of BI Publisher. Date strings are sent with a specific date format, and this date format is also sent as a parameter from Oracle Transportation Management. When dealing with dates, you must convert date string using the format, so also define a parameter to receive the date format. Reports executed from Oracle Transportation Management on BI Publisher are always treated as Online Reports for BI Publisher even if they're scheduled in Oracle Transportation Management. This means the query timeouts and memory guard properties, such as Report Size Limit, set in BI Publisher for Online Reports will be applied to the reports requested from Oracle Transportation Management. Reporting within Oracle Transportation Management is meant for running transactional reports that deal with single object records, not aggregate or analytical reports. Any aggregate or analytical reports that deal with huge data sets should be scheduled directly in BI Publisher. When writing queries, keep in mind the VPD that will be used. When logged into BI Publisher, the logged in user's VPD will apply, meaning it will use the VPD of the default role assigned to the user. In Oracle Transportation Management, if switching roles, the VPD will change to the newly selected role, so make sure the queries work for that VPD, too. See the following BI Publisher Documentation: Best Practices for SQL Data Sets SQL Query Tuning"><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:10 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Report Best Practices</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Report Best Practices","description":"All the parameters sent from Oracle Transportation Management to BI Publisher will be strings, so you must account for strings in the where condition for the queries written in data model of BI Publisher. Date strings are sent with a specific date format, and this date format is also sent as a parameter from Oracle Transportation Management. When dealing with dates, you must convert date string using the format, so also define a parameter to receive the date format. Reports executed from Oracle Transportation Management on BI Publisher are always treated as Online Reports for BI Publisher even if they're scheduled in Oracle Transportation Management. This means the query timeouts and memory guard properties, such as Report Size Limit, set in BI Publisher for Online Reports will be applied to the reports requested from Oracle Transportation Management. Reporting within Oracle Transportation Management is meant for running transactional reports that deal with single object records, not aggregate or analytical reports. Any aggregate or analytical reports that deal with huge data sets should be scheduled directly in BI Publisher. When writing queries, keep in mind the VPD that will be used. When logged into BI Publisher, the logged in user's VPD will apply, meaning it will use the VPD of the default role assigned to the user. In Oracle Transportation Management, if switching roles, the VPD will change to the newly selected role, so make sure the queries work for that VPD, too. See the following BI Publisher Documentation: Best Practices for SQL Data Sets SQL Query Tuning","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="optimization-best-practices.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="troubleshooting-maintenance-best-practices.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Report Best Practices<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="report-best-practices"></span><span id="OTMCAreport-best-practices" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30255368">Report Best Practices</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <div class="p">
+            <ul class="ul" id="u30255368__ul_yrs_kps_m2c">
+                <li class="li">All the parameters sent from Oracle Transportation Management to BI Publisher
+                    will be strings, so you must account for strings in the where condition for the
+                    queries written in data model of BI Publisher. Date strings are sent with a
+                    specific date format, and this date format is also sent as a parameter from
+                    Oracle Transportation Management. When dealing with dates, you must convert date
+                    string using the format, so also define a parameter to receive the date
+                    format.</li>
+                <li class="li">Reports executed from Oracle Transportation Management on BI Publisher are
+                    always treated as Online Reports for BI Publisher even if they're scheduled in
+                    Oracle Transportation Management. This means the query timeouts and memory guard
+                    properties, such as Report Size Limit, set in BI Publisher for Online Reports
+                    will be applied to the reports requested from Oracle Transportation
+                    Management.</li>
+                <li class="li">Reporting within Oracle Transportation Management is meant for running
+                    transactional reports that deal with single object records, not aggregate or
+                    analytical reports. Any aggregate or analytical reports that deal with huge data
+                    sets should be scheduled directly in BI Publisher.</li>
+                <li class="li">When writing queries, keep in mind the VPD that will be used. <ul class="ul" id="u30255368__ul_zrs_kps_m2c">
+                        <li class="li">When logged into BI Publisher, the logged in user's VPD will apply,
+                            meaning it will use the VPD of the default role assigned to the user. </li>
+                        <li class="li">In Oracle Transportation Management, if switching roles, the VPD will
+                            change to the newly selected role, so make sure the queries work for
+                            that VPD, too.</li>
+                    </ul></li>
+                <li class="li">See the following BI Publisher Documentation:<ul class="ul" id="u30255368__ul_ass_kps_m2c">
+                        <li class="li">
+                            <p class="p"><a class="xref" href="https://docs.oracle.com/middleware/bi12214/bip/BIPDM/GUID-478A2B1D-BC89-421E-9702-5749BA49EFD2.htm#GUID-9A9233A9-1D48-4D50-AB00-7FDD29EB0E23" target="_blank" rel="external noopener">Best Practices for SQL Data
+                                    Sets</a></p>
+                        </li>
+                        <li class="li">
+                            <p class="p"><a class="xref" href="https://docs.oracle.com/middleware/bi12214/bip/BIPDM/GUID-478A2B1D-BC89-421E-9702-5749BA49EFD2.htm#GUID-34172429-AF05-4366-8B76-FA91B909EACA" target="_blank" rel="external noopener">SQL Query Tuning</a></p>
+                        </li>
+                    </ul></li>
+            </ul>
+        </div>
+        <section class="section" id="u30255368__section_mkf_lps_m2c"><h2 class="title sectiontitle">Analytical Reports</h2>
+            
+            <div class="p">
+                <ul class="ul" id="u30255368__ul_pnb_mps_m2c">
+                    <li class="li">Create a report with facts and dimensions from same analysis folder, as
+                        using a different analysis folder might yield inconsistent results. For
+                        example, creating a report with Shipment Count fact from the Shipment
+                        Analysis folder and Dimension from the Shipment Stop Analysis folder will
+                        show inconsistent results.</li>
+                    <li class="li">Always have at least one fact and one dimension in the analytical report.
+                        You might see inconsistent results if ONLY dimension columns or ONLY fact
+                        columns are selected in the report.</li>
+                    <li class="li">Analytical reports are intended for analyzing at a higher level, meaning
+                        they should always be aggregated or summarized with high level dimension.
+                        For example: number of shipments and total cost by service provider in a
+                        particular lane.</li>
+                    <li class="li">It's always recommended to back up custom artifacts (reports and dashboards)
+                        on regular basis from Oracle Analytics Server (/analytics) using the archive
+                        option. This will be stored as a <code class="ph codeph">.catalog</code> file. You can
+                        make a backup of BI Publisher reports, Data Visualization workbooks, and
+                        analytical dashboards and reports using this option.</li>
+                    <li class="li">All catalog folders in Oracle Analytics Server are read-only except the
+                        custom folder. To change a default report, copy it to the custom folder and
+                        edit it.</li>
+                    <li class="li">Avoid saving your custom reports in the User folder; instead, use the Custom
+                        folder. Reports stored in the User folder will not be retained during
+                        migration from Oracle Analytics Server to Oracle Analytics Cloud.</li>
+                    <li class="li">Caching is enabled in analytics, so that if the same report is run with same
+                        parameters, it will get the data from BI server cache instead of from the
+                        database. ETL clears the BI server cache as part of the ETL process, so it's
+                        recommended to run any analytical report after 30 min of ETL completion as
+                        BI server will look for cache table for every 30 min and clear the cache if
+                        the cache table has entries.</li>
+                    <li class="li">Analytics users should always have any of the following VPD profiles. Or,
+                        you can create a custom VPD profile with all the predicates provided in
+                        these VPD profiles.<ul class="ul" id="u30255368__ul_qnb_mps_m2c">
+                            <li class="li">FTI_DEFAULT</li>
+                            <li class="li">GTI_DEFAULT</li>
+                            <li class="li">SERVPROV</li>
+                        </ul></li>
+                </ul>
+            </div>
+        </section>
+        <section class="section" id="u30255368__section_fyh_mps_m2c"><h2 class="title sectiontitle">ETL</h2>
+            
+            <div class="p">
+                <ul class="ul" id="u30255368__ul_wqd_nps_m2c">
+                    <li class="li">ETL is scheduled to run once daily. It is NOT recommended to create multiple
+                        ETL schedules on same day.</li>
+                    <li class="li">It's recommended to monitor ETL on regular basis and report any issues. This
+                        avoids a bulk extract in the event ETL was stuck due to some issues and
+                        wasn't running for an extended period of time. This might lead to
+                        performance issues when the ETL is run again. ETL can be monitored from
+                        Transportation Intelligence &gt; ETL results screen. Select âIn Progressâ Load
+                        Status to monitor the running ETL process.</li>
+                    <li class="li">Customers should not run lookback ETL regularly. This might impact the
+                        performance as this will load the two weeks of data from the date selected
+                        in the OTM. This lookback option is only meant to correct the data if there
+                        were any ETL fixes.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div></article></body></html>

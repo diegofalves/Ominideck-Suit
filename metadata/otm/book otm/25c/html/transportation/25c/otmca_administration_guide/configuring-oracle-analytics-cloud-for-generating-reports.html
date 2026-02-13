@@ -1,0 +1,69 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="accessing-business-intelligence-publisher-directly.html" title="Previous" type="text/html"><link rel="next" href="manually-assigning-users-to-groups-in-the-identity-cloud-service-console.html" title="Next" type="text/html"><meta name="description" content="The following section documents the minimum configuration required to start using Oracle Analytics Cloud service. These steps are required for new customers and customers that have been migrated from Oracle Analytic Server."><meta property="og:description" content="The following section documents the minimum configuration required to start using Oracle Analytics Cloud service. These steps are required for new customers and customers that have been migrated from Oracle Analytic Server."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:08 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Managing User Roles for Oracle Analytics Cloud</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Managing User Roles for Oracle Analytics Cloud","description":"The following section documents the minimum configuration required to start using Oracle Analytics Cloud service. These steps are required for new customers and customers that have been migrated from Oracle Analytic Server.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="accessing-business-intelligence-publisher-directly.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="manually-assigning-users-to-groups-in-the-identity-cloud-service-console.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Managing User Roles for Oracle Analytics Cloud<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="configuring-oracle-analytics-cloud-for-generating-reports"></span><span id="OTMCAconfiguring-oracle-analytics-cloud-for-generating-reports" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30257411">Managing User Roles for Oracle Analytics Cloud</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <p class="p">The following section documents the minimum configuration required to start using Oracle
+            Analytics Cloud service. These steps are required for new customers and customers that
+            have been migrated from Oracle Analytic Server.</p>
+        <div class="p">User Access to Oracle Analytics Cloud is controlled by assigning users to Identity Cloud
+            Service Groups. OTM users who need to view, create, or modify reports or use Analytic
+            Dashboards, will need to be assigned to an Identity Cloud Service Group with the
+            corresponding Oracle Analytics Cloud application role. This can be done manually within
+            the Oracle Cloud console, but you are strongly encouraged to enable the OTM User
+            Synchronization feature, which will avoid the need to manually assign IDCS Groups. If
+            you are migrated from Oracle Analytic Server, you will need to assign the Groups
+            manually to your existing users or enable the synchronization feature and run the
+            âSynchronize Usersâ action for all users that need access to Oracle Analytics Cloud.
+                <div class="infobox-" id="u30257411__note_hzl_dk1_gfc"><span class="notep1">Note:</span> Users can run reports from within OTM without needing
+                access to Oracle Analytics Cloud. Refer to the <a class="xref" href="create-oracle-identity-cloud-service-user-and-update-default-report-system.html#u30257416">Enable Report Generation from within Oracle Transportation Management</a> section
+                for more details on how to configure this option.</div></div>
+        <p class="p">The Oracle Transportation Management Business Intelligence roles in the OTM User Manager
+            are associated with Oracle Analytics Cloud application roles via Identity Cloud Service
+            Groups. Each Business Intelligence Role in OTM is mapped to an Identity Cloud Service
+            Group, which is in turn mapped to an Oracle Analytics Cloud application role.</p>
+        <p class="p">There is an important difference with how Business Intelligence Roles work with
+            environments of type DEVELOPMENT in Oracle Analytics Cloud. The Oracle Identity Cloud
+            Service is common for all the OTM environments (PRODUCTION, TEST, LNM and DEVELOPMENT)
+            in a customer tenancy. User who have access to multiple DEVELOPMENT environments will
+            have same Business Intelligence roles in all DEVELOPMENT Environments. </p>
+        <p class="p">Suppose a customer has two Environments of type âDEVELOPMENTâ, DEV1 and DEV2. Regardless
+            of which OTM Environment you sign in to assign the user the Business Intelligence Role,
+            they will be assigned to a Group that is common to all Environments of type
+            âDEVELOPMENTâ. For example, if a User is assigned the BIADMINISTRATOR role in âDEV1â,
+            they will also have the BIADMINISTRATOR role in âDev2â. In the Identity Cloud Service
+            console, you will see that the user is assigned to a single Group named
+            âOTMBIAdministrator_DEVELOPMENTâ. This behavior is intentional and cannot be
+            modified.</p>
+    </div>
+</div></article></body></html>

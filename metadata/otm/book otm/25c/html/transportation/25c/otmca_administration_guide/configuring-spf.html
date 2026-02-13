@@ -1,0 +1,156 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="using-reply-to-as-an-alternative-to-wildcard-approved-senders.html" title="Previous" type="text/html"><link rel="next" href="configuring-dkim.html" title="Next" type="text/html"><meta name="description" content="Sender Policy Framework (SPF) is an internet standard for email to reduce spamming and other fraudulent emails by specifically identifying which Internet hosts are allowed to originate email for email addresses within a specific domain name. Since spamming and phishing attacks primarily use forged sender email addresses to lure the victims into opening dangerous emails (since they appear to be from trusted friends, colleagues, or businesses), SPF prevents this by allowing receiving email servers to reject emails that come from hosts that should not be originating emails with certain sender email addresses, therefore preserving the trustworthiness of those email addresses' domains."><meta property="og:description" content="Sender Policy Framework (SPF) is an internet standard for email to reduce spamming and other fraudulent emails by specifically identifying which Internet hosts are allowed to originate email for email addresses within a specific domain name. Since spamming and phishing attacks primarily use forged sender email addresses to lure the victims into opening dangerous emails (since they appear to be from trusted friends, colleagues, or businesses), SPF prevents this by allowing receiving email servers to reject emails that come from hosts that should not be originating emails with certain sender email addresses, therefore preserving the trustworthiness of those email addresses' domains."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:10 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Configuring SPF</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Configuring SPF","description":"Sender Policy Framework (SPF) is an internet standard for email to reduce spamming and other fraudulent emails by specifically identifying which Internet hosts are allowed to originate email for email addresses within a specific domain name. Since spamming and phishing attacks primarily use forged sender email addresses to lure the victims into opening dangerous emails (since they appear to be from trusted friends, colleagues, or businesses), SPF prevents this by allowing receiving email servers to reject emails that come from hosts that should not be originating emails with certain sender email addresses, therefore preserving the trustworthiness of those email addresses' domains.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="using-reply-to-as-an-alternative-to-wildcard-approved-senders.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="configuring-dkim.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Configuring SPF<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="configuring-spf"></span><span id="OTMCAconfiguring-spf" data-help-type="cloud-saas-docid"></span><span id="configuring_spf" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225118">Configuring SPF</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">Sender Policy Framework (SPF) is an internet standard for email to reduce spamming and
+            other fraudulent emails by specifically identifying which Internet hosts are allowed to
+            originate email for email addresses within a specific domain name. Since spamming and
+            phishing attacks primarily use forged sender email addresses to lure the victims into
+            opening dangerous emails (since they appear to be from trusted friends, colleagues, or
+            businesses), SPF prevents this by allowing receiving email servers to reject emails that
+            come from hosts that should not be originating emails with certain sender email
+            addresses, therefore preserving the trustworthiness of those email addresses'
+            domains.</p>
+        <p class="p">SPF works by having the owner of the domain name specifically identify which public
+            Internet hosts are allowed to originate email for addresses in that domain. For example,
+            if the <code class="ph codeph">example.com</code> domain owner only wanted the host
+                <code class="ph codeph">mx.example.com</code> to be able to publicly send emails from anyone with
+            a <code class="ph codeph">user@example.com</code> email address, they could specify that with SPF, so
+            any other computer that attempted to send example.com emails would have their email
+            discarded when the SPF-compliant receiving email server received the forged email.</p>
+        <p class="p">SPF-compliant receiving email servers look up the sending email address's domain name,
+            and see if an SPF record is specified. If so, the computer attempting to send the email
+            is cross-checked against the list of authorized Internet addresses in the SPF record; if
+            the sending computer is not authorized, the email can be rejected or classified as
+            spam.</p>
+        <p class="p">Note that SPF is not used within a corporate intranet; it is implemented at the firewall
+            border between a companyâs intranet and the global Internet. This is why
+            company-originated emails go to the Internet through a specific border public email
+            server (or redundant cloud of servers), and are similarly received by a single
+            publicly-exposed entry point into the company.</p>
+        <p class="p">Emails supposedly from domains that do not use SPF probably will not be trusted, as the
+            domain owners appear too careless to prevent forgeries in their name.</p>
+        <p class="p">Transportation and Global Trade Management can send automated emails to many users for
+            many different reasons, and such emails have to have a sender email address. If the
+            sender email address is not left to the standard installation setting for an Oracle
+            Cloud deployment, such emails will appear as forged to the recipients' email server
+            because the email server associated with the Transportation and Global Trade Management
+            application server may not be on the SPF-authorized list for the Internet domain name of
+            the sender email address.</p>
+        <p class="p">Hence, for every sender email address configured into a Transportation and Global Trade
+            Management deployment, not only do they have to be registered with the Oracle email
+            service (through the registration web page in the Transportation and Global Trade
+            Management web UI), but the Oracle public outbound email servers have to be listed as
+            authorized email originators in the SPF records for the email addresses' domains.</p>
+        <p class="p">This requires contacting the parties within your organization responsible for maintaining
+            your organizationâs domain name records, and asking them to add an SPF directive to your
+            domain name's SPF record authorizing the Oracle public email servers to send email on
+            behalf of the configured Transportation and Global Trade Management sender email
+            addresses in that Internet domain.</p>
+        <p class="p">Oracle has created publicly posted SPF sublists of the Oracle Cloud public outbound email
+            servers that can be conveniently included by reference in your domain name's SPF
+            record.</p>
+        <p class="p">The SPF is dependent on the geographic region where your service deployed. Refer to the
+            following table to determine the correct SPF record corresponding to your region.</p>
+        <div class="p">In your DNS setup, create a TXT record and paste the following information into the
+            record based on the sending region:<table class="customlayout" style="table-layout: auto; width: 95%" summary="Use this table to determine the SPF record associated with your region."><p class="titleintable">Configuring SPF</p><colgroup><col><col></colgroup><thead class="thead">
+                        <tr class="row">
+                            <th class="entry colsep-1 rowsep-1" id="u30225118__entry__1">Sending Region</th>
+                            <th class="entry colsep-1 rowsep-1" id="u30225118__entry__2">SPF Record</th>
+                        </tr>
+                    </thead><tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__1">Americas</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__2"><code class="ph codeph">v=spf1 include:rp.oracleemaildelivery.com
+                                ~all</code></td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__1">Asia/Pacific</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__2"><code class="ph codeph">v=spf1 include:ap.rp.oracleemaildelivery.com
+                                    ~all</code></td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__1">Europe</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__2"><code class="ph codeph">v=spf1 include:eu.rp.oracleemaildelivery.com
+                                    ~all</code></td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__1">All Commercial Regions</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__2"><code class="ph codeph">v=spf1 include:rp.oracleemaildelivery.com
+                                    include:ap.rp.oracleemaildelivery.com
+                                    include:eu.rp.oracleemaildelivery.com ~all</code></td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__1">Government Regions</td>
+                            <td class="entry colsep-1 rowsep-1" headers="u30225118__entry__2">
+                                <ul class="ul" id="u30225118__top_ul_ydr_swg_t4b">
+                                    <li class="li">For US Government Cloud with FedRAMP Authorization, see
+                                            <a class="xref" href="https://docs.oracle.com/en-us/iaas/Content/General/Concepts/govfedramp.htm#govfedramp_topic-SPF" target="_blank" rel="external noopener">SPF Record
+                                        Syntax</a>.</li>
+                                    <li class="li">For US Federal Cloud with DISA Impact Level 5, see <a class="xref" href="https://docs.oracle.com/en-us/iaas/Content/General/Concepts/govfeddod.htm#govfeddod_topic-SPF" target="_blank" rel="external noopener">SPF Record
+                                        Syntax</a>.</li>
+                                    <li class="li">For United Kingdom Government Cloud, see <a class="xref" href="https://docs.oracle.com/en-us/iaas/Content/General/Concepts/govuksouth.htm#govuksouth_topic-SPF" target="_blank" rel="external noopener">SPF Record
+                                        Syntax</a>.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody></table></div>
+        <div class="infobox-" id="u30225118__note_yl2_2nz_ssb"><span class="notep1">Note:</span> If your organization is already using the Oracle Cloud to
+            service your email needs, this SPF update should already have been done.</div>
+        <p class="p">Do not use only the directive above as your entire SPF record unless you are using the
+            Oracle Cloud as your sole email service provider; otherwise, specifying only the Oracle
+            Cloud SPF directive may block your other legitimate email servers. For example:</p>
+        <p class="p"><code class="ph codeph">v=spf1 a:mx.example.com include:spf_c.oraclecloud.com -all</code></p>
+        <p class="p">would specify for the example.com domain that their public email gateway (mx.example.com)
+            and the Oracle Cloud email gateways are permitted to send emails for the example.com
+            domain, and all other hosts should be rejected as probable spam forgers. Consult <a class="xref" href="https://www.rfc-editor.org/rfc/rfc7208.txt" target="_blank" rel="external noopener">Internet RFC 7208</a> for technical details about specifying the contents of
+            your SPF record.</p>
+        <p class="p">If your domain has a large quantity it may be necessary or even desirable to create a new
+            domain or subdomain that is specifically intended for Oracle Cloud email, i.e.
+            "mail.example.com". You should use this domain for your Approved Sender, i.e.
+                "<code class="ph codeph">no-reply@mail.example.com</code>".</p>
+        <div class="infobox-" id="u30225118__note_zl2_2nz_ssb"><span class="notep1">Note:</span> All domains should have an SPF record specifying which servers
+            are authorized to send email to the Internet on behalf of their domain. Oracle will be
+            enforcing a policy of requiring customers sending email using the Oracle Cloud to
+            properly list the Oracle Cloud email servers in your domain's SPF record. Failure to do
+            so could cause the Oracle Cloud to be put in a Block List by other email systems, so
+            Oracle will not accept sender email addresses which would be blocked; Oracle will
+            instead check your SPF record and preemptively block emails using sender domains not
+            authorizing the Oracle email gateways before the emails leave the Oracle Cloud.</div>
+        <p class="p">The status of each sender email address used by the system can be monitored to ensure it
+            has an associated SPF record in the customerâs domain. A performance collector, MAIL
+            COMMUNICATIONS, keeps track of every sender email, showing the status of each email
+            address from the perspective of the domain.</p>
+        <p class="p">You can review your SPF configuration with a public service like <a class="xref" href="https://dmarcian.com/spf-survey/" target="_blank" rel="external noopener">dmarcian</a>.</p>
+    </div>
+</div></article></body></html>

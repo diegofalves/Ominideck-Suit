@@ -1,0 +1,167 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="table-name.html" title="Previous" type="text/html"><link rel="next" href="csv-db-xml.html" title="Next" type="text/html"><meta name="description" content="Oracle Transportation and Global Trade Management service supports the ability to have the production database instance cloned to your test instances. This is often a good idea to have done shortly after go-live to facilitate issue replication. It's also highly recommended to have this done before an upgrade. P2T requests are made by opening service requests."><meta property="og:description" content="Oracle Transportation and Global Trade Management service supports the ability to have the production database instance cloned to your test instances. This is often a good idea to have done shortly after go-live to facilitate issue replication. It's also highly recommended to have this done before an upgrade. P2T requests are made by opening service requests."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:08 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Production to Test Cloning (P2T)</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Production to Test Cloning (P2T)","description":"Oracle Transportation and Global Trade Management service supports the ability to have the production database instance cloned to your test instances. This is often a good idea to have done shortly after go-live to facilitate issue replication. It's also highly recommended to have this done before an upgrade. P2T requests are made by opening service requests.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="table-name.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="csv-db-xml.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Production to Test Cloning (P2T)<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="non-propagated-data"></span><span id="OTMCAnon-propagated-data" data-help-type="cloud-saas-docid"></span><span id="production_to_test_cloning__p2t" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225232">Production to Test Cloning (P2T)</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">Oracle Transportation and Global Trade Management service supports the ability to have
+            the production database instance cloned to your test instances. This is often a good
+            idea to have done shortly after go-live to facilitate issue replication. It's also
+            highly recommended to have this done before an upgrade. P2T requests are made by opening
+            service requests.</p>
+        <p class="p">The entire production database is cloned with the following exceptions.</p>
+        <ul class="ul" id="u30225232__ul_bgf_slx_dvb">
+            <li class="li">BIPublisher Reports aren't copied.</li>
+            <li class="li">Files such as images and email stylesheets that are stored on the file system aren't
+                copied.</li>
+            <li class="li">Recurring processes are disabled with a <span class="ph uicontrol">Next Process Time</span> set
+                in the distant future to prevent production processes from running on test data.
+                These might be edited as needed to run in the test system.</li>
+            <li class="li">All users other than Service Administrators (users with the âDBA.ADMINâ role) are
+                expired to prevent inadvertent use of the test system. There's a âManage User
+                Expiration Dateâ action available on the User Manager, which can be used to
+                un-expire a group of users.</li>
+            <li class="li">The Transportation and Global Trade Management password for Service Administrators
+                is retained from production. Note: This password would only be used if the DBA.ADMIN
+                user was used for Integration processing, which is highly discouraged. Regardless,
+                it's highly recommended to change this password immediately following a P2T.</li>
+            <li class="li">The web services are unlinked from the External System record. Edit the
+                corresponding External Systems and relink them to the test web service after the P2T
+                is complete.</li>
+            <li class="li">Environment Specific data and data potentially containing Personally Identifiable
+                Information (PII) isn't propagated. </li>
+        </ul>
+        <p class="p">The following table outlines the data that's not propagated. </p>
+        <table class="customlayout" style="table-layout: auto; width: 95%" summary="This table outlines the data that isn't propagated."><p class="titleintable">Non-Propagated Data</p><colgroup><col><col></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry colsep-1 rowsep-1" id="u30225232__table_sww_wwx_vjb__entry__1">Table Name</th>
+                        <th class="entry colsep-1 rowsep-1" id="u30225232__table_sww_wwx_vjb__entry__2">Column Name</th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">ADHOC_NOTIFY</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">COM_ADDRESS</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">APP_MACHINE</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">MACHINE_URL</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">CONTACT</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">CELL_PHONE</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">CONTACT</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">EMAIL_ADDRESS</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">CONTACT</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">FAX</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">CONTACT</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">PHONE1</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">CONTACT</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">PHONE2</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">CONTACT_POINT</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">COM_ADDRESS</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">CUSTOMER_TAX_INFO</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">All Columns</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">DOMAIN_SETTING_TAX_INFO</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">All Columns</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">DRIVER</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">DATE_OF_BIRTH</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">DRIVER_CDL</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">All Columns</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">EXTERNAL_SYSTEM</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">HOSTNAME</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">EXTERNAL_SYSTEM</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">URL</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">EXTERNAL_SYSTEM</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">IP_ADDRESS</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">EXTERNAL_SYSTEM_SERVICE</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">All Columns</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">I_MESSAGE</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">CELL_PHONE</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">NOTIFY_REQUEST</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">COM_ADDRESS</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">ORDER_RELEASE</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">EM_PHONE_NUMBER</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">PROBLEM</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">PROBLEM_URL</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">PROCESS_CONTROL_REQUEST</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">NEXT_PROCESS_TIME, for all public entries</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">REPORT_EMAIL</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">EMAIL_ADDRESS</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">SHIPMENT</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">EM_PHONE_NUMBER</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__1">X_UN_LOC_CODE</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225232__table_sww_wwx_vjb__entry__2">EMAIL_ADDRESS</td>
+                    </tr>
+                </tbody></table>
+    </div>
+</div></article></body></html>

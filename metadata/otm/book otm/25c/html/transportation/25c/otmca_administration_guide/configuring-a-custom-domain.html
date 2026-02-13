@@ -1,0 +1,52 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="using-a-common-approved-sender-email-address.html" title="Previous" type="text/html"><link rel="next" href="terminology.html" title="Next" type="text/html"><meta name="description" content="Obtaining reliable email delivery requires the implementation of SPF, DKIM, and DMARC. The only way to achieve that in Oracle Transportation and Global Trade Management service is to use an email from address that uses a valid and properly configured Internet Domain. Customerâs often use their companyâs domain. It is a best practice to create a mail specific subdomain, perhaps even an OTM mail specific subdomain, i.e. OTMAdvisor@otm.mail.example.com . Using a subdomain will make the configuration of SPF, DKIM, and DMARC easier."><meta property="og:description" content="Obtaining reliable email delivery requires the implementation of SPF, DKIM, and DMARC. The only way to achieve that in Oracle Transportation and Global Trade Management service is to use an email from address that uses a valid and properly configured Internet Domain. Customerâs often use their companyâs domain. It is a best practice to create a mail specific subdomain, perhaps even an OTM mail specific subdomain, i.e. OTMAdvisor@otm.mail.example.com . Using a subdomain will make the configuration of SPF, DKIM, and DMARC easier."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:07 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Configuring a Custom Domain</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Configuring a Custom Domain","description":"Obtaining reliable email delivery requires the implementation of SPF, DKIM, and DMARC. The only way to achieve that in Oracle Transportation and Global Trade Management service is to use an email from address that uses a valid and properly configured Internet Domain. Customerâs often use their companyâs domain. It is a best practice to create a mail specific subdomain, perhaps even an OTM mail specific subdomain, i.e. OTMAdvisor@otm.mail.example.com . Using a subdomain will make the configuration of SPF, DKIM, and DMARC easier.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="using-a-common-approved-sender-email-address.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="terminology.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Configuring a Custom Domain<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="configuring-a-custom-domain"></span><span id="OTMCAconfiguring-a-custom-domain" data-help-type="cloud-saas-docid"></span><span id="configuring_a_custom_domain_for_high_deliverability" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225117">Configuring a Custom Domain</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">Obtaining reliable email delivery requires the implementation of SPF, DKIM, and DMARC.
+            The only way to achieve that in Oracle Transportation and Global Trade Management
+            service is to use an email from address that uses a valid and properly configured
+            Internet Domain. Customerâs often use their companyâs domain. It is a best practice to
+            create a mail specific subdomain, perhaps even an OTM mail specific subdomain, i.e.
+                <code class="ph codeph">OTMAdvisor@otm.mail.example.com</code>. Using a subdomain will make the
+            configuration of SPF, DKIM, and DMARC easier.</p>
+        <p class="p">Sender Policy Framework (SPF) is an internet standard for email to reduce spamming and
+            other fraudulent emails by specifically identifying which Internet hosts are allowed to
+            originate email for email addresses within a specific domain name. Since spamming and
+            phishing attacks primarily use forged sender email addresses to lure the victims into
+            opening dangerous emails (since they appear to be from trusted friends, colleagues, or
+            businesses), SPF prevents this by allowing receiving email servers to reject emails that
+            come from hosts that should not be originating emails with certain sender email
+            addresses, therefore preserving the trustworthiness of those email addresses'
+            domains.</p>
+    </div>
+</div></article></body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="configuring-a-custom-domain.html" title="Previous" type="text/html"><link rel="next" href="configuring-approved-senders.html" title="Next" type="text/html"><meta name="description" content><meta property="og:description" content><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:08 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Terminology</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Terminology","description":"","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="configuring-a-custom-domain.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="configuring-approved-senders.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Terminology<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="terminology"></span><span id="OTMCAterminology" data-help-type="cloud-saas-docid"></span><span id="terminology" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225114">Terminology</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <ul class="ul" id="u30225114__ul_ysj_x51_54b">
+            <li class="li"><span class="ph uicontrol">Spoofing</span>: Method of forging another entity's identity (e.g.,
+                the "From" address) onto an email in order to get users to open a message.</li>
+            <li class="li"><span class="ph uicontrol">Phishing</span>: Method of tricking recipients into giving out
+                personal information, such as credit card numbers or account passwords, often by
+                spoofing the origins of the email (e.g., a user's bank, credit card company, or
+                familiar merchant).</li>
+            <li class="li"><span class="ph uicontrol">Approved Sender</span>: The address used in the "From:" header of
+                the emails you send must be managed as an approved sender via the Email Delivery
+                Service (OCI SDK). The domain name used in the approved sender needs to be
+                configured as a sending domain which requires DNS configuration; see sending domain
+                definition below. An approved sender is a regional resource with an associated
+                Oracle Cloud ID (<a class="xref" href="https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm" target="_blank" rel="external noopener">OCID</a>).</li>
+            <li class="li"><span class="ph uicontrol">DomainKeys Identified Mail (DKIM)</span>: DomainKeys Identified Mail
+                is a cryptographic signature-based type of email authentication. DKIM requires email
+                senders' computers to generate "public/private key pairs" and then publish the
+                public keys into their Domain Name System (DNS) records. The matching private keys
+                are stored in a sender's outbound email servers, and when those servers send out
+                email, the private keys generate message-specific "signatures" that are added into
+                additional, embedded email headers. ISPs that authenticate using DKIM look up the
+                public key in DNS and then can verify that the signature was generated by the
+                matching private key. This ensures that an authorized sender actually sent the
+                message, and that the message headers and content weren't altered in any way during
+                their trip from the original sender to the recipient.</li>
+            <li class="li"><span class="ph uicontrol">DKIM Selector</span>: A DKIM selector is a short name for a DKIM
+                private/public key pair within a given sending domain. It's also the first component
+                of the DNS name used to publish the DKIM public key. Each sending domain must have
+                at least one unique DKIM selector per region used.</li>
+            <li class="li"><span class="ph uicontrol">Domain-based Message Authentication, Reporting &amp; Conformance
+                    (DMARC)</span>: DMARC standardizes how email receivers perform email
+                authentication using both of the well-known SPF and DKIM mechanisms. It allows a
+                sender to indicate within its DNS record that its email is protected by SPF and/or
+                DKIM. If neither of those authentication methods pass, the sender can specify the
+                actions a receiver should take (i.e. quarantine or reject the message). DMARC helps
+                senders experience consistent authentication results for their messages at AOL,
+                Gmail, Hotmail, Yahoo! and any other email receiver implementing DMARC.</li>
+            <li class="li"><span class="ph uicontrol">Return Path</span>: The return path is an SMTP email source address
+                used to process the bounces that occur with your emails. The return path is where
+                mailbox providers send the bounces. The default Email Delivery return path domain is
+                    <code class="ph codeph">&lt;region-short-code&gt;1.rp.oracleemaildelivery.com</code>.
+                Configuring the return path can improve: Deliverability &amp; Reputation,
+                Addressbook addition &amp; other allow-listing mechanisms, DMARC alignment (SPF),
+                consistent branding.</li>
+            <li class="li"><span class="ph uicontrol">Sender Policy Framework (SPF)</span>: SPF is an IP-based process
+                that enables the verification of a sender's IP address by cross-checking the domain
+                in the email address listed in the visible "Mail From" line of an email against the
+                published record a sender has registered in the Domain Name System (DNS). An SPF
+                record consists of a list of computer servers or IP addresses that senders indicate
+                are "authorized" to send email for that domain. By publishing an SPF record for a
+                domain, that domain is declaring which IP addresses are authorized to send out email
+                claiming to be from that domain .</li>
+            <li class="li"><span class="ph uicontrol">Sending Domain</span>: the DNS domain name used in the From header
+                when sending email. This domain should have an MX or A record (a CNAME can be used
+                but is not as good) and should accept mail for <code class="ph codeph">postmaster@domain</code>
+                and <code class="ph codeph">abuse@domain</code> without bouncing. For more details, see <a class="xref" href="https://www.m3aawg.org/published-documents" target="_blank" rel="external noopener">MAAWG best practices</a> for sending domains document.</li>
+            <li class="li"><span class="ph uicontrol">Suppressions</span>: If you send to an email address that fails (due
+                to a hard bounce, repeated soft-bounce, or spam/ abuse complaint), Email Delivery
+                may process the bounce message and create a suppression. Subsequent attempts to send
+                to that address will be accepted by Transportation and Global Trade Management
+                (counting against your limits) but dropped by Email Delivery. See <a class="xref" href="managing-delivery-failure.html#u30225123">Managing Delivery Failure</a> for more details on this
+                topic.</li>
+        </ul>
+    </div>
+</div></article></body></html>

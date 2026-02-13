@@ -1,0 +1,51 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" class="ohc-snippet" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="enhanced-workbench-best-practices.html" title="Previous" type="text/html"><link rel="next" href="report-best-practices.html" title="Next" type="text/html"><meta name="description" content="Review the glog.query Properties help for possible finder query optimizations. Properties such as glog.query.joinSubqueryToParent and glog.query.xidOptimization as well as others could be used to make finder queries faster when there are very few domains. Review glog.webserver.finderresults.concatPseudoField property in glog.webserver Property help to see if this feature is needed. If not, performance can be improved by turning it off. Avoid using too much agent logging. This can be helpful during implementation, but should be turned off in production."><meta property="og:description" content="Review the glog.query Properties help for possible finder query optimizations. Properties such as glog.query.joinSubqueryToParent and glog.query.xidOptimization as well as others could be used to make finder queries faster when there are very few domains. Review glog.webserver.finderresults.concatPseudoField property in glog.webserver Property help to see if this feature is needed. If not, performance can be improved by turning it off. Avoid using too much agent logging. This can be helpful during implementation, but should be turned off in production."><meta property="og:title" content="Administration Guide"><meta name="application-name" content="Administration Guide"><meta name="dcterms:title" content="Administration Guide"><meta name="dcterms.title" content="Administration Guide"><meta name="doctitle" content="Administration Guide"><meta name="dcterms.created" content="Thu Oct 16 06:58:10 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMCA"><meta name="dcterms.alternative" content="otmca"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="administration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Optimization Best Practices</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28115-10">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Optimization Best Practices","description":"Review the glog.query Properties help for possible finder query optimizations. Properties such as glog.query.joinSubqueryToParent and glog.query.xidOptimization as well as others could be used to make finder queries faster when there are very few domains. Review glog.webserver.finderresults.concatPseudoField property in glog.webserver Property help to see if this feature is needed. If not, performance can be improved by turning it off. Avoid using too much agent logging. This can be helpful during implementation, but should be turned off in production.","datePublished":"2025-10-16 CST","dateModified":"2025-10-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="enhanced-workbench-best-practices.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="report-best-practices.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Administration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Optimization Best Practices<meta property="position" content="1"></li></ol><h1 class="fa-chapter"><span id="optimization-best-practices"></span><span id="OTMCAoptimization-best-practices" data-help-type="cloud-saas-docid"></span><span class="chapterstart" id="u30255367">Optimization Best Practices</span></h1></header><div>
+    <p></p>
+    
+    <div class="body">
+        <div class="p">
+            <ul class="ul" id="u30255367__ul_typ_3ps_m2c">
+                <li class="li">Review the <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=guide_glog.query_Properties" target="_blank" rel="external noopener">glog.query Properties help</a> for
+                    possible finder query optimizations. Properties such as
+                    glog.query.joinSubqueryToParent and glog.query.xidOptimization as well as others
+                    could be used to make finder queries faster when there are very few
+                    domains.</li>
+                <li class="li">Review glog.webserver.finderresults.concatPseudoField property in <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=guide_glog_webserver_finderresults_concatPseudoField" target="_blank" rel="external noopener">glog.webserver Property help</a> to see if
+                    this feature is needed. If not, performance can be improved by turning it
+                    off.</li>
+                <li class="li">Avoid using too much agent logging. This can be helpful during implementation,
+                    but should be turned off in production.</li>
+            </ul>
+        </div>
+    </div>
+</div></article></body></html>
