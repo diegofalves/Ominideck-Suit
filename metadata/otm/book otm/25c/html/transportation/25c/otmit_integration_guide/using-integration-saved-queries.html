@@ -1,0 +1,105 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="using-null-values.html" title="Previous" type="text/html"><link rel="next" href="character-encodings.html" title="Next" type="text/html"><meta name="description" content="You can select or identify objects to update or delete without using a GID by using a configurable matching integration saved query. Integration Saved Queries are defined in Power Data via the following menu: Business Process Automation &gt; Power Data &gt; Integration &gt; Integration Saved Queries . The queries are written as SQL statements that contain references to the information in the incoming XML transmission. For example, a query for a shipment GID given a shipment reference number would be as follows (e.g. if query GID is &#34;GUEST.TEST_SAVED_QUERY_001&#34;):"><meta property="og:description" content="You can select or identify objects to update or delete without using a GID by using a configurable matching integration saved query. Integration Saved Queries are defined in Power Data via the following menu: Business Process Automation &gt; Power Data &gt; Integration &gt; Integration Saved Queries . The queries are written as SQL statements that contain references to the information in the incoming XML transmission. For example, a query for a shipment GID given a shipment reference number would be as follows (e.g. if query GID is &#34;GUEST.TEST_SAVED_QUERY_001&#34;):"><meta property="og:title" content="Integration Guide"><meta name="application-name" content="Integration Guide"><meta name="dcterms:title" content="Integration Guide"><meta name="dcterms.title" content="Integration Guide"><meta name="doctitle" content="Integration Guide"><meta name="dcterms.created" content="Wed Jul 16 08:06:52 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMIT"><meta name="dcterms.alternative" content="otmit"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="integration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Using Integration Saved Queries</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28969-03">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Using Integration Saved Queries","description":"You can select or identify objects to update or delete without using a GID by using a configurable matching integration saved query. Integration Saved Queries are defined in Power Data via the following menu: Business Process Automation &gt; Power Data &gt; Integration &gt; Integration Saved Queries . The queries are written as SQL statements that contain references to the information in the incoming XML transmission. For example, a query for a shipment GID given a shipment reference number would be as follows (e.g. if query GID is &#34;GUEST.TEST_SAVED_QUERY_001&#34;):","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="using-null-values.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="character-encodings.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Integration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Using Integration Saved Queries<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="using-integration-saved-queries"></span><span id="OTMITusing-integration-saved-queries" data-help-type="cloud-saas-docid"></span><span id="using_integration_saved_queries" data-help-type="cloud-saas"></span><span id="default_integration_saved_queries_for_updates" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225361">Using Integration Saved Queries</span></h1></header><div>
+  <p></p>
+  
+  <div class="body">
+        <p class="p">You can select or identify objects to update or delete without using a GID by using a
+            configurable matching integration saved query. Integration Saved Queries are defined in
+            Power Data via the following menu: <span class="ph uicontrol">Business Process Automation &gt; Power Data &gt;
+                Integration &gt; Integration Saved Queries</span>. The queries are written as SQL
+            statements that contain references to the information in the incoming XML transmission.
+            For example, a query for a shipment GID given a shipment reference number would be as
+            follows (e.g. if query GID is "GUEST.TEST_SAVED_QUERY_001"):</p>
+        <pre class="pre codeblock"><code>select s.shipment_GID from shipment_refnum s where s.shipment_refnum_qual_GID = '{%QUAL%}' and s.shipment_refnum_value = '{%VALUE%}'</code></pre>
+        <p class="p">The inbound XML would then contain the following IntSavedQuery element to use the above
+            query:</p>
+        <pre class="pre codeblock"><code>&lt;IntSavedQuery&gt;
+	&lt;IntSavedQueryGid&gt;
+		&lt;Gid&gt;
+			&lt;DomainName&gt;GUEST&lt;/DomainName&gt;
+			&lt;Xid&gt;TEST_SAVED_QUERY_001&lt;/Xid&gt;
+		&lt;/Gid&gt;
+	&lt;/IntSavedQueryGid&gt;
+	&lt;IntSavedQueryArg&gt;
+		&lt;ArgName&gt;QUAL&lt;/ArgName&gt;
+		&lt;ArgValue&gt;ZZ&lt;/ArgValue&gt;
+	&lt;/IntSavedQueryArg&gt;
+	&lt;IntSavedQueryArg&gt;
+		&lt;ArgName&gt;VALUE&lt;/ArgName&gt;
+		&lt;ArgValue&gt;MY_SHIP_REFNUM_001&lt;/ArgValue&gt;
+	&lt;/IntSavedQueryArg&gt;
+   &lt;IsMultiMatch&gt;Y&lt;/IsMultiMatch&gt;
+   &lt;NoDataFoundAction&gt;&lt;/NoDataFoundAction&gt;
+&lt;/IntSavedQuery&gt;
+</code></pre>
+        <p class="p">During processing, Transportation and Global Trade Management Cloud would then replace
+            the '{%QUAL%}' with 'ZZ' and the '{%VALUE%}' with ' MY_SHIP_REFNUM_001' to search for
+            the shipment GID. And the transaction would be processed with using the shipment GID
+            returned from the query. Note that the <code class="ph codeph">IsMultiMatch</code> element can be
+            used to indicate if multiple GIDs can be returned from the query and used for
+            processing. Refer to the schema notes for additional fields that are available for the
+            query.</p>
+        <p class="p">The queries can also be written using XPath expressions to search for values from
+            specific elements in the XML. An example of a query that relies on XPath expressions is
+            as follows:</p>
+        <pre class="pre codeblock"><code>select ob.ORDER_BASE_GID from OB_REFNUM ob where ob.ORDER_REFNUM_QUAL_GID = 'PO' and ob.OB_REFNUM_VALUE = '{TransOrder/TransOrderHeader/OrderRefnum[OrderRefnumQualifierGID/GID/Xid='PO' and (not(OrderRefnumQualifierGID/GID/DomainName) or OrderRefnumQualifierGID/GID/DomainName = '' or OrderRefnumQualifierGID/GID/DomainName = 'PUBLIC')]/OrderRefnumValue}'</code></pre>
+        <p class="p">Note that the preferred method is to use the ArgName and ArgValue as they perform much
+            better than the XPath expressions.</p>
+        <p class="p">If <code class="ph codeph">NoDataFoundAction</code> is not null and the Integration Saved Query returns
+            no value, then the transaction code for the XML is switched to the transaction code
+            specified by <code class="ph codeph">NoDataFoundAction</code>, which must be a valid transaction code. </p>
+        <div class="infobox-" id="u30225361__note_qsj_jbb_rsb"><span class="notep1">Note:</span> The <code class="ph codeph">NoDataFoundAction</code> tag does not work on
+            child elements. It is designed primarily for the root elements.</div>
+    </div>
+<div class="topic nested1" lang="en" id="u30225362"><h2 class="title topictitle2"><span id="using-integration-saved-queries"></span><span id="OTMITusing-integration-saved-queries" data-help-type="cloud-saas-docid"></span>Default Integration Saved Queries for Updates</h2>
+      
+      <div class="body">
+        <p class="p">There are a few interfaces that support default integration saved queries without having
+            to specify the IntSavedQuery element in the inbound XML. This functionality is supported
+            for Location, TransOrder, TransOrderLine, and Shipment.</p>
+        <p class="p">The default integration saved queries are only used when the transaction code element has
+            a value of U or D, and the primary GID for the interface is missing. If a TransOrderGid
+            is missing, then the INT_TRANS_ORDER_GID_1 and INT_TRANS_ORDER_GID_2 saved queries are
+            used. If a TransOrderLineGid is missing, then the INT_TRANS_ORDER_LINE_GID_1 and
+            INT_TRANS_ORDER_LINE_GID_2 saved queries are used. If a Shipment GID is missing, then
+            the INT_SHIPMENT_GID_1 and INT_SHIPMENT_GID_2 saved queries are used. If a Location GID
+            is missing, then the INT_LOCATION_GID_1 and INT_LOCATION_GID_2 saved queries are
+            used.</p>
+        <p class="p">The defined queries must return a single GID of the element being referenced (for
+            example, Order_Base_GID for TransOrder, Shipment_GID for Shipment, etc.). When a query
+            returns multiple records, it will generate an error. Transportation and Global Trade
+            Management Cloud supports up to two queries for each interface/record. If the first
+            query generates an error or does not resolve to a single record, the second query will
+            be applied. And if nothing is returned, then an error is generated.</p>
+    </div>
+</div></div></article></body></html>

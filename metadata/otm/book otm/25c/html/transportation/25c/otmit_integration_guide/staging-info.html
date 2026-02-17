@@ -1,0 +1,83 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="inbound-transmission-staging-and-processing.html" title="Previous" type="text/html"><link rel="next" href="general-overview.html" title="Next" type="text/html"><meta name="description" content="The StagingInfo content in the Transmission header defines the following:"><meta property="og:description" content="The StagingInfo content in the Transmission header defines the following:"><meta property="og:title" content="Integration Guide"><meta name="application-name" content="Integration Guide"><meta name="dcterms:title" content="Integration Guide"><meta name="dcterms.title" content="Integration Guide"><meta name="doctitle" content="Integration Guide"><meta name="dcterms.created" content="Wed Jul 16 08:06:53 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMIT"><meta name="dcterms.alternative" content="otmit"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="integration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Staging Info</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28969-03">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Staging Info","description":"The StagingInfo content in the Transmission header defines the following:","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="inbound-transmission-staging-and-processing.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="general-overview.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Integration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Staging Info<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="staging-info"></span><span id="OTMITstaging-info" data-help-type="cloud-saas-docid"></span><span id="staging_info" data-help-type="cloud-saas"></span><span id="staging_info_examples" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225365">Staging Info</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">The <code class="ph codeph">StagingInfo</code> content in the Transmission header defines the
+            following:</p>
+        <ul class="ul" id="u30225365__ul_et3_ltl_4jb">
+            <li class="li"><span class="ph uicontrol">A Staging Query</span>: The <code class="ph codeph">StagingQuery</code> element is an
+                Integration Saved Query which should return one or more Transmission numbers. The
+                first transmission number returned from the query is used as the transmission number
+                to which the transactions in the current transmission are appended thus constructing
+                a more complete Transmission.</li>
+            <li class="li"><span class="ph uicontrol">A Staging Process</span>: The <code class="ph codeph">StagingProcess</code> element is an
+                Integration Saved Query which determines if the Transmission is now ready for
+                processing. If the query returns a result, the Transmission will proceed with
+                processing, and if no result is returned then the transmission will remain in a
+                STAGING status until another event triggers it to be processed. </li>
+        </ul>
+        <div class="infobox-"><span class="notep1">Note:</span> Initiating the processing of the Staging Transmission can also be enabled through the
+            TRANSMISSION agent type, and the Staging Transmission Processing process management
+            actions.</div>
+    </div>
+<div class="topic nested1" lang="en" id="u30225366"><h2 class="title topictitle2"><span id="staging-info"></span><span id="OTMITstaging-info" data-help-type="cloud-saas-docid"></span>Staging Info Examples</h2>
+      
+      <div class="body">
+        <p class="p">To put a transmission immediately into a STAGING state, use the following
+            TransmissionHeader:</p>
+        <pre class="pre codeblock"><code>&lt;TransmissionHeader&gt;
+   &lt;TransmissionType&gt;STAGING&lt;/TransmissionType&gt;
+&lt;/TransmissionHeader&gt;
+</code></pre>
+        <p class="p">If a Transmission contains the above header the transactions within the transmission will
+            remain in STAGING state until a subsequent transmission or process changes their
+            state.</p>
+        <p class="p">If the current transmission should also be put into STAGING state but the transactions
+            contained within it should be added to an already existing transmission also in STAGING
+            state, the following TransmissionHeader should be used:-</p>
+        <pre class="pre codeblock"><code>&lt;TransmissionHeader&gt;
+   &lt;TransmissionType&gt;STAGING&lt;/TransmissionType&gt;
+   &lt;StagingInfo&gt;
+      &lt;StagingQuery&gt;
+         &lt;IntSavedQuery&gt;
+            â¦integration saved query elementsâ¦
+         &lt;/IntSavedQuery&gt;
+      &lt;/StagingQuery&gt;
+   &lt;/StagingInfo&gt;
+&lt;/TransmissionHeader&gt;</code></pre>
+        <p class="p">The Integration Saved Query should return the transmission number of the previously
+            staged transmission which should have the current transactions added to it. If no result
+            is returned the transactions remain associated to this transmission and it will remain
+            in STAGING state.</p>
+    </div>
+</div></div></article></body></html>

@@ -914,7 +914,6 @@
       line-height: 1.4 !important;
       /* O background será definido pelo CSS institucional */
     }
-    }
 
     tr[style*="background-color: #f5f5f5"],
     tr[style*="background-color: #f8f9fa"] {
@@ -1410,7 +1409,7 @@
                       {% set possible_child_idx = loop.index0 %}
                       {% if possible_child_idx != obj_index %}
                         {% set possible_child_table = (possible_child.object_type or possible_child.otm_table or "")|string|upper %}
-                        {% set possible_child_domain = (possible_child.domainName or possible_child.domain or "")|string|upper %}
+                        {% set possible_child_domain = (possible_child.domainName or possible_child.domain or "")|string|trim|upper %}
                         {% if possible_child_table %}
                           {% for candidate_subtable in parent_subtables %}
                             {% set candidate_subtable_name = (candidate_subtable|string|upper) %}
@@ -1429,7 +1428,7 @@
                 data-parent-owner-key="parent-{{ row_meta.parent_object_index }}"
                 data-is-subtable="{% if row_number.is_subtable %}1{% else %}0{% endif %}"
               >
-                <td style="padding: 10px 12px; color: #6c757d; font-weight: 500; {% if row_number.is_subtable %}text-align: left; padding-left: 18px;{% else %}text-align: center;{% endif %}">
+                <td class="table-cell-label {% if row_number.is_subtable %}is-subtable{% else %}is-main-table{% endif %}">
                   {% if not row_number.is_subtable and row_meta.has_subtable_children %}
                     <button
                       type="button"
@@ -1681,8 +1680,7 @@
             required
             placeholder="Ex: BAU"
             value="{{ (current_object.domainName or current_object.domain) if current_object else '' }}"
-            style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}"
-            {% if current_item_is_subtable.value %}readonly{% endif %}
+            style="width: 100%;" {% if current_item_is_subtable.value %}class="input-subtable" readonly{% endif %}
           >
           <datalist id="domain-name-list">
             {% for domain in data.domain_stats.domain_names %}
@@ -1849,8 +1847,7 @@
             type="text"
             name="object_responsible"
             value="{{ current_object.responsible if current_object else '' }}"
-            style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}"
-            {% if current_item_is_subtable.value %}readonly{% endif %}
+            style="width: 100%;" {% if current_item_is_subtable.value %}class="input-subtable" readonly{% endif %}
           >
         </div>
 
@@ -1861,8 +1858,7 @@
             name="identifiers[migration_project_id]"
             placeholder="ID do projeto"
             value="{{ current_object.identifiers.migration_project_id if current_object and current_object.identifiers else '' }}"
-            style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}"
-            {% if current_item_is_subtable.value %}readonly{% endif %}
+            style="width: 100%;" {% if current_item_is_subtable.value %}class="input-subtable" readonly{% endif %}
           >
         </div>
       </div>
@@ -1885,31 +1881,31 @@
         <!-- SAVED_QUERY -->
         <div id="identifier_query_name" style="display:none;">
           <label>Query Name</label>
-          <input type="text" name="identifiers[query_name]" placeholder="Nome da query" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
+          <input type="text" name="identifiers[query_name]" placeholder="Nome da query" value="" style="width: 100%;" {% if current_item_is_subtable.value %}class="input-subtable" readonly{% endif %}>
         </div>
 
         <!-- AGENT -->
         <div id="identifier_agent_gid" style="display:none;">
           <label>Agent GID</label>
-          <input type="text" name="identifiers[agent_gid]" placeholder="Identificador do agente" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
+          <input type="text" name="identifiers[agent_gid]" placeholder="Identificador do agente" value="" style="width: 100%;" {% if current_item_is_subtable.value %}class="input-subtable" readonly{% endif %}>
         </div>
 
         <!-- FINDER_SET -->
         <div id="identifier_finder_set_gid" style="display:none;">
           <label>Finder Set GID</label>
-          <input type="text" name="identifiers[finder_set_gid]" placeholder="Identificador do Finder Set" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
+          <input type="text" name="identifiers[finder_set_gid]" placeholder="Identificador do Finder Set" value="" style="width: 100%;" {% if current_item_is_subtable.value %}class="input-subtable" readonly{% endif %}>
         </div>
 
         <!-- RATE -->
         <div id="identifier_rate_offering_gid" style="display:none;">
           <label>Rate Offering GID</label>
-          <input type="text" name="identifiers[rate_offering_gid]" placeholder="Identificador da taxa de oferta" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
+          <input type="text" name="identifiers[rate_offering_gid]" placeholder="Identificador da taxa de oferta" value="" style="width: 100%;" {% if current_item_is_subtable.value %}class="input-subtable" readonly{% endif %}>
         </div>
 
         <!-- EVENT_GROUP -->
         <div id="identifier_event_group_gid" style="display:none;">
           <label>Event Group GID</label>
-          <input type="text" name="identifiers[event_group_gid]" placeholder="Identificador do grupo de eventos" value="" style="width: 100%; {% if current_item_is_subtable.value %}background-color: #f3f4f6; color: #4b5563;{% endif %}" {% if current_item_is_subtable.value %}readonly{% endif %}>
+          <input type="text" name="identifiers[event_group_gid]" placeholder="Identificador do grupo de eventos" value="" style="width: 100%;" {% if current_item_is_subtable.value %}class="input-subtable" readonly{% endif %}>
         </div>
       </div>
 
@@ -1943,6 +1939,54 @@
         <p style="font-size: 11px; color: #666; margin-top: 8px;">
           💡 Esta query é usada para extrair objetos OTM e gerar o cache local do item de migração.
         </p>
+
+          <!-- Bloco de seleção de colunas para renderização (com dropdown) -->
+          <div style="margin-top: 16px; margin-bottom: 16px;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <strong>Selecione as colunas para exibir no HTML:</strong>
+              <button type="button" id="toggle-columns-list-btn" onclick="
+                var el = document.getElementById('columns-list-block');
+                if (el.style.display === 'none') { el.style.display = 'flex'; this.innerText = 'Ocultar'; } else { el.style.display = 'none'; this.innerText = 'Mostrar'; }
+              " style="background: #e3e8ef; color: #374151; border: 1px solid #bfc9d9; border-radius: 4px; padding: 2px 10px; font-size: 12px; cursor: pointer;">Ocultar</button>
+            </label>
+            <div id="columns-list-block" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px;">
+              {% set all_tables = [] %}
+              {% if current_object and current_object.otm_table %}
+                {% set _ = all_tables.append(current_object.otm_table) %}
+              {% endif %}
+              {% if current_object and current_object.otm_subtables %}
+                {% for subtable in current_object.otm_subtables %}
+                  {% if subtable not in all_tables %}
+                    {% set _ = all_tables.append(subtable) %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
+              {% set columns_by_table = {} %}
+              {% for table in all_tables %}
+                {% set columns = columns_catalog[table] if columns_catalog and table in columns_catalog else [] %}
+                {% set columns_by_table = columns_by_table.update({table: columns}) or columns_by_table %}
+              {% endfor %}
+
+              {% for table in all_tables %}
+                <div style="min-width: 180px;">
+                  <div style="font-weight: 600; color: #374151; margin-bottom: 4px;">{{ table }}</div>
+                  {% set columns = columns_by_table[table] if table in columns_by_table else [] %}
+                  {% if columns %}
+                    {% for col in columns %}
+                      <label style="display: flex; align-items: center; gap: 4px; font-size: 13px; margin-bottom: 2px;">
+                        <input type="checkbox" name="selected_columns" value="{{ table }}.{{ col }}"
+                          {% if current_object.selected_columns and (table ~ '.' ~ col) in current_object.selected_columns %}checked{% endif %}>
+                        {{ col }}
+                      </label>
+                    {% endfor %}
+                  {% else %}
+                    <span style="color: #888; font-size: 12px;">(Sem colunas encontradas)</span>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
       </fieldset>
 
       <fieldset style="background-color: #f7f7f7; border: 1px solid #9e9e9e;">
@@ -2748,7 +2792,7 @@
         ? selectedFromUi
         : (Array.isArray(currentSubtablesFromPage) ? currentSubtablesFromPage : []);
 
-      renderRelatedTablesSelector(relatedTables, selectedSubtables, currentPrimaryTable, currentDomain);
+      renderRelatedTablesSelector(relatedTables, selectedSubtables, currentPrimaryTable, currentDomainName);
     };
 
     if (objectTypeSelect && otmTableHidden) {

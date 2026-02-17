@@ -1405,6 +1405,63 @@ def projeto_migracao():
         save_project(domain_data)
         return redirect("/projeto-migracao")
 
+    # Montar columns_catalog: dicionário {tabela: [colunas]}
+    from ui.backend.schema_repository import SchemaRepository
+
+    def get_all_tables_from_project(proj):
+        tables = set()
+        if not proj:
+            return tables
+        for group in proj.get("groups", []):
+            for obj in group.get("objects", []):
+                t = obj.get("otm_table") or obj.get("object_type")
+                if t:
+                    tables.add(str(t).upper())
+                for sub in obj.get("otm_subtables", []):
+                    tables.add(str(sub).upper())
+        return tables
+
+
+    import glob
+    cache_dir = PROJECT_ROOT / "metadata" / "otm" / "cache" / "objects"
+
+    def get_cache_file_for_table(table):
+        # Busca arquivo de cache que contenha o nome da tabela (exato, upper)
+        pattern = f"*{table.upper()}*.json"
+        files = list(cache_dir.glob(pattern))
+        return files[0] if files else None
+
+    def get_nonempty_columns(table):
+        schema = SchemaRepository.load_table(table)
+        if not (schema and "columns" in schema):
+            return []
+        cache_file = get_cache_file_for_table(table)
+        if not cache_file:
+            # Se não houver cache, retorna todas as colunas
+            return [col["name"] for col in schema["columns"]]
+        try:
+            with open(cache_file, "r", encoding="utf-8") as f:
+                cache_data = json.load(f)
+            # Estrutura esperada: cache_data["tables"][table]["rows"]
+            rows = cache_data.get("tables", {}).get(table, {}).get("rows", [])
+            if not rows:
+                return []
+            result = []
+            for col in schema["columns"]:
+                col_name = col["name"]
+                # Se pelo menos um valor não for vazio/nulo, inclui
+                if any(row.get(col_name) not in (None, "") for row in rows):
+                    result.append(col_name)
+            return result
+        except Exception as e:
+            print(f"Erro lendo cache para tabela {table}: {e}")
+            return [col["name"] for col in schema["columns"]]
+
+    all_tables = get_all_tables_from_project(project)
+    columns_catalog = {}
+    for table in all_tables:
+        columns_catalog[table] = get_nonempty_columns(table)
+
     return render_template(
         "projeto_migracao.html",
         data=data,
@@ -1413,7 +1470,8 @@ def projeto_migracao():
         ui=data["ui"],
         groups_catalog=data.get("groups_catalog", {}),
         project=project,
-        errors=[]
+        errors=[],
+        columns_catalog=columns_catalog
     )
 
 

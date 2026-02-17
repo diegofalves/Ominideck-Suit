@@ -1,0 +1,138 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="supported-transport-protocols.html" title="Previous" type="text/html"><link rel="next" href="schema-files-1.html" title="Next" type="text/html"><meta name="description" content="OAuth 2 Client Credentials flow is available as the authentication protocol for inbound REST API and XML integration using HTTP POST. The authorization service is managed by Oracle Identity Cloud Service (IDCS) (also used for single sign-on application user accounts)."><meta property="og:description" content="OAuth 2 Client Credentials flow is available as the authentication protocol for inbound REST API and XML integration using HTTP POST. The authorization service is managed by Oracle Identity Cloud Service (IDCS) (also used for single sign-on application user accounts)."><meta property="og:title" content="Integration Guide"><meta name="application-name" content="Integration Guide"><meta name="dcterms:title" content="Integration Guide"><meta name="dcterms.title" content="Integration Guide"><meta name="doctitle" content="Integration Guide"><meta name="dcterms.created" content="Wed Jul 16 08:06:53 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMIT"><meta name="dcterms.alternative" content="otmit"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="integration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>OAuth 2</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28969-03">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"OAuth 2","description":"OAuth 2 Client Credentials flow is available as the authentication protocol for inbound REST API and XML integration using HTTP POST. The authorization service is managed by Oracle Identity Cloud Service (IDCS) (also used for single sign-on application user accounts).","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="supported-transport-protocols.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="schema-files-1.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Integration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">OAuth 2<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="oauth-2"></span><span id="OTMIToauth-2" data-help-type="cloud-saas-docid"></span><span id="oauth_2_0" data-help-type="cloud-saas"></span><span id="idcs_configuration" data-help-type="cloud-saas"></span><span id="transportation_and_global_trade_management_cloud_configuration" data-help-type="cloud-saas"></span><span id="runtime_authentication" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225568">OAuth 2</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">OAuth 2 Client Credentials flow is available as the authentication protocol for inbound
+            REST API and XML integration using HTTP POST. The authorization service is managed by
+            Oracle Identity Cloud Service (IDCS) (also used for single sign-on application user
+            accounts).</p>
+        <p class="p">The following steps must be followed to configure an external integration application to
+            use OAuth 2 for inbound integration.</p>
+        <ol class="ol" id="u30225568__ol_r23_krd_snb">
+            <li class="li">Configure external integration application in IDCS to obtain client ID and
+                secret</li>
+            <li class="li">Assign client ID generated in step 1 above as Nickname for Transportation and Global
+                Trade Management Cloud integration user account, i.e. user account authorized to
+                process inbound integration messages for all required application resources.</li>
+        </ol>
+    </div>
+<div class="topic nested1" lang="en" id="u30225569"><h2 class="title topictitle2"><span id="oauth-2"></span><span id="OTMIToauth-2" data-help-type="cloud-saas-docid"></span>IDCS Configuration</h2>
+      
+      <div class="body">
+        <div class="infobox-"><span class="notep1">Note:</span> 
+            <p class="p">The following instructions assume that the user has already obtained a valid account
+                and URL for access to the IDCS Administration console.</p>
+        </div>
+        <p class="p">The following steps are taken from the <a class="xref" href="https://docs.oracle.com/en/cloud/paas/identity-cloud/uaids/add-confidential-application.html" target="_blank" rel="external noopener">online documentation for Oracle Identity Cloud
+                Service</a>. Refer to the online documentation for up-to-date steps.</p>
+        <ol class="ol" id="u30225569__ol_azr_jlk_5xb">
+            <li class="li">Log in to IDCS administration console using the credentials provided.</li>
+            <li class="li">Under <span class="ph uicontrol">Identity domain</span> click
+                    <span class="ph uicontrol">Applications</span>.</li>
+            <li class="li">Click <span class="ph uicontrol">Add application</span>.</li>
+            <li class="li">Select <span class="ph uicontrol">Confidential Application</span> and click <span class="ph uicontrol">Launch
+                    workflow</span>.</li>
+            <li class="li">Provide a Name and click <span class="ph uicontrol">Next</span>.</li>
+            <li class="li"><span class="ph uicontrol">Resource Server Configuration</span><ol class="ol" type="a" id="u30225569__ol_bzr_jlk_5xb">
+                    <li class="li">Select "<span class="ph uicontrol">Configure this application as a resource server
+                            now</span>" .</li>
+                    <li class="li">Provide a value for <span class="ph uicontrol">Access token expiration</span>.</li>
+                    <li class="li">Provide a value for the Primary Audience, e.g.
+                            <code class="ph codeph">https://{host-id}/</code> where <code class="ph codeph">{host-id}</code> is
+                        the Transportation and Global Trade Management Cloud server. The actual
+                        value may depend on whether the target application is REST API -
+                            <code class="ph codeph">https://{host-id}/logisticsRestApi/</code> - or XML
+                        integration - <code class="ph codeph">https://{host-id}/logisticsXmlApi/</code>.</li>
+                    <li class="li">Select <span class="ph uicontrol">Add scopes</span> and click
+                            <span class="ph uicontrol">Add</span>.</li>
+                    <li class="li">Enter a unique name for the <span class="ph uicontrol">Scope</span>. This can be any
+                        text, this scope name will be selected or used at later steps.</li>
+                </ol></li>
+            <li class="li"><span class="ph uicontrol">Client Configuration</span><ol class="ol" type="a" id="u30225569__ol_wcj_4lk_5xb">
+                    <li class="li">Select <span class="ph uicontrol">Configure this application as a client now</span> and
+                            <span class="ph uicontrol">Client Credentials</span> as the Allowed Grant
+                        Types.</li>
+                </ol></li>
+            <li class="li">Select <span class="ph uicontrol">Next</span>.</li>
+            <li class="li">Under <span class="ph uicontrol">Web tier policy</span> select <span class="ph uicontrol">Skip and do
+                    later</span>.</li>
+            <li class="li">Click <span class="ph uicontrol">Finish</span>.</li>
+            <li class="li">Click <span class="ph uicontrol">Edit OAuth configuration</span>.</li>
+            <li class="li">Under <span class="ph uicontrol">Client configuration</span> &gt; <span class="ph uicontrol">Token Issuance
+                    policy</span> select â<span class="ph uicontrol">Add resources</span>".</li>
+            <li class="li">Click <span class="ph uicontrol">Add scope</span>, select the drop-down against the
+                Confidential application we are created and select the available scope under this
+                application and click <span class="ph uicontrol">Add</span>.</li>
+            <li class="li">Click <span class="ph uicontrol">Save Changes</span>. </li>
+            <li class="li">Click <span class="ph uicontrol">Activate</span> and <span class="ph uicontrol">Activate
+                    application</span>.</li>
+            <li class="li">Make a secure note of the Client ID and Client Secret. These will be used by the
+                external application to authenticate with IDCS when using the target application and
+                when configuring the application user Nickname.</li>
+        </ol>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225570"><h2 class="title topictitle2"><span id="oauth-2"></span><span id="OTMIToauth-2" data-help-type="cloud-saas-docid"></span>Transportation and Global Trade Management Cloud Configuration</h2>
+      
+      <div class="body">
+        <ol class="ol" id="u30225570__ol_ksb_qsd_snb">
+            <li class="li">Obtain the Client ID associated with target application previously configured in
+                IDCS.</li>
+            <li class="li">Edit the integration user account via the User Manager page.</li>
+            <li class="li">Place the Client ID in the <span class="ph uicontrol">Nickname</span> field.</li>
+            <li class="li"><span class="ph uicontrol">Save</span>.</li>
+        </ol>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225571"><h2 class="title topictitle2"><span id="oauth-2"></span><span id="OTMIToauth-2" data-help-type="cloud-saas-docid"></span>Runtime Authentication</h2>
+      
+      <div class="body">
+        <p class="p">The OAuth 2 Client Credentials protocol works by completing the following stages, which
+            MUST be performed using HTTPS:</p>
+        <ol class="ol" id="u30225571__ol_w3g_wtd_snb">
+            <li class="li">Client submits Authorization request to obtain a token.</li>
+            <li class="li">Client requests resource and pass token.</li>
+        </ol>
+        <p class="p">The first step requires the URL for the IDCS instance:</p>
+        <pre class="pre codeblock"><code>https://&lt;IDCS-Service-Instance&gt;.identity.oraclecloud.com/oauth2/v1/token</code></pre>
+        <p class="p">The HTTP request will use HTTP Authentication (Basic) header to pass the Client ID and
+            Client Secret. The message body will use the â<code class="ph codeph">x-www-form-url-encoded</code>â
+            content type to send the following name/value parameters in the message body:</p>
+        <ul class="ul" id="u30225571__ul_sjh_s5d_snb">
+            <li class="li"><code class="ph codeph">grant_type=client_credentials</code></li>
+            <li class="li"><code class="ph codeph">scope=[Copy the scope from the Confidential Application Client configuration
+                    &gt; Token Issuance policy &gt; Resources &gt; Scope.]</code></li>
+        </ul>
+        <p class="p">A successfully authenticated request will receive the HTTP 200 status code and a JSON
+            message body containing the required "Access Token". This access token must then be
+            passed as the HTTP "Authorization: Bearer" header.</p>
+    </div>
+</div></div></article></body></html>

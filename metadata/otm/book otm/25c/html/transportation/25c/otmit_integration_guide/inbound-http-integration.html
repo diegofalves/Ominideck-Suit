@@ -1,0 +1,158 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="prev" href="outbound.html" title="Previous" type="text/html"><link rel="next" href="outbound-http-integration.html" title="Next" type="text/html"><meta name="description" content="There are various options for sending integration messages into Transportation and Global Trade Management Cloud using HTTP:"><meta property="og:description" content="There are various options for sending integration messages into Transportation and Global Trade Management Cloud using HTTP:"><meta property="og:title" content="Integration Guide"><meta name="application-name" content="Integration Guide"><meta name="dcterms:title" content="Integration Guide"><meta name="dcterms.title" content="Integration Guide"><meta name="doctitle" content="Integration Guide"><meta name="dcterms.created" content="Wed Jul 16 08:06:53 PDT 2025"><meta name="dcterms.dateCopyrighted" content="2025"><meta name="dcterms.category" content="cloud"><meta name="dcterms.isVersionOf" content="OTMIT"><meta name="dcterms.alternative" content="otmit"><meta name="dcterms.product" content="en/cloud/saas/transportation/25c"><link type="application/pdf" title="PDF" href="integration-guide.pdf" rel="alternate"><script type="application/json" id="ssot-metadata">{"primary":{"category":{"short_name":"cloud","element_name":"Cloud","display_in_url":true},"suite":{"short_name":"saas","element_name":"Cloud Applications","display_in_url":true},"product_group":{"short_name":"supply-chain-management","element_name":"Supply Chain Management","display_in_url":false},"product":{"short_name":"transportation","element_name":"Transportation and Global Trade Management Cloud","display_in_url":true},"release":{"short_name":"25c","element_name":"Release 25C","display_in_url":true}}}</script><title>Inbound HTTP Integration</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--saved from url=(0023)https://docs.oracle.com-->
+  <link rel="stylesheet" href="/sp_common/book-template/ohc-book-template/css/book.css">
+  <script>
+	document.write('<style type="text/css">');
+	document.write('body > .noscript, body > .noscript ~ * { opacity: 0; }');
+	document.write('</style>');
+  </script>
+  <script data-main="/sp_common/book-template/ohc-book-template/js/book-config" src="/sp_common/book-template/requirejs/require.js"></script>
+
+  <script>
+	if (window.require === undefined) {
+		document.write('<script data-main="sp_common/book-template/ohc-book-template/js/book-config" src="sp_common/book-template/requirejs/require.js"><\/script>');
+		document.write('<link href="sp_common/book-template/ohc-book-template/css/book.css" rel="stylesheet">');
+	}
+  </script>
+
+  <meta name="generator" content="Fusion Publishing Server, UAE Ditamap Publisher">
+  <link rel="shortcut icon" href="/sp_common/book-template/ohc-common/img/favicon.ico">
+  <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+
+
+    <meta name="dcterms.identifier" content="G28969-03">
+    <meta name="dcterms.release" content="Release 25C">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Inbound HTTP Integration","description":"There are various options for sending integration messages into Transportation and Global Trade Management Cloud using HTTP:","datePublished":"2025-07-16 CST","dateModified":"2025-07-16 CST"}</script>
+    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head><body><div class="noscript alert alert-danger text-center" role="alert"><a class="pull-left" href="outbound.html"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous</a><a class="pull-right" href="outbound-http-integration.html">Next<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> JavaScript must be enabled to correctly display this content
+		</div><article><header><style>table:not(.fsModule) th,table:not(.fsModule) td{width:auto !important;}</style><ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="index.html" property="item" typeof="WebPage"><span property="name">Integration Guide</span></a><meta property="position" content="0"></li><li class="active" property="itemListElement" typeof="ListItem">Inbound HTTP Integration<meta property="position" content="1"></li></ol><h1 class="fa-chapter topic_link"><span id="inbound-http-integration"></span><span id="OTMITinbound-http-integration" data-help-type="cloud-saas-docid"></span><span id="inbound_0" data-help-type="cloud-saas"></span><span id="http_authentication_basic" data-help-type="cloud-saas"></span><span id="oauth2" data-help-type="cloud-saas"></span><span id="transform_inbound_xml_with_xsl" data-help-type="cloud-saas"></span><span class="chapterstart" id="u30225343">Inbound HTTP Integration</span></h1></header><div><p></p>
+      
+      <div class="body">
+        <p class="p">There are various options for sending integration messages into Transportation and Global
+            Trade Management Cloud using HTTP:</p>
+        <ul class="ul" id="u30225343__ul_n41_hzr_qnb">
+            <li class="li"><span class="ph uicontrol">Standard Transmission XML integration</span>: Requires XML which
+                conforms to the XML schemas described within the <a class="xref" href="Chunk1766613350.html#u30225623">Transmission Schema</a> section.</li>
+            <li class="li"><span class="ph uicontrol">Transformed Non-standard or external XML format</span>: A custom
+                XSLT stylesheet can be applied to inbound XML to convert to the standard
+                Transmission format. See the <a class="xref" href="#u30225346">Transform Inbound XML with XSL</a> section for additional details.</li>
+            <li class="li"><span class="ph uicontrol">Direct Load of standard Transmission</span>: Used for optimised
+                pre-load of business objects without triggering internal workflow or automation
+                agents. Refer to the <a class="xref" href="dirload.html#u30225599">DirLoad</a> section for additional
+                details.</li>
+        </ul>
+        <div class="p">The specific URL path to call for each of the supported cases depends on the desired
+            method of authentication. There are currently the following options:<ul class="ul" id="u30225343__ul_cyv_k1s_qnb">
+                <li class="li">HTTP Authentication (Basic)</li>
+                <li class="li">OAuth 2</li>
+            </ul></div>
+    </div>
+<div class="topic nested1" lang="en" id="u30225344"><h2 class="title topictitle2"><span id="inbound-http-integration"></span><span id="OTMITinbound-http-integration" data-help-type="cloud-saas-docid"></span>HTTP Authentication (Basic)</h2>
+      
+      <div class="body">
+        <p class="p">All integration messages using HTTP as the transport should use HTTPS URLs i.e. secured
+            by Transport Layer Security (TLS).</p>
+        <p class="p">The internal Transportation and Global Trade Management user credentials must be passed
+            in the HTTP Authorization header (<a class="xref" href="https://tools.ietf.org/html/rfc7617" target="_blank" rel="external noopener">RFC 7617</a>) i.e. not the Cloud SSO credentials.
+            The following URL endpoints must be targeted (relative the Cloud server/port):</p>
+        <table class="customlayout" style="table-layout: auto; width: 95%" summary="This table lists the URL endpoints which must be targeted (relative the Cloud&#xA;                server/port)."><p class="titleintable">Endpoints and Relative URLs</p><colgroup><col><col></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry colsep-1 rowsep-1" id="u30225344__table_uwd_54l_4jb__entry__1">Endpoint</th>
+                        <th class="entry colsep-1 rowsep-1" id="u30225344__table_uwd_54l_4jb__entry__2">Relative URL</th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225344__table_uwd_54l_4jb__entry__1">Standard Transmission XML</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225344__table_uwd_54l_4jb__entry__2">GC3/glog.integration.servlet.WMServlet</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225344__table_uwd_54l_4jb__entry__1">Transformed</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225344__table_uwd_54l_4jb__entry__2">GC3/glog.integration.servlet.TransformerServlet</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225344__table_uwd_54l_4jb__entry__1">Direct Load</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225344__table_uwd_54l_4jb__entry__2">GC3/glog.integration.servlet.DirLoadServlet</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225344__table_uwd_54l_4jb__entry__1">DB XML</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225344__table_uwd_54l_4jb__entry__2">GC3/glog.integration.servlet.DBXMLServlet</td>
+                    </tr>
+                </tbody></table>
+        <p class="p">If HTTP Authentication (Basic) is not required, it is recommended to disable the support
+            for it. See the <a class="xref" href="/pls/topic/lookup?ctx=otm-latest&amp;id=u30259811" target="_blank" rel="external noopener">Remove Inbound HTTP Basic Authentication Support for
+                External Integration End Points</a> section in the Oracle Fusion Cloud
+            Transportation and Global Trade Management Security Guide.</p>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225345"><h2 class="title topictitle2"><span id="inbound-http-integration"></span><span id="OTMITinbound-http-integration" data-help-type="cloud-saas-docid"></span>OAuth 2</h2>
+      
+      <div class="body">
+        <p class="p">The Transportation and Global Trade Management application also supports OAuth 2 Client
+            Credentials authentication. The Oracle Identity Cloud Service (IDCS) processes the
+            authentication request and provides the access token that is used to access the
+            application integration servlets.</p>
+        <p class="p">See the <a class="xref" href="oauth-2.html#u30225568">OAuth 2 section of the Security chapter</a> for
+            configuration details.</p>
+        <p class="p">The following URL endpoints must be targeted (relative the Cloud server/port):</p>
+        <table class="customlayout" style="table-layout: auto; width: 95%" summary="This table lists the URL endpoints which must be targeted (relative the Cloud&#xA;                server/port)."><p class="titleintable">Endpoints and Relative URLs</p><colgroup><col><col></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry colsep-1 rowsep-1" id="u30225345__table_uwd_54l_4jb__entry__1">Endpoint</th>
+                        <th class="entry colsep-1 rowsep-1" id="u30225345__table_uwd_54l_4jb__entry__2">Relative URL</th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__1">Standard Transmission XML</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__2">logisticsXmlApi/Transmission</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__1">Transformed</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__2">logisticsXmlApi/Transformer</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__1">Direct Load</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__2">logisticsXmlApi/DirLoad</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__1">DB XML</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__2">logisticsXmlApi/DBXML</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__1">Device Message</td>
+                        <td class="entry colsep-1 rowsep-1" headers="u30225345__table_uwd_54l_4jb__entry__2">logisticsXmlApi/DeviceMessage</td>
+                    </tr>
+                </tbody></table>
+        <div class="infobox-"><span class="notep1">Note:</span> The supported content types for HTTP messages (corresponding to the
+                <code class="ph codeph">Content-Type</code> HTTP header parameter) are <code class="ph codeph">text/xml</code>
+            and <code class="ph codeph">application/xml</code>.</div>
+    </div>
+</div><div class="topic nested1" lang="en" id="u30225346"><h2 class="title topictitle2"><span id="inbound-http-integration"></span><span id="OTMITinbound-http-integration" data-help-type="cloud-saas-docid"></span>Transform Inbound XML with XSL</h2>
+      
+      <div class="body">
+        <p class="p">You can configure Transportation and Global Trade Management Cloud to transform your
+            inbound transmissions from another XML schema to a valid Transmission XML. To do
+            this:</p>
+        <ol class="ol" id="u30225346__ol_pzd_mns_4jb">
+            <li class="li">Create a Stylesheet Content record in the Transportation and Global Trade Management
+                Cloud Database. </li>
+            <li class="li">Include this processing instruction in the beginning of every transmission that
+                Transportation and Global Trade Management Cloud needs to transform:
+                    <code class="ph codeph">&lt;?gc3-int-translate stylesheet_name="stylesheet_name"?&gt;</code>,
+                    <code class="ph codeph">stylesheet name</code> is the GID of the required Stylesheet
+                Content record prefixed with "db:". You can include multiple processing instructions
+                in one transmission, in which case, Transportation and Global Trade Management Cloud
+                will transform in the order the processing instructions appear in the
+                transmission.</li>
+            <li class="li">Post XML documents to
+                    <code class="ph codeph">http://hostname/GC3/glog.integration.servlet.TransformerServlet</code>
+                instead of
+                <code class="ph codeph">http://hostname/GC3/glog.integration.servlet.WMServlet</code>.</li>
+        </ol>
+        <div class="infobox-"><span class="notep1">Note:</span> The use of uploaded (file-system based) stylesheets instead of Stylesheet Content is
+            still supported for backward compatibility but is deprecated and their use should be
+            replaced with Stylesheet Content as soon as possible. Support for file-system based
+            stylesheets will be removed in a future version.</div>
+    </div>
+</div></div></article></body></html>
