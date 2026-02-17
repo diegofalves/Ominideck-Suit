@@ -343,9 +343,17 @@ def form_to_domain(form, existing_project=None):
                     "saved_query": {"sql": ""},
                     "object_extraction_query": {"language": "SQL", "content": ""},
                     "technical_content": {"type": "NONE", "content": ""},
+                    "selected_columns": [],
                 })
 
             target_obj = target_group["objects"][target_obj_index]
+            # Salvar colunas selecionadas (checkboxes)
+            selected_columns = _get_form_list(form, "selected_columns")
+            if selected_columns:
+                target_obj["selected_columns"] = selected_columns
+            else:
+                # Se não vier nada, zera (útil para desmarcar tudo)
+                target_obj["selected_columns"] = []
 
             # Campos básicos
             if object_name:
