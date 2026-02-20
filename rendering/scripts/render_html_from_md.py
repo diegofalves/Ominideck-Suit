@@ -100,10 +100,42 @@ def render(json_path: Path):
             elif block["type"] == "list" and block.get("items"):
                 block["items"] = [md_to_html(item) for item in block["items"]]
 
-    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), autoescape=select_autoescape(enabled_extensions=("html", "xml")))
+    template_dirs = [
+        str(BASE_DIR / "rendering" / "html"),
+        str(BASE_DIR / "rendering" / "templates")
+    ]
+    env = Environment(
+        loader=FileSystemLoader(template_dirs),
+        autoescape=select_autoescape(enabled_extensions=("html", "xml"))
+    )
     env.filters['format_date_br'] = format_date_br
-    template = env.get_template("projeto_migracao.html.tpl")
-    html_output = template.render(data=data)
+    template = env.get_template("base.html.tpl")
+    # Para compatibilidade, passamos as variáveis principais esperadas pelo novo base.html.tpl
+    # Renderiza o conteúdo principal com o contexto 'data' para o template projeto_migracao.html.tpl
+    # Renderizar blocos separados para cada seção principal
+    # Função auxiliar para extrair apenas o conteúdo de uma seção do template
+    # Renderizar blocos separados para cada seção principal usando templates parciais
+    overview = env.get_template("overview.html").render(data=data)
+    metadata = env.get_template("metadata.html").render(data=data)
+    objective = env.get_template("objective.html").render(data=data)
+    groups_content = env.get_template("groups_content.html").render(data=data)
+    roadmap = env.get_template("roadmap.html").render(data=data)
+
+    # Corrigir ids dos grupos para sidebar
+    groups = data.get("groups", [])
+    for idx, group in enumerate(groups, 1):
+        group["_sidebar_id"] = f"group-{group.get('domain', idx)}"
+
+    html_output = template.render(
+        title=data.get("project", {}).get("name", "Projeto de Migração"),
+        project_code=data.get("project", {}).get("code", ""),
+        groups=groups,
+        overview=overview,
+        metadata=metadata,
+        objective=objective,
+        groups_content=groups_content,
+        roadmap=roadmap
+    )
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_FILE.write_text(html_output, encoding="utf-8")

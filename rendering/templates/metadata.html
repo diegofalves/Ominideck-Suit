@@ -1,0 +1,40 @@
+{# Metadados do projeto #}
+<section class="metadata-page">
+    <header class="metadata-page__header">
+        <h2 class="metadata-page__title">Informações do Projeto</h2>
+    </header>
+    <table class="meta-table">
+        <tbody>
+            <tr class="meta-table__row">
+                <td class="meta-table__label">Nome do Projeto</td>
+                <td class="meta-table__value">{{ data.project.name }}</td>
+            </tr>
+            <tr class="meta-table__row">
+                <td class="meta-table__label">Código</td>
+                <td class="meta-table__value meta-table__value--code">{{ data.project.code }}</td>
+            </tr>
+            <tr class="meta-table__row">
+                <td class="meta-table__label">Versão</td>
+                <td class="meta-table__value">{{ data.project.version }}</td>
+            </tr>
+            <tr class="meta-table__row">
+                <td class="meta-table__label">Consultor Responsável</td>
+                <td class="meta-table__value">{{ data.project.consultant }}</td>
+            </tr>
+            {% if data.project.environment %}
+                {% if data.project.environment.source %}
+                <tr class="meta-table__row">
+                    <td class="meta-table__label">Ambiente Origem</td>
+                    <td class="meta-table__value meta-table__value--url">{{ data.project.environment.source }}</td>
+                </tr>
+                {% endif %}
+                {% if data.project.environment.target %}
+                <tr class="meta-table__row">
+                    <td class="meta-table__label">Ambiente Destino</td>
+                    <td class="meta-table__value meta-table__value--url">{{ data.project.environment.target }}</td>
+                </tr>
+                {% endif %}
+            {% endif %}
+        </tbody>
+    </table>
+</section>

@@ -1,0 +1,50 @@
+{# Roadmap de migração #}
+<section class="roadmap-page">
+    <header class="roadmap-page__header">
+        <h2 class="roadmap-page__title">Roadmap de Migração</h2>
+        <p class="roadmap-page__description">
+            Plano de execução agrupado por deployment type, contemplando todos os objetos dentro do escopo de migração do OTM.
+        </p>
+    </header>
+    <!-- Exemplo simples: agrupar grupos/objetos por deployment_type -->
+    {% if data.groups %}
+        {% set deployments = {} %}
+        {% for group in data.groups %}
+            {% for object in group.objects %}
+                {% set dt = object.deployment_type or 'UNDEFINED' %}
+                {% if deployments.get(dt) is none %}
+                    {% set _ = deployments.update({dt: []}) %}
+                {% endif %}
+                {% set _ = deployments[dt].append({'group': group, 'object': object}) %}
+            {% endfor %}
+        {% endfor %}
+        {% for dt, items in deployments.items() %}
+            <article class="deployment-type-block deployment-type--{{ dt | lower }}">
+                <header class="deployment-type-block__header">
+                    <h3 class="deployment-type-block__title">{{ dt }}</h3>
+                    <div class="deployment-type-block__count">{{ items | length }} objetos</div>
+                </header>
+                <table class="meta-table meta-table--roadmap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Grupo</th>
+                            <th>Objeto</th>
+                            <th>Responsável</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.object.sequence }}</td>
+                            <td>{{ item.group.label }}</td>
+                            <td>{{ item.object.name }}</td>
+                            <td>{{ item.object.owner or 'ITC' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </article>
+        {% endfor %}
+    {% endif %}
+</section>

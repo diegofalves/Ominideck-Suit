@@ -1,0 +1,19 @@
+{# Objetivo do projeto #}
+<section class="objective-page">
+    <header class="objective-page__header">
+        <h2 class="objective-page__title">{{ data.project_metadata.migration_objective.title or 'Objetivo do Projeto' }}</h2>
+    </header>
+    <div class="objective-page__content">
+        {% for block in data.project_metadata.migration_objective.blocks %}
+            {% if block.type == "paragraph" %}
+                <p>{{ block.text }}</p>
+            {% elif block.type == "list" %}
+                <ul>
+                    {% for item in block["items"] %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>

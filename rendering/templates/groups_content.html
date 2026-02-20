@@ -1,0 +1,45 @@
+{# Grupos e objetos #}
+<section class="groups-overview">
+    <h2 class="groups-overview__title">Grupos e Objetos de Migração OTM</h2>
+    <div class="groups-overview__content">
+        {% for group in data.groups %}
+        <div class="group-item">
+            <div class="group-item__name">{{ group.label }}</div>
+            <div class="group-item__count">{{ group.objects | length }} objetos</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% for group in data.groups %}
+    <section class="group-block" id="group-{{ group.domain|e }}">
+        <header class="group-block__header">
+            <h2>{{ group.label }}</h2>
+        </header>
+        <div class="group-block__content">
+            {% if group.description_paragraphs %}
+                {% for paragraph in group.description_paragraphs %}
+                    <p>{{ paragraph }}</p>
+                {% endfor %}
+            {% endif %}
+            {% for object in group.objects %}
+            <article class="object-card" id="object-{{ object.sequence }}">
+                <header class="object-card__header">
+                    <div class="object-card__title-group">
+                        <h3 class="object-card__title">{{ object.name }}</h3>
+                        {% if object.object_type %}
+                        <span class="object-card__badge object-card__badge--type">{{ object.object_type }}</span>
+                        {% endif %}
+                    </div>
+                    {% if object.sequence %}
+                    <div class="object-card__sequence">{{ object.sequence }}</div>
+                    {% endif %}
+                </header>
+                {% if object.description %}
+                <p class="object-card__description">{{ object.description }}</p>
+                {% endif %}
+                <!-- ...demais campos do objeto... -->
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+</section>

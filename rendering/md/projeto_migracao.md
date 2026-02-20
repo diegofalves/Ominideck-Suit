@@ -214,35 +214,26 @@
 ## Objetivo do Projeto de Migração
 
 
-
 Este projeto tem como objetivo executar a migração controlada e governada das configurações do Oracle Transportation Management (OTM), atualmente consolidadas e validadas no ambiente de homologação (HOM), para o ambiente de produção (PRD).
-
-
 
 
 A migração visa unificar e padronizar o conjunto de objetos de configuração definidos no baseline BR100, incorporando também ajustes e extensões específicas do projeto Bauducco, garantindo consistência funcional, estabilidade operacional e aderência às melhores práticas de governança do OTM.
 
 
-
-
 Com a execução desta migração em PROD, espera-se:
-
-
-
 
 
 - disponibilizar integralmente as configurações necessárias para o planejamento, execução e monitoramento logístico;
 
+
 - eliminar divergências entre ambientes que possam impactar comportamento de planejamento, rating, integração ou visibilidade operacional;
+
 
 - assegurar rastreabilidade, capacidade de rollback e validação pós-migração, reduzindo riscos de impacto nas operações produtivas.
 
 
 
-
-
 ---
-
 
 
 

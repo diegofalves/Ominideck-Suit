@@ -14,17 +14,24 @@ def render(json_path: Path):
     with open(json_path, "r", encoding="utf-8") as f:
         raw = json.load(f)
 
-    data = normalize_render_data(raw)
-    validate_object_status(data)
+    try:
+        data = normalize_render_data(raw)
+        validate_object_status(data)
 
-    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), autoescape=False)
-    template = env.get_template("projeto_migracao.md.tpl")
+        env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), autoescape=False)
+        template = env.get_template("projeto_migracao.md.tpl")
 
-    output = template.render(data=data)
+        output = template.render(data=data)
 
-    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_FILE.write_text(output, encoding="utf-8")
-    print(f"Markdown gerado em: {OUTPUT_FILE}")
+        OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+        OUTPUT_FILE.write_text(output, encoding="utf-8")
+        print(f"Markdown gerado em: {OUTPUT_FILE}")
+    except Exception as e:
+        import traceback
+        print("\n[ERRO] Falha ao gerar o Markdown do projeto de migração:")
+        print(str(e))
+        traceback.print_exc()
+        raise
 
 if __name__ == "__main__":
     import sys

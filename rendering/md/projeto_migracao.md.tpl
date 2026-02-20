@@ -22,23 +22,15 @@
 
 ---
 
-{% if data.project_metadata.migration_objective.blocks %}
+{% if data.project_metadata.migration_objective.content %}
 ## {{ data.project_metadata.migration_objective.title }}
 
-{% for block in data.project_metadata.migration_objective.blocks %}
-{% if block.type == "paragraph" %}
-{{ block.text }}
+{% for line in data.project_metadata.migration_objective.content %}
+{{ line }}
 
-{% elif block.type == "list" %}
-{% for item in block["items"] %}
-- {{ item }}
-{% endfor %}
-
-{% endif %}
 {% endfor %}
 
 ---
-
 {% endif %}
 
 {% set vc = data.project_metadata.version_control %}

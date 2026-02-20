@@ -23,26 +23,69 @@ def load_data():
 
 def build_html(data):
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
-    template = env.get_template("projeto_migracao.html")
+    template = env.get_template("projeto_migracao_pdf_template.html.tpl")
 
+    # Copia profunda para evitar mutações
+    import copy
+    data = copy.deepcopy(data)
+
+    # Lógica de compatibilidade igual ao painel (backend)
     project = data.get("project", {})
+    project_metadata = data.get("project_metadata", {})
     groups = data.get("groups", [])
-    roadmap = data.get("roadmap", [])
 
+    # Garante que project_metadata está dentro de project
+    project["project_metadata"] = project_metadata
+
+    # Atalhos para campos principais
+    # Código, nome, versão, consultor, ambientes
+    project.setdefault("code", project_metadata.get("code"))
+    project.setdefault("name", project_metadata.get("name"))
+    project.setdefault("version", project_metadata.get("version"))
+    project.setdefault("consultant", project_metadata.get("consultant"))
+    project.setdefault("environment", project_metadata.get("environment"))
+
+    # Estado do projeto
+    if "state" in data:
+        project["state"] = data["state"]
+    elif "state" in project_metadata:
+        project["state"] = project_metadata["state"]
+
+    # Roadmap: prioriza raiz, depois project_metadata
+    roadmap = data.get("roadmap")
+    if not roadmap:
+        roadmap = project_metadata.get("roadmap")
+    if not roadmap:
+        roadmap = []
+
+    # Objetivo de migração
     migration_obj = None
-    meta = data.get("project_metadata", {})
-    if "migration_objective" in meta:
-        content = meta["migration_objective"].get("content")
+    migration_objective = project_metadata.get("migration_objective")
+    if migration_objective:
+        content = migration_objective.get("content")
         if isinstance(content, list):
             migration_obj = content
         elif isinstance(content, str):
             migration_obj = [content]
+
+    # Grupos: se não vier na raiz, tenta em project_metadata
+    if not groups:
+        groups = project_metadata.get("groups", [])
+
+    # Outros campos que o painel pode usar
+    # Exemplo: enums, ui, etc. (adapte conforme necessário)
+    enums = data.get("enums", project_metadata.get("enums"))
+    ui = data.get("ui", project_metadata.get("ui"))
 
     html = template.render(
         project=project,
         migration_objective=migration_obj,
         groups=groups,
         roadmap=roadmap,
+        project_metadata=project_metadata,
+        enums=enums,
+        ui=ui,
+        # Adicione outros campos relevantes aqui se necessário
     )
     return html
 
