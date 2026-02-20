@@ -1,0 +1,136 @@
+/* Este arquivo foi sobrescrito para unificar o estilo do PDF com o HTML/tela. */
+/* Layout base sem conflito: tela cheia e PDF A4 */
+/* Reset simples */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* A4 só para o PDF */
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
+/* Tela: ocupar toda a largura do navegador */
+@media screen {
+  body {
+    font-family: "Calibri", "Arial", sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    background: #ffffff;
+    color: #334155;
+  }
+
+  .screen-canvas {
+    background: #ffffff;
+    min-height: 100vh;
+    padding: 16px;
+  }
+
+  .document-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* CAIXAS PRINCIPAIS: ocupam 100% da largura da tela */
+  .page,
+  .page-container,
+  .document-page,
+  .document-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+  }
+
+  /* “Cards” ocupando toda a largura útil da tela, sem fundo branco */
+  .metadata-page,
+  .toc-page,
+  .objective-page,
+  .version-control-page,
+  .change-history-page,
+  .groups-overview,
+  .group-block,
+  .object-card,
+  .status-panel,
+  .roadmap-page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 24px 0;
+    padding: 16px 20px;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+/* PDF: usar A4, limpar containers extras */
+@media print {
+  html, body {
+    background: #ffffff !important;
+    font-family: "Calibri", "Arial", sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .screen-canvas,
+  .document-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .page,
+  .page-container,
+  .document-page,
+  .document-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Blocos ocupam toda a largura útil da página A4 */
+  .metadata-page,
+  .toc-page,
+  .objective-page,
+  .version-control-page,
+  .change-history-page,
+  .groups-overview,
+  .group-block,
+  .object-card,
+  .status-panel,
+  .roadmap-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 6mm 0 !important;
+    padding: 3mm 3mm !important;
+    background: #ffffff !important;
+    border-radius: 0 !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+/* ========================================
+   OmniDeck - Estilo Global PDF (A4)
+   JSON → MD → HTML → PDF
+======================================== */
