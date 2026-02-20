@@ -1,161 +1,262 @@
-@media print {
-  .capa-page {
-    page-break-after: always;
-    break-after: page;
-  }
-  .metadata-page {
-    page-break-after: always;
-    break-after: page;
-  }
-  .toc-page {
-    page-break-after: always;
-    break-after: page;
-  }
-  .objective-page {
-    page-break-after: always;
-    break-after: page;
-  }
-}
-/* Garante que a capa fique em uma página individual no PDF */
-@media print {
-  .capa-page {
-    page-break-after: always;
-    break-after: page;
-  }
-}
-/* Este arquivo foi sobrescrito para unificar o estilo do PDF com o HTML/tela. */
-/* Layout base sem conflito: tela cheia e PDF A4 */
-/* Reset simples */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ========================================
+   OmniDeck – PDF Print Stylesheet
+   Documento Formal para Cliente
+   Engine: WeasyPrint
+   Fonte única: JSON → HTML → PDF
+======================================== */
 
-html, body {
-  width: 100%;
-  min-height: 100vh;
-}
-
-/* A4 só para o PDF */
+/* ==============================
+   CONFIGURAÇÃO A4
+============================== */
 @page {
   size: A4;
-  margin: 10mm;
-}
+  margin: 25mm 15mm 25mm 15mm;
 
-/* Tela: ocupar toda a largura do navegador */
-@media screen {
-  body {
-    font-family: "Calibri", "Arial", sans-serif;
-    font-size: 13px;
-    line-height: 1.7;
-    background: #ffffff;
-    color: #334155;
+  @top-left {
+    content: "OMNIDECK | PROJETO DE MIGRAÇÃO";
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+    color: #64748B;
   }
 
-  .screen-canvas {
-    background: #ffffff;
-    min-height: 100vh;
-    padding: 16px;
-  }
-
-  .document-wrapper {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-  /* CAIXAS PRINCIPAIS: ocupam 100% da largura da tela */
-  .page,
-  .page-container,
-  .document-page,
-  .document-content {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
-    border: none;
-  }
-
-  /* “Cards” ocupando toda a largura útil da tela, sem fundo branco */
-  .metadata-page,
-  .toc-page,
-  .objective-page,
-  .version-control-page,
-  .change-history-page,
-  .groups-overview,
-  .group-block,
-  .object-card,
-  .status-panel,
-  .roadmap-page {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 0 24px 0;
-    padding: 16px 20px;
-    background: transparent;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
+  @bottom-right {
+    content: "Página " counter(page) " de " counter(pages);
+    font-size: 9pt;
+    color: #64748B;
   }
 }
 
-/* PDF: usar A4, limpar containers extras */
-@media print {
-  html, body {
-    background: #ffffff !important;
-    font-family: "Calibri", "Arial", sans-serif;
-    font-size: 12px;
-    line-height: 1.6;
+@page landscape {
+  size: A4 landscape;
+  margin: 18mm 18mm 18mm 18mm;
+
+  @top-left {
+    content: "OMNIDECK | PROJETO DE MIGRAÇÃO";
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+    color: #64748B;
   }
 
-  .screen-canvas,
-  .document-wrapper {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #ffffff !important;
-  }
-
-  .page,
-  .page-container,
-  .document-page,
-  .document-content {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #ffffff !important;
-    box-shadow: none !important;
-    border: none !important;
-  }
-
-  /* Blocos ocupam toda a largura útil da página A4 */
-  .metadata-page,
-  .toc-page,
-  .objective-page,
-  .version-control-page,
-  .change-history-page,
-  .groups-overview,
-  .group-block,
-  .object-card,
-  .status-panel,
-  .roadmap-page {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 0 6mm 0 !important;
-    padding: 3mm 3mm !important;
-    background: #ffffff !important;
-    border-radius: 0 !important;
-    border: 1px solid #e5e7eb !important;
-    box-shadow: none !important;
-    page-break-inside: avoid;
-    break-inside: avoid;
+  @bottom-right {
+    content: "Página " counter(page) " de " counter(pages);
+    font-size: 9pt;
+    color: #64748B;
   }
 }
-/* ========================================
-   OmniDeck - Estilo Global PDF (A4)
-   JSON → MD → HTML → PDF
-======================================== */
+
+.page.landscape {
+  page: landscape;
+}
+
+@page:first {
+  @top-left {
+    content: "";
+  }
+}
+
+/* ==============================
+   BASE TIPOGRÁFICA
+============================== */
+body {
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 11pt;
+  line-height: 1.65;
+  color: #1E293B;
+  background: #FFFFFF;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+/* ==============================
+   HIERARQUIA DE TÍTULOS
+============================== */
+h1 {
+  font-size: 22pt;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #0F172A;
+}
+
+h2 {
+  font-size: 16pt;
+  font-weight: 600;
+  margin-top: 38px;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #1D4ED8;
+  color: #0F172A;
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 13pt;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  page-break-after: avoid;
+  color: #1E293B;
+}
+
+/* ==============================
+   CAPA
+============================== */
+.cover-page {
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  min-height: 247mm;
+}
+
+.cover-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 10mm;
+}
+
+.cover-logo img {
+  height: 55px;
+  margin-bottom: 32px;
+}
+
+.cover-title {
+  font-size: 24pt;
+  font-weight: 600;
+  color: #0F172A;
+  max-width: 80%;
+  margin: 0 auto 16px auto;
+  line-height: 1.35;
+}
+
+.cover-divider {
+  width: 90px;
+  height: 3px;
+  background: #1D4ED8;
+  margin: 18px auto 30px auto;
+}
+
+.cover-footer {
+  text-align: center;
+  font-size: 8.5pt;
+  color: #94A3B8;
+  margin-top: auto;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* ==============================
+   TABELAS GERAIS
+============================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+th, td {
+  border: 1px solid #E2E8F0;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 10pt;
+}
+
+th {
+  background: #F1F5F9;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #F8FAFC;
+}
+
+/* ==============================
+   RESUMO EXECUTIVO
+============================== */
+#sec-resumo {
+  page-break-before: always;
+  page-break-after: always;
+  break-inside: avoid;
+}
+
+/* ==============================
+   HISTÓRICO
+============================== */
+#sec-historico {
+  page-break-before: always;
+  page-break-after: always;
+}
+
+.history-page th:nth-child(1),
+.history-page td:nth-child(1) { width: 10%; }
+
+.history-page th:nth-child(2),
+.history-page td:nth-child(2) { width: 15%; }
+
+.history-page th:nth-child(3),
+.history-page td:nth-child(3) { width: 20%; }
+
+.history-page th:nth-child(4),
+.history-page td:nth-child(4) { width: 55%; }
+
+/* ==============================
+   ROADMAP
+============================== */
+#sec-roadmap {
+  page-break-before: always;
+}
+
+#sec-roadmap h3 {
+  margin-top: 26px;
+  margin-bottom: 10px;
+  font-size: 13pt;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+#sec-roadmap th {
+  font-size: 9.5pt;
+}
+
+#sec-roadmap td {
+  font-size: 9.8pt;
+  padding: 6px 8px;
+}
+
+#sec-roadmap table {
+  table-layout: auto;
+  width: 100%;
+}
+
+/* ==============================
+   ROADMAP – COLUNAS (LANDSCAPE DINÂMICO)
+============================== */
+
+#sec-roadmap.page.landscape table {
+  table-layout: auto;
+  width: 100%;
+}
+
+#sec-roadmap.page.landscape th,
+#sec-roadmap.page.landscape td {
+  font-size: 9.5pt;
+  padding: 7px 9px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Colunas técnicas estreitas */
+#sec-roadmap.page.landscape th:nth-child(1),
+#sec-roadmap.page.landscape td:nth-child(1),
+#sec-roadmap.page.landscape th:nth-child(3),
+#sec-roadmap.page.landscape td:nth-child(3) {
+  width: 40px;
+  text-align: center;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }

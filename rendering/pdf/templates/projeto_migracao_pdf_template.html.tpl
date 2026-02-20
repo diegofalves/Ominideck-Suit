@@ -1,213 +1,332 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="{{ project.consultant }}" />
-  <meta name="description" content="Documentação técnica do projeto {{ project.name }}" />
-  <meta name="generator" content="OmniDeck PDF Generator" />
-  <title>{{ project.name }} - {{ project.code }}</title>
-  <link rel="stylesheet" href="pdf.css">
+    <meta charset="UTF-8">
+    <title>{{ projeto.nome }}</title>
+    <link rel="stylesheet" href="pdf.css">
 </head>
-<body class="screen-canvas">
-<div class="document-wrapper">
-  <div class="document-page">
-    <main class="document-content">
 
-      <!-- CAPA -->
-      <section class="page">
-        <div class="page-container capa-page">
-          <div class="capa">
-            <div class="capa__label">PROJETO DE MIGRAÇÃO OTM</div>
-            <h1 class="capa__title">{{ project.name }}</h1>
-            <div class="capa__meta">
-              <div class="capa__version">Versão: {{ project.version }}</div>
-              <div class="capa__code">Código: {{ project.code }}</div>
-              {% if project.date %}<div class="capa__version">Data: {{ project.date }}</div>{% endif %}
-              {% if project.consultant %}<div class="capa__code">Consultor: {{ project.consultant }}</div>{% endif %}
+<body>
+
+    <section class="cover-page">
+
+        <div class="cover-header">
+            OmniDeck – Projeto de Migração
+        </div>
+
+        <div class="cover-content">
+
+            {% if projeto.logo_path %}
+            <div class="cover-logo">
+                <img src="{{ projeto.logo_path }}">
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- METADADOS DO PROJETO -->
-      <section class="page">
-        <div class="page-container">
-          <div class="metadata-page">
-            <header class="metadata-page__header">
-              <h2 class="metadata-page__title">Informações do Projeto</h2>
-            </header>
-            <table class="meta-table">
-              <tbody>
-                <tr class="meta-table__row">
-                  <td class="meta-table__label">Nome do Projeto</td>
-                  <td class="meta-table__value">{{ project.name }}</td>
-                </tr>
-                <tr class="meta-table__row">
-                  <td class="meta-table__label">Código</td>
-                  <td class="meta-table__value meta-table__value--code">{{ project.code }}</td>
-                </tr>
-                <tr class="meta-table__row">
-                  <td class="meta-table__label">Versão</td>
-                  <td class="meta-table__value">{{ project.version }}</td>
-                </tr>
-                {% if project.date %}
-                <tr class="meta-table__row">
-                  <td class="meta-table__label">Data</td>
-                  <td class="meta-table__value">{{ project.date }}</td>
-                </tr>
-                {% endif %}
-                <tr class="meta-table__row">
-                  <td class="meta-table__label">Consultor Responsável</td>
-                  <td class="meta-table__value">{{ project.consultant }}</td>
-                </tr>
-                {% if project.environment %}
-                  {% if project.environment.source %}
-                  <tr class="meta-table__row">
-                    <td class="meta-table__label">Ambiente Origem</td>
-                    <td class="meta-table__value meta-table__value--url">{{ project.environment.source }}</td>
-                  </tr>
-                  {% endif %}
-                  {% if project.environment.target %}
-                  <tr class="meta-table__row">
-                    <td class="meta-table__label">Ambiente Destino</td>
-                    <td class="meta-table__value meta-table__value--url">{{ project.environment.target }}</td>
-                  </tr>
-                  {% endif %}
-                {% endif %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- SUMÁRIO -->
-      <section class="page">
-        <div class="page-container">
-          <div class="toc-page">
-            <header class="toc-page__header">
-              <h2 class="toc-page__title">Sumário</h2>
-            </header>
-            <div class="toc-page__content">
-              <ul>
-                <li><a class="toc-link" href="#objetivo">Objetivo do Projeto</a></li>
-                <li><a class="toc-link" href="#roadmap">Roadmap de Migração</a></li>
-                <li><a class="toc-link" href="#grupos-objetos">Grupos e Objetos de Migração</a></li>
-                {% if groups %}
-                  {% for g in groups %}
-                  <li><a class="toc-link" href="#group-{{ loop.index }}">{{ g.label }}</a></li>
-                  {% endfor %}
-                {% endif %}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- OBJETIVO DO PROJETO -->
-      <section class="page" id="objetivo">
-        <div class="page-container">
-          <div class="objective-page">
-            <h2>Objetivo do Projeto</h2>
-            {% if migration_objective %}
-              {% for p in migration_objective %}
-                <p>{{ p }}</p>
-              {% endfor %}
-            {% else %}
-              <p>Não informado.</p>
             {% endif %}
-          </div>
-        </div>
-      </section>
 
-      <!-- HISTÓRICO DE ALTERAÇÕES -->
-      {% set history = project.project_metadata.change_history if project.project_metadata and project.project_metadata.change_history else [] %}
-      {% if history and history|length > 0 %}
-      <section class="page" id="historico-alteracoes">
-        <div class="page-container">
-          <div class="change-history-page">
-            <h2>Histórico de Alterações</h2>
-            <table class="meta-table">
-              <thead>
+            <div class="cover-category">
+                PROJETO DE MIGRAÇÃO OTM
+            </div>
+
+            <h1 class="cover-title">
+                {{ projeto.nome }}
+            </h1>
+
+            <div class="cover-divider"></div>
+
+            <div class="cover-meta">
+                <div><strong>Versão:</strong> {{ projeto.versao }}</div>
+                <div><strong>Código:</strong> {{ projeto.codigo }}</div>
+                <div><strong>Consultor:</strong> {{ projeto.responsavel }}</div>
+                <div><strong>Data:</strong> {{ projeto.data_geracao }}</div>
+            </div>
+
+        </div>
+
+        <div class="cover-footer">
+            Documento Confidencial – Uso Corporativo
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         METADADOS
+    =============================== -->
+    <section class="metadata-page">
+        <h2>Informações do Projeto</h2>
+
+        <!-- BLOCO EDITORIAL -->
+        <div class="metadata-context">
+
+
+            {% if projeto.escopo %}
+            <h3>Escopo</h3>
+            <p>{{ projeto.escopo }}</p>
+            {% endif %}
+
+        </div>
+
+        <!-- BLOCO GOVERNANÇA -->
+        <div class="metadata-governance">
+            <table class="metadata-table">
+
+                {% if projeto.codigo %}
                 <tr>
-                  <th>Data</th>
-                  <th>Versão</th>
-                  <th>Descrição</th>
-                  <th>Autor</th>
+                    <td>Código</td>
+                    <td>{{ projeto.codigo }}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {% for item in history %}
+                {% endif %}
+
+                {% if projeto.versao %}
                 <tr>
-                  <td>{{ item.date }}</td>
-                  <td>{{ item.version }}</td>
-                  <td>{{ item.description }}</td>
-                  <td>{{ item.author }}</td>
+                    <td>Versão</td>
+                    <td>{{ projeto.versao }}</td>
+                </tr>
+                {% endif %}
+
+                {% if projeto.status %}
+                <tr>
+                    <td>Status</td>
+                    <td>{{ projeto.status }}</td>
+                </tr>
+                {% endif %}
+
+                {% if projeto.cliente %}
+                <tr>
+                    <td>Cliente</td>
+                    <td>{{ projeto.cliente }}</td>
+                </tr>
+                {% endif %}
+
+                {% if projeto.environment_source_url %}
+                <tr>
+                    <td>Ambiente de Origem</td>
+                    <td>
+                        <a href="{{ projeto.environment_source_url }}">
+                            {{ projeto.environment_source_url }}
+                        </a>
+                    </td>
+                </tr>
+                {% endif %}
+
+                {% if projeto.environment_target_url %}
+                <tr>
+                    <td>Ambiente de Destino</td>
+                    <td>
+                        <a href="{{ projeto.environment_target_url }}">
+                            {{ projeto.environment_target_url }}
+                        </a>
+                    </td>
+                </tr>
+                {% endif %}
+
+            </table>
+        </div>
+
+        <!-- BLOCO DINÂMICO DE METADADOS ADICIONAIS -->
+        <div class="metadata-dynamic">
+            <table class="metadata-table">
+
+                {% for key, value in projeto.items() %}
+
+                    {% if key|lower not in ['nome','logo_path','versao','codigo','responsavel','data_geracao','objetivo','escopo','cliente','status','grupos','roadmap','environment_source_url','environment_target_url','name','code','version','consultant','state','environment']
+                          and value
+                          and value != ""
+                          and value != []
+                          and value != {} %}
+
+                        {% if value is string or value is number or value is boolean %}
+                        <tr>
+                            <td>{{ key | replace('_',' ') | title }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                        {% endif %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </section>
+
+    {% if projeto.change_history and projeto.change_history|length > 0 %}
+    <section id="sec-historico" class="history-page">
+        <h2>Histórico de Atualizações</h2>
+
+        <table class="metadata-table">
+            <thead>
+                <tr>
+                    <th>Versão</th>
+                    <th>Data</th>
+                    <th>Autor</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in projeto.change_history %}
+                <tr>
+                    <td>{{ item.version }}</td>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.author }}</td>
+                    <td>{{ item.description }}</td>
                 </tr>
                 {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-      {% endif %}
+            </tbody>
+        </table>
+    </section>
+    {% endif %}
 
-      <!-- ROADMAP DE MIGRAÇÃO -->
-      {% if roadmap %}
-      <section class="page" id="roadmap">
-        <div class="page-container">
-          <div class="roadmap-page">
-            <h2>Roadmap de Migração</h2>
-            <ul class="roadmap-list">
-              {% for step in roadmap %}
-                <li class="roadmap-list__item"><strong>{{ step.title }}</strong> – {{ step.description }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </section>
-      {% endif %}
+    <!-- ==============================
+         SUMÁRIO
+    =============================== -->
+    <section class="toc-page">
+        <h2>Sumário</h2>
+        <ul class="toc-list">
+            {% if projeto.change_history and projeto.change_history|length > 0 %}
+            <li><a href="#sec-historico">Histórico de Atualizações</a></li>
+            {% endif %}
+            <li><a href="#sec-resumo">Resumo Executivo</a></li>
+            <li><a href="#sec-roadmap">Roadmap</a></li>
+        </ul>
+    </section>
 
-      <!-- GRUPOS E OBJETOS -->
-      {% if groups %}
-      <section class="page" id="grupos-objetos">
-        <div class="page-container">
-          <div class="groups-overview">
-            <h2>Visão Geral de Grupos</h2>
-            <ul class="groups-list">
-              {% for g in groups %}
-                <li class="groups-list__item"><strong>{{ g.label }}</strong>{% if g.description %}<span> – {{ g.description }}</span>{% endif %}</li>
-              {% endfor %}
-            </ul>
-          </div>
-          {% for g in groups %}
-          <section class="group-block" id="group-{{ loop.index }}">
-            <h2>{{ g.label }}</h2>
-            {% if g.description %}<p>{{ g.description }}</p>{% endif %}
-            {% for o in g.objects %}
-            <article class="object-card">
-              <div class="object-card__bar"></div>
-              <div class="object-card__content">
-                <h3 class="object-card__title">{{ o.sequence }}. {{ o.name }}</h3>
-                {% if o.description %}<p class="object-card__desc">{{ o.description }}</p>{% endif %}
-                <p class="object-card__meta">
-                  Tipo: {{ o.object_type }} |
-                  Status (projeto): {{ o.status.migration_project }} |
-                  Status (documentação): {{ o.status.documentation }}
-                </p>
-              </div>
-            </article>
+
+    <!-- ==============================
+         OBJETIVO
+    =============================== -->
+    {% if projeto.objetivo %}
+    <section id="sec-resumo">
+        <h2>Resumo Executivo</h2>
+        <p>{{ projeto.objetivo }}</p>
+    </section>
+    {% endif %}
+
+    <!-- ==============================
+         ROADMAP DE MIGRAÇÃO
+    =============================== -->
+    <section id="sec-roadmap" class="roadmap-page">
+
+        {% if projeto.roadmap_dinamico %}
+            {% for tipo, objetos in projeto.roadmap_dinamico.items() %}
+            <div class="roadmap-block page landscape" style="page-break-before: always;">
+                {% if loop.first %}
+                    <h2>Roadmap de Migração</h2>
+                    <p class="roadmap-intro">
+                        Este capítulo apresenta o roadmap completo de migração, mapeando todos os objetos OTM por estratégia de implantação.
+                    </p>
+                {% endif %}
+
+                <h3>{{ tipo }} ({{ objetos|length }} objetos)</h3>
+
+                {% if tipo == 'MANUAL' %}
+                <table class="metadata-table">
+                    <thead>
+                        <tr>
+                            <th>Resp.</th>
+                            <th>Tipo Migração</th>
+                            <th>Grupo</th>
+                            <th>Descrição</th>
+                            <th>Tabela OTM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in objetos | sort(attribute='seq') | sort(attribute='grupo') %}
+                        <tr>
+                            <td>{{ obj.responsavel }}</td>
+                            <td>{{ obj.tipo_migracao }}</td>
+                            <td>{{ obj.grupo }}</td>
+                            <td>{{ obj.descricao }}</td>
+                            <td>{{ obj.otm_table or '-' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                {% elif tipo == 'MIGRATION_PROJECT' %}
+                <table class="metadata-table">
+                    <thead>
+                        <tr>
+                            <th>Resp.</th>
+                            <th>Tipo Migração</th>
+                            <th>Seq.</th>
+                            <th>ID Migration Project</th>
+                            <th>Grupo</th>
+                            <th>Descrição</th>
+                            <th>Tabela OTM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in objetos | sort(attribute='seq') | sort(attribute='grupo') %}
+                        <tr>
+                            <td>{{ obj.responsavel }}</td>
+                            <td>{{ obj.tipo_migracao }}</td>
+                            <td>{{ obj.seq or '-' }}</td>
+                            <td>{{ obj.id_migration_project or obj.codigo or obj.migration_item_id or '-' }}</td>
+                            <td>{{ obj.grupo }}</td>
+                            <td>{{ obj.descricao }}</td>
+                            <td>{{ obj.otm_table or '-' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                {% elif tipo == 'CSV' or tipo == 'DB_XML' or tipo == 'INTEGRATION' %}
+                <table class="metadata-table">
+                    <thead>
+                        <tr>
+                            <th>Resp.</th>
+                            <th>Tipo Migração</th>
+                            <th>Seq.</th>
+                            <th>Grupo</th>
+                            <th>Descrição</th>
+                            <th>Tabela OTM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in objetos | sort(attribute='seq') | sort(attribute='grupo') %}
+                        <tr>
+                            <td>{{ obj.responsavel }}</td>
+                            <td>{{ obj.tipo_migracao }}</td>
+                            <td>{{ obj.seq or '-' }}</td>
+                            <td>{{ obj.grupo }}</td>
+                            <td>{{ obj.descricao }}</td>
+                            <td>{{ obj.otm_table or '-' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+                <table class="metadata-table">
+                    <thead>
+                        <tr>
+                            <th>Resp.</th>
+                            <th>Tipo Migração</th>
+                            <th>Grupo</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in objetos | sort(attribute='seq') | sort(attribute='grupo') %}
+                        <tr>
+                            <td>{{ obj.responsavel }}</td>
+                            <td>{{ obj.tipo_migracao }}</td>
+                            <td>{{ obj.grupo }}</td>
+                            <td>{{ obj.descricao }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+
+            </div>
             {% endfor %}
-          </section>
-          {% endfor %}
-        </div>
-      </section>
-      {% endif %}
+        {% else %}
+            <p>Nenhum objeto registrado para o roadmap.</p>
+        {% endif %}
+    </section>
 
-    </main>
-  </div>
-</div>
+
+
 </body>
 </html>

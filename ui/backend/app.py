@@ -1274,6 +1274,21 @@ def projeto_migracao():
             save_project(project)
             return redirect("/projeto-migracao")
         
+        # Se acao for carregar grupo para edição
+        if action == "load_group":
+            edit_group_index = _get_form_value(request.form, "edit_group_index", "")
+            requested_group_id = _get_form_value(request.form, "active_group_id", "")
+            if edit_group_index != "":
+                if project.get("state") is None:
+                    project["state"] = {}
+                project["state"]["last_edit_group_index"] = int(edit_group_index)
+                # Limpa edição de item
+                project["state"]["last_edit_object_index"] = None
+                if requested_group_id:
+                    project["active_group_id"] = requested_group_id
+                save_project(project)
+            return redirect("/projeto-migracao#group-edit-panel")
+
         # Se acao e apenas carregar item, salvar apenas o state sem validar
         if action == "load_object":
             edit_index = _get_form_value(request.form, "edit_object_index", "")
@@ -1282,6 +1297,8 @@ def projeto_migracao():
                 if project.get("state") is None:
                     project["state"] = {}
                 project["state"]["last_edit_object_index"] = int(edit_index)
+                # Limpa edição de grupo
+                project["state"]["last_edit_group_index"] = None
                 if requested_group_id:
                     project["active_group_id"] = requested_group_id
                 save_project(project)
