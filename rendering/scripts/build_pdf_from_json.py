@@ -74,13 +74,6 @@ def build_html(data):
     elif "state" in project_metadata:
         project["state"] = project_metadata["state"]
 
-    # Roadmap: prioriza raiz, depois project_metadata
-    roadmap = data.get("roadmap")
-    if not roadmap:
-        roadmap = project_metadata.get("roadmap")
-    if not roadmap:
-        roadmap = []
-
     # Histórico de alterações (governança documental)
     change_history = project_metadata.get("change_history") or []
 
@@ -119,14 +112,19 @@ def build_html(data):
         ]:
             continue
         grupo_seq = g.get("sequence")
-        objetos = g.get("objects") or g.get("objetos") or []
+        objetos = (
+            g.get("objects")
+            or g.get("objetos")
+            or g.get("items")
+            or []
+        )
 
         normalized_objetos = []
 
         for obj in objetos:
             deployment_type = obj.get("deployment_type") or obj.get("tipo")
             if not deployment_type:
-                deployment_type = "UNDEFINED"
+                continue
             deployment_type = str(deployment_type).strip().upper()
             codigo = obj.get("code") or obj.get("codigo")
             descricao = obj.get("name") or obj.get("description") or obj.get("descricao")
@@ -138,6 +136,8 @@ def build_html(data):
 
             normalized_obj = {
                 "codigo": codigo,
+                "name": obj.get("name"),
+                "description": obj.get("description"),
                 "descricao": descricao,
                 "tipo": deployment_type,
                 "object_type": object_type,
@@ -149,10 +149,13 @@ def build_html(data):
 
             normalized_objetos.append(normalized_obj)
 
-        # Adiciona grupo normalizado à estrutura final
+        # Adiciona grupo normalizado à estrutura final (inclui descrição do grupo)
+        grupo_descricao = g.get("description") or g.get("descricao")
+
         normalized_groups.append({
             "nome": grupo_nome,
             "sequence": grupo_seq,
+            "descricao": grupo_descricao,
             "objetos": normalized_objetos
         })
 
@@ -235,7 +238,11 @@ def build_html(data):
     for tipo in roadmap_grouped:
         roadmap_grouped[tipo] = sorted(
             roadmap_grouped[tipo],
-            key=lambda x: (x.get("seq") is None, x.get("seq"))
+            key=lambda x: (
+                x.get("grupo") or "",
+                x.get("seq") is None,
+                x.get("seq")
+            )
         )
 
     roadmap_grouped = dict(sorted(roadmap_grouped.items()))
@@ -267,14 +274,13 @@ def build_html(data):
         "objetivo": migration_obj[0] if migration_obj else None,
         "escopo": project_metadata.get("scope"),
         "cliente": project_metadata.get("client"),
-        # Status com interpretação funcional
+        # Status com interpretação funcional segura
         "status": (
-            STATUS_LOOKUP.get(
-                project.get("state", {}).get("overall_status"),
-                project.get("state", {}).get("overall_status")
-            )
-            if isinstance(project.get("state"), dict)
-            else STATUS_LOOKUP.get(project.get("state"), project.get("state"))
+            (lambda state: (
+                STATUS_LOOKUP.get(state.get("overall_status"))
+                if isinstance(state, dict)
+                else STATUS_LOOKUP.get(state, state)
+            ))(project.get("state"))
         ),
         "subtitulo": project_metadata.get("subtitle"),
         "logo_path": project_metadata.get("logo_path"),

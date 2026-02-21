@@ -47,7 +47,6 @@
 
     </section>
 
-
     <!-- ==============================
          METADADOS
     =============================== -->
@@ -326,6 +325,47 @@
         {% endif %}
     </section>
 
+    <!-- ==============================
+         GRUPOS E OBJETOS DE MIGRAÇÃO OTM
+    =============================== -->
+    <section id="sec-grupos-otm" class="groups-page">
+        <h2>Grupos e Objetos de Migração OTM</h2>
+        <p class="groups-intro">
+            Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.
+        </p>
+
+        {% if projeto.grupos and projeto.grupos|length > 0 %}
+
+        {% for grupo in projeto.grupos | sort(attribute='sequence') %}
+        <div class="group-block">
+            <h3>{{ grupo.nome }}</h3>
+
+            {% if grupo.descricao %}
+            <p class="group-description">
+                {{ grupo.descricao }}
+            </p>
+            {% endif %}
+
+            {% if grupo.objetos and grupo.objetos|length > 0 %}
+                {% for objeto in grupo.objetos | sort(attribute='sequence') %}
+                <div class="group-item">
+                    <h4>{{ objeto.name }}</h4>
+
+                    {% if objeto.description %}
+                    <div class="migration-object-description">
+                        {{ objeto.description }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% else %}
+            <p>Nenhum grupo configurado para este projeto.</p>
+        {% endif %}
+
+    </section>
 
 
 </body>
