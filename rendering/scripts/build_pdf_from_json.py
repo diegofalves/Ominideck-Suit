@@ -10,7 +10,33 @@ if sys.platform == "darwin":
 import json
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
+
 from weasyprint import HTML, CSS
+
+# Helper for SQL keyword highlighting
+import re
+
+def highlight_sql(sql_text):
+    if not isinstance(sql_text, str):
+        return sql_text
+
+    keywords = [
+        "SELECT", "FROM", "WHERE", "AND", "OR",
+        "ORDER BY", "GROUP BY", "NOT LIKE",
+        "INNER JOIN", "LEFT JOIN", "RIGHT JOIN",
+        "ON", "IN", "EXISTS"
+    ]
+
+    for kw in sorted(keywords, key=len, reverse=True):
+        pattern = r"\b" + re.escape(kw) + r"\b"
+        sql_text = re.sub(
+            pattern,
+            f"<span class='sql-keyword'>{kw}</span>",
+            sql_text,
+            flags=re.IGNORECASE
+        )
+
+    return sql_text
 
 def sanitize_text(value):
     if isinstance(value, str):
@@ -38,6 +64,7 @@ BASE_DIR = os.path.dirname(__file__)
 TEMPLATE_DIR = os.path.join(BASE_DIR, "../pdf/templates")
 DOMAIN_DIR = os.path.join(BASE_DIR, "../../domain/projeto_migracao")
 OUTPUT_PDF = os.path.join(BASE_DIR, "../pdf/projeto_migracao.pdf")
+OUTPUT_HTML = os.path.join(BASE_DIR, "../pdf/projeto_migracao.debug.html")
 
 def load_data():
     json_path = os.path.join(DOMAIN_DIR, "projeto_migracao.json")
@@ -45,13 +72,30 @@ def load_data():
         return json.load(f)
 
 def build_html(data):
-    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
+    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), auto_reload=True)
     template = env.get_template("projeto_migracao_pdf_template.html.tpl")
 
     # DEBUG: confirma qual template está sendo carregado
     try:
         print("TEMPLATE_DIR:", TEMPLATE_DIR)
         print("Template carregado:", template.filename)
+        try:
+            import os
+            from datetime import datetime
+            mtime = os.path.getmtime(template.filename)
+            print("Template mtime:", datetime.fromtimestamp(mtime).isoformat(timespec="seconds"))
+
+            with open(template.filename, encoding="utf-8") as tf:
+                tpl_text = tf.read()
+            # Sanity check: verify if the moved Navigation block exists near the description area
+            desc_pos = tpl_text.find("<!-- Descrição Técnica -->")
+            nav_pos = tpl_text.find("Navegação OTM")
+            print("Template sanity (Descrição Técnica pos):", desc_pos)
+            print("Template sanity (Navegação OTM pos):", nav_pos)
+            if desc_pos != -1 and nav_pos != -1:
+                print("Template sanity (Nav after Desc):", nav_pos > desc_pos)
+        except Exception as e:
+            print("Erro ao checar mtime/sanity do template:", e)
     except Exception as e:
         print("Erro ao inspecionar template:", e)
 
@@ -131,30 +175,60 @@ def build_html(data):
         normalized_objetos = []
 
         for obj in objetos:
-            deployment_type = obj.get("deployment_type") or obj.get("tipo")
+            # JSON como fonte única de verdade
+            deployment_type = obj.get("deployment_type")
             if not deployment_type:
                 continue
             deployment_type = str(deployment_type).strip().upper()
-            codigo = obj.get("code") or obj.get("codigo")
-            descricao = obj.get("name") or obj.get("description") or obj.get("descricao")
+
+            codigo = obj.get("migration_item_id")
+            descricao = obj.get("description")
             object_type = obj.get("object_type")
             otm_table = obj.get("otm_table")
             sequence = obj.get("sequence")
             saved_query_id = obj.get("saved_query_id")
-            responsavel = obj.get("owner") or "ITC"
+            responsavel = obj.get("responsible")
 
-            normalized_obj = {
+            # Preserva TODOS os campos originais do JSON
+            normalized_obj = dict(obj)
+
+            # Aplica highlight apenas no campo content, mantendo a estrutura original
+            raw_query = obj.get("object_extraction_query")
+            if isinstance(raw_query, dict) and raw_query.get("content"):
+                raw_query = dict(raw_query)
+                raw_query["content"] = highlight_sql(raw_query.get("content"))
+
+            # Normalizações e aliases padronizados para o template (alinhado 100% com o JSON)
+            normalized_obj.update({
                 "codigo": codigo,
                 "name": obj.get("name"),
-                "description": obj.get("description"),
+                "description": descricao,
                 "descricao": descricao,
+                "deployment_type": deployment_type,
                 "tipo": deployment_type,
                 "object_type": object_type,
                 "otm_table": otm_table,
                 "sequence": sequence,
                 "saved_query_id": saved_query_id,
-                "responsavel": responsavel
-            }
+                "responsavel": responsavel,
+                "domain": obj.get("domain"),
+                "domainName": obj.get("domainName"),
+                "migration_item_name": obj.get("migration_item_name"),
+                "auto_generated": obj.get("auto_generated"),
+                "auto_source": obj.get("auto_source"),
+                "notes": obj.get("notes"),
+                "identifiers": obj.get("identifiers"),
+                "data": obj.get("data"),
+                "status": obj.get("status"),
+                "object_extraction_query": raw_query,
+                "technical_content": obj.get("technical_content"),
+                "otm_subtables": obj.get("otm_subtables"),
+                "otm_related_tables": obj.get("otm_related_tables"),
+                "otm_navigation_path_en": obj.get("otm_navigation_path_en"),
+                "otm_navigation_source": obj.get("otm_navigation_source"),
+                "otm_navigation_equivalent_table": obj.get("otm_navigation_equivalent_table"),
+                "otm_navigation_equivalence_confidence": obj.get("otm_navigation_equivalence_confidence")
+            })
 
             normalized_objetos.append(normalized_obj)
 
@@ -326,14 +400,35 @@ def main():
     data = load_data()
     html_string = build_html(data)
 
-    html = HTML(
-        string=html_string.encode("utf-8").decode("utf-8"),
-        base_url=TEMPLATE_DIR,
-        encoding="utf-8"
-    )
-    css = CSS(filename=os.path.join(TEMPLATE_DIR, "pdf.css"))
+    try:
+        with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
+            f.write(html_string)
+        print("HTML debug gerado em:", OUTPUT_HTML)
+    except Exception as e:
+        print("Falha ao gravar HTML debug:", e)
+
+    print("Base URL (templates):", TEMPLATE_DIR)
+    print("CSS:", os.path.join(TEMPLATE_DIR, "pdf.css"))
     print("Gerando PDF em:", OUTPUT_PDF)
-    html.write_pdf(OUTPUT_PDF, stylesheets=[css])
+
+    # Garante caminhos absolutos para evitar problemas de resolução no WeasyPrint
+    template_base = os.path.abspath(TEMPLATE_DIR)
+    css_path = os.path.abspath(os.path.join(TEMPLATE_DIR, "pdf.css"))
+
+    print("Base URL absoluto:", template_base)
+    print("CSS absoluto:", css_path)
+
+    html = HTML(
+        string=html_string,
+        base_url=template_base
+    )
+
+    css = CSS(filename=css_path)
+
+    html.write_pdf(
+        OUTPUT_PDF,
+        stylesheets=[css]
+    )
     print("PDF gerado em:", OUTPUT_PDF)
 
 if __name__ == "__main__":

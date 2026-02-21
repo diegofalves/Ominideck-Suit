@@ -468,6 +468,82 @@
                     </p>
                     {% endif %}
 
+                    <!-- NAVEGAÇÃO OTM (posicionada logo após a descrição) -->
+                    {% if objeto.otm_navigation_path_en %}
+                    <div class="object-navigation">
+                        <p><strong>Navegação OTM:</strong> {{ objeto.otm_navigation_path_en }}</p>
+                    </div>
+                    {% endif %}
+
+                    <!-- STATUS DO OBJETO -->
+                    {% if objeto.status %}
+                    <div class="object-status">
+                        <strong>Status</strong>
+                        <div class="status-badges">
+
+                            {% set s = objeto.status %}
+
+                            {% set items = [
+                                ('Documentação Técnica', s.documentation),
+                                ('Configuração do Projeto de Migração', s.migration_project),
+                                ('Preparação de Arquivos para Migração', s.export),
+                                ('Configuração Técnica no Sistema', s.deploy),
+                                ('Validação Funcional', s.validation),
+                                ('Implantação em Produção', s.deployment)
+                            ] %}
+
+                            {% for label, value in items %}
+                                {% set val = value or '-' %}
+                                {% set css_class = '' %}
+                                {% if val == 'DONE' %}
+                                    {% set css_class = 'done' %}
+                                {% elif val == 'PENDING' %}
+                                    {% set css_class = 'pending' %}
+                                {% elif val == 'FAILED' %}
+                                    {% set css_class = 'failed' %}
+                                {% endif %}
+
+                                <span class="status-badge {{ css_class }}">
+                                    {{ label }}: {{ val }}
+                                </span>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- QUERY DE EXTRAÇÃO -->
+                    {% if objeto.object_extraction_query and objeto.object_extraction_query.content %}
+                    <div class="object-extraction">
+                        <p><strong>Query de Extração:</strong></p>
+                        <pre><code class="language-sql">{{ objeto.object_extraction_query.content | safe }}</code></pre>
+                    </div>
+                    {% endif %}
+
+                    <!-- CONTEÚDO TÉCNICO -->
+                    {% if objeto.technical_content and objeto.technical_content.content %}
+                    <div class="object-technical">
+                        <p><strong>Conteúdo Técnico ({{ objeto.technical_content.type or 'N/A' }}):</strong></p>
+                        <pre><code>{{ objeto.technical_content.content }}</code></pre>
+                    </div>
+                    {% endif %}
+
+                    <!-- RELACIONAMENTOS OTM -->
+                    {% if objeto.otm_subtables or objeto.otm_related_tables %}
+                    <div class="object-relationships">
+                        <p><strong>Relacionamentos OTM:</strong></p>
+                        <ul>
+                            {% if objeto.otm_subtables %}
+                            <li><strong>Subtables:</strong> {{ objeto.otm_subtables | join(', ') }}</li>
+                            {% endif %}
+                            {% if objeto.otm_related_tables %}
+                            <li><strong>Related Tables:</strong> {{ objeto.otm_related_tables | join(', ') }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+
                 </div>
                 {% endfor %}
             {% endif %}

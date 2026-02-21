@@ -57,17 +57,9 @@ page: landscape;
    GOVERNANÇA DE QUEBRAS DE PÁGINA
 ============================== */
 
-/* Quebra automática entre seções principais */
-
-
-/* Evita página extra ao final */
 .page:last-of-type {
   page-break-after: avoid;
 }
-
-/* =========================================
-   QUEBRA EXPLÍCITA ENTRE SEÇÕES PRINCIPAIS
-========================================= */
 
 #sec-metadata {
   page-break-after: always;
@@ -97,7 +89,6 @@ page: landscape;
 /* ==============================
    GRUPOS – CONTROLE DE QUEBRA
 ============================== */
-
 
 #sec-grupos-otm .group-block:first-of-type {
   page-break-before: avoid;
@@ -266,33 +257,268 @@ page-break-inside: avoid;
 }
 
 .group-item strong {
-display: block;
-font-weight: 600;
-font-size: 13pt;
-margin-bottom: 6px;
-color: #111827;
+  display: block;
+  font-weight: 600;
+  font-size: 14pt;
+  margin-bottom: 4px;
+  color: #0F172A;
+  letter-spacing: 0.3px;
 }
 
 .object-meta {
-font-size: 9.8pt;
-color: #6B7280;
-margin-bottom: 8px;
-letter-spacing: 0.4px;
-text-transform: uppercase;
+  font-size: 9pt;
+  color: #6B7280;
+  margin-bottom: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
 }
 
 .group-item p {
-margin: 0;
-font-size: 11pt;
-color: #374151;
-line-height: 1.75;
+  margin: 6px 0 10px 0;
+  font-size: 11pt;
+  color: #374151;
+  line-height: 1.75;
 }
 
 /* Evita página em branco após último grupo */
+/* ==============================
+   DETALHES TÉCNICOS DO OBJETO – BIG4 COMPACT
+============================== */
+
+.object-status {
+  margin-top: 12px;
+  padding: 8px 10px;
+  background: #F8FAFC;
+  border-left: 3px solid #1D4ED8;
+  font-size: 9pt;
+  line-height: 1.5;
+  page-break-inside: avoid;
+}
+
+.object-status p {
+  margin: 0;
+  color: #1F2937;
+}
+
+.object-status strong {
+  display: block;
+  font-size: 9.5pt;
+  margin-bottom: 4px;
+  color: #0F172A;
+  letter-spacing: 0.3px;
+}
+
+/* ==============================
+   STATUS BADGES – VISUAL DEFINIÇÃO
+============================== */
+
+.status-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin-top: 6px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 8.5pt;
+  font-weight: 600;
+  border-radius: 4px;
+  background: #E2E8F0;
+  color: #1F2937;
+  letter-spacing: 0.2px;
+}
+
+/* Estados semânticos (caso o template aplique classes futuramente) */
+
+.status-badge.done {
+  background: #DCFCE7;
+  color: #166534;
+}
+
+.status-badge.pending {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.status-badge.failed {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+/* ==============================
+   RELACIONAMENTOS OTM – EXECUTIVO CLARO
+============================== */
+
+.object-relationships {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-left: 4px solid #0F172A;
+  border-radius: 6px;
+  page-break-inside: avoid;
+}
+
+/* Título da seção */
+.object-relationships p {
+  font-size: 9pt;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #334155;
+}
+
+/* Cada grupo (Subtables / Related Tables) */
+.object-relationships ul {
+  list-style: none;
+  margin: 6px 0 12px 0;
+  padding: 8px 10px;
+  background: #F8FAFC;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+/* Diferencia visualmente os dois blocos */
+.object-relationships ul:nth-of-type(1) {
+  border-left: 3px solid #2563EB; /* Azul técnico */
+}
+
+.object-relationships ul:nth-of-type(2) {
+  border-left: 3px solid #64748B; /* Cinza estrutural */
+}
+
+/* Tags das tabelas */
+.object-relationships li {
+  font-size: 8.5pt;
+  font-weight: 600;
+  padding: 5px 10px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 4px;
+  color: #0F172A;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+}
+
+.object-navigation {
+  margin-top: 10px;
+  page-break-inside: avoid;
+}
+
+/* Títulos técnicos mais discretos */
+.object-extraction p,
+.object-technical p,
+.object-relationships p {
+  font-size: 9.5pt;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #1F2937;
+  letter-spacing: 0.3px;
+}
+
+/* Navegação – estilo breadcrumb executivo */
+.object-navigation {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: #F9FAFB;
+  border-left: 3px solid #CBD5E1;
+  font-size: 9.5pt;
+  line-height: 1.6;
+}
+
+.object-navigation p {
+  margin: 0;
+  font-weight: 400;
+  color: #334155;
+}
+
+.object-navigation strong {
+  display: block;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #64748B;
+  margin-bottom: 4px;
+}
+
+/* Blocos de código mais densos e profissionais */
+/* ==============================
+   BLOCO DE QUERY – EXECUTIVO TÉCNICO
+============================== */
+
+.object-extraction {
+  margin-top: 14px;
+  page-break-inside: avoid;
+}
+
+.object-extraction p {
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.object-extraction pre,
+.object-technical pre {
+  background: #0F172A;          /* Fundo técnico escuro */
+  color: #E2E8F0;               /* Texto claro */
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 8.5pt;
+  line-height: 1.45;
+  border: 1px solid #1E293B;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+  page-break-inside: avoid;
+}
+
+/* ==============================
+   SQL KEYWORD HIGHLIGHT
+============================== */
+
+.sql-keyword {
+  color: #38BDF8;      /* Azul técnico destacado */
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.object-navigation {
+  margin-top: 8px;
+  padding-top: 6px;
+  font-size: 9.5pt;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.object-navigation strong {
+  font-weight: 600;
+  color: #0F172A;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Evita que título técnico fique isolado da query */
+.object-extraction,
+.object-technical {
+  page-break-before: avoid;
+}
+
+/* Evita que bloco técnico inteiro quebre feio */
+.group-item {
+  page-break-inside: avoid;
+}
 #sec-grupos-otm .group-block:last-of-type {
   page-break-after: avoid;
 }
-
 
 /* ==============================
 ROADMAP
@@ -325,6 +551,7 @@ padding: 6px 8px;
 width: 40px;
 text-align: center;
 }
+
 * {
 box-sizing: border-box;
 }
@@ -333,11 +560,11 @@ html, body {
 margin: 0;
 padding: 0;
 }
+
 /* ==============================
-   SUMÁRIO – CONTROLE FINAL (NUMERAÇÃO MANUAL + CASCATA VISUAL)
+   SUMÁRIO – CONTROLE FINAL
 ============================== */
 
-/* remove completamente qualquer numeração automática do HTML */
 .toc ol,
 .toc li {
   list-style: none !important;
@@ -346,24 +573,20 @@ padding: 0;
   padding: 0;
 }
 
-/* nível 1 */
 .toc > ol > li {
   margin-bottom: 8px;
 }
 
-/* nível 2 */
 .toc > ol > li > ol {
   margin-left: 20px;
   margin-top: 6px;
 }
 
-/* nível 3 */
 .toc > ol > li > ol > li > ol {
   margin-left: 20px;
   margin-top: 4px;
 }
 
-/* garante que o link ocupe a linha inteira */
 .toc a {
   text-decoration: none;
   color: #1D4ED8;
@@ -371,12 +594,10 @@ padding: 0;
   display: block;
 }
 
-/* mantém hierarquia visual mesmo sem numeração HTML */
 .toc li {
   margin-bottom: 4px;
 }
 
-/* fallback para engines que usam marker */
 .toc li::marker {
   content: "";
 }
