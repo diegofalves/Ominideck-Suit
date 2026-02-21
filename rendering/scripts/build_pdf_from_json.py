@@ -48,6 +48,13 @@ def build_html(data):
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
     template = env.get_template("projeto_migracao_pdf_template.html.tpl")
 
+    # DEBUG: confirma qual template está sendo carregado
+    try:
+        print("TEMPLATE_DIR:", TEMPLATE_DIR)
+        print("Template carregado:", template.filename)
+    except Exception as e:
+        print("Erro ao inspecionar template:", e)
+
     # Copia profunda para evitar mutações
     import copy
     data = copy.deepcopy(data)
@@ -108,7 +115,9 @@ def build_html(data):
             "SEM GRUPO DEFINIDO",
             "UNDEFINED",
             "NONE",
-            "NULL"
+            "NULL",
+            "IGNORADOS",
+            "IGNORED"
         ]:
             continue
         grupo_seq = g.get("sequence")
@@ -323,6 +332,7 @@ def main():
         encoding="utf-8"
     )
     css = CSS(filename=os.path.join(TEMPLATE_DIR, "pdf.css"))
+    print("Gerando PDF em:", OUTPUT_PDF)
     html.write_pdf(OUTPUT_PDF, stylesheets=[css])
     print("PDF gerado em:", OUTPUT_PDF)
 

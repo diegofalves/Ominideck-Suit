@@ -1,358 +1,382 @@
 /* ========================================
-   OmniDeck – PDF Print Stylesheet
-   Documento Formal para Cliente
-   Engine: WeasyPrint
-   Fonte única: JSON → HTML → PDF
+OmniDeck – PDF Print Stylesheet
+Documento Formal para Cliente
+Engine: WeasyPrint
+Fonte única: JSON → HTML → PDF
+Versão: Big4 Technical – Stable Clean
 ======================================== */
 
 /* ==============================
-   CONFIGURAÇÃO A4
+CONFIGURAÇÃO A4
 ============================== */
 @page {
-  size: A4;
-  margin: 25mm 15mm 25mm 15mm;
+size: A4;
+margin: 25mm 15mm 25mm 15mm;
 
-  @top-left {
-    content: "OMNIDECK | PROJETO DE MIGRAÇÃO";
-    font-size: 8.5pt;
-    letter-spacing: 0.5px;
-    color: #64748B;
-  }
+@top-left {
+content: "OMNIDECK | PROJETO DE MIGRAÇÃO";
+font-size: 8.5pt;
+letter-spacing: 0.6px;
+color: #64748B;
+}
 
-  @bottom-right {
-    content: "Página " counter(page) " de " counter(pages);
-    font-size: 9pt;
-    color: #64748B;
-  }
+@bottom-right {
+content: "Página " counter(page) " de " counter(pages);
+font-size: 9pt;
+color: #64748B;
+}
 }
 
 @page landscape {
-  size: A4 landscape;
-  margin: 18mm 18mm 18mm 18mm;
+size: A4 landscape;
+margin: 18mm 18mm 18mm 18mm;
 
-  @top-left {
-    content: "OMNIDECK | PROJETO DE MIGRAÇÃO";
-    font-size: 8.5pt;
-    letter-spacing: 0.5px;
-    color: #64748B;
-  }
+@top-left {
+content: "OMNIDECK | PROJETO DE MIGRAÇÃO";
+font-size: 8.5pt;
+letter-spacing: 0.6px;
+color: #64748B;
+}
 
-  @bottom-right {
-    content: "Página " counter(page) " de " counter(pages);
-    font-size: 9pt;
-    color: #64748B;
-  }
+@bottom-right {
+content: "Página " counter(page) " de " counter(pages);
+font-size: 9pt;
+color: #64748B;
+}
 }
 
 .page.landscape {
-  page: landscape;
+page: landscape;
 }
 
 @page:first {
-  @top-left {
-    content: "";
-  }
+@top-left { content: ""; }
 }
 
 /* ==============================
-   BASE TIPOGRÁFICA
+   GOVERNANÇA DE QUEBRAS DE PÁGINA
 ============================== */
-body {
-  font-family: "Inter", "Arial", sans-serif;
-  font-size: 11pt;
-  line-height: 1.65;
-  color: #1E293B;
-  background: #FFFFFF;
-}
 
-p {
-  margin-bottom: 10px;
-}
+/* Quebra automática entre seções principais */
 
-/* ==============================
-   HIERARQUIA DE TÍTULOS
-============================== */
-h1 {
-  font-size: 22pt;
-  font-weight: 600;
-  margin-bottom: 18px;
-  color: #0F172A;
-}
 
-h2 {
-  font-size: 16pt;
-  font-weight: 600;
-  margin-top: 38px;
-  margin-bottom: 18px;
-  padding-bottom: 8px;
-  border-bottom: 3px solid #1D4ED8;
-  color: #0F172A;
+/* Evita página extra ao final */
+.page:last-of-type {
   page-break-after: avoid;
 }
 
-h3 {
-  font-size: 13pt;
-  font-weight: 600;
-  margin-top: 20px;
-  margin-bottom: 8px;
-  page-break-after: avoid;
-  color: #1E293B;
-}
+/* =========================================
+   QUEBRA EXPLÍCITA ENTRE SEÇÕES PRINCIPAIS
+========================================= */
 
-/* ==============================
-   CAPA
-============================== */
-.cover-page {
+#sec-metadata {
   page-break-after: always;
-  display: flex;
-  flex-direction: column;
-  min-height: 247mm;
 }
 
-.cover-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 10mm;
-}
-
-.cover-logo img {
-  height: 55px;
-  margin-bottom: 32px;
-}
-
-.cover-title {
-  font-size: 24pt;
-  font-weight: 600;
-  color: #0F172A;
-  max-width: 80%;
-  margin: 0 auto 16px auto;
-  line-height: 1.35;
-}
-
-.cover-divider {
-  width: 90px;
-  height: 3px;
-  background: #1D4ED8;
-  margin: 18px auto 30px auto;
-}
-
-.cover-footer {
-  text-align: center;
-  font-size: 8.5pt;
-  color: #94A3B8;
-  margin-top: auto;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-}
-
-/* ==============================
-   TABELAS GERAIS
-============================== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 8px;
-}
-
-th, td {
-  border: 1px solid #E2E8F0;
-  padding: 8px 10px;
-  text-align: left;
-  font-size: 10pt;
-}
-
-th {
-  background: #F1F5F9;
-  font-weight: 600;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #F8FAFC;
-}
-
-/* ==============================
-   RESUMO EXECUTIVO
-============================== */
-#sec-resumo {
-  page-break-before: always;
-  page-break-after: always;
-  break-inside: avoid;
-}
-
-/* ==============================
-   HISTÓRICO
-============================== */
 #sec-historico {
   page-break-before: always;
+}
+
+#sec-sumario {
+  page-break-before: always;
   page-break-after: always;
 }
 
-.history-page th:nth-child(1),
-.history-page td:nth-child(1) { width: 10%; }
-
-.history-page th:nth-child(2),
-.history-page td:nth-child(2) { width: 15%; }
-
-.history-page th:nth-child(3),
-.history-page td:nth-child(3) { width: 20%; }
-
-.history-page th:nth-child(4),
-.history-page td:nth-child(4) { width: 55%; }
-
 /* ==============================
-   GRUPOS E OBJETOS
+   ROADMAP – CONTROLE DE QUEBRA
 ============================== */
 
-#sec-grupos-otm {
+#sec-roadmap .roadmap-block {
   page-break-before: always;
 }
 
-
-.groups-intro {
-  font-size: 10.5pt;
-  color: #475569;
-  margin-bottom: 18px;
-  line-height: 1.6;
-}
-
-/* Mantém título + descrição + primeiro grupo juntos */
-#sec-grupos-otm h2,
-#sec-grupos-otm .groups-intro {
-  page-break-after: avoid;
-}
-
-#sec-grupos-otm .groups-intro + .group-block {
+#sec-roadmap .roadmap-block:first-of-type {
   page-break-before: avoid;
 }
 
 /* ==============================
-   ESTILO VISUAL – GRUPOS E OBJETOS
+   GRUPOS – CONTROLE DE QUEBRA
 ============================== */
 
-.group-block {
-  margin-top: 22px;
-  margin-bottom: 26px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #E2E8F0;
-}
 
-/* ==========================================
-   Quebra controlada entre grupos (estável)
-   ========================================== */
-
-/* Cada grupo começa em nova página */
-.group-block {
-  page-break-inside: avoid;
-  page-break-before: always;
-}
-
-/* EXCEÇÃO: o primeiro grupo da seção NÃO deve quebrar */
 #sec-grupos-otm .group-block:first-of-type {
-  page-break-before: avoid !important;
+  page-break-before: avoid;
 }
 
-/* Título do grupo */
+/* ==============================
+BASE TIPOGRÁFICA
+============================== */
+body {
+font-family: "Inter", "Arial", sans-serif;
+font-size: 11pt;
+line-height: 1.7;
+color: #1F2937;
+background: #FFFFFF;
+}
+
+p {
+margin-bottom: 10px;
+}
+
+/* ==============================
+HIERARQUIA DE TÍTULOS
+============================== */
+h1 {
+font-size: 22pt;
+font-weight: 600;
+margin-bottom: 20px;
+color: #0F172A;
+}
+
+h2 {
+font-size: 16pt;
+font-weight: 600;
+margin-top: 40px;
+margin-bottom: 18px;
+padding-bottom: 8px;
+border-bottom: 3px solid #1D4ED8;
+color: #0F172A;
+page-break-after: avoid;
+}
+
+h3 {
+font-size: 14pt;
+font-weight: 600;
+margin-top: 22px;
+margin-bottom: 10px;
+page-break-after: avoid;
+color: #111827;
+}
+
+/* ==============================
+CAPA
+============================== */
+.cover-page {
+page-break-after: always;
+display: flex;
+flex-direction: column;
+min-height: 247mm;
+}
+
+.cover-content {
+flex: 1;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+padding: 0 10mm;
+}
+
+.cover-logo img {
+height: 55px;
+margin-bottom: 32px;
+}
+
+.cover-title {
+font-size: 24pt;
+font-weight: 600;
+color: #0F172A;
+max-width: 80%;
+margin: 0 auto 16px auto;
+line-height: 1.35;
+}
+
+.cover-divider {
+width: 90px;
+height: 3px;
+background: #1D4ED8;
+margin: 18px auto 30px auto;
+}
+
+.cover-footer {
+text-align: center;
+font-size: 8.5pt;
+color: #94A3B8;
+margin-top: auto;
+letter-spacing: 0.4px;
+text-transform: uppercase;
+}
+
+/* ==============================
+TABELAS
+============================== */
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
+}
+
+th, td {
+border: 1px solid #E5E7EB;
+padding: 8px 10px;
+text-align: left;
+font-size: 10pt;
+}
+
+th {
+background: #F3F4F6;
+font-weight: 600;
+}
+
+/* ==============================
+GRUPOS E OBJETOS – BIG4 CLEAN
+============================== */
+#sec-grupos-otm {
+page-break-before: always;
+}
+
+.groups-intro {
+font-size: 11pt;
+color: #374151;
+margin-bottom: 30px;
+line-height: 1.75;
+}
+
+.group-block {
+margin-top: 45px;
+margin-bottom: 40px;
+padding-left: 22px;
+border-left: 4px solid #0F172A;
+page-break-inside: avoid;
+}
+
 .group-block h3 {
-  font-size: 14pt;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #0F172A;
+font-size: 16pt;
+font-weight: 600;
+letter-spacing: 0.6px;
+text-transform: uppercase;
+color: #0F172A;
+margin-bottom: 14px;
+}
+
+.group-description {
+font-size: 11pt;
+color: #4B5563;
+margin-bottom: 26px;
+line-height: 1.75;
+}
+
+.group-item {
+margin-top: 20px;
+margin-bottom: 20px;
+padding: 18px 0;
+border-bottom: 1px solid #E5E7EB;
+page-break-inside: avoid;
+}
+
+.group-item strong {
+display: block;
+font-weight: 600;
+font-size: 13pt;
+margin-bottom: 6px;
+color: #111827;
+}
+
+.object-meta {
+font-size: 9.8pt;
+color: #6B7280;
+margin-bottom: 8px;
+letter-spacing: 0.4px;
+text-transform: uppercase;
+}
+
+.group-item p {
+margin: 0;
+font-size: 11pt;
+color: #374151;
+line-height: 1.75;
+}
+
+/* Evita página em branco após último grupo */
+#sec-grupos-otm .group-block:last-of-type {
   page-break-after: avoid;
 }
 
-/* Descrição do grupo */
-.group-description {
-  font-size: 10.5pt;
-  color: #475569;
-  margin-bottom: 14px;
-  line-height: 1.6;
-}
-
-/* Lista de objetos */
-.group-item {
-  margin-left: 0;
-  padding: 10px 12px;
-  margin-bottom: 8px;
-  border-left: 3px solid #1D4ED8;
-  background-color: #F8FAFC;
-  page-break-inside: avoid;
-}
-
-/* Nome do objeto */
-.group-item strong {
-  display: block;
-  font-weight: 600;
-  font-size: 10.8pt;
-  margin-bottom: 4px;
-  color: #1E293B;
-}
-
-/* Descrição do objeto */
-.group-item p {
-  margin: 0;
-  font-size: 10pt;
-  color: #475569;
-  line-height: 1.55;
-}
 
 /* ==============================
-   ROADMAP
+ROADMAP
 ============================== */
 #sec-roadmap {
-  page-break-before: always;
+page-break-before: always;
 }
 
 #sec-roadmap h3 {
-  margin-top: 26px;
-  margin-bottom: 10px;
-  font-size: 13pt;
-  font-weight: 600;
-  color: #0F172A;
+margin-top: 28px;
+margin-bottom: 12px;
+font-size: 14pt;
+font-weight: 600;
+color: #0F172A;
 }
 
 #sec-roadmap th {
-  font-size: 9.5pt;
+font-size: 9.5pt;
 }
 
 #sec-roadmap td {
-  font-size: 9.8pt;
-  padding: 6px 8px;
+font-size: 9.8pt;
+padding: 6px 8px;
 }
 
-#sec-roadmap table {
-  table-layout: auto;
-  width: 100%;
-}
-
-/* ==============================
-   ROADMAP – COLUNAS (LANDSCAPE DINÂMICO)
-============================== */
-
-#sec-roadmap.page.landscape table {
-  table-layout: auto;
-  width: 100%;
-}
-
-#sec-roadmap.page.landscape th,
-#sec-roadmap.page.landscape td {
-  font-size: 9.5pt;
-  padding: 7px 9px;
-  white-space: normal;
-  word-break: break-word;
-}
-
-/* Colunas técnicas estreitas */
 #sec-roadmap.page.landscape th:nth-child(1),
 #sec-roadmap.page.landscape td:nth-child(1),
 #sec-roadmap.page.landscape th:nth-child(3),
 #sec-roadmap.page.landscape td:nth-child(3) {
-  width: 40px;
-  text-align: center;
+width: 40px;
+text-align: center;
+}
+* {
+box-sizing: border-box;
 }
 
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+html, body {
+margin: 0;
+padding: 0;
+}
+/* ==============================
+   SUMÁRIO – CONTROLE FINAL (NUMERAÇÃO MANUAL + CASCATA VISUAL)
+============================== */
+
+/* remove completamente qualquer numeração automática do HTML */
+.toc ol,
+.toc li {
+  list-style: none !important;
+  list-style-type: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* nível 1 */
+.toc > ol > li {
+  margin-bottom: 8px;
+}
+
+/* nível 2 */
+.toc > ol > li > ol {
+  margin-left: 20px;
+  margin-top: 6px;
+}
+
+/* nível 3 */
+.toc > ol > li > ol > li > ol {
+  margin-left: 20px;
+  margin-top: 4px;
+}
+
+/* garante que o link ocupe a linha inteira */
+.toc a {
+  text-decoration: none;
+  color: #1D4ED8;
+  font-size: 11pt;
+  display: block;
+}
+
+/* mantém hierarquia visual mesmo sem numeração HTML */
+.toc li {
+  margin-bottom: 4px;
+}
+
+/* fallback para engines que usam marker */
+.toc li::marker {
+  content: "";
+}

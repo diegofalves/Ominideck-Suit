@@ -8,7 +8,7 @@
 
 <body>
 
-    <section class="cover-page">
+    <section id="sec-capa" class="cover-page">
 
         <div class="cover-header">
             OmniDeck – Projeto de Migração
@@ -32,12 +32,6 @@
 
             <div class="cover-divider"></div>
 
-            <div class="cover-meta">
-                <div><strong>Versão:</strong> {{ projeto.versao }}</div>
-                <div><strong>Código:</strong> {{ projeto.codigo }}</div>
-                <div><strong>Consultor:</strong> {{ projeto.responsavel }}</div>
-                <div><strong>Data:</strong> {{ projeto.data_geracao }}</div>
-            </div>
 
         </div>
 
@@ -50,7 +44,7 @@
     <!-- ==============================
          METADADOS
     =============================== -->
-    <section class="metadata-page">
+    <section id="sec-metadata" class="page">
         <h2>Informações do Projeto</h2>
 
         <!-- BLOCO EDITORIAL -->
@@ -176,17 +170,89 @@
     {% endif %}
 
     <!-- ==============================
-         SUMÁRIO
+         SUMÁRIO (DINÂMICO HIERÁRQUICO)
     =============================== -->
-    <section class="toc-page">
+    <section id="sec-sumario" class="page">
         <h2>Sumário</h2>
-        <ul class="toc-list">
-            {% if projeto.change_history and projeto.change_history|length > 0 %}
-            <li><a href="#sec-historico">Histórico de Atualizações</a></li>
-            {% endif %}
-            <li><a href="#sec-resumo">Resumo Executivo</a></li>
-            <li><a href="#sec-roadmap">Roadmap</a></li>
-        </ul>
+        <nav class="toc">
+            <ol>
+
+                <!-- 1 -->
+                <li>
+                    <a href="#sec-metadata">1. Informações do Projeto</a>
+                </li>
+
+                {% set idx = 2 %}
+
+                <!-- Histórico -->
+                {% if projeto.change_history and projeto.change_history|length > 0 %}
+                <li>
+                    <a href="#sec-historico">{{ idx }}. Histórico de Atualizações</a>
+                </li>
+                {% set idx = idx + 1 %}
+                {% endif %}
+
+                <!-- Resumo -->
+                {% if projeto.objetivo %}
+                <li>
+                    <a href="#sec-resumo">{{ idx }}. Resumo Executivo</a>
+                </li>
+                {% set idx = idx + 1 %}
+                {% endif %}
+
+                <!-- Roadmap -->
+                {% if projeto.roadmap_dinamico %}
+                {% set roadmap_idx = idx %}
+                <li>
+                    <a href="#sec-roadmap">{{ roadmap_idx }}. Roadmap de Migração</a>
+                    <ol>
+                        {% for tipo, objetos in projeto.roadmap_dinamico.items() %}
+                        <li>
+                            <a href="#roadmap-{{ tipo|lower }}">
+                                {{ roadmap_idx }}.{{ loop.index }} {{ tipo }} ({{ objetos|length }} objetos)
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </li>
+                {% set idx = idx + 1 %}
+                {% endif %}
+
+                <!-- Grupos -->
+                {% if projeto.grupos and projeto.grupos|length > 0 %}
+                {% set grupos_idx = idx %}
+                <li>
+                    <a href="#sec-grupos-otm">{{ grupos_idx }}. Grupos e Objetos de Migração OTM</a>
+                    <ol>
+                        {% for grupo in projeto.grupos | sort(attribute='sequence') %}
+                        {% set grupo_index = loop.index %}
+                        {% set grupo_anchor = grupo.nome|replace(' ','-')|lower %}
+                        <li>
+                            <a href="#grupo-{{ grupo_anchor }}">
+                                {{ grupos_idx }}.{{ loop.index }} {{ grupo.nome }}
+                            </a>
+
+                            {% if grupo.objetos and grupo.objetos|length > 0 %}
+                            <ol>
+                                {% for objeto in grupo.objetos | sort(attribute='sequence') %}
+                                {% set obj_anchor = objeto.name|replace(' ','-')|lower %}
+                                <li>
+                                    <a href="#objeto-{{ obj_anchor }}">
+                                        {{ grupos_idx }}.{{ grupo_index }}.{{ loop.index }} {{ objeto.name }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ol>
+                            {% endif %}
+
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </li>
+                {% endif %}
+
+            </ol>
+        </nav>
     </section>
 
 
@@ -194,7 +260,7 @@
          OBJETIVO
     =============================== -->
     {% if projeto.objetivo %}
-    <section id="sec-resumo">
+    <section id="sec-resumo" class="page">
         <h2>Resumo Executivo</h2>
         <p>{{ projeto.objetivo }}</p>
     </section>
@@ -203,11 +269,11 @@
     <!-- ==============================
          ROADMAP DE MIGRAÇÃO
     =============================== -->
-    <section id="sec-roadmap" class="roadmap-page">
+    <section id="sec-roadmap" class="page landscape">
 
         {% if projeto.roadmap_dinamico %}
             {% for tipo, objetos in projeto.roadmap_dinamico.items() %}
-            <div class="roadmap-block page landscape"{% if not loop.first %} style="page-break-before: always;"{% endif %}>
+            <div class="roadmap-block" id="roadmap-{{ tipo|lower }}">
                 {% if loop.first %}
                     <h2>Roadmap de Migração</h2>
                     <p class="roadmap-intro">
@@ -328,15 +394,19 @@
     <!-- ==============================
          GRUPOS E OBJETOS DE MIGRAÇÃO OTM
     =============================== -->
-    <section id="sec-grupos-otm" class="groups-page">
+    <section id="sec-grupos-otm">
         <h2>Grupos e Objetos de Migração OTM</h2>
-        <p class="groups-intro">
-            Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração, organizados por agrupamentos funcionais e estruturais do sistema.
-            <br><br>
-            Cada grupo consolida entidades que compartilham finalidade operacional ou técnica, permitindo rastrear impactos, dependências e critérios de implantação ao longo do ciclo de migração. A organização por grupos facilita a governança do projeto, a priorização das atividades e a validação técnica entre ambiente de origem e destino.
-            <br><br>
-            <strong>Para cada objeto são descritos:</strong>
-            <br><br>
+        <div class="groups-intro">
+            <p>
+                Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração, organizados por agrupamentos funcionais e estruturais do sistema.
+            </p>
+
+            <p>
+                Cada grupo consolida entidades que compartilham finalidade operacional ou técnica, permitindo rastrear impactos, dependências e critérios de implantação ao longo do ciclo de migração. A organização por grupos facilita a governança do projeto, a priorização das atividades e a validação técnica entre ambiente de origem e destino.
+            </p>
+
+            <p><strong>Para cada objeto são descritos:</strong></p>
+
             <ul class="groups-list">
                 <li>Nome técnico da entidade no OTM</li>
                 <li>Contexto funcional dentro do domínio</li>
@@ -344,19 +414,21 @@
                 <li>Papel no baseline de configuração</li>
                 <li>Relevância para estabilidade do ambiente pós-migração</li>
             </ul>
-            <br><br>
-            <strong>Essa estrutura garante rastreabilidade completa entre:</strong>
+
+            <p><strong>Essa estrutura garante rastreabilidade completa entre:</strong></p>
+
             <ul class="groups-list">
                 <li>Roadmap de Migração</li>
                 <li>Estratégia de Implantação (Manual, Migration Project, CSV, DB.XML, etc.)</li>
                 <li>Governança técnica do domínio</li>
                 <li>Validação funcional e homologação</li>
-            </ul> </p>
+            </ul>
+        </div>
 
         {% if projeto.grupos and projeto.grupos|length > 0 %}
 
         {% for grupo in projeto.grupos | sort(attribute='sequence') %}
-        <div class="group-block{% if loop.first %} group-block-first{% endif %}">
+        <div class="group-block{% if loop.first %} group-block-first{% endif %}" id="grupo-{{ grupo.nome|replace(' ','-')|lower }}">
             <h3>{{ grupo.nome }}</h3>
 
             {% if grupo.descricao %}
@@ -367,14 +439,35 @@
 
             {% if grupo.objetos and grupo.objetos|length > 0 %}
                 {% for objeto in grupo.objetos | sort(attribute='sequence') %}
-                <div class="group-item">
-                    <h4>{{ objeto.name }}</h4>
+                <div class="group-item" id="objeto-{{ objeto.name|replace(' ','-')|lower }}">
 
-                    {% if objeto.description %}
-                    <div class="migration-object-description">
-                        {{ objeto.description }}
+                    <!-- Nome Técnico do Objeto -->
+                    <strong>{{ objeto.name }}</strong>
+
+                    <!-- Linha técnica auxiliar (opcional e futura expansão) -->
+                    {% if objeto.otm_table or objeto.tipo_migracao or grupo.nome %}
+                    <div class="object-meta">
+                        {% if objeto.otm_table %}
+                            Tabela OTM: {{ objeto.otm_table }}
+                        {% endif %}
+                        {% if objeto.tipo_migracao %}
+                            {% if objeto.otm_table %} | {% endif %}
+                            Estratégia: {{ objeto.tipo_migracao }}
+                        {% endif %}
+                        {% if grupo.nome %}
+                            {% if objeto.otm_table or objeto.tipo_migracao %} | {% endif %}
+                            Grupo: {{ grupo.nome }}
+                        {% endif %}
                     </div>
                     {% endif %}
+
+                    <!-- Descrição Técnica -->
+                    {% if objeto.description %}
+                    <p>
+                        {{ objeto.description }}
+                    </p>
+                    {% endif %}
+
                 </div>
                 {% endfor %}
             {% endif %}
