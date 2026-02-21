@@ -211,16 +211,6 @@ tbody tr:nth-child(even) {
   page-break-before: always;
 }
 
-/* Mantém título da seção e primeiro grupo na mesma página */
-#sec-grupos-otm h2 {
-  page-break-after: avoid;
-  break-after: avoid;
-}
-
-#sec-grupos-otm .group-block:first-of-type {
-  page-break-before: avoid;
-  break-before: avoid;
-}
 
 .groups-intro {
   font-size: 10.5pt;
@@ -229,10 +219,18 @@ tbody tr:nth-child(even) {
   line-height: 1.6;
 }
 
+/* Mantém título + descrição + primeiro grupo juntos */
+#sec-grupos-otm h2,
+#sec-grupos-otm .groups-intro {
+  page-break-after: avoid;
+}
+
+#sec-grupos-otm .groups-intro + .group-block {
+  page-break-before: avoid;
+}
+
 /* Bloco de grupo não pode quebrar entre título e primeiro item */
 .group-block {
-  page-break-inside: avoid;
-  break-inside: avoid;
   margin-bottom: 18px;
 }
 
