@@ -278,7 +278,6 @@ def build_html(data):
                     "responsavel": obj.get("responsavel"),
                     "tipo_migracao": "Técnica",
                     "seq": obj.get("sequence"),
-                    "id_migration_project": obj.get("codigo"),
                     "grupo": grupo.get("nome"),
                     "descricao": obj.get("descricao"),
                     "otm_table": obj.get("otm_table")
