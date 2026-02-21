@@ -229,30 +229,74 @@ tbody tr:nth-child(even) {
   page-break-before: avoid;
 }
 
-/* Bloco de grupo não pode quebrar entre título e primeiro item */
+/* ==============================
+   ESTILO VISUAL – GRUPOS E OBJETOS
+============================== */
+
 .group-block {
-  margin-bottom: 18px;
+  margin-top: 22px;
+  margin-bottom: 26px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E2E8F0;
 }
 
-/* Evita quebra logo após o título do grupo */
-.group-block h3 {
-  page-break-after: avoid;
-  break-after: avoid;
-  margin-bottom: 6px;
-}
+/* ==========================================
+   Quebra controlada entre grupos (estável)
+   ========================================== */
 
-/* Lista de objetos do grupo */
-.group-item {
-  margin-left: 10px;
-  margin-bottom: 6px;
+/* Cada grupo começa em nova página */
+.group-block {
   page-break-inside: avoid;
-  break-inside: avoid;
+  page-break-before: always;
 }
 
-/* Garante que o primeiro item fique colado ao título */
-.group-block .group-item:first-of-type {
-  page-break-before: avoid;
-  break-before: avoid;
+/* EXCEÇÃO: o primeiro grupo da seção NÃO deve quebrar */
+#sec-grupos-otm .group-block:first-of-type {
+  page-break-before: avoid !important;
+}
+
+/* Título do grupo */
+.group-block h3 {
+  font-size: 14pt;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #0F172A;
+  page-break-after: avoid;
+}
+
+/* Descrição do grupo */
+.group-description {
+  font-size: 10.5pt;
+  color: #475569;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+/* Lista de objetos */
+.group-item {
+  margin-left: 0;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-left: 3px solid #1D4ED8;
+  background-color: #F8FAFC;
+  page-break-inside: avoid;
+}
+
+/* Nome do objeto */
+.group-item strong {
+  display: block;
+  font-weight: 600;
+  font-size: 10.8pt;
+  margin-bottom: 4px;
+  color: #1E293B;
+}
+
+/* Descrição do objeto */
+.group-item p {
+  margin: 0;
+  font-size: 10pt;
+  color: #475569;
+  line-height: 1.55;
 }
 
 /* ==============================

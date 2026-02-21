@@ -207,7 +207,7 @@
 
         {% if projeto.roadmap_dinamico %}
             {% for tipo, objetos in projeto.roadmap_dinamico.items() %}
-            <div class="roadmap-block page landscape" style="page-break-before: always;">
+            <div class="roadmap-block page landscape"{% if not loop.first %} style="page-break-before: always;"{% endif %}>
                 {% if loop.first %}
                     <h2>Roadmap de Migração</h2>
                     <p class="roadmap-intro">
@@ -331,13 +331,32 @@
     <section id="sec-grupos-otm" class="groups-page">
         <h2>Grupos e Objetos de Migração OTM</h2>
         <p class="groups-intro">
-            Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração.
-        </p>
+            Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração, organizados por agrupamentos funcionais e estruturais do sistema.
+            <br><br>
+            Cada grupo consolida entidades que compartilham finalidade operacional ou técnica, permitindo rastrear impactos, dependências e critérios de implantação ao longo do ciclo de migração. A organização por grupos facilita a governança do projeto, a priorização das atividades e a validação técnica entre ambiente de origem e destino.
+            <br><br>
+            <strong>Para cada objeto são descritos:</strong>
+            <br><br>
+            <ul class="groups-list">
+                <li>Nome técnico da entidade no OTM</li>
+                <li>Contexto funcional dentro do domínio</li>
+                <li>Finalidade operacional ou estrutural</li>
+                <li>Papel no baseline de configuração</li>
+                <li>Relevância para estabilidade do ambiente pós-migração</li>
+            </ul>
+            <br><br>
+            <strong>Essa estrutura garante rastreabilidade completa entre:</strong>
+            <ul class="groups-list">
+                <li>Roadmap de Migração</li>
+                <li>Estratégia de Implantação (Manual, Migration Project, CSV, DB.XML, etc.)</li>
+                <li>Governança técnica do domínio</li>
+                <li>Validação funcional e homologação</li>
+            </ul> </p>
 
         {% if projeto.grupos and projeto.grupos|length > 0 %}
 
         {% for grupo in projeto.grupos | sort(attribute='sequence') %}
-        <div class="group-block">
+        <div class="group-block{% if loop.first %} group-block-first{% endif %}">
             <h3>{{ grupo.nome }}</h3>
 
             {% if grupo.descricao %}
