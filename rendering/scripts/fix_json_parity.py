@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-JSON_FILE = BASE_DIR / "domain" / "projeto_migracao" / "projeto_migracao.json"
+JSON_FILE = Path(__file__).resolve().parents[2] / "domain" / "projeto_migracao" / "projeto_migracao.json"
 
 # Mapear objeto_type para tabela OTM padrão
 OBJECT_TYPE_TO_TABLE = {
@@ -113,6 +113,30 @@ def fill_missing_fields(data):
             # 6. Garantir description existe
             if "description" not in obj:
                 obj["description"] = ""
+            
+            # 7. Preencher otm_primary_key com a chave primária da tabela equivalente
+            otm_table = obj.get("otm_table", "")
+            if otm_table:
+                tables_dir = Path(__file__).resolve().parents[2] / "metadata" / "otm" / "tables"
+                # Busca case-insensitive
+                metadata_file = None
+                for file in tables_dir.iterdir():
+                    if file.is_file() and file.stem.lower() == otm_table.lower():
+                        metadata_file = file
+                        break
+                if metadata_file:
+                    try:
+                        with open(metadata_file, "r", encoding="utf-8") as meta_file:
+                            meta_json = json.load(meta_file)
+                        primary_key = meta_json.get("primaryKey", [])
+                        obj["otm_primary_key"] = [pk["columnName"] for pk in primary_key if "columnName" in pk]
+                        print(f"✓ Grupo {group['label']} / Objeto {obj['name']}: OTM Primary Key preenchida: {obj['otm_primary_key']}")
+                    except Exception as e:
+                        obj["otm_primary_key"] = []
+                        print(f"⚠️ Erro ao ler chave primária de {otm_table}: {e}")
+                else:
+                    obj["otm_primary_key"] = []
+                    print(f"⚠️ Metadata não encontrada para tabela {otm_table}")
     
     return data
 
