@@ -90,24 +90,6 @@ page: landscape;
    GRUPOS – CONTROLE DE QUEBRA
 ============================== */
 
-#sec-grupos-otm .group-block:first-of-type {
-  page-break-before: avoid;
-}
-
-/* ==============================
-BASE TIPOGRÁFICA
-============================== */
-body {
-font-family: "Inter", "Arial", sans-serif;
-font-size: 11pt;
-line-height: 1.7;
-color: #1F2937;
-background: #FFFFFF;
-}
-
-p {
-margin-bottom: 10px;
-}
 
 /* ==============================
 HIERARQUIA DE TÍTULOS
@@ -222,14 +204,15 @@ font-size: 11pt;
 color: #374151;
 margin-bottom: 30px;
 line-height: 1.75;
+page-break-inside: avoid;
+break-inside: avoid;
 }
 
 .group-block {
-margin-top: 45px;
-margin-bottom: 40px;
+margin-top: 28px;
+margin-bottom: 28px;
 padding-left: 22px;
 border-left: 4px solid #0F172A;
-page-break-inside: avoid;
 }
 
 .group-block h3 {
@@ -244,16 +227,43 @@ margin-bottom: 14px;
 .group-description {
 font-size: 11pt;
 color: #4B5563;
-margin-bottom: 26px;
+margin-bottom: 18px;
 line-height: 1.75;
+page-break-inside: avoid;
+break-inside: avoid;
 }
 
 .group-item {
-margin-top: 20px;
-margin-bottom: 20px;
-padding: 18px 0;
+margin-top: 16px;
+margin-bottom: 16px;
+padding: 14px 0;
 border-bottom: 1px solid #E5E7EB;
 page-break-inside: avoid;
+}
+
+/* Cabeçalho do grupo não deve ficar órfão no fim da página */
+.group-head {
+  page-break-after: avoid;
+  break-after: avoid-page;
+}
+
+/* Exceção controlada: o PRIMEIRO item do grupo pode quebrar (senão o WeasyPrint empurra ele inteiro pra próxima página) */
+.group-item-first {
+  page-break-before: auto;
+  break-before: auto;
+  page-break-inside: auto;
+  break-inside: auto;
+}
+
+/* Libera quebra especificamente nos blocos que mais causam o “push” (SQL/code) */
+.group-item-first .object-extraction,
+.group-item-first .object-technical,
+.group-item-first pre,
+.group-item-first code,
+.group-item-first .object-extraction pre,
+.group-item-first .object-technical pre {
+  page-break-inside: auto;
+  break-inside: auto;
 }
 
 .group-item strong {
@@ -453,7 +463,7 @@ page-break-inside: avoid;
 
 .object-extraction {
   margin-top: 14px;
-  page-break-inside: avoid;
+  page-break-inside: auto;
 }
 
 .object-extraction p {
@@ -468,7 +478,7 @@ page-break-inside: avoid;
 .object-extraction pre,
 .object-technical pre {
   background: #0F172A;          /* Fundo técnico escuro */
-  color: #E2E8F0;               /* Texto claro */
+  color: #E2E8F0;               /* Texto claro */ 
   border-radius: 6px;
   padding: 12px 14px;
   font-size: 8.5pt;
@@ -478,7 +488,8 @@ page-break-inside: avoid;
   word-break: break-word;
   font-family: "JetBrains Mono", "Courier New", monospace;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
-  page-break-inside: avoid;
+  page-break-inside: auto;
+  break-inside: auto;
 }
 
 /* ==============================
@@ -512,9 +523,10 @@ page-break-inside: avoid;
   page-break-before: avoid;
 }
 
-/* Evita que bloco técnico inteiro quebre feio */
+/* Evita que bloco técnico inteiro quebre feio (exceto o 1º item, que tem override acima) */
 .group-item {
   page-break-inside: avoid;
+  break-inside: avoid;
 }
 #sec-grupos-otm .group-block:last-of-type {
   page-break-after: avoid;
@@ -600,4 +612,10 @@ padding: 0;
 
 .toc li::marker {
   content: "";
+}
+
+/* Mantém cabeçalho do grupo + 1º objeto juntos. Se não couber, sobe o bloco inteiro para a próxima página (evita órfão). */
+.group-pack{
+  page-break-inside: avoid;
+  break-inside: avoid;
 }

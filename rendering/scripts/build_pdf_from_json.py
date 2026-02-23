@@ -72,8 +72,10 @@ def load_data():
         return json.load(f)
 
 def build_html(data):
-    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), auto_reload=True)
+    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), auto_reload=True, cache_size=0)
     template = env.get_template("projeto_migracao_pdf_template.html.tpl")
+    # NOTE: cache_size=0 garante reload efetivo do template em cada execução (evita cache de Jinja durante depuração)
+    print("Jinja cache_size=0 (template reload forçado)")
 
     # DEBUG: confirma qual template está sendo carregado
     try:
@@ -424,9 +426,72 @@ def main():
 
     css = CSS(filename=css_path)
 
+    # ---------------------------------------------------------
+    # WeasyPrint: overrides pontuais para evitar quebra artificial
+    # entre cabeçalho do grupo e primeiro objeto.
+    #
+    # Sintoma: o título do grupo fica no fim da página anterior
+    # e o primeiro objeto é empurrado inteiro para a próxima página,
+    # gerando página "quase vazia".
+    #
+    # Causa típica: algum bloco está sendo tratado como "não quebrável"
+    # (break-inside: avoid / page-break-inside: avoid), especialmente
+    # quando há <pre> grandes.
+    #
+    # Estratégia: permitir quebra dentro de .group-item e dentro de <pre>,
+    # e impedir quebra imediatamente após .group-head.
+    # ---------------------------------------------------------
+    weasyprint_fix_css = CSS(
+        string="""
+/* === WeasyPrint FIX: evitar páginas vazias entre grupo e 1º objeto === */
+
+/* Mantém o cabeçalho do grupo grudado no conteúdo seguinte */
+.group-head {
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+
+/* Permite que o item quebre entre páginas (não pode ser um bloco "inteiro") */
+.group-item,
+.group-item-first,
+.object-status,
+.object-extraction,
+.object-technical,
+.object-relationships {
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+/* Garante que o primeiro item não force início em nova página */
+.group-item-first {
+  break-before: auto;
+  page-break-before: auto;
+}
+
+/* Se a introdução for grande, não trate como bloco indivisível */
+.groups-intro,
+.no-page-break {
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+/* Blocos de código precisam quebrar e fazer wrap */
+pre,
+code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  max-width: 100%;
+}
+"""
+    )
+
     html.write_pdf(
         OUTPUT_PDF,
-        stylesheets=[css]
+        stylesheets=[css, weasyprint_fix_css]
     )
     print("PDF gerado em:", OUTPUT_PDF)
 

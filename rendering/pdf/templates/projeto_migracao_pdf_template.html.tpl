@@ -32,7 +32,6 @@
 
             <div class="cover-divider"></div>
 
-
         </div>
 
         <div class="cover-footer">
@@ -49,7 +48,6 @@
 
         <!-- BLOCO EDITORIAL -->
         <div class="metadata-context">
-
 
             {% if projeto.escopo %}
             <h3>Escopo</h3>
@@ -255,7 +253,6 @@
         </nav>
     </section>
 
-
     <!-- ==============================
          OBJETIVO
     =============================== -->
@@ -326,7 +323,7 @@
                             <td>{{ obj.responsavel }}</td>
                             <td>{{ obj.tipo_migracao }}</td>
                             <td>{{ obj.seq or '-' }}</td>
-                            <td>{{ obj.id_migration_project or obj.codigo or obj.migration_item_id or '-' }}</td>
+                            <td></td>
                             <td>{{ obj.grupo }}</td>
                             <td>{{ obj.descricao }}</td>
                             <td>{{ obj.otm_table or '-' }}</td>
@@ -396,7 +393,8 @@
     =============================== -->
     <section id="sec-grupos-otm">
         <h2>Grupos e Objetos de Migração OTM</h2>
-        <div class="groups-intro">
+
+        <div class="groups-intro no-page-break">
             <p>
                 Esta seção apresenta os conjuntos de objetos do Oracle Transportation Management (OTM) contemplados no escopo de migração, organizados por agrupamentos funcionais e estruturais do sistema.
             </p>
@@ -429,16 +427,134 @@
 
         {% for grupo in projeto.grupos | sort(attribute='sequence') %}
         <div class="group-block{% if loop.first %} group-block-first{% endif %}" id="grupo-{{ grupo.nome|replace(' ','-')|lower }}">
-            <h3>{{ grupo.nome }}</h3>
 
-            {% if grupo.descricao %}
-            <p class="group-description">
-                {{ grupo.descricao }}
-            </p>
-            {% endif %}
+            {# === FIX: garante que cabeçalho + 1º objeto não se separem === #}
+            {% set objetos_sorted = (grupo.objetos | default([])) | sort(attribute='sequence') %}
 
-            {% if grupo.objetos and grupo.objetos|length > 0 %}
-                {% for objeto in grupo.objetos | sort(attribute='sequence') %}
+            <div class="group-pack">
+                <div class="group-head">
+                    <h3>{{ grupo.nome }}</h3>
+
+                    {% if grupo.descricao %}
+                    <p class="group-description">
+                        {{ grupo.descricao }}
+                    </p>
+                    {% endif %}
+                </div>
+
+                {% if objetos_sorted and objetos_sorted|length > 0 %}
+                    {% set objeto = objetos_sorted[0] %}
+                    <div class="group-item group-item-first" id="objeto-{{ objeto.name|replace(' ','-')|lower }}">
+
+                        <!-- Nome Técnico do Objeto -->
+                        <strong>{{ objeto.name }}</strong>
+
+                        <!-- Linha técnica auxiliar (opcional e futura expansão) -->
+                        {% if objeto.otm_table or objeto.tipo_migracao or grupo.nome %}
+                        <div class="object-meta">
+                            {% if objeto.otm_table %}
+                                Tabela OTM: {{ objeto.otm_table }}
+                            {% endif %}
+                            {% if objeto.tipo_migracao %}
+                                {% if objeto.otm_table %} | {% endif %}
+                                Estratégia: {{ objeto.tipo_migracao }}
+                            {% endif %}
+                            {% if grupo.nome %}
+                                {% if objeto.otm_table or objeto.tipo_migracao %} | {% endif %}
+                                Grupo: {{ grupo.nome }}
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <!-- Descrição Técnica -->
+                        {% if objeto.description %}
+                        <p>
+                            {{ objeto.description }}
+                        </p>
+                        {% endif %}
+
+                        <!-- NAVEGAÇÃO OTM (posicionada logo após a descrição) -->
+                        {% if objeto.otm_navigation_path_en %}
+                        <div class="object-navigation">
+                            <p><strong>Navegação OTM:</strong> {{ objeto.otm_navigation_path_en }}</p>
+                        </div>
+                        {% endif %}
+
+                        <!-- STATUS DO OBJETO -->
+                        {% if objeto.status %}
+                        <div class="object-status">
+                            <strong>Status</strong>
+                            <div class="status-badges">
+
+                                {% set s = objeto.status %}
+
+                                {% set items = [
+                                    ('Documentação Técnica', s.documentation),
+                                    ('Configuração do Projeto de Migração', s.migration_project),
+                                    ('Preparação de Arquivos para Migração', s.export),
+                                    ('Configuração Técnica no Sistema', s.deploy),
+                                    ('Validação Funcional', s.validation),
+                                    ('Implantação em Produção', s.deployment)
+                                ] %}
+
+                                {% for label, value in items %}
+                                    {% set val = value or '-' %}
+                                    {% set css_class = '' %}
+                                    {% if val == 'DONE' %}
+                                        {% set css_class = 'done' %}
+                                    {% elif val == 'PENDING' %}
+                                        {% set css_class = 'pending' %}
+                                    {% elif val == 'FAILED' %}
+                                        {% set css_class = 'failed' %}
+                                    {% endif %}
+
+                                    <span class="status-badge {{ css_class }}">
+                                        {{ label }}: {{ val }}
+                                    </span>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- QUERY DE EXTRAÇÃO -->
+                        {% if objeto.object_extraction_query and objeto.object_extraction_query.content %}
+                        <div class="object-extraction">
+                            <p><strong>Query de Extração:</strong></p>
+                            <pre><code class="language-sql">{{ objeto.object_extraction_query.content | safe }}</code></pre>
+                        </div>
+                        {% endif %}
+
+                        <!-- CONTEÚDO TÉCNICO -->
+                        {% if objeto.technical_content and objeto.technical_content.content %}
+                        <div class="object-technical">
+                            <p><strong>Conteúdo Técnico ({{ objeto.technical_content.type or 'N/A' }}):</strong></p>
+                            <pre><code>{{ objeto.technical_content.content }}</code></pre>
+                        </div>
+                        {% endif %}
+
+                        <!-- RELACIONAMENTOS OTM -->
+                        {% if objeto.otm_subtables or objeto.otm_related_tables %}
+                        <div class="object-relationships">
+                            <p><strong>Relacionamentos OTM:</strong></p>
+                            <ul>
+                                {% if objeto.otm_subtables %}
+                                <li><strong>Subtables:</strong> {{ objeto.otm_subtables | join(', ') }}</li>
+                                {% endif %}
+                                {% if objeto.otm_related_tables %}
+                                <li><strong>Related Tables:</strong> {{ objeto.otm_related_tables | join(', ') }}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                {% endif %}
+            </div>
+
+            {# === Demais objetos do grupo (a partir do 2º) === #}
+            {% if objetos_sorted and objetos_sorted|length > 1 %}
+                {% for objeto in objetos_sorted[1:] %}
                 <div class="group-item" id="objeto-{{ objeto.name|replace(' ','-')|lower }}">
 
                     <!-- Nome Técnico do Objeto -->
@@ -543,18 +659,18 @@
                     </div>
                     {% endif %}
 
-
                 </div>
                 {% endfor %}
             {% endif %}
+
         </div>
         {% endfor %}
+
         {% else %}
             <p>Nenhum grupo configurado para este projeto.</p>
         {% endif %}
 
     </section>
-
 
 </body>
 </html>
