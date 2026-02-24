@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-11T23:02:31Z",
+  "generatedAt": "2026-02-24T18:57:49Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.EXTENSION_QUALIFIERS.STATUS_VALUE.STATUS_VALUE_BAU_AUTO.461",
@@ -29,7 +29,7 @@
     "technicalContentType": "NONE",
     "rootName": "STATUS_VALUE",
     "query": "SELECT *\nFROM\n  STATUS_VALUE sv,\n  STATUS_TYPE st\nWHERE\n  sv.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n  AND st.IS_EXTERNAL = 'Y'\n  AND (\n    EXISTS (\n      SELECT 1\n      FROM SHIPMENT_STATUS ss\n      WHERE ss.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ss.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n    OR EXISTS (\n      SELECT 1\n      FROM ORDER_RELEASE_STATUS ors\n      WHERE ors.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ors.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n  )\nORDER BY\n  st.DOMAIN_NAME,\n  st.OBJECT_TYPE,\n  st.STATUS_TYPE_GID,\n  sv.SEQUENCE",
-    "normalizedRowCount": 68,
+    "normalizedRowCount": 70,
     "nonSchemaFieldsDetected": [
       "IS_EXTERNAL",
       "STATUS_TYPE_XID"
@@ -76,7 +76,7 @@
         "querySource": "object_extraction_query",
         "rootName": "STATUS_VALUE",
         "query": "SELECT *\nFROM\n  STATUS_VALUE sv,\n  STATUS_TYPE st\nWHERE\n  sv.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n  AND st.IS_EXTERNAL = 'Y'\n  AND (\n    EXISTS (\n      SELECT 1\n      FROM SHIPMENT_STATUS ss\n      WHERE ss.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ss.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n    OR EXISTS (\n      SELECT 1\n      FROM ORDER_RELEASE_STATUS ors\n      WHERE ors.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ors.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n  )\nORDER BY\n  st.DOMAIN_NAME,\n  st.OBJECT_TYPE,\n  st.STATUS_TYPE_GID,\n  sv.SEQUENCE",
-        "normalizedRowCount": 68,
+        "normalizedRowCount": 70,
         "nonSchemaFieldsDetected": [
           "IS_EXTERNAL",
           "STATUS_TYPE_XID"
@@ -157,6 +157,36 @@
           "UPDATE_USER": "",
           "UPDATE_DATE": "",
           "OTM_RELEASE": "25.2.1-20250627"
+        },
+        {
+          "STATUS_TYPE_GID": "BAU.BAU_OR_PICKING",
+          "STATUS_VALUE_GID": "BAU.OR_PICKING_AGUARDANDO",
+          "STATUS_VALUE_XID": "OR_PICKING_AGUARDANDO",
+          "OBJECT_TYPE": "ORDER_RELEASE",
+          "DESCRIPTION": "AGUARDANDO O PICKING DO SAP",
+          "SEQUENCE": "10",
+          "INITIAL_VALUE": "Y",
+          "DOMAIN_NAME": "BAU",
+          "INSERT_USER": "",
+          "INSERT_DATE": "2026-02-24T17:59:43Z",
+          "UPDATE_USER": "",
+          "UPDATE_DATE": "",
+          "OTM_RELEASE": "25.3.1-20250926"
+        },
+        {
+          "STATUS_TYPE_GID": "BAU.BAU_OR_PICKING",
+          "STATUS_VALUE_GID": "BAU.OR_PICKING_RECEBIDO",
+          "STATUS_VALUE_XID": "OR_PICKING_RECEBIDO",
+          "OBJECT_TYPE": "ORDER_RELEASE",
+          "DESCRIPTION": "INFORMACAO DE PICKING RECEBIDO DO SAP",
+          "SEQUENCE": "10",
+          "INITIAL_VALUE": "N",
+          "DOMAIN_NAME": "BAU",
+          "INSERT_USER": "",
+          "INSERT_DATE": "2026-02-24T17:59:43Z",
+          "UPDATE_USER": "",
+          "UPDATE_DATE": "",
+          "OTM_RELEASE": "25.3.1-20250926"
         },
         {
           "STATUS_TYPE_GID": "BAU.BAU_REM_AGENDAMENTO",
@@ -1201,6 +1231,36 @@
       "UPDATE_USER": "",
       "UPDATE_DATE": "",
       "OTM_RELEASE": "25.2.1-20250627"
+    },
+    {
+      "STATUS_TYPE_GID": "BAU.BAU_OR_PICKING",
+      "STATUS_VALUE_GID": "BAU.OR_PICKING_AGUARDANDO",
+      "STATUS_VALUE_XID": "OR_PICKING_AGUARDANDO",
+      "OBJECT_TYPE": "ORDER_RELEASE",
+      "DESCRIPTION": "AGUARDANDO O PICKING DO SAP",
+      "SEQUENCE": "10",
+      "INITIAL_VALUE": "Y",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "2026-02-24T17:59:43Z",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": "",
+      "OTM_RELEASE": "25.3.1-20250926"
+    },
+    {
+      "STATUS_TYPE_GID": "BAU.BAU_OR_PICKING",
+      "STATUS_VALUE_GID": "BAU.OR_PICKING_RECEBIDO",
+      "STATUS_VALUE_XID": "OR_PICKING_RECEBIDO",
+      "OBJECT_TYPE": "ORDER_RELEASE",
+      "DESCRIPTION": "INFORMACAO DE PICKING RECEBIDO DO SAP",
+      "SEQUENCE": "10",
+      "INITIAL_VALUE": "N",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "2026-02-24T17:59:43Z",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": "",
+      "OTM_RELEASE": "25.3.1-20250926"
     },
     {
       "STATUS_TYPE_GID": "BAU.BAU_REM_AGENDAMENTO",

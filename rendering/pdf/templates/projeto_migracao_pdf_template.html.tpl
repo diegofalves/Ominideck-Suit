@@ -1,3 +1,4 @@
+{% set idx = 1 %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -180,41 +181,45 @@
                     <a href="#sec-metadata">1. Informações do Projeto</a>
                 </li>
 
-                {% set idx = 2 %}
 
-                <!-- Histórico -->
-                {% if projeto.change_history and projeto.change_history|length > 0 %}
-                <li>
-                    <a href="#sec-historico">{{ idx }}. Histórico de Atualizações</a>
-                </li>
-                {% set idx = idx + 1 %}
-                {% endif %}
+                {# Filtra apenas linhas que possuem a chave 'object' e são dicionários #}
+                {% set object_rows = cache_data | selectattr('object', 'defined') | list %}
 
-                <!-- Resumo -->
-                {% if projeto.objetivo %}
-                <li>
-                    <a href="#sec-resumo">{{ idx }}. Resumo Executivo</a>
-                </li>
-                {% set idx = idx + 1 %}
-                {% endif %}
-
-                <!-- Roadmap -->
-                {% if projeto.roadmap_dinamico %}
-                {% set roadmap_idx = idx %}
-                <li>
-                    <a href="#sec-roadmap">{{ roadmap_idx }}. Roadmap de Migração</a>
-                    <ol>
-                        {% for tipo, objetos in projeto.roadmap_dinamico.items() %}
-                        <li>
-                            <a href="#roadmap-{{ tipo|lower }}">
-                                {{ roadmap_idx }}.{{ loop.index }} {{ tipo }} ({{ objetos|length }} objetos)
-                            </a>
-                        </li>
+                {# Coleta todas as chaves dinâmicas dos objetos #}
+                {% set all_keys = [] %}
+                {% for row in object_rows %}
+                    {% if row['object'] is mapping %}
+                        {% for key, value in row['object'].items() %}
+                            {% if key not in all_keys %}
+                                {% set _ = all_keys.append(key) %}
+                            {% endif %}
                         {% endfor %}
+                    {% endif %}
+                {% endfor %}
+
+                <table>
+                    <thead>
+                        <tr>
+                            {% for key in all_keys %}
+                                <th>{{ key }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in object_rows %}
+                            {% if row['object'] is mapping %}
+                                <tr>
+                                    {% for key in all_keys %}
+                                        <td>{{ row['object'][key] if key in row['object'] else '' }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
                     </ol>
                 </li>
                 {% set idx = idx + 1 %}
-                {% endif %}
 
                 <!-- Grupos -->
                 {% if projeto.grupos and projeto.grupos|length > 0 %}
@@ -547,8 +552,58 @@
                             </ul>
                         </div>
                         {% endif %}
-
                     </div>
+                {% endif %}
+
+                {% if objeto.object_cache_results %}
+                <div class="object-extraction-result">
+                    <p><strong>Resultado da Extração:</strong></p>
+                            {% set cache = objeto.object_cache_results[0] if objeto.object_cache_results|length > 0 else None %}
+                            {% if cache %}
+                                {# Busca as linhas do cache, tentando os caminhos mais comuns #}
+                                {% set rows = None %}
+                                {% if cache.cache_data and cache.cache_data.data and cache.cache_data.data.rows %}
+                                    {% set rows = cache.cache_data.data.rows %}
+                                {% elif cache.cache_data and cache.cache_data.tables and objeto.otm_table and cache.cache_data.tables[objeto.otm_table] and cache.cache_data.tables[objeto.otm_table].rows %}
+                                    {% set rows = cache.cache_data.tables[objeto.otm_table].rows %}
+                                {% endif %}
+                                {% if rows and rows|length > 0 %}
+                                    {# Coleta todas as chaves dinâmicas das linhas #}
+                                    {% set all_keys = [] %}
+                                    {% for row in rows %}
+                                        {% if row.items is defined %}
+                                            {% for k in row.keys() %}
+                                                {% if k not in all_keys %}
+                                                    {% set _ = all_keys.append(k) %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <table class="metadata-table">
+                                        <thead>
+                                            <tr>
+                                                {% for k in all_keys %}
+                                                    <th>{{ k }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in rows %}
+                                                {% if row.items is defined %}
+                                                    <tr>
+                                                        {% for k in all_keys %}
+                                                            <td>{{ row[k] if k in row else '' }}</td>
+                                                        {% endfor %}
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p style="color: #c00;">Nenhum dado encontrado nas linhas do cache.</p>
+                                {% endif %}
+                            {% endif %}
+                </div>
                 {% endif %}
             </div>
 

@@ -322,9 +322,8 @@ def _iter_project_objects(project_data: Dict[str, Any]) -> Iterable[Tuple[str, D
         migration_group_id = str(
             group.get(MIGRATION_GROUP_ID_KEY) or group.get("group_id") or ""
         ).strip()
-        migration_items = group.get("migration_items")
-        if not isinstance(migration_items, list):
-            migration_items = group.get("objects", [])
+        # Sempre buscar por 'objects', nunca por 'migration_items' (compatibilidade universal)
+        migration_items = group.get("objects", [])
         if not isinstance(migration_items, list):
             continue
         for obj in migration_items:

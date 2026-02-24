@@ -1,3 +1,49 @@
+import glob
+def get_object_cache_data(domain_name, otm_table, migration_item_name=None):
+    """
+    Busca o arquivo de cache correto para o objeto/tabela usando o objects_index.json e retorna os dados do cache.
+    """
+    index_path = os.path.abspath(os.path.join(BASE_DIR, '../../metadata/otm/cache/objects_index.json'))
+    if not os.path.exists(index_path):
+        return None
+    with open(index_path, encoding="utf-8") as f:
+        index_data = json.load(f)
+    # Busca por todas as chaves que contenham o domínio e a tabela
+    results = []
+    for key, entries in index_data.get("objectLocatorByKey", {}).items():
+        # Busca apenas pela tabela principal definida em otm_table
+        if domain_name and otm_table and f"{domain_name}|{otm_table}" in key:
+            for entry in entries:
+                # Garante que a tabela do cache seja exatamente a principal
+                if entry.get("table") != otm_table:
+                    continue
+                # Se migration_item_name for fornecido, filtra apenas se for MUITO diferente
+                if migration_item_name:
+                    entry_name = entry.get("migrationItemName")
+                    # Permite se for igual, ou se um contém o outro (case-insensitive)
+                    if entry_name and migration_item_name:
+                        if migration_item_name.lower() != entry_name.lower() and migration_item_name.lower() not in entry_name.lower() and entry_name.lower() not in migration_item_name.lower():
+                            continue
+                file_path = os.path.abspath(os.path.join(BASE_DIR, '../../', entry["file"]))
+                if os.path.exists(file_path):
+                    with open(file_path, encoding="utf-8") as cache_file:
+                        try:
+                            cache_data = json.load(cache_file)
+                            # Adiciona referência ao arquivo e info extra
+                            results.append({
+                                "file": entry["file"],
+                                "rowNumber": entry.get("rowNumber"),
+                                "tableRowNumber": entry.get("tableRowNumber"),
+                                "migrationItemId": entry.get("migrationItemId"),
+                                "migrationItemName": entry.get("migrationItemName"),
+                                "migrationGroupId": entry.get("migrationGroupId"),
+                                "table": entry.get("table"),
+                                "domainName": entry.get("domainName"),
+                                "cache_data": cache_data
+                            })
+                        except Exception as e:
+                            continue
+    return results if results else None
 import os
 import sys
 # --- Ajuste automático de variáveis de ambiente para libs do Homebrew (macOS) ---
@@ -151,6 +197,7 @@ def build_html(data):
     normalized_groups = []
     roadmap_grouped = {}
 
+
     for g in groups:
         grupo_nome = g.get("label") or g.get("nome") or g.get("name")
         # Ignora grupos técnicos ou placeholders
@@ -199,6 +246,21 @@ def build_html(data):
             if isinstance(raw_query, dict) and raw_query.get("content"):
                 raw_query = dict(raw_query)
                 raw_query["content"] = highlight_sql(raw_query.get("content"))
+
+            # Busca dados de cache para o objeto/tabela
+            domain_name = obj.get("domainName") or obj.get("domain")
+            migration_item_name = obj.get("migration_item_name") or obj.get("name")
+            cache_results = None
+            if domain_name and otm_table:
+                cache_results = get_object_cache_data(domain_name, otm_table, migration_item_name)
+            normalized_obj["object_cache_results"] = cache_results
+
+            # DEBUG: printa se encontrou dados de cache
+            if cache_results:
+                print(f"[CACHE] Objeto: {normalized_obj.get('name') or normalized_obj.get('migration_item_name')} | Domínio: {domain_name} | Tabela: {otm_table}")
+                print(f"[CACHE] Arquivos encontrados: {[c['file'] for c in cache_results]}")
+                for c in cache_results:
+                    print(f"[CACHE] Exemplo de dados: {str(c.get('cache_data'))[:500]}")
 
             # Normalizações e aliases padronizados para o template (alinhado 100% com o JSON)
             normalized_obj.update({
