@@ -556,7 +556,7 @@
                 {% endif %}
 
                 {% if objeto.object_cache_results %}
-                <div class="object-extraction-result">
+                <section class="page landscape object-extraction-result">
                     <p><strong>Resultado da Extração:</strong></p>
                             {% set cache = objeto.object_cache_results[0] if objeto.object_cache_results|length > 0 else None %}
                             {% if cache %}
@@ -605,6 +605,7 @@
                             {% endif %}
                 </div>
                 {% endif %}
+                </section>
             </div>
 
             {# === Demais objetos do grupo (a partir do 2º) === #}
