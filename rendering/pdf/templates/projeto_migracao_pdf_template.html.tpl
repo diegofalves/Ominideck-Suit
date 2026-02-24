@@ -540,7 +540,6 @@
 
                         <!-- RELACIONAMENTOS OTM -->
                         {% if objeto.otm_subtables or objeto.otm_related_tables %}
-                        <div class="object-relationships">
                             <p><strong>Relacionamentos OTM:</strong></p>
                             <ul>
                                 {% if objeto.otm_subtables %}
@@ -550,7 +549,6 @@
                                 <li><strong>Related Tables:</strong> {{ objeto.otm_related_tables | join(', ') }}</li>
                                 {% endif %}
                             </ul>
-                        </div>
                         {% endif %}
                     </div>
                 {% endif %}
@@ -606,6 +604,7 @@
                 </div>
                 {% endif %}
                 </section>
+                <div style="page-break-before: always;"></div>
             </div>
 
             {# === Demais objetos do grupo (a partir do 2º) === #}
