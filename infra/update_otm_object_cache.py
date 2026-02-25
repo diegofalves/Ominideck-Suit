@@ -1,3 +1,21 @@
+from __future__ import annotations
+
+def _normalize_sql_table_aliases(sql_query: str) -> str:
+    """
+    Substitui aliases customizados na query SQL por aliases padronizados com o nome da tabela.
+    Exemplo: 'SELECT t1.col FROM table1 t1' vira 'SELECT table1.col FROM table1 table1'.
+    """
+    if not isinstance(sql_query, str) or not sql_query.strip():
+        return sql_query
+    # Regex para encontrar FROM/JOIN com alias
+    def replacer(match):
+        table = match.group("table")
+        alias = match.group("alias")
+        if alias and alias != table:
+            return f"{table} {table}"
+        return match.group(0)
+    pattern = re.compile(r"(?i)(FROM|JOIN)\s+(?P<table>[A-Z0-9_.$\"#@]+)\s+(?P<alias>[A-Z0-9_]+)")
+    return pattern.sub(replacer, sql_query)
 #!/usr/bin/env python3
 """
 Build local OTM object cache files from projeto_migracao migration items.
@@ -9,6 +27,7 @@ Core rules:
 - Missing values in OTM response are filled with empty string.
 - INSERT_DATE/UPDATE_DATE are managed as local cache lifecycle fields when present in schema.
 """
+
 
 from __future__ import annotations
 
@@ -865,6 +884,7 @@ def _build_cache_payload(
             "domainName": migration_item_payload["domainName"],
             "sequence": migration_item_payload["sequence"],
             "deploymentType": migration_item_payload["deploymentType"],
+            "simulatedExtractionQuery": _normalize_sql_table_aliases(sql_query),
         },
         "extraction": {
             "objectExtractionQueryLanguage": query_language,

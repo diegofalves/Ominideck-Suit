@@ -570,11 +570,7 @@
                                     {% set all_keys = [] %}
                                     {% if objeto.selected_columns is defined and objeto.selected_columns %}
                                         {% for col in objeto.selected_columns %}
-                                            {% if '.' in col %}
-                                                {% set _ = all_keys.append(col.split('.')[-1]) %}
-                                            {% else %}
-                                                {% set _ = all_keys.append(col) %}
-                                            {% endif %}
+                                            {% set _ = all_keys.append(col) %}
                                         {% endfor %}
                                     {% else %}
                                         {# Se não houver selected_columns, pega só a chave primária (primeira coluna de cada linha) #}
@@ -603,8 +599,8 @@
                                     <table class="metadata-table">
                                         <thead>
                                             <tr>
-                                                {% for k in all_keys %}
-                                                    <th>{{ k }}</th>
+                                                {% for k in objeto.selected_columns %}
+                                                    <th>{{ k.split('.')[-1] }}</th>
                                                 {% endfor %}
                                             </tr>
                                         </thead>
@@ -612,8 +608,18 @@
                                             {% for row in rows %}
                                                 {% if row.items is defined %}
                                                     <tr>
-                                                        {% for k in all_keys %}
-                                                            <td>{{ row[k] if k in row else '' }}</td>
+                                                        {% for k in objeto.selected_columns %}
+                                                            <td>
+                                                                {% if k in row %}
+                                                                    {% if row[k] is iterable and row[k] is not string %}
+                                                                        {{ row[k]|join(', ') if row[k]|length > 0 else 'N/A' }}
+                                                                    {% else %}
+                                                                        {{ row[k] if row[k] else 'N/A' }}
+                                                                    {% endif %}
+                                                                {% else %}
+                                                                    'N/A'
+                                                                {% endif %}
+                                                            </td>
                                                         {% endfor %}
                                                     </tr>
                                                 {% endif %}

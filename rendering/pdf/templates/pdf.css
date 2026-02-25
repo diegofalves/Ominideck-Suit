@@ -234,10 +234,12 @@ break-inside: avoid;
 }
 
 .group-block {
-margin-top: 28px;
-margin-bottom: 28px;
-padding-left: 22px;
-border-left: 4px solid #0F172A;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  padding-left: 0;
+  border-left: none;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .group-block h3 {
@@ -594,41 +596,47 @@ padding: 0;
    SUMÁRIO – CONTROLE FINAL
 ============================== */
 
-.toc ol,
-.toc li {
-  list-style: none !important;
-  list-style-type: none !important;
+.toc {
+  font-size: 11pt;
+  line-height: 1.6;
+}
+
+.toc ol {
+  list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .toc > ol > li {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.toc > ol > li > a {
+  font-weight: 600;
 }
 
 .toc > ol > li > ol {
-  margin-left: 20px;
-  margin-top: 6px;
+  margin-left: 18px;
+  margin-top: 4px;
+}
+
+.toc > ol > li > ol > li {
+  margin-bottom: 4px;
 }
 
 .toc > ol > li > ol > li > ol {
-  margin-left: 20px;
-  margin-top: 4px;
+  margin-left: 18px;
+  margin-top: 2px;
+}
+
+.toc > ol > li > ol > li > a {
+  font-weight: 500;
 }
 
 .toc a {
   text-decoration: none;
   color: #1D4ED8;
-  font-size: 11pt;
   display: block;
-}
-
-.toc li {
-  margin-bottom: 4px;
-}
-
-.toc li::marker {
-  content: "";
 }
 
 /* Mantém cabeçalho do grupo + 1º objeto juntos. Se não couber, sobe o bloco inteiro para a próxima página (evita órfão). */
