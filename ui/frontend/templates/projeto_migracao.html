@@ -919,6 +919,132 @@
     tr[style*="background-color: #f8f9fa"] {
       background-color: #ffffff !important;
     }
+
+    /* ================================================
+       Grupos — linha ativa destacada
+    ================================================ */
+    .group-row-active td {
+      background: linear-gradient(to right, rgba(11, 92, 255, 0.07) 0%, rgba(11, 92, 255, 0.02) 100%) !important;
+    }
+    .group-row-active td:first-child {
+      border-left: 3px solid var(--omni-blue) !important;
+    }
+    .badge-active-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: var(--omni-blue);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+      vertical-align: middle;
+      letter-spacing: 0.4px;
+      margin-left: 6px;
+      text-transform: uppercase;
+    }
+
+    /* ================================================
+       Item em edição — linha destacada
+    ================================================ */
+    .item-row-editing td {
+      background: rgba(11, 92, 255, 0.06) !important;
+    }
+    .item-row-editing td:first-child {
+      border-left: 3px solid var(--omni-blue) !important;
+    }
+
+    /* ================================================
+       Botões de ação das tabelas
+    ================================================ */
+    .btn-tbl {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, box-shadow 0.15s;
+      white-space: nowrap;
+    }
+    .btn-tbl:hover {
+      opacity: 0.85;
+      transform: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .btn-tbl-edit  { background: var(--omni-blue); color: #fff; }
+    .btn-tbl-del   { background: hsl(var(--danger)); color: #fff; }
+    .btn-tbl-add   { background: hsl(var(--success)); color: #fff; }
+
+    /* ================================================
+       Painel de edição do grupo — card limpo
+    ================================================ */
+    .group-edit-card {
+      display: grid;
+      gap: 16px;
+    }
+    .group-edit-card .field-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .group-edit-card .field-label {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--omni-blue-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .group-edit-card .field-hint {
+      font-size: 11px;
+      color: hsl(var(--muted-foreground));
+      margin-top: 2px;
+    }
+    .group-edit-card .seq-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .group-edit-card input[type="number"] {
+      max-width: 90px;
+    }
+
+    /* ================================================
+       Fieldset — grupo ativo (seção de edição)
+    ================================================ */
+    .fieldset-group-edit {
+      border-left: 4px solid var(--omni-blue) !important;
+      background: #f4f7ff !important;
+    }
+    .fieldset-group-edit legend {
+      color: var(--omni-blue-deep);
+    }
+
+    /* ================================================
+       Itens — cabeçalho da seção com nome do grupo
+    ================================================ */
+    .items-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .items-group-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--omni-blue-deep);
+      color: #e9eef5;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
   </style>
 </head>
 <body>
@@ -1271,21 +1397,25 @@
           {% set manual_group_rank = namespace(value=0) %}
           {% for g in project.groups %}
             {% set is_special_group = (g.group_id|string|upper in ['SEM_GRUPO', 'GROUP_0', 'IGNORADOS']) %}
+            {% set is_active_group = (g.group_id == project.active_group_id) %}
             {% if not is_special_group %}
               {% set manual_group_rank.value = manual_group_rank.value + 1 %}
             {% endif %}
-            <tr class="{% if loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}" style="border-bottom: 1px solid #eee;">
-              <td style="padding: 2px 8px; text-align: center; color: #666;">
+            <tr class="{% if is_active_group %}group-row-active{% elif loop.index % 2 == 0 %}table-row-even{% else %}table-row-odd{% endif %}">
+              <td style="text-align: center; color: #888; font-size: 12px;">
                 {{ "—" if is_special_group else manual_group_rank.value }}
               </td>
-              <td style="padding: 2px 8px; white-space: nowrap;"><strong>{{ g.label }}</strong></td>
-              <td style="padding: 2px 8px; color: #666; white-space: normal;">{{ g.description if g.description is defined else 'Sem descrição' }}</td>
-              <td style="text-align: center; padding: 2px 8px; color: #666;">{{ "—" if is_special_group else (g.sequence ~ "º") }}</td>
-              <td style="text-align: center; padding: 2px 8px; color: #666;">{{ g.objects|length if g.objects else 0 }}</td>
-              <td class="actions-cell" style="text-align: center;">
-                <button type="button" class="icon-btn" onclick="submitProjectAction({'active_group_id': '{{ g.group_id }}', 'reset_edit_mode': '1'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar grupo">✏️</button>
-                {% if g.group_id|string|upper not in ['SEM_GRUPO', 'GROUP_0', 'IGNORADOS'] %}
-                  <button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este grupo?')) submitProjectAction({'remove_group_id': '{{ g.group_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover grupo">🗑️</button>
+              <td>
+                <strong style="color: var(--omni-text);">{{ g.label }}</strong>
+                {% if is_active_group %}<span class="badge-active-group">● ativo</span>{% endif %}
+              </td>
+              <td style="color: #555; font-size: 12px;">{{ g.description if g.description else '<span style="color:#bbb;font-style:italic;">—</span>' | safe }}</td>
+              <td style="text-align: center; color: #888; font-size: 12px;">{{ "—" if is_special_group else (g.sequence ~ "º") }}</td>
+              <td style="text-align: center; color: #444; font-weight: 600; font-size: 13px;">{{ g.objects|length if g.objects else 0 }}</td>
+              <td class="actions-cell" style="text-align: center; white-space: nowrap;">
+                <button type="button" class="btn-tbl btn-tbl-edit" onclick="submitProjectAction({'active_group_id': '{{ g.group_id }}', 'reset_edit_mode': '1'})" title="Selecionar e editar grupo">✏ Editar</button>
+                {% if not is_special_group %}
+                  <button type="button" class="btn-tbl btn-tbl-del" onclick="if(confirm('Remover o grupo &quot;{{ g.label }}&quot;? Os itens serão movidos para Sem Grupo.')) submitProjectAction({'remove_group_id': '{{ g.group_id }}'})" title="Remover grupo" style="margin-left: 4px;">✕</button>
                 {% endif %}
               </td>
             </tr>
@@ -1317,50 +1447,50 @@
       {% endfor %}
     {% endif %}
     {% if edit_grp.data %}
-      <fieldset style="margin-bottom: 24px; background-color: #f0f8ff; border-left: 4px solid #0066cc;">
-        <legend style="color: #0066cc; font-weight: 600;">📝 Edição do Grupo</legend>
-        <div style="display: grid; gap: 14px;">
+      <fieldset class="fieldset-group-edit">
+        <legend>📝 {{ edit_grp.data.label or 'Edição do Grupo' }}</legend>
+        <div class="group-edit-card">
 
-          <div>
-            <label style="display: block; font-weight: 600; font-size: 13px; color: #333; margin-bottom: 4px;">Nome</label>
+          <div class="field-row">
+            <span class="field-label">Nome do Grupo</span>
             <input
               type="text"
               name="group_label"
               value="{{ edit_grp.data.label or '' }}"
               {% if is_protected %}disabled{% endif %}
-              style="width: 100%; padding: 6px 10px; border: 1px solid #b0c4de; border-radius: 4px; font-size: 13px; box-sizing: border-box;">
+              placeholder="Nome do grupo"
+              style="max-width: 480px;">
           </div>
 
           {% if not is_protected %}
-          <div>
-            <label style="display: block; font-weight: 600; font-size: 13px; color: #333; margin-bottom: 4px;">Ordem de Execução</label>
-            <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="field-row">
+            <span class="field-label">Ordem de Execução</span>
+            <div class="seq-row">
               <input
                 type="number"
                 name="group_sequence"
                 value="{{ edit_grp.data.sequence or 1 }}"
-                min="1"
-                style="width: 80px; padding: 6px 10px; border: 1px solid #b0c4de; border-radius: 4px; font-size: 13px;">
-              <span style="font-size: 12px; color: #666;">Os demais grupos serão reordenados automaticamente ao salvar.</span>
+                min="1">
+              <span class="field-hint">Os demais grupos são renumerados automaticamente ao salvar.</span>
             </div>
           </div>
           {% endif %}
 
-          <div>
-            <label style="display: block; font-weight: 600; font-size: 13px; color: #333; margin-bottom: 4px;">Descrição</label>
+          <div class="field-row">
+            <span class="field-label">Descrição</span>
             <textarea
               name="group_description"
               rows="3"
               {% if is_protected %}disabled{% endif %}
-              style="width: 100%; padding: 6px 10px; border: 1px solid #b0c4de; border-radius: 4px; font-size: 13px; resize: vertical; box-sizing: border-box;">{{ edit_grp.data.description or '' }}</textarea>
+              placeholder="Descreva o escopo e responsabilidade deste grupo de migração..."
+              style="max-width: 100%; font-family: inherit;">{{ edit_grp.data.description or '' }}</textarea>
           </div>
 
           {% if not is_protected %}
           <div>
             <button
               type="button"
-              onclick="submitProjectAction({'action': 'save_group', 'active_group_id': '{{ edit_grp.data.group_id }}'})"
-              style="background: #0066cc; color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600;">
+              onclick="submitProjectAction({'action': 'save_group', 'active_group_id': '{{ edit_grp.data.group_id }}'})">
               💾 Salvar Grupo
             </button>
           </div>
@@ -1394,13 +1524,17 @@
     <!-- Lista de Itens do Grupo (MOVIDA) -->
     <!-- ======================================= -->
     {% if current_group.data and current_group.data.objects %}
-      <fieldset style="margin-bottom: 24px;">
-        <legend>📦 Itens do Grupo ({{ current_group.data.objects|length }})</legend>
-        <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+      <fieldset>
+        <legend>
+          📦 Itens do Grupo
+          <span class="items-group-chip" style="margin-left: 10px;">{{ current_group.data.label or active_id }} · {{ current_group.data.objects|length }} itens</span>
+        </legend>
+        <div class="items-section-header">
+          <span style="font-size: 12px; color: hsl(var(--muted-foreground));">Clique em <strong>✏ Editar</strong> em um item para abrir o formulário de edição abaixo.</span>
           <button
             type="button"
             id="toggle-group-objects-btn"
-            style="background: #374151; color: #fff; border: none; border-radius: 6px; padding: 6px 10px; font-size: 12px; cursor: pointer;"
+            style="background: var(--omni-blue-deep); color: #e9eef5; border: none; border-radius: 6px; padding: 5px 12px; font-size: 12px; cursor: pointer; font-weight: 500;"
             aria-controls="group-objects-content"
             aria-expanded="true"
           >
@@ -1409,22 +1543,22 @@
         </div>
 
         <div id="group-objects-content">
-        <table class="group-objects-table" style="border-collapse: collapse; width: 100%; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <table class="group-objects-table">
           <thead>
-            <tr style="background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%); border-bottom: 2px solid #dee2e6;">
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 72px;">#</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 176px;">Nome Funcional</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 324px;">Descrição Funcional</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 220px;">Tabela OTM</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057;">Dominio</th>
-              <th style="padding: 10px 12px; text-align: left; font-weight: 600; color: #495057; width: 110px;">Tipo Deploy</th>
-              <th style="padding: 10px 14px; text-align: center; font-weight: 600; color: #495057; width: 70px;">Resp.</th>
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">📝 Doc.</th>
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">📦 Mig.</th>
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">💾 Exp.</th>
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">🚀 Dep.</th>
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 60px;">✅ Val.</th>
-              <th style="padding: 10px 12px; text-align: center; font-weight: 600; color: #495057; width: 90px;">Ações</th>
+            <tr>
+              <th style="text-align: center;">#</th>
+              <th>Nome Funcional</th>
+              <th>Descrição Funcional</th>
+              <th>Tabela OTM</th>
+              <th>Domínio</th>
+              <th>Tipo Deploy</th>
+              <th style="text-align: center;">Resp.</th>
+              <th style="text-align: center;">📝 Doc.</th>
+              <th style="text-align: center;">📦 Mig.</th>
+              <th style="text-align: center;">💾 Exp.</th>
+              <th style="text-align: center;">🚀 Dep.</th>
+              <th style="text-align: center;">✅ Val.</th>
+              <th style="text-align: center;">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -2853,7 +2987,7 @@
         ? selectedFromUi
         : (Array.isArray(currentSubtablesFromPage) ? currentSubtablesFromPage : []);
 
-      renderRelatedTablesSelector(relatedTables, selectedSubtables, currentPrimaryTable, currentDomainName);
+      renderRelatedTablesSelector(relatedTables, selectedSubtables, currentPrimaryTable, currentDomain);
     };
 
     if (objectTypeSelect && otmTableHidden) {

@@ -1168,6 +1168,10 @@ def api_edit_group():
     if not group_id:
         return jsonify({"status": "error", "message": "group_id é obrigatório."}), 400
 
+    _PROTECTED = {"SEM_GRUPO", "GROUP_0", "IGNORADOS"}
+    if group_id.upper() in _PROTECTED:
+        return jsonify({"status": "error", "message": f"Grupo '{group_id}' é protegido e não pode ser editado via API."}), 403
+
     project = load_project()
     if not project or not isinstance(project.get("groups"), list):
         return jsonify({"status": "error", "message": "Projeto não encontrado."}), 404
@@ -1198,9 +1202,22 @@ def api_edit_group():
     new_sequence = payload.get("sequence")
     if new_sequence is not None:
         try:
-            seq = int(new_sequence)
-            if seq >= 1:
-                target_group["sequence"] = seq
+            new_seq = int(new_sequence)
+            if new_seq >= 1:
+                user_groups = [
+                    g for g in project["groups"]
+                    if str(g.get("group_id") or "").upper() not in _PROTECTED
+                ]
+                new_seq = max(1, min(new_seq, len(user_groups)))
+                user_groups = [g for g in user_groups if g.get("group_id") != group_id]
+                user_groups.insert(new_seq - 1, target_group)
+                for i, g in enumerate(user_groups, 1):
+                    g["sequence"] = i
+                protected_groups = [
+                    g for g in project["groups"]
+                    if str(g.get("group_id") or "").upper() in _PROTECTED
+                ]
+                project["groups"] = protected_groups + user_groups
                 updated_fields.append("sequence")
         except (TypeError, ValueError):
             pass
