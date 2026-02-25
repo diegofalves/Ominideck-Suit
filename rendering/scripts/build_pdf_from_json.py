@@ -250,9 +250,58 @@ def build_html(data):
             # Busca dados de cache para o objeto/tabela
             domain_name = obj.get("domainName") or obj.get("domain")
             migration_item_name = obj.get("migration_item_name") or obj.get("name")
+
             cache_results = None
             if domain_name and otm_table:
                 cache_results = get_object_cache_data(domain_name, otm_table, migration_item_name)
+
+                # --- AJUSTE: selected_columns do tipo TABELA.COLUNA ---
+                selected_columns = obj.get("selected_columns")
+                if cache_results and selected_columns:
+                    # Para cada resultado de cache encontrado
+                    for cache in cache_results:
+                        # Busca as linhas do cache, tentando os caminhos mais comuns
+                        rows = None
+                        cache_data = cache.get("cache_data", {})
+                        if (
+                            cache_data.get("data")
+                            and cache_data["data"].get("rows")
+                        ):
+                            rows = cache_data["data"]["rows"]
+                        elif (
+                            cache_data.get("tables")
+                            and otm_table in cache_data["tables"]
+                            and cache_data["tables"][otm_table].get("rows")
+                        ):
+                            rows = cache_data["tables"][otm_table]["rows"]
+                        # Se houver linhas, reestrutura para usar apenas o nome da coluna
+                        if rows:
+                            new_rows = []
+                            for row in rows:
+                                new_row = {}
+                                for col in selected_columns:
+                                    # Se col for TABELA.COLUNA, extrai só COLUNA
+                                    if "." in col:
+                                        _, col_name = col.split(".", 1)
+                                    else:
+                                        col_name = col
+                                    # Busca valor na linha
+                                    val = row.get(col_name)
+                                    new_row[col_name] = val if val is not None else ""
+                                new_rows.append(new_row)
+                            # Atualiza as linhas do cache para o template
+                            if (
+                                cache_data.get("data")
+                                and cache_data["data"].get("rows")
+                            ):
+                                cache_data["data"]["rows"] = new_rows
+                            elif (
+                                cache_data.get("tables")
+                                and otm_table in cache_data["tables"]
+                                and cache_data["tables"][otm_table].get("rows")
+                            ):
+                                cache_data["tables"][otm_table]["rows"] = new_rows
+
             normalized_obj["object_cache_results"] = cache_results
 
             # DEBUG: printa se encontrou dados de cache
