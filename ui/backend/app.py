@@ -1284,6 +1284,7 @@ def projeto_migracao():
                             # Se era o grupo ativo, desativar
                             if project.get("active_group_id") == remove_group_id:
                                 project["active_group_id"] = None
+                                project["active_migration_group_id"] = None
                             
                             save_project(project)
                             break
@@ -1335,16 +1336,6 @@ def projeto_migracao():
                 print(f"⚠️ Erro ao mover item: {e}")
                 return redirect("/projeto-migracao")
         
-        # Se reset_edit_mode esta ativo (mudanca de grupo), limpar estado de edicao
-        if reset_edit_mode == "1":
-            active_group_id = _get_form_value(request.form, "active_group_id", "")
-            if project.get("state") is None:
-                project["state"] = {}
-            project["state"]["last_edit_object_index"] = None
-            project["active_group_id"] = active_group_id
-            save_project(project)
-            return redirect("/projeto-migracao")
-        
         # Se acao for carregar grupo para edição
         if action == "load_group":
             edit_group_index = _get_form_value(request.form, "edit_group_index", "")
@@ -1357,6 +1348,7 @@ def projeto_migracao():
                 project["state"]["last_edit_object_index"] = None
                 if requested_group_id:
                     project["active_group_id"] = requested_group_id
+                    project["active_migration_group_id"] = requested_group_id
                 save_project(project)
             return redirect("/projeto-migracao#group-edit-panel")
 
@@ -1372,6 +1364,7 @@ def projeto_migracao():
                 project["state"]["last_edit_group_index"] = None
                 if requested_group_id:
                     project["active_group_id"] = requested_group_id
+                    project["active_migration_group_id"] = requested_group_id
                 save_project(project)
             return redirect("/projeto-migracao#object-edit-panel")
 
