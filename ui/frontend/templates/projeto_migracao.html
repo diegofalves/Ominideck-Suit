@@ -960,6 +960,70 @@
 
 <form id="project-form" method="POST">
 
+<script>
+  (function () {
+    var submitProjectAction = function (fields) {
+      var form = document.getElementById("project-form");
+      if (!form) {
+        console.error("[submitProjectAction] Formulário #project-form não encontrado.");
+        return;
+      }
+
+      form.querySelectorAll('input[data-dynamic-action="1"]').forEach(function (node) { node.remove(); });
+
+      Object.entries(fields || {}).forEach(function (entry) {
+        var name = entry[0];
+        var value = entry[1];
+        if (value === undefined || value === null) {
+          return;
+        }
+        var normalizedValue = String(value);
+        var existingHidden = Array.from(form.elements).find(function (element) {
+          return (
+            element &&
+            element.name === name &&
+            element.tagName === "INPUT" &&
+            element.type === "hidden" &&
+            element.getAttribute("data-dynamic-action") !== "1"
+          );
+        });
+
+        if (existingHidden) {
+          existingHidden.value = normalizedValue;
+          return;
+        }
+
+        var hidden = document.createElement("input");
+        hidden.type = "hidden";
+        hidden.name = name;
+        hidden.value = normalizedValue;
+        hidden.setAttribute("data-dynamic-action", "1");
+        form.appendChild(hidden);
+      });
+
+      form.submit();
+    };
+
+    window.submitProjectAction = submitProjectAction;
+
+    window.submitMoveObject = function (editIndex) {
+      var targetSelect = document.getElementById("move-to-group-id");
+      var targetGroup = targetSelect && typeof targetSelect.value === "string"
+        ? targetSelect.value.trim()
+        : "";
+      if (!targetGroup) {
+        window.alert("Selecione o grupo de destino para mover o item.");
+        return;
+      }
+      submitProjectAction({
+        move_object_index: String(editIndex),
+        move_to_group_id: targetGroup,
+        active_group_id: "{{ project.active_group_id if project else '' }}",
+      });
+    };
+  })();
+</script>
+
   <!-- ========================================================================= -->
   <!-- Contexto: Determinar current_object para preencher seletor object_type -->
   <!-- ========================================================================= -->
@@ -2136,63 +2200,6 @@
   
   // Log para debug
   console.log("[Template] Dados do item existente:", window.ExistingObjectData);
-
-  const submitProjectAction = (fields) => {
-    const form = document.getElementById("project-form");
-    if (!form) {
-      return;
-    }
-
-    form.querySelectorAll('input[data-dynamic-action="1"]').forEach((node) => node.remove());
-
-    Object.entries(fields || {}).forEach(([name, value]) => {
-      if (value === undefined || value === null) {
-        return;
-      }
-      const normalizedValue = String(value);
-      const existingHidden = Array.from(form.elements).find(
-        (element) =>
-          element &&
-          element.name === name &&
-          element.tagName === "INPUT" &&
-          element.type === "hidden" &&
-          element.getAttribute("data-dynamic-action") !== "1"
-      );
-
-      if (existingHidden) {
-        existingHidden.value = normalizedValue;
-        return;
-      }
-
-      const hidden = document.createElement("input");
-      hidden.type = "hidden";
-      hidden.name = name;
-      hidden.value = normalizedValue;
-      hidden.setAttribute("data-dynamic-action", "1");
-      form.appendChild(hidden);
-    });
-
-    form.submit();
-  };
-
-    const submitMoveObject = (editIndex) => {
-    const targetSelect = document.getElementById("move-to-group-id");
-    const targetGroup = targetSelect && typeof targetSelect.value === "string"
-      ? targetSelect.value.trim()
-      : "";
-    if (!targetGroup) {
-      window.alert("Selecione o grupo de destino para mover o item.");
-      return;
-    }
-    submitProjectAction({
-      move_object_index: String(editIndex),
-      move_to_group_id: targetGroup,
-      active_group_id: "{{ project.active_group_id if project else '' }}",
-    });
-  };
-
-  window.submitProjectAction = submitProjectAction;
-  window.submitMoveObject = submitMoveObject;
 
     const activeGroupIdFromPage = {{ (project.active_group_id if project and project.active_group_id else "") | tojson }};
     const activeGroupLabelFromPage = {{ (groups_catalog.get(project.active_group_id).label if project and project.active_group_id and groups_catalog.get(project.active_group_id) else "") | tojson }};

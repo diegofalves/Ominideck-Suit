@@ -1158,6 +1158,65 @@ def dashboard_migracao():
     return render_template("dashboard_migracao.html", dashboard=dashboard)
 
 
+@app.route("/api/edit-group", methods=["POST"])
+def api_edit_group():
+    payload = request.get_json(silent=True) or {}
+    if not isinstance(payload, dict):
+        return jsonify({"status": "error", "message": "Payload inválido."}), 400
+
+    group_id = str(payload.get("group_id") or "").strip()
+    if not group_id:
+        return jsonify({"status": "error", "message": "group_id é obrigatório."}), 400
+
+    project = load_project()
+    if not project or not isinstance(project.get("groups"), list):
+        return jsonify({"status": "error", "message": "Projeto não encontrado."}), 404
+
+    target_group = None
+    for group in project["groups"]:
+        if isinstance(group, dict) and str(group.get("group_id") or "").strip() == group_id:
+            target_group = group
+            break
+
+    if target_group is None:
+        return jsonify({"status": "error", "message": f"Grupo '{group_id}' não encontrado."}), 404
+
+    updated_fields = []
+
+    new_label = payload.get("label")
+    if new_label is not None:
+        new_label = str(new_label).strip()
+        if new_label:
+            target_group["label"] = new_label
+            updated_fields.append("label")
+
+    new_description = payload.get("description")
+    if new_description is not None:
+        target_group["description"] = str(new_description).strip()
+        updated_fields.append("description")
+
+    new_sequence = payload.get("sequence")
+    if new_sequence is not None:
+        try:
+            seq = int(new_sequence)
+            if seq >= 1:
+                target_group["sequence"] = seq
+                updated_fields.append("sequence")
+        except (TypeError, ValueError):
+            pass
+
+    if not updated_fields:
+        return jsonify({"status": "ok", "message": "Nenhum campo alterado.", "group": target_group})
+
+    save_project(project)
+
+    return jsonify({
+        "status": "success",
+        "message": f"Grupo '{group_id}' atualizado. Campos: {', '.join(updated_fields)}.",
+        "group": target_group,
+    })
+
+
 @app.route("/projeto-migracao", methods=["GET", "POST"])
 def projeto_migracao():
     if not session.get("can_access_migration_panel"):

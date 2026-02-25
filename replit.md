@@ -25,6 +25,19 @@ OmniDeck is a Flask-based internal suite for managing OTM (Oracle Transportation
 - Markdown
 - Requests (OTM HTTP integration)
 
+## API Endpoints
+- `POST /api/edit-group` - Edit group properties (label, description, sequence) via AJAX
+- `POST /api/otm/update-tables` - Update OTM domain table statistics
+- `POST /api/otm/update-object-cache` - Update object cache by scope
+- `GET /api/schema/tables` - List all OTM tables
+- `GET /api/schema/<table>/raw` - Get raw schema for a table
+- `GET /api/schema/<table>/fields` - Get normalized field descriptors
+
+## JS Architecture Notes
+- `submitProjectAction` is defined in an early inline `<script>` inside `<form id="project-form">` in `projeto_migracao.html` to ensure global availability regardless of errors in later scripts
+- `editGroupAndUpdateList` in `app.js` provides AJAX-based group editing via `/api/edit-group`
+- `schema-engine.js` handles OTM table/field loading and selector population
+
 ## Running
 ```bash
 python3 run.py

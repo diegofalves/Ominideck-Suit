@@ -592,6 +592,75 @@ function hydrateProject(projectJson) {
 }
 
 // ============================================================
+// EDIÇÃO DE GRUPO VIA AJAX
+// ============================================================
+
+async function editGroupAndUpdateList(groupIndex) {
+  var projectDataEl = document.getElementById('existing-project-data');
+  if (!projectDataEl) {
+    console.error('[editGroupAndUpdateList] Elemento #existing-project-data não encontrado.');
+    return;
+  }
+
+  var projectJson;
+  try {
+    projectJson = JSON.parse(projectDataEl.textContent);
+  } catch (e) {
+    console.error('[editGroupAndUpdateList] Erro ao parsear dados do projeto:', e);
+    return;
+  }
+
+  if (!projectJson || !Array.isArray(projectJson.groups) || groupIndex >= projectJson.groups.length) {
+    console.error('[editGroupAndUpdateList] Índice de grupo inválido:', groupIndex);
+    return;
+  }
+
+  var group = projectJson.groups[groupIndex];
+  var groupId = group.group_id || '';
+
+  var newLabel = window.prompt('Nome do Grupo:', group.label || '');
+  if (newLabel === null) {
+    return;
+  }
+  newLabel = newLabel.trim();
+  if (!newLabel) {
+    window.alert('O nome do grupo não pode ser vazio.');
+    return;
+  }
+
+  var newDescription = window.prompt('Descrição do Grupo:', group.description || '');
+  if (newDescription === null) {
+    newDescription = group.description || '';
+  }
+
+  try {
+    var response = await fetch('/api/edit-group', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        group_id: groupId,
+        label: newLabel,
+        description: newDescription.trim()
+      })
+    });
+
+    var result = await response.json();
+
+    if (!response.ok || result.status === 'error') {
+      window.alert('Erro ao editar grupo: ' + (result.message || 'Erro desconhecido'));
+      return;
+    }
+
+    window.location.reload();
+  } catch (error) {
+    console.error('[editGroupAndUpdateList] Erro na requisição:', error);
+    window.alert('Erro de comunicação ao editar grupo.');
+  }
+}
+
+window.editGroupAndUpdateList = editGroupAndUpdateList;
+
+// ============================================================
 // Bootstrap ao carregar a página
 // ============================================================
 
