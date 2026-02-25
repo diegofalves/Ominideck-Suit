@@ -1228,7 +1228,18 @@ def projeto_migracao():
     if request.method == "POST":
         action = _get_form_value(request.form, "action", "")
         reset_edit_mode = _get_form_value(request.form, "reset_edit_mode", "0")
-        
+
+        # Atualizar grupo ativo (somente quando reset_edit_mode=1)
+        if reset_edit_mode == "1":
+            active_group_id = _get_form_value(request.form, "active_group_id", "")
+            if project.get("state") is None:
+                project["state"] = {}
+            project["state"]["last_edit_object_index"] = None
+            if active_group_id:
+                project["active_group_id"] = active_group_id
+            save_project(project)
+            return redirect("/projeto-migracao")
+
         # ===== REMOVER ITEM =====
         remove_object_index = _get_form_value(request.form, "remove_object_index", "")
         if remove_object_index != "":
