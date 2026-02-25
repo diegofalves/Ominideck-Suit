@@ -1230,16 +1230,14 @@ def projeto_migracao():
         reset_edit_mode = _get_form_value(request.form, "reset_edit_mode", "0")
 
         # Atualizar grupo ativo (somente quando reset_edit_mode=1)
-        print(f"[DEBUG POST] action={action!r} reset_edit_mode={reset_edit_mode!r} form_keys={list(request.form.keys())}")
-        print(f"[DEBUG POST] active_group_id_values={request.form.getlist('active_group_id')}")
         if reset_edit_mode == "1":
             active_group_id = _get_form_value(request.form, "active_group_id", "")
-            print(f"[DEBUG reset_edit_mode=1] active_group_id={active_group_id!r}")
             if project.get("state") is None:
                 project["state"] = {}
             project["state"]["last_edit_object_index"] = None
             if active_group_id:
                 project["active_group_id"] = active_group_id
+                project["active_migration_group_id"] = active_group_id
             save_project(project)
             return redirect("/projeto-migracao")
 
