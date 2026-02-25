@@ -50,7 +50,8 @@ page: landscape;
 }
 
 @page:first {
-@top-left { content: ""; }
+  @top-left { content: ""; }
+  @bottom-right { content: ""; }
 }
 
 /* ==============================
@@ -125,50 +126,74 @@ color: #111827;
 CAPA
 ============================== */
 .cover-page {
-page-break-after: always;
-display: flex;
-flex-direction: column;
-min-height: 247mm;
+  display: block;
+  text-align: center;
+
+  /* Remove flex completely to avoid vertical compression */
+  padding-top: 60mm;
+  padding-bottom: 25mm;
+
+  page-break-after: always;
 }
 
 .cover-content {
-flex: 1;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 0 10mm;
+  display: block; /* remove nested flex to prevent overlap */
+  text-align: center;
+  padding: 0 15mm;
 }
 
 .cover-logo img {
-height: 55px;
-margin-bottom: 32px;
+  height: 55px;
+  margin-bottom: 32px;
 }
 
 .cover-title {
-font-size: 24pt;
-font-weight: 600;
-color: #0F172A;
-max-width: 80%;
-margin: 0 auto 16px auto;
-line-height: 1.35;
+  font-size: 24pt;
+  font-weight: 600;
+  color: #0F172A;
+  max-width: 80%;
+  margin: 0 auto 16px auto;
+  line-height: 1.35;
 }
 
 .cover-divider {
-width: 90px;
-height: 3px;
-background: #1D4ED8;
-margin: 18px auto 30px auto;
+  width: 90px;
+  height: 3px;
+  background: #1D4ED8;
+  margin: 18px auto 30px auto;
+}
+
+/* Remove any header text block above cover title */
+.cover-page .cover-header,
+.cover-page .cover-meta,
+.cover-page .cover-subtitle {
+  display: none !important;
 }
 
 .cover-footer {
-text-align: center;
-font-size: 8.5pt;
-color: #94A3B8;
-margin-top: auto;
-letter-spacing: 0.4px;
-text-transform: uppercase;
+  position: absolute;
+  bottom: 20mm;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 8.5pt;
+  color: #94A3B8;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* Prevent margin collapsing and header interference on cover */
+.cover-page h1,
+.cover-page h2,
+.cover-page h3,
+.cover-page p {
+  margin-top: 0;
+}
+
+.cover-page .cover-title {
+  margin-top: 10mm;
+  margin-bottom: 10mm;
+  line-height: 1.25;
 }
 
 /* ==============================
