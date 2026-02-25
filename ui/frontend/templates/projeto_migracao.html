@@ -1306,13 +1306,67 @@
   <!-- Descricao do Grupo Ativo -->
   <!-- ================================ -->
   {% if project and project.active_group_id %}
-    {% set active_group = groups_catalog.get(project.active_group_id) %}
-    {% if active_group %}
+    {% set active_id_edit = project.active_group_id | upper %}
+    {% set is_protected = active_id_edit in ['SEM_GRUPO', 'GROUP_0', 'IGNORADOS'] %}
+    {% set edit_grp = namespace(data=none) %}
+    {% if project.groups %}
+      {% for g in project.groups %}
+        {% if g.group_id == project.active_group_id %}
+          {% set edit_grp.data = g %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if edit_grp.data %}
       <fieldset style="margin-bottom: 24px; background-color: #f0f8ff; border-left: 4px solid #0066cc;">
-        <legend style="color: #0066cc; font-weight: 600;">📝 Descrição do Grupo</legend>
-        <p style="color: #333; line-height: 1.6; margin: 0;">
-          {{ active_group.description or '<span style="color: #999; font-style: italic;">Nenhuma descrição fornecida para este grupo.</span>' | safe }}
-        </p>
+        <legend style="color: #0066cc; font-weight: 600;">📝 Edição do Grupo</legend>
+        <div style="display: grid; gap: 14px;">
+
+          <div>
+            <label style="display: block; font-weight: 600; font-size: 13px; color: #333; margin-bottom: 4px;">Nome</label>
+            <input
+              type="text"
+              name="group_label"
+              value="{{ edit_grp.data.label or '' }}"
+              {% if is_protected %}disabled{% endif %}
+              style="width: 100%; padding: 6px 10px; border: 1px solid #b0c4de; border-radius: 4px; font-size: 13px; box-sizing: border-box;">
+          </div>
+
+          {% if not is_protected %}
+          <div>
+            <label style="display: block; font-weight: 600; font-size: 13px; color: #333; margin-bottom: 4px;">Ordem de Execução</label>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <input
+                type="number"
+                name="group_sequence"
+                value="{{ edit_grp.data.sequence or 1 }}"
+                min="1"
+                style="width: 80px; padding: 6px 10px; border: 1px solid #b0c4de; border-radius: 4px; font-size: 13px;">
+              <span style="font-size: 12px; color: #666;">Os demais grupos serão reordenados automaticamente ao salvar.</span>
+            </div>
+          </div>
+          {% endif %}
+
+          <div>
+            <label style="display: block; font-weight: 600; font-size: 13px; color: #333; margin-bottom: 4px;">Descrição</label>
+            <textarea
+              name="group_description"
+              rows="3"
+              {% if is_protected %}disabled{% endif %}
+              style="width: 100%; padding: 6px 10px; border: 1px solid #b0c4de; border-radius: 4px; font-size: 13px; resize: vertical; box-sizing: border-box;">{{ edit_grp.data.description or '' }}</textarea>
+          </div>
+
+          {% if not is_protected %}
+          <div>
+            <button
+              type="button"
+              onclick="submitProjectAction({'action': 'save_group', 'active_group_id': '{{ edit_grp.data.group_id }}'})"
+              style="background: #0066cc; color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600;">
+              💾 Salvar Grupo
+            </button>
+          </div>
+          {% endif %}
+
+        </div>
       </fieldset>
     {% endif %}
   {% endif %}

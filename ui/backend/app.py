@@ -1368,6 +1368,52 @@ def projeto_migracao():
                 save_project(project)
             return redirect("/projeto-migracao#object-edit-panel")
 
+        # ===== SALVAR GRUPO =====
+        if action == "save_group":
+            save_group_id = _get_form_value(request.form, "active_group_id", "").strip()
+            group_label = _get_form_value(request.form, "group_label", "").strip()
+            group_description = _get_form_value(request.form, "group_description", "")
+            group_sequence_str = _get_form_value(request.form, "group_sequence", "").strip()
+
+            protected_ids = {"SEM_GRUPO", "GROUP_0", "IGNORADOS"}
+
+            if save_group_id and save_group_id.upper() not in protected_ids and project.get("groups"):
+                target_group = None
+                for g in project["groups"]:
+                    if str(g.get("group_id") or "").strip() == save_group_id:
+                        target_group = g
+                        break
+
+                if target_group:
+                    if group_label:
+                        target_group["label"] = group_label
+                    target_group["description"] = group_description
+
+                    if group_sequence_str:
+                        try:
+                            new_sequence = int(group_sequence_str)
+                            user_groups = [
+                                g for g in project["groups"]
+                                if str(g.get("group_id") or "").upper() not in protected_ids
+                            ]
+                            new_sequence = max(1, min(new_sequence, len(user_groups)))
+                            user_groups = [g for g in user_groups if g.get("group_id") != save_group_id]
+                            user_groups.insert(new_sequence - 1, target_group)
+                            for i, g in enumerate(user_groups, 1):
+                                g["sequence"] = i
+                            protected_groups = [
+                                g for g in project["groups"]
+                                if str(g.get("group_id") or "").upper() in protected_ids
+                            ]
+                            project["groups"] = protected_groups + user_groups
+                        except ValueError:
+                            pass
+
+                project["active_group_id"] = save_group_id
+                project["active_migration_group_id"] = save_group_id
+                save_project(project)
+            return redirect("/projeto-migracao")
+
         # Salvar apenas o item em edicao (sem bloquear por validacoes globais do projeto).
         # Também entra aqui quando a flag de ignore foi alterada no formulário.
         should_save_object_partial = action == "save_object"
