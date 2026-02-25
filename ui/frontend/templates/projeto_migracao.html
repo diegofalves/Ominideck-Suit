@@ -2205,8 +2205,8 @@
     const activeGroupLabelFromPage = {{ (groups_catalog.get(project.active_group_id).label if project and project.active_group_id and groups_catalog.get(project.active_group_id) else "") | tojson }};
     const currentMigrationItemNameFromPage = {{ (current_object.name if current_object else "") | tojson }};
     const currentMigrationItemIdFromPage = {{ (current_object.migration_item_id if current_object and current_object.migration_item_id else "") | tojson }};
-    const currentPrimaryTableFromPage = {{ ((current_object.object_type if current_object and current_object.object_type else (current_object.otm_table if current_object else "")) if current_object else "") | tojson }};
-    const currentDomainFromPage = {{ ((current_object.domainName if current_object and current_object.domainName else (current_object.domain if current_object else "")) if current_object else "") | tojson }};
+    const currentPrimaryTableFromPage = {{ ((current_object.object_type if current_object and current_object.object_type else (current_object.otm_table if current_object and current_object.otm_table else "")) if current_object else "") | default("") | tojson }};
+    const currentDomainFromPage = {{ ((current_object.domainName if current_object and current_object.domainName else (current_object.domain if current_object and current_object.domain else "")) if current_object else "") | default("") | tojson }};
     const currentEditObjectIndexFromPage = {{ (edit_object_index if edit_object_index is defined and edit_object_index is not none else -1) }};
     const projectGroupsFromPage = {{ (project.groups if project and project.groups is iterable and project.groups is not string else []) | tojson }};
     const currentRelatedTablesFromPage = {{ (current_object.otm_related_tables if current_object and current_object.otm_related_tables is iterable and current_object.otm_related_tables is not string else []) | tojson }};
