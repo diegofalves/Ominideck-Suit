@@ -250,16 +250,10 @@ function buildChangeHistoryRow(index, data = {}) {
       <span class="view-mode" data-field="author">${data.author || '-'}</span>
       <input type="text" class="edit-mode" name="change_history[${index}][author]" value="${data.author || ''}" style="display: none; width: 100%; padding: 4px; font-size: 12px;">
     </td>
-    <td style="padding: 2px 8px; text-align: center; font-size: 0;">
-      <button type="button" class="edit-btn" onclick="toggleEditHistoryRow(${index})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0;" title="Editar">
-        ✏️
-      </button>
-      <button type="button" class="save-btn" onclick="toggleEditHistoryRow(${index})" style="display: none; background: #4CAF50; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0;" title="Salvar">
-        ✔️
-      </button>
-      <button type="button" onclick="removeChangeHistoryRow(${index})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0;" title="Remover">
-        🗑️
-      </button>
+    <td style="padding: 2px 8px; text-align: center; white-space: nowrap;">
+      <button type="button" class="btn-tbl btn-tbl-edit edit-btn" onclick="toggleEditHistoryRow(${index})" title="Editar">✏ Editar</button>
+      <button type="button" class="btn-tbl btn-tbl-add save-btn" onclick="toggleEditHistoryRow(${index})" style="display: none;" title="Salvar">✔ Salvar</button>
+      <button type="button" class="btn-tbl btn-tbl-del" onclick="removeChangeHistoryRow(${index})" title="Remover">✕</button>
     </td>
   `;
 

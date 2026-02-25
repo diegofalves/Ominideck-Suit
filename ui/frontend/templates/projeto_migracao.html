@@ -1812,7 +1812,7 @@
                   {% endif %}
                 </td>
                 <td class="actions-cell">
-                  <button type="button" class="icon-btn" onclick="submitProjectAction({'action': 'load_object', 'edit_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" style="background: #2196F3; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0 4px 0 0; display: inline-block;" title="Editar item">✏️</button>{% if not row_number.is_subtable %}<button type="button" class="icon-btn" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" style="background: #f44336; color: white; border: none; padding: 3px 6px; border-radius: 3px; cursor: pointer; font-size: 13px; margin: 0; display: inline-block;" title="Remover item">🗑️</button>{% endif %}
+                  <button type="button" class="btn-tbl btn-tbl-edit" onclick="submitProjectAction({'action': 'load_object', 'edit_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" title="Editar item">✏ Editar</button>{% if not row_number.is_subtable %} <button type="button" class="btn-tbl btn-tbl-del" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ obj_index }}', 'active_group_id': '{{ active_id }}'})" title="Remover item">✕</button>{% endif %}
                 </td>
               </tr>
             {% endfor %}
@@ -2302,8 +2302,8 @@
             <!-- Botao Remover (formulario separado) -->
             <div class="action-inline-form" style="display: inline; margin: 0;">
               {% if not current_item_is_subtable.value %}
-                <button type="button" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ edit_object_index }}', 'active_group_id': '{{ project.active_group_id if project else '' }}'})" style="background-color: #e53935; color: white; padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; white-space: nowrap;">
-                  🗑️ Remover Item
+                <button type="button" class="btn-tbl btn-tbl-del" onclick="if(confirm('Tem certeza que deseja remover este item?')) submitProjectAction({'remove_object_index': '{{ edit_object_index }}', 'active_group_id': '{{ project.active_group_id if project else '' }}'})" style="padding: 7px 14px; font-size: 13px;">
+                  ✕ Remover Item
                 </button>
               {% else %}
                 <span style="display: inline-block; font-size: 11px; color: #856404; white-space: nowrap;">
