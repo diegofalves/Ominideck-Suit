@@ -130,13 +130,35 @@ CAPA
   text-align: center;
 
   /* Remove flex completely to avoid vertical compression */
-  padding-top: 60mm;
   padding-bottom: 25mm;
 
   page-break-after: always;
 }
 
 .cover-content {
+/* --- Compactação máxima de tabelas no PDF --- */
+table, tr, th, td,
+.metadata-table, .metadata-table tr, .metadata-table th, .metadata-table td,
+.object-table, .object-table tr, .object-table th, .object-table td,
+.roadmap-table, .roadmap-table tr, .roadmap-table th, .roadmap-table td {
+  margin: 0 !important;
+  padding: 0 1px !important;
+  line-height: 1 !important;
+  height: auto !important;
+  vertical-align: middle !important;
+  border-collapse: collapse !important;
+}
+
+/* Remove margens extras de elementos próximos às tabelas */
+table {
+  margin: 0 !important;
+}
+
+/* Remove padding e margens de thead, tbody, tfoot */
+thead, tbody, tfoot {
+  margin: 0 !important;
+  padding: 0 !important;
+}
   display: block; /* remove nested flex to prevent overlap */
   text-align: center;
   padding: 0 15mm;
@@ -207,9 +229,10 @@ margin-top: 10px;
 
 th, td {
 border: 1px solid #E5E7EB;
-padding: 8px 10px;
+padding: 0 2px;
 text-align: left;
 font-size: 10pt;
+line-height: 1;
 }
 
 th {
