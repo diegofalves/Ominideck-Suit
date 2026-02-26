@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:58:13Z",
+  "generatedAt": "2026-02-26T01:12:08Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.GOVERNANCE_UI.USER_PREFERENCE_ACCESS.USER_PREFERENCE_ACCESS_BAU_AUTO.479",
@@ -21,7 +21,8 @@
     "otmTable": "USER_PREFERENCE_ACCESS",
     "domainName": "BAU",
     "sequence": 479,
-    "deploymentType": "DB_XML"
+    "deploymentType": "DB_XML",
+    "simulatedExtractionQuery": "SELECT *\nUSER_ACCESS USER_ACCESS\n  LEFT USER_MENU_ACCESS USER_MENU_ACCESS ON ua.USER_ACCESS_GID = uma.USER_ACCESS_GID\n  LEFT USER_PREFERENCE_ACCESS USER_PREFERENCE_ACCESS ON ua.USER_ACCESS_GID = upa.USER_ACCESS_GID\n  LEFT MOBILE_ACTION_ACCESS MOBILE_ACTION_ACCESS ON ua.USER_ACCESS_GID = maa.USER_ACCESS_GID\nWHERE\n  ua.DOMAIN_NAME = 'BAU'\nORDER BY\n  ua.USER_ACCESS_GID"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

@@ -29,7 +29,6 @@ Core rules:
 """
 
 
-from __future__ import annotations
 
 import argparse
 import hashlib
@@ -1771,4 +1770,16 @@ def main(argv: List[str]) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    exit_code = main(sys.argv[1:])
+    # Chama o script update_simulated_query_projeto.py ao final
+    import subprocess
+    try:
+        script_path = str(BASE_DIR / "scripts" / "update_simulated_query_projeto.py")
+        result = subprocess.run([sys.executable, script_path], capture_output=True, text=True)
+        print("\n[update_simulated_query_projeto.py OUTPUT]:")
+        print(result.stdout)
+        if result.stderr:
+            print("[update_simulated_query_projeto.py ERROR]:", result.stderr)
+    except Exception as exc:
+        print(f"Erro ao executar update_simulated_query_projeto.py: {exc}")
+    sys.exit(exit_code)

@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:02Z",
+  "generatedAt": "2026-02-26T01:10:45Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.AUTOMATION.BATCH_PROCESS.BATCH_PROCESSES.8",
@@ -23,7 +23,8 @@
     "otmTable": "BATCH_PROCESS",
     "domainName": "BAU",
     "sequence": 8,
-    "deploymentType": "MIGRATION_PROJECT"
+    "deploymentType": "MIGRATION_PROJECT",
+    "simulatedExtractionQuery": "SELECT *\nBATCH_PROCESS BATCH_PROCESS,\n  BATCH_PROCESS_D BPD\nWHERE\n  BP.BATCH_PROCESS_GID = BPD.BATCH_PROCESS_GID\n  AND BP.IS_ENABLED = 'Y'\nORDER BY\n  BP.DOMAIN_NAME,\n  BP.BATCH_PROCESS_XID,\n  BPD.SEQUENCE_NO"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

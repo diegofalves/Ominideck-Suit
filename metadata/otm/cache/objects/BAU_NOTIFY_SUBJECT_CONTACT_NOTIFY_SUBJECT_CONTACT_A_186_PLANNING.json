@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:58Z",
+  "generatedAt": "2026-02-26T01:11:50Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.PLANNING.NOTIFY_SUBJECT_CONTACT.NOTIFY_SUBJECT_CONTACT_AUTO.186",
@@ -21,7 +21,8 @@
     "otmTable": "NOTIFY_SUBJECT_CONTACT",
     "domainName": "BAU",
     "sequence": 186,
-    "deploymentType": "MIGRATION_PROJECT"
+    "deploymentType": "MIGRATION_PROJECT",
+    "simulatedExtractionQuery": "SELECT *\nCONTACT CONTACT\n  LEFT CONTACT_COM_METHOD CONTACT_COM_METHOD ON ccm.CONTACT_GID = c.CONTACT_GID\n  LEFT NOTIFY_SUBJECT_CONTACT NOTIFY_SUBJECT_CONTACT ON nsc.CONTACT_GID = c.CONTACT_GID AND nsc.COM_METHOD_GID = ccm.COM_METHOD_GID\nWHERE\n  c.DOMAIN_NAME = 'BAU'\n  AND\n  c.CONTACT_GID = 'BAU.AUD'\nORDER BY\n  c.CONTACT_GID,\n  ccm.COM_METHOD_RANK,\n  nsc.NOTIFY_SUBJECT_GID"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

@@ -27,30 +27,25 @@ def _normalize_sql_table_aliases(sql_query: str) -> str:
 # Caminho do projeto_migracao.json
 PROJETO_PATH = Path("domain/projeto_migracao/projeto_migracao.json")
 
-# Nome do objeto alvo
-OBJETO_NOME = "Saved Conditions"
-# Query simulada (exemplo, pode ser substituída por lógica dinâmica)
-QUERY_SIMULADA = "SELECT * FROM BAU_SAVED_CONDITION t1 JOIN BAU_OTHER_TABLE t2 ON t1.ID = t2.ID"
 
 # Carrega o JSON
 with PROJETO_PATH.open("r", encoding="utf-8") as f:
     projeto = json.load(f)
 
-# Busca e atualiza/inclui o campo simulatedExtractionQuery
-alterado = False
+# Atualiza/inclui o campo simulatedExtractionQuery para todos os objetos com query válida
+alterados = 0
 for grupo in projeto.get("groups", []):
     for obj in grupo.get("objects", []):
-        nome = obj.get("name")
-        if nome and nome.strip().lower() == OBJETO_NOME.strip().lower():
-            # Busca a query original
-            query_original = obj.get("object_extraction_query", {}).get("content", "")
+        query_original = obj.get("object_extraction_query", {}).get("content", "")
+        if query_original:
             query_normalizada = _normalize_sql_table_aliases(query_original)
-            obj["simulatedExtractionQuery"] = query_normalizada
-            alterado = True
+            if obj.get("simulatedExtractionQuery") != query_normalizada:
+                obj["simulatedExtractionQuery"] = query_normalizada
+                alterados += 1
 
-if alterado:
+if alterados > 0:
     with PROJETO_PATH.open("w", encoding="utf-8") as f:
         json.dump(projeto, f, ensure_ascii=False, indent=2)
-    print(f"Campo simulatedExtractionQuery atualizado/inserido para '{OBJETO_NOME}'.")
+    print(f"Campo simulatedExtractionQuery atualizado/inserido em {alterados} objeto(s).")
 else:
-    print(f"Objeto '{OBJETO_NOME}' não encontrado.")
+    print("Nenhum objeto elegível encontrado para atualização.")

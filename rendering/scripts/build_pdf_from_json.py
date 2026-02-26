@@ -88,23 +88,11 @@ def highlight_sql(sql_text):
 
 def sanitize_text(value):
     if isinstance(value, str):
-        # Normaliza hífens
-        value = (
-            value
-            .replace("\u2010", "-")
-            .replace("\u2011", "-")
-            .replace("\u2012", "-")
-            .replace("\u2013", "-")
-            .replace("\u2014", "-")
-            .replace("\u2212", "-")
-        )
-
         # Remove qualquer caractere invisível ou não imprimível
         value = "".join(
             ch for ch in value
             if ch.isprintable()
         )
-
         return value
     return value
 
@@ -138,7 +126,6 @@ def build_html(data):
     # milestone: carregando template
     print_progress(10, "Carregando template PDF")
 
-    # DEBUG: confirma qual template está sendo carregado
     # milestone: template carregado
     print_progress(20, "Template carregado")
 
@@ -194,6 +181,7 @@ def build_html(data):
 
 
     for g in groups:
+
         grupo_nome = g.get("label") or g.get("nome") or g.get("name")
         # Ignora grupos técnicos ou placeholders
         if not grupo_nome:
@@ -217,7 +205,6 @@ def build_html(data):
         )
 
         normalized_objetos = []
-
 
         for obj in objetos:
             deployment_type = obj.get("deployment_type")
@@ -244,9 +231,17 @@ def build_html(data):
             migration_item_name = obj.get("migration_item_name") or obj.get("name")
 
             cache_results = None
+
             selected_columns = obj.get("selected_columns")
             simulated_query = obj.get("simulatedExtractionQuery")
+            otm_primary_key = obj.get("otm_primary_key")
 
+            # Se não houver selected_columns, usa a primary key como padrão (apenas o nome da coluna, sem prefixo de tabela)
+            if not selected_columns and otm_primary_key:
+                if isinstance(otm_primary_key, list):
+                    selected_columns = [col for col in otm_primary_key]
+                elif isinstance(otm_primary_key, str):
+                    selected_columns = [otm_primary_key]
 
             if domain_name and otm_table and simulated_query and selected_columns:
                 cache_results = get_object_cache_data(domain_name, otm_table, migration_item_name)
@@ -269,13 +264,6 @@ def build_html(data):
 
                     filtered_rows = []
                     if rows:
-                        print("[DEBUG] --- Tabela principal:", otm_table)
-                        print("[DEBUG] --- selected_columns:", selected_columns)
-                        print("[DEBUG] --- Exemplo de linha da tabela principal:")
-                        if len(rows) > 0:
-                            print(json.dumps(rows[0], indent=2, ensure_ascii=False))
-                        else:
-                            print("[DEBUG] --- Nenhuma linha na tabela principal!")
                         for row in rows:
                             filtered_row = {}
                             for col in selected_columns:
@@ -294,13 +282,10 @@ def build_html(data):
                                             if match:
                                                 break
                                         filtered_row[col] = match.get(col_name, "") if match else ""
-                                        if not match:
-                                            print(f"[DEBUG] --- Não encontrou match para {col} na subtabela {tbl} para row principal: {row}")
                                     else:
                                         filtered_row[col] = ""
                                 else:
                                     filtered_row[col] = row.get(col, "")
-                            print("[DEBUG] --- Linha filtrada:", filtered_row)
                             filtered_rows.append(filtered_row)
                         # Atualiza as linhas filtradas no cache_data
                         if cache_data.get("data") and cache_data["data"].get("rows"):
@@ -459,14 +444,14 @@ def build_html(data):
 
     # Campos principais padronizados
     projeto_context.update({
-        "nome": project.get("name"),
-        "codigo": project.get("code"),
+        "nome": sanitize_text(project.get("name")),
+        "codigo": project.get("code"),  # NÃO sanitizar código
         "versao": project.get("version"),
-        "responsavel": project.get("consultant"),
+        "responsavel": sanitize_text(project.get("consultant")),
         "data_geracao": project_metadata.get("generated_at") or datetime.now().strftime("%d/%m/%Y"),
-        "objetivo": migration_obj[0] if migration_obj else None,
-        "escopo": project_metadata.get("scope"),
-        "cliente": project_metadata.get("client"),
+        "objetivo": sanitize_text(migration_obj[0]) if migration_obj else None,
+        "escopo": sanitize_text(project_metadata.get("scope")),
+        "cliente": sanitize_text(project_metadata.get("client")),
         # Status com interpretação funcional segura
         "status": (
             (lambda state: (
@@ -475,7 +460,7 @@ def build_html(data):
                 else STATUS_LOOKUP.get(state, state)
             ))(project.get("state"))
         ),
-        "subtitulo": project_metadata.get("subtitle"),
+        "subtitulo": sanitize_text(project_metadata.get("subtitle")),
         "logo_path": project_metadata.get("logo_path"),
         # URLs de ambiente (para renderização como hyperlink no template)
         "environment_source_url": sanitize_text(

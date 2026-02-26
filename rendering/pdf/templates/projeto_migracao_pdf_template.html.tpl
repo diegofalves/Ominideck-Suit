@@ -596,7 +596,7 @@
                                             {% endif %}
                                         {% endfor %}
                                     {% endif %}
-                                    <table class="metadata-table">
+                                    <table class="metadata-table" style="table-layout: fixed; width: 100%;">
                                         <thead>
                                             <tr>
                                                 {% for k in objeto.selected_columns %}
@@ -609,12 +609,13 @@
                                                 {% if row.items is defined %}
                                                     <tr>
                                                         {% for k in objeto.selected_columns %}
-                                                            <td>
+                                                            {% set is_id_col = k.lower().endswith('_id') or k.lower().endswith('_gid') or k.lower().endswith('_xid') or k.lower() in ['id', 'codigo', 'code'] %}
+                                                            <td style="{{ 'overflow-wrap: anywhere; white-space: pre-wrap; padding: 0px 4px;' if is_id_col else 'word-break: break-all; overflow-wrap: break-word; hyphens: auto; white-space: pre-wrap; padding: 0px 4px;' }}">
                                                                 {% if k in row %}
                                                                     {% if row[k] is iterable and row[k] is not string %}
                                                                         {{ row[k]|join(', ') if row[k]|length > 0 else 'N/A' }}
                                                                     {% else %}
-                                                                        {{ row[k] if row[k] else 'N/A' }}
+                                                                        <span style="white-space: normal; display: inline-block;">{{ (row[k] if row[k] else 'N/A')|trim }}</span>
                                                                     {% endif %}
                                                                 {% else %}
                                                                     'N/A'

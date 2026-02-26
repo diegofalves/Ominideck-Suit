@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:53Z",
+  "generatedAt": "2026-02-26T01:11:43Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.PLANNING.ITINERARY.ITINERARIES.6",
@@ -21,7 +21,8 @@
     "otmTable": "ITINERARY",
     "domainName": "BAU",
     "sequence": 6,
-    "deploymentType": "MIGRATION_PROJECT"
+    "deploymentType": "MIGRATION_PROJECT",
+    "simulatedExtractionQuery": "SELECT *\r\nITINERARY ITINERARY,\r\n    ITINERARY_DETAIL ITD,\r\n    LEG L\r\nWHERE\r\n    ID.ITINERARY_GID = ITD.ITINERARY_GID\r\n    AND ITD.LEG_GID = L.LEG_GID\r\n    AND ID.DOMAIN_NAME = 'BAU'\r\nORDER BY\r\n    ID.ITINERARY_XID,\r\n    ITD.SEQUENCE_NO"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:58:11Z",
+  "generatedAt": "2026-02-26T01:12:06Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.GOVERNANCE_UI.TRANSLATION_D.TRANSLATION_D_AUTO.352",
@@ -21,7 +21,8 @@
     "otmTable": "TRANSLATION_D",
     "domainName": "PUBLIC",
     "sequence": 352,
-    "deploymentType": "DB_XML"
+    "deploymentType": "DB_XML",
+    "simulatedExtractionQuery": "SELECT *\nTRANSLATION TRANSLATION,\n  TRANSLATION_D td\nWHERE\n  t.TRANSLATION_GID = td.TRANSLATION_GID\n  AND t.TRANSLATION_GID LIKE '%BAU%'\nORDER BY\n  t.TRANSLATION_XID,\n  td.LANG,\n  td.COUNTRY,\n  td.VARIANT"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",
