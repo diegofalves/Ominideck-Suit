@@ -578,8 +578,7 @@
                                                 {% if row.items is defined %}
                                                     <tr>
                                                         {% for k in objeto.selected_columns %}
-                                                            {% set is_id_col = k.lower().endswith('_id') or k.lower().endswith('_gid') or k.lower().endswith('_xid') or k.lower() in ['id', 'codigo', 'code'] %}
-                                                            <td style="{{ 'overflow-wrap: anywhere; white-space: pre-wrap; padding: 0px 4px;' if is_id_col else 'word-break: break-all; overflow-wrap: break-word; hyphens: auto; white-space: pre-wrap; padding: 0px 4px;' }}">
+                                                            <td style="word-break: break-word; overflow-wrap: break-word; hyphens: none; padding: 0px 4px;">
                                                                 {% if k in row %}
                                                                     {% if row[k] is iterable and row[k] is not string %}
                                                                         {{ row[k]|join(', ') if row[k]|length > 0 else 'N/A' }}

@@ -662,10 +662,9 @@ padding: 0;
   display: block;
 }
 
-/* Mantém cabeçalho do grupo + 1º objeto juntos. Se não couber, sobe o bloco inteiro para a próxima página (evita órfão). */
-.group-pack{
-  page-break-inside: avoid;
-  break-inside: avoid;
+/* Wrapper estrutural: apenas agrupa header + 1º item no DOM. A prevenção de órfão é feita pelo .group-head (break-after: avoid-page). */
+.group-pack {
+  display: block;
 }
 
 /* ==============================
@@ -673,6 +672,7 @@ padding: 0;
 ============================== */
 .extraction-data-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin-top: 8px;
   font-size: 7.5pt;
@@ -688,7 +688,8 @@ padding: 0;
   text-align: left;
   border: 1px solid #334155;
   letter-spacing: 0.3px;
-  white-space: nowrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .extraction-data-table td {
@@ -698,7 +699,8 @@ padding: 0;
   color: #1F2937;
   vertical-align: top;
   word-break: break-word;
-  max-width: 180px;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 
 .extraction-data-table tr:nth-child(even) td {

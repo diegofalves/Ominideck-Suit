@@ -222,11 +222,6 @@ def build_html(data):
 
             normalized_obj = dict(obj)
 
-            raw_query = obj.get("object_extraction_query")
-            if isinstance(raw_query, dict) and raw_query.get("content"):
-                raw_query = dict(raw_query)
-                raw_query["content"] = highlight_sql(raw_query.get("content"))
-
             domain_name = obj.get("domainName") or obj.get("domain")
             migration_item_name = obj.get("migration_item_name") or obj.get("name")
 
@@ -236,12 +231,33 @@ def build_html(data):
             simulated_query = obj.get("simulatedExtractionQuery")
             otm_primary_key = obj.get("otm_primary_key")
 
-            # Se não houver selected_columns, usa a primary key como padrão (apenas o nome da coluna, sem prefixo de tabela)
+            # Se não houver selected_columns, usa a primary key como padrão
             if not selected_columns and otm_primary_key:
                 if isinstance(otm_primary_key, list):
                     selected_columns = [col for col in otm_primary_key]
                 elif isinstance(otm_primary_key, str):
                     selected_columns = [otm_primary_key]
+
+            # Constrói a query exibida: usa simulatedExtractionQuery com SELECT explícito
+            if simulated_query and isinstance(simulated_query, str):
+                display_query_content = simulated_query
+                cols_for_display = selected_columns or []
+                if cols_for_display:
+                    col_list = ",\n  ".join(cols_for_display)
+                    select_replacement = f"SELECT\n  {col_list}"
+                    display_query_content = re.sub(
+                        r"SELECT\s+\*",
+                        select_replacement,
+                        display_query_content,
+                        count=1,
+                        flags=re.IGNORECASE
+                    )
+                raw_query = {"language": "SQL", "content": highlight_sql(display_query_content)}
+            else:
+                raw_query = obj.get("object_extraction_query")
+                if isinstance(raw_query, dict) and raw_query.get("content"):
+                    raw_query = dict(raw_query)
+                    raw_query["content"] = highlight_sql(raw_query.get("content"))
 
             if domain_name and otm_table and simulated_query and selected_columns:
                 cache_results = get_object_cache_data(domain_name, otm_table, migration_item_name)
