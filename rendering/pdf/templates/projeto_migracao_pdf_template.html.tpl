@@ -564,25 +564,8 @@
                                                 {% endif %}
                                             {% endif %}
                                         {% endif %}
-<<<<<<< HEAD
-                                    {% endfor %}
+                                    {% endif %}
                                     <table class="extraction-data-table">
-=======
-                                    {% endif %}
-                                    {% if not all_keys or all_keys|length == 0 %}
-                                        {% set all_keys = [] %}
-                                        {% for row in rows %}
-                                            {% if row.items is defined %}
-                                                {% for k in row.keys() %}
-                                                    {% if k not in all_keys %}
-                                                        {% set _ = all_keys.append(k) %}
-                                                    {% endif %}
-                                                {% endfor %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                    <table class="metadata-table" style="table-layout: fixed; width: 100%;">
->>>>>>> 7e4a903b48f4d7e63c76bb66a05d8497c8f811e1
                                         <thead>
                                             <tr>
                                                 {% for k in objeto.selected_columns %}
