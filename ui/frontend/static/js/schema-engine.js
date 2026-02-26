@@ -289,14 +289,26 @@ const SchemaEngine = {
     // ========================================================
     
     renderSchemaFields(existingData = null) {
-        // Desabilitado: não renderizar campos schema-driven
-        const container = document.getElementById("schema-sections-container");
-        if (container) {
-            container.style.display = "none";
-            container.innerHTML = "";
+        if (!this.currentSchema) {
+            alert("Nenhuma tabela OTM selecionada");
+            return;
         }
-        // Apenas log para debug
-        console.log("[SchemaEngine] Renderização de campos schema-driven desabilitada.");
+        
+        const container = document.getElementById("schema-sections-container");
+        if (!container) return;
+        
+        container.innerHTML = "";
+        const sections = this.currentSchema.sections;
+        
+        // Renderiza cada seção com dados existentes se houver
+        for (const [sectionName, fields] of Object.entries(sections)) {
+            const fieldset = this.createSectionFieldset(sectionName, fields, existingData);
+            container.appendChild(fieldset);
+        }
+        
+        container.style.display = "block";
+        
+        console.log(`[SchemaEngine] ${Object.keys(sections).length} seções renderizadas com dados existentes`);
     },
     
     createSectionFieldset(sectionName, fields, existingData = null) {

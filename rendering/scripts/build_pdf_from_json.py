@@ -1,51 +1,46 @@
 import glob
 import sys
 import time
-def get_object_cache_data(domain_name, otm_table, migration_item_name=None):
-    """
-    Busca o arquivo de cache correto para o objeto/tabela usando o objects_index.json e retorna os dados do cache.
-    """
-    index_path = os.path.abspath(os.path.join(BASE_DIR, '../../metadata/otm/cache/objects_index.json'))
-    if not os.path.exists(index_path):
-        return None
-    with open(index_path, encoding="utf-8") as f:
-        index_data = json.load(f)
-    # Busca por todas as chaves que contenham o domínio e a tabela
-    results = []
-    for key, entries in index_data.get("objectLocatorByKey", {}).items():
-        # Busca apenas pela tabela principal definida em otm_table
-        if domain_name and otm_table and f"{domain_name}|{otm_table}" in key:
-            for entry in entries:
-                # Garante que a tabela do cache seja exatamente a principal
-                if entry.get("table") != otm_table:
-                    continue
-                # Se migration_item_name for fornecido, filtra apenas se for MUITO diferente
-                if migration_item_name:
-                    entry_name = entry.get("migrationItemName")
-                    # Permite se for igual, ou se um contém o outro (case-insensitive)
-                    if entry_name and migration_item_name:
-                        if migration_item_name.lower() != entry_name.lower() and migration_item_name.lower() not in entry_name.lower() and entry_name.lower() not in migration_item_name.lower():
-                            continue
-                file_path = os.path.abspath(os.path.join(BASE_DIR, '../../', entry["file"]))
-                if os.path.exists(file_path):
-                    with open(file_path, encoding="utf-8") as cache_file:
-                        try:
-                            cache_data = json.load(cache_file)
-                            # Adiciona referência ao arquivo e info extra
-                            results.append({
-                                "file": entry["file"],
-                                "rowNumber": entry.get("rowNumber"),
-                                "tableRowNumber": entry.get("tableRowNumber"),
-                                "migrationItemId": entry.get("migrationItemId"),
-                                "migrationItemName": entry.get("migrationItemName"),
-                                "migrationGroupId": entry.get("migrationGroupId"),
-                                "table": entry.get("table"),
-                                "domainName": entry.get("domainName"),
-                                "cache_data": cache_data
-                            })
-                        except Exception as e:
-                            continue
-    return results if results else None
+import re
+from pathlib import Path
+
+# Funções auxiliares para padronizar nomes (slugify, short_slug)
+def _slugify(value):
+    value = str(value or "").strip().lower()
+    value = re.sub(r"[^a-z0-9]+", "_", value)
+    return value.strip("_")
+
+def _short_slug(value, max_len):
+    slug = _slugify(value)
+    if len(slug) <= max_len:
+        return slug
+    return slug[:max_len].rstrip("_") or slug[:max_len]
+
+# Função para montar o nome do arquivo de cache
+def build_cache_filename(domain_name, table_name, migration_group_id, migration_item_name, sequence):
+    domain_token = _slugify(domain_name or "NO_DOMAIN")
+    table_token = _slugify(table_name or "NO_TABLE")
+    group_token = _short_slug(migration_group_id or "NO_GROUP", 18)
+    name_token = _short_slug(migration_item_name or "ITEM", 24)
+    sequence_token = re.sub(r"[^0-9]+", "", str(sequence or "").strip()) or "0"
+    filename = f"{domain_token}_{table_token}_{name_token}_{sequence_token}_{group_token}.json"
+    return filename
+
+def get_object_cache_data(domain_name, otm_table, migration_item_name=None, migration_group_id=None, sequence=None):
+    cache_dir = Path(BASE_DIR) / "../../metadata/otm/cache/objects"
+    filename = build_cache_filename(domain_name, otm_table, migration_group_id, migration_item_name, sequence)
+    file_path = cache_dir / filename
+    if file_path.exists():
+        with open(file_path, encoding="utf-8") as cache_file:
+            try:
+                cache_data = json.load(cache_file)
+                return [{
+                    "file": str(file_path),
+                    "cache_data": cache_data
+                }]
+            except Exception:
+                return None
+    return None
 import os
 import sys
 # --- Ajuste automático de variáveis de ambiente para libs do Homebrew (macOS) ---
@@ -228,6 +223,7 @@ def build_html(data):
             cache_results = None
 
             selected_columns = obj.get("selected_columns")
+
             simulated_query = obj.get("simulatedExtractionQuery")
             otm_primary_key = obj.get("otm_primary_key")
 
@@ -238,41 +234,59 @@ def build_html(data):
                 elif isinstance(otm_primary_key, str):
                     selected_columns = [otm_primary_key]
 
-            # Constrói a query exibida: usa simulatedExtractionQuery com SELECT explícito
-            if simulated_query and isinstance(simulated_query, str):
-                display_query_content = simulated_query
-                cols_for_display = selected_columns or []
-                if cols_for_display:
-                    col_list = ",\n  ".join(cols_for_display)
-                    select_replacement = f"SELECT\n  {col_list}"
-                    # Se a query não tem FROM logo após SELECT *, insere FROM
-                    has_from = re.search(r"SELECT\s+\*\s*(?:\r?\n)\s*FROM\b", display_query_content, re.IGNORECASE)
-                    if has_from:
-                        display_query_content = re.sub(
-                            r"SELECT\s+\*",
-                            select_replacement,
-                            display_query_content,
-                            count=1,
-                            flags=re.IGNORECASE
-                        )
-                    else:
-                        # Substitui SELECT * + quebra de linha + insere FROM antes das tabelas
-                        display_query_content = re.sub(
-                            r"SELECT\s+\*\s*(?:\r?\n)\s*",
-                            select_replacement + "\nFROM\n  ",
-                            display_query_content,
-                            count=1,
-                            flags=re.IGNORECASE
-                        )
-                raw_query = {"language": "SQL", "content": highlight_sql(display_query_content)}
-            else:
-                raw_query = obj.get("object_extraction_query")
-                if isinstance(raw_query, dict) and raw_query.get("content"):
-                    raw_query = dict(raw_query)
-                    raw_query["content"] = highlight_sql(raw_query.get("content"))
+            # Se ainda não houver selected_columns, tenta pegar todas as colunas do schema do cache
+            if not selected_columns:
+                # Busca cache para pegar schema
+                domain_name_tmp = obj.get("domainName") or obj.get("domain")
+                otm_table_tmp = obj.get("otmTable") or obj.get("otm_table")
+                migration_item_name_tmp = obj.get("migration_item_name") or obj.get("name")
+                migration_group_id_tmp = g.get("group_id") or g.get("nome") or g.get("label")
+                sequence_tmp = obj.get("sequence")
+                cache_results_tmp = get_object_cache_data(domain_name_tmp, otm_table_tmp, migration_item_name_tmp, migration_group_id_tmp, sequence_tmp)
+                if cache_results_tmp and len(cache_results_tmp) > 0:
+                    cache_data_tmp = cache_results_tmp[0].get("cache_data", {})
+                    # Tenta pegar schema das tabelas
+                    schema_cols = []
+                    if cache_data_tmp.get("tables") and otm_table_tmp in cache_data_tmp["tables"]:
+                        schema = cache_data_tmp["tables"][otm_table_tmp].get("schema", {})
+                        schema_cols = schema.get("columns", [])
+                    elif cache_data_tmp.get("schema"):
+                        schema_cols = cache_data_tmp["schema"].get("columns", [])
+                    if schema_cols:
+                        selected_columns = schema_cols
 
-            if domain_name and otm_table and simulated_query and selected_columns:
-                cache_results = get_object_cache_data(domain_name, otm_table, migration_item_name)
+            # Sempre exibe object_extraction_query.content no bloco 'QUERY DE EXTRAÇÃO'
+            raw_query = obj.get("object_extraction_query")
+            if isinstance(raw_query, dict) and raw_query.get("content"):
+                raw_query = dict(raw_query)
+                raw_query["content"] = highlight_sql(raw_query.get("content"))
+            else:
+                raw_query = {"language": "SQL", "content": ""}
+
+            # simulatedExtractionQuery será usado apenas para renderizar a tabela de dados (não para exibir no bloco de query)
+
+
+            # Garante que a tabela de extração será renderizada mesmo se não houver dados, desde que selected_columns esteja presente
+            if domain_name and otm_table and selected_columns:
+                migration_group_id = g.get("group_id") or g.get("nome") or g.get("label")
+                sequence = obj.get("sequence")
+                cache_results = get_object_cache_data(domain_name, otm_table, migration_item_name, migration_group_id, sequence)
+                # Se não houver cache_results, cria um resultado vazio para garantir renderização da tabela
+                if not cache_results:
+                    cache_results = [{
+                        "file": None,
+                        "rowNumber": None,
+                        "tableRowNumber": None,
+                        "migrationItemId": None,
+                        "migrationItemName": migration_item_name,
+                        "migrationGroupId": migration_group_id,
+                        "table": otm_table,
+                        "domainName": domain_name,
+                        "cache_data": {
+                            "data": {"rows": []},
+                            "tables": {otm_table: {"rows": []}}
+                        }
+                    }]
                 # Nova lógica: simula JOINs simples para selected_columns que referenciam subtabelas
                 for cache in cache_results or []:
                     cache_data = cache.get("cache_data", {})
@@ -298,9 +312,9 @@ def build_html(data):
                                 if "." in col:
                                     tbl, col_name = col.split(".", 1)
                                     if tbl == otm_table:
-                                        filtered_row[col] = row.get(col_name, "")
+                                        # Fallback: se col_name não existir, tenta pegar o valor bruto
+                                        filtered_row[col] = row.get(col_name, row.get(col, ""))
                                     elif tbl in subtables:
-                                        # Tenta associar pelo campo de chave (ex: *_GID)
                                         main_keys = [k for k in row.keys() if k.endswith("_GID") or k.endswith("_ID") or k.endswith("_XID")]
                                         match = None
                                         for sub_row in subtables[tbl]:
@@ -310,17 +324,13 @@ def build_html(data):
                                                     break
                                             if match:
                                                 break
-                                        filtered_row[col] = match.get(col_name, "") if match else ""
+                                        filtered_row[col] = match.get(col_name, match.get(col, "")) if match else ""
                                     else:
-                                        filtered_row[col] = ""
+                                        filtered_row[col] = row.get(col, "")
                                 else:
                                     filtered_row[col] = row.get(col, "")
-                            # Só adiciona se houver pelo menos uma célula preenchida
-                            if any(filtered_row.values()):
-                                filtered_rows.append(filtered_row)
-                            else:
-                                # Se todas as células estão vazias, ainda assim adiciona a linha para garantir renderização
-                                filtered_rows.append(filtered_row)
+                            # Sempre adiciona a linha, mesmo se estiver parcialmente vazia
+                            filtered_rows.append(filtered_row)
                         # Atualiza as linhas filtradas no cache_data
                         if cache_data.get("data") and cache_data["data"].get("rows"):
                             cache_data["data"]["rows"] = filtered_rows
@@ -363,6 +373,22 @@ def build_html(data):
                 "otm_navigation_equivalence_confidence": obj.get("otm_navigation_equivalence_confidence")
             })
 
+            # Bloco de debug: salva informações de cache e colunas no objeto para inspeção no HTML
+            debug_info = {}
+            debug_info["selected_columns"] = selected_columns
+            debug_info["cache_results"] = cache_results
+            debug_info["cache_rows"] = []
+            if cache_results:
+                for cache in cache_results:
+                    cache_data = cache.get("cache_data", {})
+                    rows = None
+                    if cache_data.get("data") and cache_data["data"].get("rows"):
+                        rows = cache_data["data"]["rows"]
+                    elif cache_data.get("tables") and otm_table in cache_data["tables"] and cache_data["tables"][otm_table].get("rows"):
+                        rows = cache_data["tables"][otm_table]["rows"]
+                    if rows:
+                        debug_info["cache_rows"].append(rows)
+            normalized_obj["_debug"] = debug_info
             normalized_objetos.append(normalized_obj)
 
         # Adiciona grupo normalizado à estrutura final (inclui descrição do grupo)

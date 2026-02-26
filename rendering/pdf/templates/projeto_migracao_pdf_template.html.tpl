@@ -564,6 +564,7 @@
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}
+                                    <div style="color: red; font-weight: bold;">[DEBUG PDF] Renderização ativa para objeto: {{ objeto.name }} (Tabela: {{ objeto.otm_table }})<br>[DEBUG PDF] Cache utilizado: {{ cache.file }}</div>
                                     <table class="extraction-data-table">
                                         <thead>
                                             <tr>
