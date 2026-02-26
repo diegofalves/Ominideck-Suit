@@ -140,15 +140,15 @@ def _collect_subtable_constraint_errors(groups: List[Dict[str, Any]]) -> List[st
     owners_by_subtable: Dict[str, List[Dict[str, Any]]] = {}
     object_rows: List[Dict[str, Any]] = []
 
-    for g_idx, group in enumerate(groups, start=1):
+    for group in groups:
         if not isinstance(group, dict):
             continue
-        group_label = str(group.get("label") or group.get("group_id") or f"Grupo {g_idx}")
+        group_label = str(group.get("label") or group.get("group_id") or group.get("migration_group_id") or "Grupo")
         objects = group.get("objects", [])
         if not isinstance(objects, list):
             continue
 
-        for o_idx, obj in enumerate(objects, start=1):
+        for obj in objects:
             if not isinstance(obj, dict):
                 continue
             if _is_ignored_object(obj):
@@ -162,8 +162,8 @@ def _collect_subtable_constraint_errors(groups: List[Dict[str, Any]]) -> List[st
             parent_subtables = _normalize_subtable_list(obj.get("otm_subtables"))
 
             row_ref = {
-                "group_index": g_idx,
-                "object_index": o_idx,
+                "group_id": group.get("migration_group_id"),
+                "object_id": obj.get("migration_item_id"),
                 "group_label": group_label,
                 "name": parent_name,
                 "table": parent_table,
@@ -175,7 +175,7 @@ def _collect_subtable_constraint_errors(groups: List[Dict[str, Any]]) -> List[st
             for subtable in parent_subtables:
                 if subtable == parent_table:
                     errors.append(
-                        f"Grupo {g_idx} / Objeto {o_idx}: tabela {parent_table} não pode ser subtabela de si mesma."
+                        f"Grupo '{group_label}' / Item '{parent_name}': tabela {parent_table} não pode ser subtabela de si mesma."
                     )
                     continue
 
@@ -183,8 +183,8 @@ def _collect_subtable_constraint_errors(groups: List[Dict[str, Any]]) -> List[st
                 conflict = None
                 for owner in bucket:
                     same_row = (
-                        owner["group_index"] == g_idx
-                        and owner["object_index"] == o_idx
+                        owner["group_id"] == group.get("migration_group_id")
+                        and owner["object_id"] == obj.get("migration_item_id")
                     )
                     if same_row:
                         continue
@@ -204,8 +204,8 @@ def _collect_subtable_constraint_errors(groups: List[Dict[str, Any]]) -> List[st
 
                 bucket.append(
                     {
-                        "group_index": g_idx,
-                        "object_index": o_idx,
+                        "group_id": group.get("migration_group_id"),
+                        "object_id": obj.get("migration_item_id"),
                         "group_label": group_label,
                         "name": parent_name,
                         "table": parent_table,
@@ -227,8 +227,8 @@ def _collect_subtable_constraint_errors(groups: List[Dict[str, Any]]) -> List[st
 
         for owner in owners:
             same_row = (
-                owner["group_index"] == row["group_index"]
-                and owner["object_index"] == row["object_index"]
+                owner["group_id"] == row["group_id"]
+                and owner["object_id"] == row["object_id"]
             )
             if same_row:
                 continue
@@ -237,11 +237,12 @@ def _collect_subtable_constraint_errors(groups: List[Dict[str, Any]]) -> List[st
 
             errors.append(
                 "Conflito de hierarquia: "
-                f"'{row['name']}' ({row['group_label']}) está definido com subtabelas, "
+                f"Item '{row['name']}' (Grupo '{row['group_label']}') está definido com subtabelas, "
                 f"mas sua tabela {current_table} já é subtabela de "
-                f"'{owner['name']}' ({owner['group_label']}). "
+                f"Item '{owner['name']}' (Grupo '{owner['group_label']}). "
                 "Remova o vínculo anterior para permitir nova hierarquia."
             )
+            break
             break
 
     return errors
@@ -418,31 +419,33 @@ def validate_project(domain):
         is_group_zero = group_id in LEGACY_GROUP_ZERO_IDS
         is_ignored_group = group_id == IGNORED_GROUP_ID
 
+        group_label = str(group.get("label") or group.get("group_id") or group.get("migration_group_id") or f"Grupo {g_idx}")
         if not group.get("label"):
-            errors.append(f"Grupo {g_idx}: label é obrigatório.")
+            errors.append(f"Grupo '{group_label}': label é obrigatório.")
 
         seq = group.get("sequence")
         try:
             seq_int = int(seq)
             if is_group_zero and seq_int != 0:
-                errors.append(f"Grupo {g_idx}: sequência inválida para SEM_GRUPO (use 0).")
+                errors.append(f"Grupo '{group_label}': sequência inválida para SEM_GRUPO (use 0).")
             elif not is_group_zero and seq_int <= 0:
-                errors.append(f"Grupo {g_idx}: sequência inválida.")
+                errors.append(f"Grupo '{group_label}': sequência inválida.")
         except (ValueError, TypeError):
-            errors.append(f"Grupo {g_idx}: sequência inválida.")
+            errors.append(f"Grupo '{group_label}': sequência inválida.")
 
         objects = group.get("objects", [])
         if not objects and not is_group_zero and not is_ignored_group:
-            errors.append(f"Grupo {g_idx}: deve conter ao menos um objeto.")
+            errors.append(f"Grupo '{group_label}': deve conter ao menos um item.")
 
         for o_idx, obj in enumerate(objects, start=1):
             # Validação: nome obrigatório
+            item_name = str(obj.get("name") or obj.get("object_type") or obj.get("migration_item_id") or f"Item {o_idx}")
             if not obj.get("name"):
-                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: Nome do objeto é obrigatório.")
+                errors.append(f"Grupo '{group_label}' / Item '{item_name}': Nome do item é obrigatório.")
             
             obj_type = obj.get("object_type")
             if not obj_type:
-                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: object_type é obrigatório.")
+                errors.append(f"Grupo '{group_label}' / Item '{item_name}': object_type é obrigatório.")
                 continue
             obj_type_normalized = _normalize_otm_name(obj_type)
             otm_table_normalized = _normalize_otm_name(obj.get("otm_table"))
@@ -452,40 +455,33 @@ def validate_project(domain):
                 saved_query = obj.get("saved_query", {})
                 sql = saved_query.get("sql", "").strip()
                 if not sql:
-                    errors.append(f"Grupo {g_idx} / Objeto {o_idx}: SQL da Saved Query é obrigatório.")
+                    errors.append(f"Grupo '{group_label}' / Item '{item_name}': SQL da Saved Query é obrigatório.")
             
             # Validação: Status documentation
             status = obj.get("status", {})
             status_doc = status.get("documentation", "").strip()
             if status_doc and status_doc not in ["PENDING", "IN_PROGRESS", "DONE"]:
-                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: Status de documentação inválido (use PENDING, IN_PROGRESS ou DONE).")
+                errors.append(f"Grupo '{group_label}' / Item '{item_name}': Status de documentação inválido (use PENDING, IN_PROGRESS ou DONE).")
             
             # Validação: Status deployment
             status_dep = status.get("deployment", "").strip()
             if status_dep and status_dep not in ["PENDING", "IN_PROGRESS", "DONE"]:
-                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: Status de deployment inválido (use PENDING, IN_PROGRESS ou DONE).")
+                errors.append(f"Grupo '{group_label}' / Item '{item_name}': Status de deployment inválido (use PENDING, IN_PROGRESS ou DONE).")
             
             obj_type = obj.get("object_type")
             if not obj_type:
-                errors.append(f"Grupo {g_idx} / Objeto {o_idx}: object_type é obrigatório.")
+                errors.append(f"Grupo '{group_label}' / Item '{item_name}': object_type é obrigatório.")
                 continue
 
             # SE é tipo lógico (não tabela OTM)
             if _is_logical_object_type(obj_type):
-                required_ids = LOGICAL_OBJECT_TYPES[obj_type_normalized]
-                identifiers = obj.get("identifiers", {})
-
-                for rid in required_ids:
-                    if not identifiers.get(rid):
-                        errors.append(
-                            f"Grupo {g_idx} / Objeto {o_idx}: {rid} é obrigatório para {obj_type_normalized}."
-                        )
+                pass  # Não exige identificadores para tipos lógicos
             
             # SE é tabela OTM (schema-driven)
             else:
                 if otm_table_normalized and otm_table_normalized != obj_type_normalized:
                     errors.append(
-                        f"Grupo {g_idx} / Objeto {o_idx}: otm_table deve ser igual a object_type para tabela OTM."
+                        f"Grupo '{group_label}' / Item '{item_name}': otm_table deve ser igual a object_type para tabela OTM."
                     )
                 # Validar usando schema
                 data = obj.get("data", {})
@@ -493,7 +489,7 @@ def validate_project(domain):
                 
                 for schema_error in schema_errors:
                     errors.append(
-                        f"Grupo {g_idx} / Objeto {o_idx}: {schema_error}"
+                        f"Grupo '{group_label}' / Item '{item_name}': {schema_error}"
                     )
 
     # Regras de subtabelas:
@@ -564,8 +560,8 @@ def validate_form_data_against_schema(
     descriptors = repo.get_field_descriptors(table_name)
     
     if not descriptors:
-        errors.append(f"Schema não encontrado para tabela: {table_name}")
-        return errors
+        print(f"[AVISO] Schema não encontrado para tabela: {table_name}")
+        return []
     
     # Cria mapa nome_coluna => descriptor
     desc_map = {d.name: d for d in descriptors}

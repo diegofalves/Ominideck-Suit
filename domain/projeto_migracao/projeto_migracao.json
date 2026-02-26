@@ -43,70 +43,14 @@
           "migration_item_name": "ACTION_ARG (AUTO)",
           "object_extraction_query": {
             "language": "SQL",
-            "content": "SELECT * FROM SAVED_CONDITION"
-          },
-          "technical_content": {
-            "type": "NONE",
-            "content": ""
-          },
-          "otm_subtables": [],
-          "otm_related_tables": [
-            "SAVED_CONDITION"
-          ],
-          "otm_navigation_path_en": "Operational Planning > Appointment Management > Appointment Information Manager",
-          "otm_navigation_source": "equivalence_prefix_match",
-          "otm_navigation_equivalent_table": "ACTION",
-          "otm_navigation_equivalence_confidence": 88,
-          "migration_type": "",
-          "otm_primary_key": [
-            "ACTION_GID",
-            "ARG_NAME"
-          ],
-          "simulatedExtractionQuery": "SELECT * FROM SAVED_CONDITION"
-        },
-        {
-          "name": "ACTION_DEF (AUTO)",
-          "description": "Tipo de ação, 'C' Coletivo, 'R' Recursivo, 'I' Independente ou NULL.",
-          "object_type": "ACTION_DEF",
-          "otm_table": "ACTION_DEF",
-          "deployment_type": "MIGRATION_PROJECT",
-          "sequence": 7,
-          "responsible": "",
-          "status": {
-            "documentation": "PENDING",
-            "migration_project": "PENDING",
-            "export": "PENDING",
-            "deploy": "PENDING",
-            "validation": "PENDING",
-            "deployment": "PENDING"
-          },
-          "identifiers": {},
-          "data": {},
-          "notes": "",
-          "auto_generated": true,
-          "auto_source": "domain_table_statistics.json",
-          "domainName": "PUBLIC",
-          "domain": "PUBLIC",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.ACTION_DEF.ACTION_DEF_AUTO.7",
-          "migration_item_name": "ACTION_DEF (AUTO)",
-          "object_extraction_query": {
-            "language": "SQL",
             "content": ""
           },
           "technical_content": {
             "type": "NONE",
             "content": ""
           },
-          "otm_subtables": [],
           "otm_related_tables": [],
-          "otm_navigation_path_en": "Operational Planning > Appointment Management > Appointment Information Manager",
-          "otm_navigation_source": "equivalence_prefix_match",
-          "otm_navigation_equivalent_table": "ACTION",
-          "otm_navigation_equivalence_confidence": 88,
-          "migration_type": "",
-          "otm_primary_key": [
-            "ACTION_DEF_GID"
-          ]
+          "otm_subtables": []
         },
         {
           "name": "ACTION_DEF_STATE (AUTO)",
@@ -18640,15 +18584,15 @@
           ]
         },
         {
-          "name": "STATUS_VALUE (BAU - AUTO)",
-          "description": "Esta tabela define vários valores de status que podem ser atribuídos a um tipo de status. Por exemplo, para um tipo de Status de Compromisso, os valores podem ser: Completo Nenhum Parcial etc.",
-          "object_type": "STATUS_VALUE",
-          "otm_table": "STATUS_VALUE",
+          "name": "DOMAIN (BAU - AUTO)",
+          "description": "Domínio é um conceito do GC3 que cria um grupo por cliente. Quando um cliente (remetente/provedor de serviços) instala o GC3 pela primeira vez, ele cria um domínio para si mesmo. Todos os dados subsequentes desse cliente são então anexados ao domínio. Isso cria um agrupamento lógico dos dados por cliente no GC3. Isso também permite que o GC3 hospede dados de vários clientes simultaneamente em um banco de dados GC3. Este conceito pode ser pensado como um espaço de dados virtual por cliente no GC3. Os clientes podem fornecer acesso ao seu domínio a um ou mais prestadores de serviços. Este conceito permite também armazenar códigos semelhantes entre vários clientes, localizados no seu domínio. O GID - Identificador Global é usado em todas as tabelas do GC3 para identificar códigos específicos do GC3. O GID é formulado concatenando o nome de domínio e o XID como DomainName.XID Um XID - Identificador Externo é usado para armazenar códigos específicos do cliente. Por exemplo, o Wal-Mart pode atribuir um código 'Nike' aos calçados Nike em seu inventário. A K-Mart também pode usar o código 'Nike' para calçados Nike em seu inventário. Para Wal-Mart: Nome de domínio: Wal-Mart Item_XID: Nike Item_GID: Walmart.Nike Para K-Mart: Nome de domínio: Kmart Item_XID: Nike Item_GID: Kmart.Nike.",
+          "object_type": "DOMAIN",
+          "otm_table": "DOMAIN",
           "otm_related_tables": [],
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1980,
+          "sequence": 1679,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18673,7 +18617,81 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "BAU",
           "domain": "BAU",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.STATUS_VALUE.STATUS_VALUE_BAU_AUTO.1980",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.DOMAIN.DOMAIN_BAU_AUTO.1679",
+          "migration_item_name": "DOMAIN (BAU - AUTO)"
+        },
+        {
+          "name": "ACTION_DEF (PUBLIC - AUTO)",
+          "description": "Tipo de ação, 'C' Coletivo, 'R' Recursivo, 'I' Independente ou NULL.",
+          "object_type": "ACTION_DEF",
+          "otm_table": "ACTION_DEF",
+          "otm_related_tables": [],
+          "otm_subtables": [],
+          "deployment_type": "MIGRATION_PROJECT",
+          "deployment_type_user_defined": false,
+          "sequence": 1698,
+          "responsible": "",
+          "status": {
+            "documentation": "PENDING",
+            "migration_project": "PENDING",
+            "export": "PENDING",
+            "deploy": "PENDING",
+            "validation": "PENDING",
+            "deployment": "PENDING"
+          },
+          "object_extraction_query": {
+            "language": "SQL",
+            "content": ""
+          },
+          "technical_content": {
+            "type": "NONE",
+            "content": ""
+          },
+          "identifiers": {},
+          "data": {},
+          "notes": "",
+          "auto_generated": true,
+          "auto_source": "domain_table_statistics.json",
+          "domainName": "PUBLIC",
+          "domain": "PUBLIC",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.ACTION_DEF.ACTION_DEF_PUBLIC_AUTO.1698",
+          "migration_item_name": "ACTION_DEF (PUBLIC - AUTO)"
+        },
+        {
+          "name": "STATUS_VALUE (BAU - AUTO)",
+          "description": "Esta tabela define vários valores de status que podem ser atribuídos a um tipo de status. Por exemplo, para um tipo de Status de Compromisso, os valores podem ser: Completo Nenhum Parcial etc.",
+          "object_type": "STATUS_VALUE",
+          "otm_table": "STATUS_VALUE",
+          "otm_related_tables": [],
+          "otm_subtables": [],
+          "deployment_type": "",
+          "deployment_type_user_defined": false,
+          "sequence": 1862,
+          "responsible": "",
+          "status": {
+            "documentation": "PENDING",
+            "migration_project": "PENDING",
+            "export": "PENDING",
+            "deploy": "PENDING",
+            "validation": "PENDING",
+            "deployment": "PENDING"
+          },
+          "object_extraction_query": {
+            "language": "SQL",
+            "content": ""
+          },
+          "technical_content": {
+            "type": "NONE",
+            "content": ""
+          },
+          "identifiers": {},
+          "data": {},
+          "notes": "",
+          "auto_generated": true,
+          "auto_source": "domain_table_statistics.json",
+          "domainName": "BAU",
+          "domain": "BAU",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.STATUS_VALUE.STATUS_VALUE_BAU_AUTO.1862",
           "migration_item_name": "STATUS_VALUE (BAU - AUTO)"
         },
         {
@@ -18685,7 +18703,7 @@
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1982,
+          "sequence": 1864,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18710,7 +18728,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "BAU",
           "domain": "BAU",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_MENU_ACCESS.USER_MENU_ACCESS_BAU_AUTO.1982",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_MENU_ACCESS.USER_MENU_ACCESS_BAU_AUTO.1864",
           "migration_item_name": "USER_MENU_ACCESS (BAU - AUTO)"
         },
         {
@@ -18722,7 +18740,7 @@
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1983,
+          "sequence": 1865,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18747,7 +18765,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "BAU",
           "domain": "BAU",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_PREFERENCE_ACCESS.USER_PREFERENCE_ACCESS_BAU_AUTO.1983",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_PREFERENCE_ACCESS.USER_PREFERENCE_ACCESS_BAU_AUTO.1865",
           "migration_item_name": "USER_PREFERENCE_ACCESS (BAU - AUTO)"
         },
         {
@@ -18759,7 +18777,7 @@
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1984,
+          "sequence": 1866,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18784,7 +18802,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "BAU",
           "domain": "BAU",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_ROLE_ACR_ROLE.USER_ROLE_ACR_ROLE_BAU_AUTO.1984",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_ROLE_ACR_ROLE.USER_ROLE_ACR_ROLE_BAU_AUTO.1866",
           "migration_item_name": "USER_ROLE_ACR_ROLE (BAU - AUTO)"
         },
         {
@@ -18796,7 +18814,7 @@
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1673,
+          "sequence": 1867,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18821,7 +18839,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "PUBLIC",
           "domain": "PUBLIC",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.SAVED_CONDITION_QUERY.SAVED_CONDITION_QUERY_PUBLIC_AUTO.1673",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.SAVED_CONDITION_QUERY.SAVED_CONDITION_QUERY_PUBLIC_AUTO.1867",
           "migration_item_name": "SAVED_CONDITION_QUERY (PUBLIC - AUTO)"
         },
         {
@@ -18833,7 +18851,7 @@
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1674,
+          "sequence": 1868,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18858,7 +18876,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "SERVPROV",
           "domain": "SERVPROV",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.STATUS_VALUE.STATUS_VALUE_SERVPROV_AUTO.1674",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.STATUS_VALUE.STATUS_VALUE_SERVPROV_AUTO.1868",
           "migration_item_name": "STATUS_VALUE (SERVPROV - AUTO)"
         },
         {
@@ -18870,7 +18888,7 @@
           "otm_subtables": [],
           "deployment_type": "MIGRATION_PROJECT",
           "deployment_type_user_defined": false,
-          "sequence": 1675,
+          "sequence": 1869,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18895,7 +18913,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "PUBLIC",
           "domain": "PUBLIC",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.STYLESHEET_PROFILE.STYLESHEET_PROFILE_PUBLIC_AUTO.1675",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.STYLESHEET_PROFILE.STYLESHEET_PROFILE_PUBLIC_AUTO.1869",
           "migration_item_name": "STYLESHEET_PROFILE (PUBLIC - AUTO)"
         },
         {
@@ -18907,7 +18925,7 @@
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1676,
+          "sequence": 1870,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18932,7 +18950,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "SERVPROV",
           "domain": "SERVPROV",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_MENU_ACCESS.USER_MENU_ACCESS_SERVPROV_AUTO.1676",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_MENU_ACCESS.USER_MENU_ACCESS_SERVPROV_AUTO.1870",
           "migration_item_name": "USER_MENU_ACCESS (SERVPROV - AUTO)"
         },
         {
@@ -18944,7 +18962,7 @@
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1677,
+          "sequence": 1871,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -18969,7 +18987,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "SERVPROV",
           "domain": "SERVPROV",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_PREFERENCE_ACCESS.USER_PREFERENCE_ACCESS_SERVPROV_AUTO.1677",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_PREFERENCE_ACCESS.USER_PREFERENCE_ACCESS_SERVPROV_AUTO.1871",
           "migration_item_name": "USER_PREFERENCE_ACCESS (SERVPROV - AUTO)"
         },
         {
@@ -18981,7 +18999,7 @@
           "otm_subtables": [],
           "deployment_type": "",
           "deployment_type_user_defined": false,
-          "sequence": 1678,
+          "sequence": 1872,
           "responsible": "",
           "status": {
             "documentation": "PENDING",
@@ -19006,7 +19024,7 @@
           "auto_source": "domain_table_statistics.json",
           "domainName": "SERVPROV",
           "domain": "SERVPROV",
-          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_ROLE_ACR_ROLE.USER_ROLE_ACR_ROLE_SERVPROV_AUTO.1678",
+          "migration_item_id": "MIGRATION_ITEM.SEM_GRUPO.USER_ROLE_ACR_ROLE.USER_ROLE_ACR_ROLE_SERVPROV_AUTO.1872",
           "migration_item_name": "USER_ROLE_ACR_ROLE (SERVPROV - AUTO)"
         }
       ],
@@ -22148,7 +22166,7 @@
         {
           "name": "External System Contact",
           "description": "Tabela de contatos de sistemas externos integrados ao OTM.",
-          "object_type": "EXTERNAL_CONTACT",
+          "object_type": "CONTACT",
           "deployment_type": "MIGRATION_PROJECT",
           "sequence": 8,
           "responsible": "ITC",
@@ -22160,30 +22178,33 @@
             "validation": "PENDING",
             "deployment": "PENDING"
           },
-          "otm_table": "EXTERNAL_CONTACT",
-          "identifiers": {},
+          "otm_table": "CONTACT",
+          "identifiers": {
+            "migration_project_id": ""
+          },
           "notes": "",
           "migration_item_id": "MIGRATION_ITEM.INTEGRATION.EXTERNAL_CONTACT.EXTERNAL_SYSTEM_CONTACT.8",
           "migration_item_name": "External System Contact",
           "object_extraction_query": {
             "language": "SQL",
-            "content": "SELECT *\nFROM\n  CONTACT c\nWHERE\n  c.DOMAIN_NAME = 'BAU'\n  AND c.EXTERNAL_SYSTEM_GID IS NOT NULL\nORDER BY\n  c.CONTACT_XID"
+            "content": "SELECT *\r\nFROM\r\n  CONTACT c\r\nWHERE\r\n  c.DOMAIN_NAME = 'BAU'\r\n  AND c.EXTERNAL_SYSTEM_GID IS NOT NULL\r\nORDER BY\r\n  c.CONTACT_XID"
           },
           "technical_content": {
             "type": "NONE",
             "content": ""
           },
-          "otm_subtables": [
-            "CONTACT"
-          ],
-          "otm_related_tables": [
-            "CONTACT"
-          ],
+          "otm_subtables": [],
+          "otm_related_tables": [],
           "otm_navigation_path_en": "Business Process Automation > Communication Management > External Systems",
           "otm_navigation_source": "help_inferred",
           "migration_type": "",
           "otm_primary_key": [],
-          "simulatedExtractionQuery": "SELECT *\nCONTACT CONTACT\nWHERE\n  CONTACT.DOMAIN_NAME = 'BAU'\n  AND CONTACT.EXTERNAL_SYSTEM_GID IS NOT NULL\nORDER BY\n  CONTACT.CONTACT_XID"
+          "simulatedExtractionQuery": "SELECT *\nCONTACT CONTACT\nWHERE\n  CONTACT.DOMAIN_NAME = 'BAU'\n  AND CONTACT.EXTERNAL_SYSTEM_GID IS NOT NULL\nORDER BY\n  CONTACT.CONTACT_XID",
+          "selected_columns": [],
+          "deployment_type_user_defined": true,
+          "domainName": "BAU",
+          "domain": "BAU",
+          "ignore_table": false
         }
       ],
       "description": "Inclui objetos relacionados a integração e mensageria (templates, perfis XML, web services e sistemas externos) assegurando comunicação entre OTM e sistemas parceiros.",
@@ -22877,11 +22898,10 @@
   ],
   "state": {
     "overall_status": "IN_PROGRESS",
-    "last_edit_object_index": 0,
-    "last_edit_group_index": null
+    "last_edit_object_index": "7"
   },
-  "active_group_id": "AUTOMATION",
-  "active_migration_group_id": "AUTOMATION",
+  "active_group_id": "INTEGRATION",
+  "active_migration_group_id": "INTEGRATION",
   "project_metadata": {
     "migration_objective": {
       "title": "Objetivo do Projeto de Migração",
