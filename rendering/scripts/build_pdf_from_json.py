@@ -245,13 +245,25 @@ def build_html(data):
                 if cols_for_display:
                     col_list = ",\n  ".join(cols_for_display)
                     select_replacement = f"SELECT\n  {col_list}"
-                    display_query_content = re.sub(
-                        r"SELECT\s+\*",
-                        select_replacement,
-                        display_query_content,
-                        count=1,
-                        flags=re.IGNORECASE
-                    )
+                    # Se a query não tem FROM logo após SELECT *, insere FROM
+                    has_from = re.search(r"SELECT\s+\*\s*(?:\r?\n)\s*FROM\b", display_query_content, re.IGNORECASE)
+                    if has_from:
+                        display_query_content = re.sub(
+                            r"SELECT\s+\*",
+                            select_replacement,
+                            display_query_content,
+                            count=1,
+                            flags=re.IGNORECASE
+                        )
+                    else:
+                        # Substitui SELECT * + quebra de linha + insere FROM antes das tabelas
+                        display_query_content = re.sub(
+                            r"SELECT\s+\*\s*(?:\r?\n)\s*",
+                            select_replacement + "\nFROM\n  ",
+                            display_query_content,
+                            count=1,
+                            flags=re.IGNORECASE
+                        )
                 raw_query = {"language": "SQL", "content": highlight_sql(display_query_content)}
             else:
                 raw_query = obj.get("object_extraction_query")

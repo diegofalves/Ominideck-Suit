@@ -414,11 +414,10 @@
         {% for grupo in projeto.grupos | sort(attribute='sequence') %}
         <div class="group-block{% if loop.first %} group-block-first{% endif %}" id="grupo-{{ grupo.nome|replace(' ','-')|lower }}">
 
-            {# === FIX: garante que cabeçalho + 1º objeto não se separem === #}
+            {# === group-head com break-after: avoid-page garante que o título não fique órfão === #}
             {% set objetos_sorted = (grupo.objetos | default([])) | sort(attribute='sequence') %}
 
-            <div class="group-pack">
-                <div class="group-head">
+            <div class="group-head">
                     <h3>{{ grupo.nome }}</h3>
 
                     {% if grupo.descricao %}
@@ -583,10 +582,10 @@
                                                                     {% if row[k] is iterable and row[k] is not string %}
                                                                         {{ row[k]|join(', ') if row[k]|length > 0 else 'N/A' }}
                                                                     {% else %}
-                                                                        <span style="white-space: normal; display: inline-block;">{{ (row[k] if row[k] else 'N/A')|trim }}</span>
+                                                                        {{ (row[k] if row[k] is not none and row[k] != '' else 'N/A')|trim }}
                                                                     {% endif %}
                                                                 {% else %}
-                                                                    'N/A'
+                                                                    N/A
                                                                 {% endif %}
                                                             </td>
                                                         {% endfor %}
@@ -603,7 +602,6 @@
                 {% endif %}
                 </section>
                 <div style="page-break-before: always;"></div>
-            </div>
 
             {# === Demais objetos do grupo (a partir do 2º) === #}
             {% if objetos_sorted and objetos_sorted|length > 1 %}
