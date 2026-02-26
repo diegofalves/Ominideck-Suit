@@ -174,56 +174,37 @@
     <section id="sec-sumario" class="page">
         <h2>Sumário</h2>
         <nav class="toc">
+            {% set ns = namespace(idx=1) %}
             <ol>
 
-                <!-- 1 -->
                 <li>
-                    <a href="#sec-metadata">1. Informações do Projeto</a>
+                    <a href="#sec-metadata">{{ ns.idx }}. Informações do Projeto</a>
                 </li>
+                {% set ns.idx = ns.idx + 1 %}
 
-
-                {# Filtra apenas linhas que possuem a chave 'object' e são dicionários #}
-                {% set object_rows = cache_data | selectattr('object', 'defined') | list %}
-
-                {# Coleta todas as chaves dinâmicas dos objetos #}
-                {% set all_keys = [] %}
-                {% for row in object_rows %}
-                    {% if row['object'] is mapping %}
-                        {% for key, value in row['object'].items() %}
-                            {% if key not in all_keys %}
-                                {% set _ = all_keys.append(key) %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-
-                <table>
-                    <thead>
-                        <tr>
-                            {% for key in all_keys %}
-                                <th>{{ key }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in object_rows %}
-                            {% if row['object'] is mapping %}
-                                <tr>
-                                    {% for key in all_keys %}
-                                        <td>{{ row['object'][key] if key in row['object'] else '' }}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-                    </ol>
+                {% if projeto.change_history and projeto.change_history|length > 0 %}
+                <li>
+                    <a href="#sec-historico">{{ ns.idx }}. Histórico de Atualizações</a>
                 </li>
-                {% set idx = idx + 1 %}
+                {% set ns.idx = ns.idx + 1 %}
+                {% endif %}
 
-                <!-- Grupos -->
+                {% if projeto.objetivo %}
+                <li>
+                    <a href="#sec-resumo">{{ ns.idx }}. Resumo Executivo</a>
+                </li>
+                {% set ns.idx = ns.idx + 1 %}
+                {% endif %}
+
+                {% if projeto.roadmap_dinamico %}
+                <li>
+                    <a href="#sec-roadmap">{{ ns.idx }}. Roadmap de Migração</a>
+                </li>
+                {% set ns.idx = ns.idx + 1 %}
+                {% endif %}
+
                 {% if projeto.grupos and projeto.grupos|length > 0 %}
-                {% set grupos_idx = idx %}
+                {% set grupos_idx = ns.idx %}
                 <li>
                     <a href="#sec-grupos-otm">{{ grupos_idx }}. Grupos e Objetos de Migração OTM</a>
                     <ol>
@@ -232,7 +213,7 @@
                         {% set grupo_anchor = grupo.nome|replace(' ','-')|lower %}
                         <li>
                             <a href="#grupo-{{ grupo_anchor }}">
-                                {{ grupos_idx }}.{{ loop.index }} {{ grupo.nome }}
+                                {{ grupos_idx }}.{{ grupo_index }} {{ grupo.nome }}
                             </a>
 
                             {% if grupo.objetos and grupo.objetos|length > 0 %}
@@ -577,7 +558,7 @@
                                             {% endfor %}
                                         {% endif %}
                                     {% endfor %}
-                                    <table class="metadata-table">
+                                    <table class="extraction-data-table">
                                         <thead>
                                             <tr>
                                                 {% for k in all_keys %}
