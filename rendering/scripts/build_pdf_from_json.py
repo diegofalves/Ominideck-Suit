@@ -272,6 +272,7 @@ def build_html(data):
                                     if tbl == otm_table:
                                         filtered_row[col] = row.get(col_name, "")
                                     elif tbl in subtables:
+                                        # Tenta associar pelo campo de chave (ex: *_GID)
                                         main_keys = [k for k in row.keys() if k.endswith("_GID") or k.endswith("_ID") or k.endswith("_XID")]
                                         match = None
                                         for sub_row in subtables[tbl]:
@@ -286,13 +287,21 @@ def build_html(data):
                                         filtered_row[col] = ""
                                 else:
                                     filtered_row[col] = row.get(col, "")
-                            filtered_rows.append(filtered_row)
+                            # Só adiciona se houver pelo menos uma célula preenchida
+                            if any(filtered_row.values()):
+                                filtered_rows.append(filtered_row)
+                            else:
+                                # Se todas as células estão vazias, ainda assim adiciona a linha para garantir renderização
+                                filtered_rows.append(filtered_row)
                         # Atualiza as linhas filtradas no cache_data
                         if cache_data.get("data") and cache_data["data"].get("rows"):
                             cache_data["data"]["rows"] = filtered_rows
                         elif cache_data.get("tables") and otm_table in cache_data["tables"] and cache_data["tables"][otm_table].get("rows"):
                             cache_data["tables"][otm_table]["rows"] = filtered_rows
 
+
+            # Garante que selected_columns sempre está presente no objeto normalizado
+            normalized_obj["selected_columns"] = selected_columns
             normalized_obj["object_cache_results"] = cache_results
 
             normalized_obj.update({
