@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:18Z",
+  "generatedAt": "2026-02-26T01:10:58Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.MASTER_DATA.LOCATION.LOCATIONS.5",
@@ -21,7 +21,8 @@
     "otmTable": "LOCATION",
     "domainName": "BAU",
     "sequence": 5,
-    "deploymentType": "CSV"
+    "deploymentType": "CSV",
+    "simulatedExtractionQuery": "SELECT *\nSERVPROV SERVPROV,\n  LOCATION L,\n  LOCATION_REFNUM LR\nWHERE\n  S.SERVPROV_GID = L.LOCATION_GID\n  AND L.LOCATION_GID = LR.LOCATION_GID\nORDER BY\n  L.LOCATION_NAME"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

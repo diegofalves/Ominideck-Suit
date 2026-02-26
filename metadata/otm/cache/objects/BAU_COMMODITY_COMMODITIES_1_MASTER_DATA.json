@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:12Z",
+  "generatedAt": "2026-02-26T01:10:50Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.MASTER_DATA.COMMODITY.COMMODITIES.1",
@@ -21,7 +21,8 @@
     "otmTable": "COMMODITY",
     "domainName": "BAU",
     "sequence": 1,
-    "deploymentType": "MIGRATION_PROJECT"
+    "deploymentType": "MIGRATION_PROJECT",
+    "simulatedExtractionQuery": "SELECT *\nCOMMODITY COMMODITY\n  DOMAIN_NAME = 'BAU'\n  AND COMMODITY_GID IN (\n    SELECT COMMODITY_GID ITEM ITEM DOMAIN_NAME = 'BAU' AND COMMODITY_GID IS NOT NULL\n  )\nORDER BY COMMODITY_XID"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

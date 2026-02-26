@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:24Z",
+  "generatedAt": "2026-02-26T01:11:07Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.MASTER_DATA.ITEM.ITEMS.8",
@@ -23,7 +23,8 @@
     "otmTable": "ITEM",
     "domainName": "BAU",
     "sequence": 8,
-    "deploymentType": "INTEGRATION"
+    "deploymentType": "INTEGRATION",
+    "simulatedExtractionQuery": "SELECT *\nSTYLESHEET_PROFILE STYLESHEET_PROFILE\nWHERE\n  ssp.CONTENT_GID IN (\n    SELECT\n      sc.STYLESHEET_CONTENT_GID\n    STYLESHEET_CONTENT STYLESHEET_CONTENT\n    WHERE\n      sc.DOMAIN_NAME = 'BAU'\n  )"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

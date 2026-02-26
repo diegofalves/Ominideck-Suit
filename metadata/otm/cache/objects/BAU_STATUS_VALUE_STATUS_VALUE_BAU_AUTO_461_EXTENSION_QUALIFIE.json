@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:49Z",
+  "generatedAt": "2026-02-26T01:11:39Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.EXTENSION_QUALIFIERS.STATUS_VALUE.STATUS_VALUE_BAU_AUTO.461",
@@ -21,7 +21,8 @@
     "otmTable": "STATUS_VALUE",
     "domainName": "BAU",
     "sequence": 461,
-    "deploymentType": "MIGRATION_PROJECT"
+    "deploymentType": "MIGRATION_PROJECT",
+    "simulatedExtractionQuery": "SELECT *\nSTATUS_VALUE STATUS_VALUE,\n  STATUS_TYPE st\nWHERE\n  sv.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n  AND st.IS_EXTERNAL = 'Y'\n  AND (\n    EXISTS (\n      SELECT 1\n      SHIPMENT_STATUS SHIPMENT_STATUS\n      WHERE ss.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ss.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n    OR EXISTS (\n      SELECT 1\n      ORDER_RELEASE_STATUS ORDER_RELEASE_STATUS\n      WHERE ors.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ors.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n  )\nORDER BY\n  st.DOMAIN_NAME,\n  st.OBJECT_TYPE,\n  st.STATUS_TYPE_GID,\n  sv.SEQUENCE"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",
@@ -29,7 +30,7 @@
     "technicalContentType": "NONE",
     "rootName": "STATUS_VALUE",
     "query": "SELECT *\nFROM\n  STATUS_VALUE sv,\n  STATUS_TYPE st\nWHERE\n  sv.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n  AND st.IS_EXTERNAL = 'Y'\n  AND (\n    EXISTS (\n      SELECT 1\n      FROM SHIPMENT_STATUS ss\n      WHERE ss.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ss.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n    OR EXISTS (\n      SELECT 1\n      FROM ORDER_RELEASE_STATUS ors\n      WHERE ors.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ors.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n  )\nORDER BY\n  st.DOMAIN_NAME,\n  st.OBJECT_TYPE,\n  st.STATUS_TYPE_GID,\n  sv.SEQUENCE",
-    "normalizedRowCount": 70,
+    "normalizedRowCount": 72,
     "nonSchemaFieldsDetected": [
       "IS_EXTERNAL",
       "STATUS_TYPE_XID"
@@ -76,7 +77,7 @@
         "querySource": "object_extraction_query",
         "rootName": "STATUS_VALUE",
         "query": "SELECT *\nFROM\n  STATUS_VALUE sv,\n  STATUS_TYPE st\nWHERE\n  sv.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n  AND st.IS_EXTERNAL = 'Y'\n  AND (\n    EXISTS (\n      SELECT 1\n      FROM SHIPMENT_STATUS ss\n      WHERE ss.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ss.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n    OR EXISTS (\n      SELECT 1\n      FROM ORDER_RELEASE_STATUS ors\n      WHERE ors.STATUS_TYPE_GID = st.STATUS_TYPE_GID\n        AND ors.UPDATE_DATE >= TO_DATE('02/01/2026','DD/MM/YYYY')\n    )\n  )\nORDER BY\n  st.DOMAIN_NAME,\n  st.OBJECT_TYPE,\n  st.STATUS_TYPE_GID,\n  sv.SEQUENCE",
-        "normalizedRowCount": 70,
+        "normalizedRowCount": 72,
         "nonSchemaFieldsDetected": [
           "IS_EXTERNAL",
           "STATUS_TYPE_XID"
@@ -259,6 +260,21 @@
           "DOMAIN_NAME": "BAU",
           "INSERT_USER": "",
           "INSERT_DATE": "2026-02-11T23:02:31Z",
+          "UPDATE_USER": "",
+          "UPDATE_DATE": "",
+          "OTM_RELEASE": "25.2.1-20250627"
+        },
+        {
+          "STATUS_TYPE_GID": "BAU.BAU_REM_AGENDAMENTO",
+          "STATUS_VALUE_GID": "BAU.REM_CLIENTE_RETIRA",
+          "STATUS_VALUE_XID": "REM_CLIENTE_RETIRA",
+          "OBJECT_TYPE": "ORDER_RELEASE",
+          "DESCRIPTION": "CONTROLA O STATUS DO PROCESSO DE AGENDAMENTO EXCLUSIVAMENTE PARA REMESSAS, REFLETINDO SEU ESTADO ANTE",
+          "SEQUENCE": "10",
+          "INITIAL_VALUE": "N",
+          "DOMAIN_NAME": "BAU",
+          "INSERT_USER": "",
+          "INSERT_DATE": "2026-02-26T00:27:16Z",
           "UPDATE_USER": "",
           "UPDATE_DATE": "",
           "OTM_RELEASE": "25.2.1-20250627"
@@ -559,6 +575,21 @@
           "DOMAIN_NAME": "BAU",
           "INSERT_USER": "",
           "INSERT_DATE": "2026-02-11T23:02:31Z",
+          "UPDATE_USER": "",
+          "UPDATE_DATE": "",
+          "OTM_RELEASE": "25.2.1-20250627"
+        },
+        {
+          "STATUS_TYPE_GID": "BAU.BAU_SH_AGENDAMENTO",
+          "STATUS_VALUE_GID": "BAU.SH_CLIENTE_RETIRA",
+          "STATUS_VALUE_XID": "SH_CLIENTE_RETIRA",
+          "OBJECT_TYPE": "SHIPMENT",
+          "DESCRIPTION": "CONTROLA O STATUS DO PROCESSO DE AGENDAMENTO DE UM SHIPMENT, COM BASE NA CONSOLIDACAO DAS INFORMACOES",
+          "SEQUENCE": "10",
+          "INITIAL_VALUE": "N",
+          "DOMAIN_NAME": "BAU",
+          "INSERT_USER": "",
+          "INSERT_DATE": "2026-02-26T00:27:16Z",
           "UPDATE_USER": "",
           "UPDATE_DATE": "",
           "OTM_RELEASE": "25.2.1-20250627"
@@ -1338,6 +1369,21 @@
       "OTM_RELEASE": "25.2.1-20250627"
     },
     {
+      "STATUS_TYPE_GID": "BAU.BAU_REM_AGENDAMENTO",
+      "STATUS_VALUE_GID": "BAU.REM_CLIENTE_RETIRA",
+      "STATUS_VALUE_XID": "REM_CLIENTE_RETIRA",
+      "OBJECT_TYPE": "ORDER_RELEASE",
+      "DESCRIPTION": "CONTROLA O STATUS DO PROCESSO DE AGENDAMENTO EXCLUSIVAMENTE PARA REMESSAS, REFLETINDO SEU ESTADO ANTE",
+      "SEQUENCE": "10",
+      "INITIAL_VALUE": "N",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "2026-02-26T00:27:16Z",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": "",
+      "OTM_RELEASE": "25.2.1-20250627"
+    },
+    {
       "STATUS_TYPE_GID": "BAU.BAU_REM_PICKING",
       "STATUS_VALUE_GID": "BAU.REM_PICKING_AGUARDANDO",
       "STATUS_VALUE_XID": "REM_PICKING_AGUARDANDO",
@@ -1633,6 +1679,21 @@
       "DOMAIN_NAME": "BAU",
       "INSERT_USER": "",
       "INSERT_DATE": "2026-02-11T23:02:31Z",
+      "UPDATE_USER": "",
+      "UPDATE_DATE": "",
+      "OTM_RELEASE": "25.2.1-20250627"
+    },
+    {
+      "STATUS_TYPE_GID": "BAU.BAU_SH_AGENDAMENTO",
+      "STATUS_VALUE_GID": "BAU.SH_CLIENTE_RETIRA",
+      "STATUS_VALUE_XID": "SH_CLIENTE_RETIRA",
+      "OBJECT_TYPE": "SHIPMENT",
+      "DESCRIPTION": "CONTROLA O STATUS DO PROCESSO DE AGENDAMENTO DE UM SHIPMENT, COM BASE NA CONSOLIDACAO DAS INFORMACOES",
+      "SEQUENCE": "10",
+      "INITIAL_VALUE": "N",
+      "DOMAIN_NAME": "BAU",
+      "INSERT_USER": "",
+      "INSERT_DATE": "2026-02-26T00:27:16Z",
       "UPDATE_USER": "",
       "UPDATE_DATE": "",
       "OTM_RELEASE": "25.2.1-20250627"

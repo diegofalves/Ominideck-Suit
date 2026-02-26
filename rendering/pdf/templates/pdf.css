@@ -50,7 +50,8 @@ page: landscape;
 }
 
 @page:first {
-@top-left { content: ""; }
+  @top-left { content: ""; }
+  @bottom-right { content: ""; }
 }
 
 /* ==============================
@@ -125,50 +126,96 @@ color: #111827;
 CAPA
 ============================== */
 .cover-page {
-page-break-after: always;
-display: flex;
-flex-direction: column;
-min-height: 247mm;
+  display: block;
+  text-align: center;
+
+  /* Remove flex completely to avoid vertical compression */
+  padding-bottom: 25mm;
+
+  page-break-after: always;
 }
 
 .cover-content {
-flex: 1;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 0 10mm;
+/* --- Compactação máxima de tabelas no PDF --- */
+table, tr, th, td,
+.metadata-table, .metadata-table tr, .metadata-table th, .metadata-table td,
+.object-table, .object-table tr, .object-table th, .object-table td,
+.roadmap-table, .roadmap-table tr, .roadmap-table th, .roadmap-table td {
+  margin: 0 !important;
+  padding: 0 1px !important;
+  line-height: 1 !important;
+  height: auto !important;
+  vertical-align: middle !important;
+  border-collapse: collapse !important;
+}
+
+/* Remove margens extras de elementos próximos às tabelas */
+table {
+  margin: 0 !important;
+}
+
+/* Remove padding e margens de thead, tbody, tfoot */
+thead, tbody, tfoot {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+  display: block; /* remove nested flex to prevent overlap */
+  text-align: center;
+  padding: 0 15mm;
 }
 
 .cover-logo img {
-height: 55px;
-margin-bottom: 32px;
+  height: 55px;
+  margin-bottom: 32px;
 }
 
 .cover-title {
-font-size: 24pt;
-font-weight: 600;
-color: #0F172A;
-max-width: 80%;
-margin: 0 auto 16px auto;
-line-height: 1.35;
+  font-size: 24pt;
+  font-weight: 600;
+  color: #0F172A;
+  max-width: 80%;
+  margin: 0 auto 16px auto;
+  line-height: 1.35;
 }
 
 .cover-divider {
-width: 90px;
-height: 3px;
-background: #1D4ED8;
-margin: 18px auto 30px auto;
+  width: 90px;
+  height: 3px;
+  background: #1D4ED8;
+  margin: 18px auto 30px auto;
+}
+
+/* Remove any header text block above cover title */
+.cover-page .cover-header,
+.cover-page .cover-meta,
+.cover-page .cover-subtitle {
+  display: none !important;
 }
 
 .cover-footer {
-text-align: center;
-font-size: 8.5pt;
-color: #94A3B8;
-margin-top: auto;
-letter-spacing: 0.4px;
-text-transform: uppercase;
+  position: absolute;
+  bottom: 20mm;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 8.5pt;
+  color: #94A3B8;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* Prevent margin collapsing and header interference on cover */
+.cover-page h1,
+.cover-page h2,
+.cover-page h3,
+.cover-page p {
+  margin-top: 0;
+}
+
+.cover-page .cover-title {
+  margin-top: 10mm;
+  margin-bottom: 10mm;
+  line-height: 1.25;
 }
 
 /* ==============================
@@ -182,9 +229,10 @@ margin-top: 10px;
 
 th, td {
 border: 1px solid #E5E7EB;
-padding: 8px 10px;
+padding: 0 2px;
 text-align: left;
 font-size: 10pt;
+line-height: 1;
 }
 
 th {
@@ -209,10 +257,12 @@ break-inside: avoid;
 }
 
 .group-block {
-margin-top: 28px;
-margin-bottom: 28px;
-padding-left: 22px;
-border-left: 4px solid #0F172A;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  padding-left: 0;
+  border-left: none;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .group-block h3 {
@@ -569,41 +619,47 @@ padding: 0;
    SUMÁRIO – CONTROLE FINAL
 ============================== */
 
-.toc ol,
-.toc li {
-  list-style: none !important;
-  list-style-type: none !important;
+.toc {
+  font-size: 11pt;
+  line-height: 1.6;
+}
+
+.toc ol {
+  list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .toc > ol > li {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.toc > ol > li > a {
+  font-weight: 600;
 }
 
 .toc > ol > li > ol {
-  margin-left: 20px;
-  margin-top: 6px;
+  margin-left: 18px;
+  margin-top: 4px;
+}
+
+.toc > ol > li > ol > li {
+  margin-bottom: 4px;
 }
 
 .toc > ol > li > ol > li > ol {
-  margin-left: 20px;
-  margin-top: 4px;
+  margin-left: 18px;
+  margin-top: 2px;
+}
+
+.toc > ol > li > ol > li > a {
+  font-weight: 500;
 }
 
 .toc a {
   text-decoration: none;
   color: #1D4ED8;
-  font-size: 11pt;
   display: block;
-}
-
-.toc li {
-  margin-bottom: 4px;
-}
-
-.toc li::marker {
-  content: "";
 }
 
 /* Mantém cabeçalho do grupo + 1º objeto juntos. Se não couber, sobe o bloco inteiro para a próxima página (evita órfão). */

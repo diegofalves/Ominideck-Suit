@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:56Z",
+  "generatedAt": "2026-02-26T01:11:48Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.PLANNING.LOAD_CONFIG_SETUP.LOAD_CONFIGURATION_SETUP.9",
@@ -23,7 +23,8 @@
     "otmTable": "LOAD_CONFIG_SETUP",
     "domainName": "BAU",
     "sequence": 9,
-    "deploymentType": "MIGRATION_PROJECT"
+    "deploymentType": "MIGRATION_PROJECT",
+    "simulatedExtractionQuery": "SELECT *\nLOAD_CONFIG_SETUP LOAD_CONFIG_SETUP\n  LOAD_CONFIG_SETUP_ORIENTATION LOAD_CONFIG_SETUP_ORIENTATION\n    ON LCSO.LOAD_CONFIG_SETUP_GID = LCS.LOAD_CONFIG_SETUP_GID\n    AND LCSO.DOMAIN_NAME = LCS.DOMAIN_NAME\nWHERE\n  LCS.DOMAIN_NAME = 'BAU'\nORDER BY\n  LCS.LOAD_CONFIG_SETUP_GID,\n  LCSO.ORIENTATION_GID"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

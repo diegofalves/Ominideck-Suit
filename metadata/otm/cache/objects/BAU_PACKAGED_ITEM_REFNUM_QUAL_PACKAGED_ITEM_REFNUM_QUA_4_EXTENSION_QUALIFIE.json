@@ -1,0 +1,98 @@
+{
+  "cacheType": "OTM_OBJECT_CACHE",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T01:11:31Z",
+  "source": "update_otm_object_cache.py",
+  "migrationItem": {
+    "migrationItemId": "MIGRATION_ITEM.EXTENSION_QUALIFIERS.PACKAGED_ITEM_REFNUM_QUAL.PACKAGED_ITEM_REFNUM_QUALIFIER.4",
+    "migrationItemName": "Packaged Item Refnum Qualifier",
+    "migrationGroupId": "EXTENSION_QUALIFIERS",
+    "objectType": "PACKAGED_ITEM_REFNUM_QUAL",
+    "otmTable": "PACKAGED_ITEM_REFNUM_QUAL",
+    "otmSubtables": [],
+    "domainName": "BAU",
+    "sequence": 4,
+    "deploymentType": "MIGRATION_PROJECT"
+  },
+  "object": {
+    "name": "Packaged Item Refnum Qualifier",
+    "groupId": "EXTENSION_QUALIFIERS",
+    "objectType": "PACKAGED_ITEM_REFNUM_QUAL",
+    "otmTable": "PACKAGED_ITEM_REFNUM_QUAL",
+    "domainName": "BAU",
+    "sequence": 4,
+    "deploymentType": "MIGRATION_PROJECT",
+    "simulatedExtractionQuery": "SELECT *\r\nPACKAGED_ITEM_REFNUM_QUAL PACKAGED_ITEM_REFNUM_QUAL PACKAGED_ITEM_REFNUM_QUAL_GID IN (SELECT PACKAGED_ITEM_REFNUM_QUAL_GID FROM PACKAGED_ITEM_REFNUM)\r\n  AND DOMAIN_NAME = 'BAU'\r\nORDER BY\r\n  DOMAIN_NAME,\r\n  PACKAGED_ITEM_REFNUM_QUAL_XID"
+  },
+  "extraction": {
+    "objectExtractionQueryLanguage": "SQL",
+    "objectExtractionQuerySource": "object_extraction_query",
+    "technicalContentType": "NONE",
+    "rootName": "PACKAGED_ITEM_REFNUM_QUAL",
+    "query": "SELECT *\r\nFROM\r\n  PACKAGED_ITEM_REFNUM_QUAL\r\nWHERE PACKAGED_ITEM_REFNUM_QUAL_GID IN (SELECT PACKAGED_ITEM_REFNUM_QUAL_GID FROM PACKAGED_ITEM_REFNUM)\r\n  AND DOMAIN_NAME = 'BAU'\r\nORDER BY\r\n  DOMAIN_NAME,\r\n  PACKAGED_ITEM_REFNUM_QUAL_XID",
+    "normalizedRowCount": 0,
+    "nonSchemaFieldsDetected": [],
+    "tableCount": 1,
+    "tableNames": [
+      "PACKAGED_ITEM_REFNUM_QUAL"
+    ],
+    "skippedSubtablesNoSchema": []
+  },
+  "tableHierarchy": {
+    "primaryTable": "PACKAGED_ITEM_REFNUM_QUAL",
+    "subtables": [],
+    "allTables": [
+      "PACKAGED_ITEM_REFNUM_QUAL"
+    ],
+    "skippedSubtablesNoSchema": []
+  },
+  "tables": {
+    "PACKAGED_ITEM_REFNUM_QUAL": {
+      "tableName": "PACKAGED_ITEM_REFNUM_QUAL",
+      "schema": {
+        "owner": "glogowner",
+        "tableName": "packaged_item_refnum_qual",
+        "columnCount": 10,
+        "columns": [
+          "PACKAGED_ITEM_REFNUM_QUAL_GID",
+          "PACKAGED_ITEM_REFNUM_QUAL_XID",
+          "PACKAGED_ITEM_REFNUM_QUAL_DESC",
+          "IS_VISIBLE_IF_MASTER_CARR",
+          "UPDATE_FLAG",
+          "DOMAIN_NAME",
+          "INSERT_USER",
+          "INSERT_DATE",
+          "UPDATE_USER",
+          "UPDATE_DATE"
+        ]
+      },
+      "extraction": {
+        "queryLanguage": "SQL",
+        "querySource": "object_extraction_query",
+        "rootName": "PACKAGED_ITEM_REFNUM_QUAL",
+        "query": "SELECT *\r\nFROM\r\n  PACKAGED_ITEM_REFNUM_QUAL\r\nWHERE PACKAGED_ITEM_REFNUM_QUAL_GID IN (SELECT PACKAGED_ITEM_REFNUM_QUAL_GID FROM PACKAGED_ITEM_REFNUM)\r\n  AND DOMAIN_NAME = 'BAU'\r\nORDER BY\r\n  DOMAIN_NAME,\r\n  PACKAGED_ITEM_REFNUM_QUAL_XID",
+        "normalizedRowCount": 0,
+        "nonSchemaFieldsDetected": []
+      },
+      "rows": []
+    }
+  },
+  "schema": {
+    "owner": "glogowner",
+    "tableName": "packaged_item_refnum_qual",
+    "columnCount": 10,
+    "columns": [
+      "PACKAGED_ITEM_REFNUM_QUAL_GID",
+      "PACKAGED_ITEM_REFNUM_QUAL_XID",
+      "PACKAGED_ITEM_REFNUM_QUAL_DESC",
+      "IS_VISIBLE_IF_MASTER_CARR",
+      "UPDATE_FLAG",
+      "DOMAIN_NAME",
+      "INSERT_USER",
+      "INSERT_DATE",
+      "UPDATE_USER",
+      "UPDATE_DATE"
+    ]
+  },
+  "rows": []
+}

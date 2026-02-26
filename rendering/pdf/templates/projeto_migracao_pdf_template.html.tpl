@@ -547,22 +547,46 @@
                                     {% set rows = cache.cache_data.tables[objeto.otm_table].rows %}
                                 {% endif %}
                                 {% if rows and rows|length > 0 %}
-                                    {# Coleta todas as chaves dinâmicas das linhas #}
+                                    {# Usa selected_columns se existir, senão coleta as chaves dinâmicas #}
                                     {% set all_keys = [] %}
-                                    {% for row in rows %}
-                                        {% if row.items is defined %}
-                                            {% for k in row.keys() %}
-                                                {% if k not in all_keys %}
-                                                    {% set _ = all_keys.append(k) %}
+                                    {% if objeto.selected_columns is defined and objeto.selected_columns %}
+                                        {% for col in objeto.selected_columns %}
+                                            {% set _ = all_keys.append(col) %}
+                                        {% endfor %}
+                                    {% else %}
+                                        {# Se não houver selected_columns, pega só a chave primária (primeira coluna de cada linha) #}
+                                        {% if rows and rows|length > 0 %}
+                                            {% set first_row = rows[0] %}
+                                            {% if first_row.items is defined %}
+                                                {% set first_key = first_row.keys()|list|first %}
+                                                {% if first_key %}
+                                                    {% set _ = all_keys.append(first_key) %}
                                                 {% endif %}
-                                            {% endfor %}
+                                            {% endif %}
                                         {% endif %}
+<<<<<<< HEAD
                                     {% endfor %}
                                     <table class="extraction-data-table">
+=======
+                                    {% endif %}
+                                    {% if not all_keys or all_keys|length == 0 %}
+                                        {% set all_keys = [] %}
+                                        {% for row in rows %}
+                                            {% if row.items is defined %}
+                                                {% for k in row.keys() %}
+                                                    {% if k not in all_keys %}
+                                                        {% set _ = all_keys.append(k) %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    <table class="metadata-table" style="table-layout: fixed; width: 100%;">
+>>>>>>> 7e4a903b48f4d7e63c76bb66a05d8497c8f811e1
                                         <thead>
                                             <tr>
-                                                {% for k in all_keys %}
-                                                    <th>{{ k }}</th>
+                                                {% for k in objeto.selected_columns %}
+                                                    <th>{{ k.split('.')[-1] }}</th>
                                                 {% endfor %}
                                             </tr>
                                         </thead>
@@ -570,8 +594,19 @@
                                             {% for row in rows %}
                                                 {% if row.items is defined %}
                                                     <tr>
-                                                        {% for k in all_keys %}
-                                                            <td>{{ row[k] if k in row else '' }}</td>
+                                                        {% for k in objeto.selected_columns %}
+                                                            {% set is_id_col = k.lower().endswith('_id') or k.lower().endswith('_gid') or k.lower().endswith('_xid') or k.lower() in ['id', 'codigo', 'code'] %}
+                                                            <td style="{{ 'overflow-wrap: anywhere; white-space: pre-wrap; padding: 0px 4px;' if is_id_col else 'word-break: break-all; overflow-wrap: break-word; hyphens: auto; white-space: pre-wrap; padding: 0px 4px;' }}">
+                                                                {% if k in row %}
+                                                                    {% if row[k] is iterable and row[k] is not string %}
+                                                                        {{ row[k]|join(', ') if row[k]|length > 0 else 'N/A' }}
+                                                                    {% else %}
+                                                                        <span style="white-space: normal; display: inline-block;">{{ (row[k] if row[k] else 'N/A')|trim }}</span>
+                                                                    {% endif %}
+                                                                {% else %}
+                                                                    'N/A'
+                                                                {% endif %}
+                                                            </td>
                                                         {% endfor %}
                                                     </tr>
                                                 {% endif %}

@@ -1,7 +1,7 @@
 {
   "cacheType": "OTM_OBJECT_CACHE",
   "version": "1.0",
-  "generatedAt": "2026-02-24T18:57:38Z",
+  "generatedAt": "2026-02-26T01:11:24Z",
   "source": "update_otm_object_cache.py",
   "migrationItem": {
     "migrationItemId": "MIGRATION_ITEM.EXTENSION_QUALIFIERS.ORDER_RELEASE_REFNUM_QUAL.ORDER_RELEASE_REFNUM_QUALIFIER.2",
@@ -21,7 +21,8 @@
     "otmTable": "ORDER_RELEASE_REFNUM_QUAL",
     "domainName": "BAU",
     "sequence": 2,
-    "deploymentType": "MIGRATION_PROJECT"
+    "deploymentType": "MIGRATION_PROJECT",
+    "simulatedExtractionQuery": "SELECT *\nORDER_RELEASE_REFNUM_QUAL ORDER_RELEASE_REFNUM_QUAL ORDER_RELEASE_REFNUM_QUAL_GID IN (SELECT ORDER_RELEASE_REFNUM_QUAL_GID FROM ORDER_RELEASE_REFNUM)\n  AND DOMAIN_NAME = 'BAU'\nORDER BY\n  DOMAIN_NAME,\n  ORDER_RELEASE_REFNUM_QUAL_XID"
   },
   "extraction": {
     "objectExtractionQueryLanguage": "SQL",

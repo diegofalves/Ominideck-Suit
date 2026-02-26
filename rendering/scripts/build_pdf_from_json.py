@@ -1,4 +1,6 @@
 import glob
+import sys
+import time
 def get_object_cache_data(domain_name, otm_table, migration_item_name=None):
     """
     Busca o arquivo de cache correto para o objeto/tabela usando o objects_index.json e retorna os dados do cache.
@@ -86,23 +88,11 @@ def highlight_sql(sql_text):
 
 def sanitize_text(value):
     if isinstance(value, str):
-        # Normaliza hífens
-        value = (
-            value
-            .replace("\u2010", "-")
-            .replace("\u2011", "-")
-            .replace("\u2012", "-")
-            .replace("\u2013", "-")
-            .replace("\u2014", "-")
-            .replace("\u2212", "-")
-        )
-
         # Remove qualquer caractere invisível ou não imprimível
         value = "".join(
             ch for ch in value
             if ch.isprintable()
         )
-
         return value
     return value
 
@@ -117,35 +107,27 @@ def load_data():
     with open(json_path, encoding="utf-8") as f:
         return json.load(f)
 
+def print_progress(percent, milestone=None):
+    bar_len = 40
+    filled_len = int(bar_len * percent // 100)
+    bar = '█' * filled_len + '-' * (bar_len - filled_len)
+    if milestone:
+        sys.stdout.write(f"\r[{bar}] {percent:3d}% - {milestone}   ")
+    else:
+        sys.stdout.write(f"\r[{bar}] {percent:3d}%   ")
+    sys.stdout.flush()
+    if percent == 100:
+        print()
+
 def build_html(data):
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), auto_reload=True, cache_size=0)
     template = env.get_template("projeto_migracao_pdf_template.html.tpl")
     # NOTE: cache_size=0 garante reload efetivo do template em cada execução (evita cache de Jinja durante depuração)
-    print("Jinja cache_size=0 (template reload forçado)")
+    # milestone: carregando template
+    print_progress(10, "Carregando template PDF")
 
-    # DEBUG: confirma qual template está sendo carregado
-    try:
-        print("TEMPLATE_DIR:", TEMPLATE_DIR)
-        print("Template carregado:", template.filename)
-        try:
-            import os
-            from datetime import datetime
-            mtime = os.path.getmtime(template.filename)
-            print("Template mtime:", datetime.fromtimestamp(mtime).isoformat(timespec="seconds"))
-
-            with open(template.filename, encoding="utf-8") as tf:
-                tpl_text = tf.read()
-            # Sanity check: verify if the moved Navigation block exists near the description area
-            desc_pos = tpl_text.find("<!-- Descrição Técnica -->")
-            nav_pos = tpl_text.find("Navegação OTM")
-            print("Template sanity (Descrição Técnica pos):", desc_pos)
-            print("Template sanity (Navegação OTM pos):", nav_pos)
-            if desc_pos != -1 and nav_pos != -1:
-                print("Template sanity (Nav after Desc):", nav_pos > desc_pos)
-        except Exception as e:
-            print("Erro ao checar mtime/sanity do template:", e)
-    except Exception as e:
-        print("Erro ao inspecionar template:", e)
+    # milestone: template carregado
+    print_progress(20, "Template carregado")
 
     # Copia profunda para evitar mutações
     import copy
@@ -199,6 +181,7 @@ def build_html(data):
 
 
     for g in groups:
+
         grupo_nome = g.get("label") or g.get("nome") or g.get("name")
         # Ignora grupos técnicos ou placeholders
         if not grupo_nome:
@@ -224,7 +207,6 @@ def build_html(data):
         normalized_objetos = []
 
         for obj in objetos:
-            # JSON como fonte única de verdade
             deployment_type = obj.get("deployment_type")
             if not deployment_type:
                 continue
@@ -238,31 +220,90 @@ def build_html(data):
             saved_query_id = obj.get("saved_query_id")
             responsavel = obj.get("responsible")
 
-            # Preserva TODOS os campos originais do JSON
             normalized_obj = dict(obj)
 
-            # Aplica highlight apenas no campo content, mantendo a estrutura original
             raw_query = obj.get("object_extraction_query")
             if isinstance(raw_query, dict) and raw_query.get("content"):
                 raw_query = dict(raw_query)
                 raw_query["content"] = highlight_sql(raw_query.get("content"))
 
-            # Busca dados de cache para o objeto/tabela
             domain_name = obj.get("domainName") or obj.get("domain")
             migration_item_name = obj.get("migration_item_name") or obj.get("name")
+
             cache_results = None
-            if domain_name and otm_table:
+
+            selected_columns = obj.get("selected_columns")
+            simulated_query = obj.get("simulatedExtractionQuery")
+            otm_primary_key = obj.get("otm_primary_key")
+
+            # Se não houver selected_columns, usa a primary key como padrão (apenas o nome da coluna, sem prefixo de tabela)
+            if not selected_columns and otm_primary_key:
+                if isinstance(otm_primary_key, list):
+                    selected_columns = [col for col in otm_primary_key]
+                elif isinstance(otm_primary_key, str):
+                    selected_columns = [otm_primary_key]
+
+            if domain_name and otm_table and simulated_query and selected_columns:
                 cache_results = get_object_cache_data(domain_name, otm_table, migration_item_name)
+                # Nova lógica: simula JOINs simples para selected_columns que referenciam subtabelas
+                for cache in cache_results or []:
+                    cache_data = cache.get("cache_data", {})
+                    # Busca linhas da tabela principal
+                    rows = None
+                    if cache_data.get("data") and cache_data["data"].get("rows"):
+                        rows = cache_data["data"]["rows"]
+                    elif cache_data.get("tables") and otm_table in cache_data["tables"] and cache_data["tables"][otm_table].get("rows"):
+                        rows = cache_data["tables"][otm_table]["rows"]
+
+                    # Indexa subtabelas por nome
+                    subtables = {}
+                    if cache_data.get("tables"):
+                        for tbl_name, tbl_data in cache_data["tables"].items():
+                            if tbl_data.get("rows"):
+                                subtables[tbl_name] = tbl_data["rows"]
+
+                    filtered_rows = []
+                    if rows:
+                        for row in rows:
+                            filtered_row = {}
+                            for col in selected_columns:
+                                if "." in col:
+                                    tbl, col_name = col.split(".", 1)
+                                    if tbl == otm_table:
+                                        filtered_row[col] = row.get(col_name, "")
+                                    elif tbl in subtables:
+                                        # Tenta associar pelo campo de chave (ex: *_GID)
+                                        main_keys = [k for k in row.keys() if k.endswith("_GID") or k.endswith("_ID") or k.endswith("_XID")]
+                                        match = None
+                                        for sub_row in subtables[tbl]:
+                                            for key in main_keys:
+                                                if key in sub_row and row[key] == sub_row[key]:
+                                                    match = sub_row
+                                                    break
+                                            if match:
+                                                break
+                                        filtered_row[col] = match.get(col_name, "") if match else ""
+                                    else:
+                                        filtered_row[col] = ""
+                                else:
+                                    filtered_row[col] = row.get(col, "")
+                            # Só adiciona se houver pelo menos uma célula preenchida
+                            if any(filtered_row.values()):
+                                filtered_rows.append(filtered_row)
+                            else:
+                                # Se todas as células estão vazias, ainda assim adiciona a linha para garantir renderização
+                                filtered_rows.append(filtered_row)
+                        # Atualiza as linhas filtradas no cache_data
+                        if cache_data.get("data") and cache_data["data"].get("rows"):
+                            cache_data["data"]["rows"] = filtered_rows
+                        elif cache_data.get("tables") and otm_table in cache_data["tables"] and cache_data["tables"][otm_table].get("rows"):
+                            cache_data["tables"][otm_table]["rows"] = filtered_rows
+
+
+            # Garante que selected_columns sempre está presente no objeto normalizado
+            normalized_obj["selected_columns"] = selected_columns
             normalized_obj["object_cache_results"] = cache_results
 
-            # DEBUG: printa se encontrou dados de cache
-            if cache_results:
-                print(f"[CACHE] Objeto: {normalized_obj.get('name') or normalized_obj.get('migration_item_name')} | Domínio: {domain_name} | Tabela: {otm_table}")
-                print(f"[CACHE] Arquivos encontrados: {[c['file'] for c in cache_results]}")
-                for c in cache_results:
-                    print(f"[CACHE] Exemplo de dados: {str(c.get('cache_data'))[:500]}")
-
-            # Normalizações e aliases padronizados para o template (alinhado 100% com o JSON)
             normalized_obj.update({
                 "codigo": codigo,
                 "name": obj.get("name"),
@@ -412,14 +453,14 @@ def build_html(data):
 
     # Campos principais padronizados
     projeto_context.update({
-        "nome": project.get("name"),
-        "codigo": project.get("code"),
+        "nome": sanitize_text(project.get("name")),
+        "codigo": project.get("code"),  # NÃO sanitizar código
         "versao": project.get("version"),
-        "responsavel": project.get("consultant"),
+        "responsavel": sanitize_text(project.get("consultant")),
         "data_geracao": project_metadata.get("generated_at") or datetime.now().strftime("%d/%m/%Y"),
-        "objetivo": migration_obj[0] if migration_obj else None,
-        "escopo": project_metadata.get("scope"),
-        "cliente": project_metadata.get("client"),
+        "objetivo": sanitize_text(migration_obj[0]) if migration_obj else None,
+        "escopo": sanitize_text(project_metadata.get("scope")),
+        "cliente": sanitize_text(project_metadata.get("client")),
         # Status com interpretação funcional segura
         "status": (
             (lambda state: (
@@ -428,7 +469,7 @@ def build_html(data):
                 else STATUS_LOOKUP.get(state, state)
             ))(project.get("state"))
         ),
-        "subtitulo": project_metadata.get("subtitle"),
+        "subtitulo": sanitize_text(project_metadata.get("subtitle")),
         "logo_path": project_metadata.get("logo_path"),
         # URLs de ambiente (para renderização como hyperlink no template)
         "environment_source_url": sanitize_text(
@@ -456,106 +497,79 @@ def build_html(data):
         if key not in projeto_context:
             projeto_context[key] = value
 
+    print_progress(60, "Renderizando HTML")
     html = template.render(projeto=projeto_context)
+    print_progress(70, "HTML renderizado")
     return html
 
 def main():
-    data = load_data()
-    html_string = build_html(data)
+        print_progress(0, "Iniciando geração PDF")
+        data = load_data()
+        print_progress(30, "Dados carregados")
+        html_string = build_html(data)
 
-    try:
-        with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
-            f.write(html_string)
-        print("HTML debug gerado em:", OUTPUT_HTML)
-    except Exception as e:
-        print("Falha ao gravar HTML debug:", e)
+        try:
+                with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
+                        f.write(html_string)
+                print_progress(75, f"HTML debug salvo: {OUTPUT_HTML}")
+        except Exception as e:
+                print_progress(75, f"Falha ao gravar HTML debug: {e}")
 
-    print("Base URL (templates):", TEMPLATE_DIR)
-    print("CSS:", os.path.join(TEMPLATE_DIR, "pdf.css"))
-    print("Gerando PDF em:", OUTPUT_PDF)
+        # milestone: preparando PDF
+        print_progress(80, "Preparando PDF")
+        template_base = os.path.abspath(TEMPLATE_DIR)
+        css_path = os.path.abspath(os.path.join(TEMPLATE_DIR, "pdf.css"))
 
-    # Garante caminhos absolutos para evitar problemas de resolução no WeasyPrint
-    template_base = os.path.abspath(TEMPLATE_DIR)
-    css_path = os.path.abspath(os.path.join(TEMPLATE_DIR, "pdf.css"))
+        html = HTML(
+                string=html_string,
+                base_url=template_base
+        )
 
-    print("Base URL absoluto:", template_base)
-    print("CSS absoluto:", css_path)
+        css = CSS(filename=css_path)
 
-    html = HTML(
-        string=html_string,
-        base_url=template_base
-    )
-
-    css = CSS(filename=css_path)
-
-    # ---------------------------------------------------------
-    # WeasyPrint: overrides pontuais para evitar quebra artificial
-    # entre cabeçalho do grupo e primeiro objeto.
-    #
-    # Sintoma: o título do grupo fica no fim da página anterior
-    # e o primeiro objeto é empurrado inteiro para a próxima página,
-    # gerando página "quase vazia".
-    #
-    # Causa típica: algum bloco está sendo tratado como "não quebrável"
-    # (break-inside: avoid / page-break-inside: avoid), especialmente
-    # quando há <pre> grandes.
-    #
-    # Estratégia: permitir quebra dentro de .group-item e dentro de <pre>,
-    # e impedir quebra imediatamente após .group-head.
-    # ---------------------------------------------------------
-    weasyprint_fix_css = CSS(
-        string="""
+        weasyprint_fix_css = CSS(
+                string="""
 /* === WeasyPrint FIX: evitar páginas vazias entre grupo e 1º objeto === */
 
-/* Mantém o cabeçalho do grupo grudado no conteúdo seguinte */
 .group-head {
-  break-after: avoid-page;
-  page-break-after: avoid;
+    break-after: avoid-page;
+    page-break-after: avoid;
 }
-
-/* Permite que o item quebre entre páginas (não pode ser um bloco "inteiro") */
 .group-item,
 .group-item-first,
 .object-status,
 .object-extraction,
 .object-technical,
 .object-relationships {
-  break-inside: auto;
-  page-break-inside: auto;
+    break-inside: auto;
+    page-break-inside: auto;
 }
-
-/* Garante que o primeiro item não force início em nova página */
 .group-item-first {
-  break-before: auto;
-  page-break-before: auto;
+    break-before: auto;
+    page-break-before: auto;
 }
-
-/* Se a introdução for grande, não trate como bloco indivisível */
 .groups-intro,
 .no-page-break {
-  break-inside: auto;
-  page-break-inside: auto;
+    break-inside: auto;
+    page-break-inside: auto;
 }
-
-/* Blocos de código precisam quebrar e fazer wrap */
 pre,
 code {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
-
 pre {
-  max-width: 100%;
+    max-width: 100%;
 }
 """
-    )
+        )
 
-    html.write_pdf(
-        OUTPUT_PDF,
-        stylesheets=[css, weasyprint_fix_css]
-    )
-    print("PDF gerado em:", OUTPUT_PDF)
+        html.write_pdf(
+                OUTPUT_PDF,
+                stylesheets=[css, weasyprint_fix_css]
+        )
+        print_progress(100, f"PDF gerado: {OUTPUT_PDF}")
 
 if __name__ == "__main__":
-    main()
+        main()
