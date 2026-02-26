@@ -396,22 +396,7 @@ def build_html(data):
                 "otm_navigation_equivalence_confidence": obj.get("otm_navigation_equivalence_confidence")
             })
 
-            # Bloco de debug: salva informações de cache e colunas no objeto para inspeção no HTML
-            debug_info = {}
-            debug_info["selected_columns"] = selected_columns
-            debug_info["cache_results"] = cache_results
-            debug_info["cache_rows"] = []
-            if cache_results:
-                for cache in cache_results:
-                    cache_data = cache.get("cache_data", {})
-                    rows = None
-                    if cache_data.get("data") and cache_data["data"].get("rows"):
-                        rows = cache_data["data"]["rows"]
-                    elif cache_data.get("tables") and otm_table in cache_data["tables"] and cache_data["tables"][otm_table].get("rows"):
-                        rows = cache_data["tables"][otm_table]["rows"]
-                    if rows:
-                        debug_info["cache_rows"].append(rows)
-            normalized_obj["_debug"] = debug_info
+            # ...removido bloco de debug...
             normalized_objetos.append(normalized_obj)
 
         # Adiciona grupo normalizado à estrutura final (inclui descrição do grupo)
