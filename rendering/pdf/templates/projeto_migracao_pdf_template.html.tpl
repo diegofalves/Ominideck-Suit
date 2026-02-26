@@ -712,6 +712,56 @@
                     {% endif %}
 
                 </div>
+                {% if objeto.object_cache_results %}
+                <section class="page landscape object-extraction-result">
+                    <p><strong>Resultado da Extração:</strong></p>
+                    {% set cache = objeto.object_cache_results[0] if objeto.object_cache_results|length > 0 else None %}
+                    {% if cache %}
+                        {% set rows = None %}
+                        {% if cache.cache_data and cache.cache_data.data and cache.cache_data.data.rows %}
+                            {% set rows = cache.cache_data.data.rows %}
+                        {% elif cache.cache_data and cache.cache_data.tables and objeto.otm_table and cache.cache_data.tables[objeto.otm_table] and cache.cache_data.tables[objeto.otm_table].rows %}
+                            {% set rows = cache.cache_data.tables[objeto.otm_table].rows %}
+                        {% endif %}
+                        {% if rows and rows|length > 0 %}
+                            <div style="color: red; font-weight: bold;">[DEBUG PDF] Renderização ativa para objeto: {{ objeto.name }} (Tabela: {{ objeto.otm_table }})<br>[DEBUG PDF] Cache utilizado: {{ cache.file }}</div>
+                            <table class="extraction-data-table">
+                                <thead>
+                                    <tr>
+                                        {% for k in objeto.selected_columns %}
+                                            <th>{{ k.split('.')[-1] }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in rows %}
+                                        {% if row.items is defined %}
+                                            <tr>
+                                                {% for k in objeto.selected_columns %}
+                                                    <td style="word-break: break-word; overflow-wrap: break-word; hyphens: none; padding: 0px 4px;">
+                                                        {% if k in row %}
+                                                            {% if row[k] is iterable and row[k] is not string %}
+                                                                {{ row[k]|join(', ') if row[k]|length > 0 else 'N/A' }}
+                                                            {% else %}
+                                                                {{ (row[k] if row[k] is not none and row[k] != '' else 'N/A')|trim }}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            N/A
+                                                        {% endif %}
+                                                    </td>
+                                                {% endfor %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p style="color: #c00;">Nenhum dado encontrado nas linhas do cache.</p>
+                        {% endif %}
+                    {% endif %}
+                </section>
+                <div style="page-break-before: always;"></div>
+                {% endif %}
                 {% endfor %}
             {% endif %}
 

@@ -26,20 +26,43 @@ def build_cache_filename(domain_name, table_name, migration_group_id, migration_
     filename = f"{domain_token}_{table_token}_{name_token}_{sequence_token}_{group_token}.json"
     return filename
 
+def _load_cache_file(file_path):
+    try:
+        with open(file_path, encoding="utf-8") as f:
+            return [{"file": str(file_path), "cache_data": json.load(f)}]
+    except Exception:
+        return None
+
 def get_object_cache_data(domain_name, otm_table, migration_item_name=None, migration_group_id=None, sequence=None):
     cache_dir = Path(BASE_DIR) / "../../metadata/otm/cache/objects"
+    if not cache_dir.is_dir():
+        return None
+
     filename = build_cache_filename(domain_name, otm_table, migration_group_id, migration_item_name, sequence)
-    file_path = cache_dir / filename
-    if file_path.exists():
-        with open(file_path, encoding="utf-8") as cache_file:
-            try:
-                cache_data = json.load(cache_file)
-                return [{
-                    "file": str(file_path),
-                    "cache_data": cache_data
-                }]
-            except Exception:
-                return None
+
+    # Camada 1: match exato (esperado em ambientes case-insensitive como macOS)
+    exact_path = cache_dir / filename
+    if exact_path.exists():
+        return _load_cache_file(exact_path)
+
+    # Camada 2: match case-insensitive (Linux com arquivos em UPPERCASE)
+    filename_lower = filename.lower()
+    for f in cache_dir.iterdir():
+        if f.name.lower() == filename_lower:
+            return _load_cache_file(f)
+
+    # Camada 3: fallback por domínio + tabela + sequência + grupo (ignora variação no migration_item_name)
+    domain_slug = _slugify(domain_name or "")
+    table_slug = _slugify(otm_table or "")
+    group_slug = _short_slug(migration_group_id or "", 18).lower()
+    seq_str = re.sub(r"[^0-9]+", "", str(sequence or "").strip()) or "0"
+    prefix = f"{domain_slug}_{table_slug}_"
+    suffix = f"_{seq_str}_{group_slug}.json"
+    for f in cache_dir.iterdir():
+        fname_lower = f.name.lower()
+        if fname_lower.startswith(prefix) and fname_lower.endswith(suffix):
+            return _load_cache_file(f)
+
     return None
 import os
 import sys
