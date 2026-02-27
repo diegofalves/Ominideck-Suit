@@ -26,7 +26,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='omni_launcher',
+    name='OmniDeck Suite',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -46,12 +46,22 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='omni_launcher',
+    name='OmniDeck Suite',
 )
 
 app = BUNDLE(
     coll,
-    name='omni_launcher.app',
-    icon=None,
-    bundle_identifier=None,
+    name='OmniDeck Suite.app',
+    icon='omnideck_icon.icns',
+    bundle_identifier='com.diego.omnidecksuite',
+    info_plist={
+        "CFBundleName": "OmniDeck Suite",
+        "CFBundleDisplayName": "OmniDeck Suite",
+        "CFBundleIdentifier": "com.diego.omnidecksuite",
+        "CFBundleVersion": "1.0.0",
+        "CFBundleShortVersionString": "1.0.0",
+        "LSMinimumSystemVersion": "11.0",
+        "NSHighResolutionCapable": True,
+        "LSUIElement": False,
+    },
 )

@@ -76,12 +76,13 @@ app.config.update(
     DEBUG=False,
 )
 
- # Ajuste de PROJECT_ROOT para funcionar corretamente no PyInstaller
+# PROJECT_ROOT fixo apontando para a pasta real do projeto no macOS.
+# Assim o .app funciona apenas como interface e mantém vínculo
+# com os JSON originais já existentes no projeto.
 if getattr(sys, "frozen", False):
-    # sys.executable -> .../omni_launcher.app/Contents/MacOS/omni_launcher
-    # Precisamos usar .../Contents/Resources como raiz real do projeto
-    macos_dir = Path(sys.executable).resolve().parent
-    PROJECT_ROOT = macos_dir.parent / "Resources"
+    PROJECT_ROOT = Path(
+        "/Users/diegoalves/Documents/01 - Diego/02 - Trabalhos/05 - ITC/02 - Projetos/01 - Bauducco/04 - Desevolvimentos OTM/00 - Ominideck - Bauducco"
+    )
 else:
     PROJECT_ROOT = Path(__file__).resolve().parents[2]
 GROUP_ZERO_ID = "SEM_GRUPO"
