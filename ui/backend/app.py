@@ -23,14 +23,67 @@ from ui.backend.schema_repository import SchemaRepository
 # -------------------------------------------------
 # App
 # -------------------------------------------------
+ # Ajuste robusto de paths para modo normal e empacotado
+if getattr(sys, "frozen", False):
+    # Quando empacotado via PyInstaller (.app),
+    # sys.executable -> .../omni_launcher.app/Contents/MacOS/omni_launcher
+    # Precisamos apontar para .../Contents/Resources
+    macos_dir = Path(sys.executable).resolve().parent
+    resources_dir = macos_dir.parent / "Resources"
+    base_path = resources_dir
+else:
+    # Execução normal (dev)
+    base_path = Path(__file__).resolve().parent.parent
+
+base_path = str(base_path)
+
+template_path = os.path.join(base_path, "ui", "frontend", "templates")
+static_path = os.path.join(base_path, "ui", "frontend", "static")
+
 app = Flask(
     __name__,
-    template_folder="../frontend/templates",
-    static_folder="../frontend/static"
+    template_folder=template_path,
+    static_folder=static_path
 )
 app.secret_key = os.environ.get("OMNIDECK_SECRET_KEY", "omnideck-internal-secret")
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+# -------------------------------------------------
+# Hard override de debug/relo ader (proteção contra loop no bundle)
+# -------------------------------------------------
+app.config.update(
+    ENV="production",
+    DEBUG=False,
+    TESTING=False,
+    TEMPLATES_AUTO_RELOAD=False,
+)
+app.debug = False
+app.jinja_env.auto_reload = False
+
+# Monkey patch defensivo: força qualquer chamada externa a app.run()
+# (ex: via omni_launcher) a nunca ativar debug ou reloader.
+_original_run = app.run
+
+def _safe_run(*args, **kwargs):
+    kwargs["debug"] = False
+    kwargs["use_reloader"] = False
+    return _original_run(*args, **kwargs)
+
+app.run = _safe_run
+
+# Força modo produção quando executado via launcher
+app.config.update(
+    ENV="production",
+    DEBUG=False,
+)
+
+ # Ajuste de PROJECT_ROOT para funcionar corretamente no PyInstaller
+if getattr(sys, "frozen", False):
+    # sys.executable -> .../omni_launcher.app/Contents/MacOS/omni_launcher
+    # Precisamos usar .../Contents/Resources como raiz real do projeto
+    macos_dir = Path(sys.executable).resolve().parent
+    PROJECT_ROOT = macos_dir.parent / "Resources"
+else:
+    PROJECT_ROOT = Path(__file__).resolve().parents[2]
 GROUP_ZERO_ID = "SEM_GRUPO"
 LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
 IGNORED_GROUP_ID = "IGNORADOS"
@@ -1619,13 +1672,27 @@ def projeto_migracao():
     )
 
 
+
 # -------------------------------------------------
 # Bootstrap
 # -------------------------------------------------
 if __name__ == "__main__":
+    import os
+
+    # Blindagem total contra modo debug/reloader (inclusive via variáveis externas)
+    os.environ["FLASK_ENV"] = "production"
+    os.environ["FLASK_DEBUG"] = "0"
+
+    app.config.update(
+        ENV="production",
+        DEBUG=False,
+        TESTING=False,
+    )
+
     app.run(
-        host="0.0.0.0",
+        host="127.0.0.1",
         port=8088,
         debug=False,
-        use_reloader=False
+        use_reloader=False,
+        threaded=True
     )
