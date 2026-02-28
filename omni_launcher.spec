@@ -18,11 +18,13 @@ a = Analysis(
 )
 
 a.datas += Tree('ui', prefix='ui')
+a.datas += Tree('domain', prefix='domain')
+a.datas += Tree('metadata', prefix='metadata')
 
 pyz = PYZ(a.pure)
 
 exe = EXE(
-    pyz,
+    pyz,    
     a.scripts,
     [],
     exclude_binaries=True,
