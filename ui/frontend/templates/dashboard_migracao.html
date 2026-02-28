@@ -204,17 +204,24 @@
         <article class="phase">
           <div class="phase-title">Documentação</div>
           <div class="phase-numbers">{{ dashboard.phases.documentation.done }} de {{ dashboard.phases.documentation.total }} concluídos · {{ dashboard.phases.documentation.pct }}%</div>
-          <div class="bar"><span style="width: {{ dashboard.phases.documentation.pct }}%"></span></div>
+          <div class="bar"><span id="bar-doc"></span></div>
         </article>
         <article class="phase">
           <div class="phase-title">Deploy</div>
           <div class="phase-numbers">{{ dashboard.phases.deployment.done }} de {{ dashboard.phases.deployment.total }} concluídos · {{ dashboard.phases.deployment.pct }}%</div>
-          <div class="bar"><span style="width: {{ dashboard.phases.deployment.pct }}%"></span></div>
+          <div class="bar"><span id="bar-deploy"></span></div>
         </article>
         <article class="phase">
           <div class="phase-title">Migration Project</div>
           <div class="phase-numbers">{{ dashboard.phases.migration_project.done }} de {{ dashboard.phases.migration_project.total }} concluídos · {{ dashboard.phases.migration_project.pct }}%</div>
-          <div class="bar"><span style="width: {{ dashboard.phases.migration_project.pct }}%"></span></div>
+          <div class="bar"><span id="bar-migration"></span></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('bar-doc').style.width = '{{ dashboard.phases.documentation.pct|int }}%';
+                document.getElementById('bar-deploy').style.width = '{{ dashboard.phases.deployment.pct|int }}%';
+                document.getElementById('bar-migration').style.width = '{{ dashboard.phases.migration_project.pct|int }}%';
+              });
+            </script>
         </article>
       </div>
     </section>
