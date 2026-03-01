@@ -82,8 +82,10 @@ Se houver aviso de assinatura ad-hoc no macOS, o app ainda pode ser copiado manu
 ## Rotas principais esperadas
 
 - `/` → Home
-- `/dashboard-migracao` → Dashboard
-- `/projeto-migracao` → Painel de projeto
+- `/dashboard-documento-migracao` → Dashboard (canônica)
+- `/documento-migracao` → Painel de documento (canônica)
+- `/dashboard-migracao` → Dashboard (alias legado, retrocompatível)
+- `/projeto-migracao` → Painel de projeto (alias legado, retrocompatível)
 - `/cadastros` → Cadastros
 - `/execucao-scripts` → Execução de scripts
 - `/api/health` → Health check

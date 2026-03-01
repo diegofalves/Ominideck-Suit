@@ -76,6 +76,10 @@ LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
 IGNORED_GROUP_ID = "IGNORADOS"
 PROTECTED_GROUP_IDS = set(LEGACY_GROUP_ZERO_IDS) | {IGNORED_GROUP_ID}
 CADASTROS_PATH = PROJECT_ROOT / "domain" / "consultoria" / "cadastros.json"
+ROUTE_DASHBOARD_MIGRACAO = "/dashboard-migracao"
+ROUTE_DASHBOARD_DOCUMENTO_MIGRACAO = "/dashboard-documento-migracao"
+ROUTE_PROJETO_MIGRACAO = "/projeto-migracao"
+ROUTE_DOCUMENTO_MIGRACAO = "/documento-migracao"
 
 # -------------------------------------------------
 # Rotas
@@ -495,7 +499,14 @@ def _new_id(prefix: str) -> str:
 @app.after_request
 def disable_cache_for_dynamic_routes(response):
     path = request.path or ""
-    if path in {"/projeto-migracao", "/execucao-scripts", "/dashboard-migracao", "/cadastros"} or path.startswith("/api/"):
+    if path in {
+        ROUTE_PROJETO_MIGRACAO,
+        ROUTE_DOCUMENTO_MIGRACAO,
+        "/execucao-scripts",
+        ROUTE_DASHBOARD_MIGRACAO,
+        ROUTE_DASHBOARD_DOCUMENTO_MIGRACAO,
+        "/cadastros",
+    } or path.startswith("/api/"):
         return _apply_no_cache_headers(response)
     return response
 
@@ -1252,7 +1263,8 @@ def cadastros():
     )
 
 
-@app.route("/dashboard-migracao", methods=["GET"])
+@app.route(ROUTE_DASHBOARD_MIGRACAO, methods=["GET"])
+@app.route(ROUTE_DASHBOARD_DOCUMENTO_MIGRACAO, methods=["GET"])
 def dashboard_migracao():
     session["can_access_migration_panel"] = True
     project = load_project() or {}
@@ -1341,10 +1353,11 @@ def api_edit_group():
     })
 
 
-@app.route("/projeto-migracao", methods=["GET", "POST"])
+@app.route(ROUTE_PROJETO_MIGRACAO, methods=["GET", "POST"])
+@app.route(ROUTE_DOCUMENTO_MIGRACAO, methods=["GET", "POST"])
 def projeto_migracao():
     if not session.get("can_access_migration_panel"):
-        return redirect("/dashboard-migracao")
+        return redirect(ROUTE_DASHBOARD_DOCUMENTO_MIGRACAO)
 
     data = load_all()
     project = load_project()
@@ -1363,7 +1376,7 @@ def projeto_migracao():
                 project["active_group_id"] = active_group_id
                 project["active_migration_group_id"] = active_group_id
             save_project(project)
-            return redirect("/projeto-migracao")
+            return redirect(ROUTE_DOCUMENTO_MIGRACAO)
 
         # ===== REMOVER ITEM =====
         remove_object_index = _get_form_value(request.form, "remove_object_index", "")
@@ -1386,17 +1399,17 @@ def projeto_migracao():
                                 save_project(project)
                             break
                 
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
             except (ValueError, KeyError) as e:
                 print(f"⚠️ Erro ao remover item: {e}")
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
         
         # ===== REMOVER GRUPO =====
         remove_group_id = _get_form_value(request.form, "remove_group_id", "")
         if remove_group_id != "":
             try:
                 if str(remove_group_id).strip().upper() in PROTECTED_GROUP_IDS:
-                    return redirect("/projeto-migracao")
+                    return redirect(ROUTE_DOCUMENTO_MIGRACAO)
 
                 if project.get("groups"):
                     # Encontrar e remover o grupo
@@ -1413,10 +1426,10 @@ def projeto_migracao():
                             save_project(project)
                             break
                 
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
             except (ValueError, KeyError) as e:
                 print(f"⚠️ Erro ao remover grupo: {e}")
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
         
         # ===== MOVER ITEM PARA OUTRO GRUPO =====
         move_object_index = _get_form_value(request.form, "move_object_index", "")
@@ -1455,10 +1468,10 @@ def projeto_migracao():
                         
                         save_project(project)
                 
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
             except (ValueError, KeyError) as e:
                 print(f"⚠️ Erro ao mover item: {e}")
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
         
         # Se acao for carregar grupo para edição
         if action == "load_group":
@@ -1474,7 +1487,7 @@ def projeto_migracao():
                     project["active_group_id"] = requested_group_id
                     project["active_migration_group_id"] = requested_group_id
                 save_project(project)
-            return redirect("/projeto-migracao#group-edit-panel")
+            return redirect(f"{ROUTE_DOCUMENTO_MIGRACAO}#group-edit-panel")
 
         # Se acao e apenas carregar item, salvar apenas o state sem validar
         if action == "load_object":
@@ -1490,7 +1503,7 @@ def projeto_migracao():
                     project["active_group_id"] = requested_group_id
                     project["active_migration_group_id"] = requested_group_id
                 save_project(project)
-            return redirect("/projeto-migracao#object-edit-panel")
+            return redirect(f"{ROUTE_DOCUMENTO_MIGRACAO}#object-edit-panel")
 
         # ===== SALVAR GRUPO =====
         if action == "save_group":
@@ -1536,7 +1549,7 @@ def projeto_migracao():
                 project["active_group_id"] = save_group_id
                 project["active_migration_group_id"] = save_group_id
                 save_project(project)
-            return redirect("/projeto-migracao")
+            return redirect(ROUTE_DOCUMENTO_MIGRACAO)
 
         # Salvar apenas o item em edicao (sem bloquear por validacoes globais do projeto).
         # Também entra aqui quando a flag de ignore foi alterada no formulário.
@@ -1576,7 +1589,7 @@ def projeto_migracao():
             object_type = _get_form_value(request.form, "object_type", "") or _get_form_value(request.form, "object_otm_table", "")
 
             if not active_group_id:
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
 
             projected_domain = form_to_domain(request.form, existing_project=project)
             source_group = None
@@ -1586,7 +1599,7 @@ def projeto_migracao():
                     break
 
             if not isinstance(source_group, dict):
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
 
             resolved_source_idx = _resolve_object_index(
                 source_group,
@@ -1595,7 +1608,7 @@ def projeto_migracao():
                 object_type,
             )
             if resolved_source_idx is None:
-                return redirect("/projeto-migracao")
+                return redirect(ROUTE_DOCUMENTO_MIGRACAO)
 
             try:
                 validate_subtable_constraints_for_object(
@@ -1634,7 +1647,7 @@ def projeto_migracao():
                     projected_domain["active_group_id"] = active_group_id
                     projected_domain["state"]["last_edit_object_index"] = resolved_source_idx
             save_project(projected_domain)
-            return redirect("/projeto-migracao")
+            return redirect(ROUTE_DOCUMENTO_MIGRACAO)
         
         # Caso contrário, validar e salvar normalmente
         domain_data = form_to_domain(request.form, existing_project=project)
@@ -1654,7 +1667,7 @@ def projeto_migracao():
             )
 
         save_project(domain_data)
-        return redirect("/projeto-migracao")
+        return redirect(ROUTE_DOCUMENTO_MIGRACAO)
 
     # Montar columns_catalog: dicionário {tabela: [colunas]}
     from ui.backend.schema_repository import SchemaRepository
