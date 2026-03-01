@@ -724,7 +724,6 @@
                             {% set rows = cache.cache_data.tables[objeto.otm_table].rows %}
                         {% endif %}
                         {% if rows and rows|length > 0 %}
-                            <div style="color: red; font-weight: bold;">[DEBUG PDF] Renderização ativa para objeto: {{ objeto.name }} (Tabela: {{ objeto.otm_table }})<br>[DEBUG PDF] Cache utilizado: {{ cache.file }}</div>
                             <table class="extraction-data-table">
                                 <thead>
                                     <tr>

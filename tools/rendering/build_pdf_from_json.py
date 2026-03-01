@@ -115,10 +115,10 @@ def sanitize_text(value):
     return value
 
 BASE_DIR = os.path.dirname(__file__)
-TEMPLATE_DIR = os.path.join(BASE_DIR, "../pdf/templates")
+TEMPLATE_DIR = os.path.join(BASE_DIR, "../../rendering/pdf/templates")
 DOMAIN_DIR = os.path.join(BASE_DIR, "../../domain/projeto_migracao")
-OUTPUT_PDF = os.path.join(BASE_DIR, "../pdf/documento_migracao.pdf")
-OUTPUT_HTML = os.path.join(BASE_DIR, "../pdf/documento_migracao.debug.html")
+OUTPUT_PDF = os.path.join(BASE_DIR, "../../rendering/pdf/documento_migracao.pdf")
+OUTPUT_HTML = os.path.join(BASE_DIR, "../../rendering/pdf/documento_migracao.debug.html")
 
 def load_data():
     json_path = os.path.join(DOMAIN_DIR, "documento_migracao.json")
@@ -567,17 +567,17 @@ def main():
         print(f"⚠️  Falha ao gravar HTML debug: {e}")
 
     template_base = os.path.abspath(TEMPLATE_DIR)
-        css_path = os.path.abspath(os.path.join(TEMPLATE_DIR, "pdf.css"))
+    css_path = os.path.abspath(os.path.join(TEMPLATE_DIR, "pdf.css"))
 
-        html = HTML(
-                string=html_string,
-                base_url=template_base
-        )
+    html = HTML(
+        string=html_string,
+        base_url=template_base
+    )
 
-        css = CSS(filename=css_path)
+    css = CSS(filename=css_path)
 
-        weasyprint_fix_css = CSS(
-                string="""
+    weasyprint_fix_css = CSS(
+        string="""
 /* === WeasyPrint FIX: evitar páginas vazias entre grupo e 1º objeto === */
 
 .group-head {
@@ -612,14 +612,13 @@ pre {
     max-width: 100%;
 }
 """
-        )
+    )
 
-        html.write_pdf(
-                OUTPUT_PDF,
-                stylesheets=[css, weasyprint_fix_css]
-        )
-        print_progress(100, f"PDF gerado: {OUTPUT_PDF}")
+    html.write_pdf(
+        OUTPUT_PDF,
+        stylesheets=[css, weasyprint_fix_css]
+    )
+    print_progress(100, f"PDF gerado: {OUTPUT_PDF}")
 
 if __name__ == "__main__":
-        main()
-(f"✅ 
+    main() 
