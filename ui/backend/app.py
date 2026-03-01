@@ -1067,6 +1067,14 @@ def home():
     # Carregar dados de cadastro
     cadastros = _load_cadastros()
     
+    # Se não há dados cadastrados, redirecionar para setup
+    is_empty = (
+        len(cadastros.get("consultancies", [])) == 0 and
+        len(cadastros.get("projects", [])) == 0
+    )
+    if is_empty:
+        return redirect("/setup")
+    
     # Informações da consultoria (primeira ou nenhuma)
     consultancy_name = None
     if cadastros.get("consultancies") and len(cadastros["consultancies"]) > 0:
@@ -1100,6 +1108,64 @@ def home():
         critical_alerts=critical_alerts,
         docs_in_progress=docs_in_progress,
     )
+
+
+@app.route("/setup", methods=["GET", "POST"])
+def setup():
+    """Fluxo de setup guiado para novos usuários"""
+    if request.method == "GET":
+        cadastros = _load_cadastros()
+        return render_template("setup.html", cadastros=cadastros)
+    
+    # POST: Salvar dados do setup
+    try:
+        data = request.get_json() or {}
+        cadastros = _load_cadastros()
+        
+        # Validar e salvar consultoria
+        if data.get("consultancy"):
+            consultancy = {
+                "id": _new_id("CONS"),
+                "name": data["consultancy"].get("name", ""),
+                "contact": data["consultancy"].get("contact", ""),
+            }
+            cadastros["consultancies"] = [consultancy]
+        
+        # Validar e salvar consultor
+        if data.get("consultant"):
+            consultant = {
+                "id": _new_id("CONS"),
+                "name": data["consultant"].get("name", ""),
+                "email": data["consultant"].get("email", ""),
+            }
+            cadastros["consultants"].append(consultant)
+        
+        # Validar e salvar cliente
+        if data.get("client"):
+            client = {
+                "id": _new_id("CLI"),
+                "name": data["client"].get("name", ""),
+                "contact": data["client"].get("contact", ""),
+            }
+            cadastros["clients"].append(client)
+        
+        # Validar e salvar projeto
+        if data.get("project"):
+            project = {
+                "id": _new_id("PROJ"),
+                "name": data["project"].get("name", ""),
+                "description": data["project"].get("description", ""),
+                "progress": 0,
+                "next_step": "Inicializar",
+            }
+            cadastros["projects"].append(project)
+        
+        # Salvar tudo
+        _save_cadastros(cadastros)
+        
+        return jsonify({"success": True, "message": "Setup concluído com sucesso!"})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 400
 
 
 @app.route("/execucao-scripts", methods=["GET"])
