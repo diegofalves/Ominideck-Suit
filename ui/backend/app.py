@@ -1061,7 +1061,45 @@ def api_scripts_build_agent_sql_catalog():
 
 @app.route("/", methods=["GET"])
 def home():
-    return render_template("home.html")
+    """Rota home com dados operacionais dinâmicos"""
+    from datetime import datetime
+    
+    # Carregar dados de cadastro
+    cadastros = _load_cadastros()
+    
+    # Informações da consultoria (primeira ou nenhuma)
+    consultancy_name = None
+    if cadastros.get("consultancies") and len(cadastros["consultancies"]) > 0:
+        consultancy_name = cadastros["consultancies"][0].get("name", "Não definida")
+    
+    # Contar projetos ativos (placeholder - ajustar conforme lógica real)
+    active_projects_count = len(cadastros.get("projects", []))
+    
+    # Mock de dados operacionais (em produção vir de banco de dados)
+    projects = []
+    for i, project in enumerate(cadastros.get("projects", [])[:5]):
+        projects.append({
+            "id": project.get("id", f"proj_{i}"),
+            "name": project.get("name", f"Projeto {i+1}"),
+            "description": project.get("description", ""),
+            "progress": project.get("progress", 0),
+            "next_step": project.get("next_step", "Aguardando definição"),
+        })
+    
+    # Métricas operacionais (dados fictícios por enquanto)
+    last_update_human = "há 2 horas"
+    critical_alerts = 0
+    docs_in_progress = len([p for p in projects if p["progress"] < 100])
+    
+    return render_template(
+        "home.html",
+        consultancy_name=consultancy_name,
+        active_projects_count=active_projects_count,
+        projects=projects,
+        last_update_human=last_update_human,
+        critical_alerts=critical_alerts,
+        docs_in_progress=docs_in_progress,
+    )
 
 
 @app.route("/execucao-scripts", methods=["GET"])
