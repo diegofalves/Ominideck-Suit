@@ -29,7 +29,7 @@
     <div class="page-container capa-page">
         <div class="capa">
             <div class="capa__label">
-                PROJETO DE MIGRAÇÃO OTM
+                DOCUMENTO DE MIGRAÇÃO OTM
             </div>
 
             <h1 class="capa__title">

@@ -127,7 +127,7 @@ def render(json_path: Path):
         group["_sidebar_id"] = f"group-{group.get('domain', idx)}"
 
     html_output = template.render(
-        title=data.get("project", {}).get("name", "Projeto de Migração"),
+        title=data.get("project", {}).get("name", "Documento de Migração"),
         project_code=data.get("project", {}).get("code", ""),
         groups=groups,
         overview=overview,

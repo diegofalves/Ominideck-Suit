@@ -79,7 +79,7 @@ Este capítulo apresenta a estratégia de execução da migração, agrupada por
 {% if dt_name == "MANUAL" %}
 Implantação manual no ambiente de destino. Objetos que requerem ação humana direta e validação específica.
 {% elif dt_name == "MIGRATION_PROJECT" %}
-Migração via projeto de migração nativo do OTM. Objetos transportados com configurações relacionadas.
+Migração via documento de migração nativo do OTM. Objetos transportados com configurações relacionadas.
 {% elif dt_name == "CSV" %}
 Importação via arquivos CSV. Dados estruturados em formato de valores separados por vírgula.
 {% elif dt_name == "DB.XML" %}

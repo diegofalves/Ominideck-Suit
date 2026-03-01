@@ -12,7 +12,7 @@
     <section id="sec-capa" class="cover-page">
 
         <div class="cover-header">
-            OmniDeck – Projeto de Migração
+            OmniDeck – Documento de Migração
         </div>
 
         <div class="cover-content">
@@ -24,7 +24,7 @@
             {% endif %}
 
             <div class="cover-category">
-                PROJETO DE MIGRAÇÃO OTM
+                DOCUMENTO DE MIGRAÇÃO OTM
             </div>
 
             <h1 class="cover-title">
@@ -475,7 +475,7 @@
 
                                 {% set items = [
                                     ('Documentação Técnica', s.documentation),
-                                    ('Configuração do Projeto de Migração', s.migration_project),
+                                    ('Configuração do Documento de Migração', s.migration_project),
                                     ('Preparação de Arquivos para Migração', s.export),
                                     ('Configuração Técnica no Sistema', s.deploy),
                                     ('Validação Funcional', s.validation),
@@ -653,7 +653,7 @@
 
                             {% set items = [
                                 ('Documentação Técnica', s.documentation),
-                                ('Configuração do Projeto de Migração', s.migration_project),
+                                ('Configuração do Documento de Migração', s.migration_project),
                                 ('Preparação de Arquivos para Migração', s.export),
                                 ('Configuração Técnica no Sistema', s.deploy),
                                 ('Validação Funcional', s.validation),

@@ -1,8 +1,8 @@
-# Projeto de Migração
+# Documento de Migração
 
-Este domínio representa o Projeto de Migração no OmniDeck.
+Este domínio representa o Documento de Migração no OmniDeck.
 
-O Projeto de Migração é a entidade orquestradora do sistema,
+O Documento de Migração é a entidade orquestradora do sistema,
 responsável por governar o escopo, os MIGRATION_ITEMs, as regras e o estado
 de uma migração OTM.
 

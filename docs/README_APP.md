@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-O OmniDeck Suite é uma interface para operação do projeto de migração OTM.
+O OmniDeck Suite é uma interface para operação do documento de migração OTM.
 O app desktop (PyWebView) e o modo navegador (Flask via terminal) devem ter **comportamento idêntico**:
 
 - mesmas rotas;

@@ -37,7 +37,7 @@ def normalize_migration_objective(project_metadata: Dict[str, Any]) -> Dict[str,
     Padroniza o bloco migration_objective a partir do JSON fonte.
     """
     objective = (project_metadata or {}).get("migration_objective", {}) or {}
-    title = objective.get("title") or "Objetivo do Projeto de Migração"
+    title = objective.get("title") or "Objetivo do Documento de Migração"
     content = objective.get("content") or []
 
     return {

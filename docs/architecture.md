@@ -7,7 +7,7 @@
 ## Visão Geral
 
 O OmniDeck é construído seguindo princípios de **Domain-Driven Design (DDD)**.
-O **Projeto de Migração** é o *Aggregate Root* do sistema e representa a fonte única
+O **Documento de Migração** é o *Aggregate Root* do sistema e representa a fonte única
 da verdade para qualquer migração OTM.
 
 Interfaces (UI Web, CLI futura), parsers e renderizadores (Markdown, HTML, PDF)
@@ -15,10 +15,10 @@ são considerados **adapters** e nunca contêm regras de negócio.
 
 ## Entidades de Domínio
 
-### Projeto de Migração
+### Documento de Migração
 
 #### Papel
-O Projeto de Migração é a entidade orquestradora do OmniDeck.
+O Documento de Migração é a entidade orquestradora do OmniDeck.
 Ele governa o escopo, os MIGRATION_ITEMs, as regras e o estado de uma migração OTM,
 servindo como fonte única para documentação e acompanhamento.
 
@@ -31,7 +31,7 @@ Vocabulário canônico:
 
 #### Boundary — O que pertence
 
-Pertencem ao Projeto de Migração:
+Pertencem ao Documento de Migração:
 
 - Identidade do projeto (código, nome, versão, responsável, ambientes)
 - MIGRATION_GROUPs
@@ -46,7 +46,7 @@ Pertencem ao Projeto de Migração:
 
 #### Boundary — O que NÃO pertence
 
-Não pertencem ao Projeto de Migração:
+Não pertencem ao Documento de Migração:
 
 - HTML final
 - PDF final
@@ -68,11 +68,11 @@ Esses elementos são artefatos derivados ou infraestrutura.
 
 ---
 
-## Validações de Domínio — Projeto de Migração
+## Validações de Domínio — Documento de Migração
 
 As validações a seguir são regras de domínio obrigatórias e devem ser
 respeitadas por qualquer interface, automação ou script que interaja
-com o schema canônico do Projeto de Migração.
+com o schema canônico do Documento de Migração.
 
 ### 1. Validações do Projeto (nível raiz)
 

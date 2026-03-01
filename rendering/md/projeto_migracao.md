@@ -1,4 +1,4 @@
-# Projeto de Migração - Configuração OTM Unificada (BR100 + Projeto)
+# Documento de Migração - Configuração OTM Unificada (BR100 + Projeto)
 
 ## Identificação do Projeto
 
@@ -13,31 +13,6 @@
 ## Sumário
 
 - Grupos e Objetos de Migração OTM
-
-  - Grupo: Automação
-  
-    - Saved Conditions
-  
-    - Data Type Association
-  
-    - Agent Event
-  
-    - Agents
-  
-    - App Actions
-  
-    - Actions
-  
-    - Batch Processes
-  
-    - SAVED_CONDITION_QUERY (BAU - AUTO)
-  
-    - AGENT_EVENT_DETAILS (AUTO)
-  
-    - STYLESHEET_CONTENT (BAU - AUTO)
-  
-    - BATCH_PROCESS_D (AUTO)
-  
 
   - Grupo: Configuração
   
@@ -62,6 +37,31 @@
     - Transport Mode
   
     - BN Named Range
+  
+
+  - Grupo: Automação
+  
+    - Saved Conditions
+  
+    - Data Type Association
+  
+    - Agent Event
+  
+    - Agents
+  
+    - App Actions
+  
+    - Actions
+  
+    - Batch Processes
+  
+    - SAVED_CONDITION_QUERY (BAU - AUTO)
+  
+    - AGENT_EVENT_DETAILS (AUTO)
+  
+    - STYLESHEET_CONTENT (BAU - AUTO)
+  
+    - BATCH_PROCESS_D (AUTO)
   
 
   - Grupo: Dados Mestres
@@ -211,7 +211,7 @@
 ---
 
 
-## Objetivo do Projeto de Migração
+## Objetivo do Documento de Migração
 
 
 Este projeto tem como objetivo executar a migração controlada e governada das configurações do Oracle Transportation Management (OTM), atualmente consolidadas e validadas no ambiente de homologação (HOM), para o ambiente de produção (PRD).
@@ -675,11 +675,21 @@ Implantação manual no ambiente de destino. Objetos que requerem ação humana 
 ### MIGRATION_PROJECT
 
 
-Migração via projeto de migração nativo do OTM. Objetos transportados com configurações relacionadas.
+Migração via documento de migração nativo do OTM. Objetos transportados com configurações relacionadas.
 
 
 **Objetos nesta estratégia:** 62
 
+
+- Units of Measure (UOM)
+
+- Business Number
+
+- Reports
+
+- Transport Mode
+
+- BN Named Range
 
 - Saved Conditions
 
@@ -702,16 +712,6 @@ Migração via projeto de migração nativo do OTM. Objetos transportados com co
 - STYLESHEET_CONTENT (BAU - AUTO)
 
 - BATCH_PROCESS_D (AUTO)
-
-- Units of Measure (UOM)
-
-- Business Number
-
-- Reports
-
-- Transport Mode
-
-- BN Named Range
 
 - Commodities
 
@@ -853,485 +853,10 @@ Esta seção apresenta os conjuntos de objetos do Oracle Transportation Manageme
 ---
 
 
-### Grupo: Automação
-
-
-Esta seção concentra os objetos responsáveis pela execução automática de regras e fluxos operacionais no OTM, como Saved Queries, Conditions e lógicas de acionamento utilizadas por Agents e processos batch. O conteúdo evidencia como cada automação está associada a um deploy type específico (MANUAL, MIGRATION, CSV, DB.XML, ZIP BI), permitindo rastrear impactos da migração sobre fluxos automáticos, dependências técnicas e a ordem correta de implantação no roadmap do projeto.
-
-
-
-
-### Saved Conditions
-
-GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 2
-**Object Type:** SAVED_CONDITION
-**OTM Table:** SAVED_CONDITION
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  SAVED_CONDITION SC,
-  SAVED_CONDITION_QUERY SCQ
-WHERE
-  SC.SAVED_CONDITION_GID = SCQ.SAVED_CONDITION_GID
-  AND SC.DOMAIN_NAME = 'BAU'
-  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEST%'
-  AND SC.SAVED_CONDITION_GID NOT LIKE '%TESTE%'
-  AND SC.SAVED_CONDITION_GID NOT LIKE '%MIG%'
-  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEMP%'
-ORDER BY
-  SC.DOMAIN_NAME,
-  SC.SAVED_CONDITION_XID,
-  SCQ.SAVED_QUERY_GID
-```
-
-
-
-
-
-### Data Type Association
-
-Identificador exclusivo de associação de tipo de dados.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 3
-**Object Type:** DATA_TYPE_ASSOCIATION
-**OTM Table:** DATA_TYPE_ASSOCIATION
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  DATA_TYPE_ASSOCIATION
-WHERE
-  DOMAIN_NAME = 'BAU'
-ORDER BY
-  DATA_TYPE_ASSOCIATION_XID
-```
-
-
-
-
-
-### Agent Event
-
-GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 4
-**Object Type:** AGENT_EVENT
-**OTM Table:** AGENT_EVENT
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  AGENT_EVENT ae,
-  AGENT_EVENT_DETAILS aed,
-  AGENT a
-WHERE
-  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
-  AND aed.AGENT_GID = a.AGENT_GID
-  AND ae.DOMAIN_NAME = 'BAU'
-  AND a.IS_ACTIVE = 'Y'
-ORDER BY
-  ae.DATA_QUERY_TYPE_GID,
-  ae.AGENT_EVENT_XID,
-  a.AGENT_XID
-```
-
-
-
-
-
-### Agents
-
-GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 5
-**Object Type:** AGENT
-**OTM Table:** AGENT
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  AGENT_EVENT ae,
-  AGENT_EVENT_DETAILS aed,
-  AGENT a
-WHERE
-  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
-  AND aed.AGENT_GID = a.AGENT_GID
-  AND ae.DOMAIN_NAME = 'BAU'
-  AND a.IS_ACTIVE = 'Y'
-ORDER BY
-  ae.DATA_QUERY_TYPE_GID,
-  ae.AGENT_EVENT_XID,
-  a.AGENT_XID
-```
-
-
-
-
-
-### App Actions
-
-Se Y, o objeto de negócios será bloqueado durante a chamada de ação. O pode bloquear vários objetos de negócios para ações de UI/planejamento.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 6
-**Object Type:** APP_ACTION
-**OTM Table:** APP_ACTION
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  APP_ACTION
-WHERE
-  DOMAIN_NAME = 'BAU'
-ORDER BY
-  ACTION_XID
-```
-
-
-
-
-
-### Actions
-
-Esta tabela contém a lista de todas as ações possíveis da interface do usuário que podem ser executadas no GC3.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 7
-**Object Type:** ACTION
-**OTM Table:** ACTION
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  AGENT_EVENT ae,
-  AGENT_EVENT_DETAILS aed,
-  AGENT a
-WHERE
-  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
-  AND aed.AGENT_GID = a.AGENT_GID
-  AND ae.DOMAIN_NAME = 'BAU'
-  AND a.IS_ACTIVE = 'Y'
-ORDER BY
-  ae.DATA_QUERY_TYPE_GID,
-  ae.AGENT_EVENT_XID,
-  a.AGENT_XID
-```
-
-
-
-
-
-### Batch Processes
-
-Especifica um grupo de processos em lote. Isso é usado para identificar um grupo de processos que são executados como uma cadeia.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 8
-**Object Type:** BATCH_PROCESS
-**OTM Table:** BATCH_PROCESS
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  BATCH_PROCESS BP,
-  BATCH_PROCESS_D BPD
-WHERE
-  BP.BATCH_PROCESS_GID = BPD.BATCH_PROCESS_GID
-  AND BP.IS_ENABLED = 'Y'
-ORDER BY
-  BP.DOMAIN_NAME,
-  BP.BATCH_PROCESS_XID,
-  BPD.SEQUENCE_NO
-```
-
-
-
-
-
-### SAVED_CONDITION_QUERY (BAU - AUTO)
-
-GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 453
-**Object Type:** SAVED_CONDITION_QUERY
-**OTM Table:** SAVED_CONDITION_QUERY
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  SAVED_CONDITION SC,
-  SAVED_CONDITION_QUERY SCQ
-WHERE
-  SC.SAVED_CONDITION_GID = SCQ.SAVED_CONDITION_GID
-  AND SC.DOMAIN_NAME = 'BAU'
-  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEST%'
-  AND SC.SAVED_CONDITION_GID NOT LIKE '%TESTE%'
-  AND SC.SAVED_CONDITION_GID NOT LIKE '%MIG%'
-  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEMP%'
-ORDER BY
-  SC.DOMAIN_NAME,
-  SC.SAVED_CONDITION_XID,
-  SCQ.SAVED_QUERY_GID
-```
-
-
-
-
-
-### AGENT_EVENT_DETAILS (AUTO)
-
-GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 14
-**Object Type:** AGENT_EVENT_DETAILS
-**OTM Table:** AGENT_EVENT_DETAILS
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  AGENT_EVENT ae,
-  AGENT_EVENT_DETAILS aed,
-  AGENT a
-WHERE
-  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
-  AND aed.AGENT_GID = a.AGENT_GID
-  AND ae.DOMAIN_NAME = 'BAU'
-  AND a.IS_ACTIVE = 'Y'
-ORDER BY
-  ae.DATA_QUERY_TYPE_GID,
-  ae.AGENT_EVENT_XID,
-  a.AGENT_XID
-```
-
-
-
-
-
-### STYLESHEET_CONTENT (BAU - AUTO)
-
-ID da versão – string de versão completa.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 463
-**Object Type:** STYLESHEET_CONTENT
-**OTM Table:** STYLESHEET_CONTENT
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  AGENT_EVENT ae,
-  AGENT_EVENT_DETAILS aed,
-  AGENT a
-WHERE
-  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
-  AND aed.AGENT_GID = a.AGENT_GID
-  AND ae.DOMAIN_NAME = 'BAU'
-  AND a.IS_ACTIVE = 'Y'
-ORDER BY
-  ae.DATA_QUERY_TYPE_GID,
-  ae.AGENT_EVENT_XID,
-  a.AGENT_XID
-```
-
-
-
-
-
-### BATCH_PROCESS_D (AUTO)
-
-Especifica os processos que serão executados em um grupo de processos em lote.
-
-<div class="meta-text" markdown="1">
-**Sequência:** 38
-**Object Type:** BATCH_PROCESS_D
-**OTM Table:** BATCH_PROCESS_D
-**Deployment Type:** MIGRATION_PROJECT
-
-
-**Responsável:** ITC
-
-
-**Documentação:** DONE
-**Migration Project:** DONE
-**Exportação:** DONE
-**Deploy:** DONE
-**Validação:** DONE
-</div>
-
-
-### Query de Extração de Objetos
-```sql
-SELECT *
-FROM
-  BATCH_PROCESS BP,
-  BATCH_PROCESS_D BPD
-WHERE
-  BP.BATCH_PROCESS_GID = BPD.BATCH_PROCESS_GID
-  AND BP.IS_ENABLED = 'Y'
-ORDER BY
-  BP.DOMAIN_NAME,
-  BP.BATCH_PROCESS_XID,
-  BPD.SEQUENCE_NO
-```
-
-
-
-
-
-
 ### Grupo: Configuração
 
 
-Reúne configurações centrais do domínio OTM, incluindo domínios, grants, parâmetros e propriedades que sustentam a operação e o baseline de migração.
+Grupo para configurações e parametrizações gerais do sistema.
 
 
 
@@ -1709,6 +1234,500 @@ WHERE
   DOMAIN_NAME = 'BAU'
 ORDER BY
   BN_NAMED_RANGE_XID
+```
+
+
+
+
+
+
+### Grupo: Automação
+
+
+
+
+### Saved Conditions
+
+GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 2
+**Object Type:** SAVED_CONDITION
+**OTM Table:** SAVED_CONDITION
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Query Name:** 
+
+**Agent Gid:** 
+
+**Finder Set Gid:** 
+
+**Rate Offering Gid:** 
+
+**Event Group Gid:** 
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  SAVED_CONDITION SC,
+  SAVED_CONDITION_QUERY SCQ
+WHERE
+  SC.SAVED_CONDITION_GID = SCQ.SAVED_CONDITION_GID
+  AND SC.DOMAIN_NAME = 'BAU'
+  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEST%'
+  AND SC.SAVED_CONDITION_GID NOT LIKE '%TESTE%'
+  AND SC.SAVED_CONDITION_GID NOT LIKE '%MIG%'
+  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEMP%'
+  AND SC.SAVED_CONDITION_GID NOT LIKE 'BAU.BASE%'
+ORDER BY
+  SC.DOMAIN_NAME,
+  SC.SAVED_CONDITION_XID,
+  SCQ.SAVED_QUERY_GID
+```
+
+
+
+
+
+### Data Type Association
+
+Identificador exclusivo de associação de tipo de dados.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 3
+**Object Type:** DATA_TYPE_ASSOCIATION
+**OTM Table:** DATA_TYPE_ASSOCIATION
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  DATA_TYPE_ASSOCIATION
+WHERE
+  DOMAIN_NAME = 'BAU'
+ORDER BY
+  DATA_TYPE_ASSOCIATION_XID
+```
+
+
+
+
+
+### Agent Event
+
+GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 4
+**Object Type:** AGENT_EVENT
+**OTM Table:** AGENT_EVENT
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  AGENT_EVENT ae,
+  AGENT_EVENT_DETAILS aed,
+  AGENT a
+WHERE
+  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
+  AND aed.AGENT_GID = a.AGENT_GID
+  AND ae.DOMAIN_NAME = 'BAU'
+  AND a.IS_ACTIVE = 'Y'
+ORDER BY
+  ae.DATA_QUERY_TYPE_GID,
+  ae.AGENT_EVENT_XID,
+  a.AGENT_XID
+```
+
+
+
+
+
+### Agents
+
+GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 5
+**Object Type:** AGENT
+**OTM Table:** AGENT
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  AGENT_EVENT ae,
+  AGENT_EVENT_DETAILS aed,
+  AGENT a
+WHERE
+  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
+  AND aed.AGENT_GID = a.AGENT_GID
+  AND ae.DOMAIN_NAME = 'BAU'
+  AND a.IS_ACTIVE = 'Y'
+ORDER BY
+  ae.DATA_QUERY_TYPE_GID,
+  ae.AGENT_EVENT_XID,
+  a.AGENT_XID
+```
+
+
+
+
+
+### App Actions
+
+Se Y, o objeto de negócios será bloqueado durante a chamada de ação. O pode bloquear vários objetos de negócios para ações de UI/planejamento.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 6
+**Object Type:** APP_ACTION
+**OTM Table:** APP_ACTION
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  APP_ACTION
+WHERE
+  DOMAIN_NAME = 'BAU'
+ORDER BY
+  ACTION_XID
+```
+
+
+
+
+
+### Actions
+
+Esta tabela contém a lista de todas as ações possíveis da interface do usuário que podem ser executadas no GC3.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 7
+**Object Type:** ACTION
+**OTM Table:** ACTION
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  AGENT_EVENT ae,
+  AGENT_EVENT_DETAILS aed,
+  AGENT a
+WHERE
+  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
+  AND aed.AGENT_GID = a.AGENT_GID
+  AND ae.DOMAIN_NAME = 'BAU'
+  AND a.IS_ACTIVE = 'Y'
+ORDER BY
+  ae.DATA_QUERY_TYPE_GID,
+  ae.AGENT_EVENT_XID,
+  a.AGENT_XID
+```
+
+
+
+
+
+### Batch Processes
+
+Especifica um grupo de processos em lote. Isso é usado para identificar um grupo de processos que são executados como uma cadeia.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 8
+**Object Type:** BATCH_PROCESS
+**OTM Table:** BATCH_PROCESS
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  BATCH_PROCESS BP,
+  BATCH_PROCESS_D BPD
+WHERE
+  BP.BATCH_PROCESS_GID = BPD.BATCH_PROCESS_GID
+  AND BP.IS_ENABLED = 'Y'
+ORDER BY
+  BP.DOMAIN_NAME,
+  BP.BATCH_PROCESS_XID,
+  BPD.SEQUENCE_NO
+```
+
+
+
+
+
+### SAVED_CONDITION_QUERY (BAU - AUTO)
+
+GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 453
+**Object Type:** SAVED_CONDITION_QUERY
+**OTM Table:** SAVED_CONDITION_QUERY
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Query Name:** 
+
+**Agent Gid:** 
+
+**Finder Set Gid:** 
+
+**Rate Offering Gid:** 
+
+**Event Group Gid:** 
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  SAVED_CONDITION SC,
+  SAVED_CONDITION_QUERY SCQ
+WHERE
+  SC.SAVED_CONDITION_GID = SCQ.SAVED_CONDITION_GID
+  AND SC.DOMAIN_NAME = 'BAU'
+  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEST%'
+  AND SC.SAVED_CONDITION_GID NOT LIKE '%TESTE%'
+  AND SC.SAVED_CONDITION_GID NOT LIKE '%MIG%'
+  AND SC.SAVED_CONDITION_GID NOT LIKE '%TEMP%'
+  AND SC.SAVED_CONDITION_GID NOT LIKE 'BAU.BASE%'
+ORDER BY
+  SC.DOMAIN_NAME,
+  SC.SAVED_CONDITION_XID,
+  SCQ.SAVED_QUERY_GID
+```
+
+
+
+
+
+### AGENT_EVENT_DETAILS (AUTO)
+
+GC3 Identificador global da entidade. É criado concatenando o nome de domínio,'.' e XID.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 14
+**Object Type:** AGENT_EVENT_DETAILS
+**OTM Table:** AGENT_EVENT_DETAILS
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  AGENT_EVENT ae,
+  AGENT_EVENT_DETAILS aed,
+  AGENT a
+WHERE
+  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
+  AND aed.AGENT_GID = a.AGENT_GID
+  AND ae.DOMAIN_NAME = 'BAU'
+  AND a.IS_ACTIVE = 'Y'
+ORDER BY
+  ae.DATA_QUERY_TYPE_GID,
+  ae.AGENT_EVENT_XID,
+  a.AGENT_XID
+```
+
+
+
+
+
+### STYLESHEET_CONTENT (BAU - AUTO)
+
+ID da versão – string de versão completa.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 463
+**Object Type:** STYLESHEET_CONTENT
+**OTM Table:** STYLESHEET_CONTENT
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  AGENT_EVENT ae,
+  AGENT_EVENT_DETAILS aed,
+  AGENT a
+WHERE
+  ae.AGENT_EVENT_GID = aed.AGENT_EVENT_GID
+  AND aed.AGENT_GID = a.AGENT_GID
+  AND ae.DOMAIN_NAME = 'BAU'
+  AND a.IS_ACTIVE = 'Y'
+ORDER BY
+  ae.DATA_QUERY_TYPE_GID,
+  ae.AGENT_EVENT_XID,
+  a.AGENT_XID
+```
+
+
+
+
+
+### BATCH_PROCESS_D (AUTO)
+
+Especifica os processos que serão executados em um grupo de processos em lote.
+
+<div class="meta-text" markdown="1">
+**Sequência:** 38
+**Object Type:** BATCH_PROCESS_D
+**OTM Table:** BATCH_PROCESS_D
+**Deployment Type:** MIGRATION_PROJECT
+
+
+**Responsável:** ITC
+
+
+**Documentação:** DONE
+**Migration Project:** DONE
+**Exportação:** DONE
+**Deploy:** DONE
+**Validação:** DONE
+</div>
+
+
+### Query de Extração de Objetos
+```sql
+SELECT *
+FROM
+  BATCH_PROCESS BP,
+  BATCH_PROCESS_D BPD
+WHERE
+  BP.BATCH_PROCESS_GID = BPD.BATCH_PROCESS_GID
+  AND BP.IS_ENABLED = 'Y'
+ORDER BY
+  BP.DOMAIN_NAME,
+  BP.BATCH_PROCESS_XID,
+  BPD.SEQUENCE_NO
 ```
 
 
@@ -2401,6 +2420,16 @@ Especifica se o qualificador refnum pode existir no objeto de negócios diversas
 **OTM Table:** PACKAGED_ITEM_REFNUM_QUAL
 **Deployment Type:** MIGRATION_PROJECT
 
+
+**Query Name:** 
+
+**Agent Gid:** 
+
+**Finder Set Gid:** 
+
+**Rate Offering Gid:** 
+
+**Event Group Gid:** 
 
 **Responsável:** ITC
 
@@ -3660,8 +3689,8 @@ Tabela de contatos de sistemas externos integrados ao OTM.
 
 <div class="meta-text" markdown="1">
 **Sequência:** 8
-**Object Type:** EXTERNAL_CONTACT
-**OTM Table:** EXTERNAL_CONTACT
+**Object Type:** CONTACT
+**OTM Table:** CONTACT
 **Deployment Type:** MIGRATION_PROJECT
 
 

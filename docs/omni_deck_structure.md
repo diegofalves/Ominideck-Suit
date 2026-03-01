@@ -50,7 +50,7 @@ Nenhuma regra de negócio existe fora dessa pasta.
 
 ## Contém
 
-- Entidades (Projeto de Migração, MIGRATION_GROUP, MIGRATION_ITEM)
+- Entidades (Documento de Migração, MIGRATION_GROUP, MIGRATION_ITEM)
 - Validações
 - Enums
 - Regras condicionais

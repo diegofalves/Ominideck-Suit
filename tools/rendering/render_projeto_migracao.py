@@ -28,7 +28,7 @@ def render(json_path: Path):
         print(f"Markdown gerado em: {OUTPUT_FILE}")
     except Exception as e:
         import traceback
-        print("\n[ERRO] Falha ao gerar o Markdown do projeto de migração:")
+        print("\n[ERRO] Falha ao gerar o Markdown do documento de migração:")
         print(str(e))
         traceback.print_exc()
         raise

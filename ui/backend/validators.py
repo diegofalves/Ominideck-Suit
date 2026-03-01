@@ -1,5 +1,5 @@
 """
-Validadores de domínio para Projeto de Migração OTM
+Validadores de domínio para Documento de Migração OTM
 Implementa regras de negócio e validações estruturais
 """
 

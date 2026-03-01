@@ -12,7 +12,7 @@ Este documento centraliza o modelo atual de extração OTM no OmniDeck: fluxos, 
 
 Hierarquia funcional usada no projeto:
 
-1. `Projeto de Migração`
+1. `Documento de Migração`
 2. `MIGRATION_GROUP`
 3. `MIGRATION_ITEM`
 4. `Tabela OTM` (principal + subtabelas marcadas)

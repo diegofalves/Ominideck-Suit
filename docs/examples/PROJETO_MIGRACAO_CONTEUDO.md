@@ -1,5 +1,5 @@
 documento_codigo: MIG0001
-documento_nome: "Projeto de Migração - Configuração OTM Unificada (BR100 + Projeto)"
+documento_nome: "Documento de Migração - Configuração OTM Unificada (BR100 + Projeto)"
 tipo_documento: PROJETO_MIGRACAO
 versao: "1.1"
 data_geracao: "18 de janeiro de 2026"
@@ -13,7 +13,7 @@ ambiente_destino: "https://otmgtm-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.c
 | Campo | Informação |
 |-------|------------|
 | Documento Código | MIG0001 |
-| Documento Nome | Projeto de Migração - Configuração OTM Unificada (BR100 + Projeto) |
+| Documento Nome | Documento de Migração - Configuração OTM Unificada (BR100 + Projeto) |
 | Versão | 1.1 |
 | Data de Geração | 18 de janeiro de 2026 |
 | Última Atualização | 02 de February de 2026 |
@@ -21,7 +21,7 @@ ambiente_destino: "https://otmgtm-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.c
 
 ---
 
-## Objetivo do Projeto de Migração
+## Objetivo do Documento de Migração
 
 <div class="objetivo-container" markdown="1">
 Este projeto tem como objetivo executar a migração controlada e governada das configurações do Oracle Transportation Management (OTM), atualmente consolidadas e validadas no ambiente de homologação (HOM), para o ambiente de produção (PRD).
@@ -53,8 +53,8 @@ Com a execução desta migração em PROD, espera-se:
 |------|-----------|--------|-------------|
 | 28/01/2026 | Removido o ícone “🔹” das headings que destacam cada tipo de deploy (MANUAL/MIGRATION/CSV/DB/XML/ARQUIVO ZIP BI) para harmonizar a renderização do HTML. | Tornar o painel e navegação menos dependentes de símbolos gráficos, mantendo os mesmos títulos e counts. | Diego Ferreira Alves |
 | 27/01/2026 | Padronizado o preenchimento automático de colunas em `Migration Project` e reforçado o agrupamento dos tipos de deploy para as seções de Automação e Configuração. | Garantir que as tabelas reflitam corretamente o roadmap e facilitam futuras integrações (scripts/painel). | Diego Ferreira Alves |
-| 21/01/2026 | Revisão geral do Projeto de Migração: alinhamento dos tipos de deploy (Manual/Migration), atualização da tabela Migration Project, hiperlinks entre objetos e painel, e sincronização dos caches. | Incorporar as melhorias estruturais realizadas na iteração anterior e manter rastreabilidade da evolução. | Diego Ferreira Alves |
-| 18/01/2026 | Criação inicial do documento de Projeto de Migração | Consolidação do template de migração e início do projeto de replicação para ambiente PROD | Diego Ferreira Alves |
+| 21/01/2026 | Revisão geral do Documento de Migração: alinhamento dos tipos de deploy (Manual/Migration), atualização da tabela Migration Project, hiperlinks entre objetos e painel, e sincronização dos caches. | Incorporar as melhorias estruturais realizadas na iteração anterior e manter rastreabilidade da evolução. | Diego Ferreira Alves |
+| 18/01/2026 | Criação inicial do Documento de Migração | Consolidação do template de migração e início do projeto de replicação para ambiente PROD | Diego Ferreira Alves |
 
 ---
 

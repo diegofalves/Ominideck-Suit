@@ -44,7 +44,7 @@ Scripts de renderização e geração de relatórios/documentos.
 - `fix_json_parity.py` - Corrige paridade de dados JSON
 - `objective_utils.py` - Utilitários para objetivos
 - `render_html_from_md.py` - Renderiza HTML de Markdown
-- `render_projeto_migracao.py` - Renderiza projeto de migração
+- `render_projeto_migracao.py` - Renderiza documento de migração
 - `validate_chain.py` - Valida cadeia de dependências
 - `projeto_migracao.html.tpl` - Template HTML (legado)
 

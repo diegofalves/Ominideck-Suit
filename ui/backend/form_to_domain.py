@@ -484,7 +484,7 @@ def form_to_domain(form, existing_project=None):
                     data_key = key[len("data["):-1]
                     target_obj.setdefault("data", {})[data_key] = value
 
-    migration_objective_title = form.get("migration_objective_title") or "Objetivo do Projeto de Migração"
+    migration_objective_title = form.get("migration_objective_title") or "Objetivo do Documento de Migração"
     migration_objective_content = form.get("migration_objective_content", "")
     content_lines = [
         line.strip()

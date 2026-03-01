@@ -415,7 +415,7 @@ def _build_migration_dashboard(project: Dict[str, Any]) -> Dict[str, Any]:
     )
 
     return {
-        "project_name": str(project.get("project", {}).get("name") or "Projeto de Migração").strip(),
+        "project_name": str(project.get("project", {}).get("name") or "Documento de Migração").strip(),
         "project_code": str(project.get("project", {}).get("code") or "-").strip(),
         "total_groups": len(groups_stats),
         "total_objects": total_objects,
