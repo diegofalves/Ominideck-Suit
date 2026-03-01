@@ -7,6 +7,12 @@ set -e
 
 PROJECT_NAME="OmniDeck Suite"
 APP_NAME="OmniDeck Suite.app"
+PROJECT_ROOT="$(pwd)"
+
+echo "🧭 Registrando PROJECT_ROOT para app desktop..."
+mkdir -p "$HOME/.omnideck"
+echo "$PROJECT_ROOT" > "$HOME/.omnideck/project_root.txt"
+echo "📌 PROJECT_ROOT: $PROJECT_ROOT"
 
 echo "🧹 Limpando builds anteriores..."
 rm -rf build dist

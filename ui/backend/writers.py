@@ -5,8 +5,10 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 from ui.backend.deployment_policy import deployment_type_for_table
 from ui.backend.domain_stats import object_domain_map, table_domain_map
+from ui.backend.paths import PROJECT_ROOT
 
-BASE_DIR = Path(__file__).resolve().parents[2]
+# Use centralized PROJECT_ROOT from paths.py
+BASE_DIR = PROJECT_ROOT
 PROJECT_PATH = BASE_DIR / "domain/projeto_migracao/projeto_migracao.json"
 DOMAIN_TABLE_STATS_PATH = BASE_DIR / "metadata" / "otm" / "domain_table_statistics.json"
 TABLE_DESCRIPTIONS_PT_BR_PATH = (

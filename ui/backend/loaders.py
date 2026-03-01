@@ -2,8 +2,10 @@ import json
 from pathlib import Path
 
 from ui.backend.domain_stats import unique_domain_names
+from ui.backend.paths import PROJECT_ROOT
 
-BASE_DIR = Path(__file__).resolve().parents[2]
+# Use centralized PROJECT_ROOT from paths.py
+BASE_DIR = PROJECT_ROOT
 
 DOMAIN_DIR = BASE_DIR / "domain" / "projeto_migracao"
 ENUMS_DIR = DOMAIN_DIR / "enums"

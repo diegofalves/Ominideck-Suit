@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, jsonify, session
+from flask import Flask, render_template, request, redirect, jsonify, session, make_response
 import json
 import os
 import subprocess
@@ -18,27 +18,19 @@ from ui.backend.validators import (
 )
 from ui.backend.writers import load_project, save_project
 from ui.backend.schema_repository import SchemaRepository
+from ui.backend.paths import PROJECT_ROOT as CENTRALIZED_PROJECT_ROOT
 
 
 # -------------------------------------------------
-# App
+# App Configuration & Path Resolution
 # -------------------------------------------------
- # Ajuste robusto de paths para modo normal e empacotado
-if getattr(sys, "frozen", False):
-    # Quando empacotado via PyInstaller (.app),
-    # sys.executable -> .../omni_launcher.app/Contents/MacOS/omni_launcher
-    # Precisamos apontar para .../Contents/Resources
-    macos_dir = Path(sys.executable).resolve().parent
-    resources_dir = macos_dir.parent / "Resources"
-    base_path = resources_dir
-else:
-    # Execução normal (dev)
-    base_path = Path(__file__).resolve().parent.parent
 
-base_path = str(base_path)
+# Usar PROJECT_ROOT centralizado de paths.py
+PROJECT_ROOT = CENTRALIZED_PROJECT_ROOT
 
-template_path = os.path.join(base_path, "ui", "frontend", "templates")
-static_path = os.path.join(base_path, "ui", "frontend", "static")
+# Configurar paths para templates e assets
+template_path = str(PROJECT_ROOT / "ui" / "frontend" / "templates")
+static_path = str(PROJECT_ROOT / "ui" / "frontend" / "static")
 
 app = Flask(
     __name__,
@@ -48,7 +40,7 @@ app = Flask(
 app.secret_key = os.environ.get("OMNIDECK_SECRET_KEY", "omnideck-internal-secret")
 
 # -------------------------------------------------
-# Hard override de debug/relo ader (proteção contra loop no bundle)
+# Hard override de debug/reloader (proteção contra loop no bundle)
 # -------------------------------------------------
 app.config.update(
     ENV="production",
@@ -76,15 +68,9 @@ app.config.update(
     DEBUG=False,
 )
 
-# PROJECT_ROOT fixo apontando para a pasta real do projeto no macOS.
-# Assim o .app funciona apenas como interface e mantém vínculo
-# com os JSON originais já existentes no projeto.
-if getattr(sys, "frozen", False):
-    PROJECT_ROOT = Path(
-        "/Users/diegoalves/Documents/01 - Diego/02 - Trabalhos/05 - ITC/02 - Projetos/01 - Bauducco/04 - Desevolvimentos OTM/00 - Ominideck - Bauducco"
-    )
-else:
-    PROJECT_ROOT = Path(__file__).resolve().parents[2]
+# -------------------------------------------------
+# Constants
+# -------------------------------------------------
 GROUP_ZERO_ID = "SEM_GRUPO"
 LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
 IGNORED_GROUP_ID = "IGNORADOS"
@@ -512,6 +498,126 @@ def disable_cache_for_dynamic_routes(response):
     if path in {"/projeto-migracao", "/execucao-scripts", "/dashboard-migracao", "/cadastros"} or path.startswith("/api/"):
         return _apply_no_cache_headers(response)
     return response
+
+# ===== ERROR HANDLERS =====
+
+@app.errorhandler(500)
+def internal_error(error):
+    """Handler para erros internos do servidor"""
+    import traceback
+    error_trace = traceback.format_exc()
+    print(f"[ERROR 500] {error}")
+    print(error_trace)
+    return jsonify({
+        "error": "Internal server error",
+        "message": str(error),
+        "type": type(error).__name__
+    }), 500
+
+@app.errorhandler(404)
+def not_found(error):
+    """Handler para rotas não encontradas"""
+    return jsonify({
+        "error": "Not found",
+        "path": request.path
+    }), 404
+
+@app.errorhandler(Exception)
+def handle_exception(error):
+    """Handler global para todas as exceções"""
+    import traceback
+    error_trace = traceback.format_exc()
+    print(f"[EXCEPTION] {type(error).__name__}: {error}")
+    print(error_trace)
+    return jsonify({
+        "error": "Exception occurred",
+        "message": str(error),
+        "type": type(error).__name__
+    }), 500
+
+# ===== HEALTH CHECK ENDPOINTS =====
+
+@app.route("/api/health", methods=["GET"])
+def api_health():
+    """
+    Health check endpoint. Verifica se a aplicação está funcionando.
+    """
+    try:
+        # Tentar carregar dados para validar integridade
+        load_all()
+        load_project()
+        
+        return jsonify({
+            "status": "healthy",
+            "message": "Application is running correctly",
+            "PROJECT_ROOT": str(PROJECT_ROOT),
+            "template_folder": app.template_folder,
+            "static_folder": app.static_folder
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "unhealthy",
+            "error": str(e),
+            "PROJECT_ROOT": str(PROJECT_ROOT)
+        }), 500
+
+@app.route("/test", methods=["GET"])
+def test_page():
+    """
+    Página de teste simples para verificar se o PyWebView está renderizando HTML.
+    """
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Teste PyWebView</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .container {
+                text-align: center;
+                background: rgba(255,255,255,0.1);
+                padding: 40px;
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+            }
+            h1 { font-size: 3em; margin-bottom: 20px; }
+            p { font-size: 1.5em; }
+            .status { 
+                background: #4CAF50;
+                padding: 10px 20px;
+                border-radius: 10px;
+                display: inline-block;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>✓ PyWebView Funcionando!</h1>
+            <p>Se você está vendo esta página, o PyWebView está renderizando HTML corretamente.</p>
+            <div class="status">STATUS: OK</div>
+            <p style="margin-top: 30px;">
+                <a href="/" style="color: white;">Ir para Home</a> | 
+                <a href="/dashboard-migracao" style="color: white;">Ir para Dashboard</a>
+            </p>
+        </div>
+        <script>
+            console.log('Test page loaded successfully');
+            console.log('Time:', new Date().toISOString());
+        </script>
+    </body>
+    </html>
+    """
 
 # ===== SCHEMA API ENDPOINTS =====
 
@@ -1209,7 +1315,12 @@ def dashboard_migracao():
     session["can_access_migration_panel"] = True
     project = load_project() or {}
     dashboard = _build_migration_dashboard(project)
-    return render_template("dashboard_migracao.html", dashboard=dashboard)
+    response = make_response(render_template("dashboard_migracao.html", dashboard=dashboard))
+    # Desabilitar cache para garantir que sempre mostra dados atualizados
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 
 @app.route("/api/edit-group", methods=["POST"])
