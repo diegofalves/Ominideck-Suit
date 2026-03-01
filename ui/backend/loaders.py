@@ -11,7 +11,7 @@ DOMAIN_DIR = BASE_DIR / "domain" / "projeto_migracao"
 ENUMS_DIR = DOMAIN_DIR / "enums"
 SCHEMA_PATH = DOMAIN_DIR / "schema.json"
 
-UI_CONTRACT_PATH = BASE_DIR / "ui" / "contracts" / "projeto_migracao.ui.json"
+UI_CONTRACT_PATH = BASE_DIR / "ui" / "contracts" / "documento_migracao.ui.json"
 
 
 def load_schema():

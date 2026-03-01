@@ -117,11 +117,11 @@ def sanitize_text(value):
 BASE_DIR = os.path.dirname(__file__)
 TEMPLATE_DIR = os.path.join(BASE_DIR, "../pdf/templates")
 DOMAIN_DIR = os.path.join(BASE_DIR, "../../domain/projeto_migracao")
-OUTPUT_PDF = os.path.join(BASE_DIR, "../pdf/projeto_migracao.pdf")
-OUTPUT_HTML = os.path.join(BASE_DIR, "../pdf/projeto_migracao.debug.html")
+OUTPUT_PDF = os.path.join(BASE_DIR, "../pdf/documento_migracao.pdf")
+OUTPUT_HTML = os.path.join(BASE_DIR, "../pdf/documento_migracao.debug.html")
 
 def load_data():
-    json_path = os.path.join(DOMAIN_DIR, "projeto_migracao.json")
+    json_path = os.path.join(DOMAIN_DIR, "documento_migracao.json")
     with open(json_path, encoding="utf-8") as f:
         return json.load(f)
 
@@ -139,7 +139,7 @@ def print_progress(percent, milestone=None):
 
 def build_html(data):
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), auto_reload=True, cache_size=0)
-    template = env.get_template("projeto_migracao_pdf_template.html.tpl")
+    template = env.get_template("documento_migracao_pdf_template.html.tpl")
     # NOTE: cache_size=0 garante reload efetivo do template em cada execução (evita cache de Jinja durante depuração)
     # milestone: carregando template
     print_progress(10, "Carregando template PDF")

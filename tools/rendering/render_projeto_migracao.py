@@ -6,8 +6,8 @@ from objective_utils import normalize_render_data, validate_object_status
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 TEMPLATE_DIR = BASE_DIR / "rendering" / "md"
-DEFAULT_JSON = BASE_DIR / "domain" / "projeto_migracao" / "projeto_migracao.json"
-OUTPUT_FILE = BASE_DIR / "rendering" / "md" / "projeto_migracao.md"
+DEFAULT_JSON = BASE_DIR / "domain" / "projeto_migracao" / "documento_migracao.json"
+OUTPUT_FILE = BASE_DIR / "rendering" / "md" / "documento_migracao.md"
 SPECIAL_GROUP_IDS = {"SEM_GRUPO", "GROUP_0", "IGNORADOS"}
 
 def render(json_path: Path):
@@ -19,7 +19,7 @@ def render(json_path: Path):
         validate_object_status(data)
 
         env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), autoescape=False)
-        template = env.get_template("projeto_migracao.md.tpl")
+        template = env.get_template("documento_migracao.md.tpl")
 
         output = template.render(data=data)
 

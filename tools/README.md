@@ -46,7 +46,7 @@ Scripts de renderização e geração de relatórios/documentos.
 - `render_html_from_md.py` - Renderiza HTML de Markdown
 - `render_projeto_migracao.py` - Renderiza documento de migração
 - `validate_chain.py` - Valida cadeia de dependências
-- `projeto_migracao.html.tpl` - Template HTML (legado)
+- `documento_migracao.html.tpl` - Template HTML (legado)
 
 **Uso típico:**
 ```bash

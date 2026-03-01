@@ -17,10 +17,10 @@ import pdfplumber
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-JSON_FILE = BASE_DIR / "domain" / "projeto_migracao" / "projeto_migracao.json"
-MD_FILE = BASE_DIR / "rendering" / "md" / "projeto_migracao.md"
-HTML_FILE = BASE_DIR / "rendering" / "html" / "projeto_migracao.html"
-PDF_FILE = BASE_DIR / "rendering" / "pdf" / "projeto_migracao.pdf"
+JSON_FILE = BASE_DIR / "domain" / "projeto_migracao" / "documento_migracao.json"
+MD_FILE = BASE_DIR / "rendering" / "md" / "documento_migracao.md"
+HTML_FILE = BASE_DIR / "rendering" / "html" / "documento_migracao.html"
+PDF_FILE = BASE_DIR / "rendering" / "pdf" / "documento_migracao.pdf"
 REPORT_FILE = BASE_DIR / "rendering" / "reports" / "validation_chain_report.json"
 
 

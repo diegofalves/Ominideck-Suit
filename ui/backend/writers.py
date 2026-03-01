@@ -9,7 +9,7 @@ from ui.backend.paths import PROJECT_ROOT
 
 # Use centralized PROJECT_ROOT from paths.py
 BASE_DIR = PROJECT_ROOT
-PROJECT_PATH = BASE_DIR / "domain/projeto_migracao/projeto_migracao.json"
+PROJECT_PATH = BASE_DIR / "domain/projeto_migracao/documento_migracao.json"
 DOMAIN_TABLE_STATS_PATH = BASE_DIR / "metadata" / "otm" / "domain_table_statistics.json"
 TABLE_DESCRIPTIONS_PT_BR_PATH = (
     BASE_DIR / "metadata" / "otm" / "table_descriptions_pt_br.json"

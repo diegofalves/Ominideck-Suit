@@ -20,7 +20,7 @@ Hierarquia funcional usada no projeto:
 
 Regras principais:
 
-- Fonte de verdade do projeto: `domain/projeto_migracao/projeto_migracao.json`.
+- Fonte de verdade do projeto: `domain/projeto_migracao/documento_migracao.json`.
 - Query de extração por item: `object_extraction_query.content`.
 - `technical_content` permanece para notas/conteúdo técnico não-extrativo.
 - Subtabelas só entram no cache quando explicitamente marcadas.

@@ -20,7 +20,7 @@ Em resumo: o app desktop é apenas um facilitador de acesso/navegação sobre o 
 - **Desktop wrapper:** PyWebView (`omni_launcher.py`)
 - **Templates:** `ui/frontend/templates`
 - **Static:** `ui/frontend/static`
-- **Domínio principal:** `domain/projeto_migracao/projeto_migracao.json`
+- **Domínio principal:** `domain/projeto_migracao/documento_migracao.json`
 
 Arquivos-chave de resolução de paths:
 

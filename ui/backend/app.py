@@ -1618,7 +1618,7 @@ def projeto_migracao():
                 )
             except DomainValidationError as e:
                 return render_template(
-                    "projeto_migracao.html",
+                    "documento_migracao.html",
                     data=data,
                     schema=data["schema"],
                     enums=data["enums"],
@@ -1656,7 +1656,7 @@ def projeto_migracao():
             validate_project(domain_data)
         except DomainValidationError as e:
             return render_template(
-                "projeto_migracao.html",
+                "documento_migracao.html",
                 data=data,
                 schema=data["schema"],
                 enums=data["enums"],
@@ -1727,7 +1727,7 @@ def projeto_migracao():
         columns_catalog[table] = get_nonempty_columns(table)
 
     return render_template(
-        "projeto_migracao.html",
+        "documento_migracao.html",
         data=data,
         schema=data["schema"],
         enums=data["enums"],

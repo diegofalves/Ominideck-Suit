@@ -24,8 +24,8 @@ def _normalize_sql_table_aliases(sql_query: str) -> str:
         sql_query = re.sub(rf"\b{alias}\.", f"{table}.", sql_query)
     return sql_query
 
-# Caminho do projeto_migracao.json
-PROJETO_PATH = Path("domain/projeto_migracao/projeto_migracao.json")
+# Caminho do documento_migracao.json
+PROJETO_PATH = Path("domain/projeto_migracao/documento_migracao.json")
 
 
 # Carrega o JSON

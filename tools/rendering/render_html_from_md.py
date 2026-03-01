@@ -43,9 +43,9 @@ from datetime import datetime
 from objective_utils import normalize_render_data, validate_object_status
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-DEFAULT_JSON = BASE_DIR / "domain" / "projeto_migracao" / "projeto_migracao.json"
+DEFAULT_JSON = BASE_DIR / "domain" / "projeto_migracao" / "documento_migracao.json"
 TEMPLATE_DIR = BASE_DIR / "rendering" / "templates"
-OUTPUT_FILE = BASE_DIR / "rendering" / "html" / "projeto_migracao.html"
+OUTPUT_FILE = BASE_DIR / "rendering" / "html" / "documento_migracao.html"
 
 
 def format_date_br(date_str):
@@ -111,7 +111,7 @@ def render(json_path: Path):
     env.filters['format_date_br'] = format_date_br
     template = env.get_template("base.html.tpl")
     # Para compatibilidade, passamos as variáveis principais esperadas pelo novo base.html.tpl
-    # Renderiza o conteúdo principal com o contexto 'data' para o template projeto_migracao.html.tpl
+    # Renderiza o conteúdo principal com o contexto 'data' para o template documento_migracao.html.tpl
     # Renderizar blocos separados para cada seção principal
     # Função auxiliar para extrair apenas o conteúdo de uma seção do template
     # Renderizar blocos separados para cada seção principal usando templates parciais

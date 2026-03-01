@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-JSON_FILE = Path(__file__).resolve().parents[2] / "domain" / "projeto_migracao" / "projeto_migracao.json"
+JSON_FILE = Path(__file__).resolve().parents[2] / "domain" / "projeto_migracao" / "documento_migracao.json"
 
 # Mapear objeto_type para tabela OTM padrão
 OBJECT_TYPE_TO_TABLE = {

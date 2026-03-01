@@ -46,7 +46,7 @@ except ModuleNotFoundError:
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-PROJECT_PATH = BASE_DIR / "domain" / "projeto_migracao" / "projeto_migracao.json"
+PROJECT_PATH = BASE_DIR / "domain" / "projeto_migracao" / "documento_migracao.json"
 TABLES_DIR = BASE_DIR / "metadata" / "otm" / "tables"
 CACHE_DIR = BASE_DIR / "metadata" / "otm" / "cache" / "objects"
 CACHE_INDEX_PATH = BASE_DIR / "metadata" / "otm" / "cache" / "objects_index.json"
@@ -1561,7 +1561,7 @@ def _parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "--migration-item-name",
         default="",
-        help="Nome exato do MIGRATION_ITEM em domain/projeto_migracao/projeto_migracao.json.",
+        help="Nome exato do MIGRATION_ITEM em domain/projeto_migracao/documento_migracao.json.",
     )
     parser.add_argument(
         "--object-name",

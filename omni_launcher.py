@@ -13,7 +13,7 @@ def _is_valid_project_root(path: Path) -> bool:
     required = [
         path / "ui" / "backend" / "app.py",
         path / "ui" / "frontend" / "templates" / "home.html",
-        path / "domain" / "projeto_migracao" / "projeto_migracao.json",
+        path / "domain" / "projeto_migracao" / "documento_migracao.json",
     ]
     return all(item.exists() for item in required)
 
