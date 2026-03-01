@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, jsonify, session, make_response
+from flask import Flask, render_template, request, redirect, jsonify, session, make_response, send_file
 import json
 import os
 import subprocess
@@ -1275,6 +1275,72 @@ def dashboard_migracao():
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '0'
     return response
+
+
+@app.route("/api/render/build-html", methods=["POST"])
+def api_render_build_html():
+    """Gera HTML a partir do JSON de migração"""
+    try:
+        result = _run_script("tools/rendering/build_html_from_json.py")
+        if result[0] == 0:
+            return jsonify({
+                "status": "success",
+                "message": "HTML gerado com sucesso!",
+                "output": result[2]
+            })
+        else:
+            return jsonify({
+                "status": "error",
+                "message": "Erro ao gerar HTML",
+                "error": result[2]
+            }), 500
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Erro ao executar script: {str(e)}"
+        }), 500
+
+
+@app.route("/api/render/build-pdf", methods=["POST"])
+def api_render_build_pdf():
+    """Gera PDF a partir do JSON de migração"""
+    try:
+        result = _run_script("tools/rendering/build_pdf_from_json.py")
+        if result[0] == 0:
+            return jsonify({
+                "status": "success",
+                "message": "PDF gerado com sucesso!",
+                "output": result[2]
+            })
+        else:
+            return jsonify({
+                "status": "error",
+                "message": "Erro ao gerar PDF",
+                "error": result[2]
+            }), 500
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Erro ao executar script: {str(e)}"
+        }), 500
+
+
+@app.route("/render/view-html")
+def render_view_html():
+    """Abre o arquivo HTML gerado"""
+    html_path = PROJECT_ROOT / "rendering" / "html" / "documento_migracao_standalone.html"
+    if not html_path.exists():
+        return f"<h1>Erro</h1><p>Arquivo HTML não encontrado. Gere primeiro através do botão.</p>", 404
+    return send_file(html_path, mimetype="text/html")
+
+
+@app.route("/render/view-pdf")
+def render_view_pdf():
+    """Abre o arquivo PDF gerado"""
+    pdf_path = PROJECT_ROOT / "rendering" / "pdf" / "documento_migracao.pdf"
+    if not pdf_path.exists():
+        return "<h1>Erro</h1><p>Arquivo PDF não encontrado. Gere primeiro através do botão.</p>", 404
+    return send_file(pdf_path, mimetype="application/pdf")
 
 
 @app.route("/api/edit-group", methods=["POST"])

@@ -173,6 +173,14 @@
       </nav>
     </header>
 
+    <section class="render-controls" style="margin-bottom: 20px; padding: 12px; background: #ffffff14; border-radius: 12px; border: 1px solid #ffffff20; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+      <button id="btn-build-html" onclick="buildHTML()" style="padding: 8px 14px; background: #0f67ff; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">⚡ Atualizar HTML</button>
+      <button id="btn-build-pdf" onclick="buildPDF()" style="padding: 8px 14px; background: #0f67ff; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">⚡ Atualizar PDF</button>
+      <button onclick="window.open('/render/view-html', '_blank')" style="padding: 8px 14px; background: #13925c; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">👁️ Ver HTML</button>
+      <button onclick="window.open('/render/view-pdf', '_blank')" style="padding: 8px 14px; background: #13925c; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">📄 Ver PDF</button>
+      <span id="render-status" style="flex: 1; text-align: right; color: #c3d8f7; font-size: 0.85rem; min-width: 200px;"></span>
+    </section>
+
     <section class="grid-kpi">
       <article class="kpi">
         <div class="label">Progresso Geral</div>
@@ -330,5 +338,63 @@
       </table>
     </section>
   </div>
+
+  <script>
+    const statusEl = document.getElementById('render-status');
+    
+    function showStatus(msg, type = 'info') {
+      const colors = {
+        'info': '#c3d8f7',
+        'success': '#13925c',
+        'error': '#dc2626'
+      };
+      statusEl.style.color = colors[type] || '#c3d8f7';
+      statusEl.textContent = msg;
+    }
+
+    async function buildHTML() {
+      const btn = document.getElementById('btn-build-html');
+      btn.disabled = true;
+      showStatus('Gerando HTML...');
+      
+      try {
+        const response = await fetch('/api/render/build-html', { method: 'POST' });
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          showStatus('✅ HTML gerado com sucesso!', 'success');
+          setTimeout(() => showStatus(''), 3000);
+        } else {
+          showStatus('❌ Erro ao gerar HTML', 'error');
+        }
+      } catch (error) {
+        showStatus('❌ Erro na requisição', 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function buildPDF() {
+      const btn = document.getElementById('btn-build-pdf');
+      btn.disabled = true;
+      showStatus('Gerando PDF...');
+      
+      try {
+        const response = await fetch('/api/render/build-pdf', { method: 'POST' });
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          showStatus('✅ PDF gerado com sucesso!', 'success');
+          setTimeout(() => showStatus(''), 3000);
+        } else {
+          showStatus('❌ Erro ao gerar PDF', 'error');
+        }
+      } catch (error) {
+        showStatus('❌ Erro na requisição', 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
 </body>
 </html>
