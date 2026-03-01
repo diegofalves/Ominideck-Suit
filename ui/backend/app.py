@@ -18,6 +18,7 @@ from ui.backend.validators import (
 )
 from ui.backend.writers import load_project, save_project
 from ui.backend.schema_repository import SchemaRepository
+from ui.backend.project_context import get_active_project_context
 from ui.backend.paths import PROJECT_ROOT as CENTRALIZED_PROJECT_ROOT
 
 
@@ -576,6 +577,68 @@ def api_health():
             "PROJECT_ROOT": str(PROJECT_ROOT)
         }), 500
 
+
+@app.route("/api/set-active-project", methods=["POST"])
+def api_set_active_project():
+    """
+    Define o projeto ativo e persiste a seleção em ~/.omnideck_config.json
+    """
+    try:
+        data = request.get_json() or {}
+        project_id = data.get("project_id")
+        
+        if not project_id:
+            return jsonify({
+                "success": False,
+                "message": "project_id é obrigatório"
+            }), 400
+        
+        # Validar se o projeto existe
+        cadastros = _load_cadastros()
+        projects = cadastros.get("projects", [])
+        project_exists = any(p.get("id") == project_id for p in projects)
+        
+        if not project_exists:
+            return jsonify({
+                "success": False,
+                "message": f"Projeto {project_id} não encontrado"
+            }), 404
+        
+        # Salvar em ~/.omnideck_config.json
+        config_file = Path.home() / ".omnideck_config.json"
+        config = {}
+        
+        if config_file.exists():
+            try:
+                with open(config_file) as f:
+                    config = json.load(f)
+            except Exception:
+                config = {}
+        
+        config["active_project_id"] = project_id
+        
+        with open(config_file, "w") as f:
+            json.dump(config, f, indent=2)
+        
+        # Salvar em sessão
+        session["active_project_id"] = project_id
+        
+        # Atualizar variável de ambiente
+        os.environ["OMNIDECK_ACTIVE_PROJECT"] = project_id
+        
+        return jsonify({
+            "success": True,
+            "message": f"Projeto {project_id} definido como ativo",
+            "active_project_id": project_id
+        }), 200
+        
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e),
+            "message": "Erro ao definir projeto ativo"
+        }), 500
+
 # ===== SCHEMA API ENDPOINTS =====
 
 @app.route("/api/schema/tables", methods=["GET"])
@@ -1103,6 +1166,25 @@ def home():
     critical_alerts = 0
     docs_in_progress = len([p for p in projects if p["progress"] < 100])
     
+    # Carregar todos os projetos para o dropdown de seleção
+    all_projects = cadastros.get("projects", [])
+    
+    # Carregar ID do projeto ativo (da variável de ambiente ou config file)
+    active_project_id = os.getenv("OMNIDECK_ACTIVE_PROJECT")
+    if not active_project_id:
+        config_file = Path.home() / ".omnideck_config.json"
+        if config_file.exists():
+            try:
+                with open(config_file) as f:
+                    config = json.load(f)
+                    active_project_id = config.get("active_project_id")
+            except Exception:
+                pass
+    
+    # Se nenhum projeto ativo, selecionar o primeiro
+    if not active_project_id and all_projects:
+        active_project_id = all_projects[0].get("id")
+    
     return render_template(
         "home.html",
         consultancy_name=consultancy_name,
@@ -1111,6 +1193,8 @@ def home():
         last_update_human=last_update_human,
         critical_alerts=critical_alerts,
         docs_in_progress=docs_in_progress,
+        all_projects=all_projects,
+        active_project_id=active_project_id,
     )
 
 

@@ -443,7 +443,27 @@
       </div>
       <div class="context-info">
         <div class="context-item">Consultoria: <strong>{{ consultancy_name or 'Não definida' }}</strong></div>
-        <div class="context-item">Projetos Ativos: <strong>{{ active_projects_count }}</strong></div>
+        <div class="context-item" style="display: flex; gap: 8px; align-items: center;">
+          <span>Projeto Ativo:</span>
+          <select id="active-project-selector" style="
+            background: #ffffff08;
+            border: 1px solid #ffffff1f;
+            border-radius: 8px;
+            padding: 6px 10px;
+            color: #0f67ff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            min-width: 180px;
+          " onchange="setActiveProject(this.value)">
+            <option value="">-- Selecione --</option>
+            {% for project in all_projects %}
+            <option value="{{ project.id }}" {% if project.id == active_project_id %}selected{% endif %}>
+              {{ project.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
       </div>
     </header>
 
@@ -584,6 +604,31 @@
       header.classList.toggle('open');
       content.classList.toggle('open');
       toggle.classList.toggle('open');
+    }
+
+    // Seletor de projeto ativo
+    function setActiveProject(projectId) {
+      if (!projectId) return;
+      
+      fetch('/api/set-active-project', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ project_id: projectId })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Recarrega a página para atualizar contexto
+          setTimeout(() => location.reload(), 300);
+        } else {
+          alert('Erro ao selecionar projeto');
+        }
+      })
+      .catch(err => {
+        console.error('Erro:', err);
+        alert('Erro ao selecionar projeto');
+      });
     }
   </script>
 </body>
