@@ -187,6 +187,7 @@
       font-size: 0.9rem;
     }
     .form-group input,
+    .form-group select,
     .form-group textarea {
       width: 100%;
       padding: 10px 12px;
@@ -199,6 +200,7 @@
       transition: border-color 160ms ease;
     }
     .form-group input:focus,
+    .form-group select:focus,
     .form-group textarea:focus {
       outline: none;
       border-color: var(--brand);
@@ -444,7 +446,7 @@
       <!-- STEP 4: PROJETO -->
       <div class="step-content" data-step="4">
         <h2>📋 Projeto(s)</h2>
-        <p>Cadastre seu(s) projeto(s) inicial(ais).</p>
+        <p>Cadastre seu(s) projeto(s) inicial(ais) e vincule cada um a uma consultoria, um consultor e um cliente.</p>
         
         <div class="items-list empty" id="projectsList"></div>
 
@@ -452,6 +454,24 @@
           <div class="form-group">
             <label for="projectName">Nome do Projeto *</label>
             <input type="text" id="projectName" name="name" placeholder="Ex: Migração OTM - Consultoria" required>
+          </div>
+          <div class="form-group">
+            <label for="projectConsultancy">Consultoria *</label>
+            <select id="projectConsultancy" required>
+              <option value="">Selecione a consultoria</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="projectConsultant">Consultor *</label>
+            <select id="projectConsultant" required>
+              <option value="">Selecione o consultor</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="projectClient">Cliente *</label>
+            <select id="projectClient" required>
+              <option value="">Selecione o cliente</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="projectDescription">Descrição</label>
@@ -494,6 +514,7 @@
       setupData.consultancies.push({ name, contact });
       renderConsultancies();
       form.reset();
+      renderProjectRelationOptions();
     }
 
     function addConsultant(e) {
@@ -510,6 +531,7 @@
       setupData.consultants.push({ name, email });
       renderConsultants();
       form.reset();
+      renderProjectRelationOptions();
     }
 
     function addClient(e) {
@@ -526,12 +548,16 @@
       setupData.clients.push({ name, contact });
       renderClients();
       form.reset();
+      renderProjectRelationOptions();
     }
 
     function addProject(e) {
       e.preventDefault();
       const form = document.getElementById('projectForm');
       const name = document.getElementById('projectName').value.trim();
+      const consultancyIndex = document.getElementById('projectConsultancy').value;
+      const consultantIndex = document.getElementById('projectConsultant').value;
+      const clientIndex = document.getElementById('projectClient').value;
       const description = document.getElementById('projectDescription').value.trim();
       
       if (!name) {
@@ -539,9 +565,21 @@
         return;
       }
 
-      setupData.projects.push({ name, description });
+      if (consultancyIndex === '' || consultantIndex === '' || clientIndex === '') {
+        showAlert('Todo projeto deve estar vinculado a consultoria, consultor e cliente.', 'error');
+        return;
+      }
+
+      setupData.projects.push({
+        name,
+        description,
+        consultancy_index: Number(consultancyIndex),
+        consultant_index: Number(consultantIndex),
+        client_index: Number(clientIndex),
+      });
       renderProjects();
       form.reset();
+      renderProjectRelationOptions();
     }
 
     function renderConsultancies() {
@@ -587,24 +625,81 @@
         return;
       }
       container.classList.remove('empty');
-      container.innerHTML = setupData.projects.map((p, i) => 
-        `<div class="item-badge">${p.name}<button type="button" onclick="removeProject(${i})">×</button></div>`
-      ).join('');
+      container.innerHTML = setupData.projects.map((p, i) => {
+        const consultancyName = setupData.consultancies[p.consultancy_index]?.name || 'Consultoria removida';
+        const consultantName = setupData.consultants[p.consultant_index]?.name || 'Consultor removido';
+        const clientName = setupData.clients[p.client_index]?.name || 'Cliente removido';
+        return `<div class="item-badge">${p.name} • ${consultancyName} • ${consultantName} • ${clientName}<button type="button" onclick="removeProject(${i})">×</button></div>`;
+      }).join('');
+    }
+
+    function renderProjectRelationOptions() {
+      const consultancySelect = document.getElementById('projectConsultancy');
+      const consultantSelect = document.getElementById('projectConsultant');
+      const clientSelect = document.getElementById('projectClient');
+
+      const consultancyCurrent = consultancySelect.value;
+      const consultantCurrent = consultantSelect.value;
+      const clientCurrent = clientSelect.value;
+
+      consultancySelect.innerHTML = '<option value="">Selecione a consultoria</option>' +
+        setupData.consultancies.map((c, i) => `<option value="${i}">${c.name}</option>`).join('');
+      consultantSelect.innerHTML = '<option value="">Selecione o consultor</option>' +
+        setupData.consultants.map((c, i) => `<option value="${i}">${c.name}</option>`).join('');
+      clientSelect.innerHTML = '<option value="">Selecione o cliente</option>' +
+        setupData.clients.map((c, i) => `<option value="${i}">${c.name}</option>`).join('');
+
+      if (consultancyCurrent !== '' && Number(consultancyCurrent) < setupData.consultancies.length) {
+        consultancySelect.value = consultancyCurrent;
+      }
+      if (consultantCurrent !== '' && Number(consultantCurrent) < setupData.consultants.length) {
+        consultantSelect.value = consultantCurrent;
+      }
+      if (clientCurrent !== '' && Number(clientCurrent) < setupData.clients.length) {
+        clientSelect.value = clientCurrent;
+      }
     }
 
     function removeConsultancy(i) {
+      if (setupData.projects.some(p => p.consultancy_index === i)) {
+        showAlert('Remova primeiro os projetos vinculados a esta consultoria.', 'error');
+        return;
+      }
       setupData.consultancies.splice(i, 1);
+      setupData.projects.forEach(p => {
+        if (p.consultancy_index > i) p.consultancy_index -= 1;
+      });
       renderConsultancies();
+      renderProjects();
+      renderProjectRelationOptions();
     }
 
     function removeConsultant(i) {
+      if (setupData.projects.some(p => p.consultant_index === i)) {
+        showAlert('Remova primeiro os projetos vinculados a este consultor.', 'error');
+        return;
+      }
       setupData.consultants.splice(i, 1);
+      setupData.projects.forEach(p => {
+        if (p.consultant_index > i) p.consultant_index -= 1;
+      });
       renderConsultants();
+      renderProjects();
+      renderProjectRelationOptions();
     }
 
     function removeClient(i) {
+      if (setupData.projects.some(p => p.client_index === i)) {
+        showAlert('Remova primeiro os projetos vinculados a este cliente.', 'error');
+        return;
+      }
       setupData.clients.splice(i, 1);
+      setupData.projects.forEach(p => {
+        if (p.client_index > i) p.client_index -= 1;
+      });
       renderClients();
+      renderProjects();
+      renderProjectRelationOptions();
     }
 
     function removeProject(i) {
@@ -735,6 +830,7 @@
     // Inicializar
     updateProgress();
     updateSteps();
+    renderProjectRelationOptions();
   </script>
 </body>
 </html>

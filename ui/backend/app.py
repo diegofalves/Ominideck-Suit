@@ -75,7 +75,11 @@ GROUP_ZERO_ID = "SEM_GRUPO"
 LEGACY_GROUP_ZERO_IDS = {"GROUP_0", GROUP_ZERO_ID}
 IGNORED_GROUP_ID = "IGNORADOS"
 PROTECTED_GROUP_IDS = set(LEGACY_GROUP_ZERO_IDS) | {IGNORED_GROUP_ID}
-CADASTROS_PATH = PROJECT_ROOT / "domain" / "consultoria" / "cadastros.json"
+
+# Usar paths dinâmicos
+from ui.backend.paths import get_cadastros_path
+CADASTROS_PATH = get_cadastros_path()
+
 ROUTE_DASHBOARD_MIGRACAO = "/dashboard-migracao"
 ROUTE_DASHBOARD_DOCUMENTO_MIGRACAO = "/dashboard-documento-migracao"
 ROUTE_PROJETO_MIGRACAO = "/projeto-migracao"
@@ -1121,40 +1125,93 @@ def setup():
     try:
         data = request.get_json() or {}
         cadastros = _load_cadastros()
+
+        consultancies_payload = data.get("consultancies", [])
+        consultants_payload = data.get("consultants", [])
+        clients_payload = data.get("clients", [])
+        projects_payload = data.get("projects", [])
+
+        if not consultancies_payload or not consultants_payload or not clients_payload or not projects_payload:
+            return jsonify({
+                "success": False,
+                "message": "Setup inválido: consultoria, consultor, cliente e projeto são obrigatórios.",
+            }), 400
+
+        def _safe_int(value: Any) -> int:
+            try:
+                return int(value)
+            except (TypeError, ValueError):
+                return -1
         
         # Salvar múltiplas consultorias
-        for consultancy_data in data.get("consultancies", []):
+        created_consultancies = []
+        for consultancy_data in consultancies_payload:
             consultancy = {
                 "id": _new_id("CONS"),
                 "name": consultancy_data.get("name", ""),
                 "contact": consultancy_data.get("contact", ""),
             }
             cadastros["consultancies"].append(consultancy)
+            created_consultancies.append(consultancy)
         
         # Salvar múltiplos consultores
-        for consultant_data in data.get("consultants", []):
+        created_consultants = []
+        for consultant_data in consultants_payload:
             consultant = {
                 "id": _new_id("CONS"),
                 "name": consultant_data.get("name", ""),
                 "email": consultant_data.get("email", ""),
             }
             cadastros["consultants"].append(consultant)
+            created_consultants.append(consultant)
         
         # Salvar múltiplos clientes
-        for client_data in data.get("clients", []):
+        created_clients = []
+        for client_data in clients_payload:
             client = {
                 "id": _new_id("CLI"),
                 "name": client_data.get("name", ""),
                 "contact": client_data.get("contact", ""),
             }
             cadastros["clients"].append(client)
+            created_clients.append(client)
         
         # Salvar múltiplos projetos
-        for project_data in data.get("projects", []):
+        for idx, project_data in enumerate(projects_payload):
+            consultancy_index = _safe_int(project_data.get("consultancy_index"))
+            consultant_index = _safe_int(project_data.get("consultant_index"))
+            client_index = _safe_int(project_data.get("client_index"))
+
+            if not (0 <= consultancy_index < len(created_consultancies)):
+                return jsonify({
+                    "success": False,
+                    "message": f"Projeto #{idx + 1}: consultoria vinculada é obrigatória.",
+                }), 400
+            if not (0 <= consultant_index < len(created_consultants)):
+                return jsonify({
+                    "success": False,
+                    "message": f"Projeto #{idx + 1}: consultor vinculado é obrigatório.",
+                }), 400
+            if not (0 <= client_index < len(created_clients)):
+                return jsonify({
+                    "success": False,
+                    "message": f"Projeto #{idx + 1}: cliente vinculado é obrigatório.",
+                }), 400
+
+            linked_consultancy = created_consultancies[consultancy_index]
+            linked_consultant = created_consultants[consultant_index]
+            linked_client = created_clients[client_index]
+
             project = {
                 "id": _new_id("PROJ"),
                 "name": project_data.get("name", ""),
                 "description": project_data.get("description", ""),
+                "consultancy_id": linked_consultancy.get("id", ""),
+                "consultancy_name": linked_consultancy.get("name", ""),
+                "consultant_id": linked_consultant.get("id", ""),
+                "consultant_name": linked_consultant.get("name", ""),
+                "client_id": linked_client.get("id", ""),
+                "client_name": linked_client.get("name", ""),
                 "progress": 0,
                 "next_step": "Inicializar",
             }
@@ -1193,6 +1250,10 @@ def cadastros():
             city_state = str(request.form.get("consultant_city_state") or "").strip()
             document = str(request.form.get("consultant_document") or "").strip()
             availability_pct = str(request.form.get("consultant_availability_pct") or "").strip()
+            hourly_cost = str(request.form.get("consultant_hourly_cost") or "").strip()
+            certifications = str(request.form.get("consultant_certifications") or "").strip()
+            languages = str(request.form.get("consultant_languages") or "").strip()
+            linkedin = str(request.form.get("consultant_linkedin") or "").strip()
 
             if not name:
                 error_message = "Informe o nome do consultor."
@@ -1209,6 +1270,10 @@ def cadastros():
                         "city_state": city_state,
                         "document": document,
                         "availability_pct": availability_pct,
+                        "hourly_cost": hourly_cost,
+                        "certifications": certifications,
+                        "languages": languages,
+                        "linkedin": linkedin,
                         "status": status or "ACTIVE",
                     }
                 )
@@ -1228,6 +1293,10 @@ def cadastros():
             city = str(request.form.get("client_city") or "").strip()
             billing_email = str(request.form.get("client_billing_email") or "").strip()
             account_manager = str(request.form.get("client_account_manager") or "").strip()
+            timezone = str(request.form.get("client_timezone") or "").strip()
+            billing_cycle = str(request.form.get("client_billing_cycle") or "").strip().upper()
+            payment_term_days = str(request.form.get("client_payment_term_days") or "").strip()
+            contract_number = str(request.form.get("client_contract_number") or "").strip()
 
             if not name:
                 error_message = "Informe o nome do cliente."
@@ -1247,6 +1316,10 @@ def cadastros():
                         "contact_email": contact_email,
                         "billing_email": billing_email,
                         "account_manager": account_manager,
+                        "timezone": timezone,
+                        "billing_cycle": billing_cycle,
+                        "payment_term_days": payment_term_days,
+                        "contract_number": contract_number,
                     }
                 )
                 _save_cadastros(payload)
@@ -1259,43 +1332,107 @@ def cadastros():
             consultant_id = str(request.form.get("project_consultant_id") or "").strip()
             consultancy_id = str(request.form.get("project_consultancy_id") or "").strip()
             status = str(request.form.get("project_status") or "PLANNING").strip().upper()
+            phase = str(request.form.get("project_phase") or "").strip().upper()
             start_date = str(request.form.get("project_start_date") or "").strip()
             end_date = str(request.form.get("project_end_date") or "").strip()
+            scope = str(request.form.get("project_scope") or "").strip()
+            hourly_rate = str(request.form.get("project_hourly_rate") or "").strip()
+            estimated_hours = str(request.form.get("project_estimated_hours") or "").strip()
+            planned_budget = str(request.form.get("project_planned_budget") or "").strip()
+            currency = str(request.form.get("project_currency") or "BRL").strip().upper()
+            delivery_model = str(request.form.get("project_delivery_model") or "").strip().upper()
+            priority = str(request.form.get("project_priority") or "MEDIUM").strip().upper()
             env_dev_url = str(request.form.get("project_env_dev_url") or "").strip()
             env_test_url = str(request.form.get("project_env_test_url") or "").strip()
             env_prod_url = str(request.form.get("project_env_prod_url") or "").strip()
             integration_user = str(request.form.get("project_integration_user") or "").strip()
             integration_password = str(request.form.get("project_integration_password") or "").strip()
+            
+            # 🆕 OTM Config
+            otm_source_url = str(request.form.get("project_otm_source_url") or "").strip()
+            otm_target_url = str(request.form.get("project_otm_target_url") or "").strip()
+            otm_username = str(request.form.get("project_otm_username") or "").strip()
+            otm_password = str(request.form.get("project_otm_password") or "").strip()
+            otm_domain_name = str(request.form.get("project_otm_domain_name") or "").strip()
+            otm_version = str(request.form.get("project_otm_version") or "25c").strip()
+            project_data_root = str(request.form.get("project_data_root") or "").strip()
 
             if not code or not name:
                 error_message = "Informe código e nome do projeto."
             elif not client_id:
                 error_message = "Selecione o cliente do projeto."
+            elif not consultant_id:
+                error_message = "Selecione o consultor responsável do projeto."
+            elif not consultancy_id:
+                error_message = "Selecione a consultoria vinculada do projeto."
+            elif not otm_source_url or not otm_username or not otm_domain_name or not project_data_root:
+                error_message = "Configure os parâmetros OTM e o diretório do projeto."
             else:
-                payload["projects"].append(
-                    {
-                        "project_id": _new_id("PROJECT"),
-                        "code": code,
-                        "name": name,
-                        "client_id": client_id,
-                        "consultant_id": consultant_id,
-                        "consultancy_id": consultancy_id,
-                        "status": status or "PLANNING",
-                        "start_date": start_date,
-                        "end_date": end_date,
-                        "environments": {
-                            "dev_url": env_dev_url,
-                            "test_url": env_test_url,
-                            "prod_url": env_prod_url,
-                        },
-                        "integration": {
-                            "user": integration_user,
-                            "password": integration_password,
-                        },
-                    }
-                )
-                _save_cadastros(payload)
-                return redirect("/cadastros?ok=projeto")
+                from ui.backend.project_context import ProjectContext
+                from pathlib import Path
+                
+                # Gerar ID do projeto
+                project_id = _new_id("PROJECT")
+                
+                # Criar estrutura de diretórios
+                data_root = Path(os.getenv("OMNIDECK_DATA_PATH", "~/OmniDeck/data")).expanduser()
+                project_full_path = data_root / project_data_root
+                
+                try:
+                    (project_full_path / "domain" / "projeto_migracao" / "enums").mkdir(parents=True, exist_ok=True)
+                    (project_full_path / "metadata" / "otm" / "cache" / "objects").mkdir(parents=True, exist_ok=True)
+                    (project_full_path / "metadata" / "otm" / "cache" / "translations").mkdir(parents=True, exist_ok=True)
+                    (project_full_path / "rendering" / "reports").mkdir(parents=True, exist_ok=True)
+                except Exception as e:
+                    error_message = f"Erro criando estrutura de projeto: {str(e)}"
+                
+                if not error_message:
+                    payload["projetos"].append(
+                        {
+                            "id": project_id,
+                            "code": code,
+                            "name": name,
+                            "client_id": client_id,
+                            "consultant_id": consultant_id,
+                            "consultancy_id": consultancy_id,
+                            "status": status or "PLANNING",
+                            "phase": phase or status or "PLANNING",
+                            "start_date": start_date,
+                            "end_date": end_date,
+                            "scope": scope,
+                            "hourly_rate": hourly_rate,
+                            "estimated_hours": estimated_hours,
+                            "planned_budget": planned_budget,
+                            "currency": currency or "BRL",
+                            "delivery_model": delivery_model,
+                            "priority": priority or "MEDIUM",
+                            "environments": {
+                                "dev_url": env_dev_url,
+                                "test_url": env_test_url,
+                                "prod_url": env_prod_url,
+                            },
+                            "integration": {
+                                "user": integration_user,
+                                "password": integration_password,
+                            },
+                            "otm_config": {
+                                "source_url": otm_source_url,
+                                "target_url": otm_target_url,
+                                "username": otm_username,
+                                "password": otm_password,
+                                "domain_name": otm_domain_name,
+                                "version": otm_version,
+                            },
+                            "project_paths": {
+                                "data_root": project_data_root,
+                                "domain": f"{project_data_root}/domain",
+                                "metadata": f"{project_data_root}/metadata",
+                                "reports": f"{project_data_root}/rendering/reports",
+                            },
+                        }
+                    )
+                    _save_cadastros(payload)
+                    return redirect("/cadastros?ok=projeto")
 
         elif entity == "consultancy":
             consultant_id = str(request.form.get("consultancy_consultant_id") or "").strip()
@@ -1305,6 +1442,13 @@ def cadastros():
             hourly_rate = str(request.form.get("consultancy_hourly_rate") or "").strip()
             status = str(request.form.get("consultancy_status") or "PLANNED").strip().upper()
             contract_type = str(request.form.get("consultancy_contract_type") or "").strip().upper()
+            contract_start_date = str(request.form.get("consultancy_contract_start_date") or "").strip()
+            contract_end_date = str(request.form.get("consultancy_contract_end_date") or "").strip()
+            currency = str(request.form.get("consultancy_currency") or "BRL").strip().upper()
+            billing_model = str(request.form.get("consultancy_billing_model") or "").strip().upper()
+            payment_term_days = str(request.form.get("consultancy_payment_term_days") or "").strip()
+            sla = str(request.form.get("consultancy_sla") or "").strip()
+            notes = str(request.form.get("consultancy_notes") or "").strip()
             taxes_payload: Dict[str, str] = {}
 
             if contract_type == "PJ":
@@ -1344,8 +1488,15 @@ def cadastros():
                         "project_id": project_id,
                         "service_name": service_name,
                         "hourly_rate": hourly_rate,
+                        "currency": currency or "BRL",
                         "status": status or "PLANNED",
                         "contract_type": contract_type,
+                        "contract_start_date": contract_start_date,
+                        "contract_end_date": contract_end_date,
+                        "billing_model": billing_model,
+                        "payment_term_days": payment_term_days,
+                        "sla": sla,
+                        "notes": notes,
                         "taxes": taxes_payload,
                     }
                 )

@@ -40,3 +40,27 @@ def get_project_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
 PROJECT_ROOT = get_project_root()
+
+def get_data_root() -> Path:
+    """Retorna o diretório raiz dos dados (cadastros + projetos)."""
+    return Path(os.getenv("OMNIDECK_DATA_PATH", "~/OmniDeck/data")).expanduser()
+
+
+def get_cadastros_path() -> Path:
+    """Retorna o caminho para o arquivo de cadastros global."""
+    return get_data_root() / "consultoria" / "cadastros.json"
+
+
+def get_active_project_data_path() -> Path:
+    """
+    Retorna o caminho para os dados do projeto ativo.
+    
+    Se não houver projeto ativo, retorna None.
+    Útil para scripts que precisam saber onde estão os dados do projeto.
+    """
+    from ui.backend.project_context import get_active_project_context
+    
+    context = get_active_project_context()
+    if not context:
+        return None
+    return context.project_data_root

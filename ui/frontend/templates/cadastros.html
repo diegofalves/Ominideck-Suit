@@ -268,6 +268,26 @@
               </select>
             </div>
           </div>
+          <div class="fields">
+            <div class="field">
+              <label>Custo hora (R$)</label>
+              <input name="consultant_hourly_cost" type="number" min="0" step="0.01" placeholder="Ex: 180.00">
+            </div>
+            <div class="field">
+              <label>Idiomas</label>
+              <input name="consultant_languages" placeholder="Ex: PT-BR, EN">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Certificações</label>
+              <input name="consultant_certifications" placeholder="Ex: OTM Cloud, ITIL">
+            </div>
+            <div class="field">
+              <label>LinkedIn</label>
+              <input name="consultant_linkedin" placeholder="https://linkedin.com/in/...">
+            </div>
+          </div>
           <button type="submit">Cadastrar consultor</button>
         </form>
       </article>
@@ -342,6 +362,32 @@
               <input name="client_account_manager" placeholder="Responsável interno/externo">
             </div>
           </div>
+          <div class="fields">
+            <div class="field">
+              <label>Fuso horário</label>
+              <input name="client_timezone" placeholder="Ex: America/Sao_Paulo">
+            </div>
+            <div class="field">
+              <label>Ciclo de faturamento</label>
+              <select name="client_billing_cycle">
+                <option value="">Selecione</option>
+                <option value="MONTHLY">Mensal</option>
+                <option value="BIMONTHLY">Bimestral</option>
+                <option value="QUARTERLY">Trimestral</option>
+                <option value="MILESTONE">Por marco</option>
+              </select>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Prazo de pagamento (dias)</label>
+              <input name="client_payment_term_days" type="number" min="0" step="1" placeholder="Ex: 30">
+            </div>
+            <div class="field">
+              <label>Nº contrato</label>
+              <input name="client_contract_number" placeholder="Ex: CT-2026-001">
+            </div>
+          </div>
           <button type="submit">Cadastrar cliente</button>
         </form>
       </article>
@@ -364,7 +410,7 @@
           </div>
           <div class="fields">
             <div class="field">
-              <label>Cliente</label>
+              <label>Cliente *</label>
               <select name="project_client_id" required>
                 <option value="">Selecione</option>
                 {% for client in cadastros.clients %}
@@ -373,8 +419,8 @@
               </select>
             </div>
             <div class="field">
-              <label>Consultor responsável</label>
-              <select name="project_consultant_id">
+              <label>Consultor responsável *</label>
+              <select name="project_consultant_id" required>
                 <option value="">Selecione</option>
                 {% for consultant in cadastros.consultants %}
                 <option value="{{ consultant.consultant_id }}">{{ consultant.name }}</option>
@@ -384,8 +430,8 @@
           </div>
           <div class="fields">
             <div class="field">
-              <label>Consultoria vinculada</label>
-              <select name="project_consultancy_id">
+              <label>Consultoria vinculada *</label>
+              <select name="project_consultancy_id" required>
                 <option value="">Selecione</option>
                 {% for consultancy in cadastros.consultancies %}
                 <option value="{{ consultancy.consultancy_id }}">{{ consultancy.service_name }} ({{ consultancy.status }})</option>
@@ -421,6 +467,72 @@
           </div>
           <div class="fields">
             <div class="field">
+              <label>Fase atual</label>
+              <select name="project_phase">
+                <option value="">Selecione</option>
+                <option value="DESENHO">Desenho</option>
+                <option value="PLANEJAMENTO">Planejamento</option>
+                <option value="CONSTRUCAO">Construção</option>
+                <option value="TESTE_UNITARIO">Teste Unitário</option>
+                <option value="SIT">SIT</option>
+                <option value="UAT">UAT</option>
+                <option value="CUTOVER">CutOver</option>
+                <option value="GO_LIVE">Go Live</option>
+                <option value="HYPERCARE">Hypercare</option>
+                <option value="AMS">AMS</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Escopo</label>
+              <input name="project_scope" placeholder="Ex: OTM Core + Integrações + Relatórios">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Valor hora (R$)</label>
+              <input name="project_hourly_rate" type="number" min="0" step="0.01" placeholder="Ex: 250.00">
+            </div>
+            <div class="field">
+              <label>Horas estimadas</label>
+              <input name="project_estimated_hours" type="number" min="0" step="1" placeholder="Ex: 800">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Budget planejado</label>
+              <input name="project_planned_budget" type="number" min="0" step="0.01" placeholder="Ex: 200000.00">
+            </div>
+            <div class="field">
+              <label>Moeda</label>
+              <select name="project_currency">
+                <option value="BRL">BRL</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+              </select>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Modelo de entrega</label>
+              <select name="project_delivery_model">
+                <option value="">Selecione</option>
+                <option value="TIME_AND_MATERIAL">Time & Material</option>
+                <option value="FIXED_SCOPE">Escopo fechado</option>
+                <option value="SQUAD_AS_A_SERVICE">Squad as a Service</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Prioridade</label>
+              <select name="project_priority">
+                <option value="LOW">Baixa</option>
+                <option value="MEDIUM" selected>Média</option>
+                <option value="HIGH">Alta</option>
+                <option value="CRITICAL">Crítica</option>
+              </select>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
               <label>Link ambiente DEV</label>
               <input name="project_env_dev_url" type="url" placeholder="https://...">
             </div>
@@ -445,6 +557,65 @@
               <input name="project_integration_password" type="password" placeholder="••••••••">
             </div>
           </div>
+
+          <!-- Seção OTM -->
+          <div style="border-top: 2px solid #dce6f5; margin-top: 16px; padding-top: 16px;">
+            <h3 style="color: #0f67ff; margin-bottom: 12px; font-size: 1rem;">🔌 Configuração OTM</h3>
+            
+            <div class="fields">
+              <div class="field">
+                <label>URL Ambiente Source (DEV) *</label>
+                <input name="project_otm_source_url" type="url" 
+                       placeholder="https://otmgtm-dev1-cliente.ocs.oraclecloud.com" required>
+              </div>
+              <div class="field">
+                <label>URL Ambiente Target (PROD)</label>
+                <input name="project_otm_target_url" type="url" 
+                       placeholder="https://otmgtm-cliente.ocs.oraclecloud.com">
+              </div>
+            </div>
+
+            <div class="fields">
+              <div class="field">
+                <label>Usuário OTM *</label>
+                <input name="project_otm_username" placeholder="usuario.integracao" required>
+              </div>
+              <div class="field">
+                <label>Senha OTM *</label>
+                <input name="project_otm_password" type="password" required>
+                <small style="color: #5c7191; display: block; margin-top: 2px;">
+                  💡 Use ${OTM_PASSWORD} para variável de ambiente
+                </small>
+              </div>
+            </div>
+
+            <div class="fields">
+              <div class="field">
+                <label>Nome do Domínio OTM *</label>
+                <input name="project_otm_domain_name" placeholder="CLIENTE" required>
+                <small style="color: #5c7191; display: block; margin-top: 2px;">
+                  Ex: BAUDUCCO, PUBLIC, etc.
+                </small>
+              </div>
+              <div class="field">
+                <label>Versão OTM</label>
+                <select name="project_otm_version">
+                  <option value="25c" selected>25c</option>
+                  <option value="24c">24c</option>
+                  <option value="23c">23c</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Diretório de Dados do Projeto</label>
+              <input name="project_data_root" placeholder="projects/nome-cliente" required>
+              <small style="color: #5c7191; display: block; margin-top: 2px;">
+                Caminho relativo a ~/OmniDeck/data/
+              </small>
+            </div>
+          </div>
+
           <button type="submit">Cadastrar projeto</button>
         </form>
       </article>
@@ -502,6 +673,35 @@
                 <option value="PJ">PJ</option>
                 <option value="CLT">CLT</option>
                 <option value="COOPERATIVA">Cooperativa</option>
+              </select>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Início do contrato</label>
+              <input name="consultancy_contract_start_date" type="date">
+            </div>
+            <div class="field">
+              <label>Fim do contrato</label>
+              <input name="consultancy_contract_end_date" type="date">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>Moeda</label>
+              <select name="consultancy_currency">
+                <option value="BRL">BRL</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Modelo de cobrança</label>
+              <select name="consultancy_billing_model">
+                <option value="">Selecione</option>
+                <option value="TIME_AND_MATERIAL">Time & Material</option>
+                <option value="FIXED_SCOPE">Escopo fechado</option>
+                <option value="RETAINER">Retainer mensal</option>
               </select>
             </div>
           </div>
@@ -572,6 +772,20 @@
                 <option value="DONE">Concluída</option>
               </select>
             </div>
+            <div class="field">
+              <label>Prazo de pagamento (dias)</label>
+              <input name="consultancy_payment_term_days" type="number" min="0" step="1" placeholder="Ex: 30">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label>SLA acordado</label>
+              <input name="consultancy_sla" placeholder="Ex: 99.5% disponibilidade">
+            </div>
+            <div class="field">
+              <label>Observações fiscais/contratuais</label>
+              <input name="consultancy_notes" placeholder="Ex: retenção INSS 11%, NF até dia 25">
+            </div>
           </div>
           <button type="submit">Cadastrar consultoria</button>
         </form>
@@ -589,7 +803,7 @@
             <li>
               <strong>{{ item.name }}</strong><br>
               {{ item.role or "Sem função" }} · {{ item.seniority or "-" }}<br>
-              {{ item.specialty or "-" }}
+              {{ item.specialty or "-" }} · R$/h {{ item.hourly_cost or "-" }}
             </li>
             {% endfor %}
           </ul>
@@ -606,7 +820,7 @@
             <li>
               <strong>{{ item.name }}</strong><br>
               {{ item.segment or "Sem segmento" }} · {{ item.size or "-" }}<br>
-              {{ item.city or "-" }}/{{ item.state or "-" }}
+              {{ item.city or "-" }}/{{ item.state or "-" }} · {{ item.billing_cycle or "-" }}
             </li>
             {% endfor %}
           </ul>
@@ -622,6 +836,8 @@
             {% for item in cadastros.projects %}
             <li>
               <strong>{{ item.code }}</strong> - {{ item.name }}<br>
+              Fase: {{ item.phase or "-" }} · Prioridade: {{ item.priority or "-" }}<br>
+              Escopo: {{ item.scope or "-" }}<br>
               DEV: {{ item.get('environments', {}).get('dev_url', '-') or '-' }}<br>
               TEST: {{ item.get('environments', {}).get('test_url', '-') or '-' }}<br>
               PROD: {{ item.get('environments', {}).get('prod_url', '-') or '-' }}
@@ -640,8 +856,8 @@
             {% for item in cadastros.consultancies %}
             <li>
               <strong>{{ item.service_name }}</strong><br>
-              Valor hora: {{ item.hourly_rate if item.hourly_rate else "-" }}<br>
-              Contratação: {{ item.contract_type if item.contract_type else "-" }}<br>
+              Valor hora: {{ item.hourly_rate if item.hourly_rate else "-" }} {{ item.currency or "BRL" }}<br>
+              Contratação: {{ item.contract_type if item.contract_type else "-" }} · {{ item.billing_model or "-" }}<br>
               Status: {{ item.status }}
             </li>
             {% endfor %}
