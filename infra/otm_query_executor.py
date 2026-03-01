@@ -7,13 +7,20 @@ Fluxo principal:
 2. Envia requisicao HTTP para endpoint OTM (DBServlet ou Saved Query).
 3. Recebe XML e converte para dict Python normalizado.
 4. Retorna resultado padronizado com status/payload/raw/error_message.
+
+Configuração:
+- URLs e credenciais são carregadas do ProjectContext (por projeto)
+- Se não houver projeto ativo, levanta erro
 """
 
 import json
+import os
 import re
+import sys
 import time
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, Optional
+from pathlib import Path
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -26,13 +33,55 @@ ALLOWED_EXECUTION_TYPES = {"SQL", "SAVED_QUERY"}
 ALLOWED_OUTPUT_FORMATS = {"json", "md", "raw"}
 
 # -------------------------------------------------
-# Configuracao fixa do ambiente OTM (ajustar aqui)
+# Carregamento dinâmico de configuração OTM
 # -------------------------------------------------
-OTM_BASE_URL = "https://otmgtm-dev1-bauducco.otmgtm.us-phoenix-1.ocs.oraclecloud.com"
+
+def get_otm_config() -> Dict[str, str]:
+    """
+    Carrega configuração OTM do projeto ativo.
+    
+    Returns:
+        Dict com base_url, username, password, domain_name
+    
+    Raises:
+        ValueError: Se não houver projeto ativo definido
+    """
+    # Adicionar projeto root ao path
+    project_root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(project_root))
+    
+    try:
+        from ui.backend.project_context import get_active_project_context
+        
+        context = get_active_project_context()
+        if not context:
+            raise ValueError(
+                "Nenhum projeto ativo. Defina OMNIDECK_ACTIVE_PROJECT ou use a UI para selecionar."
+            )
+        
+        return context.get_otm_connection_params()
+    except ImportError:
+        # Fallback para desenvolvimento local
+        print("⚠️  Modo fallback: usando variáveis de ambiente")
+        return {
+            "base_url": os.getenv("OTM_BASE_URL", ""),
+            "username": os.getenv("OTM_USERNAME", ""),
+            "password": os.getenv("OTM_PASSWORD", ""),
+            "domain_name": os.getenv("OTM_DOMAIN_NAME", ""),
+        }
+
+# Carregar configuração
+OTM_CONFIG = get_otm_config()
+OTM_BASE_URL = OTM_CONFIG.get("base_url", "")
+OTM_USER = OTM_CONFIG.get("username", "")
+OTM_PASSWORD = OTM_CONFIG.get("password", "")
+DOMAIN_NAME = OTM_CONFIG.get("domain_name", "")
+
+if not all([OTM_BASE_URL, OTM_USER, OTM_PASSWORD, DOMAIN_NAME]):
+    raise ValueError("Credenciais OTM incompletas. Verifique configuração do projeto.")
+
 URL_SERVLET = f"{OTM_BASE_URL}/GC3/glog.integration.servlet.DBXMLServlet?command=xmlExport"
 URL_DO_SERVICO_OTM = f"{OTM_BASE_URL}/GC3Services/TransmissionService/call"
-OTM_USER = "BAU.TEST_INTEGRATION"
-OTM_PASSWORD = "TestIntegracao@2025"
 CREDENCIAIS = (OTM_USER, OTM_PASSWORD)
 OTM_HTTP_METHOD = "POST"
 OTM_VERIFY_SSL = True
@@ -336,9 +385,9 @@ if __name__ == "__main__":
 
     example_ctx = {
         # Parametros usados no SQL
-        "DOMAIN_NAME": "BAUDUCCO",
+        "DOMAIN_NAME": DOMAIN_NAME,  # Carregado do projeto ativo
         "DATE_FROM": "2025-01-01",
-        # Parametros de conexao estao fixos no topo do arquivo.
+        # Parametros de conexao estao carregados do projeto ativo.
         # Se quiser sobrescrever pontualmente, inclua no context:
         # "endpoint_url", "username", "password", "timeout", etc.
     }

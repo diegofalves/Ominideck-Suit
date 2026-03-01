@@ -127,9 +127,20 @@ def main():
     with open(log_path, "a") as f:
         f.write("Creating PyWebView window...\n")
 
+    # Determinar título da janela (dinâmico baseado no projeto ativo)
+    try:
+        from ui.backend.project_context import get_active_project_context
+        context = get_active_project_context()
+        if context:
+            window_title = f"OmniDeck – {context._project_data.get('name', 'Suite')}"
+        else:
+            window_title = "OmniDeck Suite"
+    except:
+        window_title = "OmniDeck Suite"
+
     # Criar janela abrindo na home
     window = webview.create_window(
-        "OmniDeck – Bauducco",
+        window_title,
         "http://127.0.0.1:8088",
         width=1280,
         height=800

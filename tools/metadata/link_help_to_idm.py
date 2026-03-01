@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from tqdm import tqdm
 import unicodedata
+from pathlib import Path
 
 def normalize_column_name(name):
     # Convert to lowercase
@@ -24,8 +25,25 @@ def main():
     convertido_path = os.path.join(help_path, 'convertido')
     os.makedirs(convertido_path, exist_ok=True)
 
-    # 1. Ler planilha MoSCoW
-    mosco_file = os.path.join(base_path, 'KPMG @ Bauducco_MoSCoW List.xlsx')
+    # 1. Ler planilha MoSCoW (específica do projeto)
+    # Nota: esse arquivo é específico de cada projeto
+    # Para Bauducco, procurar em: ~/OmniDeck/data/projects/bauducco/
+    
+    try:
+        from ui.backend.project_context import get_active_project_context
+        context = get_active_project_context()
+        if context:
+            project_data_root = context.project_data_root
+        else:
+            project_data_root = Path.cwd()
+    except:
+        project_data_root = Path.cwd()
+    
+    mosco_file = project_data_root / 'KPMG @ Bauducco_MoSCoW List.xlsx'
+    if not mosco_file.exists():
+        # Fallback para path antigo
+        mosco_file = Path(base_path) / 'KPMG @ Bauducco_MoSCoW List.xlsx'
+    
     df = pd.read_excel(mosco_file, engine='openpyxl', header=2)
 
     # Normalizar os nomes das colunas
