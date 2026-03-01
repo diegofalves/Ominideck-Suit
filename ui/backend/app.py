@@ -1122,39 +1122,39 @@ def setup():
         data = request.get_json() or {}
         cadastros = _load_cadastros()
         
-        # Validar e salvar consultoria
-        if data.get("consultancy"):
+        # Salvar múltiplas consultorias
+        for consultancy_data in data.get("consultancies", []):
             consultancy = {
                 "id": _new_id("CONS"),
-                "name": data["consultancy"].get("name", ""),
-                "contact": data["consultancy"].get("contact", ""),
+                "name": consultancy_data.get("name", ""),
+                "contact": consultancy_data.get("contact", ""),
             }
-            cadastros["consultancies"] = [consultancy]
+            cadastros["consultancies"].append(consultancy)
         
-        # Validar e salvar consultor
-        if data.get("consultant"):
+        # Salvar múltiplos consultores
+        for consultant_data in data.get("consultants", []):
             consultant = {
                 "id": _new_id("CONS"),
-                "name": data["consultant"].get("name", ""),
-                "email": data["consultant"].get("email", ""),
+                "name": consultant_data.get("name", ""),
+                "email": consultant_data.get("email", ""),
             }
             cadastros["consultants"].append(consultant)
         
-        # Validar e salvar cliente
-        if data.get("client"):
+        # Salvar múltiplos clientes
+        for client_data in data.get("clients", []):
             client = {
                 "id": _new_id("CLI"),
-                "name": data["client"].get("name", ""),
-                "contact": data["client"].get("contact", ""),
+                "name": client_data.get("name", ""),
+                "contact": client_data.get("contact", ""),
             }
             cadastros["clients"].append(client)
         
-        # Validar e salvar projeto
-        if data.get("project"):
+        # Salvar múltiplos projetos
+        for project_data in data.get("projects", []):
             project = {
                 "id": _new_id("PROJ"),
-                "name": data["project"].get("name", ""),
-                "description": data["project"].get("description", ""),
+                "name": project_data.get("name", ""),
+                "description": project_data.get("description", ""),
                 "progress": 0,
                 "next_step": "Inicializar",
             }

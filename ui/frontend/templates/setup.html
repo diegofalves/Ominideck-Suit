@@ -208,6 +208,64 @@
       resize: vertical;
       min-height: 80px;
     }
+    /* ===== ITEMS LIST ===== */
+    .items-list {
+      background: #f4f6f9;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 18px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .items-list.empty {
+      display: none;
+    }
+    .item-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 6px 10px;
+      margin-bottom: 8px;
+      margin-right: 8px;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+    }
+    .item-badge button {
+      background: none;
+      border: none;
+      color: #d32f2f;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      line-height: 1;
+      transition: transform 160ms ease;
+    }
+    .item-badge button:hover {
+      transform: scale(1.2);
+    }
+    /* ===== ADD BUTTON ===== */
+    .btn-add {
+      background: #e8f5e9;
+      color: var(--accent);
+      border: 1px solid #c8e6c9;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 160ms ease;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+    .btn-add:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-1px);
+    }
     /* ===== BUTTONS ===== */
     .actions {
       display: flex;
@@ -326,8 +384,11 @@
       <!-- STEP 1: CONSULTORIA -->
       <div class="step-content active" data-step="1">
         <h2>🏢 Consultoria</h2>
-        <p>Crie sua consultoria base para organizar suas operações.</p>
-        <form id="consultancyForm">
+        <p>Cadastre sua(s) consultoria(s).</p>
+        
+        <div class="items-list empty" id="consultanciesList"></div>
+
+        <form id="consultancyForm" onsubmit="addConsultancy(event)">
           <div class="form-group">
             <label for="consultancyName">Nome da Consultoria *</label>
             <input type="text" id="consultancyName" name="name" placeholder="Ex: ABC Consulting" required>
@@ -336,14 +397,18 @@
             <label for="consultancyContact">Contato (Email ou Telefone)</label>
             <input type="text" id="consultancyContact" name="contact" placeholder="Ex: contato@abcconsulting.com">
           </div>
+          <button type="submit" class="btn-add">+ Adicionar Consultoria</button>
         </form>
       </div>
 
       <!-- STEP 2: CONSULTOR -->
       <div class="step-content" data-step="2">
         <h2>👤 Consultor</h2>
-        <p>Adicione um consultor à sua equipe.</p>
-        <form id="consultantForm">
+        <p>Cadastre seu(s) consultor(es).</p>
+        
+        <div class="items-list empty" id="consultantsList"></div>
+
+        <form id="consultantForm" onsubmit="addConsultant(event)">
           <div class="form-group">
             <label for="consultantName">Nome do Consultor *</label>
             <input type="text" id="consultantName" name="name" placeholder="Ex: João Silva" required>
@@ -352,14 +417,18 @@
             <label for="consultantEmail">Email *</label>
             <input type="email" id="consultantEmail" name="email" placeholder="Ex: joao@example.com" required>
           </div>
+          <button type="submit" class="btn-add">+ Adicionar Consultor</button>
         </form>
       </div>
 
       <!-- STEP 3: CLIENTE -->
       <div class="step-content" data-step="3">
         <h2>🤝 Cliente</h2>
-        <p>Registre um cliente para suas operações.</p>
-        <form id="clientForm">
+        <p>Cadastre seu(s) cliente(s).</p>
+        
+        <div class="items-list empty" id="clientsList"></div>
+
+        <form id="clientForm" onsubmit="addClient(event)">
           <div class="form-group">
             <label for="clientName">Nome do Cliente *</label>
             <input type="text" id="clientName" name="name" placeholder="Ex: Empresa XYZ" required>
@@ -368,14 +437,18 @@
             <label for="clientContact">Contato (Email ou Telefone)</label>
             <input type="text" id="clientContact" name="contact" placeholder="Ex: contato@empresaxyz.com">
           </div>
+          <button type="submit" class="btn-add">+ Adicionar Cliente</button>
         </form>
       </div>
 
       <!-- STEP 4: PROJETO -->
       <div class="step-content" data-step="4">
-        <h2>📋 Projeto Inicial</h2>
-        <p>Crie seu primeiro projeto para começar as operações.</p>
-        <form id="projectForm">
+        <h2>📋 Projeto(s)</h2>
+        <p>Cadastre seu(s) projeto(s) inicial(ais).</p>
+        
+        <div class="items-list empty" id="projectsList"></div>
+
+        <form id="projectForm" onsubmit="addProject(event)">
           <div class="form-group">
             <label for="projectName">Nome do Projeto *</label>
             <input type="text" id="projectName" name="name" placeholder="Ex: Migração OTM - Consultoria" required>
@@ -384,6 +457,7 @@
             <label for="projectDescription">Descrição</label>
             <textarea id="projectDescription" name="description" placeholder="Ex: Projeto de migração para a plataforma OTM..."></textarea>
           </div>
+          <button type="submit" class="btn-add">+ Adicionar Projeto</button>
         </form>
       </div>
 
@@ -400,11 +474,143 @@
     const TOTAL_STEPS = 4;
     let currentStep = 1;
     const setupData = {
-      consultancy: {},
-      consultant: {},
-      client: {},
-      project: {},
+      consultancies: [],
+      consultants: [],
+      clients: [],
+      projects: [],
     };
+
+    function addConsultancy(e) {
+      e.preventDefault();
+      const form = document.getElementById('consultancyForm');
+      const name = document.getElementById('consultancyName').value.trim();
+      const contact = document.getElementById('consultancyContact').value.trim();
+      
+      if (!name) {
+        showAlert('Por favor, preencha o nome da consultoria.', 'error');
+        return;
+      }
+
+      setupData.consultancies.push({ name, contact });
+      renderConsultancies();
+      form.reset();
+    }
+
+    function addConsultant(e) {
+      e.preventDefault();
+      const form = document.getElementById('consultantForm');
+      const name = document.getElementById('consultantName').value.trim();
+      const email = document.getElementById('consultantEmail').value.trim();
+      
+      if (!name || !email) {
+        showAlert('Por favor, preencha nome e email do consultor.', 'error');
+        return;
+      }
+
+      setupData.consultants.push({ name, email });
+      renderConsultants();
+      form.reset();
+    }
+
+    function addClient(e) {
+      e.preventDefault();
+      const form = document.getElementById('clientForm');
+      const name = document.getElementById('clientName').value.trim();
+      const contact = document.getElementById('clientContact').value.trim();
+      
+      if (!name) {
+        showAlert('Por favor, preencha o nome do cliente.', 'error');
+        return;
+      }
+
+      setupData.clients.push({ name, contact });
+      renderClients();
+      form.reset();
+    }
+
+    function addProject(e) {
+      e.preventDefault();
+      const form = document.getElementById('projectForm');
+      const name = document.getElementById('projectName').value.trim();
+      const description = document.getElementById('projectDescription').value.trim();
+      
+      if (!name) {
+        showAlert('Por favor, preencha o nome do projeto.', 'error');
+        return;
+      }
+
+      setupData.projects.push({ name, description });
+      renderProjects();
+      form.reset();
+    }
+
+    function renderConsultancies() {
+      const container = document.getElementById('consultanciesList');
+      if (setupData.consultancies.length === 0) {
+        container.classList.add('empty');
+        return;
+      }
+      container.classList.remove('empty');
+      container.innerHTML = setupData.consultancies.map((c, i) => 
+        `<div class="item-badge">${c.name}<button type="button" onclick="removeConsultancy(${i})">×</button></div>`
+      ).join('');
+    }
+
+    function renderConsultants() {
+      const container = document.getElementById('consultantsList');
+      if (setupData.consultants.length === 0) {
+        container.classList.add('empty');
+        return;
+      }
+      container.classList.remove('empty');
+      container.innerHTML = setupData.consultants.map((c, i) => 
+        `<div class="item-badge">${c.name} (${c.email})<button type="button" onclick="removeConsultant(${i})">×</button></div>`
+      ).join('');
+    }
+
+    function renderClients() {
+      const container = document.getElementById('clientsList');
+      if (setupData.clients.length === 0) {
+        container.classList.add('empty');
+        return;
+      }
+      container.classList.remove('empty');
+      container.innerHTML = setupData.clients.map((c, i) => 
+        `<div class="item-badge">${c.name}<button type="button" onclick="removeClient(${i})">×</button></div>`
+      ).join('');
+    }
+
+    function renderProjects() {
+      const container = document.getElementById('projectsList');
+      if (setupData.projects.length === 0) {
+        container.classList.add('empty');
+        return;
+      }
+      container.classList.remove('empty');
+      container.innerHTML = setupData.projects.map((p, i) => 
+        `<div class="item-badge">${p.name}<button type="button" onclick="removeProject(${i})">×</button></div>`
+      ).join('');
+    }
+
+    function removeConsultancy(i) {
+      setupData.consultancies.splice(i, 1);
+      renderConsultancies();
+    }
+
+    function removeConsultant(i) {
+      setupData.consultants.splice(i, 1);
+      renderConsultants();
+    }
+
+    function removeClient(i) {
+      setupData.clients.splice(i, 1);
+      renderClients();
+    }
+
+    function removeProject(i) {
+      setupData.projects.splice(i, 1);
+      renderProjects();
+    }
 
     function updateProgress() {
       const percentage = ((currentStep - 1) / TOTAL_STEPS) * 100;
@@ -437,38 +643,32 @@
       document.querySelector(`.step-content[data-step="${stepNum}"]`).classList.add('active');
     }
 
-    function saveCurrentStep() {
-      const form = document.querySelector(`.step-content.active form`);
-      if (!form) return true;
-
-      // Validar campos obrigatórios
-      const requiredInputs = form.querySelectorAll('[required]');
-      for (const input of requiredInputs) {
-        if (!input.value.trim()) {
-          showAlert(`Por favor, preencha todos os campos obrigatórios.`, 'error');
-          return false;
-        }
-      }
-
-      // Salvar dados
-      const formData = new FormData(form);
-      const stepKey = ['consultancy', 'consultant', 'client', 'project'][currentStep - 1];
-      setupData[stepKey] = Object.fromEntries(formData);
-
-      return true;
-    }
-
     function previousStep() {
       if (currentStep > 1) {
         currentStep--;
         showStep(currentStep);
         updateProgress();
         updateSteps();
+        clearAlert();
       }
     }
 
     function nextStep() {
-      if (!saveCurrentStep()) {
+      // Validar que há pelo menos um registro em cada step
+      if (currentStep === 1 && setupData.consultancies.length === 0) {
+        showAlert('Por favor, adicione pelo menos uma consultoria.', 'error');
+        return;
+      }
+      if (currentStep === 2 && setupData.consultants.length === 0) {
+        showAlert('Por favor, adicione pelo menos um consultor.', 'error');
+        return;
+      }
+      if (currentStep === 3 && setupData.clients.length === 0) {
+        showAlert('Por favor, adicione pelo menos um cliente.', 'error');
+        return;
+      }
+      if (currentStep === 4 && setupData.projects.length === 0) {
+        showAlert('Por favor, adicione pelo menos um projeto.', 'error');
         return;
       }
       
@@ -482,17 +682,12 @@
     }
 
     async function finishSetup() {
-      if (!saveCurrentStep()) {
-        return;
-      }
-
-      // Validar que há dados
-      if (!setupData.consultancy.name || !setupData.consultant.name || !setupData.client.name || !setupData.project.name) {
+      // Validação final
+      if (setupData.consultancies.length === 0 || setupData.consultants.length === 0 || setupData.clients.length === 0 || setupData.projects.length === 0) {
         showAlert('Por favor, complete todos os passos antes de finalizar.', 'error');
         return;
       }
 
-      // Desabilitar botão
       const finishBtn = document.getElementById('finishBtn');
       finishBtn.disabled = true;
       finishBtn.textContent = '⏳ Salvando...';
