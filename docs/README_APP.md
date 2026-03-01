@@ -55,7 +55,7 @@ Com isso, o backend passa a consumir o mesmo conteúdo original do projeto tamb�
 No root do projeto:
 
 - ativar venv;
-- subir Flask (`python omni_launcher.py` ou `python run.py` conforme fluxo desejado);
+- subir Flask (`python omni_launcher.py` ou `python tools/run_dev_server.py` conforme fluxo desejado);
 - abrir no navegador.
 
 ### 2) Modo app desktop
@@ -67,7 +67,7 @@ No root do projeto:
 
 ## Build e instalação do app
 
-Script oficial: `build_release.sh`
+Script oficial: `tools/build/build_release.sh`
 
 O script:
 
@@ -96,7 +96,7 @@ Se houver aviso de assinatura ad-hoc no macOS, o app ainda pode ser copiado manu
 
 1. Verificar `~/.omnideck/project_root.txt`.
 2. Confirmar que aponta para o root correto do projeto.
-3. Rebuildar com `build_release.sh`.
+3. Rebuildar com `tools/build/build_release.sh`.
 4. Reinstalar o app em `/Applications`.
 
 ### Porta em uso (8088)

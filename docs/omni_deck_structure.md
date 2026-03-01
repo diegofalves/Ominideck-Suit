@@ -27,16 +27,16 @@ O JSON canônico é a fonte única da verdade.
 ├── ui/
 ├── infra/
 ├── rendering/
-├── scripts/
+├── tools/
+│   ├── build/
+│   ├── metadata/
+│   └── rendering/
 ├── metadata/
 ├── legacy/
 ├── build/
 ├── dist/
 ├── omni_launcher.py
-├── omni_launcher.spec
-├── run.py
-├── main.py
-└── build_release.sh
+└── omni_launcher.spec
 ```
 
 ---
@@ -172,7 +172,7 @@ Esta pasta é a documentação institucional do sistema.
 
 - `omni_launcher.py`
 - `omni_launcher.spec`
-- `build_release.sh`
+- `tools/build/build_release.sh`
 
 ## Fluxo
 

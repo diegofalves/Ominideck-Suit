@@ -7,7 +7,7 @@ set -e
 
 PROJECT_NAME="OmniDeck Suite"
 APP_NAME="OmniDeck Suite.app"
-PROJECT_ROOT="$(pwd)"
+PROJECT_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 echo "🧭 Registrando PROJECT_ROOT para app desktop..."
 mkdir -p "$HOME/.omnideck"
@@ -15,8 +15,10 @@ echo "$PROJECT_ROOT" > "$HOME/.omnideck/project_root.txt"
 echo "📌 PROJECT_ROOT: $PROJECT_ROOT"
 
 echo "🧹 Limpando builds anteriores..."
+cd "$PROJECT_ROOT"
 rm -rf build dist
 
+cd "$PROJECT_ROOT"
 echo "📦 Gerando novo bundle..."
 pyinstaller omni_launcher.spec --clean
 
