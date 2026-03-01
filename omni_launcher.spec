@@ -54,7 +54,7 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name='OmniDeck Suite.app',
-    icon='omnideck_icon.icns',
+    icon='tools/build/assets/omnideck_icon.icns',
     bundle_identifier='com.diego.omnidecksuite',
     info_plist={
         "CFBundleName": "OmniDeck Suite",
