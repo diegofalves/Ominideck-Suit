@@ -135,8 +135,6 @@ def print_progress(percent, milestone=None):
 def build_html(data):
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), auto_reload=True, cache_size=0)
     template = env.get_template("documento_migracao_html_template.html.tpl")
-    print_progress(10, "Carregando template HTML")
-    print_progress(20, "Template carregado")
 
     # Copia profunda para evitar mutações
     import copy
@@ -437,15 +435,11 @@ def build_html(data):
         if key not in projeto_context:
             projeto_context[key] = value
 
-    print_progress(60, "Renderizando HTML")
     html = template.render(projeto=projeto_context)
-    print_progress(70, "HTML renderizado")
     return html
 
 def main():
-    print_progress(0, "Iniciando geração HTML")
     data = load_data()
-    print_progress(30, "Dados carregados")
     html_string = build_html(data)
 
     # Inline o CSS no HTML para visualização standalone
@@ -459,13 +453,11 @@ def main():
         f'<style>{css_content}</style>'
     )
 
-    print_progress(80, "Salvando HTML")
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_string)
     
-    print_progress(100, f"HTML gerado: {OUTPUT_HTML}")
-    print(f"\n✅ Arquivo pronto para visualização: {OUTPUT_HTML}")
-    print(f"💡 Abra no navegador ou use: open '{OUTPUT_HTML}'")
+    print(f"✅ HTML gerado: {OUTPUT_HTML}")
+    print(f"💡 Abra no navegador: open '{OUTPUT_HTML}'")
 
 if __name__ == "__main__":
     main()

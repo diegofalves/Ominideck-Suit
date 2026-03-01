@@ -140,12 +140,6 @@ def print_progress(percent, milestone=None):
 def build_html(data):
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), auto_reload=True, cache_size=0)
     template = env.get_template("documento_migracao_pdf_template.html.tpl")
-    # NOTE: cache_size=0 garante reload efetivo do template em cada execução (evita cache de Jinja durante depuração)
-    # milestone: carregando template
-    print_progress(10, "Carregando template PDF")
-
-    # milestone: template carregado
-    print_progress(20, "Template carregado")
 
     # Copia profunda para evitar mutações
     import copy
@@ -559,27 +553,20 @@ def build_html(data):
         if key not in projeto_context:
             projeto_context[key] = value
 
-    print_progress(60, "Renderizando HTML")
     html = template.render(projeto=projeto_context)
-    print_progress(70, "HTML renderizado")
     return html
 
 def main():
-        print_progress(0, "Iniciando geração PDF")
-        data = load_data()
-        print_progress(30, "Dados carregados")
-        html_string = build_html(data)
+    data = load_data()
+    html_string = build_html(data)
 
-        try:
-                with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
-                        f.write(html_string)
-                print_progress(75, f"HTML debug salvo: {OUTPUT_HTML}")
-        except Exception as e:
-                print_progress(75, f"Falha ao gravar HTML debug: {e}")
+    try:
+        with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
+            f.write(html_string)
+    except Exception as e:
+        print(f"⚠️  Falha ao gravar HTML debug: {e}")
 
-        # milestone: preparando PDF
-        print_progress(80, "Preparando PDF")
-        template_base = os.path.abspath(TEMPLATE_DIR)
+    template_base = os.path.abspath(TEMPLATE_DIR)
         css_path = os.path.abspath(os.path.join(TEMPLATE_DIR, "pdf.css"))
 
         html = HTML(
@@ -635,3 +622,4 @@ pre {
 
 if __name__ == "__main__":
         main()
+(f"✅ 

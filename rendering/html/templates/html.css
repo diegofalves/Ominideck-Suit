@@ -1,117 +1,111 @@
 /* ========================================
 OmniDeck – HTML Viewer Stylesheet
-Documento Formal para Cliente
+Documento Formal para Cliente - Visualização Web
 Engine: Navegador Web (Chrome, Firefox, Safari)
-Fonte única: JSON → HTML (visualização rápida)
+Fonte única: JSON → HTML (navegador)
 Versão: Big4 Technical – Browser Optimized
 ======================================== */
 
 /* ==============================
-CONFIGURAÇÃO DO VIEWPORT E BODY
+CONFIGURAÇÃO BASE PARA NAVEGADOR
 ============================== */
-* {
-  box-sizing: border-box;
-}
-
 html {
-  font-size: 16px;
   scroll-behavior: smooth;
+  background: #f1f5f9;
 }
 
 body {
   margin: 0;
-  padding: 40px 20px;
-  background: #f8fafc;
+  padding: 0;
+  background: #f1f5f9;
+}
+
+/* Container centralizado */
+body > * {
   max-width: 1200px;
-  margin: 0 auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.6;
-  color: #0F172A;
-}
-
-.page {
-  background: white;
-  padding: 40px;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  border-radius: 8px;
-}
-
-.page.landscape {
-  /* Para visualização, manter largura normal */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Header fixo no topo */
 .doc-header {
   position: sticky;
   top: 0;
-  background: #1e40af;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
   color: white;
-  padding: 12px 20px;
-  margin: -40px -20px 20px -20px;
+  padding: 16px 20px;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  text-align: center;
+  max-width: none !important;
+  margin: 0 !important;
 }
 
-/* ==============================
-   NAVEGAÇÃO VISUAL (não imprime)
-============================== */
+/* Navegação rápida */
 .section-nav {
   background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 24px;
+  margin: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .section-nav h3 {
-  margin-top: 0;
-  font-size: 1.1rem;
+  margin: 0 0 16px 0;
+  font-size: 1.125rem;
   color: #1e40af;
+  font-weight: 600;
 }
 
 .section-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
 }
 
 .section-nav li {
-  margin-bottom: 8px;
+  margin: 0;
 }
 
 .section-nav a {
+  display: block;
   color: #1e40af;
   text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background 0.2s;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  font-size: 0.9375rem;
 }
 
 .section-nav a:hover {
-  background: #eff6ff;
+  background: #dbeafe;
+  transform: translateX(4px);
+}
+
+/* Seções como cards */
+.page, section {
+  background: white;
+  padding: 48px;
+  margin: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 12px;
+}
+
+.cover-page {
+  box-shadow: none;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 /* ==============================
-   ESTILOS DE IMPRESSÃO (@media print)
+ESTILOS DE IMPRESSÃO
 ============================== */
 @media print {
-  body {
+  html, body {
     background: white;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-  }
-  
-  .page {
-    box-shadow: none;
-    border-radius: 0;
-    margin-bottom: 0;
-    page-break-after: always;
   }
   
   .doc-header,
@@ -119,132 +113,97 @@ body {
     display: none;
   }
   
-  #sec-metadata {
+  .page, section {
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 20mm;
     page-break-after: always;
   }
   
-  #sec-historico {
-    page-break-before: always;
-  }
-  
-  #sec-sumario {
-    page-break-before: always;
+  .cover-page {
     page-break-after: always;
-  }
-  
-  #sec-roadmap .roadmap-block:not(:first-of-type) {
-    page-break-before: always;
   }
 }
+
+.page:last-of-type {
+  page-break-after: avoid;
+}
+
+#sec-metadata {
+  page-break-after: always;
+}
+
+#sec-historico {
+  page-break-before: always;
+}
+
+#sec-sumario {
+  page-break-before: always;
+  page-break-after: always;
+}
+
+/* ==============================
+   ROADMAP – CONTROLE DE QUEBRA
+============================== */
+
+#sec-roadmap .roadmap-block {
+  page-break-before: always;
+}
+
+#sec-roadmap .roadmap-block:first-of-type {
+  page-break-before: avoid;
+}
+
+/* ==============================
+   GRUPOS – CONTROLE DE QUEBRA
+============================== */
 
 
 /* ==============================
 HIERARQUIA DE TÍTULOS
 ============================== */
 h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #0F172A;
+font-size: 22pt;
+font-weight: 600;
+margin-bottom: 20px;
+color: #0F172A;
 }
 
 h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 40px;
-  margin-bottom: 18px;
-  padding-bottom: 8px;
-  border-bottom: 3px solid #1D4ED8;
-  color: #0F172A;
+font-size: 16pt;
+font-weight: 600;
+margin-top: 40px;
+margin-bottom: 18px;
+padding-bottom: 8px;
+border-bottom: 3px solid #1D4ED8;
+color: #0F172A;
+page-break-after: avoid;
 }
 
 h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 22px;
-  margin-bottom: 10px;
-  color: #111827;
+font-size: 14pt;
+font-weight: 600;
+margin-top: 22px;
+margin-bottom: 10px;
+page-break-after: avoid;
+color: #111827;
 }
 
 /* ==============================
 CAPA
 ============================== */
 .cover-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: block;
   text-align: center;
-  min-height: 80vh;
-  padding: 60px 40px;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-  color: white;
-  border-radius: 8px;
-}
 
-.cover-header {
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  opacity: 0.9;
+  /* Remove flex completely to avoid vertical compression */
+  padding-bottom: 25mm;
+
+  page-break-after: always;
 }
 
 .cover-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.cover-logo {
-  margin-bottom: 40px;
-  max-width: 200px;
-}
-
-.cover-logo img {
-  max-width: 100%;
-  height: auto;
-}
-
-.cover-category {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  opacity: 0.8;
-  margin-bottom: 20px;
-}
-
-.cover-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0;
-  color: white;
-}
-
-.cover-divider {
-  width: 80px;
-  height: 4px;
-  background: white;
-  margin-top: 30px;
-  opacity: 0.8;
-}
-
-.cover-footer {
-  font-size: 0.75rem;
-  opacity: 0.7;
-  letter-spacing: 0.5px;
-}
-
-@media print {
-  .cover-page {
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-    min-height: 100vh;
-    page-break-after: always;
-  }
-}
 /* --- Compactação máxima de tabelas no PDF --- */
 table, tr, th, td,
 .metadata-table, .metadata-table tr, .metadata-table th, .metadata-table td,
