@@ -561,64 +561,6 @@ def api_health():
             "PROJECT_ROOT": str(PROJECT_ROOT)
         }), 500
 
-@app.route("/test", methods=["GET"])
-def test_page():
-    """
-    Página de teste simples para verificar se o PyWebView está renderizando HTML.
-    """
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Teste PyWebView</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-            }
-            .container {
-                text-align: center;
-                background: rgba(255,255,255,0.1);
-                padding: 40px;
-                border-radius: 20px;
-                backdrop-filter: blur(10px);
-            }
-            h1 { font-size: 3em; margin-bottom: 20px; }
-            p { font-size: 1.5em; }
-            .status { 
-                background: #4CAF50;
-                padding: 10px 20px;
-                border-radius: 10px;
-                display: inline-block;
-                margin-top: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>✓ PyWebView Funcionando!</h1>
-            <p>Se você está vendo esta página, o PyWebView está renderizando HTML corretamente.</p>
-            <div class="status">STATUS: OK</div>
-            <p style="margin-top: 30px;">
-                <a href="/" style="color: white;">Ir para Home</a> | 
-                <a href="/dashboard-migracao" style="color: white;">Ir para Dashboard</a>
-            </p>
-        </div>
-        <script>
-            console.log('Test page loaded successfully');
-            console.log('Time:', new Date().toISOString());
-        </script>
-    </body>
-    </html>
-    """
-
 # ===== SCHEMA API ENDPOINTS =====
 
 @app.route("/api/schema/tables", methods=["GET"])

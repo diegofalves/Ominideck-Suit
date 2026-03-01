@@ -666,7 +666,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const projectJson = JSON.parse(projectDataEl.textContent);
       if (projectJson && projectJson.groups && projectJson.groups.length > 0) {
         groupIndexCounter = projectJson.groups.length;
-        console.log(`[app.js] Inicializado contador de grupos: ${groupIndexCounter} (grupos existentes)`);
       }
     } catch (e) {
       console.error('[app.js] Erro ao parsear dados do projeto:', e);

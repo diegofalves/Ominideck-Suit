@@ -31,12 +31,10 @@ const SchemaEngine = {
     // ========================================================
     
     async init() {
-        console.log("[SchemaEngine 9.1] Inicializando com modelo novo...");
         await this.loadTableList();
         this.setupEventListeners();
         this.setupDynamicObjectObserver();
         this.setupObjectModeObserver();
-        console.log("[SchemaEngine 9.1] Pronto");
     },
     
     // ========================================================
@@ -49,7 +47,6 @@ const SchemaEngine = {
             const data = await response.json();
             this.tables = data.tables || [];
             
-            console.log(`[SchemaEngine] ${this.tables.length} tabelas carregadas`);
             this.populateObjectTypeSelector();
         } catch (error) {
             console.error("[SchemaEngine] Erro ao carregar tabelas:", error);
@@ -59,11 +56,8 @@ const SchemaEngine = {
     populateObjectTypeSelector() {
         // Encontrar TODOS os selects (estáticos do backend + dinâmicos criados por JS)
         const allSelectors = document.querySelectorAll('select[name="object_type"], select#object_type, select.dynamic-object-type-selector');
-        
-        console.log("[SchemaEngine] Selectors encontrados:", allSelectors.length);
 
         if (!allSelectors.length) {
-            console.warn("[SchemaEngine] Nenhum select object_type encontrado no DOM");
             return;
         }
 
@@ -71,14 +65,12 @@ const SchemaEngine = {
         allSelectors.forEach(selector => {
             // Verificar se já foi populado (evitar duplicação)
             if (selector.dataset.populated === 'true' && selector.options.length > 1) {
-                console.log("[SchemaEngine] Selector já populado, ignorando");
                 return;
             }
 
             // Passo 1: Ler valor do atributo data-current-type (renderizado pelo backend)
             const currentType = selector.getAttribute("data-current-type") || "";
             
-            console.log("[SchemaEngine] Processando selector:", {
                 name: selector.name,
                 id: selector.id,
                 classes: selector.className,
@@ -119,7 +111,6 @@ const SchemaEngine = {
             // Passo 6: Restaurar valor usando data-current-type (BACKEND-DRIVEN)
             if (currentType) {
                 selector.value = currentType;
-                console.log("[SchemaEngine] Valor restaurado:", {
                     selector: selector.name,
                     value: currentType
                 });
@@ -128,8 +119,6 @@ const SchemaEngine = {
             // Marcar como populado
             selector.dataset.populated = 'true';
         });
-        
-        console.log(`[SchemaEngine] ✅ ${allSelectors.length} select(s) populado(s) com ${this.tables.length} tabelas OTM + ${this.logicalTypes.length} tipos lógicos`);
     },
 
     onObjectTypeChange(objectType) {
@@ -143,7 +132,6 @@ const SchemaEngine = {
     async loadTableSchema(tableName) {
         // Se for tipo lógico: não carregar schema
         if (LOGICAL_OBJECT_TYPES.has(tableName)) {
-            console.log(`[SchemaEngine] ${tableName} é tipo lógico, não carregando schema`);
             this.currentTable = null;
             this.currentSchema = null;
             this.hideSchemaPreview();
@@ -176,7 +164,6 @@ const SchemaEngine = {
         
         // Se for tabela OTM: carregar schema
         if (!tableName) {
-            console.log("[SchemaEngine] Tabela limpa");
             this.currentTable = null;
             this.currentSchema = null;
             this.hideSchemaPreview();
@@ -197,8 +184,6 @@ const SchemaEngine = {
             this.currentTable = tableName;
             this.currentSchema = data;
             
-            console.log(`[SchemaEngine] Schema carregado: ${tableName}`);
-            
             this.showSchemaPreview(tableName, data);
             this.hideIdentifierFields();
             
@@ -208,10 +193,8 @@ const SchemaEngine = {
                 // Obter dados existentes do objeto atual
                 const currentData = this.getExistingObjectData();
                 if (currentData) {
-                    console.log(`[SchemaEngine] Renderizando schema com dados existentes`, currentData);
                     this.renderSchemaFields(currentData);
                 } else {
-                    console.log(`[SchemaEngine] Renderizando schema sem dados (novo objeto)`);
                     this.renderSchemaFields(null);
                 }
             }
@@ -223,7 +206,6 @@ const SchemaEngine = {
     getExistingObjectData() {
         // Primeira prioridade: Dados injetados pelo template (current_object.data)
         if (window.ExistingObjectData && Object.keys(window.ExistingObjectData).length > 0) {
-            console.log(`[SchemaEngine] Usando dados do template: ${Object.keys(window.ExistingObjectData).length} campos`);
             return window.ExistingObjectData;
         }
         
@@ -308,7 +290,6 @@ const SchemaEngine = {
         
         container.style.display = "block";
         
-        console.log(`[SchemaEngine] ${Object.keys(sections).length} seções renderizadas com dados existentes`);
     },
     
     createSectionFieldset(sectionName, fields, existingData = null) {
@@ -580,7 +561,6 @@ const SchemaEngine = {
                             : node.querySelectorAll ? node.querySelectorAll('.dynamic-object-type-selector') : [];
                         
                         if (selects.length > 0) {
-                            console.log(`[SchemaEngine] Detectado ${selects.length} novo(s) select(s), populando...`);
                             this.populateObjectTypeSelector();
                         }
                     }
@@ -604,7 +584,6 @@ const SchemaEngine = {
         const editSelector = document.getElementById('edit_object_index');
         if (editSelector) {
             editSelector.addEventListener('change', () => {
-                console.log("[SchemaEngine] Modo de objeto alterado, resetando select...");
                 // Resetar o select de object_type para forçar repopulação
                 const objectTypeSelect = document.querySelector('select[name="object_type"]');
                 if (objectTypeSelect) {

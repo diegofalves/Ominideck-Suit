@@ -144,7 +144,6 @@ def main():
             window.evaluate_js('''
                 localStorage.clear();
                 sessionStorage.clear();
-                console.log("Storage cleared on startup");
             ''')
             
             with open(log_path, "a") as f:
